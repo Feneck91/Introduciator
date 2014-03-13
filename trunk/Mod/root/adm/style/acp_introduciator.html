@@ -47,9 +47,56 @@
 <!-- IF S_CONFIGURATION_PAGES -->
 	<h1>{L_INTRODUCIATOR_CP_TITLE}</h1>
 	{L_INTRODUCIATOR_CP_TITLE_EXPLAIN}
+	
+	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+	<form id="acp_introduciator" method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend>{L_GENERAL_OPTIONS}</legend>
+			<dl>
+				<dt><label for="forum_choice">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN}</span></dt>
+				<dd><input id="forum_choice" name="forum_choice" type="text" class="text medium" value="{ITEM_NAME}" /></dd>
+			</dl>
+			<dl>
+				<dt><label for="item_tag">{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN}</span></dt>
+				<dd><input id="item_tag" name="item_tag" type="text" class="text medium" value="{ITEM_TAG}" maxlength="3" onkeyup="javascript:this.value=this.value.toUpperCase()"/></dd>
+			</dl>
+			<hr />
+
+			<div id="itemoptions">
+				<dl>
+					<dt><label for="item_iso_code">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICES}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICES_EXPLAIN}</span></dt>
+					<dd>
+						<select name="forums_choices[]" style="width: 100%;" id="forum_choices" multiple="multiple" size="10">
+						<!-- BEGIN forums -->
+							<option value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME} forum_{forums.FORUM_ID}</option>
+						<!-- END items -->
+						</select>
+					</dd>
+				</dl>
+			</div>
+		</fieldset>
+		<!-- IF S_EDIT_ERROR -->
+		<fieldset class="errorbox">
+			<label for="item_filter_tags">{ITEM_EDIT_ERROR}</label>
+		</fieldset>
+		<!-- ENDIF -->
+		<fieldset>
+			<p class="submit-buttons">
+				{S_HIDDEN_FIELDS}
+				<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+				<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+				{S_FORM_TOKEN}
+			</p>
+		</fieldset>
+	</form>
+
+	
+	
+	
+	
 	<!-- IF not S_EDIT -->
 		<!--
-			 By default, display diaries list
+			 By default, display 
 		-->
 		<form id="acp_diary" method="post" action="{U_ACTION}">
 			<table cellspacing="1">

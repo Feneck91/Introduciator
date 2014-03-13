@@ -47,15 +47,15 @@ $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Changements majeurs depuis la version 0.0.1-dev',
 
 	'INTRODUCIATOR_MOD'							=> 'Mod Introduciator',
-	'DONATION_MOD_EXPLAIN'				=> 'UMIL effectuera automatiquement, dans la base de données, tous les changements nécessaires pour le MOD Introduciator.',
+	'DONATION_MOD_EXPLAIN'						=> 'UMIL effectuera automatiquement, dans la base de données, tous les changements nécessaires pour le MOD Introduciator.',
 
-	'UNINSTALL_INTRODUCIATOR_MOD'				=> 'Désinstaller le Mod  Diay',
+	'UNINSTALL_INTRODUCIATOR_MOD'				=> 'Désinstaller le Mod Introduciator',
 	'UNINSTALL_INTRODUCIATOR_MOD_CONFIRM'		=> 'Êtes-vous prêt à désinstaller le Mod Introduciator ? Tous les réglages et données sauvegardées par ce MOD seront supprimés !',
 
-	'UPDATE_INTRODUCIATOR_MOD'					=> 'Mettre à jour le Mod Diay',
+	'UPDATE_INTRODUCIATOR_MOD'					=> 'Mettre à jour le Mod Introduciator',
 	'UPDATE_INTRODUCIATOR_MOD_CONFIRM'			=> 'Êtes-vous prêt à mettre à jour le Mod Introduciator ?',
 
-	'UNUSED_LANG_FILES_TRUE'			=> 'Suppression des fichiers non utilisés.',
-	'UNUSED_LANG_FILES_FALSE'			=> 'La suppression des fichiers non utilisés n’est pas nécessaire.'
+	'UNUSED_LANG_FILES_TRUE'					=> 'Suppression des fichiers non utilisés.',
+	'UNUSED_LANG_FILES_FALSE'					=> 'La suppression des fichiers non utilisés n’est pas nécessaire.'
 ));
 ?>

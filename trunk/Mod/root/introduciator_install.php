@@ -116,7 +116,7 @@ $versions = array(
 				'module_langname'	=> 'INTRODUCIATOR_CONFIGURATION',
 				'module_mode'		=> 'configuration',
 				'module_auth'		=> 'acl_a_board',	// Acl Admin Introduciator Manage
-				'after'				=> 'INTRODUCIATOR_GENERAL',
+				'after'			=> 'INTRODUCIATOR_GENERAL',
 				),
 			),
 
