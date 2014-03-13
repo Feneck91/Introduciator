@@ -131,11 +131,12 @@ $versions = array(
 		'table_add' => array(
 			// Table used to record introduciator configuration
 			//   fk_introduciator_id is a foreign key to INTRODUCIATOR_ITEMS_TABLE primary key
-			//   fk_forum_id is a foreign key to FORUMS_TABLE primary key. If is
-			//               null, the introduciator is displayed into main page
+			//   fk_forum_id is a foreign key to FORUMS_TABLE primary key. If is the selected forum where
+			//               user must introduce himself.
 			array(INTRODUCIATOR_CONFIG_TABLE, array(
 				'COLUMNS' => array(
 					'introduciator_id'	=> array('UINT', NULL, 'auto_increment'),
+					'fk_forum_id'		=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
 					'fk_forum_id'		=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
 				),
 			)),
