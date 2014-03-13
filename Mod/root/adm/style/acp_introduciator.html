@@ -1,0 +1,152 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF S_GENERAL_PAGES -->
+	<h1>{L_INTRODUCIATOR_GP_TITLE}</h1>
+	{L_INTRODUCIATOR_GP_TITLE_EXPLAIN}
+
+	<!-- IF S_INTRODUCIATOR_VERSIONCHECK_FAIL -->
+		<div class="errorbox notice">
+			<p>{L_VERSIONCHECK_FAIL}</p>
+			<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a></p>
+		</div>
+	<!-- ELSEIF not S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+		<div class="errorbox">
+			<p>{L_INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE}</p>
+			<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a> &middot; <a href="{U_INTRODUCIATOR_VERSIONCHECK}">{L_MORE_INFORMATION}</a></p>
+		</div>
+	<!-- ENDIF -->
+
+	<table cellspacing="1">
+		<caption>{L_INTRODUCIATOR_GP_STATS}</caption>
+		<col class="col1" /><col class="col2" />
+		<thead>
+			<tr>
+				<th>{L_STATISTIC}</th>
+				<th>{L_VALUE}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{L_INTRODUCIATOR_GP_INSTALL_DATE}</td>
+				<td><strong>{INTRODUCIATOR_INSTALL_DATE}</strong></td>
+			</tr>
+			<tr>
+				<td>{L_INTRODUCIATOR_GP_VERSION}</td>
+				<td>
+				<!-- IF S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+					<strong style="color: #228822;">{INTRODUCIATOR_VERSION}</strong> [&nbsp;<a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>&nbsp;]
+				<!-- ELSE -->
+					<strong><a href="{U_INTRODUCIATOR_VERSIONCHECK}" style="color: #BC2A4D;" title="{L_MORE_INFORMATION}">{INTRODUCIATOR_VERSION}</a></strong> [&nbsp;<a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>&nbsp;]
+				<!-- ENDIF -->
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<!-- ENDIF -->
+
+<!-- IF S_CONFIGURATION_PAGES -->
+	<h1>{L_INTRODUCIATOR_CP_TITLE}</h1>
+	{L_INTRODUCIATOR_CP_TITLE_EXPLAIN}
+	<!-- IF not S_EDIT -->
+		<!--
+			 By default, display diaries list
+		-->
+		<form id="acp_diary" method="post" action="{U_ACTION}">
+			<table cellspacing="1">
+				<thead>
+					<tr>
+						<th colspan="1">{L_INTRODUCIATOR_NAME}</th>
+						<th colspan="2">{L_OPTIONS}</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- BEGIN items -->
+					<!-- IF items.S_ROW_COUNT is even --><tr class="row1"><!-- ELSE --><tr class="row2"><!-- ENDIF -->
+						<td><a href="{items.U_EDIT}">{items.NAME}</a></td>
+						<td style="width:90px; white-space: nowrap; text-align: right; vertical-align: middle;">
+							<!-- IF items.S_FIRST_ROW && not items.S_LAST_ROW && not S_MODE -->
+								{ICON_MOVE_UP_DISABLED}
+								<a href="{items.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+							<!-- ELSEIF not items.S_FIRST_ROW && not items.S_LAST_ROW && not S_MODE -->
+								<a href="{items.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+								<a href="{items.U_MOVE_DOWN}">{ICON_MOVE_DOWN}</a>
+							<!-- ELSEIF items.S_LAST_ROW && not items.S_FIRST_ROW && not S_MODE -->
+								<a href="{items.U_MOVE_UP}">{ICON_MOVE_UP}</a>
+								{ICON_MOVE_DOWN_DISABLED}
+							<!-- ELSE -->
+								{ICON_MOVE_UP_DISABLED}
+								{ICON_MOVE_DOWN_DISABLED}
+							<!-- ENDIF -->
+							<a href="{items.U_EDIT}">{ICON_EDIT}</a>
+							<a href="{items.U_DELETE}">{ICON_DELETE}</a>
+						</td>
+					</tr>
+				<!-- BEGINELSE -->
+					<tr class="row2">
+						<td style="text-align: center;" colspan="3">{L_ACP_NO_ITEMS}</td>
+					</tr>
+				<!-- END items -->
+				</tbody>
+			</table>
+
+			<div class="clearfix">&nbsp;</div>
+
+			<fieldset class="quick" style="float: {S_CONTENT_FLOW_END};">
+				{S_HIDDEN_FIELDS}
+				<input class="button2" name="addnew" type="submit" value="{L_INTRODUCIATOR_CP_CREATE_INTRODUCIATOR}"/>
+				{S_FORM_TOKEN}
+			</fieldset>
+		</form>
+	<!-- ELSE -->
+		<!--
+			 Display diary item (edition)
+		-->
+		<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
+		<form id="acp_introduciator" method="post" action="{U_ACTION}">
+			<fieldset>
+				<legend>{L_GENERAL_OPTIONS}</legend>
+				<dl>
+					<dt><label for="item_name">{L_INTRODUCIATOR_CP_ED_NAME}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_NAME_EXPLAIN}</span></dt>
+					<dd><input id="item_name" name="item_name" type="text" class="text medium" value="{ITEM_NAME}" /></dd>
+				</dl>
+				<dl>
+					<dt><label for="item_tag">{L_INTRODUCIATOR_CP_ED_TAG}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_TAG_EXPLAIN}</span></dt>
+					<dd><input id="item_tag" name="item_tag" type="text" class="text medium" value="{ITEM_TAG}" maxlength="3" onkeyup="javascript:this.value=this.value.toUpperCase()"/></dd>
+				</dl>
+				<dl>
+					<dt><label for="item_filter_tags">{L_INTRODUCIATOR_CP_ED_FILTER_TAG}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FILTER_TAG_EXPLAIN}</span></dt>
+					<dd><textarea id="item_filter_tags" name="item_filter_tags" rows="10" cols="60" onkeyup="javascript:this.value=this.value.toUpperCase()">{ITEM_FILTER_TAGS}</textarea></dd>
+				</dl>
+				<hr />
+				<div id="itemoptions">
+					<dl>
+						<dt><label for="item_iso_code">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICES}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICES_EXPLAIN}</span></dt>
+						<dd>
+							<select name="forums_choices[]" style="width: 100%;" id="forum_choices" multiple="multiple" size="10">
+							<!-- BEGIN forums -->
+								<option value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME} forum_{forums.FORUM_ID}</option>
+							<!-- END items -->
+							</select>
+						</dd>
+					</dl>
+				</div>
+			</fieldset>
+			<!-- IF S_EDIT_ERROR -->
+			<fieldset class="errorbox">
+				<label for="item_filter_tags">{ITEM_EDIT_ERROR}</label>
+			</fieldset>
+			<!-- ENDIF -->
+			<fieldset>
+				<p class="submit-buttons">
+					{S_HIDDEN_FIELDS}
+					<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+					<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+					{S_FORM_TOKEN}
+				</p>
+			</fieldset>
+		</form>
+	<!-- ENDIF -->
+
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
