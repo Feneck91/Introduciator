@@ -44,7 +44,6 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD'					=> 'Install Introduciator Mod',
 
-
 	'INSTALL_INTRODUCIATOR_MOD_CONFIRM'			=> 'Are you ready to install the Introduciator Mod?',
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Major changes since version 0.0.1-dev',
 

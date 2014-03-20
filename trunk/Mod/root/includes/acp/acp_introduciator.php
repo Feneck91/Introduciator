@@ -113,101 +113,44 @@ class acp_introduciator
 					'S_CONFIGURATION_PAGES'	=> $mode,
 				));
 
-				// If no action, display diaries list
+				// If no action, display configuration
 				if (!$action)
-				{
-					$sql = sprintf('SELECT * FROM %s ORDER BY left_id',INTRODUCIATOR_ITEMS_TABLE);
-					$result = $db->sql_query($sql);
-
-					while ($row = $db->sql_fetchrow($result))
-					{
-						$row_id = (int) $row['introduciator_id'];
-
-						$template->assign_block_vars('items', array(
-						'NAME'			=> $row['introduciator_name'],
-						// links
-						'U_EDIT'			=> $this->u_action . '&amp;action=edit&amp;id=' . $row_id,
-						'U_MOVE_UP'			=> $this->u_action . '&amp;action=move_up&amp;id=' . $row_id,
-						'U_MOVE_DOWN'		=> $this->u_action . '&amp;action=move_down&amp;id=' . $row_id,
-						'U_DELETE'			=> $this->u_action . '&amp;action=delete&amp;id=' . $row_id,
-						));
-					};
-					$db->sql_freeresult($result);
-
-					$template->assign_vars(array(
-						// Check force URL
-						// i is the ID of this MOD (introduciator) / mode is the sub item
-						'U_INTRODUCIATOR_ADD_NEW'	=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=introduciator&amp;mode=' . $mode . '&amp;action=addnew'),
-						'S_EDIT'			=> false,
-					));
-				}
-				else
 				{	// Action
 					$dp_data = null;
-					$s_hidden_fields = null;
+					$s_hidden_fields = array();
 
-					switch ($action)
-					{
-						case 'update' :
-						{	// User has request an update : write it into database
-							$error_msg = null;
-							$introduciator_id  = request_var('id', 0, true);
-							$item_name = utf8_normalize_nfc(request_var('item_name', '', true));
-							$left_id   = request_var('left_id', 0, true);
-							$right_id  = request_var('right_id', 0, true);
-							$item_tag  = utf8_normalize_nfc(request_var('item_tag', '', true));
-							$item_filter_tags = utf8_normalize_nfc(request_var('item_filter_tags', '', true));
-							$forums = request_var('forums_choices[]', 0, true);
+					$sql = printf("SELECT %s FROM",INTRODUCIATOR_ITEMS_TABLE);
+					$result = $db->sql_query($sql);
+					$row = $db->sql_fetchrow($result);
+					$db->sql_freeresult($result);
 
-							if ($item_name === '')
-							{
-								$error_msg = $user->lang['ERROR_INTRODUCIATOR_NAME_EMPTY'];
-							}
-							else if (strlen($item_tag) != 3)
-							{
-								$error_msg = $user->lang['ERROR_INTRODUCIATOR_ITEM_TAG_INVALID'];
-							}
+					// User has request an update : write it into database
+					$error_msg = null;
+					$introduciator_id  = request_var('id', 0, true);
+					$item_name = utf8_normalize_nfc(request_var('item_name', '', true));
+					$item_tag  = utf8_normalize_nfc(request_var('item_tag', '', true));
+					$item_filter_tags = utf8_normalize_nfc(request_var('item_filter_tags', '', true));
+					$forums = request_var('forums_choices[]', 0, true);
 
-							else
-							{
-								$right_id = execute_sql_value(printf('SELECT MAX(right_id) AS right_id FROM %s',INTRODUCIATOR_ITEMS_TABLE),'right_id');
-								$introduciator_item['left_id'] = $right_id + 1;
-								$introduciator_item['right_id'] = $right_id + 2;
+					$dp_data = array(
+						'id'			=> $row['introduciator_id'],
+						'forum_id'		=> $row['fk_forum_id'],
+					);
 
-								$db->sql_query(sprintf('INSERT INTO %s %s',INTRODUCIATOR_ITEMS_TABLE,$db->sql_build_array('INSERT', $introduciator_item)));
-							}
-
-							if ($error_msg !== null)
-							{
-								$dp_data = array(
-									'id'				=> $introduciator_id,
-									'item_name'		=> $item_name,
-									'item_tag'			=> $item_tag,
-									'filter_tag'		=> $filter_tag,
-									'left_id'			=> $item_enable,
-									'right_id'			=> $mode,
-								);
-								// Indicate to web page that current display is EDITION (edit or new one)
-								$template->assign_vars(array(
-									'S_EDIT_ERROR'		=> true,
-									'ITEM_EDIT_ERROR'	=> $error_msg
-								));
-							}
-							else
-							{
-								$trigger_url = (!$introduciator_id ? '&amp;action=addnew&amp;back=1' : '&amp;action=edit&amp;back=1&amp;id=') . (int) $introduciator_id;
-								trigger_error($user->lang['ERROR_INTRODUCIATOR_NAME_EMPTY'] . adm_back_link($this->u_action . $trigger_url));
-								break;
-							}
-						}
-					}
 					if ($dp_data != null)
 					{
-
 						$template->assign_vars(array(
 							'S_HIDDEN_FIELDS' => $s_hidden_fields,
 						));
 					}
+
+					// Add all forums
+					$this->add_all_forums($row['fk_forum_id'],0,0);
+
+					$s_hidden_fields = build_hidden_fields(array(
+							'id'			=> $row['introduciator_id'],
+							'action'		=> 'update',
+						));
 				}
 				break;
 			}
@@ -221,32 +164,16 @@ class acp_introduciator
 	{
 		global $db;			// Database
 		global $template;	// Page template
-		global $user;		// User information
-
-		if ($id_parent == 0 && $level == 0)
-		{	// Add 'main page' into the forum's list (first one)
-			$template->assign_block_vars('forums', array(
-			'FORUM_NAME'				=> $user->lang['INTRODUCIATOR_CP_ED_MAIN_PAGE'],
-			'FORUM_ID'					=> MAIN_PAGE_FORUM_ID, // MAIN_PAGE_FORUM_ID is Main page, specific case
-			'SELECTED'					=> ($id_introduciator == 0
-												// If new introduciator, select it only if it is the first one
-												? !$this->is_at_least_one_introduciator_exists()
-												// else check table to know if it is selected or not
-												: is_introduciator_displayed_into_forum($id_introduciator,MAIN_PAGE_FORUM_ID)),
-			'TOOLTIP'					=> $user->lang['INTRODUCIATOR_CP_ED_MAIN_PAGE_TOOLTIP'],
-			));
-			$level = $level + 1;
-		}
 
 		$sql = sprintf('SELECT forum_name,forum_id,forum_desc FROM %s WHERE parent_id = %d',FORUMS_TABLE,$id_parent);
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('forums', array(
-			'FORUM_NAME'				=> str_repeat("&nbsp;",4 * $level) . $row['forum_name'],
-			'FORUM_ID'					=> (int) $row['forum_id'],
-			'SELECTED'					=> is_introduciator_displayed_into_forum($id_introduciator,$row['forum_id']),
-			'TOOLTIP'					=> $row['forum_desc'],
+			'FORUM_NAME'	=> str_repeat("&nbsp;",4 * $level) . $row['forum_name'],
+			'FORUM_ID'		=> (int) $row['forum_id'],
+			'SELECTED'		=> is_introduciator_displayed_into_forum($id_introduciator,$row['forum_id']),
+			'TOOLTIP'		=> $row['forum_desc'],
 			));
 			$this->add_all_forums($id_introduciator,$row['forum_id'],$level + 1);
 		}
@@ -264,40 +191,6 @@ class acp_introduciator
 	function is_at_least_one_introduciator_exists()
 	{
 		return is_exists_at_least_once(INTRODUCIATOR_ITEMS_TABLE,NULL);
-	}
-
-	/**
-	 * Obtains the latest introduciator_id (primary key) into the ordered list of diaries.
-	 *
-	 * All diaries are stored into the INTRODUCIATOR_ITEMS_TABLE table, each row have
-	 * a previous_id that indicate the primary key (introduciator_id) of the previous
-	 * introduciator. This help to know the introduciator order into the forums.
-	 *
-	 * @return The latest introduciator primary key if found, 0 if no introduciator exists.
-	 */
-	function find_last_introduciator_id()
-	{
-		global $db;			// Database
-
-		// First item : has previous_id to 0
-		$last_id = 0;
-
-		// Find last introduciator into the ordered list of diaries
-		$sql = sprintf('SELECT introduciator_id,previous_id FROM %s WHERE previous_id = %d',INTRODUCIATOR_ITEMS_TABLE,$last_id);
-		$result = $db->sql_query($sql);
-		if ($row = $db->sql_fetchrow($result))
-		{	// Get the last item
-			$is_displayed_main = false; // Not first item: do not show it into the main page
-			do
-			{
-				$last_id = $row['introduciator_id'];
-				$sql =	sprintf('SELECT introduciator_id,previous_id FROM %s WHERE previous_id = %d',INTRODUCIATOR_ITEMS_TABLE,$last_id);
- 				$result = $db->sql_query($sql);
-			}
-			while ($row = $db->sql_fetchrow($result));
-		}
-
-		return $last_id;
 	}
 
 	/**
