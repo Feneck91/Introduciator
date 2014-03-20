@@ -137,8 +137,8 @@ $versions = array(
 				'COLUMNS' => array(
 					'introduciator_id'	=> array('UINT', NULL, 'auto_increment'),
 					'fk_forum_id'		=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
-					'fk_forum_id'		=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
 				),
+				'PRIMARY_KEY'	=> 'introduciator_id',
 			)),
 		),
 		// Creating the tables into database
