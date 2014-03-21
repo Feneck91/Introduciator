@@ -57,6 +57,6 @@ $lang = array_merge($lang, array(
 	'UPDATE_INTRODUCIATOR_MOD_CONFIRM'			=> 'Are you ready to update the Introduciator Mod?',
 
 	'UNUSED_LANG_FILES_TRUE'					=> 'Removal of unused language files.',
-	'UNUSED_LANG_FILES_FALSE'					=> 'The removal of unused files is not necessary.'
+	'UNUSED_LANG_FILES_FALSE'					=> 'The removal of unused files is not necessary.',
 ));
 ?>

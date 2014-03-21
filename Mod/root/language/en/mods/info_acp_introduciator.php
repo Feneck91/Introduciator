@@ -85,15 +85,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Is used to know with forum should be tested to know if the user has already made it\'s introduction or not',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Display explanation page',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Used to display an explanation page if the user try to post into another forum that the introduced one',
-));
 
-/**
-* Others
-*/
-$lang = array_merge($lang, array(
-	'ERROR_NO_INTRODUCIATOR_ID'					=> 'Diary item is not found!',
-	'ERROR_INTRODUCIATOR_NAME_EMPTY'			=> 'The diary name must not be empty!',
-	'ERROR_INTRODUCIATOR_ITEM_TAG_INVALID'		=> 'The diary tag must be 3 character length!',
+	'INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'					=> '<Deactivate this functionality>',
 ));
 
 /**

@@ -144,6 +144,20 @@ $versions = array(
 		// Creating the tables into database
 		//-------------------------------------------------------------
 
+		//-------------------------------------------------------------
+		// Fill config table
+		'table_row_insert' => array(
+			array(INTRODUCIATOR_CONFIG_TABLE,
+				array(
+					'introduciator_id'			=> '1',
+					'fk_forum_id'				=> '0',
+				),
+			),
+		),
+		// Creating the tables into database
+		//-------------------------------------------------------------
+
+
 		// Purge cache else
 		'cache_purge' => '',
 	),

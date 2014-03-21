@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* permissions_diary.php [English]
+* permissions_introduciator.php [English]
 *
-* @package Diary MOD
+* @package Introduciator MOD
 * @copyright (c) 2014 Feneck91
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -39,15 +39,6 @@ if (empty($lang) || !is_array($lang))
 //
 
 // Adding new category
-$lang['permission_cat']['diary']   = 'Diary MOD';
-
-// Adding the permissions
-$lang = array_merge($lang, array(
-	// User Permissions
-	'u_diary_use'			=> array('lang' => 'Can use the diary', 'cat' => 'diary'),
-
-	// Admin Permissions
-	'acl_a_diady_manage'	=> array('lang' => 'Can manage Diary MOD', 'cat' => 'misc'),
-));
+$lang['permission_cat']['introduciator']   = 'Introduciator MOD';
 
 ?>
