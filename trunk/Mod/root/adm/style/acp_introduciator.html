@@ -47,15 +47,13 @@
 <!-- IF S_CONFIGURATION_PAGES -->
 	<h1>{L_INTRODUCIATOR_CP_TITLE}</h1>
 	{L_INTRODUCIATOR_CP_TITLE_EXPLAIN}
-
-	<a href="{U_BACK}" style="float: {S_CONTENT_FLOW_END};">&laquo; {L_BACK}</a>
 	<form id="acp_introduciator" method="post" action="{U_ACTION}">
 		<fieldset>
 			<legend>{L_GENERAL_OPTIONS}</legend>
 			<dl>
 				<dt><label for="forum_choice">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN}</span></dt>
 				<dd>
-					<select name="forums_choice" style="width: 100%;" id="forum_choice" size="1">
+					<select name="forum_choice" style="width: 100%;" id="forum_choice" size="1">
 					<!-- BEGIN forums -->
 						<option value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
 					<!-- END items -->
@@ -63,9 +61,13 @@
 				</dd>
 			</dl>
 			<dl>
-				<dt><label for="item_tag">{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN}</span></dt>
-				<dd><input id="item_tag" name="item_tag" type="text" class="text medium" value="{ITEM_TAG}" maxlength="3" onkeyup="javascript:this.value=this.value.toUpperCase()"/></dd>
+				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN}</span></dt>
+				<dd><label><input id="display_explanation" name="display_explanation" type="radio" class="radio" value="1"<!-- IF DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
 			</dl>
+			<input  type="hidden" name="action" value="update" />
+			<input  type="hidden" name="id" value="{id}" />
 		</fieldset>
 		<!-- IF S_EDIT_ERROR -->
 		<fieldset class="errorbox">

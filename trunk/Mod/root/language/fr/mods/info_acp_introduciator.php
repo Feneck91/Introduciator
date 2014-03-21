@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE'						=> 'Configuration de la Présentation forcée',
-	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de créer / supprimer / éditer les agendas',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de configurer le fonctionnement du MOD',
 	'INTRODUCIATOR_CP_CREATE_INTRODUCIATOR'			=> 'Permet de sélectionner le forum de présentation, les goupes qui n\'ont pas à se présenter, etc.',
 ));
 
@@ -86,7 +86,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s\'est déjà présenté ou pas',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Afficher la page d\'explication',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Utilisé pour afficher la page d\'explication si l\'utilisateur tente de poster dans un autre forum que celui des présentations',
-
 	'INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'					=> '<Désactivation de la fonctionnalité>',
 ));
 

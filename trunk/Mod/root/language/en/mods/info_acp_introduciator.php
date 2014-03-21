@@ -73,6 +73,7 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE'						=> 'Introductiator configurations',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Allow to configure the MOD operating',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Allow to select introduced forum, groups that are not needed to be introduced, etc.',
 ));
 
@@ -85,7 +86,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Is used to know with forum should be tested to know if the user has already made it\'s introduction or not',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Display explanation page',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Used to display an explanation page if the user try to post into another forum that the introduced one',
-
 	'INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'					=> '<Deactivate this functionality>',
 ));
 
