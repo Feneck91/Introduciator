@@ -35,12 +35,13 @@ class acp_introduciator
 	function main($id, $mode)
 	{
 		global $template;			// Page template
-		global $user;				// User information
+		global $user;				// User information (+ language)
 		global $phpbb_root_path;	// Php bb root path
 		global $phpEx;				// php Extension
 		global $config;				// Configuration
 
 		include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+		$user->add_lang('mods/info_acp_introduciator');
 
 		$this->tpl_name = 'acp_introduciator'; // Template file : adm/style/introduciator/acp_introduciator.htm
 		$this->page_title = $user->lang['ACP_INTRODUCIATOR_MOD']; // Page Title
@@ -119,7 +120,7 @@ class acp_introduciator
 					$dp_data = null;
 					$s_hidden_fields = array();
 
-					$sql = printf("SELECT %s FROM",INTRODUCIATOR_ITEMS_TABLE);
+					$sql = sprintf('SELECT * FROM %s',INTRODUCIATOR_CONFIG_TABLE);
 					$result = $db->sql_query($sql);
 					$row = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
@@ -145,7 +146,7 @@ class acp_introduciator
 					}
 
 					// Add all forums
-					$this->add_all_forums($row['fk_forum_id'],0,0);
+					$this->add_all_forums(8/*$row['fk_forum_id']*/,0,0);
 
 					$s_hidden_fields = build_hidden_fields(array(
 							'id'			=> $row['introduciator_id'],
@@ -160,11 +161,23 @@ class acp_introduciator
 		}
 	}
 
-	function add_all_forums($id_introduciator,$id_parent,$level)
+	function add_all_forums($fk_selected_forum_id,$id_parent,$level)
 	{
 		global $db;			// Database
 		global $template;	// Page template
+		global $user;		// User information (translation)
 
+		if ($id_parent == 0)
+		{	// Add deactivation item
+			$template->assign_block_vars('forums', array(
+			'FORUM_NAME'	=> sprintf("<%s>",$user->lang['INTRODUCIATOR_CP_ED_MOD_DESACTIVATE']),
+			'FORUM_ID'		=> (int) 0,
+			'SELECTED'		=> ($fk_selected_forum_id == 0),
+			'TOOLTIP'		=> '',
+			));
+		}
+
+		// Add all forums
 		$sql = sprintf('SELECT forum_name,forum_id,forum_desc FROM %s WHERE parent_id = %d',FORUMS_TABLE,$id_parent);
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
@@ -172,25 +185,12 @@ class acp_introduciator
 			$template->assign_block_vars('forums', array(
 			'FORUM_NAME'	=> str_repeat("&nbsp;",4 * $level) . $row['forum_name'],
 			'FORUM_ID'		=> (int) $row['forum_id'],
-			'SELECTED'		=> is_introduciator_displayed_into_forum($id_introduciator,$row['forum_id']),
+			'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
 			'TOOLTIP'		=> $row['forum_desc'],
 			));
-			$this->add_all_forums($id_introduciator,$row['forum_id'],$level + 1);
+			$this->add_all_forums($fk_selected_forum_id,$row['forum_id'],$level + 1);
 		}
 		$db->sql_freeresult($result);
-	}
-
-	/**
-	 * Indicate if at least one introduciator exists or not.
-	 *
-	 * Used to know if the introduciator creation is the first one or not. In this case
-	 * the first created introduciator has 'main page' automatically selected.
-	 *
-	 * @return true if at least one introduciator exists, false else.
-	 */
-	function is_at_least_one_introduciator_exists()
-	{
-		return is_exists_at_least_once(INTRODUCIATOR_ITEMS_TABLE,NULL);
 	}
 
 	/**

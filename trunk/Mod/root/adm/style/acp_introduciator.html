@@ -54,26 +54,18 @@
 			<legend>{L_GENERAL_OPTIONS}</legend>
 			<dl>
 				<dt><label for="forum_choice">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN}</span></dt>
-				<dd><input id="forum_choice" name="forum_choice" type="text" class="text medium" value="{ITEM_NAME}" /></dd>
+				<dd>
+					<select name="forums_choice" style="width: 100%;" id="forum_choice" size="1">
+					<!-- BEGIN forums -->
+						<option value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
+					<!-- END items -->
+					</select>
+				</dd>
 			</dl>
 			<dl>
 				<dt><label for="item_tag">{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN}</span></dt>
 				<dd><input id="item_tag" name="item_tag" type="text" class="text medium" value="{ITEM_TAG}" maxlength="3" onkeyup="javascript:this.value=this.value.toUpperCase()"/></dd>
 			</dl>
-			<hr />
-
-			<div id="itemoptions">
-				<dl>
-					<dt><label for="item_iso_code">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICES}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICES_EXPLAIN}</span></dt>
-					<dd>
-						<select name="forums_choice" style="width: 100%;" id="forum_choice" size="10">
-						<!-- BEGIN forums -->
-							<option value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME} forum_{forums.FORUM_ID}</option>
-						<!-- END items -->
-						</select>
-					</dd>
-				</dl>
-			</div>
 		</fieldset>
 		<!-- IF S_EDIT_ERROR -->
 		<fieldset class="errorbox">
@@ -89,7 +81,6 @@
 			</p>
 		</fieldset>
 	</form>
-	<!-- ENDIF -->
 <!-- ENDIF -->
 
 <!-- INCLUDE overall_footer.html -->

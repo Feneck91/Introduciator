@@ -84,8 +84,10 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'						=> 'Choix du forum où l\'utilisateur doit se présenter',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s\'est déjà présenté ou pas',
-	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Afficher la page d\explication',
+	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Afficher la page d\'explication',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Utilisé pour afficher la page d\'explication si l\'utilisateur tente de poster dans un autre forum que celui des présentations',
+
+	'INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'					=> '<Désactivation de la fonctionnalité>',
 ));
 
 /**
