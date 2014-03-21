@@ -68,7 +68,7 @@ class acp_introduciator
 				{
 					$template->assign_vars(array(
 						'S_INTRODUCIATOR_VERSIONCHECK_FAIL'	=> true,
-						'L_VERSIONCHECK_FAIL'				=> sprintf($user->lang['VERSIONCHECK_FAIL'], $latest_version_info),
+						'L_VERSIONCHECK_FAIL'				=> $user->lang['VERSIONCHECK_FAIL'],
 					));
 				}
 				else
@@ -104,8 +104,7 @@ class acp_introduciator
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
 				// Is Add action ?
-				$action = request_var('action', '');
-				$is_edit = ($action ==='edit');
+				$action = request_var('action', false);
 				$introduciator_id = 0; // 0 for new, else it contains the ID
 
 				// Display configuration page
@@ -115,49 +114,70 @@ class acp_introduciator
 				));
 
 				// If no action, display configuration
-				if (!$action)
-				{	// Action
-					$dp_data = null;
-					$s_hidden_fields = array();
-
-					$sql = sprintf('SELECT * FROM %s',INTRODUCIATOR_CONFIG_TABLE);
-					$result = $db->sql_query($sql);
-					$row = $db->sql_fetchrow($result);
-					$db->sql_freeresult($result);
-
-					// User has request an update : write it into database
-					$error_msg = null;
-					$introduciator_id  = request_var('id', 0, true);
-					$item_name = utf8_normalize_nfc(request_var('item_name', '', true));
-					$item_tag  = utf8_normalize_nfc(request_var('item_tag', '', true));
-					$item_filter_tags = utf8_normalize_nfc(request_var('item_filter_tags', '', true));
-					$forums = request_var('forums_choices[]', 0, true);
-
-					$dp_data = array(
-						'id'			=> $row['introduciator_id'],
-						'forum_id'		=> $row['fk_forum_id'],
-					);
-
-					if ($dp_data != null)
+				if ($action !== false)
+				{	// Action !
+					switch ($action)
 					{
-						$template->assign_vars(array(
-							'S_HIDDEN_FIELDS' => $s_hidden_fields,
-						));
-					}
+						case 'update' :
+						{	// User has request an update : write it into database
+							// Update Database
+							$sql_ary = array(
+								'fk_forum_id'				=> request_var('forum_choice', 0),
+								'is_explanation_enabled'	=> (request_var('display_explanation', 0) != 0),
+							);							
+							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
+									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
+									WHERE introduciator_id = ' . (int) request_var('id', 0);
+							$db->sql_query($sql);
+							break;
+						}
+						default:
+						{
+							trigger_error('NO_MODE', E_USER_ERROR);
+							break;
+						}
+					} // End of Case
+				} // End of Action
+					
+				// no action or update current
+				$dp_data = null;
+				$s_hidden_fields = array();
 
-					// Add all forums
-					$this->add_all_forums(8/*$row['fk_forum_id']*/,0,0);
+				$sql = 'SELECT *
+						FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
+				$result = $db->sql_query($sql);
+				$row = $db->sql_fetchrow($result);
+				$db->sql_freeresult($result);
 
-					$s_hidden_fields = build_hidden_fields(array(
-							'id'			=> $row['introduciator_id'],
-							'action'		=> 'update',
-						));
+				$dp_data = array(
+					'id'			=>  $row['introduciator_id'],
+				);
+
+				if ($dp_data != null)
+				{
+					$template->assign_vars(array(
+						'S_HIDDEN_FIELDS'				=> $s_hidden_fields,
+						'DISPLAY_EXPLANATION_ENABLED'	=> $row['is_explanation_enabled'],
+						'U_ACTION'						=> $this->u_action,
+					));
 				}
-				break;
+
+				// Add all forums
+				$this->add_all_forums($row['fk_forum_id'],0,0);
+
+				$s_hidden_fields = build_hidden_fields(array(
+						'forum_id'		=> $row['fk_forum_id'],
+						'action'		=> 'update',
+						'id'			=> $row['introduciator_id'],
+					));
+
+				if ($dp_data != null)
+				{
+					$template->assign_vars(array(
+						'S_HIDDEN_FIELDS' => $s_hidden_fields,
+					));
+				}
 			}
-			default:
-				trigger_error('NO_MODE', E_USER_ERROR);
-			break;
 		}
 	}
 
@@ -166,11 +186,11 @@ class acp_introduciator
 		global $db;			// Database
 		global $template;	// Page template
 		global $user;		// User information (translation)
-
+		
 		if ($id_parent == 0)
 		{	// Add deactivation item
 			$template->assign_block_vars('forums', array(
-			'FORUM_NAME'	=> sprintf("<%s>",$user->lang['INTRODUCIATOR_CP_ED_MOD_DESACTIVATE']),
+			'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'],
 			'FORUM_ID'		=> (int) 0,
 			'SELECTED'		=> ($fk_selected_forum_id == 0),
 			'TOOLTIP'		=> '',

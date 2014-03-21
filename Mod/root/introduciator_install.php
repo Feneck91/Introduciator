@@ -135,8 +135,9 @@ $versions = array(
 			//               user must introduce himself.
 			array(INTRODUCIATOR_CONFIG_TABLE, array(
 				'COLUMNS' => array(
-					'introduciator_id'	=> array('UINT', NULL, 'auto_increment'),
-					'fk_forum_id'		=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
+					'introduciator_id'			=> array('UINT', NULL, 'auto_increment'),
+					'is_explanation_enabled'	=> array('BOOL',1),
+					'fk_forum_id'				=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
 				),
 				'PRIMARY_KEY'	=> 'introduciator_id',
 			)),
@@ -149,8 +150,9 @@ $versions = array(
 		'table_row_insert' => array(
 			array(INTRODUCIATOR_CONFIG_TABLE,
 				array(
-					'introduciator_id'			=> '1',
-					'fk_forum_id'				=> '0',
+					'introduciator_id'			=> 1,
+					'is_explanation_enabled'	=> false,
+					'fk_forum_id'				=> 0,
 				),
 			),
 		),
