@@ -114,7 +114,47 @@ class acp_introduciator
 				));
 
 				// If no action, display configuration
-				if ($action !== false)
+				if ($action === false)
+				{	// no action or update current
+					$dp_data = null;
+					$s_hidden_fields = array();
+
+					$sql = 'SELECT *
+							FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
+					$result = $db->sql_query($sql);
+					$row = $db->sql_fetchrow($result);
+					$db->sql_freeresult($result);
+
+					$dp_data = array(
+						'id'			=>  $row['introduciator_id'],
+					);
+
+					if ($dp_data != null)
+					{
+						$template->assign_vars(array(
+							'S_HIDDEN_FIELDS'				=> $s_hidden_fields,
+							'DISPLAY_EXPLANATION_ENABLED'	=> $row['is_explanation_enabled'],
+							'U_ACTION'						=> $this->u_action,
+						));
+					}
+
+					// Add all forums
+					$this->add_all_forums($row['fk_forum_id'],0,0);
+
+					$s_hidden_fields = build_hidden_fields(array(
+							'forum_id'		=> $row['fk_forum_id'],
+							'action'		=> 'update',
+							'id'			=> $row['introduciator_id'],
+						));
+
+					if ($dp_data != null)
+					{
+						$template->assign_vars(array(
+							'S_HIDDEN_FIELDS' => $s_hidden_fields,
+						));
+					}
+				}
+				else
 				{	// Action !
 					switch ($action)
 					{
@@ -124,11 +164,14 @@ class acp_introduciator
 							$sql_ary = array(
 								'fk_forum_id'				=> request_var('forum_choice', 0),
 								'is_explanation_enabled'	=> (request_var('display_explanation', 0) != 0),
-							);							
+							);
 							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
 									WHERE introduciator_id = ' . (int) request_var('id', 0);
 							$db->sql_query($sql);
+
+							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
+							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
 							break;
 						}
 						default:
@@ -138,45 +181,6 @@ class acp_introduciator
 						}
 					} // End of Case
 				} // End of Action
-					
-				// no action or update current
-				$dp_data = null;
-				$s_hidden_fields = array();
-
-				$sql = 'SELECT *
-						FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
-				$result = $db->sql_query($sql);
-				$row = $db->sql_fetchrow($result);
-				$db->sql_freeresult($result);
-
-				$dp_data = array(
-					'id'			=>  $row['introduciator_id'],
-				);
-
-				if ($dp_data != null)
-				{
-					$template->assign_vars(array(
-						'S_HIDDEN_FIELDS'				=> $s_hidden_fields,
-						'DISPLAY_EXPLANATION_ENABLED'	=> $row['is_explanation_enabled'],
-						'U_ACTION'						=> $this->u_action,
-					));
-				}
-
-				// Add all forums
-				$this->add_all_forums($row['fk_forum_id'],0,0);
-
-				$s_hidden_fields = build_hidden_fields(array(
-						'forum_id'		=> $row['fk_forum_id'],
-						'action'		=> 'update',
-						'id'			=> $row['introduciator_id'],
-					));
-
-				if ($dp_data != null)
-				{
-					$template->assign_vars(array(
-						'S_HIDDEN_FIELDS' => $s_hidden_fields,
-					));
-				}
 			}
 		}
 	}
@@ -186,7 +190,7 @@ class acp_introduciator
 		global $db;			// Database
 		global $template;	// Page template
 		global $user;		// User information (translation)
-		
+
 		if ($id_parent == 0)
 		{	// Add deactivation item
 			$template->assign_block_vars('forums', array(
