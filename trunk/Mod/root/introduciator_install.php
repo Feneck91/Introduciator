@@ -136,6 +136,7 @@ $versions = array(
 			array(INTRODUCIATOR_CONFIG_TABLE, array(
 				'COLUMNS' => array(
 					'introduciator_id'			=> array('UINT', NULL, 'auto_increment'),
+					'is_enabled'				=> array('BOOL',0),
 					'is_explanation_enabled'	=> array('BOOL',1),
 					'fk_forum_id'				=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
 				),
@@ -151,6 +152,7 @@ $versions = array(
 			array(INTRODUCIATOR_CONFIG_TABLE,
 				array(
 					'introduciator_id'			=> 1,
+					'is_enabled'				=> false,
 					'is_explanation_enabled'	=> false,
 					'fk_forum_id'				=> 0,
 				),

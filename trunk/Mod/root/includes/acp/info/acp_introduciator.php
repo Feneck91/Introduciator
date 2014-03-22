@@ -27,6 +27,7 @@ class acp_introduciator_info
 	function module()
 	{
 		return array(
+			'title'				=> 'ACP_INTRODUCIATOR_MOD',	// Used when going to System / Modules / Admin
 			'filename'			=> 'acp_introduciator',		// Filename : includes/acp/acp_introduciator.php (the name of the file this info file is used for)
 			'version'			=> '0.0.1-Dev',		// Version
 			'modes'		=> array(

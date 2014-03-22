@@ -51,6 +51,12 @@
 		<fieldset>
 			<legend>{L_GENERAL_OPTIONS}</legend>
 			<dl>
+				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN}</span></dt>
+				<dd><label><input id="mod_activated" name="mod_activated" type="radio" class="radio" value="1"<!-- IF MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="mod_activated" type="radio" class="radio" value="0"<!-- IF not MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<dl>
 				<dt><label for="forum_choice">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN}</span></dt>
 				<dd>
 					<select name="forum_choice" style="width: 100%;" id="forum_choice" size="1">
