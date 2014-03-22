@@ -95,5 +95,8 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	//logs
 	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Introduciator : Configuration mise à jour.</strong>',
+
+	// Confirm box
+	'INTRODUCIATOR_CP_UPDATED'				=> 'La configuration a été mise à jour',
 ));
 ?>
