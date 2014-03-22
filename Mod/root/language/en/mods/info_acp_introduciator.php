@@ -82,11 +82,20 @@ $lang = array_merge($lang, array(
 * Info: language keys are prefixed with 'INTRODUCIATOR_CP_ED_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
 */
 $lang = array_merge($lang, array(
+	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"						=> 'Activate MOD',
+	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"				=> 'Used to enabled or disabled this MOD',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'						=> 'Forum choice where the user must to introduce himself',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Is used to know with forum should be tested to know if the user has already made it\'s introduction or not',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Display explanation page',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Used to display an explanation page if the user try to post into another forum that the introduced one',
-	'INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'					=> '<Deactivate this functionality>',
+	'INTRODUCIATOR_CP_ED_MOD_NO_FORUM_CHOICE'				=> '',
+));
+
+/**
+* Others
+*/
+$lang = array_merge($lang, array(
+	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this MOD is enabled your must choose a forum!',
 ));
 
 /**
@@ -94,7 +103,7 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	//logs
-	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Introduciator : Settings updated.</strong>',
+	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Introduciator: settings updated.</strong>',
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'				=> 'The configuration has been updated',

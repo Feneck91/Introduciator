@@ -133,6 +133,7 @@ class acp_introduciator
 					{
 						$template->assign_vars(array(
 							'S_HIDDEN_FIELDS'				=> $s_hidden_fields,
+							'MOD_ACTIVATED'					=> $row['is_enabled'],
 							'DISPLAY_EXPLANATION_ENABLED'	=> $row['is_explanation_enabled'],
 							'U_ACTION'						=> $this->u_action,
 						));
@@ -142,9 +143,9 @@ class acp_introduciator
 					$this->add_all_forums($row['fk_forum_id'],0,0);
 
 					$s_hidden_fields = build_hidden_fields(array(
-							'forum_id'		=> $row['fk_forum_id'],
-							'action'		=> 'update',
-							'id'			=> $row['introduciator_id'],
+							'forum_id'		=> $row['fk_forum_id'],		// Selected forum
+							'action'		=> 'update',				// Action
+							'id'			=> $row['introduciator_id'],// Id of row (first element) of configration table
 						));
 
 					if ($dp_data != null)
@@ -161,9 +162,18 @@ class acp_introduciator
 						case 'update' :
 						{	// User has request an update : write it into database
 							// Update Database
+							$is_enabled					= (request_var('mod_activated', 0) != 0);
+							$fk_forum_id				= request_var('forum_choice', 0);
+							$is_explanation_enabled		= (request_var('display_explanation', 0) != 0);
+
+							if ($is_enabled && $fk_forum_id === 0)
+							{
+								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
+							}
 							$sql_ary = array(
-								'fk_forum_id'				=> request_var('forum_choice', 0),
-								'is_explanation_enabled'	=> (request_var('display_explanation', 0) != 0),
+								'is_enabled'				=> $is_enabled,
+								'fk_forum_id'				=> $fk_forum_id,
+								'is_explanation_enabled'	=> $is_explanation_enabled,
 							);
 							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
@@ -194,7 +204,7 @@ class acp_introduciator
 		if ($id_parent == 0)
 		{	// Add deactivation item
 			$template->assign_block_vars('forums', array(
-			'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'],
+			'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_CP_ED_MOD_NO_FORUM_CHOICE'],
 			'FORUM_ID'		=> (int) 0,
 			'SELECTED'		=> ($fk_selected_forum_id == 0),
 			'TOOLTIP'		=> '',

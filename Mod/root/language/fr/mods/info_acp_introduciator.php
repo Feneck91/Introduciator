@@ -82,11 +82,20 @@ $lang = array_merge($lang, array(
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_ED_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
 */
 $lang = array_merge($lang, array(
+	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"						=> 'Activer le MOD',
+	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"				=> 'Utilisé pour activer ou désactiver ce MOD',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'						=> 'Choix du forum où l\'utilisateur doit se présenter',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s\'est déjà présenté ou pas',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Afficher la page d\'explication',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Utilisé pour afficher la page d\'explication si l\'utilisateur tente de poster dans un autre forum que celui des présentations',
-	'INTRODUCIATOR_CP_ED_MOD_DESACTIVATE'					=> '<Désactivation de la fonctionnalité>',
+	'INTRODUCIATOR_CP_ED_MOD_NO_FORUM_CHOICE'				=> '',
+));
+
+/**
+* Autres
+*/
+$lang = array_merge($lang, array(
+	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
 ));
 
 /**
@@ -94,7 +103,7 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	//logs
-	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Introduciator : Configuration mise à jour.</strong>',
+	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Présentation forcée : configuration mise à jour.</strong>',
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'				=> 'La configuration a été mise à jour',
