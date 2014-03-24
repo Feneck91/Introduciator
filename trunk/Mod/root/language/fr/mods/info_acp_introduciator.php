@@ -94,6 +94,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION'				=> 'Groupes exclus',
 	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'					=> 'Sélection des groupes',
 	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'			=> 'Sélectionne les groupes qui doivent être inclus ou exclus',
+	'INTRODUCIATOR_CP_ED_IGNORED_USERS'						=> 'Utilisateurs ignorés',
+	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'				=> 'Liste des utilisateurs qui ne sont pas obligés de se présenter.<br/>Entrez un utilisateur par ligne.<br/>Utilisé pour les compte Admin ou les compte de test par exemple',
 ));
 
 /**

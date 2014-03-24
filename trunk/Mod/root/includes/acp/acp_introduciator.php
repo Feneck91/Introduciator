@@ -137,6 +137,7 @@ class acp_introduciator
 							'MOD_ACTIVATED'					=> $row['is_enabled'],
 							'DISPLAY_EXPLANATION_ENABLED'	=> $row['is_explanation_enabled'],
 							'INCLUDE_GROUPS_SELECTED'		=> $row['is_include_groups'],
+							'ITEM_IGNORED_USERS'			=> $row['ignored_users'],
 							'U_ACTION'						=> $this->u_action,
 						));
 					}
@@ -171,8 +172,8 @@ class acp_introduciator
 							$fk_forum_id				= request_var('forum_choice', 0);
 							$is_explanation_enabled		= (request_var('display_explanation', 0) != 0);
 							$is_include_groups			= (request_var('include_groups', 0) != 0);
-							xdebug_break();
-							$groups                     = request_var('groups_choices', array('' => 0));
+							$groups                     = request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
+							$ignored_users				= request_var('ignored_users', '');
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
@@ -183,11 +184,33 @@ class acp_introduciator
 								'fk_forum_id'				=> $fk_forum_id,
 								'is_explanation_enabled'	=> $is_explanation_enabled,
 								'is_include_groups'			=> $is_include_groups,
+								'ignored_users'				=> $ignored_users,
 							);
+							
+							// Update INTRODUCIATOR_CONFIG_TABLE
 							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
 									WHERE introduciator_id = ' . (int) request_var('id', 0);
 							$db->sql_query($sql);
+
+							// Update INTRODUCIATOR_GROUPS_TABLE
+							// 1> Remove all entries
+							$sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;
+							$db->sql_query($sql);
+
+							// 2> Add all entries
+							foreach ($groups as &$group)
+							{	// Create elements to add by row
+								$sql_ary = array(
+									'fk_group'				=> $group,
+								);
+								// Create SQL request
+								$sql = 'INSERT INTO ' . INTRODUCIATOR_GROUPS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+								// Add row
+								$db->sql_query($sql);
+							}
+
+xdebug_break();
 
 							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
 							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
