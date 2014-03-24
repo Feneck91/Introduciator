@@ -128,6 +128,7 @@ $versions = array(
 
 		//-------------------------------------------------------------
 		// Creating the tables into database
+
 		'table_add' => array(
 			// Table used to record introduciator configuration
 			//   fk_introduciator_id is a foreign key to INTRODUCIATOR_ITEMS_TABLE primary key
@@ -138,9 +139,16 @@ $versions = array(
 					'introduciator_id'			=> array('UINT', NULL, 'auto_increment'),
 					'is_enabled'				=> array('BOOL',0),
 					'is_explanation_enabled'	=> array('BOOL',1),
+					'is_include_groups'			=> array('BOOL',1),
 					'fk_forum_id'				=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
 				),
 				'PRIMARY_KEY'	=> 'introduciator_id',
+			)),
+			// Groups list
+			array(INTRODUCIATOR_GROUPS_TABLE, array(
+				'COLUMNS' => array(
+					'fk_group'			=> array('UINT', NULL),
+				),
 			)),
 		),
 		// Creating the tables into database
@@ -154,13 +162,13 @@ $versions = array(
 					'introduciator_id'			=> 1,
 					'is_enabled'				=> false,
 					'is_explanation_enabled'	=> false,
+					'is_include_groups'			=> true,
 					'fk_forum_id'				=> 0,
 				),
 			),
 		),
 		// Creating the tables into database
 		//-------------------------------------------------------------
-
 
 		// Purge cache else
 		'cache_purge' => '',

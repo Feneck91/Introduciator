@@ -88,13 +88,19 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Is used to know with forum should be tested to know if the user has already made it\'s introduction or not',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Display explanation page',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Used to display an explanation page if the user try to post into another forum that the introduced one',
-	'INTRODUCIATOR_CP_ED_MOD_NO_FORUM_CHOICE'				=> '',
+	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'			=> 'Include groups or exclude groups',
+	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'	=> 'When include group is selected, only users of selected groups needs to introduce themself.<br/>When exclude group is selected, only users that are not into selected groups needs to introduce themself',
+	'INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION'				=> 'Include groups',
+	'INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION'				=> 'Exclude groups',
+	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'					=> 'Groups selections',
+	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'			=> 'Select groups that are to be included or excluded',
 ));
 
 /**
 * Others
 */
 $lang = array_merge($lang, array(
+	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this MOD is enabled your must choose a forum!',
 ));
 
