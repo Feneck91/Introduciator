@@ -72,6 +72,23 @@
 					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
+			<hr />
+			<dl>
+				<dt><label for="include_group">{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN}</span></dt>
+				<dd><label><input id="include_groups" name="include_groups" type="radio" class="radio" value="1"<!-- IF INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION}</label>
+					<label><input  name="include_groups" type="radio" class="radio" value="0"<!-- IF not INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION}</label>
+				</dd>
+			</dl>
+			<dl>
+				<dt><label for="item_groups">{L_INTRODUCIATOR_CP_ED_SELECTED_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN}</span></dt>
+				<dd>
+					<select name="groups_choices[]" style="width: 100%;" id="groups_choices" multiple="multiple" size="10">
+					<!-- BEGIN group -->
+						<option value="{group.ID}" name="group_{group.ID}" title="{group.TOOLTIP}" <!-- IF group.SELECTED -->selected="selected"<!-- ENDIF -->>{group.NAME}</option>
+					<!-- END items -->
+					</select>
+				</dd>
+			</dl>
 			<input  type="hidden" name="action" value="update" />
 			<input  type="hidden" name="id" value="{id}" />
 		</fieldset>

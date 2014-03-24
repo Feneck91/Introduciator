@@ -41,6 +41,7 @@ class acp_introduciator
 		global $config;				// Configuration
 
 		include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 		$user->add_lang('mods/info_acp_introduciator');
 
 		$this->tpl_name = 'acp_introduciator'; // Template file : adm/style/introduciator/acp_introduciator.htm
@@ -135,12 +136,16 @@ class acp_introduciator
 							'S_HIDDEN_FIELDS'				=> $s_hidden_fields,
 							'MOD_ACTIVATED'					=> $row['is_enabled'],
 							'DISPLAY_EXPLANATION_ENABLED'	=> $row['is_explanation_enabled'],
+							'INCLUDE_GROUPS_SELECTED'		=> $row['is_include_groups'],
 							'U_ACTION'						=> $this->u_action,
 						));
 					}
 
 					// Add all forums
 					$this->add_all_forums($row['fk_forum_id'],0,0);
+
+					// Add all groups
+					$this->add_all_groups();
 
 					$s_hidden_fields = build_hidden_fields(array(
 							'forum_id'		=> $row['fk_forum_id'],		// Selected forum
@@ -165,6 +170,9 @@ class acp_introduciator
 							$is_enabled					= (request_var('mod_activated', 0) != 0);
 							$fk_forum_id				= request_var('forum_choice', 0);
 							$is_explanation_enabled		= (request_var('display_explanation', 0) != 0);
+							$is_include_groups			= (request_var('include_groups', 0) != 0);
+							xdebug_break();
+							$groups                     = request_var('groups_choices', array('' => 0));
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
@@ -174,6 +182,7 @@ class acp_introduciator
 								'is_enabled'				=> $is_enabled,
 								'fk_forum_id'				=> $fk_forum_id,
 								'is_explanation_enabled'	=> $is_explanation_enabled,
+								'is_include_groups'			=> $is_include_groups,
 							);
 							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
@@ -204,7 +213,7 @@ class acp_introduciator
 		if ($id_parent == 0)
 		{	// Add deactivation item
 			$template->assign_block_vars('forums', array(
-			'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_CP_ED_MOD_NO_FORUM_CHOICE'],
+			'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_NO_FORUM_CHOICE'],
 			'FORUM_ID'		=> (int) 0,
 			'SELECTED'		=> ($fk_selected_forum_id == 0),
 			'TOOLTIP'		=> '',
@@ -225,6 +234,46 @@ class acp_introduciator
 			$this->add_all_forums($fk_selected_forum_id,$row['forum_id'],$level + 1);
 		}
 		$db->sql_freeresult($result);
+	}
+
+	function add_all_groups()
+	{
+		global $db;			// Database
+		global $template;	// Page template
+
+		$sql = 'SELECT group_id,group_desc
+			FROM ' . GROUPS_TABLE;
+
+		$result = $db->sql_query($sql);
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$template->assign_block_vars('group', array(
+			'NAME'		=> get_group_name($row['group_id']),
+			'ID'		=> (int) $row['group_id'],
+			'SELECTED'	=> $this->is_group_selected($row['group_id']),
+			'TOOLTIP'	=> $row['group_desc'],
+			));
+		}
+		$db->sql_freeresult($result);
+	}
+
+	function is_group_selected($forum_id)
+	{
+		global $db;			// Database
+
+		$sql = 'SELECT *
+			FROM ' . INTRODUCIATOR_GROUPS_TABLE . '
+			WHERE fk_group = ' . $forum_id;
+
+		$result = $db->sql_query($sql);
+		$ret = false;
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$ret = true;
+		}
+		$db->sql_freeresult($result);
+
+		return $ret;
 	}
 
 	/**

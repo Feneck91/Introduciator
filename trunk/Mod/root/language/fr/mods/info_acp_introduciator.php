@@ -88,13 +88,19 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'				=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s\'est déjà présenté ou pas',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'			=> 'Afficher la page d\'explication',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'	=> 'Utilisé pour afficher la page d\'explication si l\'utilisateur tente de poster dans un autre forum que celui des présentations',
-	'INTRODUCIATOR_CP_ED_MOD_NO_FORUM_CHOICE'				=> '',
+	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'			=> 'Groupes inclus ou groupes exclus',
+	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'	=> 'Lorsque les groupes inclus sont sélectionnés, Seuls les utilisateurs des groupes sélectionnés doivent se présenter.<br/>Lorsque les groupes exclus sont sont sélectionnés, seuls les utilisateurs ne faisant pas parti des groupes sélectionnés doivent se présenter',
+	'INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION'				=> 'Groupes inclus',
+	'INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION'				=> 'Groupes exclus',
+	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'					=> 'Sélection des groupes',
+	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'			=> 'Sélectionne les groupes qui doivent être inclus ou exclus',
 ));
 
 /**
 * Autres
 */
 $lang = array_merge($lang, array(
+	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
 ));
 
