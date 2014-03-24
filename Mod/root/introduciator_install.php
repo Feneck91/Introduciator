@@ -140,7 +140,8 @@ $versions = array(
 					'is_enabled'				=> array('BOOL',0),
 					'is_explanation_enabled'	=> array('BOOL',1),
 					'is_include_groups'			=> array('BOOL',1),
-					'fk_forum_id'				=> array('UINT', NULL),	// Foreign key on FORUMS_TABLE primary key
+					'fk_forum_id'				=> array('UINT', NULL),		// Foreign key on FORUMS_TABLE primary key
+					'ignored_users'				=> array('TEXT_UNI', ''),	// Users list
 				),
 				'PRIMARY_KEY'	=> 'introduciator_id',
 			)),
@@ -164,6 +165,7 @@ $versions = array(
 					'is_explanation_enabled'	=> false,
 					'is_include_groups'			=> true,
 					'fk_forum_id'				=> 0,
+					'ignored_users'				=> '',
 				),
 			),
 		),
