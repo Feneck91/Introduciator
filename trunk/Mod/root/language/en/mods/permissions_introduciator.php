@@ -38,7 +38,4 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-// Adding new category
-$lang['permission_cat']['introduciator']   = 'Introduciator MOD';
-
 ?>

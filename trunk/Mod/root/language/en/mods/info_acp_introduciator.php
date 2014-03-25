@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* info_acp_diary.php [English]
+* info_acp_introduciator.php [English]
 *
-* @package Diary MOD
+* @package Introduciator MOD
 * @copyright (c) 2014 Feneck91
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -46,7 +46,7 @@ $lang = array_merge($lang, array(
 ));
 
 /**
-* Titles present on the left side of .MOD ACP's tab under Diary item
+* Titles present on the left side of .MOD ACP's tab under Introduciator item
 */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GENERAL'							=> 'General',

@@ -41,7 +41,6 @@ class acp_introduciator
 		global $config;				// Configuration
 
 		include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-		include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 		$user->add_lang('mods/info_acp_introduciator');
 
 		$this->tpl_name = 'acp_introduciator'; // Template file : adm/style/introduciator/acp_introduciator.htm
@@ -238,7 +237,10 @@ class acp_introduciator
 		}
 
 		// Add all forums
-		$sql = sprintf('SELECT forum_name,forum_id,forum_desc FROM %s WHERE parent_id = %d',FORUMS_TABLE,$id_parent);
+		$sql = 'SELECT forum_name,forum_id,forum_desc
+				FROM ' . FORUMS_TABLE . '
+				WHERE parent_id = ' . $id_parent;
+		
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -267,30 +269,11 @@ class acp_introduciator
 			$template->assign_block_vars('group', array(
 			'NAME'		=> get_group_name($row['group_id']),
 			'ID'		=> (int) $row['group_id'],
-			'SELECTED'	=> $this->is_group_selected($row['group_id']),
+			'SELECTED'	=> is_group_selected($row['group_id']),
 			'TOOLTIP'	=> $row['group_desc'],
 			));
 		}
 		$db->sql_freeresult($result);
-	}
-
-	function is_group_selected($forum_id)
-	{
-		global $db;			// Database
-
-		$sql = 'SELECT *
-			FROM ' . INTRODUCIATOR_GROUPS_TABLE . '
-			WHERE fk_group = ' . $forum_id;
-
-		$result = $db->sql_query($sql);
-		$ret = false;
-		while ($row = $db->sql_fetchrow($result))
-		{
-			$ret = true;
-		}
-		$db->sql_freeresult($result);
-
-		return $ret;
 	}
 
 	/**

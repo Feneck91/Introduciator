@@ -32,11 +32,6 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
 
-// Start session management
-$user->session_begin();
-$auth->acl($user->data);
-$user->setup();
-
 $mod_name = 'creation';
 
 /*
