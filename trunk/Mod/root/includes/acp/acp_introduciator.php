@@ -120,38 +120,34 @@ class acp_introduciator
 					$dp_data = null;
 					$s_hidden_fields = array();
 
-					$sql = 'SELECT *
-							FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
-					$result = $db->sql_query($sql);
-					$row = $db->sql_fetchrow($result);
-					$db->sql_freeresult($result);
+					$params = introduciator_getparams();
 
 					$dp_data = array(
-						'id'			=>  $row['introduciator_id'],
+						'id'			=>  $params['introduciator_id'],
 					);
 
 					if ($dp_data != null)
 					{
 						$template->assign_vars(array(
 							'S_HIDDEN_FIELDS'				=> $s_hidden_fields,
-							'MOD_ACTIVATED'					=> $row['is_enabled'],
-							'DISPLAY_EXPLANATION_ENABLED'	=> $row['is_explanation_enabled'],
-							'INCLUDE_GROUPS_SELECTED'		=> $row['is_include_groups'],
-							'ITEM_IGNORED_USERS'			=> $row['ignored_users'],
+							'MOD_ACTIVATED'					=> $params['is_enabled'],
+							'DISPLAY_EXPLANATION_ENABLED'	=> $params['is_explanation_enabled'],
+							'INCLUDE_GROUPS_SELECTED'		=> $params['is_include_groups'],
+							'ITEM_IGNORED_USERS'			=> $params['ignored_users'],
 							'U_ACTION'						=> $this->u_action,
 						));
 					}
 
 					// Add all forums
-					$this->add_all_forums($row['fk_forum_id'],0,0);
+					$this->add_all_forums($params['fk_forum_id'],0,0);
 
 					// Add all groups
 					$this->add_all_groups();
 
 					$s_hidden_fields = build_hidden_fields(array(
-							'forum_id'		=> $row['fk_forum_id'],		// Selected forum
-							'action'		=> 'update',				// Action
-							'id'			=> $row['introduciator_id'],// Id of row (first element) of configration table
+							'forum_id'		=> $params['fk_forum_id'],		// Selected forum
+							'action'		=> 'update',					// Action
+							'id'			=> $params['introduciator_id'],	// Id of row (first element) of configration table
 						));
 
 					if ($dp_data != null)
@@ -186,7 +182,7 @@ class acp_introduciator
 								'is_include_groups'			=> $is_include_groups,
 								'ignored_users'				=> $ignored_users,
 							);
-							
+
 							// Update INTRODUCIATOR_CONFIG_TABLE
 							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
@@ -209,8 +205,6 @@ class acp_introduciator
 								// Add row
 								$db->sql_query($sql);
 							}
-
-xdebug_break();
 
 							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
 							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));

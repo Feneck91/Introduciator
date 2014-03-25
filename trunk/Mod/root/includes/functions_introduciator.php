@@ -26,20 +26,41 @@ define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
 define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
 
 /**
- * Execute rsql request and return the int value.
+ * Verify if .
  *
- * @param string $sql SQL request to execute
- * @param string $variable_name variable name to read.
+ * @param $poster_id The poster id
+ * @param $mode posting mode, could be 'reply' or 'quote' or 'post'.
  *
- * @return The int value read from $variable_name name.
+ * @return None.
  */
-function execute_sql_value($sql,$variable_name)
+function introduciator_verify($user,$mode)
+{
+	$params = introduciator_getparams();
+
+	if ($params['is_enabled'])
+	{
+		$user_id = $user->data['user_id'];
+		
+
+	}
+}
+
+/**
+ * Get the introduciator parameters.
+ *
+ * @return The introduciator parameters.
+ */
+function introduciator_getparams()
 {
 	global $db; // Database
+
+	$sql = 'SELECT *
+			FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
 	$result = $db->sql_query($sql);
-	$value = (int) $db->sql_fetchfield($variable_name);
+	$row = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
-	return $value;
+
+	return $row;
 }
 
 ?>
