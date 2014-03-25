@@ -59,4 +59,14 @@ $lang = array_merge($lang, array(
 	'UNUSED_LANG_FILES_TRUE'					=> 'Suppression des fichiers non utilisés.',
 	'UNUSED_LANG_FILES_FALSE'					=> 'La suppression des fichiers non utilisés n’est pas nécessaire.',
 ));
+
+/*
+* Autre : Messages
+*/
+$lang = array_merge($lang, array(
+	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'	=> 'Vous n\'êtes pas autorisés à vous présenter plus d\'une fois !',
+	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'	=> 'Veuillez vous présenter dans le Forum : %s',
+	'INTRODUCIATOR_MOD_DISABLED'					=> 'Le MOD introduciator est désactivé. Veuillez l\'activer pour l\'utiliser !',
+));
+
 ?>

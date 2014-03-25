@@ -45,11 +45,10 @@ $mode		= ($delete && !$preview && !$refresh && $submit) ? 'delete' : request_var
 $error = $post_data = array();
 $current_time = time();
 
-xdebug_break();
 //------------------------------------------------
 // Introduciator - Begin
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-introduciator_verify($user,$mode);
+introduciator_verify_posting($user,$mode,$forum_id,$auth);
 // Introduciator - End
 //------------------------------------------------
 

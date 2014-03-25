@@ -1,40 +1,51 @@
 <!-- INCLUDE overall_header.html -->
-
-<h2 style="color:#FF2020"><Vous devez vous pr&eacute;senter</h2>
-
+<br/>
 <div class="panel">
-   <div class="inner"><span class="corners-top"><span></span></span>
+<!-- IF S_MOD_ACTIVATED -->
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<div class="content" style="color:#000000">
+			<br/>
+				<h2><center>
+					<p style="color:#FF6060">{INTRODUCIATOR_MOD_EXPLAIN_TITLE}</p>
+				</center></h2>
+			<br/>
+			Pour chaque nouvel utilisateur, il faut commencer par aller se pr&eacute;senter aux autres membres dans le Forum '
+			<a href="{FORUM_HREF}"><u>{FORUM_NAME}</u></a>'.
+			<br/>Seul la cr&eacute;ation d'un nouveau message dans ce forum est autoris&eacute;.
+			<br/>Pour la cr&eacute;ation du message de pr&eacute;sentation, veuillez suivre les r&egrave;gles qui sont affich&eacute;es en rouge en haut de chaque forum.
+			<br/><br/><b><u>Elles sont rappel&eacute;es ici :</b></u><br/><br/>
+		</div>
 
-   <div class="content" style="color:#000000">
-      <br/>
-      <center><p style="color:#FF2020">
-         Afin d'acc&eacute;der au contenu compl&ecirc;t du forum vous devez <u>obligatoirement</u> vous pr&eacute;senter.
-      </p></center>
-      Pour chaque nouvel utilisateur, il faut commencer par aller se pr&eacute;senter aux autres membres dans le Forum '
-      <a href="http://www.arthrodese-lombaire.fr/forum/presentation-des-membre-f4/"><u>Pr&eacute;sentation des membres</u></a>'.
-      <br/>Seul la cr&eacute;ation d'un nouveau message dans ce forum est autoris&eacute;.
-      <br/>Pour la cr&eacute;ation du message de pr&eacute;sentation, veuillez suivre les r&egrave;gles qui sont affich&eacute;es en rouge en haut de chaque forum.
-      <br/><br/><b><u>Elles sont rappel&eacute;es ici :</b></u><br/><br/>
-   </div>
-
-    <div class="rules">
-        <div class="inner"><span class="corners-top"><span></span></span>
-            <strong>R&egrave;gles du forum</strong><br/>
-            <br/>
-            Pour que le Forum <b>Pr&eacute;sentation des membres</b> soit facile &agrave; lire, merci de respecter les r&egrave;gles suivantes :<br /><br />
-            <ul><li>Pri&egrave;re de mettre en titre du sujet votre pseudo.</li>
-            <li>En description une br&egrave;ve description de qui vous &ecirc;tes.</li>
-            <li>En message ce que vous souhaitez divulguer : votre op&eacute;ration, vos ant&eacute;c&eacute;dents, votre situation familiale, votre &acirc;ge, tout ce que vous souhaitez rendre publique.</li>
-            </ul>
-        <span class="corners-bottom"><span></span></span></div>
-    </div>
-    <br/>
-   <span class="corners-bottom"><span></span></span></div>
+		<div class="rules">
+			<div class="inner"><span class="corners-top"><span></span></span>
+				<strong>{L_FORUM_RULES}</strong><br/>
+				<br/>
+				{FORUM_RULES}
+				<br/>
+			<span class="corners-bottom"><span></span></span></div>
+		</div>
+		<br/>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+<!-- ELSE -->
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<div class="content" style="color:#000000">
+			<br/>
+			<center>
+				<h2>
+					<p style="color:#FF6060">{L_INTRODUCIATOR_MOD_DISABLED}</p>
+				</h2>
+			</center>
+		</div>
+		<br/>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+<!-- ENDIF -->
 </div>
 <br/>
-<a href="http://www.arthrodese-lombaire.fr/forum/presentation-des-membre-f4/">Aller dans le forum 'Pr&eacute;sentation des membres' maintenant en cliquant sur ce lien'</a>
+<a href="{FORUM_HREF}">Aller dans le forum '{FORUM_NAME}' maintenant en cliquant sur ce lien'</a>
 <br/>
-<a href="http://www.arthrodese-lombaire.fr/forum/posting.php?mode=post&f=4">Commencer votre pr&eacute;sentation maintenant en cliquant sur ce lien</a>
+<a href="{FORUM_HREF_POST}">Commencer votre pr&eacute;sentation maintenant en cliquant sur ce lien</a>
 
 <!-- INCLUDE jumpbox.html -->
 <!-- INCLUDE overall_footer.html -->
