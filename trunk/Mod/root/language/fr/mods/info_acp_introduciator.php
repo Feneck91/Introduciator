@@ -39,7 +39,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : Le nom du MOD
+* mode: main : le nom du MOD
 */
 $lang = array_merge($lang, array(
 	'ACP_INTRODUCIATOR_MOD'							=> 'Présentation forcée',
@@ -88,8 +88,8 @@ $lang = array_merge($lang, array(
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'Pour tous les champs textes suivants, vous pouvez utiliser :<br/>'
 																	.  '<ul>'
 																	.  '<li><b>%forum_name%</b> : nom du forum de présentation</li>'
-																	.  '<li><b>%forum_url%</b> : lien vers le forum de présentation</li>'
-																	.  '<li><b>%forum_post%</b> : lien pour l\'écriture d\'un nouveau post dans le forum de présentation</li>'
+																	.  '<li><b>%forum_url%</b> : url vers le forum de présentation</li>'
+																	.  '<li><b>%forum_post%</b> : url pour l\'écriture d\'un nouveau post dans le forum de présentation</li>'
 																	.  '</ul>',
 	// Sous-titres
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"								=> 'Activer le MOD',
@@ -114,9 +114,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN'	=> 'Permet d\'afficher les règles du forum de présentation dans la page d\'explication',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE'					=> 'Titre de la présentation des règles',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN'			=> 'Défaut = <b>%rules_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT'					=> 'Règles du forum de présentation',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN'			=> 'Défaut = <b>%rules_text%</b><br/>Par défaut %rules_text% est remplacé par le texte des règles du forum de présentation.<br/>Vous pouvez changer le texte pour mettre celui de votre choix',));
-
+	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT'					=> 'Texte des règles du forum de présentation',
+	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN'			=> 'Défaut = <b>%rules_text%</b><br/>Par défaut %rules_text% est remplacé par le texte des règles du forum de présentation.<br/>Vous pouvez changer le texte pour mettre celui de votre choix',
+));
+	
 /**
 * Autres
 */
