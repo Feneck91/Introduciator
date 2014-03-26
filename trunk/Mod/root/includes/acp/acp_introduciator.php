@@ -116,26 +116,24 @@ class acp_introduciator
 				// If no action, display configuration
 				if ($action === false)
 				{	// no action or update current
-					$dp_data = null;
+					$dp_data = array();
 					$s_hidden_fields = array();
 
 					$params = introduciator_getparams();
 
-					$dp_data = array(
-						'id'			=>  $params['introduciator_id'],
-					);
-
-					if ($dp_data != null)
-					{
-						$template->assign_vars(array(
-							'S_HIDDEN_FIELDS'				=> $s_hidden_fields,
-							'MOD_ACTIVATED'					=> $params['is_enabled'],
-							'DISPLAY_EXPLANATION_ENABLED'	=> $params['is_explanation_enabled'],
-							'INCLUDE_GROUPS_SELECTED'		=> $params['is_include_groups'],
-							'ITEM_IGNORED_USERS'			=> $params['ignored_users'],
-							'U_ACTION'						=> $this->u_action,
-						));
-					}
+					$template->assign_vars(array(
+						'S_HIDDEN_FIELDS'						=> $s_hidden_fields,
+						'MOD_ACTIVATED'							=> $params['is_enabled'],
+						'DISPLAY_EXPLANATION_ENABLED'			=> $params['is_explanation_enabled'],
+						'INCLUDE_GROUPS_SELECTED'				=> $params['is_include_groups'],
+						'ITEM_IGNORED_USERS'					=> $params['ignored_users'],
+						'EXPLANATION_MESSAGE_TITLE'				=> $params['explanation_message_title'],
+						'EXPLANATION_MESSAGE_TEXT'				=> $params['explanation_message_text'],
+						'EXPLANATION_IS_DISPLAY_RULES_ENABLED'	=> $params['explanation_display_rules_enabled'],
+						'EXPLANATION_MESSAGE_RULES_TITLE'		=> $params['explanation_message_rules_title'],
+						'EXPLANATION_MESSAGE_RULES_TEXT'		=> $params['explanation_message_rules_text'],
+						'U_ACTION'								=> $this->u_action,
+					));
 
 					// Add all forums
 					$this->add_all_forums($params['fk_forum_id'],0,0);
@@ -146,15 +144,12 @@ class acp_introduciator
 					$s_hidden_fields = build_hidden_fields(array(
 							'forum_id'		=> $params['fk_forum_id'],		// Selected forum
 							'action'		=> 'update',					// Action
-							'id'			=> $params['introduciator_id'],	// Id of row (first element) of configration table
+							'id'			=> $params['introduciator_id'],	// Id of row for hident input named "id"
 						));
 
-					if ($dp_data != null)
-					{
-						$template->assign_vars(array(
-							'S_HIDDEN_FIELDS' => $s_hidden_fields,
-						));
-					}
+					$template->assign_vars(array(
+						'S_HIDDEN_FIELDS' => $s_hidden_fields,
+					));
 				}
 				else
 				{	// Action !
@@ -163,23 +158,33 @@ class acp_introduciator
 						case 'update' :
 						{	// User has request an update : write it into database
 							// Update Database
-							$is_enabled					= (request_var('mod_activated', 0) != 0);
-							$fk_forum_id				= request_var('forum_choice', 0);
-							$is_explanation_enabled		= (request_var('display_explanation', 0) != 0);
-							$is_include_groups			= (request_var('include_groups', 0) != 0);
-							$groups                     = request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
-							$ignored_users				= request_var('ignored_users', '');
-
+							$is_enabled							= (request_var('mod_activated', 0) != 0);
+							$fk_forum_id						= request_var('forum_choice', 0);
+							$is_explanation_enabled				= (request_var('display_explanation', 0) != 0);
+							$is_include_groups					= (request_var('include_groups', 0) != 0);
+							$groups								= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
+							$ignored_users						= utf8_normalize_nfc(request_var('ignored_users', ''));
+							$explanation_message_title			= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
+							$explanation_message_text			= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
+							$explanation_display_rules_enabled	= (request_var('explanation_display_rules_enabled', 0) != 0);
+							$explanation_message_rules_title	= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
+							$explanation_message_rules_text		= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
+							
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
 							$sql_ary = array(
-								'is_enabled'				=> $is_enabled,
-								'fk_forum_id'				=> $fk_forum_id,
-								'is_explanation_enabled'	=> $is_explanation_enabled,
-								'is_include_groups'			=> $is_include_groups,
-								'ignored_users'				=> $ignored_users,
+								'is_enabled'						=> $is_enabled,
+								'fk_forum_id'						=> $fk_forum_id,
+								'is_explanation_enabled'			=> $is_explanation_enabled,
+								'is_include_groups'					=> $is_include_groups,
+								'ignored_users'						=> $ignored_users,
+								'explanation_message_title'			=> $explanation_message_title,
+								'explanation_message_text'			=> $explanation_message_text,
+								'explanation_display_rules_enabled'	=> $explanation_display_rules_enabled,
+								'explanation_message_rules_title'	=> $explanation_message_rules_title,
+								'explanation_message_rules_text'	=> $explanation_message_rules_text,
 							);
 
 							// Update INTRODUCIATOR_CONFIG_TABLE

@@ -81,10 +81,17 @@
 					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
-			<hr />
+			<input  type="hidden" name="action" value="update" />
+			<input  type="hidden" name="id" value="{id}" />
+		</fieldset>
+			<!--
+			     --------------------------- Manage groups and users -----------------------------
+			-->
+		<fieldset>
 			<!--
 			     Include / Exclude groups
 			-->
+			<legend>{L_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS}</legend>
 			<dl>
 				<dt><label for="include_group">{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN}</span></dt>
 				<dd><label><input id="include_groups" name="include_groups" type="radio" class="radio" value="1"<!-- IF INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION}</label>
@@ -111,8 +118,57 @@
 				<dt><label for="ignored_users">{L_INTRODUCIATOR_CP_ED_IGNORED_USERS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN}</span></dt>
 				<dd><textarea id="ignored_users" name="ignored_users" rows="10" cols="60">{ITEM_IGNORED_USERS}</textarea></dd>
 			</dl>
-			<input  type="hidden" name="action" value="update" />
-			<input  type="hidden" name="id" value="{id}" />
+		</fieldset>
+		<fieldset>
+			<!--
+			     --------------------------- Manage explanation texts ----------------------------
+			-->
+			<legend>{L_GENERAL_OPTIONS_EXPLANATION_TEXTS}</legend>
+			<!--
+			     General explanation
+			-->
+			<span>{L_GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN}</span>
+			<hr/>
+			<!--
+			     Title text
+			-->
+			<dl>
+				<dt><label for="explanation_message_title">{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_title" name="explanation_message_title" rows="5" cols="60">{EXPLANATION_MESSAGE_TITLE}</textarea></dd>
+			</dl>
+			<!--
+			     Explanation text
+			-->
+			<dl>
+				<dt><label for="explanation_message_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_text" name="explanation_message_text" rows="10" cols="60">{EXPLANATION_MESSAGE_TEXT}</textarea></dd>
+			</dl>
+			<!--
+			     Activate / Desactivate rules display
+			-->
+			<dl>
+				<dt><label for="explanation_display_rules_enabled">{L_INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN}</span></dt>
+				<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"<!-- IF EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"<!-- IF not EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<!--
+			     Rule title text
+			-->
+			<dl>
+				<dt><label for="explanation_message_rules_title">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_rules_title" name="explanation_message_rules_title" rows="5" cols="60">{EXPLANATION_MESSAGE_RULES_TITLE}</textarea></dd>
+			</dl>
+			<!--
+			     Explanation text
+			-->
+			<dl>
+				<dt><label for="explanation_message_rules_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_rules_text" name="explanation_message_rules_text" rows="10" cols="60">{EXPLANATION_MESSAGE_RULES_TEXT}</textarea></dd>
+			</dl>
+			<!--
+			     --------------------------- Posting ---------------------------------------------
+			-->
 		</fieldset>
 		<!-- IF S_EDIT_ERROR -->
 		<fieldset class="errorbox">
@@ -127,6 +183,9 @@
 				{S_FORM_TOKEN}
 			</p>
 		</fieldset>
+			<!--
+			     --------------------------- Hidden fields ---------------------------------------
+			-->
 	</form>
 <!-- ENDIF -->
 

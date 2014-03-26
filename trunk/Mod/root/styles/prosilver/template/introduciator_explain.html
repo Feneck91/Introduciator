@@ -9,13 +9,16 @@
 					<p style="color:#FF6060">{INTRODUCIATOR_MOD_EXPLAIN_TITLE}</p>
 				</center></h2>
 			<br/>
-			Pour chaque nouvel utilisateur, il faut commencer par aller se pr&eacute;senter aux autres membres dans le Forum '
-			<a href="{FORUM_HREF}"><u>{FORUM_NAME}</u></a>'.
-			<br/>Seul la cr&eacute;ation d'un nouveau message dans ce forum est autoris&eacute;.
-			<br/>Pour la cr&eacute;ation du message de pr&eacute;sentation, veuillez suivre les r&egrave;gles qui sont affich&eacute;es en rouge en haut de chaque forum.
-			<br/><br/><b><u>Elles sont rappel&eacute;es ici :</b></u><br/><br/>
+			{INTRODUCIATOR_MOD_EXPLAIN_TEXT}
+	<!-- IF S_RULES_ACTIVATED -->
+		<!-- IF S_RULES_TITLE_ACTIVATED -->
+			<br/>
+			<br/>
+			{INTRODUCIATOR_MOD_RULES_TITLE}
+			<br/>
+			<br/>
+		<!-- ENDIF -->
 		</div>
-
 		<div class="rules">
 			<div class="inner"><span class="corners-top"><span></span></span>
 				<strong>{L_FORUM_RULES}</strong><br/>
@@ -26,6 +29,14 @@
 		</div>
 		<br/>
 		<span class="corners-bottom"><span></span></span>
+	<!-- ELSE -->
+		</div>
+		<br/>
+	<!-- ENDIF -->
+	<br/>
+	<center>{INTRODUCIATOR_MOD_LINK_GOTO_FORUM}</center>
+	<center>{INTRODUCIATOR_MOD_LINK_POST_FORUM}</center><br/>
+	<br/>
 	</div>
 <!-- ELSE -->
 	<div class="inner"><span class="corners-top"><span></span></span>
@@ -42,10 +53,6 @@
 	</div>
 <!-- ENDIF -->
 </div>
-<br/>
-<a href="{FORUM_HREF}">Aller dans le forum '{FORUM_NAME}' maintenant en cliquant sur ce lien'</a>
-<br/>
-<a href="{FORUM_HREF_POST}">Commencer votre pr&eacute;sentation maintenant en cliquant sur ce lien</a>
 
 <!-- INCLUDE jumpbox.html -->
 <!-- INCLUDE overall_footer.html -->

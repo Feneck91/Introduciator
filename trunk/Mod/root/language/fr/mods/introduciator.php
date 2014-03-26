@@ -66,7 +66,15 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'	=> 'Vous n\'êtes pas autorisés à vous présenter plus d\'une fois !',
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'	=> 'Veuillez vous présenter dans le Forum : %s',
-	'INTRODUCIATOR_MOD_DISABLED'					=> 'Le MOD introduciator est désactivé. Veuillez l\'activer pour l\'utiliser !',
+	'INTRODUCIATOR_MOD_DISABLED'					=> 'Le MOD Introduciator est désactivé. Veuillez l\'activer pour l\'utiliser !',
+
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'		=> 'Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'		=> 'Pour chaque nouvel utilisateur, il faut commencer par aller se présenter aux autres membres dans le Forum <a href="%forum_url%"><u>%forum_name%</u></a><br/>'
+													.  'Seul la création d\'un nouveau message dans le forum de présentation est autorisé<br/>'
+													.  'Pour la création du message de présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation',
+	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'			=> '<b><u>Les règles sont rappelées ici :</u></b>',
+	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'		=> '<a href="%forum_url%">Aller dans le forum \'%forum_name%\' maintenant en cliquant sur ce lien</a>',
+	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'		=> '<a href="%forum_post%">Commencer votre présentation maintenant en cliquant sur ce lien</a>',
 ));
 
 ?>
