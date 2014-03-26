@@ -54,6 +54,17 @@ function is_group_selected($forum_id)
 	return $ret;
 }
 
+function replace_all_by($arr_fields,$arr_replace_by)
+{
+	foreach ($arr_fields as &$field)
+	{
+		foreach ($arr_replace_by as $arr_replace_by_key => $arr_replace_by_value)
+		{
+			$field = str_replace($arr_replace_by_key,$arr_replace_by_value,$field);
+		}
+	}
+}
+
 /**
  * Check if the user have already posted into this forum.
  * 

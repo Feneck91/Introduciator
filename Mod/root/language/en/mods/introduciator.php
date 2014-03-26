@@ -66,7 +66,14 @@ $lang = array_merge($lang, array(
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'	=> 'You are not allowed to introduce yourself more than once!',
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'	=> 'Please introduce youself into the topic: %s',
-	'INTRODUCIATOR_MOD_DISABLED'					=> 'The introduciator MOD is disabled. Enable it to use it!',
+	'INTRODUCIATOR_MOD_DISABLED'					=> 'The Introduciator MOD is disabled. Enable it to use it!',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'		=> 'To be able to post, you must <u>you must</u> introduce yourself',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'		=> 'For each new user, you must introduce yoursef to other <a href="{FORUM_HREF}"><u>{FORUM_NAME}</u></a><br/> Forum\'s members'
+													.  'Only new post into introduce forum is allowed<br/>'
+													.  'For the introduce message creation, please follow the following rules that are displayed at the top of the introduce forum',
+	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'			=> '<b><u>The rules are repeated here:</u></b>',
+	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'		=> '<a href="%forum_url%">Go to the \'%forum_name%\' forum  maintenant en cliquant sur ce lien</a>',
+	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'		=> '<a href="%forum_post%">Commencer votre présentation maintenant en cliquant sur ce lien</a>',
 ));
 
 ?>

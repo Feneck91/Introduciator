@@ -82,6 +82,10 @@ $lang = array_merge($lang, array(
 * Info: language keys are prefixed with 'INTRODUCIATOR_CP_ED_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
 */
 $lang = array_merge($lang, array(
+	// Titles
+	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'				=> 'Groups and users configuration',
+	'GENERAL_OPTIONS_EXPLANATION_TEXTS'						=> 'Explanations page configuration',
+	// Sub titles
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"						=> 'Activate MOD',
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"				=> 'Used to enabled or disabled this MOD',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'						=> 'Forum choice where the user must to introduce himself',
@@ -95,7 +99,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'					=> 'Groups selections',
 	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'			=> 'Select groups that are to be included or excluded',
 	'INTRODUCIATOR_CP_ED_IGNORED_USERS'						=> 'Ignored users',
-	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'				=> 'Users who are not required to introduce themself.<br/>Enter one user on each line.<br/>Used for the Admin or tests accounts for example',
+	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'				=> 'Users who are not required to introduce themself.<br/>Enter one user on each line.<br/>Used for the administrators or tests accounts for example',
 ));
 
 /**
