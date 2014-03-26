@@ -67,7 +67,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'	=> 'Vous n\'êtes pas autorisés à vous présenter plus d\'une fois !',
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'	=> 'Veuillez vous présenter dans le Forum : %s',
 	'INTRODUCIATOR_MOD_DISABLED'					=> 'Le MOD Introduciator est désactivé. Veuillez l\'activer pour l\'utiliser !',
-
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'		=> 'Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'		=> 'Pour chaque nouvel utilisateur, il faut commencer par aller se présenter aux autres membres dans le Forum <a href="%forum_url%"><u>%forum_name%</u></a><br/>'
 													.  'Seul la création d\'un nouveau message dans le forum de présentation est autorisé<br/>'
