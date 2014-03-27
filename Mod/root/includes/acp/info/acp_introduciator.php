@@ -17,6 +17,10 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+global $phpbb_root_path;	// Php bb root path
+global $phpEx;				// php Extension
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+
 /**
 * @package module_install
 *
@@ -27,9 +31,9 @@ class acp_introduciator_info
 	function module()
 	{
 		return array(
-			'title'				=> 'ACP_INTRODUCIATOR_MOD',	// Used when going to System / Modules / Admin
-			'filename'			=> 'acp_introduciator',		// Filename : includes/acp/acp_introduciator.php (the name of the file this info file is used for)
-			'version'			=> '0.0.1-Dev',		// Version
+			'title'				=> 'ACP_INTRODUCIATOR_MOD',			// Used when going to System / Modules / Admin
+			'filename'			=> 'acp_introduciator',				// Filename : includes/acp/acp_introduciator.php (the name of the file this info file is used for)
+			'version'			=> INTRODUCIATOR_CURRENT_VERSION,	// Version
 			'modes'		=> array(
 				'general'			=> array('title' => 'INTRODUCIATOR_GENERAL',		'auth' => 'acl_a_introduciator_manage', 'cat' => array('ACP_INTRODUCIATOR_MOD')),
 				'configuration'		=> array('title' => 'INTRODUCIATOR_CONFIGURATION',	'auth' => 'acl_a_introduciator_manage', 'cat' => array('ACP_INTRODUCIATOR_MOD')),
