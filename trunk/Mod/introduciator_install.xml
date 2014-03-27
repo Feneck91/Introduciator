@@ -16,13 +16,17 @@ It is possible to exclude users too (for tests accounts for example).]]></descri
 Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de poster un message dans un autre forum afin de lui expliquer ce qu'il doit faire.
 Certains groupes peuvent être inclus ou exclus pour permettre aux administrateurs et aux modérateurs de passer outre.
 Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par exemple).]]></description>
+		<author-notes lang="en"><![CDATA[Once you have installed this MOD, you must activate and configure it into the .MOD tab into the administration console panel.]]></author-notes>
+		<author-notes lang="fr"><![CDATA[Une fois ce MOD installé, vous devez l'activer et le configurer dans le panneau .MOD de la console d'administration.]]></author-notes>
 		<author-group>
 			<author>
 				<realname><![CDATA[CHÂTEAU Stéphane]]></realname>
 				<username><![CDATA[Feneck91]]></username>
+				<homepage><![CDATA[http://feneck91.free.fr]]></homepage>
+				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>0.9.0 Dev</mod-version>
+		<mod-version>0.9.0</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>300</time>
@@ -39,6 +43,9 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 			<file from="root/language/en/mods/introduciator.php" to="language/en/mods/introduciator.php"/>
 			<file from="root/language/en/mods/permissions_introduciator.php" to="language/en/mods/permissions_introduciator.php"/>
 			<file from="root/styles/prosilver/template/introduciator_explain.html" to="styles/prosilver/template/introduciator_explain.html"/>
+			<file from="root/language/fr/mods/info_acp_introduciator.php" to="language/fr/mods/info_acp_introduciator.php"/>
+			<file from="root/language/fr/mods/introduciator.php" to="language/fr/mods/introduciator.php"/>
+			<file from="root/language/fr/mods/permissions_introduciator.php" to="language/fr/mods/permissions_introduciator.php"/>
 			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
 			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
 			<file from="root/umil/*.*" to="umil/*.*"/>
@@ -46,7 +53,8 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 		<open src="posting.php">
 			<edit>
 				<find><![CDATA[$current_time = time();]]></find>
-				<action type="after-add"><![CDATA[//------------------------------------------------
+				<action type="after-add"><![CDATA[
+//------------------------------------------------
 // Introduciator - Begin
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 introduciator_verify_posting($user,$mode,$forum_id,$auth);
