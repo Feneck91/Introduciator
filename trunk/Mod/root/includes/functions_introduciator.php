@@ -26,6 +26,7 @@ global $table_prefix;
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
+define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.0');
 define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
 define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
 

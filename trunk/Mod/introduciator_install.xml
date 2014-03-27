@@ -7,6 +7,7 @@
 		<meta name="generator" content="MODX file generated with PP MODX Creator 1.2.6 by tumba25 (phpBB version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
 		<title lang="en"><![CDATA[Introduciator]]></title>
+		<title lang="fr"><![CDATA[Présentation Forcée]]></title>
 		<description lang="en"><![CDATA[Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums.
 An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.
 Some groups could be included or excluded to allow administrators or moderators to pass over this contraint.
@@ -21,7 +22,7 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 				<username><![CDATA[Feneck91]]></username>
 			</author>
 		</author-group>
-		<mod-version>1.0.0 RC1</mod-version>
+		<mod-version>0.9.0 Dev</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>300</time>

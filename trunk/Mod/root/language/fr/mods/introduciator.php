@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD'					=> 'Installer le Mod Introduciator',
 
 	'INSTALL_INTRODUCIATOR_MOD_CONFIRM'			=> 'Êtes-vous prêt à installer le Mod Introduciator ?',
-	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Changements majeurs depuis la version 0.0.1-dev',
+	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Changements majeurs depuis la version %s',
 
 	'INTRODUCIATOR_MOD'							=> 'Mod Introduciator',
 	'INTRODUCIATOR_MOD_EXPLAIN'					=> 'UMIL effectuera automatiquement, dans la base de données, tous les changements nécessaires pour le MOD Introduciator.',
