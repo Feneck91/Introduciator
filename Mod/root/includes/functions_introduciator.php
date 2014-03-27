@@ -31,7 +31,7 @@ define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
 
 /**
  * Check if a group is selected.
- * 
+ *
  * @param $forum_id Forum's identifier.
  * @return true if the group is selected, false else.
  */
@@ -67,7 +67,7 @@ function replace_all_by($arr_fields,$arr_replace_by)
 
 /**
  * Check if the user have already posted into this forum.
- * 
+ *
  * @param type $forum_id Forum's ID.
  * @param type $user_id User's ID.
  * @return true if the user already post at least one message into this forum, false else.
@@ -75,7 +75,7 @@ function replace_all_by($arr_fields,$arr_replace_by)
 function is_user_has_post_into_introduciator_topic($forum_id,$user_id)
 {
 	global $db; // Database
-	
+
 	$sql = 'SELECT topic_id
 			FROM ' . TOPICS_TABLE . '
 				WHERE topic_poster = ' . $user_id . '
@@ -83,27 +83,27 @@ function is_user_has_post_into_introduciator_topic($forum_id,$user_id)
 	$result = $db->sql_query($sql);
 	$topic_row = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
-	
+
 	return $topic_row !== false; // Return true or false
-}	
+}
 
 /**
  * Test if one of the user's groups has been selected into configuration.
- * 
+ *
  * These groups are selected into ACP, recorded into INTRODUCIATOR_GROUPS_TABLE table.
  * Call group_memberships function into includes/functions_user.php file.
- * 
+ *
  * @param $user_id User identifier into database.
  * @return true if one of the user's group has been selected into configuration, false else.
  */
 function is_user_in_groups_selected($user_id)
 {
 	global $db;			// Database
-	
+
 	$sql = 'SELECT *
 			FROM ' . INTRODUCIATOR_GROUPS_TABLE;
 	$result = $db->sql_query($sql);
-	
+
 	// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
 	$arr_groups_id = array();
 	while ($row = $db->sql_fetchrow($result))
@@ -111,7 +111,7 @@ function is_user_in_groups_selected($user_id)
 		array_push($arr_groups_id,$row['fk_group']);
 	}
 	$db->sql_freeresult($result);
-	
+
 	// Testing
 	return group_memberships($arr_groups_id,$user_id,true);
 }
@@ -136,10 +136,10 @@ function introduciator_getparams()
 
 /**
  * Check if the user is ignored or must introduce himself.
- * 
+ *
  * Check if it contains include groups or if doesn't contains exclude group.
  * Check if it doesn't contains name of ignored username list.
- * 
+ *
  * @param type $poster_id User's ID
  * @param type $poster_name User's name.
  * @param type $introduciator_params Introduce MOD parameters.
@@ -148,7 +148,7 @@ function introduciator_getparams()
 function is_user_ignored($poster_id,$poster_name,$introduciator_params)
 {
 	$ret = true;
-	
+
 	// Check if :
 	//	1 : Include group is ON and the user is member of at least one group of the selected groups (include groups)
 	//	2 : Include group is OFF (exclude) and the user is not member of one group of the selected groups (exclude groups)
@@ -166,7 +166,7 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  * Verify if the posting is allowed or not.
  *
  * If not allowed, it redirect the current page to the introduce forum or the explanation page.
- * 
+ *
  * @param $poster_id The poster id
  * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
  * @param $forum_id Forum identifier where the user try to post.
@@ -179,7 +179,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$auth)
 	global $phpbb_root_path;
 	global $phpEx;
 	global $template;
-	
+
 	$poster_id = $user->data['user_id'];
 	if ($poster_id != ANONYMOUS && $auth->acl_get('u_'))
 	{	// User is logged and have user authorization
@@ -195,7 +195,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$auth)
 					{
 						if ($params['is_explanation_enabled'])
 						{
-							redirect(append_sid("{$phpbb_root_path}/introduciator_explain.$phpEx", 'f=' . $forum_pres));
+							redirect(append_sid("{$phpbb_root_path}/introduciator_explain.$phpEx", 'f=' . $params['fk_forum_id']));
 						}
 						else
 						{
