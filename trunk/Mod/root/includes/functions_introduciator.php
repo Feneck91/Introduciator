@@ -168,11 +168,12 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  * @param $poster_id The poster id
  * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
  * @param $forum_id Forum identifier where the user try to post.
- * $auth User permissions.
+ * @param $post_id Post'id : it cannot be deleted if it is the first one and action is delete
+ * @param $auth User permissions.
  *
  * @return None.
  */
-function introduciator_verify_posting($user,$mode,$forum_id,$auth)
+function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth)
 {
 	global $phpbb_root_path, $phpEx, $template;
 
@@ -182,12 +183,27 @@ function introduciator_verify_posting($user,$mode,$forum_id,$auth)
 		$params = introduciator_getparams();
 
 		if ($params['is_enabled'])
-		{	// MOD is enabled
-			if (!is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id))
-			{	// No post into the introduce topic
-				if ((in_array($mode,array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
-				{
-					if (!is_user_ignored($poster_id,$user->data['username'],$params))
+		{	// MOD is enabled and the user is not ignored, it can do all he wants
+			// Force forum id because it be moved while user delete the message
+			global $db;
+
+			$is_user_ignored = is_user_ignored($poster_id,$user->data['username'],$params);
+			
+			if ($mode == 'delete' || !$is_user_ignored)
+			{
+				$sql = 'SELECT forum_id
+						FROM ' . POSTS_TABLE . '
+						WHERE post_id = ' . $post_id;
+				$result = $db->sql_query($sql);
+				$f_id = (int) $db->sql_fetchfield('forum_id');
+				$db->sql_freeresult($result);
+
+				// Take new forum id
+				$forum_id = (!$f_id) ? $forum_id : $f_id;
+
+				if (!$is_user_ignored && !is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id))
+				{	// No post into the introduce topic
+					if ((in_array($mode,array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
 					{
 						if ($params['is_explanation_enabled'])
 						{
@@ -199,15 +215,57 @@ function introduciator_verify_posting($user,$mode,$forum_id,$auth)
 						}
 					}
 				}
-			}
-			else if ($forum_id == $params['fk_forum_id'] && $mode == 'post')
-			{	// User try to create more than one introduce post
-				if (!is_user_ignored($poster_id,$user->data['username'],$params))
-				{	// Post more than once ! and not into the ignored list
+				else if (!$is_user_ignored && $forum_id == $params['fk_forum_id'] && $mode == 'post')
+				{	// User try to create more than one introduce post
 					$user->setup('mods/introduciator'); // Add lang
 					$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'];
 					$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
 					trigger_error($message,E_USER_NOTICE);
+				}
+				else if ($mode == 'delete' && !empty($post_id))
+				{	// Check if the user don't try to remove the first message of it's OWN introduce
+					// Don't care about $is_user_ignored => Administrator / Moderator cannot delete first posts of presentation
+					// else he needs to delete all the topic
+					if ($params['fk_forum_id'] == $forum_id
+						&& $user->data['is_registered']
+						&& $auth->acl_gets('f_delete', 'm_delete', $forum_id))
+					{	// This post is into the introduce forum
+						// Find the topic identifier
+						$sql = 'SELECT topic_id,poster_id
+								FROM ' . POSTS_TABLE . '
+								WHERE post_id = ' . $post_id;
+
+						$result = $db->sql_query($sql);
+						$row = $db->sql_fetchrow($result);
+						$db->sql_freeresult($result);
+
+						$topic_id = $row['topic_id'];
+						$first_poster_id = $row['poster_id'];	// <-- $poster_id could be <> from current user id
+																// It's this case when moderator try to delete post of another user
+						if (!empty($topic_id) && !empty($first_poster_id))
+						{	// Check if this post is the first one, ie this is the post that created the Topic
+							$sql = 'SELECT topic_first_post_id
+									FROM ' . TOPICS_TABLE . '
+									WHERE topic_id = ' . $topic_id;
+							$result = $db->sql_query($sql);
+							$topic_first_post_id = (int) $db->sql_fetchfield('topic_first_post_id');
+							$db->sql_freeresult($result);
+							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
+							{	// The user try to delete the first post of one intruduce topic : may be not allowed
+								// To finish, the $first_poster_id MUST BE not ignored
+								if (!is_user_ignored($first_poster_id,$user->data['username'],$params))
+								{
+									$user->setup('mods/introduciator'); // Add lang
+									$message = $user->lang[$first_poster_id == $poster_id ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
+									$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
+									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
+									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
+									meta_refresh(3, $meta_info); // Go back automatically to topic									
+									trigger_error($message,E_USER_NOTICE);
+								}
+							}
+						}
+					}
 				}
 			}
 		}
