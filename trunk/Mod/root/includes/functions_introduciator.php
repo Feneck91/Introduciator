@@ -84,6 +84,8 @@ function replace_all_by($arr_fields,$arr_replace_by)
 
 /**
  * Check if the user have already posted into this forum.
+ * 
+ * It must be the creator of one topic into the configured forum.
  *
  * @param type $forum_id Forum's ID
  * @param type $user_id User's ID
