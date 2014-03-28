@@ -18,11 +18,8 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $phpbb_root_path;	// Php bb root path
-global $phpEx;				// php Extension
+global $phpbb_root_path, $phpEx, $table_prefix;
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
-
-global $table_prefix;
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
@@ -177,7 +174,7 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  */
 function introduciator_verify_posting($user,$mode,$forum_id,$auth)
 {
-	global $phpbb_root_path, global $phpEx, $template;
+	global $phpbb_root_path, $phpEx, $template;
 
 	$poster_id = $user->data['user_id'];
 	if ($poster_id != ANONYMOUS && $auth->acl_get('u_'))
