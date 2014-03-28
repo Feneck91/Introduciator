@@ -61,10 +61,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_TITLE'						=> 'Informations générales',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Donne la version courante de ce MOD',
 
-	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'	=> 'Votre installation du MOD Introduciator n’est pas à jour.',
-	'INTRODUCIATOR_GP_STATS'						=> 'Statistiques du MOD Introduciator',
-	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Date d’installation du MOD <strong>Introduciator</strong> :',
-	'INTRODUCIATOR_GP_VERSION'						=> 'Version du MOD <strong>Introduciator</strong> :',
+	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'	=> 'Votre installation du MOD Présentation forcée n’est pas à jour.',
+	'INTRODUCIATOR_GP_STATS'						=> 'Statistiques du MOD Présentation forcée',
+	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Date d’installation du MOD <strong>Présentation forcée</strong> :',
+	'INTRODUCIATOR_GP_VERSION'						=> 'Version du MOD <strong>Présentation forcée</strong> :',
 ));
 
 /**
