@@ -158,7 +158,7 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
 	if (($introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$introduciator_params['is_include_groups'] && !$is_in_group_selected))
 	{	// The user must intruduce himself
 		// May be it is one of the users into ignored list
-		$ret = in_array(strtolower($poster_name),explode("\n", strtolower($introduciator_params['ignored_users'])));
+		$ret = in_array(utf8_strtolower($poster_name),explode("\n", utf8_strtolower($introduciator_params['ignored_users'])));
 	}
 
 	return $ret;
@@ -177,9 +177,7 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  */
 function introduciator_verify_posting($user,$mode,$forum_id,$auth)
 {
-	global $phpbb_root_path;
-	global $phpEx;
-	global $template;
+	global $phpbb_root_path, global $phpEx, $template;
 
 	$poster_id = $user->data['user_id'];
 	if ($poster_id != ANONYMOUS && $auth->acl_get('u_'))

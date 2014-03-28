@@ -17,8 +17,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $phpbb_root_path;	// Php bb root path
-global $phpEx;				// php Extension
+global $phpbb_root_path,$phpEx;	// Php bb root path / php Extension
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 
 /**
