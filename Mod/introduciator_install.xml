@@ -57,10 +57,11 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 }
 
 ]]></find>
-				<action type="after-add"><![CDATA[//------------------------------------------------
+				<action type="after-add"><![CDATA[
+//------------------------------------------------
 // Introduciator - Begin
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-introduciator_verify_posting($user,$mode,$forum_id,post_id,$auth);
+introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth);
 // Introduciator - End
 //------------------------------------------------
 ]]></action>
