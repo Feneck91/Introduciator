@@ -31,7 +31,7 @@ $forum_id	= request_var('f', 0);
 if ($user->data['user_id'] == ANONYMOUS)
 {
     login_box('', $user->lang['LOGIN']);
-} 
+}
 
 // Load langage
 $user->setup('mods/introduciator');
@@ -43,7 +43,7 @@ if ($params['is_enabled'])
 {	// Title messagte
 	$forum_name = '';
 	$forum_rules = array();
-	
+
 	// Find Forum name
 	$sql = 'SELECT forum_name, forum_rules, forum_rules_uid, forum_rules_bitfield,forum_rules_options
 			FROM ' . FORUMS_TABLE . '
@@ -69,15 +69,15 @@ if ($params['is_enabled'])
 	));
 
 
-	$explanation_title	= str_replace('%explanation_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'],$params['explanation_message_title']);
-	$explanation_text	= str_replace('%explanation_text%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'],$params['explanation_message_text']);
-	$rules_title		= str_replace('%rules_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'],$params['explanation_message_rules_title']);
-	$rules_text			= str_replace('%rules_text%',
+	$explanation_title = str_replace('%explanation_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'],$params['explanation_message_title']);
+	$explanation_text = str_replace('%explanation_text%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'],$params['explanation_message_text']);
+	$rules_title = str_replace('%rules_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'],$params['explanation_message_rules_title']);
+	$rules_text = str_replace('%rules_text%',
 									  generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
 									  $params['explanation_message_text']);
-	$link_goto_forum	= $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
-	$link_post_forum	= $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
-	
+	$link_goto_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
+	$link_post_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
+
 	// Replace in each string the predefined fields
 	replace_all_by(
 		array(
@@ -122,7 +122,7 @@ else
 	$template->assign_vars(array(
 		'S_MOD_ACTIVATED'					=> false,
 	));
-		
+
 	page_footer();
 }
 

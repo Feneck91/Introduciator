@@ -34,11 +34,7 @@ class acp_introduciator
 
 	function main($id, $mode)
 	{
-		global $template;			// Page template
-		global $user;				// User information (+ language)
-		global $phpbb_root_path;	// Php bb root path
-		global $phpEx;				// php Extension
-		global $config;				// Configuration
+		global $template, $user, $phpbb_root_path, $phpEx, $config;
 
 		include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 		$user->add_lang('mods/info_acp_introduciator');
@@ -57,7 +53,6 @@ class acp_introduciator
 		switch ($mode)
 		{
 			case 'general':
-			{
 				global $phpbb_admin_path;
 
 				$this->page_title = 'INTRODUCIATOR_GENERAL';
@@ -95,11 +90,9 @@ class acp_introduciator
 					'U_INTRODUCIATOR_VERSIONCHECK_FORCE'	=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=introduciator&amp;mode=' . $mode . '&amp;introduciator_versioncheck_force=1'),
 					'U_ACTION'								=> $this->u_action,
 				));
+			break;
 
-				break;
-			}
 			case 'configuration':
-			{
 				global $db; // Database
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
@@ -156,7 +149,7 @@ class acp_introduciator
 					switch ($action)
 					{
 						case 'update' :
-						{	// User has request an update : write it into database
+							// User has request an update : write it into database
 							// Update Database
 							$is_enabled							= (request_var('mod_activated', 0) != 0);
 							$fk_forum_id						= request_var('forum_choice', 0);
@@ -169,7 +162,7 @@ class acp_introduciator
 							$explanation_display_rules_enabled	= (request_var('explanation_display_rules_enabled', 0) != 0);
 							$explanation_message_rules_title	= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
 							$explanation_message_rules_text		= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
-							
+
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
@@ -213,23 +206,18 @@ class acp_introduciator
 							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
 							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
 							break;
-						}
+
 						default:
-						{
 							trigger_error('NO_MODE', E_USER_ERROR);
 							break;
-						}
-					} // End of Case
-				} // End of Action
+				} // End of switch Action
 			}
 		}
 	}
 
 	function add_all_forums($fk_selected_forum_id,$id_parent,$level)
 	{
-		global $db;			// Database
-		global $template;	// Page template
-		global $user;		// User information (translation)
+		global $db, $template$user;
 
 		if ($id_parent == 0)
 		{	// Add deactivation item
@@ -245,7 +233,7 @@ class acp_introduciator
 		$sql = 'SELECT forum_name,forum_id,forum_desc
 				FROM ' . FORUMS_TABLE . '
 				WHERE parent_id = ' . $id_parent;
-		
+
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
@@ -262,8 +250,7 @@ class acp_introduciator
 
 	function add_all_groups()
 	{
-		global $db;			// Database
-		global $template;	// Page template
+		global $db, $template;
 
 		$sql = 'SELECT group_id,group_desc
 			FROM ' . GROUPS_TABLE;
@@ -292,10 +279,9 @@ class acp_introduciator
 	 */
 	function obtain_latest_version_info($force_update = false, $warn_fail = false, $ttl = 86400)
 	{
-		$info = "";
-
 		global $cache;
 
+		$info = "";
 		$info = $cache->get('introduciatorversioncheck');
 
 		if ($info === false || $force_update)
