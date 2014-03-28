@@ -87,7 +87,7 @@ $lang = array_merge($lang, array(
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Explanations page configuration',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'For all next fields, you can use:<br/>'
 																	.  '<ul>'
-																	.  '<li><b>%forum_name%</b> : introduce forum's name</li>'
+																	.  '<li><b>%forum_name%</b> : introduce forum’s name</li>'
 																	.  '<li><b>%forum_url%</b> : url to introduce forum</li>'
 																	.  '<li><b>%forum_post%</b> : url to write new post into introduce forum</li>'
 																	.  '</ul>',
@@ -95,7 +95,7 @@ $lang = array_merge($lang, array(
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"								=> 'Activate MOD',
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"						=> 'Used to enabled or disabled this MOD',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Forum choice where the user must to introduce himself',
-	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Is used to know with forum should be tested to know if the user has already made it's introduction or not',
+	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Is used to know with forum should be tested to know if the user has already made it’s introduction or not',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Display explanation page',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Used to display an explanation page if the user try to post into another forum that the introduced one',
 	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'					=> 'Include groups or exclude groups',
