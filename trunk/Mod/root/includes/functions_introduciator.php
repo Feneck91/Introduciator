@@ -52,6 +52,25 @@ function is_group_selected($forum_id)
 	return $ret;
 }
 
+/**
+ * Replace all variables with several values.
+ *
+ * Example :
+ * 	replace_all_by(
+ *		array(
+ *			&$var_1,
+ *			&$var_2
+ *			),
+ *		array(
+ *			'search1'	=> 'replaced by this text1',
+ *			'search2'	=> 'replaced by this text2',
+ *			'search3'	=> 'replaced by this text3',
+ *			));
+ *
+ * @param $arr_fields Array of variables to update
+ * @param $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
+ * @return None
+ */
 function replace_all_by($arr_fields,$arr_replace_by)
 {
 	foreach ($arr_fields as &$field)
@@ -66,9 +85,9 @@ function replace_all_by($arr_fields,$arr_replace_by)
 /**
  * Check if the user have already posted into this forum.
  *
- * @param type $forum_id Forum's ID.
- * @param type $user_id User's ID.
- * @return true if the user already post at least one message into this forum, false else.
+ * @param type $forum_id Forum's ID
+ * @param type $user_id User's ID
+ * @return true if the user already post at least one message into this forum, false else
  */
 function is_user_has_post_into_introduciator_topic($forum_id,$user_id)
 {
@@ -91,8 +110,8 @@ function is_user_has_post_into_introduciator_topic($forum_id,$user_id)
  * These groups are selected into ACP, recorded into INTRODUCIATOR_GROUPS_TABLE table.
  * Call group_memberships function into includes/functions_user.php file.
  *
- * @param $user_id User identifier into database.
- * @return true if one of the user's group has been selected into configuration, false else.
+ * @param $user_id User identifier into database
+ * @return true if one of the user's group has been selected into configuration, false else
  */
 function is_user_in_groups_selected($user_id)
 {
@@ -117,7 +136,7 @@ function is_user_in_groups_selected($user_id)
 /**
  * Get the introduciator parameters.
  *
- * @return The introduciator parameters.
+ * @return The introduciator parameters
  */
 function introduciator_getparams()
 {
@@ -138,10 +157,10 @@ function introduciator_getparams()
  * Check if it contains include groups or if doesn't contains exclude group.
  * Check if it doesn't contains name of ignored username list.
  *
- * @param type $poster_id User's ID
- * @param type $poster_name User's name.
- * @param type $introduciator_params Introduce MOD parameters.
- * @return true if the user is ignored, false else.
+ * @param $poster_id User's ID
+ * @param $poster_name User's name
+ * @param $introduciator_params Introduce MOD parameters
+ * @return true if the user is ignored, false else
  */
 function is_user_ignored($poster_id,$poster_name,$introduciator_params)
 {
@@ -163,14 +182,14 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
 /**
  * Verify if the posting is allowed or not.
  *
- * If not allowed, it redirect the current page to the introduce forum or the explanation page.
+ * If not allowed, it redirect the current page to the introduce forum or the explanation page
+ * or error message if action is not allowed.
  *
  * @param $poster_id The poster id
- * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
- * @param $forum_id Forum identifier where the user try to post.
- * @param $post_id Post'id : it cannot be deleted if it is the first one and action is delete
- * @param $auth User permissions.
- *
+ * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
+ * @param $forum_id Forum identifier where the user try to post
+ * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete
+ * @param $auth User permissions
  * @return None.
  */
 function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth)
@@ -260,7 +279,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth)
 									$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
 									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
 									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
-									meta_refresh(3, $meta_info); // Go back automatically to topic									
+									// meta_refresh(3, $meta_info); // Go back automatically to topic <- Not for the moment
 									trigger_error($message,E_USER_NOTICE);
 								}
 							}
