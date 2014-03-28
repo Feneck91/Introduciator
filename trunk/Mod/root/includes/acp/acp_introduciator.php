@@ -217,7 +217,7 @@ class acp_introduciator
 
 	function add_all_forums($fk_selected_forum_id,$id_parent,$level)
 	{
-		global $db, $template$user;
+		global $db, $template, $user;
 
 		if ($id_parent == 0)
 		{	// Add deactivation item

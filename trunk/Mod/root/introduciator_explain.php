@@ -73,8 +73,8 @@ if ($params['is_enabled'])
 	$explanation_text = str_replace('%explanation_text%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'],$params['explanation_message_text']);
 	$rules_title = str_replace('%rules_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'],$params['explanation_message_rules_title']);
 	$rules_text = str_replace('%rules_text%',
-									  generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
-									  $params['explanation_message_text']);
+							  generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
+							  $params['explanation_message_rules_text']);
 	$link_goto_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
 	$link_post_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
 
@@ -94,6 +94,9 @@ if ($params['is_enabled'])
 			'%forum_post%'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&f=' . $params['fk_forum_id']),
 			));
 
+	// Only display rules if rules field is filled
+	$is_rules_filled = $params['explanation_display_rules_enabled'] && strlen($rules_text) > 0;
+
 	$template->assign_vars(array(
 		'S_MOD_ACTIVATED'					=> true,
 		'FORUM_NAME'						=> $forum_name,
@@ -102,7 +105,7 @@ if ($params['is_enabled'])
 		'FORUM_RULES'						=> generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
 		'INTRODUCIATOR_MOD_EXPLAIN_TITLE'	=> $explanation_title,
 		'INTRODUCIATOR_MOD_EXPLAIN_TEXT'	=> $explanation_text,
-		'S_RULES_ACTIVATED'					=> $params['explanation_display_rules_enabled'],
+		'S_RULES_ACTIVATED'					=> $is_rules_filled,
 		'S_RULES_TITLE_ACTIVATED'			=> (strlen($rules_title) > 0),
 		'INTRODUCIATOR_MOD_RULES_TITLE'		=> $rules_title,
 		'INTRODUCIATOR_MOD_RULES_TEXT'		=> $rules_text,
