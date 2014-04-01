@@ -73,7 +73,7 @@ $current_time = time();
 // You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
-	'0.9.0' => array(
+	'0.9.1' => array(
 		// Add new config entry
 		'config_add' => array(
 			array('introduciator_install_date', $current_time),
@@ -131,17 +131,18 @@ $versions = array(
 			//               user must introduce himself.
 			array(INTRODUCIATOR_CONFIG_TABLE, array(
 				'COLUMNS' => array(
-					'introduciator_id'					=> array('UINT', NULL, 'auto_increment'),
-					'is_enabled'						=> array('BOOL',0),
-					'is_explanation_enabled'			=> array('BOOL',1),
-					'is_include_groups'					=> array('BOOL',1),
-					'fk_forum_id'						=> array('UINT', NULL),		// Foreign key on FORUMS_TABLE primary key
-					'ignored_users'						=> array('TEXT_UNI', ''),	// Users list
-					'explanation_message_title'			=> array('TEXT_UNI', ''),	// Explanation page: title
-					'explanation_message_text'			=> array('TEXT_UNI', ''),	// Explanation page: explanation text
-					'explanation_display_rules_enabled'	=> array('BOOL',1),
-					'explanation_message_rules_title'	=> array('TEXT_UNI', ''),	// Explanation page: title rules
-					'explanation_message_rules_text'	=> array('TEXT_UNI', ''),	// Explanation page: rules, let empty to get forum rules
+					'introduciator_id'						=> array('UINT', NULL, 'auto_increment'),
+					'is_enabled'							=> array('BOOL',0),
+					'is_check_delete_first_post_enabled'	=> array('BOOL',0),
+					'is_explanation_enabled'				=> array('BOOL',1),
+					'is_include_groups'						=> array('BOOL',1),
+					'fk_forum_id'							=> array('UINT', NULL),		// Foreign key on FORUMS_TABLE primary key
+					'ignored_users'							=> array('TEXT_UNI', ''),	// Users list
+					'explanation_message_title'				=> array('TEXT_UNI', ''),	// Explanation page: title
+					'explanation_message_text'				=> array('TEXT_UNI', ''),	// Explanation page: explanation text
+					'explanation_display_rules_enabled'		=> array('BOOL',1),
+					'explanation_message_rules_title'		=> array('TEXT_UNI', ''),	// Explanation page: title rules
+					'explanation_message_rules_text'		=> array('TEXT_UNI', ''),	// Explanation page: rules, let empty to get forum rules
 				),
 				'PRIMARY_KEY'	=> 'introduciator_id',
 			)),
@@ -160,17 +161,18 @@ $versions = array(
 		'table_row_insert' => array(
 			array(INTRODUCIATOR_CONFIG_TABLE,
 				array(
-					'introduciator_id'					=> 1,
-					'is_enabled'						=> false,
-					'is_explanation_enabled'			=> false,
-					'is_include_groups'					=> true,
-					'fk_forum_id'						=> 0,
-					'ignored_users'						=> '',
-					'explanation_message_title'			=> '%explanation_title%',	// Explanation page: title
-					'explanation_message_text'			=> '%explanation_text%',	// Explanation page: explanation text
-					'explanation_display_rules_enabled'	=> true,
-					'explanation_message_rules_title'	=> '%rules_title%',			// Explanation page: title rules
-					'explanation_message_rules_text'	=> '%rules_text%',			// Explanation page: rule, let empty to get forum rules
+					'introduciator_id'						=> 1,
+					'is_enabled'							=> false,
+					'is_check_delete_first_post_enabled'	=> true,
+					'is_explanation_enabled'				=> false,
+					'is_include_groups'						=> true,
+					'fk_forum_id'							=> 0,
+					'ignored_users'							=> '',
+					'explanation_message_title'				=> '%explanation_title%',	// Explanation page: title
+					'explanation_message_text'				=> '%explanation_text%',	// Explanation page: explanation text
+					'explanation_display_rules_enabled'		=> true,
+					'explanation_message_rules_title'		=> '%rules_title%',			// Explanation page: title rules
+					'explanation_message_rules_text'		=> '%rules_text%',			// Explanation page: rule, let empty to get forum rules
 				),
 			),
 		),

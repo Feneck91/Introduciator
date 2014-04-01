@@ -117,6 +117,7 @@ class acp_introduciator
 					$template->assign_vars(array(
 						'S_HIDDEN_FIELDS'						=> $s_hidden_fields,
 						'MOD_ACTIVATED'							=> $params['is_enabled'],
+						'CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post_enabled'],
 						'DISPLAY_EXPLANATION_ENABLED'			=> $params['is_explanation_enabled'],
 						'INCLUDE_GROUPS_SELECTED'				=> $params['is_include_groups'],
 						'ITEM_IGNORED_USERS'					=> $params['ignored_users'],
@@ -151,33 +152,35 @@ class acp_introduciator
 						case 'update' :
 							// User has request an update : write it into database
 							// Update Database
-							$is_enabled							= (request_var('mod_activated', 0) != 0);
-							$fk_forum_id						= request_var('forum_choice', 0);
-							$is_explanation_enabled				= (request_var('display_explanation', 0) != 0);
-							$is_include_groups					= (request_var('include_groups', 0) != 0);
-							$groups								= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
-							$ignored_users						= utf8_normalize_nfc(request_var('ignored_users', ''));
-							$explanation_message_title			= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
-							$explanation_message_text			= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
-							$explanation_display_rules_enabled	= (request_var('explanation_display_rules_enabled', 0) != 0);
-							$explanation_message_rules_title	= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
-							$explanation_message_rules_text		= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
+							$is_enabled								= (request_var('mod_activated', 0) != 0);
+							$is_check_delete_first_post_activated	= (request_var('check_delete_first_post_activated', 0) != 0);
+							$fk_forum_id							= (int) request_var('forum_choice', 0);
+							$is_explanation_enabled					= (request_var('display_explanation', 0) != 0);
+							$is_include_groups						= (request_var('include_groups', 0) != 0);
+							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
+							$ignored_users							= utf8_normalize_nfc(request_var('ignored_users', ''));
+							$explanation_message_title				= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
+							$explanation_message_text				= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
+							$explanation_display_rules_enabled		= (request_var('explanation_display_rules_enabled', 0) != 0);
+							$explanation_message_rules_title		= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
+							$explanation_message_rules_text			= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
 							$sql_ary = array(
-								'is_enabled'						=> $is_enabled,
-								'fk_forum_id'						=> $fk_forum_id,
-								'is_explanation_enabled'			=> $is_explanation_enabled,
-								'is_include_groups'					=> $is_include_groups,
-								'ignored_users'						=> $ignored_users,
-								'explanation_message_title'			=> $explanation_message_title,
-								'explanation_message_text'			=> $explanation_message_text,
-								'explanation_display_rules_enabled'	=> $explanation_display_rules_enabled,
-								'explanation_message_rules_title'	=> $explanation_message_rules_title,
-								'explanation_message_rules_text'	=> $explanation_message_rules_text,
+								'is_enabled'							=> $is_enabled,
+								'is_check_delete_first_post_enabled'	=> $is_check_delete_first_post_activated,
+								'fk_forum_id'							=> $fk_forum_id,
+								'is_explanation_enabled'				=> $is_explanation_enabled,
+								'is_include_groups'						=> $is_include_groups,
+								'ignored_users'							=> $ignored_users,
+								'explanation_message_title'				=> $explanation_message_title,
+								'explanation_message_text'				=> $explanation_message_text,
+								'explanation_display_rules_enabled'		=> $explanation_display_rules_enabled,
+								'explanation_message_rules_title'		=> $explanation_message_rules_title,
+								'explanation_message_rules_text'		=> $explanation_message_rules_text,
 							);
 
 							// Update INTRODUCIATOR_CONFIG_TABLE
@@ -195,7 +198,7 @@ class acp_introduciator
 							foreach ($groups as &$group)
 							{	// Create elements to add by row
 								$sql_ary = array(
-									'fk_group'				=> $group,
+									'fk_group'				=> (int) $group,
 								);
 								// Create SQL request
 								$sql = 'INSERT INTO ' . INTRODUCIATOR_GROUPS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);

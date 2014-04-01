@@ -27,7 +27,7 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>0.9.0</mod-version>
+		<mod-version>0.9.1</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>300</time>
@@ -53,12 +53,11 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 		</copy>
 		<open src="posting.php">
 			<edit>
-				<find><![CDATA[	trigger_error('NO_FORUM');
+				<find><![CDATA[	trigger_error(($mode == 'reply' || $mode == 'bump') ? 'TOPIC_UNAPPROVED' : 'POST_UNAPPROVED');
 }
 
 ]]></find>
-				<action type="after-add"><![CDATA[
-//------------------------------------------------
+				<action type="after-add"><![CDATA[//------------------------------------------------
 // Introduciator - Begin
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth);
