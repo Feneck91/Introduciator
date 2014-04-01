@@ -64,12 +64,13 @@ $lang = array_merge($lang, array(
 * Autre : Messages
 */
 $lang = array_merge($lang, array(
+	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'	=> 'Votre message de présentation est en cours d’approbation, veuillez patienter.',
 	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'		=> 'Vous n’êtes pas autorisés à vous présenter plus d’une fois !',
 	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST'	=> 'Vous n’êtes pas autorisés à supprimer le premier message de votre présentation !',
 	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'		=> 'Vous n’êtes pas autorisés à supprimer le premier message d’une présentation, supprimez toute la présentation en détruisant le sujet !',
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Veuillez vous présenter dans le Forum : %s',
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'Le MOD Présentation forcée est désactivé. Veuillez l’activer pour l’utiliser !',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> 'Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</b>',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'Pour chaque nouvel utilisateur, il faut commencer par aller se présenter aux autres membres dans le Forum “<a href="%forum_url%">%forum_name%</a>”<br/>'
 														.  'Seul la création d’un nouveau message dans le forum de présentation est autorisé<br/>'
 														.  'Pour la création du message de présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation',

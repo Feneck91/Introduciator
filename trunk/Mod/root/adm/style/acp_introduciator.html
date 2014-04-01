@@ -60,6 +60,15 @@
 				</dd>
 			</dl>
 			<!--
+			     Activate / Desactivate Check delete first post
+			-->
+			<dl>
+				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN}</span></dt>
+				<dd><label><input id="mod_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="check_delete_first_post_activated" type="radio" class="radio" value="0"<!-- IF not CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<!--
 			     Forum Choice (where the user MUST introduce himself
 			-->
 			<dl>

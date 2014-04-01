@@ -94,6 +94,10 @@ $lang = array_merge($lang, array(
 	// Sub titles
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"								=> 'Activate MOD',
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"						=> 'Used to enabled or disabled this MOD',
+	"INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED"			=> 'Authorize the MOD to verify the deletion of first presentation post into introduce forum',
+	"INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN"=> 'When this option is on, the MOD prevents to delete the first post that create the topic into introduce forum'.
+																	   '<br/>Even moderators or administrators don’t have this permission to be sure that the first post author is the presentation if this member. However, it remains possible to delete the topic if the permissions allow it.' .
+																	   '<br/>You can deactivate this option but it can make strange behaviors : a member could also have several presentations, in this case, the first one is taken into account.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Forum choice where the user must to introduce himself',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Is used to know with forum should be tested to know if the user has already made it’s introduction or not',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Display explanation page',

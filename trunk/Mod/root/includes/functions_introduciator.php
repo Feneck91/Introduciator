@@ -23,7 +23,7 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.0');
+define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.1');
 define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
 define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
 
@@ -39,7 +39,7 @@ function is_group_selected($forum_id)
 
 	$sql = 'SELECT *
 			FROM ' . INTRODUCIATOR_GROUPS_TABLE . '
-			WHERE fk_group = ' . $forum_id;
+			WHERE fk_group = ' . (int) $forum_id;
 
 	$result = $db->sql_query($sql);
 	$ret = false;
@@ -97,8 +97,8 @@ function is_user_has_post_into_introduciator_topic($forum_id,$user_id)
 
 	$sql = 'SELECT topic_id
 			FROM ' . TOPICS_TABLE . '
-				WHERE topic_poster = ' . $user_id . '
-				 AND forum_id = ' . $forum_id;
+				WHERE topic_poster = ' . (int) $user_id . '
+				 AND forum_id = ' . (int) $forum_id;
 	$result = $db->sql_query($sql);
 	$topic_row = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
@@ -132,7 +132,7 @@ function is_user_in_groups_selected($user_id)
 	$db->sql_freeresult($result);
 
 	// Testing
-	return group_memberships($arr_groups_id,$user_id,true);
+	return group_memberships($arr_groups_id,(int) $user_id,true);
 }
 
 /**
@@ -166,20 +166,19 @@ function introduciator_getparams()
  */
 function is_user_ignored($poster_id,$poster_name,$introduciator_params)
 {
-	$ret = true;
-
 	// Check if :
 	//	1 : Include group is ON and the user is member of at least one group of the selected groups (include groups)
 	//	2 : Include group is OFF (exclude) and the user is not member of one group of the selected groups (exclude groups)
 	$is_in_group_selected = is_user_in_groups_selected($poster_id);
-
+	$user_ignored = true;
+	
+	// User is in selected group or out of selected group ?
 	if (($introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$introduciator_params['is_include_groups'] && !$is_in_group_selected))
-	{	// The user must intruduce himself
-		// May be it is one of the users into ignored list
-		$ret = in_array(utf8_strtolower($poster_name),explode("\n", utf8_strtolower($introduciator_params['ignored_users'])));
+	{
+		$user_ignored = in_array(utf8_strtolower($poster_name),explode("\n", utf8_strtolower($introduciator_params['ignored_users'])));		
 	}
-
-	return $ret;
+	
+	return $user_ignored;
 }
 /**
  * Verify if the posting is allowed or not.
@@ -192,13 +191,17 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  * @param $forum_id Forum identifier where the user try to post
  * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete
  * @param $auth User permissions
+ * @param $post_data Informations about posting
  * @return None.
  */
-function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth)
+function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post_data)
 {
 	global $phpbb_root_path, $phpEx, $template;
 
 	$poster_id = $user->data['user_id'];
+	$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
+	$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
+	
 	if ($poster_id != ANONYMOUS && $auth->acl_get('u_'))
 	{	// User is logged and have user authorization
 		$params = introduciator_getparams();
@@ -208,21 +211,52 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth)
 			// Force forum id because it be moved while user delete the message
 			global $db;
 
-			$is_user_ignored = is_user_ignored($poster_id,$user->data['username'],$params);
-			
-			if ($mode == 'delete' || !$is_user_ignored)
+			if ($mode == 'delete')
+			{	// Check if the user don't try to remove the first message of it's OWN introduce
+				// Don't care about $is_user_ignored => Administrator / Moderator cannot delete first posts of presentation
+				// else he needs to delete all the topic
+				if (!empty($post_id)
+					&& $params['fk_forum_id'] == $forum_id
+					&& $params['is_check_delete_first_post_enabled']
+					&& $user->data['is_registered']
+					&& $auth->acl_gets('f_delete', 'm_delete', $forum_id))
+				{	// This post is into the introduce forum
+					// Find the topic identifier
+					$sql = 'SELECT topic_id,poster_id
+							FROM ' . POSTS_TABLE . '
+							WHERE post_id = ' . (int) $post_id;
+
+					$result = $db->sql_query($sql);
+					$row = $db->sql_fetchrow($result);
+					$db->sql_freeresult($result);
+
+					$topic_id = $row['topic_id'];
+					$first_poster_id = $row['poster_id'];	// <-- $poster_id could be <> from current user id
+															// It's this case when moderator try to delete post of another user
+					if (!empty($topic_id) && !empty($first_poster_id))
+					{	// Check if this post is the first one, ie this is the post that created the Topic
+						$topic_first_post_id = (int) $post_data['topic_first_post_id'];
+						
+						if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
+						{	// The user try to delete the first post of one intruduce topic : may be not allowed
+							// To finish, the $first_poster_id MUST BE not ignored
+							if (!is_user_ignored($first_poster_id,$user->data['username'],$params))
+							{
+								$user->setup('mods/introduciator'); // Add lang
+								$message = $user->lang[$first_poster_id == $poster_id ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
+								$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
+								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
+								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
+								// meta_refresh(3, $meta_info); // Go back automatically to topic <- Not for the moment
+								trigger_error($message,E_USER_NOTICE);
+							}
+						}
+					}
+				}
+			}
+			else if (!is_user_ignored($poster_id,$user->data['username'],$params))
 			{
-				$sql = 'SELECT forum_id
-						FROM ' . POSTS_TABLE . '
-						WHERE post_id = ' . $post_id;
-				$result = $db->sql_query($sql);
-				$f_id = (int) $db->sql_fetchfield('forum_id');
-				$db->sql_freeresult($result);
-
-				// Take new forum id
-				$forum_id = (!$f_id) ? $forum_id : $f_id;
-
-				if (!$is_user_ignored && !is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id))
+				if (!is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id))
 				{	// No post into the introduce topic
 					if ((in_array($mode,array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
 					{
@@ -236,57 +270,19 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth)
 						}
 					}
 				}
-				else if (!$is_user_ignored && $forum_id == $params['fk_forum_id'] && $mode == 'post')
+				else if (!$post_data['topic_approved'])
+				{	// At least one post but not approved!
+					$user->setup('mods/introduciator'); // Add lang
+					$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'];
+					$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
+					trigger_error($message,E_USER_NOTICE);
+				}
+				else if ($forum_id == $params['fk_forum_id'] && $mode == 'post')
 				{	// User try to create more than one introduce post
 					$user->setup('mods/introduciator'); // Add lang
 					$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'];
 					$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
 					trigger_error($message,E_USER_NOTICE);
-				}
-				else if ($mode == 'delete' && !empty($post_id))
-				{	// Check if the user don't try to remove the first message of it's OWN introduce
-					// Don't care about $is_user_ignored => Administrator / Moderator cannot delete first posts of presentation
-					// else he needs to delete all the topic
-					if ($params['fk_forum_id'] == $forum_id
-						&& $user->data['is_registered']
-						&& $auth->acl_gets('f_delete', 'm_delete', $forum_id))
-					{	// This post is into the introduce forum
-						// Find the topic identifier
-						$sql = 'SELECT topic_id,poster_id
-								FROM ' . POSTS_TABLE . '
-								WHERE post_id = ' . $post_id;
-
-						$result = $db->sql_query($sql);
-						$row = $db->sql_fetchrow($result);
-						$db->sql_freeresult($result);
-
-						$topic_id = $row['topic_id'];
-						$first_poster_id = $row['poster_id'];	// <-- $poster_id could be <> from current user id
-																// It's this case when moderator try to delete post of another user
-						if (!empty($topic_id) && !empty($first_poster_id))
-						{	// Check if this post is the first one, ie this is the post that created the Topic
-							$sql = 'SELECT topic_first_post_id
-									FROM ' . TOPICS_TABLE . '
-									WHERE topic_id = ' . $topic_id;
-							$result = $db->sql_query($sql);
-							$topic_first_post_id = (int) $db->sql_fetchfield('topic_first_post_id');
-							$db->sql_freeresult($result);
-							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
-							{	// The user try to delete the first post of one intruduce topic : may be not allowed
-								// To finish, the $first_poster_id MUST BE not ignored
-								if (!is_user_ignored($first_poster_id,$user->data['username'],$params))
-								{
-									$user->setup('mods/introduciator'); // Add lang
-									$message = $user->lang[$first_poster_id == $poster_id ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
-									$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
-									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
-									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
-									// meta_refresh(3, $meta_info); // Go back automatically to topic <- Not for the moment
-									trigger_error($message,E_USER_NOTICE);
-								}
-							}
-						}
-					}
 				}
 			}
 		}
