@@ -18,12 +18,12 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $phpbb_root_path, $phpEx, $table_prefix;
+global $phpbb_root_path, $phpEx, $table_prefix, $introduciator_params;
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.1');
+define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.2');
 define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
 define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
 
@@ -89,19 +89,28 @@ function replace_all_by($arr_fields,$arr_replace_by)
  *
  * @param type $forum_id Forum's ID
  * @param type $user_id User's ID
+ * @param $topic_id If this function returns true, it contains the Topic ID where the user hast post it's presentation
+ * @param $first_post_id If this function returns true, it contains the post ID of the post that has created the topic
+ * @param $topic_approved If this function returns true, it contains true / false if the topic is approved or not
  * @return true if the user already post at least one message into this forum, false else
  */
-function is_user_has_post_into_introduciator_topic($forum_id,$user_id)
+function is_user_has_post_into_introduciator_topic($forum_id,$user_id,&$topic_id,&$first_post_id,&$topic_approved)
 {
 	global $db; // Database
 
-	$sql = 'SELECT topic_id
+	$sql = 'SELECT topic_id, topic_first_post_id, topic_approved
 			FROM ' . TOPICS_TABLE . '
 				WHERE topic_poster = ' . (int) $user_id . '
 				 AND forum_id = ' . (int) $forum_id;
 	$result = $db->sql_query($sql);
 	$topic_row = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
+	if ($topic_row !== false)
+	{
+		$topic_id = $topic_row['topic_id'];
+		$first_post_id = $topic_row['topic_first_post_id'];
+		$topic_approved = $topic_row['topic_approved'];
+	}
 
 	return $topic_row !== false; // Return true or false
 }
@@ -256,7 +265,11 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post
 			}
 			else if (!is_user_ignored($poster_id,$user->data['username'],$params))
 			{
-				if (!is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id))
+				$topic_id = 0;
+				$first_post_id = 0;
+				$topic_approved = false;
+				
+				if (!is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
 				{	// No post into the introduce topic
 					if ((in_array($mode,array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
 					{
@@ -287,6 +300,67 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post
 			}
 		}
 	}
+}
+
+/**
+ * Verify if the posting is allowed or not.
+ *
+ * If not allowed, it redirect the current page to the introduce forum or the explanation page
+ * or error message if action is not allowed.
+ *
+ * @param $poster_id The poster id
+ * @param $poster_name The poster name
+ * @return None.
+ */
+function introduciator_get_user_infos($poster_id,$poster_name)
+{
+	global $phpbb_root_path, $phpEx, $user, $introduciator_params;
+	
+	if (empty($introduciator_params))
+	{
+		$introduciator_params = introduciator_getparams();
+		$user->add_lang('mods/introduciator');
+	}
+	
+	$display = false;
+	$url = false;
+	$text = '';
+	$class = '';
+	
+	if ($introduciator_params['is_enabled'])
+	{
+		if (!is_user_ignored($poster_id,$poster_name,$introduciator_params))
+		{
+			$display = true;
+			$topic_id = 0;
+			$first_post_id = 0;
+			$topic_approved = false;
+
+			if (!is_user_has_post_into_introduciator_topic($introduciator_params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
+			{	// No post into the introduce topic
+				$text = $user->lang['INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'];
+				$class = 'introdno-icon';
+			}
+			else if ($topic_approved)
+			{
+				$text = $user->lang['INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'];
+				$url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
+				$class = 'introd-icon';
+			}
+			else
+			{
+				$text = $user->lang['INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'];
+				$class = 'introdpd-icon';
+			}
+		}
+	}
+	
+	return array(
+		'display'		=> $display,
+		'url'			=> $url,
+		'text'			=> $text,
+		'class'			=> $class,
+	);
 }
 
 ?>

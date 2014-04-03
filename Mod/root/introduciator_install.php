@@ -73,7 +73,7 @@ $current_time = time();
 // You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
-	'0.9.1' => array(
+	'0.9.2' => array(
 		// Add new config entry
 		'config_add' => array(
 			array('introduciator_install_date', $current_time),
