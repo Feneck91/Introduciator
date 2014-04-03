@@ -77,6 +77,11 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>Les règles sont rappelées ici :</u></b>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Aller dans le forum “%forum_name%” maintenant en cliquant sur ce lien</a>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Commencer votre présentation maintenant en cliquant sur ce lien</a>',
+
+	'INTRODUCIATOR_TOPIC_TITLE'							=> 'Présentation du membre',
+	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'			=> 'Pas de présentation disponible pour ce membre',
+	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'				=> 'Voir la présentation de ce membre',
+	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'Présentation en cours d’approbation',
 ));
 
 ?>
