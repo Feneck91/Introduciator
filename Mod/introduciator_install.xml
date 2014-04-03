@@ -118,6 +118,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 			<edit>
 				<find><![CDATA[<!-- IF postrow.U_PM or postrow.U_EMAIL or postrow.U_WWW or postrow.U_MSN or postrow.U_ICQ or postrow.U_YIM or postrow.U_AIM or postrow.U_JABBER]]></find>
 				<inline-edit>
+					<inline-find><![CDATA[postrow.U_JABBER]]></inline-find>
 					<inline-action type="after-add"><![CDATA[ or postrow.S_INTRODUCIATOR_DISPLAY]]></inline-action>
 				</inline-edit>
 			</edit>
