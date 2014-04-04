@@ -283,8 +283,8 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post
 						}
 					}
 				}
-				else if (!$post_data['topic_approved'])
-				{	// At least one post but not approved!
+				else if (!$topic_approved && in_array($mode,array('reply', 'quote','post')))
+				{	// At least one post but not approved !
 					$user->setup('mods/introduciator'); // Add lang
 					$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'];
 					$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
