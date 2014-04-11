@@ -79,7 +79,25 @@ $versions = array(
 			array('introduciator_install_date', $current_time),
 			array('allow_introduciator', '1', 0),
 		),
-
+		
+		// Now to add some permission settings
+		'permission_add' => array(
+			array('u_must_introduce', true),
+		),
+		// How about we give some default permissions then as well?
+		'permission_set' => array(
+			// Global Role permissions for user mask
+			array('ROLE_USER_STANDARD',	'u_must_introduce'),
+			array('ROLE_USER_LIMITED',	'u_must_introduce'),
+			array('ROLE_USER_FULL',		'u_must_introduce'),
+			
+			array('ADMINISTRATORS',		'u_must_introduce',		'group',	false),	// Never by default
+			array('GLOBAL_MODERATORS',	'u_must_introduce',		'group',	true),	// True by default
+			array('NEWLY_REGISTERED',	'u_must_introduce',		'group',	true),	// True by default
+			array('REGISTERED',			'u_must_introduce',		'group',	true),	// True by default
+			array('BOTS',				'u_must_introduce',		'group',	false),	// Never by default
+			// Let REGISTERED_COPPA, BOTS and GUESTS to false
+		),
 		//-------------------------------------------------------------
 		// Add the module in ACP under the .MOD tab
 		'module_add' => array(
