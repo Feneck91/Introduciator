@@ -175,6 +175,7 @@ function introduciator_getparams()
  */
 function is_user_ignored($poster_id,$poster_name,$introduciator_params)
 {
+	//$auth->acl_get('u_must_introduce');
 	// Check if :
 	//	1 : Include group is ON and the user is member of at least one group of the selected groups (include groups)
 	//	2 : Include group is OFF (exclude) and the user is not member of one group of the selected groups (exclude groups)
