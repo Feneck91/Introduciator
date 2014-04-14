@@ -27,7 +27,7 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>0.9.1</mod-version>
+		<mod-version>0.9.3</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>600</time>
@@ -52,6 +52,30 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 			<file from="root/umil/*.*" to="umil/*.*"/>
 			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
 		</copy>
+		<open src="memberlist.php">
+			<edit>
+				<find><![CDATA[	// Dump it out to the template]]></find>
+				<action type="before-add"><![CDATA[	//------------------------------------------------
+	// Introduciator - Begin
+	$data_introduciator = introduciator_get_user_infos($user_id);
+	// Introduciator - End
+	//------------------------------------------------
+	
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'L_VIEWING_PROFILE'	=> sprintf($user->lang['VIEWING_PROFILE'], $username),]]></find>
+				<action type="after-add"><![CDATA[		//------------------------------------------------
+		// Introduciator - Begin
+			'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+			'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
+			'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
+			'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
+		// Introduciator - End
+		//------------------------------------------------
+]]></action>
+			</edit>
+		</open>
 		<open src="posting.php">
 			<edit>
 				<find><![CDATA[	trigger_error(($mode == 'reply' || $mode == 'bump') ? 'TOPIC_UNAPPROVED' : 'POST_UNAPPROVED');
@@ -61,7 +85,7 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 				<action type="after-add"><![CDATA[//------------------------------------------------
 // Introduciator - Begin
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post_data);
+introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data);
 // Introduciator - End
 //------------------------------------------------
 ]]></action>
@@ -69,8 +93,7 @@ introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post_data);
 		</open>
 		<open src="viewtopic.php">
 			<edit>
-				<find><![CDATA[
-// Start session management]]></find>
+				<find><![CDATA[// Start session management]]></find>
 				<action type="before-add"><![CDATA[//------------------------------------------------
 // Introduciator - Begin
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
@@ -85,7 +108,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 ]]></find>
 				<action type="after-add"><![CDATA[				//------------------------------------------------
 				// Introduciator - Begin
-				'introduciator'	=> introduciator_get_user_infos($poster_id,$row['username']),
+				'introduciator'	=> introduciator_get_user_infos($poster_id),
 				// Introduciator - End
 				//------------------------------------------------
 ]]></action>
@@ -95,7 +118,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 ]]></find>
 				<action type="after-add"><![CDATA[				//------------------------------------------------
 				// Introduciator - Begin
-				'introduciator'	=> introduciator_get_user_infos($poster_id,$row['username']),
+				'introduciator'	=> introduciator_get_user_infos($poster_id),
 				// Introduciator - End
 				//------------------------------------------------
 ]]></action>
@@ -114,6 +137,17 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 ]]></action>
 			</edit>
 		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[				<dt>{L_ACTIVE_IN_TOPIC}:</dt> <dd><!-- IF ACTIVE_TOPIC != '' --><strong><a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a></strong><br />({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})<!-- ELSE --> - <!-- ENDIF --></dd>
+			<!-- ENDIF -->
+]]></find>
+				<action type="after-add"><![CDATA[			<!-- Introduciator - Begin -->
+				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_VIEW_MEMBER}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" target="blank" alt="{L_INTRODUCIATOR_TOPIC_TITLE}" title="{T_INTRODUCIATOR_TEXT}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b></a><!-- ELSE --><b>{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}</b><!-- ENDIF --></li></ul></dd><!-- ENDIF -->
+			<!-- Introduciator - End -->
+]]></action>
+			</edit>
+		</open>
 		<open src="styles/prosilver/template/viewtopic_body.html">
 			<edit>
 				<find><![CDATA[<!-- IF postrow.U_PM or postrow.U_EMAIL or postrow.U_WWW or postrow.U_MSN or postrow.U_ICQ or postrow.U_YIM or postrow.U_AIM or postrow.U_JABBER]]></find>
@@ -126,7 +160,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 				<find><![CDATA[					<!-- IF postrow.U_JABBER --><li class="jabber-icon"><a href="{postrow.U_JABBER}" onclick="popup(this.href, 550, 320); return false;" title="{L_JABBER}"><span>{L_JABBER}</span></a></li><!-- ENDIF -->
 ]]></find>
 				<action type="after-add"><![CDATA[					<!-- Introduciator - Begin -->
-						<!-- IF postrow.S_INTRODUCIATOR_DISPLAY --><li class="{postrow.T_INTRODUCIATOR_CLASS}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- IF postrow.U_INTRODUCIATOR_URL --><a href="{postrow.U_INTRODUCIATOR_URL}" target="blank" alt="{L_INTRODUCIATOR_TOPIC_TITLE}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- ENDIF --><span>{L_INTRODUCIATOR_TOPIC_TITLE}</span><!-- IF postrow.U_INTRODUCIATOR_URL --></a><!-- ENDIF --></li>
+						<!-- IF postrow.S_INTRODUCIATOR_DISPLAY --><li class="{postrow.T_INTRODUCIATOR_CLASS}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- IF postrow.U_INTRODUCIATOR_URL --><a href="{postrow.U_INTRODUCIATOR_URL}" target="blank" alt="{L_INTRODUCIATOR_TOPIC_TITLE}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- ENDIF --><span>{L_INTRODUCIATOR_TOPIC_TITLE}</span><!-- IF postrow.U_INTRODUCIATOR_URL --></a><!-- ENDIF --></li><!-- ENDIF -->
 					<!-- Introduciator - End -->
 
 ]]></action>

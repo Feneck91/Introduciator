@@ -83,7 +83,6 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	// Titres
-	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Configuration des groupes et des utilisateurs',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Configuration de la page d’explications',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'Pour tous les champs textes suivants, vous pouvez utiliser :<br/>'
 																	.  '<ul>'
@@ -96,20 +95,12 @@ $lang = array_merge($lang, array(
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"						=> 'Utilisé pour activer ou désactiver ce MOD',
 	"INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED"			=> 'Autorise le MOD à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
 	"INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN"=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation'.
-																	   '<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certaint que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permette.' .
-																	   '<br/>Vous pouvez désactiver cette option mais il peut en résulter des comportements étranges: un membre peut avoir plusieurs présentations, dans ce cas le premier trouvé est pris en compte.',
+																	   '<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.' .
+																	   '<br/>Vous pouvez désactiver cette option mais il peut en résulter des comportements étranges : un membre peut avoir plusieurs présentations, dans ce cas le premier trouvé est pris en compte.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Choix du forum où l’utilisateur doit se présenter',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s’est déjà présenté ou pas',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Afficher la page d’explication',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Utilisé pour afficher la page d’explication si l’utilisateur tente de poster dans un autre forum que celui des présentations',
-	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'					=> 'Groupes inclus ou groupes exclus',
-	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'			=> 'Lorsque les groupes inclus sont sélectionnés, seuls les utilisateurs des groupes sélectionnés doivent se présenter.<br/>Lorsque les groupes exclus sont sélectionnés, seuls les utilisateurs ne faisant pas parti des groupes sélectionnés doivent se présenter',
-	'INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION'						=> 'Groupes inclus',
-	'INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION'						=> 'Groupes exclus',
-	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'							=> 'Sélection des groupes',
-	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'					=> 'Sélectionne les groupes qui doivent être inclus ou exclus',
-	'INTRODUCIATOR_CP_ED_IGNORED_USERS'								=> 'Utilisateurs ignorés',
-	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'						=> 'Liste des utilisateurs qui ne sont pas obligés de se présenter.<br/>Entrez un utilisateur par ligne.<br/>Utilisé pour les comptes d’administrations ou de tests par exemple',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE'					=> 'Titre de la page d’explications',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN'			=> 'Défaut = <b>%explanation_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT'					=> 'Texte de la page d’explications',

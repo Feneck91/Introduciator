@@ -82,6 +82,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'			=> 'Pas de présentation disponible pour ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'				=> 'Voir la présentation de ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'Présentation en cours d’approbation pour ce membre',
+	
+	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Présentation du membre',
+	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Voir la présentation du membre',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'Aucune présentation de ce membre disponible',
 ));
 
 ?>

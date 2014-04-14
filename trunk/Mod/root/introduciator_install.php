@@ -73,7 +73,7 @@ $current_time = time();
 // You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
-	'0.9.2' => array(
+	'0.9.3' => array(
 		// Add new config entry
 		'config_add' => array(
 			array('introduciator_install_date', $current_time),
@@ -84,19 +84,15 @@ $versions = array(
 		'permission_add' => array(
 			array('u_must_introduce', true),
 		),
-		// How about we give some default permissions then as well?
+		
+		// Global Role permissions for user mask : No to All, Never for Admin and Guest
 		'permission_set' => array(
-			// Global Role permissions for user mask
-			array('ROLE_USER_STANDARD',	'u_must_introduce'),
-			array('ROLE_USER_LIMITED',	'u_must_introduce'),
-			array('ROLE_USER_FULL',		'u_must_introduce'),
-			
-			array('ADMINISTRATORS',		'u_must_introduce',		'group',	false),	// Never by default
-			array('GLOBAL_MODERATORS',	'u_must_introduce',		'group',	true),	// True by default
-			array('NEWLY_REGISTERED',	'u_must_introduce',		'group',	true),	// True by default
-			array('REGISTERED',			'u_must_introduce',		'group',	true),	// True by default
-			array('BOTS',				'u_must_introduce',		'group',	false),	// Never by default
-			// Let REGISTERED_COPPA, BOTS and GUESTS to false
+			array('ADMINISTRATORS',			'u_must_introduce', 'group',	false),	// Never by default
+			array('GUESTS',					'u_must_introduce',	'group',	false),	// Never by default (has no sens)
+			array('BOTS',					'u_must_introduce',	'group',	false),	// Never by default
+			array('GLOBAL_MODERATORS',		'u_must_introduce',	'group',	true),
+			array('NEWLY_REGISTERED',		'u_must_introduce',	'group',	true),
+			array('REGISTERED',				'u_must_introduce',	'group',	true),
 		),
 		//-------------------------------------------------------------
 		// Add the module in ACP under the .MOD tab
@@ -153,9 +149,7 @@ $versions = array(
 					'is_enabled'							=> array('BOOL',0),
 					'is_check_delete_first_post_enabled'	=> array('BOOL',0),
 					'is_explanation_enabled'				=> array('BOOL',1),
-					'is_include_groups'						=> array('BOOL',1),
 					'fk_forum_id'							=> array('UINT', NULL),		// Foreign key on FORUMS_TABLE primary key
-					'ignored_users'							=> array('TEXT_UNI', ''),	// Users list
 					'explanation_message_title'				=> array('TEXT_UNI', ''),	// Explanation page: title
 					'explanation_message_text'				=> array('TEXT_UNI', ''),	// Explanation page: explanation text
 					'explanation_display_rules_enabled'		=> array('BOOL',1),
@@ -163,12 +157,6 @@ $versions = array(
 					'explanation_message_rules_text'		=> array('TEXT_UNI', ''),	// Explanation page: rules, let empty to get forum rules
 				),
 				'PRIMARY_KEY'	=> 'introduciator_id',
-			)),
-			// Groups list
-			array(INTRODUCIATOR_GROUPS_TABLE, array(
-				'COLUMNS' => array(
-					'fk_group'			=> array('UINT', NULL),
-				),
 			)),
 		),
 		// Creating the tables into database
@@ -183,9 +171,7 @@ $versions = array(
 					'is_enabled'							=> false,
 					'is_check_delete_first_post_enabled'	=> true,
 					'is_explanation_enabled'				=> false,
-					'is_include_groups'						=> true,
 					'fk_forum_id'							=> 0,
-					'ignored_users'							=> '',
 					'explanation_message_title'				=> '%explanation_title%',	// Explanation page: title
 					'explanation_message_text'				=> '%explanation_text%',	// Explanation page: explanation text
 					'explanation_display_rules_enabled'		=> true,
