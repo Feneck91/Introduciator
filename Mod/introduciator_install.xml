@@ -54,6 +54,16 @@ Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par
 		</copy>
 		<open src="memberlist.php">
 			<edit>
+				<find><![CDATA[// Start session management]]></find>
+				<action type="before-add"><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+// Introduciator - End
+//------------------------------------------------
+
+]]></action>
+			</edit>
+			<edit>
 				<find><![CDATA[	// Dump it out to the template]]></find>
 				<action type="before-add"><![CDATA[	//------------------------------------------------
 	// Introduciator - Begin
