@@ -68,7 +68,6 @@ if ($params['is_enabled'])
 		'body' => 'introduciator_explain.html',
 	));
 
-
 	$explanation_title = str_replace('%explanation_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'],$params['explanation_message_title']);
 	$explanation_text = str_replace('%explanation_text%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'],$params['explanation_message_text']);
 	$rules_title = str_replace('%rules_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'],$params['explanation_message_rules_title']);

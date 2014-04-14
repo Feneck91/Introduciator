@@ -23,34 +23,8 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.2');
+define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.3');
 define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
-define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
-
-/**
- * Check if a group is selected.
- *
- * @param $forum_id Forum's identifier.
- * @return true if the group is selected, false else.
- */
-function is_group_selected($forum_id)
-{
-	global $db; // Database
-
-	$sql = 'SELECT *
-			FROM ' . INTRODUCIATOR_GROUPS_TABLE . '
-			WHERE fk_group = ' . (int) $forum_id;
-
-	$result = $db->sql_query($sql);
-	$ret = false;
-	while ($row = $db->sql_fetchrow($result))
-	{
-		$ret = true;
-	}
-	$db->sql_freeresult($result);
-
-	return $ret;
-}
 
 /**
  * Replace all variables with several values.
@@ -116,35 +90,6 @@ function is_user_has_post_into_introduciator_topic($forum_id,$user_id,&$topic_id
 }
 
 /**
- * Test if one of the user's groups has been selected into configuration.
- *
- * These groups are selected into ACP, recorded into INTRODUCIATOR_GROUPS_TABLE table.
- * Call group_memberships function into includes/functions_user.php file.
- *
- * @param $user_id User identifier into database
- * @return true if one of the user's group has been selected into configuration, false else
- */
-function is_user_in_groups_selected($user_id)
-{
-	global $db;			// Database
-
-	$sql = 'SELECT *
-			FROM ' . INTRODUCIATOR_GROUPS_TABLE;
-	$result = $db->sql_query($sql);
-
-	// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
-	$arr_groups_id = array();
-	while ($row = $db->sql_fetchrow($result))
-	{	// Merge array
-		array_push($arr_groups_id,$row['fk_group']);
-	}
-	$db->sql_freeresult($result);
-
-	// Testing
-	return group_memberships($arr_groups_id,(int) $user_id,true);
-}
-
-/**
  * Get the introduciator parameters.
  *
  * @return The introduciator parameters
@@ -169,27 +114,34 @@ function introduciator_getparams()
  * Check if it doesn't contains name of ignored username list.
  *
  * @param $poster_id User's ID
- * @param $poster_name User's name
- * @param $introduciator_params Introduce MOD parameters
- * @return true if the user is ignored, false else
+ * @param $authorisations User's authorisations
+ * @return true if the user must introduce himself pending of rights, false else
  */
-function is_user_ignored($poster_id,$poster_name,$introduciator_params)
+function is_user_must_introduce_himself($poster_id,$authorisations)
 {
-	//$auth->acl_get('u_must_introduce');
-	// Check if :
-	//	1 : Include group is ON and the user is member of at least one group of the selected groups (include groups)
-	//	2 : Include group is OFF (exclude) and the user is not member of one group of the selected groups (exclude groups)
-	$is_in_group_selected = is_user_in_groups_selected($poster_id);
-	$user_ignored = true;
-	
-	// User is in selected group or out of selected group ?
-	if (($introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$introduciator_params['is_include_groups'] && !$is_in_group_selected))
+	if ($authorisations === null)
 	{
-		$user_ignored = in_array(utf8_strtolower($poster_name),explode("\n", utf8_strtolower($introduciator_params['ignored_users'])));		
+		global $db;
+		
+		$sql = 'SELECT user_id, username, user_permissions, user_type
+			FROM ' . USERS_TABLE . '
+			WHERE user_id = ' . $poster_id;
+		$result = $db->sql_query($sql);
+		$userdata = $db->sql_fetchrow($result);
+		$db->sql_freeresult($result);
+
+		if (!$userdata)
+		{
+			trigger_error('NO_USERS', E_USER_ERROR);
+		}		
+		
+		$authorisations = new auth();
+		$authorisations->acl($userdata);
 	}
 	
-	return $user_ignored;
+	return $authorisations->acl_get('u_must_introduce');
 }
+
 /**
  * Verify if the posting is allowed or not.
  *
@@ -200,13 +152,12 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
  * @param $forum_id Forum identifier where the user try to post
  * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete
- * @param $auth User permissions
  * @param $post_data Informations about posting
  * @return None.
  */
-function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post_data)
+function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 {
-	global $phpbb_root_path, $phpEx, $template;
+	global $phpbb_root_path, $phpEx, $template, $auth;
 
 	$poster_id = $user->data['user_id'];
 	$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
@@ -223,7 +174,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post
 
 			if ($mode == 'delete')
 			{	// Check if the user don't try to remove the first message of it's OWN introduce
-				// Don't care about $is_user_ignored => Administrator / Moderator cannot delete first posts of presentation
+				// Don't care about is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
 				// else he needs to delete all the topic
 				if (!empty($post_id)
 					&& $params['fk_forum_id'] == $forum_id
@@ -248,12 +199,12 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post
 						$topic_first_post_id = (int) $post_data['topic_first_post_id'];
 						
 						if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
-						{	// The user try to delete the first post of one intruduce topic : may be not allowed
+						{	// The user try to delete the first post of one introduce topic : may be not allowed
 							// To finish, the $first_poster_id MUST BE not ignored
-							if (!is_user_ignored($first_poster_id,$user->data['username'],$params))
+							if (is_user_must_introduce_himself($first_poster_id,null))
 							{
 								$user->setup('mods/introduciator'); // Add lang
-								$message = $user->lang[$first_poster_id == $poster_id ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
+								$message = $user->lang[($first_poster_id == $poster_id && !$auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
 								$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
 								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
 								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
@@ -264,7 +215,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post
 					}
 				}
 			}
-			else if (!is_user_ignored($poster_id,$user->data['username'],$params))
+			else if (is_user_must_introduce_himself($poster_id,$auth))
 			{
 				$topic_id = 0;
 				$first_post_id = 0;
@@ -310,12 +261,11 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$auth,$post
  * or error message if action is not allowed.
  *
  * @param $poster_id The poster id
- * @param $poster_name The poster name
  * @return None.
  */
-function introduciator_get_user_infos($poster_id,$poster_name)
+function introduciator_get_user_infos($poster_id)
 {
-	global $phpbb_root_path, $phpEx, $user, $introduciator_params;
+	global $phpbb_root_path, $phpEx, $user, $introduciator_params, $auth;
 	
 	if (empty($introduciator_params))
 	{
@@ -330,7 +280,7 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 	
 	if ($introduciator_params['is_enabled'])
 	{
-		if (!is_user_ignored($poster_id,$poster_name,$introduciator_params))
+		if (is_user_must_introduce_himself($poster_id,$auth))
 		{
 			$display = true;
 			$topic_id = 0;
