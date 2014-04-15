@@ -32,16 +32,18 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
 
-$mod_name = 'creation';
+// The name of the mod to be displayed during installation.
+$mod_name = 'INTRODUCIATOR_MOD';
 
-/*
-* The name of the config variable which will hold the currently installed version
-* UMIL will handle checking, setting, and updating the version itself.
-*/
+// The name of the config variable which will hold the currently installed version
+// UMIL will handle checking, setting, and updating the version itself.
 $version_config_name = 'introduciator_mod_version';	// <-- includes/acp/acp_introduciator.php and here : change $versions
 
 // The language file which will be included when installing
 $language_file = 'mods/info_acp_introduciator';
+
+// logo image
+$logo_img = 'images/introduciator/introduciator_logo_small.png';
 
 // UMIL variables
 // $mod_name The name of the mod to be displayed during installation.
@@ -55,9 +57,6 @@ $language_file = 'mods/info_acp_introduciator';
 // Image height should be 50px to prevent cut-off or stretching.
 //$logo_img = 'images/introduciator/introduciator_logo_small.png';
 
-// The name of the mod to be displayed during installation.
-$mod_name = 'INTRODUCIATOR_MOD';
-
 // Name of the config variable
 $version_config_name = 'introduciator_mod_version';
 
@@ -67,32 +66,41 @@ $language_file = 'mods/introduciator';
 // Current time needed for 'introduciator_install_date'
 $current_time = time();
 
+// Options to display to the user
+$options = array(
+	'legend2'	=> 'WARNING',
+	'welcome'	=> array(
+		'lang' => 'INSTALL_INTRODUCIATOR_MOD_WELCOME',
+		'type' => 'custom',
+		'function' => 'display_message',
+		'params' => array('INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES', 'error'),
+		'explain' => false),
+	'legend3'	=> 'ACP_SUBMIT_CHANGES',
+);
+
 // The array of versions and actions within each.
 // You do not need to order it a specific way (it will be sorted automatically), however, you must enter every version, even if no actions are done for it.
 //
 // You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
-	'0.9.3' => array(
+	'1.0.0-rc1' => array(
 		// Add new config entry
 		'config_add' => array(
 			array('introduciator_install_date', $current_time),
 			array('allow_introduciator', '1', 0),
 		),
-		
+
 		// Now to add some permission settings
 		'permission_add' => array(
 			array('u_must_introduce', true),
 		),
-		
+
 		// Global Role permissions for user mask : No to All, Never for Admin and Guest
 		'permission_set' => array(
-			array('ADMINISTRATORS',			'u_must_introduce', 'group',	false),	// Never by default
-			array('GUESTS',					'u_must_introduce',	'group',	false),	// Never by default (has no sens)
-			array('BOTS',					'u_must_introduce',	'group',	false),	// Never by default
-			array('GLOBAL_MODERATORS',		'u_must_introduce',	'group',	true),
-			array('NEWLY_REGISTERED',		'u_must_introduce',	'group',	true),
-			array('REGISTERED',				'u_must_introduce',	'group',	true),
+			array('ROLE_USER_STANDARD',		'u_must_introduce'),
+			array('ROLE_USER_LIMITED',		'u_must_introduce'),
+			array('ROLE_USER_NEW_MEMBER',	'u_must_introduce'),
 		),
 		//-------------------------------------------------------------
 		// Add the module in ACP under the .MOD tab
@@ -191,3 +199,16 @@ $versions = array(
 // Include the UMIL Auto file and everything else will be handled automatically.
 include($phpbb_root_path . 'umil/umil_auto.' . $phpEx);
 
+/**
+* Display a message with a specified css class
+*
+* @param string		$lang_string	The language string to display
+* @param string		$class			The css class to apply
+* @return string					Formated html code
+*/
+function display_message($lang_string, $class)
+{
+	global $user;
+
+	return '<span class="' . $class . '">' . $user->lang[$lang_string] . '</span>';
+}

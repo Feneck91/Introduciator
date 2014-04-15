@@ -45,7 +45,10 @@ $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD'					=> 'Install Introduciator Mod',
 
 	'INSTALL_INTRODUCIATOR_MOD_CONFIRM'			=> 'Are you ready to install the Introduciator Mod?',
-	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Major changes since version %s',
+
+	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Informations',
+	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'By default, this MOD is not activated, yous must active and configure it into <strong>ACP >> .MODS >> Introduciator >> Configuration</strong>.
+													<br/>Do not forget to set up this new permission in <strong>Must introduce himself</strong> into l’ACP : « User permissions »',
 
 	'INTRODUCIATOR_MOD'							=> 'Introduciator Mod',
 	'INTRODUCIATOR_MOD_EXPLAIN'					=> 'Install Introduciator Mod database changes with UMIL auto method.',
