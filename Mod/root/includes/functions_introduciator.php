@@ -23,7 +23,7 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',	'0.9.3');
+define('INTRODUCIATOR_CURRENT_VERSION',	'1.0.0-rc1');
 define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
 
 /**
@@ -58,7 +58,7 @@ function replace_all_by($arr_fields,$arr_replace_by)
 
 /**
  * Check if the user have already posted into this forum.
- * 
+ *
  * It must be the creator of one topic into the configured forum.
  *
  * @param type $forum_id Forum's ID
@@ -122,7 +122,7 @@ function is_user_must_introduce_himself($poster_id,$authorisations)
 	if ($authorisations === null)
 	{
 		global $db;
-		
+
 		$sql = 'SELECT user_id, username, user_permissions, user_type
 			FROM ' . USERS_TABLE . '
 			WHERE user_id = ' . $poster_id;
@@ -133,12 +133,12 @@ function is_user_must_introduce_himself($poster_id,$authorisations)
 		if (!$userdata)
 		{
 			trigger_error('NO_USERS', E_USER_ERROR);
-		}		
-		
+		}
+
 		$authorisations = new auth();
 		$authorisations->acl($userdata);
 	}
-	
+
 	return $authorisations->acl_get('u_must_introduce');
 }
 
@@ -162,7 +162,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 	$poster_id = $user->data['user_id'];
 	$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
 	$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
-	
+
 	if ($poster_id != ANONYMOUS && $auth->acl_get('u_'))
 	{	// User is logged and have user authorization
 		$params = introduciator_getparams();
@@ -197,7 +197,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 					if (!empty($topic_id) && !empty($first_poster_id))
 					{	// Check if this post is the first one, ie this is the post that created the Topic
 						$topic_first_post_id = (int) $post_data['topic_first_post_id'];
-						
+
 						if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
 						{	// The user try to delete the first post of one introduce topic : may be not allowed
 							// To finish, the $first_poster_id MUST BE not ignored
@@ -220,7 +220,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 				$topic_id = 0;
 				$first_post_id = 0;
 				$topic_approved = false;
-				
+
 				if (!is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
 				{	// No post into the introduce topic
 					if ((in_array($mode,array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
@@ -266,18 +266,18 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 function introduciator_get_user_infos($poster_id)
 {
 	global $phpbb_root_path, $phpEx, $user, $introduciator_params, $auth;
-	
+
 	if (empty($introduciator_params))
 	{
 		$introduciator_params = introduciator_getparams();
 		$user->add_lang('mods/introduciator');
 	}
-	
+
 	$display = false;
 	$url = false;
 	$text = '';
 	$class = '';
-	
+
 	if ($introduciator_params['is_enabled'])
 	{
 		if (is_user_must_introduce_himself($poster_id,$auth))
@@ -305,7 +305,7 @@ function introduciator_get_user_infos($poster_id)
 			}
 		}
 	}
-	
+
 	return array(
 		'display'		=> $display,
 		'url'			=> $url,

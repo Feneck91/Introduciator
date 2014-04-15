@@ -45,7 +45,10 @@ $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD'					=> 'Installer le Mod Présentation forcée',
 
 	'INSTALL_INTRODUCIATOR_MOD_CONFIRM'			=> 'Êtes-vous prêt à installer le Mod Présentation forcée ?',
-	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Changements majeurs depuis la version %s',
+
+	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Informations',
+	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'Par défaut le MOD est désactivé, vous devez l’activer et le configurer en allant dans <strong>ACP >> .MODS >> Présentation Forcée >> Configuration</strong>.
+													<br/>N’oubliez pas de paramètrer le nouvelle permission <strong>Doit se présenter</strong> dans l’ACP : « Permissions des utilisateurs »',
 
 	'INTRODUCIATOR_MOD'							=> 'Mod Présentation forcée',
 	'INTRODUCIATOR_MOD_EXPLAIN'					=> 'UMIL effectuera automatiquement, dans la base de données, tous les changements nécessaires pour le MOD Présentation forcée.',
@@ -82,7 +85,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'			=> 'Pas de présentation disponible pour ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'				=> 'Voir la présentation de ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'Présentation en cours d’approbation pour ce membre',
-	
+
 	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Présentation du membre',
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Voir la présentation du membre',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'Aucune présentation de ce membre disponible',
