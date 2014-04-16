@@ -84,6 +84,23 @@ $options = array(
 // You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
+	'1.0.0-rc2' => array(
+		'table_column_add' => array(
+			array(INTRODUCIATOR_CONFIG_TABLE, 'is_use_permissions',	array('BOOL',1)),
+			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL',1)),
+			array(INTRODUCIATOR_CONFIG_TABLE, 'fk_forum_id',		array('UINT', NULL)),// Foreign key on FORUMS_TABLE primary key
+			array(INTRODUCIATOR_CONFIG_TABLE, 'ignored_users',		array('TEXT_UNI', '')),// Users list
+		),
+		// Groups list
+		'table_add' => array(
+			array(INTRODUCIATOR_GROUPS_TABLE, array(
+				'COLUMNS' => array(
+					'fk_group'			=> array('UINT', NULL),
+				),
+			)),
+		),
+	),
+
 	'1.0.0-rc1' => array(
 		// Add new config entry
 		'config_add' => array(
