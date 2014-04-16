@@ -102,15 +102,15 @@
 			     Use permissions or Include / Exclude groups
 			-->
 			<dl>
-				<dt><label for="include_group">{L_INTRODUCIATOR_CP_ED_USE_PERMISSIONS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN}</span></dt>
-				<dd><label><input id="include_groups" name="include_groups" type="radio" class="radio" value="1"<!-- IF USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION}</label>
-					<label><input  name="include_groups" type="radio" class="radio" value="0"<!-- IF not USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION}</label>
+				<dt><label for="is_use_permissions">{L_INTRODUCIATOR_CP_ED_USE_PERMISSIONS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN}</span></dt>
+				<dd><label><input id="is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="1"<!-- IF USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION}</label>
+					<label><input  name="is_use_permissions" type="radio" class="radio" value="0"<!-- IF not USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION}</label>
 				</dd>
 			</dl>
+			<hr/>
 			<!--
 			     Include / Exclude groups
 			-->
-			<legend>{L_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS}</legend>
 			<dl>
 				<dt><label for="include_group">{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN}</span></dt>
 				<dd><label><input id="include_groups" name="include_groups" type="radio" class="radio" value="1"<!-- IF INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION}</label>

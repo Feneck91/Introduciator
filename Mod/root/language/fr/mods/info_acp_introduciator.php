@@ -1,9 +1,9 @@
 <?php
 /**
 *
-* info_acp_diary.php [Français]
+* info_acp_introduciator.php [Français]
 *
-* @package Diary MOD
+* @package Introduciator MOD (Présentation forcée)
 * @copyright (c) 2014 Feneck91
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -59,7 +59,7 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_TITLE'						=> 'Informations générales',
-	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Donne la version courante de ce MOD',
+	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Donne la version courante de ce MOD.',
 
 	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'	=> 'Votre installation du MOD Présentation forcée n’est pas à jour.',
 	'INTRODUCIATOR_GP_STATS'						=> 'Statistiques du MOD Présentation forcée',
@@ -73,8 +73,7 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE'						=> 'Configuration de la Présentation forcée',
-	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de configurer le fonctionnement du MOD',
-	'INTRODUCIATOR_CP_CREATE_INTRODUCIATOR'			=> 'Permet de sélectionner le forum de présentation, les goupes qui n’ont pas à se présenter, etc.',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de configurer le fonctionnement du MOD.',
 ));
 
 /**
@@ -83,6 +82,7 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	// Titres
+	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Configuration des groupes et des utilisateurs',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Configuration de la page d’explications',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'Pour tous les champs textes suivants, vous pouvez utiliser :<br/>'
 																	.  '<ul>'
@@ -92,43 +92,39 @@ $lang = array_merge($lang, array(
 																	.  '</ul>',
 	// Sous-titres
 	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"								=> 'Activer le MOD',
-	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"						=> 'Utilisé pour activer ou désactiver ce MOD',
+	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"						=> 'Utilisé pour activer ou désactiver ce MOD.',
 	"INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED"			=> 'Autorise le MOD à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
 	"INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN"=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation'.
 																	   '<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.' .
 																	   '<br/>Vous pouvez désactiver cette option mais il peut en résulter des comportements étranges : un membre peut avoir plusieurs présentations, dans ce cas le premier trouvé est pris en compte.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Choix du forum où l’utilisateur doit se présenter',
-	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s’est déjà présenté ou pas',
+	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s’est déjà présenté ou pas.',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Afficher la page d’explication',
-	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Utilisé pour afficher la page d’explication si l’utilisateur tente de poster dans un autre forum que celui des présentations',
+	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Utilisé pour afficher la page d’explication si l’utilisateur tente de poster dans un autre forum que celui des présentations.',
 
 	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS'							=> 'Utiliser les permissions de phbBB',
-	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'Vous pouvez utiliser les permissions de phpBB pour indiquer si un utilisateur doit se présenter ou utiliser la configuration de ce MOD (plus simple)',
-	'INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION'						=> 'Utiliser les permissions du forums',
+	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'Vous pouvez utiliser les permissions de phpBB pour indiquer si un utilisateur doit se présenter ou utiliser la configuration de ce MOD (plus simple mais moins performant).<br/><br/>Lorsque l’option « Utiliser les permissions du forums » est utilisée, la configuration ci-dessous est ignorée.',
+	'INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION'						=> 'Utiliser les permissions du forum',
 	'INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION'					=> 'Utiliser la configuration du MOD',
-	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'			=> 'When include group is selected, only users of selected groups needs to introduce themself.<br/>When exclude group is selected, only users that are not into selected groups needs to introduce themself',
-	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'					=> 'Include groups or exclude groups',
-	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'			=> 'When include group is selected, only users of selected groups needs to introduce themself.<br/>When exclude group is selected, only users that are not into selected groups needs to introduce themself',
-	'INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION'						=> 'Include groups',
-	'INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION'						=> 'Exclude groups',
-	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'							=> 'Groups selections',
-	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'					=> 'Select groups that are to be included or excluded',
-	'INTRODUCIATOR_CP_ED_IGNORED_USERS'								=> 'Ignored users',
-	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'						=> 'Users who are not required to introduce themself.<br/>Enter one user on each line.<br/>Used for the administrators or tests accounts for example',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE'					=> 'Explanation page title',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN'			=> 'Default = <b>%explanation_title%</b><br/>You can change this texte to put your own',
-
+	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'					=> 'Groupes inclus ou groupes exclus',
+	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'			=> 'Lorsque les groupes inclus sont sélectionnés, seuls les utilisateurs des groupes sélectionnés doivent se présenter.<br/>Lorsque les groupes exclus sont sélectionnés, seuls les utilisateurs ne faisant pas parti des groupes sélectionnés doivent se présenter.',
+	'INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION'						=> 'Groupes inclus',
+	'INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION'						=> 'Groupes exclus',
+	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'							=> 'Sélection des groupes',
+	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'					=> 'Sélectionne les groupes qui doivent être inclus ou exclus.',
+	'INTRODUCIATOR_CP_ED_IGNORED_USERS'								=> 'Utilisateurs ignorés',
+	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'						=> 'Liste des utilisateurs qui ne sont pas obligés de se présenter.<br/>Entrez un utilisateur par ligne.<br/>Utilisé pour les comptes d’administrations ou de tests par exemple.',
 
 	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE'					=> 'Titre de la page d’explications',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN'			=> 'Défaut = <b>%explanation_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix',
+	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN'			=> 'Défaut = <b>%explanation_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT'					=> 'Texte de la page d’explications',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN'			=> 'Défaut = <b>%explanation_text%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix',
+	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN'			=> 'Défaut = <b>%explanation_text%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED'			=> 'Activer l’affichage des règles du forum de présentation',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN'	=> 'Permet d’afficher les règles du forum de présentation dans la page d’explication',
+	'INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN'	=> 'Permet d’afficher les règles du forum de présentation dans la page d’explication.',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE'					=> 'Titre de la présentation des règles',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN'			=> 'Défaut = <b>%rules_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix',
+	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN'			=> 'Défaut = <b>%rules_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT'					=> 'Texte des règles du forum de présentation',
-	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN'			=> 'Défaut = <b>%rules_text%</b><br/>Par défaut %rules_text% est remplacé par le texte des règles du forum de présentation.<br/>Vous pouvez changer le texte pour mettre celui de votre choix',
+	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN'			=> 'Défaut = <b>%rules_text%</b><br/>Par défaut %rules_text% est remplacé par le texte des règles du forum de présentation.<br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
 ));
 
 /**
