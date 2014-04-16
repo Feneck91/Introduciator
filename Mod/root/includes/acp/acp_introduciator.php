@@ -119,6 +119,9 @@ class acp_introduciator
 						'MOD_ACTIVATED'							=> $params['is_enabled'],
 						'CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post_enabled'],
 						'DISPLAY_EXPLANATION_ENABLED'			=> $params['is_explanation_enabled'],
+						'USE_PERMISSIONS'						=> $params['is_use_permissions'],
+						'INCLUDE_GROUPS_SELECTED'				=> $params['is_include_groups'],
+						'ITEM_IGNORED_USERS'					=> $params['ignored_users'],
 						'EXPLANATION_MESSAGE_TITLE'				=> $params['explanation_message_title'],
 						'EXPLANATION_MESSAGE_TEXT'				=> $params['explanation_message_text'],
 						'EXPLANATION_IS_DISPLAY_RULES_ENABLED'	=> $params['explanation_display_rules_enabled'],
@@ -129,6 +132,9 @@ class acp_introduciator
 
 					// Add all forums
 					$this->add_all_forums($params['fk_forum_id'],0,0);
+
+					// Add all groups
+					$this->add_all_groups();
 
 					$s_hidden_fields = build_hidden_fields(array(
 							'forum_id'		=> $params['fk_forum_id'],		// Selected forum
@@ -151,6 +157,10 @@ class acp_introduciator
 							$is_check_delete_first_post_activated	= (request_var('check_delete_first_post_activated', 0) != 0);
 							$fk_forum_id							= (int) request_var('forum_choice', 0);
 							$is_explanation_enabled					= (request_var('display_explanation', 0) != 0);
+							$is_use_permissions						= (request_var('is_use_permissions', 0) != 0);
+							$is_include_groups						= (request_var('include_groups', 0) != 0);
+							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
+							$ignored_users							= utf8_normalize_nfc(request_var('ignored_users', ''));
 							$explanation_message_title				= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
 							$explanation_message_text				= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
 							$explanation_display_rules_enabled		= (request_var('explanation_display_rules_enabled', 0) != 0);
@@ -166,6 +176,9 @@ class acp_introduciator
 								'is_check_delete_first_post_enabled'	=> $is_check_delete_first_post_activated,
 								'fk_forum_id'							=> $fk_forum_id,
 								'is_explanation_enabled'				=> $is_explanation_enabled,
+								'is_use_permissions'					=> $is_use_permissions,
+								'is_include_groups'						=> $is_include_groups,
+								'ignored_users'							=> $ignored_users,
 								'explanation_message_title'				=> $explanation_message_title,
 								'explanation_message_text'				=> $explanation_message_text,
 								'explanation_display_rules_enabled'		=> $explanation_display_rules_enabled,
@@ -178,6 +191,23 @@ class acp_introduciator
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
 									WHERE introduciator_id = ' . (int) request_var('id', 0);
 							$db->sql_query($sql);
+
+							// Update INTRODUCIATOR_GROUPS_TABLE
+							// 1> Remove all entries
+							$sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;
+							$db->sql_query($sql);
+
+							// 2> Add all entries
+							foreach ($groups as &$group)
+							{	// Create elements to add by row
+								$sql_ary = array(
+									'fk_group'				=> (int) $group,
+								);
+								// Create SQL request
+								$sql = 'INSERT INTO ' . INTRODUCIATOR_GROUPS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
+								// Add row
+								$db->sql_query($sql);
+							}
 
 							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
 							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
@@ -220,6 +250,31 @@ class acp_introduciator
 			'TOOLTIP'		=> $row['forum_desc'],
 			));
 			$this->add_all_forums($fk_selected_forum_id,$row['forum_id'],$level + 1);
+		}
+		$db->sql_freeresult($result);
+	}
+
+	/**
+	 * Find all groups to propose it to the user.
+	 *
+	 * Add all elements into the template.
+	 */
+	function add_all_groups()
+	{
+		global $db, $template;
+
+		$sql = 'SELECT group_id,group_desc
+			FROM ' . GROUPS_TABLE;
+
+		$result = $db->sql_query($sql);
+		while ($row = $db->sql_fetchrow($result))
+		{
+			$template->assign_block_vars('group', array(
+			'NAME'		=> get_group_name($row['group_id']),
+			'ID'		=> (int) $row['group_id'],
+			'SELECTED'	=> is_group_selected($row['group_id']),
+			'TOOLTIP'	=> $row['group_desc'],
+			));
 		}
 		$db->sql_freeresult($result);
 	}
