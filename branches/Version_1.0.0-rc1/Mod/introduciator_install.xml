@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<meta name="generator" content="MODX file generated with PP MODX Creator 1.2.6 by tumba25 (phpBB version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Introduciator]]></title>
+		<title lang="fr"><![CDATA[Présentation Forcée]]></title>
+		<description lang="en"><![CDATA[Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums.
+An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.
+Some groups could be included or excluded to allow administrators or moderators to pass over this contraint.
+It is possible to exclude users too (for tests accounts for example).]]></description>
+		<description lang="fr"><![CDATA[Est utilisé pour forcer les utilisateurs à poster un message de présentation dans un forum spécifique avant d'être autorisé de poster dans les autres forums.
+Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de poster un message dans un autre forum afin de lui expliquer ce qu'il doit faire.
+Certains groupes peuvent être inclus ou exclus pour permettre aux administrateurs et aux modérateurs de passer outre.
+Il est aussi possible d'exclure des utilisateurs (pour les comptes des tests par exemple).]]></description>
+		<author-notes lang="en"><![CDATA[Once you have installed this MOD, you must activate and configure it into the .MOD tab into the administration console panel.]]></author-notes>
+		<author-notes lang="fr"><![CDATA[Une fois ce MOD installé, vous devez l'activer et le configurer dans le panneau .MOD de la console d'administration.]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[CHÂTEAU Stéphane]]></realname>
+				<username><![CDATA[Feneck91]]></username>
+				<homepage><![CDATA[http://feneck91.free.fr]]></homepage>
+				<email><![CDATA[feneck91@free.fr]]></email>
+			</author>
+		</author-group>
+		<mod-version>0.9.3</mod-version>
+		<installation>
+			<level>intermediate</level>
+			<time>600</time>
+			<target-version>3.0.12</target-version>
+		</installation>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/adm/style/acp_introduciator.html" to="adm/style/acp_introduciator.html"/>
+			<file from="root/includes/functions_introduciator.php" to="includes/functions_introduciator.php"/>
+			<file from="root/includes/acp/acp_introduciator.php" to="includes/acp/acp_introduciator.php"/>
+			<file from="root/includes/acp/info/acp_introduciator.php" to="includes/acp/info/acp_introduciator.php"/>
+			<file from="root/language/en/mods/info_acp_introduciator.php" to="language/en/mods/info_acp_introduciator.php"/>
+			<file from="root/language/en/mods/introduciator.php" to="language/en/mods/introduciator.php"/>
+			<file from="root/language/en/mods/permissions_introduciator.php" to="language/en/mods/permissions_introduciator.php"/>
+			<file from="root/styles/prosilver/template/introduciator_explain.html" to="styles/prosilver/template/introduciator_explain.html"/>
+			<file from="root/language/fr/mods/info_acp_introduciator.php" to="language/fr/mods/info_acp_introduciator.php"/>
+			<file from="root/language/fr/mods/introduciator.php" to="language/fr/mods/introduciator.php"/>
+			<file from="root/language/fr/mods/permissions_introduciator.php" to="language/fr/mods/permissions_introduciator.php"/>
+			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
+			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
+			<file from="root/umil/*.*" to="umil/*.*"/>
+			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
+		</copy>
+		<open src="memberlist.php">
+			<edit>
+				<find><![CDATA[// Start session management]]></find>
+				<action type="before-add"><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+// Introduciator - End
+//------------------------------------------------
+
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[	// Dump it out to the template]]></find>
+				<action type="before-add"><![CDATA[	//------------------------------------------------
+	// Introduciator - Begin
+	$data_introduciator = introduciator_get_user_infos($user_id);
+	// Introduciator - End
+	//------------------------------------------------
+	
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'L_VIEWING_PROFILE'	=> sprintf($user->lang['VIEWING_PROFILE'], $username),]]></find>
+				<action type="after-add"><![CDATA[		//------------------------------------------------
+		// Introduciator - Begin
+			'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+			'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
+			'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
+			'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
+		// Introduciator - End
+		//------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="posting.php">
+			<edit>
+				<find><![CDATA[	trigger_error(($mode == 'reply' || $mode == 'bump') ? 'TOPIC_UNAPPROVED' : 'POST_UNAPPROVED');
+}
+
+]]></find>
+				<action type="after-add"><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data);
+// Introduciator - End
+//------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA[// Start session management]]></find>
+				<action type="before-add"><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+// Introduciator - End
+//------------------------------------------------
+
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				'warnings'			=> 0,
+				'allow_pm'			=> 0,
+]]></find>
+				<action type="after-add"><![CDATA[				//------------------------------------------------
+				// Introduciator - Begin
+				'introduciator'	=> introduciator_get_user_infos($poster_id),
+				// Introduciator - End
+				//------------------------------------------------
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				'author_profile'	=> get_username_string('profile', $poster_id, $row['username'], $row['user_colour']),
+]]></find>
+				<action type="after-add"><![CDATA[				//------------------------------------------------
+				// Introduciator - Begin
+				'introduciator'	=> introduciator_get_user_infos($poster_id),
+				// Introduciator - End
+				//------------------------------------------------
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		'S_IGNORE_POST'		=> ($row['hide_post']) ? true : false,
+]]></find>
+				<action type="after-add"><![CDATA[		//------------------------------------------------
+		// Introduciator - Begin
+		'S_INTRODUCIATOR_DISPLAY'	=> $user_cache[$poster_id]['introduciator']['display'],
+		'U_INTRODUCIATOR_URL'		=> $user_cache[$poster_id]['introduciator']['url'],
+		'T_INTRODUCIATOR_TEXT'		=> $user_cache[$poster_id]['introduciator']['text'],
+		'T_INTRODUCIATOR_CLASS'		=> $user_cache[$poster_id]['introduciator']['class'],
+		// Introduciator - End
+		//------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[				<dt>{L_ACTIVE_IN_TOPIC}:</dt> <dd><!-- IF ACTIVE_TOPIC != '' --><strong><a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a></strong><br />({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})<!-- ELSE --> - <!-- ENDIF --></dd>
+			<!-- ENDIF -->
+]]></find>
+				<action type="after-add"><![CDATA[			<!-- Introduciator - Begin -->
+				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_VIEW_MEMBER}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" target="blank" alt="{L_INTRODUCIATOR_TOPIC_TITLE}" title="{T_INTRODUCIATOR_TEXT}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b></a><!-- ELSE --><b>{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}</b><!-- ENDIF --></li></ul></dd><!-- ENDIF -->
+			<!-- Introduciator - End -->
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/viewtopic_body.html">
+			<edit>
+				<find><![CDATA[<!-- IF postrow.U_PM or postrow.U_EMAIL or postrow.U_WWW or postrow.U_MSN or postrow.U_ICQ or postrow.U_YIM or postrow.U_AIM or postrow.U_JABBER]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[postrow.U_JABBER]]></inline-find>
+					<inline-action type="after-add"><![CDATA[ or postrow.S_INTRODUCIATOR_DISPLAY]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[					<!-- IF postrow.U_JABBER --><li class="jabber-icon"><a href="{postrow.U_JABBER}" onclick="popup(this.href, 550, 320); return false;" title="{L_JABBER}"><span>{L_JABBER}</span></a></li><!-- ENDIF -->
+]]></find>
+				<action type="after-add"><![CDATA[					<!-- Introduciator - Begin -->
+						<!-- IF postrow.S_INTRODUCIATOR_DISPLAY --><li class="{postrow.T_INTRODUCIATOR_CLASS}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- IF postrow.U_INTRODUCIATOR_URL --><a href="{postrow.U_INTRODUCIATOR_URL}" target="blank" alt="{L_INTRODUCIATOR_TOPIC_TITLE}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- ENDIF --><span>{L_INTRODUCIATOR_TOPIC_TITLE}</span><!-- IF postrow.U_INTRODUCIATOR_URL --></a><!-- ENDIF --></li><!-- ENDIF -->
+					<!-- Introduciator - End -->
+
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/buttons.css">
+			<edit>
+				<find><![CDATA[ul.profile-icons li.quote-icon]]></find>
+				<action type="after-add"><![CDATA[/*------------------------------------------------
+// Introduciator - Begin */
+ul.profile-icons li.introd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: icon */
+ul.profile-icons li.introdno-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: no presentation avalaible */
+ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending */
+/* Introduciator - Begin
+//------------------------------------------------*/
+
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/colours.css">
+			<edit>
+				<find><![CDATA[.quote-icon, .quote-icon a]]></find>
+				<action type="after-add"><![CDATA[/*------------------------------------------------
+// Introduciator - Begin */
+.introd-icon, .introd-icon a		{ background-image: url("{T_THEME_PATH}/images/icon_introduciator.gif"); } 			/* Introduciator MOD: icon */
+.introdno-icon, .introdno-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_nointroduciator.gif"); }		/* Introduciator MOD: no presentation avalaible */
+.introdpd-icon, .introdpd-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_pendingintroduciator.gif"); }	/* Introduciator MOD: presentation is pending */
+/* Introduciator - Begin
+//------------------------------------------------*/
+]]></action>
+			</edit>
+		</open>
+		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
+	</action-group>
+</mod>
