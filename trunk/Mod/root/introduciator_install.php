@@ -88,7 +88,6 @@ $versions = array(
 		'table_column_add' => array(
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_use_permissions',	array('BOOL',1)),
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL',1)),
-			array(INTRODUCIATOR_CONFIG_TABLE, 'fk_forum_id',		array('UINT', NULL)),// Foreign key on FORUMS_TABLE primary key
 			array(INTRODUCIATOR_CONFIG_TABLE, 'ignored_users',		array('TEXT_UNI', '')),// Users list
 		),
 		// Groups list
