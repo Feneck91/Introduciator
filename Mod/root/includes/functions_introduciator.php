@@ -23,7 +23,7 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',	'1.0.0-rc1');
+define('INTRODUCIATOR_CURRENT_VERSION',	'1.0.0-RC2');
 define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
 define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
 
