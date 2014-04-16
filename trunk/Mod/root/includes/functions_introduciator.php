@@ -203,7 +203,7 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  * @param $introduciator_params Introduce MOD parameters
  * @return true if the user must introduce himself pending of rights, false else
  */
-function is_user_must_introduce_himself($poster_id,$authorisations,,$poster_name,$introduciator_param)
+function is_user_must_introduce_himself($poster_id,$authorisations,$poster_name,$introduciator_param)
 {
 	$ret = false;
 
