@@ -4,10 +4,10 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
 <header>
 	<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-	<title lang="en">Install the french language files</title>
-	<title lang="fr">Installer les fichiers de langue française</title>
-	<description lang="en">Allows to use the MOD for french boards</description>
-	<description lang="fr">Permet aux forums francophones d'utiliser le MOD</description>
+	<title lang="en"><![CDATA[Install the french language files]]></title>
+	<title lang="fr"><![CDATA[Installer les fichiers de langue française]]></title>
+	<description lang="en"><![CDATA[Allows to use the MOD for french boards]]></description>
+	<description lang="fr"><![CDATA[Permet aux forums francophones d'utiliser le MOD]]></description>
 	<author-group>
 		<author>
 			<realname><![CDATA[CHÂTEAU Stéphane]]></realname>
@@ -38,11 +38,11 @@
 			<rev-version>1.0.0-rc2</rev-version>
 			<changelog lang="en">
 				<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
-				<change>The language keys are now in a specific file.</change>
+				<change><![CDATA[The language keys are now in a specific file]]></change>
 			</changelog>
 			<changelog lang="fr">
 				<change><![CDATA[Ajout de la possibilité de configurer les permissions via les paramètres du mod]]></change>
-				<change>Les clés de langue sont désormais dans un fichier spécifique.</change>
+				<change><![CDATA[Les clés de langue sont désormais dans un fichier spécifique]]></change>
 			</changelog>
 		</entry>
 	</history>
@@ -57,7 +57,7 @@
 		<file from="root/language/fr/mods/introduciator.php" to="language/fr/mods/introduciator.php"/>
 		<file from="root/language/fr/mods/permissions_introduciator.php" to="language/fr/mods/permissions_introduciator.php"/>
 	</copy>
-	<diy-instructions lang="en">Make sure all files have been uploaded to the proper locations.</diy-instructions>
-	<diy-instructions lang="fr">Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements.</diy-instructions>
+	<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations.]]></diy-instructions>
+	<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements.]]></diy-instructions>
 </action-group>
 </mod>

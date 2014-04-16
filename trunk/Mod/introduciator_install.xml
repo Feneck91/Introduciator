@@ -49,7 +49,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>1.0.0-rc2</mod-version>
+		<mod-version>1.0.0-RC2</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>600</time>
@@ -58,7 +58,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 		<history>
 			<entry>
 				<date>2014-04-15</date>
-				<rev-version>1.0.0-rc1</rev-version>
+				<rev-version>1.0.0-RC1</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[First official version of this mod]]></change>
 				</changelog>
@@ -68,20 +68,22 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 			</entry>
 			<entry>
 				<date>2014-04-16</date>
-				<rev-version>1.0.0-rc2</rev-version>
+				<rev-version>1.0.0-RC2</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
+					<change><![CDATA[The language keys are now in a specific file]]></change>
 				</changelog>
 				<changelog lang="fr">
 					<change><![CDATA[Ajout de la possibilité de configurer les permissions via les paramètres du mod]]></change>
+					<change><![CDATA[Les clés de langue sont désormais dans un fichier spécifique]]></change>
 				</changelog>
 			</entry>
 		</history>
 		<link-group>
 			<link type="language" href="contrib/languages/fr.xml" lang="en">Language file for french boards</link>
 			<link type="language" href="contrib/languages/fr.xml" lang="fr">Fichier de langue pour les forums francophones</link>
-			<link type="contrib" href="contrib/updates/update_1.0.0-rc1_to_1.0.0-rc2.xml" lang="en">Update the MOD from 1.0.0-rc1 to 1.0.0-rc2</link>
-			<link type="contrib" href="contrib/updates/update_1.0.0-rc1_to_1.0.0-rc2.xml" lang="fr">Mette à jour le MOD de la version 1.0.0-rc1 à la version 1.0.0-rc2</link>
+			<link type="contrib" href="contrib/updates/update_1.0.0-RC1_to_1.0.0-RC2.xml" lang="en">Update the MOD from 1.0.0-RC1 to 1.0.0-RC2</link>
+			<link type="contrib" href="contrib/updates/update_1.0.0-RC1_to_1.0.0-RC2.xml" lang="fr">Mette à jour le MOD de la version 1.0.0-RC1 à la version 1.0.0-RC2</link>
 		</link-group>
 	</header>
 	<action-group>
@@ -99,9 +101,6 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 			<file from="root/umil/*.*" to="umil/*.*"/>
 			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
 		</copy>
-		<open src="">
-			<edit/>
-		</open>
 		<open src="memberlist.php">
 			<edit>
 				<find><![CDATA[// Start session management]]></find>
@@ -254,5 +253,7 @@ ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciato
 			</edit>
 		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
+		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion. Clear your cache and refresh your imagesets from the administration control panel.]]></diy-instructions>
+		<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements. Exécutez ensuite le fichier d'installation, intitulé introduciator_install.php, dans votre navigateur Internet puis supprimez-le une fois l'installation effectuée. Enfin, purgez votre cache et rafraîchissez vos packs d'images depuis le panneau d'administration.]]></diy-instructions>
 	</action-group>
 </mod>

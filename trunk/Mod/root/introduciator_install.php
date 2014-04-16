@@ -84,7 +84,7 @@ $options = array(
 // You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
-	'1.0.0-rc2' => array(
+	'1.0.0-RC2' => array(
 		'table_column_add' => array(
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_use_permissions',	array('BOOL',1)),
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL',1)),
@@ -101,7 +101,7 @@ $versions = array(
 		),
 	),
 
-	'1.0.0-rc1' => array(
+	'1.0.0-RC1' => array(
 		// Add new config entry
 		'config_add' => array(
 			array('introduciator_install_date', $current_time),
