@@ -82,7 +82,7 @@ $options = array(
 // config with this value, else false by default
 $allow_introduciator = false;
 global $config;
-if (array_key_exists($config,'allow_introduciator'))
+if (array_key_exists('allow_introduciator',$config))
 {	// If already installed
 	$introduciator_params = introduciator_getparams();
 	if ($introduciator_params && array_key_exists('is_enabled',$introduciator_params))

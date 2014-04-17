@@ -30,7 +30,7 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 		</installation>
 		<history>
 			<entry>
-				<date>2014-04-16</date>
+				<date>2014-04-17</date>
 				<rev-version>1.0.0-RC2</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
@@ -43,10 +43,10 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			</entry>
 		</history>
 		<link-group>
-			<link type="parent" href="../../introduciator_install.xml" lang="en">Back to install file</link>
-			<link type="language" href="../../contrib/languages/fr.xml" lang="en" realname="fr">Language file for french boards</link>
-			<link type="parent" href="../../introduciator_install.xml" lang="fr">Retourner au fichier d'installation</link>
-			<link type="language" href="../../contrib/languages/fr.xml" lang="fr" realname="fr">Fichier de langue pour les forums francophones</link>
+			<link type="parent" href="../../introduciator_install.xml" lang="en"><![CDATA[Back to install file]]></link>
+			<link type="language" href="../../contrib/languages/fr.xml" lang="en" realname="fr"><![CDATA[Language file for french boards]]></link>
+			<link type="parent" href="../../introduciator_install.xml" lang="fr"><![CDATA[Retourner au fichier d'installation]]></link>
+			<link type="language" href="../../contrib/languages/fr.xml" lang="fr" realname="fr"><![CDATA[Fichier de langue pour les forums francophones]]></link>
 		</link-group>
 	</header>
 	<action-group>
