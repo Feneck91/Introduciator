@@ -78,6 +78,19 @@ $options = array(
 	'legend3'	=> 'ACP_SUBMIT_CHANGES',
 );
 
+// Record value (if exists) 'is_enabled' from RC1 version and set it to 'allow_introduciator'
+// config with this value, else false by default
+$allow_introduciator = false;
+global $config;
+if (array_key_exists($config,'allow_introduciator'))
+{	// If already installed
+	$introduciator_params = introduciator_getparams();
+	if ($introduciator_params && array_key_exists('is_enabled',$introduciator_params))
+	{
+		$allow_introduciator = $introduciator_params['is_enabled'];
+	}
+}
+
 // The array of versions and actions within each.
 // You do not need to order it a specific way (it will be sorted automatically), however, you must enter every version, even if no actions are done for it.
 //
@@ -85,6 +98,12 @@ $options = array(
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
 	'1.0.0-RC2' => array(
+		'config_update' => array(
+			array('allow_introduciator', $allow_introduciator),
+		),
+		'table_column_remove' => array(
+			array(INTRODUCIATOR_CONFIG_TABLE, 'is_enabled'),
+		),
 		'table_column_add' => array(
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_use_permissions',	array('BOOL',1)),
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL',1)),
@@ -112,7 +131,7 @@ $versions = array(
 			array('u_must_introduce', true),
 		),
 
-		// Global Role permissions for user mask : No to All, Never for Admin and Guest
+		// Global Role permissions for user mask : Yes to All
 		'permission_set' => array(
 			array('ROLE_USER_STANDARD',		'u_must_introduce'),
 			array('ROLE_USER_LIMITED',		'u_must_introduce'),
@@ -149,7 +168,7 @@ $versions = array(
 				'module_langname'	=> 'INTRODUCIATOR_CONFIGURATION',
 				'module_mode'		=> 'configuration',
 				'module_auth'		=> 'acl_a_board',	// Acl Admin Introduciator Manage
-				'after'			=> 'INTRODUCIATOR_GENERAL',
+				'after'				=> 'INTRODUCIATOR_GENERAL',
 				),
 			),
 
