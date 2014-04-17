@@ -67,7 +67,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 				</changelog>
 			</entry>
 			<entry>
-				<date>2014-04-16</date>
+				<date>2014-04-17</date>
 				<rev-version>1.0.0-RC2</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
@@ -80,10 +80,10 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 			</entry>
 		</history>
 		<link-group>
-			<link type="language" href="contrib/languages/fr.xml" lang="en">Language file for french boards</link>
-			<link type="language" href="contrib/languages/fr.xml" lang="fr">Fichier de langue pour les forums francophones</link>
-			<link type="contrib" href="contrib/updates/update_1.0.0-RC1_to_1.0.0-RC2.xml" lang="en">Update the MOD from 1.0.0-RC1 to 1.0.0-RC2</link>
-			<link type="contrib" href="contrib/updates/update_1.0.0-RC1_to_1.0.0-RC2.xml" lang="fr">Mette à jour le MOD de la version 1.0.0-RC1 à la version 1.0.0-RC2</link>
+			<link type="language" href="contrib/languages/fr.xml" lang="en"><![CDATA[Language file for french boards]]></link>
+			<link type="language" href="contrib/languages/fr.xml" lang="fr"><![CDATA[Fichier de langue pour les forums francophones]]></link>
+			<link type="contrib" href="contrib/updates/update_1.0.0-RC1_to_1.0.0-RC2.xml" lang="en"><![CDATA[Update the MOD from 1.0.0-RC1 to 1.0.0-RC2]]></link>
+			<link type="contrib" href="contrib/updates/update_1.0.0-RC1_to_1.0.0-RC2.xml" lang="fr"><![CDATA[Mette à jour le MOD de la version 1.0.0-RC1 à la version 1.0.0-RC2]]></link>
 		</link-group>
 	</header>
 	<action-group>
