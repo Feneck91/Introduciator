@@ -116,7 +116,7 @@ class acp_introduciator
 
 					$template->assign_vars(array(
 						'S_HIDDEN_FIELDS'						=> $s_hidden_fields,
-						'MOD_ACTIVATED'							=> $params['is_enabled'],
+						'MOD_ACTIVATED'							=> $config['allow_introduciator'],
 						'CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post_enabled'],
 						'DISPLAY_EXPLANATION_ENABLED'			=> $params['is_explanation_enabled'],
 						'USE_PERMISSIONS'						=> $params['is_use_permissions'],
@@ -172,7 +172,6 @@ class acp_introduciator
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
 							$sql_ary = array(
-								'is_enabled'							=> $is_enabled,
 								'is_check_delete_first_post_enabled'	=> $is_check_delete_first_post_activated,
 								'fk_forum_id'							=> $fk_forum_id,
 								'is_explanation_enabled'				=> $is_explanation_enabled,
@@ -186,12 +185,16 @@ class acp_introduciator
 								'explanation_message_rules_text'		=> $explanation_message_rules_text,
 							);
 
+							// Set the activation MOD config
+							set_config('allow_introduciator', $is_enabled ? 1 : 0);
+
 							// Update INTRODUCIATOR_CONFIG_TABLE
 							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
 									WHERE introduciator_id = ' . (int) request_var('id', 0);
 							$db->sql_query($sql);
-
+							
+							
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
 							$sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;

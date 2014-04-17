@@ -254,7 +254,7 @@ function is_user_must_introduce_himself($poster_id,$authorisations,$poster_name,
  */
 function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 {
-	global $phpbb_root_path, $phpEx, $template, $auth;
+	global $phpbb_root_path, $phpEx, $template, $auth, $config;
 
 	$poster_id = $user->data['user_id'];
 	$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
@@ -262,13 +262,13 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 
 	if ($poster_id != ANONYMOUS && $auth->acl_get('u_'))
 	{	// User is logged and have user authorization
-		$params = introduciator_getparams();
-
-		if ($params['is_enabled'])
+		if ($config['allow_introduciator'])
 		{	// MOD is enabled and the user is not ignored, it can do all he wants
 			// Force forum id because it be moved while user delete the message
 			global $db;
-
+			
+			$params = introduciator_getparams();
+			
 			if ($mode == 'delete')
 			{	// Check if the user don't try to remove the first message of it's OWN introduce
 				// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
@@ -365,19 +365,19 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 {
 	global $phpbb_root_path, $phpEx, $user, $introduciator_params, $auth;
 
-	if (empty($introduciator_params))
-	{
-		$introduciator_params = introduciator_getparams();
-		$user->add_lang('mods/introduciator');
-	}
-
 	$display = false;
 	$url = false;
 	$text = '';
 	$class = '';
 
-	if ($introduciator_params['is_enabled'])
+	if ($config['allow_introduciator'])
 	{
+		if (empty($introduciator_params))
+		{
+			$introduciator_params = introduciator_getparams();
+			$user->add_lang('mods/introduciator');
+		}
+
 		if (is_user_must_introduce_himself($poster_id,$auth,$poster_name,$introduciator_params))
 		{
 			$display = true;
