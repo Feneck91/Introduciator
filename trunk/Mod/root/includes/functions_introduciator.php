@@ -233,7 +233,7 @@ function is_user_must_introduce_himself($poster_id,$authorisations,$poster_name,
 	}
 	else
 	{
-		$ret = !is_user_ignored($first_poster_id,$poster_name,$introduciator_param);
+		$ret = !is_user_ignored($poster_id,$poster_name,$introduciator_param);
 	}
 
 	return $ret;

@@ -87,6 +87,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'The presentation of this member is pending approval',
 
 	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Member presentation',
+	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Go to member presentation',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'No presentation for this member avalaible',
 ));
 
