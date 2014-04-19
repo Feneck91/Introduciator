@@ -84,6 +84,22 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 ]]></action>
 			</edit>
 		</open>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA[introduciator_get_user_infos]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$poster_id,]]></inline-find>
+					<inline-action type="after-add"><![CDATA[,$row['username']]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[introduciator_get_user_infos]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$poster_id,]]></inline-find>
+					<inline-action type="after-add"><![CDATA[,$row['username']]]></inline-action>
+				</inline-edit>
+			</edit>
+		</open>
 		<open src="styles/prosilver/template/memberlist_view.html">
 			<edit>
 				<find><![CDATA[<!-- IF S_INTRODUCIATOR_DISPLAY -->]]></find>
