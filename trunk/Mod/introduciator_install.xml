@@ -80,10 +80,10 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 			</entry>
 		</history>
 		<link-group>
-			<link type="language" href="contrib/languages/fr.xml" lang="en"><![CDATA[Language file for french boards]]></link>
-			<link type="language" href="contrib/languages/fr.xml" lang="fr"><![CDATA[Fichier de langue pour les forums francophones]]></link>
-			<link type="contrib" href="contrib/updates/update_1_0_0-RC1_to_1_0_0-RC2.xml" lang="en"><![CDATA[Update the MOD from 1.0.0-RC1 to 1.0.0-RC2]]></link>
-			<link type="contrib" href="contrib/updates/update_1_0_0-RC1_to_1_0_0-RC2.xml" lang="fr"><![CDATA[Mette à jour le MOD de la version 1.0.0-RC1 à la version 1.0.0-RC2]]></link>
+			<link type="language" href="contrib/languages/fr.xml" lang="en">Language file for french boards</link>
+			<link type="language" href="contrib/languages/fr.xml" lang="fr">Fichier de langue pour les forums francophones</link>
+			<link type="contrib" href="contrib/updates/update_1_0_0-RC1_to_1_0_0-RC2.xml" lang="en">Update the MOD from 1.0.0-RC1 to 1.0.0-RC2</link>
+			<link type="contrib" href="contrib/updates/update_1_0_0-RC1_to_1_0_0-RC2.xml" lang="fr">Mette à jour le MOD de la version 1.0.0-RC1 à la version 1.0.0-RC2</link>
 		</link-group>
 	</header>
 	<action-group>
@@ -127,6 +127,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 				<action type="after-add"><![CDATA[		//------------------------------------------------
 		// Introduciator - Begin
 			'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+			'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
 			'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
 			'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
 			'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
@@ -202,7 +203,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 			<!-- ENDIF -->
 ]]></find>
 				<action type="after-add"><![CDATA[			<!-- Introduciator - Begin -->
-				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_VIEW_MEMBER}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" target="blank" alt="{L_INTRODUCIATOR_TOPIC_TITLE}" title="{T_INTRODUCIATOR_TEXT}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b></a><!-- ELSE --><b>{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}</b><!-- ENDIF --></ul></dd><!-- ENDIF -->
+				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_VIEW_MEMBER}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" target="blank" alt="{L_INTRODUCIATOR_TOPIC_TITLE}" title="{T_INTRODUCIATOR_TEXT}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b></a><!-- ELSE --><b><!-- IF S_INTRODUCIATOR_PENDING -->{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}<!-- ELSE -->{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}<!-- ENDIF --></b><!-- ENDIF --></ul></dd><!-- ENDIF -->
 			<!-- Introduciator - End -->
 ]]></action>
 			</edit>

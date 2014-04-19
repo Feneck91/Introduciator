@@ -365,6 +365,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
  *   <li>url : url to member introduction, empty string if user has no presentation.</li>
  *   <li>text : Text used to display the tooltip for the button.</li>
  *   <li>class : class to use for the button.</li>
+ *   <li>pending : true if message is pending approval, false else.</li>
  * </ul>.
  */
 function introduciator_get_user_infos($poster_id,$poster_name)
@@ -375,6 +376,7 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 	$url = false;
 	$text = '';
 	$class = '';
+	$pending = false;
 
 	if ($config['allow_introduciator'])
 	{
@@ -406,6 +408,7 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 			{
 				$text = $user->lang['INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'];
 				$class = 'introdpd-icon';
+				$pending = true;
 			}
 		}
 	}
@@ -415,6 +418,7 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 		'url'			=> $url,
 		'text'			=> $text,
 		'class'			=> $class,
+		'pending'		=> $pending,
 	);
 }
 
