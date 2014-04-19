@@ -370,7 +370,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
  */
 function introduciator_get_user_infos($poster_id,$poster_name)
 {
-	global $phpbb_root_path, $phpEx, $user, $introduciator_params, $auth;
+	global $phpbb_root_path, $phpEx, $user, $introduciator_params, $auth,$config;
 
 	$display = false;
 	$url = false;
