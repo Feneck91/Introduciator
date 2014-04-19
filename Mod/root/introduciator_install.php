@@ -109,13 +109,68 @@ $versions = array(
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL',1)),
 			array(INTRODUCIATOR_CONFIG_TABLE, 'ignored_users',		array('TEXT_UNI', '')),// Users list
 		),
-		// Groups list
+		// Add Groups list table
 		'table_add' => array(
 			array(INTRODUCIATOR_GROUPS_TABLE, array(
 				'COLUMNS' => array(
 					'fk_group'			=> array('UINT', NULL),
 				),
 			)),
+		),
+
+		//-------------------------------------------------------------
+		// Add new permission to module
+		//-------------------------------------------------------------
+		// Now to add some permission settings
+		'permission_add' => array(
+			array('a_introduciator_manage', true),
+		),
+
+		// 1: remove module
+		'module_remove' => array(
+			array('acp', 'ACP_INTRODUCIATOR_MOD',	'INTRODUCIATOR_GENERAL'),
+			array('acp', 'ACP_INTRODUCIATOR_MOD',	'INTRODUCIATOR_CONFIGURATION'),
+			array('acp', 'ACP_CAT_DOT_MODS',		'ACP_INTRODUCIATOR_MOD'),
+		),
+
+		// 2: add them back with new permission
+		//-------------------------------------------------------------
+		// Add the module in ACP under the .MOD tab
+		'module_add' => array(
+			// ACP_CAT_DOT_MODS is '.MOD' in acp
+			array('acp', 'ACP_CAT_DOT_MODS', array(
+				'module_enabled'	=> 1,
+				'module_display'	=> 1,
+				// ACP_INTRODUCIATOR_MOD is the name of the MOD
+				'module_langname'	=> 'ACP_INTRODUCIATOR_MOD',
+				'module_auth'		=> 'acl_a_introduciator_manage',	// Own permission
+				),
+			),
+
+			//---------------------------------------------------------------------
+			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
+
+			// Add Sub category 'General' into the ACP .MOD tab / Under ACP_INTRODUCIATOR_MOD
+			array('acp', 'ACP_INTRODUCIATOR_MOD', array(
+				'module_basename'	=> 'introduciator',
+				'module_langname'	=> 'INTRODUCIATOR_GENERAL',
+				'module_mode'		=> 'general',
+				'module_auth'		=> 'acl_a_introduciator_manage',	// Own permission
+				),
+			),
+
+			// Add Sub category 'Configuration' into the ACP .MOD tab / Under ACP_INTRODUCIATOR_MOD
+			array('acp', 'ACP_INTRODUCIATOR_MOD', array(
+				'module_basename'	=> 'introduciator',
+				'module_langname'	=> 'INTRODUCIATOR_CONFIGURATION',
+				'module_mode'		=> 'configuration',
+				'module_auth'		=> 'acl_a_introduciator_manage',	// Own permission
+				'after'				=> 'INTRODUCIATOR_GENERAL',
+				),
+			),
+
+			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
+			//---------------------------------------------------------------------
 		),
 	),
 

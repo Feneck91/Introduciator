@@ -266,9 +266,9 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 		{	// MOD is enabled and the user is not ignored, it can do all he wants
 			// Force forum id because it be moved while user delete the message
 			global $db;
-			
+
 			$params = introduciator_getparams();
-			
+
 			if ($mode == 'delete')
 			{	// Check if the user don't try to remove the first message of it's OWN introduce
 				// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
@@ -359,7 +359,13 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
  *
  * @param $poster_id The poster id
  * @param $poster_name The poster name
- * @return None.
+ * @return Array with :
+ * <ul>
+ *   <li>display : true if the user must introduce himself, false else.</li>
+ *   <li>url : url to member introduction, empty string if user has no presentation.</li>
+ *   <li>text : Text used to display the tooltip for the button.</li>
+ *   <li>class : class to use for the button.</li>
+ * </ul>.
  */
 function introduciator_get_user_infos($poster_id,$poster_name)
 {
