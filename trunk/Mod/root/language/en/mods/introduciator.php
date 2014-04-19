@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Please introduce youself into the topic: %s',
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'The Introduciator MOD is disabled. Enable it to use it!',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>To be able to post, you must <u>you must</u> introduce yourself</b>',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'For each new user, you must introduce yoursef to other “<a href="%forum_url%">%forum_name%</a>”<br/> Forum’s members'
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'For each new user, you must introduce yoursef to other members into “<a href="%forum_url%">%forum_name%</a>” forum<br/>'
 														.  'Only new post into introduce forum is allowed<br/>'
 														.  'For the introduce message creation, please follow the following rules that are displayed at the top of the introduce forum',
 	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>The rules are repeated here:</u></b>',
@@ -86,10 +86,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'				=> 'See the member presentation',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'The presentation of this member is pending approval',
 
-	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Member presentation',
-	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Go to member presentation',
-	'INTRODUCIATOR_VIEW_MEMBER_PENDING'					=> 'The presentation for this member is pending approval',
-	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'No presentation for this member avalaible',
+	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Member’s presentation',
+	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Go to member’s presentation',
+	'INTRODUCIATOR_VIEW_MEMBER_PENDING'					=> 'The member’s presentation is pending approval',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'No presentation avalaible for this member',
 ));
 
 ?>

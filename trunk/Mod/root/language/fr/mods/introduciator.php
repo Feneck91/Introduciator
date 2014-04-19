@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Veuillez vous présenter dans le Forum : %s',
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'Le MOD Présentation forcée est désactivé. Veuillez l’activer pour l’utiliser !',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</b>',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'Pour chaque nouvel utilisateur, il faut commencer par aller se présenter aux autres membres dans le Forum “<a href="%forum_url%">%forum_name%</a>”<br/>'
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'Pour chaque nouvel utilisateur, il faut commencer par aller se présenter aux autres membres dans le forum “<a href="%forum_url%">%forum_name%</a>”<br/>'
 														.  'Seul la création d’un nouveau message dans le forum de présentation est autorisé<br/>'
 														.  'Pour la création du message de présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation',
 	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>Les règles sont rappelées ici :</u></b>',
