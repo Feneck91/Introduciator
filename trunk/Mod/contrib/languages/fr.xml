@@ -16,7 +16,7 @@
 			<email><![CDATA[feneck91@free.fr]]></email>
 		</author>
 	</author-group>
-	<mod-version>1.0.0-rc2</mod-version>
+	<mod-version>1.0.0-RC2</mod-version>
 	<installation>
 		<level>easy</level>
 		<time>60</time>
@@ -25,7 +25,7 @@
 	<history>
 		<entry>
 			<date>2014-04-15</date>
-			<rev-version>1.0.0-rc1</rev-version>
+			<rev-version>1.0.0-RC1</rev-version>
 			<changelog lang="en">
 				<change><![CDATA[First official version of this mod]]></change>
 			</changelog>
@@ -35,7 +35,7 @@
 		</entry>
 		<entry>
 			<date>2014-04-16</date>
-			<rev-version>1.0.0-rc2</rev-version>
+			<rev-version>1.0.0-RC2</rev-version>
 			<changelog lang="en">
 				<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
 				<change><![CDATA[The language keys are now in a specific file]]></change>
