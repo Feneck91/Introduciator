@@ -88,7 +88,8 @@ $lang = array_merge($lang, array(
 
 	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Présentation du membre',
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Voir la présentation du membre',
-	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'Aucune présentation de ce membre disponible',
+	'INTRODUCIATOR_VIEW_MEMBER_PENDING'					=> 'La présentation est en cours d’approbation',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'Aucune présentation disponible',
 ));
 
 ?>

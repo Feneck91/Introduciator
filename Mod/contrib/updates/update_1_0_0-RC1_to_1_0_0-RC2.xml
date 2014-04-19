@@ -43,10 +43,10 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			</entry>
 		</history>
 		<link-group>
-			<link type="parent" href="../../introduciator_install.xml" lang="en"><![CDATA[Back to install file]]></link>
-			<link type="language" href="../../contrib/languages/fr.xml" lang="en" realname="fr"><![CDATA[Language file for french boards]]></link>
-			<link type="parent" href="../../introduciator_install.xml" lang="fr"><![CDATA[Retourner au fichier d'installation]]></link>
-			<link type="language" href="../../contrib/languages/fr.xml" lang="fr" realname="fr"><![CDATA[Fichier de langue pour les forums francophones]]></link>
+			<link type="parent" href="../../introduciator_install.xml" lang="en">Back to install file</link>
+			<link type="language" href="../../contrib/languages/fr.xml" lang="en" realname="fr">Language file for french boards</link>
+			<link type="parent" href="../../introduciator_install.xml" lang="fr">Retourner au fichier d'installation</link>
+			<link type="language" href="../../contrib/languages/fr.xml" lang="fr" realname="fr">Fichier de langue pour les forums francophones</link>
 		</link-group>
 	</header>
 	<action-group>
@@ -54,8 +54,10 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			<file from="root/adm/style/acp_introduciator.html" to="adm/style/acp_introduciator.html"/>
 			<file from="root/includes/functions_introduciator.php" to="includes/functions_introduciator.php"/>
 			<file from="root/includes/acp/acp_introduciator.php" to="includes/acp/acp_introduciator.php"/>
-			<file from="root/language/en/mods/info_acp_introduciator.php" to="language/en/mods/info_acp_introduciator.php"/>
 			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
+			<file from="root/language/en/mods/info_acp_introduciator.php" to="language/en/mods/info_acp_introduciator.php"/>
+			<file from="root/language/en/mods/introduciator.php" to="language/en/mods/introduciator.php"/>
+			<file from="root/language/en/mods/permissions_introduciator.php" to="language/en/mods/permissions_introduciator.php"/>
 		</copy>
 		<open src="memberlist.php">
 			<edit>
@@ -70,6 +72,20 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 				<inline-edit>
 					<inline-find><![CDATA[$user_id]]></inline-find>
 					<inline-action type="after-add"><![CDATA[,$username]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[S_INTRODUCIATOR_DISPLAY]]></find>
+				<action type="after-add"><![CDATA[			'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[<!-- IF S_INTRODUCIATOR_DISPLAY -->]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}]]></inline-find>
+					<inline-action type="replace-with"><![CDATA[<!-- IF S_INTRODUCIATOR_PENDING -->{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}<!-- ELSE -->{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}<!-- ENDIF -->]]></inline-action>
 				</inline-edit>
 			</edit>
 		</open>
