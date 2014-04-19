@@ -12,6 +12,7 @@
 		<description lang="en"><![CDATA[Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums.
 An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.
 
+● Administrator's permission to manage this MOD.
 ● Activate / Deactivate this MOD with only one option.
 ● Select forum where the members must introduce himself.
 ● Display redirection page if the member try to post somewhere else.
@@ -27,6 +28,7 @@ An explanation page can be displayed to the user when trying to post a message i
 		<description lang="fr"><![CDATA[Est utilisé pour forcer les utilisateurs à poster un message de présentation dans un forum spécifique avant d'être autorisé de poster dans les autres forums.
 Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de poster un message dans un autre forum afin de lui expliquer ce qu'il doit faire.
 
+● Permission d'administration pour gérer ce MOD.
 ● Activation / Désactivation de ce MOD via une option.
 ● Selection du forum où les membres doivent se présenter.
 ● Affichage d'une page de redirection si un membre tente de poster un message ailleurs.
@@ -52,7 +54,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 		<mod-version>1.0.0-RC2</mod-version>
 		<installation>
 			<level>intermediate</level>
-			<time>600</time>
+			<time>900</time>
 			<target-version>3.0.12</target-version>
 		</installation>
 		<history>
@@ -67,15 +69,19 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 				</changelog>
 			</entry>
 			<entry>
-				<date>2014-04-17</date>
+				<date>2014-04-19</date>
 				<rev-version>1.0.0-RC2</rev-version>
 				<changelog lang="en">
-					<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
+					<change><![CDATA[Add the administrator's permission to manage the Introduciator MOD]]></change>
+					<change><![CDATA[Add capability to configure permission with the mod parameters instead of forum's permission]]></change>
 					<change><![CDATA[The language keys are now in a specific file]]></change>
+					<change><![CDATA[The link into the profile now indicate if the user has pending approval presention]]></change>
 				</changelog>
 				<changelog lang="fr">
-					<change><![CDATA[Ajout de la possibilité de configurer les permissions via les paramètres du mod]]></change>
+					<change><![CDATA[Ajout d'une permission d'administration pour gérer le MOD Présentation Forcée]]></change>
+					<change><![CDATA[Ajout de la possibilité de configurer les permissions via les paramètres du mod au lieu des permissions du forum]]></change>
 					<change><![CDATA[Les clés de langue sont désormais dans un fichier spécifique]]></change>
+					<change><![CDATA[The lien dans le profile indique maintenant si l'utilisateur a une présentation en cours d'approbation]]></change>
 				</changelog>
 			</entry>
 		</history>

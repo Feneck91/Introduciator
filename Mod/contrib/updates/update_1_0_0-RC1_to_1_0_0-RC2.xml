@@ -30,15 +30,19 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 		</installation>
 		<history>
 			<entry>
-				<date>2014-04-17</date>
+				<date>2014-04-19</date>
 				<rev-version>1.0.0-RC2</rev-version>
 				<changelog lang="en">
-					<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
+					<change><![CDATA[Add the administrator's permission to manage the Introduciator MOD]]></change>
+					<change><![CDATA[Add capability to configure permission with the mod parameters instead of forum's permission]]></change>
 					<change><![CDATA[The language keys are now in a specific file]]></change>
+					<change><![CDATA[The link into the profile now indicate if the user has pending approval presention]]></change>
 				</changelog>
 				<changelog lang="fr">
-					<change><![CDATA[Ajout de la possibilité de configurer les permissions via les paramètres du mod]]></change>
+					<change><![CDATA[Ajout d'une permission d'administration pour gérer le MOD Présentation Forcée]]></change>
+					<change><![CDATA[Ajout de la possibilité de configurer les permissions via les paramètres du mod au lieu des permissions du forum]]></change>
 					<change><![CDATA[Les clés de langue sont désormais dans un fichier spécifique]]></change>
+					<change><![CDATA[The lien dans le profile indique maintenant si l'utilisateur a une présentation en cours d'approbation]]></change>
 				</changelog>
 			</entry>
 		</history>
