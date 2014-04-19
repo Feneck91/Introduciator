@@ -72,13 +72,6 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 				</inline-edit>
 			</edit>
 			<edit>
-				<find><![CDATA[$data_introduciator = introduciator_get_user_infos($user_id);]]></find>
-				<inline-edit>
-					<inline-find><![CDATA[$user_id]]></inline-find>
-					<inline-action type="after-add"><![CDATA[,$username]]></inline-action>
-				</inline-edit>
-			</edit>
-			<edit>
 				<find><![CDATA[S_INTRODUCIATOR_DISPLAY]]></find>
 				<action type="after-add"><![CDATA[			'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
 ]]></action>
