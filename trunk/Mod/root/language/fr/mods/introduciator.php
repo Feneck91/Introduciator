@@ -48,7 +48,7 @@ $lang = array_merge($lang, array(
 
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Informations',
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'Par défaut le MOD est désactivé, vous devez l’activer et le configurer en allant dans <strong>ACP >> .MODS >> Présentation Forcée >> Configuration</strong>.
-													<br/>N’oubliez pas de paramètrer le nouvelle permission <strong>Doit se présenter</strong> dans l’ACP : « Permissions des utilisateurs »',
+													<br/>N’oubliez pas de paramétrer le nouvelle permission <strong>Doit se présenter</strong> dans l’ACP : « Permissions des utilisateurs »',
 
 	'INTRODUCIATOR_MOD'							=> 'Mod Présentation forcée',
 	'INTRODUCIATOR_MOD_EXPLAIN'					=> 'UMIL effectuera automatiquement, dans la base de données, tous les changements nécessaires pour le MOD Présentation forcée.',
