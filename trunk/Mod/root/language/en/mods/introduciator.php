@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'		=> 'You are not allowed to delete the first post of this introduction! You can delete this presentation by deleting the topic!',
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Please introduce youself into the topic: %s',
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'The Introduciator MOD is disabled. Enable it to use it!',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>To be able to post, you must <u>you must</u> introduce yourself</b>',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>To be able to post, <u>you must</u> introduce yourself</b>',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'For each new user, you must introduce yoursef to other members into “<a href="%forum_url%">%forum_name%</a>” forum<br/>'
 														.  'Only new post into introduce forum is allowed<br/>'
 														.  'For the introduce message creation, please follow the following rules that are displayed at the top of the introduce forum',
