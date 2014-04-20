@@ -51,7 +51,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>1.0.0-RC2</mod-version>
+		<mod-version>1.0.0</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>900</time>
@@ -84,12 +84,24 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 					<change><![CDATA[The lien dans le profile indique maintenant si l'utilisateur a une présentation en cours d'approbation]]></change>
 				</changelog>
 			</entry>
+			<entry>
+				<date>2014-04-20</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Change version only]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Changement de la version uniquement]]></change>
+				</changelog>
+			</entry>
 		</history>
 		<link-group>
 			<link type="language" href="contrib/languages/fr.xml" lang="en">Language file for french boards</link>
 			<link type="language" href="contrib/languages/fr.xml" lang="fr">Fichier de langue pour les forums francophones</link>
 			<link type="contrib" href="contrib/updates/update_1_0_0-RC1_to_1_0_0-RC2.xml" lang="en">Update the MOD from 1.0.0-RC1 to 1.0.0-RC2</link>
 			<link type="contrib" href="contrib/updates/update_1_0_0-RC1_to_1_0_0-RC2.xml" lang="fr">Mette à jour le MOD de la version 1.0.0-RC1 à la version 1.0.0-RC2</link>
+			<link type="contrib" href="contrib/updates/update_1_0_0-RC2_to_1_0_0.xml" lang="en">Update the MOD from 1.0.0-RC2 to 1.0.0</link>
+			<link type="contrib" href="contrib/updates/update_1_0_0-RC2_to_1_0_0.xml" lang="en">Mette à jour le MOD de la version 1.0.0-RC2 à la version 1.0.0</link>
 		</link-group>
 	</header>
 	<action-group>
