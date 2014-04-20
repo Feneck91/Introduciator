@@ -40,11 +40,8 @@ if (empty($lang) || !is_array($lang))
 
 // Adding the permissions
 $lang = array_merge($lang, array(
-	// Permissions Utilisateurs
-	'acl_u_must_introduce'			=> array('lang' => 'Doit se présenter',						'cat' => 'post'),
-
-	// Permission d'Administrateur (gestion du MOD)
-	'acl_a_introduciator_manage'	=> array('lang' => 'Peut gérer le MOD Présentation Forcée',	'cat' => 'misc'),
+	// User Permissions
+	'acl_u_must_introduce'		=> array('lang' => 'Doit se présenter', 'cat' => 'post'),
 ));
 
 ?>

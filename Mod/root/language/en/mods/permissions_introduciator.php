@@ -41,10 +41,7 @@ if (empty($lang) || !is_array($lang))
 // Adding the permissions
 $lang = array_merge($lang, array(
 	// User Permissions
-	'acl_u_must_introduce'			=> array('lang' => 'Must introduce himself',				'cat' => 'post'),
-
-	// Admin Permissions
-	'acl_a_introduciator_manage'	=> array('lang' => 'Can manage Introduciator Donation MOD',	'cat' => 'misc'),
+	'acl_u_must_introduce'		=> array('lang' => 'Must introduce himself', 'cat' => 'post'),
 ));
 
 ?>

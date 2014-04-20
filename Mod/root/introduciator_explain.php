@@ -36,12 +36,11 @@ if ($user->data['user_id'] == ANONYMOUS)
 // Load langage
 $user->setup('mods/introduciator');
 
-global $config;
-if ($config['allow_introduciator'])
-{	// Title messagte
-	// Load MOD configuration
-	$params = introduciator_getparams();
+// Load MOD configuration
+$params = introduciator_getparams();
 
+if ($params['is_enabled'])
+{	// Title messagte
 	$forum_name = '';
 	$forum_rules = array();
 

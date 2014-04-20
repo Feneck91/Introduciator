@@ -48,7 +48,7 @@ $lang = array_merge($lang, array(
 
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Informations',
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'Par défaut le MOD est désactivé, vous devez l’activer et le configurer en allant dans <strong>ACP >> .MODS >> Présentation Forcée >> Configuration</strong>.
-													<br/>N’oubliez pas de paramétrer le nouvelle permission <strong>Doit se présenter</strong> dans l’ACP : « Permissions des utilisateurs »',
+													<br/>N’oubliez pas de paramètrer le nouvelle permission <strong>Doit se présenter</strong> dans l’ACP : « Permissions des utilisateurs »',
 
 	'INTRODUCIATOR_MOD'							=> 'Mod Présentation forcée',
 	'INTRODUCIATOR_MOD_EXPLAIN'					=> 'UMIL effectuera automatiquement, dans la base de données, tous les changements nécessaires pour le MOD Présentation forcée.',
@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Veuillez vous présenter dans le Forum : %s',
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'Le MOD Présentation forcée est désactivé. Veuillez l’activer pour l’utiliser !',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</b>',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'Pour chaque nouvel utilisateur, il faut commencer par aller se présenter aux autres membres dans le forum “<a href="%forum_url%">%forum_name%</a>”<br/>'
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'Pour chaque nouvel utilisateur, il faut commencer par aller se présenter aux autres membres dans le Forum “<a href="%forum_url%">%forum_name%</a>”<br/>'
 														.  'Seul la création d’un nouveau message dans le forum de présentation est autorisé<br/>'
 														.  'Pour la création du message de présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation',
 	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>Les règles sont rappelées ici :</u></b>',
@@ -88,8 +88,7 @@ $lang = array_merge($lang, array(
 
 	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Présentation du membre',
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Voir la présentation du membre',
-	'INTRODUCIATOR_VIEW_MEMBER_PENDING'					=> 'La présentation est en cours d’approbation',
-	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'Aucune présentation disponible',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'Aucune présentation de ce membre disponible',
 ));
 
 ?>
