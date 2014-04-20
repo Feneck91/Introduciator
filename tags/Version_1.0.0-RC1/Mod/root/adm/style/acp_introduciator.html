@@ -1,0 +1,166 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- IF S_GENERAL_PAGES -->
+	<h1>{L_INTRODUCIATOR_GP_TITLE}</h1>
+	{L_INTRODUCIATOR_GP_TITLE_EXPLAIN}
+
+	<!-- IF S_INTRODUCIATOR_VERSIONCHECK_FAIL -->
+		<div class="errorbox notice">
+			<p>{L_VERSIONCHECK_FAIL}</p>
+			<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a></p>
+		</div>
+	<!-- ELSEIF not S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+		<div class="errorbox">
+			<p>{L_INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE}</p>
+			<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a> &middot; <a href="{U_INTRODUCIATOR_VERSIONCHECK}">{L_MORE_INFORMATION}</a></p>
+		</div>
+	<!-- ENDIF -->
+
+	<table cellspacing="1">
+		<caption>{L_INTRODUCIATOR_GP_STATS}</caption>
+		<col class="col1" /><col class="col2" />
+		<thead>
+			<tr>
+				<th>{L_STATISTIC}</th>
+				<th>{L_VALUE}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{L_INTRODUCIATOR_GP_INSTALL_DATE}</td>
+				<td><strong>{INTRODUCIATOR_INSTALL_DATE}</strong></td>
+			</tr>
+			<tr>
+				<td>{L_INTRODUCIATOR_GP_VERSION}</td>
+				<td>
+				<!-- IF S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+					<strong style="color: #228822;">{INTRODUCIATOR_VERSION}</strong> [&nbsp;<a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>&nbsp;]
+				<!-- ELSE -->
+					<strong><a href="{U_INTRODUCIATOR_VERSIONCHECK}" style="color: #BC2A4D;" title="{L_MORE_INFORMATION}">{INTRODUCIATOR_VERSION}</a></strong> [&nbsp;<a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>&nbsp;]
+				<!-- ENDIF -->
+				</td>
+			</tr>
+		</tbody>
+	</table>
+<!-- ENDIF -->
+
+<!-- IF S_CONFIGURATION_PAGES -->
+	<h1>{L_INTRODUCIATOR_CP_TITLE}</h1>
+	{L_INTRODUCIATOR_CP_TITLE_EXPLAIN}
+	<form id="acp_introduciator" method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend>{L_GENERAL_OPTIONS}</legend>
+			<!--
+			     Activate / Desactivate MOD
+			-->
+			<dl>
+				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN}</span></dt>
+				<dd><label><input id="mod_activated" name="mod_activated" type="radio" class="radio" value="1"<!-- IF MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="mod_activated" type="radio" class="radio" value="0"<!-- IF not MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<!--
+			     Activate / Desactivate Check delete first post
+			-->
+			<dl>
+				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN}</span></dt>
+				<dd><label><input id="mod_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="check_delete_first_post_activated" type="radio" class="radio" value="0"<!-- IF not CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<!--
+			     Forum Choice (where the user MUST introduce himself
+			-->
+			<dl>
+				<dt><label for="forum_choice">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN}</span></dt>
+				<dd>
+					<select name="forum_choice" style="width: 100%;" id="forum_choice" size="1">
+					<!-- BEGIN forums -->
+						<option value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
+					<!-- END items -->
+					</select>
+				</dd>
+			</dl>
+			<!--
+			     Display explanation page ?
+			-->
+			<dl>
+				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN}</span></dt>
+				<dd><label><input id="display_explanation" name="display_explanation" type="radio" class="radio" value="1"<!-- IF DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<input  type="hidden" name="action" value="update" />
+			<input  type="hidden" name="id" value="{id}" />
+		</fieldset>
+		<fieldset>
+			<!--
+			     --------------------------- Manage explanation texts ----------------------------
+			-->
+			<legend>{L_GENERAL_OPTIONS_EXPLANATION_TEXTS}</legend>
+			<!--
+			     General explanation
+			-->
+			<span>{L_GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN}</span>
+			<hr/>
+			<!--
+			     Title text
+			-->
+			<dl>
+				<dt><label for="explanation_message_title">{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_title" name="explanation_message_title" rows="5" cols="60">{EXPLANATION_MESSAGE_TITLE}</textarea></dd>
+			</dl>
+			<!--
+			     Explanation text
+			-->
+			<dl>
+				<dt><label for="explanation_message_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_text" name="explanation_message_text" rows="10" cols="60">{EXPLANATION_MESSAGE_TEXT}</textarea></dd>
+			</dl>
+			<!--
+			     Activate / Desactivate rules display
+			-->
+			<dl>
+				<dt><label for="explanation_display_rules_enabled">{L_INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN}</span></dt>
+				<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"<!-- IF EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"<!-- IF not EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				</dd>
+			</dl>
+			<!--
+			     Rule title text
+			-->
+			<dl>
+				<dt><label for="explanation_message_rules_title">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_rules_title" name="explanation_message_rules_title" rows="5" cols="60">{EXPLANATION_MESSAGE_RULES_TITLE}</textarea></dd>
+			</dl>
+			<!--
+			     Explanation text
+			-->
+			<dl>
+				<dt><label for="explanation_message_rules_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN}</span></dt>
+				<dd><textarea id="explanation_message_rules_text" name="explanation_message_rules_text" rows="10" cols="60">{EXPLANATION_MESSAGE_RULES_TEXT}</textarea></dd>
+			</dl>
+			<!--
+			     --------------------------- Posting ---------------------------------------------
+			-->
+		</fieldset>
+		<!-- IF S_EDIT_ERROR -->
+		<fieldset class="errorbox">
+			<label for="item_filter_tags">{ITEM_EDIT_ERROR}</label>
+		</fieldset>
+		<!-- ENDIF -->
+		<fieldset>
+			<p class="submit-buttons">
+				{S_HIDDEN_FIELDS}
+				<input class="button1" type="submit" id="submit" name="update" value="{L_SUBMIT}" />&nbsp;
+				<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+				{S_FORM_TOKEN}
+			</p>
+		</fieldset>
+			<!--
+			     --------------------------- Hidden fields ---------------------------------------
+			-->
+	</form>
+<!-- ENDIF -->
+
+<!-- INCLUDE overall_footer.html -->
