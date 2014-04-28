@@ -18,36 +18,39 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
+global $phpbb_root_path, $phpEx;
+require_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+
 /**
 * @package acp
 */
 class acp_introduciator
 {
 	// URL of web site where download the latest version file info
-	private $url_version_check		= 'feneck91.free.fr';
+	var $url_version_check		= 'feneck91.free.fr';
 	// Folder in web site where download the latest version file info
-	private $folder_version_check	= '/phpbb';
+	var $folder_version_check	= '/phpbb';
 	// File name to download the latest version file info
-	private $file_version_check		= 'introduciator_version.txt';
+	var $file_version_check		= 'test_introduciator_version.txt';
+
 	// Action
 	var $u_action;
 
 	function main($id, $mode)
 	{
-		global $template, $user, $phpbb_root_path, $phpEx, $config;
+		global $template, $user, $phpEx, $config;
 
-		include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 		$user->add_lang('mods/info_acp_introduciator');
-
 		$this->tpl_name = 'acp_introduciator'; // Template file : adm/style/introduciator/acp_introduciator.htm
 		$this->page_title = $user->lang['ACP_INTRODUCIATOR_MOD']; // Page Title
+
 		// Add a secret token to the form
 		// This functions adds a secret token to any form, a token which should be checked after
 		// submission with the check_form_key function to ensure that the received data is the same as the submitted.
 		$form_key = 'acp_introduciator';
 		add_form_key($form_key);
 
-		$submit = (isset($_POST['submit'])) ? true : false;
+xdebug_break();
 		$action	= request_var('action', '');
 
 		switch ($mode)
@@ -63,7 +66,6 @@ class acp_introduciator
 				{
 					$template->assign_vars(array(
 						'S_INTRODUCIATOR_VERSIONCHECK_FAIL'	=> true,
-						'L_VERSIONCHECK_FAIL'				=> $user->lang['VERSIONCHECK_FAIL'],
 					));
 				}
 				else
@@ -72,13 +74,17 @@ class acp_introduciator
 
 					$template->assign_vars(array(
 						'S_INTRODUCIATOR_VERSION_UP_TO_DATE'	=> phpbb_version_compare(trim($latest_version_info[0]), $config['introduciator_mod_version'], '<='),
-						'U_INTRODUCIATOR_VERSIONCHECK'			=> $latest_version_info[1],
+						'U_INTRODUCIATOR_VERSIONCHECK'			=> $this->get_update_information('url-',$latest_version_info),
+						'L_INTRODUCIATOR_UPDATE_VERSION'		=> trim($latest_version_info[0]),
+						'L_INTRODUCIATOR_UPDATE_FILENAME'		=> htmlspecialchars(trim($latest_version_info[2])),
+						'U_INTRODUCIATOR_UPDATE_URL'			=> htmlspecialchars(trim($latest_version_info[3])),
+						'L_INTRODUCIATOR_UPDATE_INFORMATION'	=> $this->get_update_information('info-',$latest_version_info),
 					));
 				}
 
 				$template->assign_vars(array(
 					// Display general page content into ACP .MOD tab
-					'S_GENERAL_PAGES'						=> $mode,
+					'S_GENERAL_PAGES'						=> true,
 
 					// Current version of this MOD
 					'INTRODUCIATOR_VERSION'					=> $config['introduciator_mod_version'],
@@ -97,25 +103,22 @@ class acp_introduciator
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
 				// Is Add action ?
-				$action = request_var('action', false);
 				$introduciator_id = 0; // 0 for new, else it contains the ID
 
 				// Display configuration page
 				$template->assign_vars(array(
 					// Display Configuration page content into ACP .MOD tab
-					'S_CONFIGURATION_PAGES'	=> $mode,
+					'S_CONFIGURATION_PAGES'	=> true,
 				));
 
 				// If no action, display configuration
-				if ($action === false)
+				if (empty($action))
 				{	// no action or update current
 					$dp_data = array();
-					$s_hidden_fields = array();
 
 					$params = introduciator_getparams();
 
 					$template->assign_vars(array(
-						'S_HIDDEN_FIELDS'						=> $s_hidden_fields,
 						'MOD_ACTIVATED'							=> $config['allow_introduciator'],
 						'CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post_enabled'],
 						'DISPLAY_EXPLANATION_ENABLED'			=> $params['is_explanation_enabled'],
@@ -137,7 +140,6 @@ class acp_introduciator
 					$this->add_all_groups();
 
 					$s_hidden_fields = build_hidden_fields(array(
-							'forum_id'		=> $params['fk_forum_id'],		// Selected forum
 							'action'		=> 'update',					// Action
 							'id'			=> $params['introduciator_id'],	// Id of row for hident input named "id"
 						));
@@ -153,17 +155,17 @@ class acp_introduciator
 						case 'update' :
 							// User has request an update : write it into database
 							// Update Database
-							$is_enabled								= (request_var('mod_activated', 0) != 0);
-							$is_check_delete_first_post_activated	= (request_var('check_delete_first_post_activated', 0) != 0);
-							$fk_forum_id							= (int) request_var('forum_choice', 0);
-							$is_explanation_enabled					= (request_var('display_explanation', 0) != 0);
-							$is_use_permissions						= (request_var('is_use_permissions', 0) != 0);
-							$is_include_groups						= (request_var('include_groups', 0) != 0);
+							$is_enabled								= (bool) request_var('mod_activated', false);
+							$is_check_delete_first_post_activated	= (bool) request_var('check_delete_first_post_activated', false);
+							$fk_forum_id							= (int)  request_var('forum_choice', 0);
+							$is_explanation_enabled					= (bool) request_var('display_explanation', false);
+							$is_use_permissions						= (bool) request_var('is_use_permissions', false);
+							$is_include_groups						= (bool) request_var('include_groups', false);
 							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
 							$ignored_users							= utf8_normalize_nfc(request_var('ignored_users', ''));
 							$explanation_message_title				= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
 							$explanation_message_text				= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
-							$explanation_display_rules_enabled		= (request_var('explanation_display_rules_enabled', 0) != 0);
+							$explanation_display_rules_enabled		= (bool) request_var('explanation_display_rules_enabled', false);
 							$explanation_message_rules_title		= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
 							$explanation_message_rules_text			= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
 
@@ -193,24 +195,20 @@ class acp_introduciator
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
 									WHERE introduciator_id = ' . (int) request_var('id', 0);
 							$db->sql_query($sql);
-							
-							
+
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
-							$sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;
+							$sql = 'TRUNCATE TABLE ' . INTRODUCIATOR_GROUPS_TABLE;
 							$db->sql_query($sql);
 
 							// 2> Add all entries
+							$values = array();
 							foreach ($groups as &$group)
 							{	// Create elements to add by row
-								$sql_ary = array(
-									'fk_group'				=> (int) $group,
-								);
-								// Create SQL request
-								$sql = 'INSERT INTO ' . INTRODUCIATOR_GROUPS_TABLE . ' ' . $db->sql_build_array('INSERT', $sql_ary);
-								// Add row
-								$db->sql_query($sql);
+								$values[] = array('fk_group' => (int) $group);
 							}
+							// Create SQL request
+							$db->sql_multi_insert(INTRODUCIATOR_GROUPS_TABLE, $values);
 
 							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
 							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
@@ -228,30 +226,32 @@ class acp_introduciator
 	{
 		global $db, $template, $user;
 
-		if ($id_parent == 0)
+		if ($id_parent === 0)
 		{	// Add deactivation item
 			$template->assign_block_vars('forums', array(
-			'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_NO_FORUM_CHOICE'],
-			'FORUM_ID'		=> (int) 0,
-			'SELECTED'		=> ($fk_selected_forum_id == 0),
-			'TOOLTIP'		=> '',
-			));
+				'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_NO_FORUM_CHOICE'],
+				'FORUM_ID'		=> (int) 0,
+				'SELECTED'		=> ($fk_selected_forum_id === 0),
+				'CAN_SELECT'	=> true,
+				'TOOLTIP'		=> $user->lang['INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'],
+				));
 		}
 
 		// Add all forums
-		$sql = 'SELECT forum_name,forum_id,forum_desc
+		$sql = 'SELECT forum_name,forum_id,forum_desc,forum_type
 				FROM ' . FORUMS_TABLE . '
-				WHERE parent_id = ' . $id_parent;
+				WHERE parent_id = ' . (int) $id_parent;
 
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('forums', array(
-			'FORUM_NAME'	=> str_repeat("&nbsp;",4 * $level) . $row['forum_name'],
-			'FORUM_ID'		=> (int) $row['forum_id'],
-			'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
-			'TOOLTIP'		=> $row['forum_desc'],
-			));
+				'FORUM_NAME'	=> str_repeat("&nbsp;",4 * $level) . $row['forum_name'],
+				'FORUM_ID'		=> (int) $row['forum_id'],
+				'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
+				'CAN_SELECT'	=> ((int) $row['forum_type']) == FORUM_POST,
+				'TOOLTIP'		=> $row['forum_desc'],
+				));
 			$this->add_all_forums($fk_selected_forum_id,$row['forum_id'],$level + 1);
 		}
 		$db->sql_freeresult($result);
@@ -319,6 +319,45 @@ class acp_introduciator
 		}
 
 		return $info;
+	}
+
+	/**
+	 * Get the update information string from text loaded from update web site.
+	 *
+	 * The language is written at the beginning of each lines, like [en] ou [fr].
+	 *
+	 * @param string $tag the tag to found. Searching [$tag{language name}] at the beginning of the line.
+	 * @param array $latest_version_info Array of string, the informations begins at line 2.
+	 * @return The string into the correct language. English if the current language is not found.
+	 */
+	function get_update_information($tag,$latest_version_info)
+	{
+		global $tag_and_lang,$tag_and_lang_en,$user,$tag_len;
+
+		$information = $user->lang['INTRODUCIATOR_NO_UPDATE_INFO_FOUND'];
+
+		$tag_and_lang = '[' . $tag . $user->lang['USER_LANG'] . ']';
+		$tag_and_lang_en =  '[' . $tag . 'en]';
+		$tag_len = strlen($tag_and_lang_en);
+
+		for ($index = 4;$index < sizeof($latest_version_info);++$index)
+		{
+			if (strlen($latest_version_info[$index]) > $tag_len)
+			{
+				$line_lang = substr($latest_version_info[$index],0,$tag_len);
+				if ($line_lang === $tag_and_lang)
+				{
+					$information = substr($latest_version_info[$index],$tag_len,strlen($latest_version_info[$index]) - $tag_len);
+					break; // Found, quit the for
+				}
+				else if ($line_lang === $tag_and_lang_en)
+				{	// English by default if found
+					$information = substr($latest_version_info[$index],$tag_len,strlen($latest_version_info[$index]) - $tag_len);
+				}
+			}
+		}
+
+		return str_replace('\\n','<br/>',htmlspecialchars($information));
 	}
 }
 ?>

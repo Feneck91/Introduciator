@@ -65,6 +65,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_STATS'						=> 'Introduciator statistics',
 	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Install date of <strong>Introduciator</strong> MOD:',
 	'INTRODUCIATOR_GP_VERSION'						=> '<strong>Introduciator</strong> MOD version:',
+	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'			=> 'Latest version:',
+	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'				=> 'Link to download:',
+	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'			=> 'Update informations:',
 ));
 
 /**
@@ -91,12 +94,12 @@ $lang = array_merge($lang, array(
 																	.  '<li><b>%forum_post%</b> : url to write new post into introduce forum</li>'
 																	.  '</ul>',
 	// Sub titles
-	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"								=> 'Activate MOD',
-	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"						=> 'Used to enabled or disabled this MOD.',
-	"INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED"			=> 'Authorize the MOD to verify the deletion of first presentation post into introduce forum',
-	"INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN"=> 'When this option is on, the MOD prevents to delete the first post that create the topic into introduce forum'.
-																	   '<br/>Even moderators or administrators don’t have this permission to be sure that the first post author is the presentation if this member. However, it remains possible to delete the topic if the permissions allow it.' .
-																	   '<br/>You can deactivate this option but it can make strange behaviors : a member could also have several presentations, in this case, the first one is taken into account.',
+	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Activate MOD',
+	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Used to enable or disable this MOD.',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Authorize the MOD to verify the deletion of first introduction post into introduce forum',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'When this option is on, the MOD prevents to delete the first post that create the topic into introduce forum'.
+																	   '<br/>Even moderators or administrators don’t have this permission to be sure that the first post author is the introduction of this member. However, it remains possible to delete the topic if the permissions allow it.' .
+																	   '<br/>You can deactivate this option but it can make strange behaviors : a member could also have several introductions, in this case, the first one is taken into account.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Forum choice where the user must to introduce himself',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Is used to know with forum should be tested to know if the user has already made it’s introduction or not.',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Display explanation page',
@@ -132,7 +135,9 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
+	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the MOD is desactivated',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this MOD is enabled your must choose a forum!',
+	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'No update information avalaible',
 ));
 
 /**

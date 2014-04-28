@@ -23,9 +23,9 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',	'1.0.0');
-define('INTRODUCIATOR_CONFIG_TABLE',	$table_prefix . 'introduciator_config');
-define('INTRODUCIATOR_GROUPS_TABLE',	$table_prefix . 'introduciator_groups');
+define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.0');
+define('INTRODUCIATOR_CONFIG_TABLE',		$table_prefix . 'introduciator_config');
+define('INTRODUCIATOR_GROUPS_TABLE',		$table_prefix . 'introduciator_groups');
 
 /**
  * Check if a group is selected.
@@ -94,7 +94,7 @@ function replace_all_by($arr_fields,$arr_replace_by)
  * @param $topic_approved If this function returns true, it contains true / false if the topic is approved or not
  * @return true if the user already post at least one message into this forum, false else
  */
-function is_user_has_post_into_introduciator_topic($forum_id,$user_id,&$topic_id,&$first_post_id,&$topic_approved)
+function is_user_post_into_forum($forum_id,$user_id,&$topic_id,&$first_post_id,&$topic_approved)
 {
 	global $db; // Database
 
@@ -153,8 +153,7 @@ function introduciator_getparams()
 {
 	global $db; // Database
 
-	$sql = 'SELECT *
-			FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
+	$sql = 'SELECT * FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
 	$result = $db->sql_query($sql);
 	$row = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
@@ -214,8 +213,8 @@ function is_user_must_introduce_himself($poster_id,$authorisations,$poster_name,
 			global $db;
 
 			$sql = 'SELECT user_id, username, user_permissions, user_type
-				FROM ' . USERS_TABLE . '
-				WHERE user_id = ' . $poster_id;
+					FROM ' . USERS_TABLE . '
+					WHERE user_id = ' . (int) $poster_id;
 			$result = $db->sql_query($sql);
 			$userdata = $db->sql_fetchrow($result);
 			$db->sql_freeresult($result);
@@ -256,11 +255,11 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 {
 	global $phpbb_root_path, $phpEx, $template, $auth, $config;
 
-	$poster_id = $user->data['user_id'];
+	$poster_id = (int) $user->data['user_id'];
 	$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
 	$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
 
-	if ($poster_id != ANONYMOUS && $auth->acl_get('u_'))
+	if ($poster_id != ANONYMOUS)
 	{	// User is logged and have user authorization
 		if ($config['allow_introduciator'])
 		{	// MOD is enabled and the user is not ignored, it can do all he wants
@@ -273,11 +272,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 			{	// Check if the user don't try to remove the first message of it's OWN introduce
 				// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
 				// else he needs to delete all the topic
-				if (!empty($post_id)
-					&& $params['fk_forum_id'] == $forum_id
-					&& $params['is_check_delete_first_post_enabled']
-					&& $user->data['is_registered']
-					&& $auth->acl_gets('f_delete', 'm_delete', $forum_id))
+				if (!empty($post_id) && $params['fk_forum_id'] == $forum_id && $params['is_check_delete_first_post_enabled'] && $user->data['is_registered'] && $auth->acl_gets('f_delete', 'm_delete', $forum_id))
 				{	// This post is into the introduce forum
 					// Find the topic identifier
 					$sql = 'SELECT topic_id,poster_id
@@ -288,9 +283,9 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 					$row = $db->sql_fetchrow($result);
 					$db->sql_freeresult($result);
 
-					$topic_id = $row['topic_id'];
-					$first_poster_id = $row['poster_id'];	// <-- $poster_id could be <> from current user id
-															// It's this case when moderator try to delete post of another user
+					$topic_id = (int) $row['topic_id'];
+					$first_poster_id = (int) $row['poster_id'];	// <-- $poster_id could be <> from current user id
+																// It's this case when moderator try to delete post of another user
 					if (!empty($topic_id) && !empty($first_poster_id))
 					{	// Check if this post is the first one, ie this is the post that created the Topic
 						$topic_first_post_id = (int) $post_data['topic_first_post_id'];
@@ -318,7 +313,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 				$first_post_id = 0;
 				$topic_approved = false;
 
-				if (!is_user_has_post_into_introduciator_topic($params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
+				if (!is_user_post_into_forum($params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
 				{	// No post into the introduce topic
 					if ((in_array($mode,array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
 					{
@@ -393,7 +388,7 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 			$first_post_id = 0;
 			$topic_approved = false;
 
-			if (!is_user_has_post_into_introduciator_topic($introduciator_params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
+			if (!is_user_post_into_forum($introduciator_params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
 			{	// No post into the introduce topic
 				$text = $user->lang['INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'];
 				$class = 'introdno-icon';

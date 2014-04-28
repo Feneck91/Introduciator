@@ -40,6 +40,20 @@
 				<!-- ENDIF -->
 				</td>
 			</tr>
+		<!-- IF not S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+			<tr>
+				<td>{L_INTRODUCIATOR_GP_UPDATE_VERSION_TITLE}</td>
+				<td>{L_INTRODUCIATOR_UPDATE_VERSION}</td>
+			</tr>
+			<tr>
+				<td>{L_INTRODUCIATOR_GP_UPDATE_URL_TITLE}</td>
+				<td><a href="{U_INTRODUCIATOR_UPDATE_URL}" title="{L_INTRODUCIATOR_UPDATE_FILENAME}">{L_INTRODUCIATOR_UPDATE_FILENAME}</a></td>
+			</tr>
+			<tr>
+				<td>{L_INTRODUCIATOR_GP_UPDATE_INFOS_TITLE}</td>
+				<td>{L_INTRODUCIATOR_UPDATE_INFORMATION}</td>
+			</tr>
+		<!-- ENDIF -->
 		</tbody>
 	</table>
 <!-- ENDIF -->
@@ -63,7 +77,7 @@
 			     Activate / Desactivate Check delete first post
 			-->
 			<dl>
-				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN}</span></dt>
+				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN}</span></dt>
 				<dd><label><input id="mod_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 					<label><input  name="check_delete_first_post_activated" type="radio" class="radio" value="0"<!-- IF not CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
@@ -76,7 +90,7 @@
 				<dd>
 					<select name="forum_choice" style="width: 100%;" id="forum_choice" size="1">
 					<!-- BEGIN forums -->
-						<option value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
+						<option <!-- IF not forums.CAN_SELECT -->disabled class="disabled-option"<!-- ENDIF --> value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
 					<!-- END items -->
 					</select>
 				</dd>
@@ -90,8 +104,7 @@
 					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
-			<input  type="hidden" name="action" value="update" />
-			<input  type="hidden" name="id" value="{id}" />
+			{S_HIDDEN_FIELDS}
 		</fieldset>
 			<!--
 			     --------------------------- Manage groups and users -----------------------------
