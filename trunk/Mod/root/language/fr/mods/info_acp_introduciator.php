@@ -65,6 +65,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_STATS'						=> 'Statistiques du MOD Présentation forcée',
 	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Date d’installation du MOD <strong>Présentation forcée</strong> :',
 	'INTRODUCIATOR_GP_VERSION'						=> 'Version du MOD <strong>Présentation forcée</strong> :',
+	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'			=> 'Dernière version :',
+	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'				=> 'Lien de téléchargement :',
+	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'			=> 'Information de mise à jour :',
 ));
 
 /**
@@ -91,10 +94,10 @@ $lang = array_merge($lang, array(
 																	.  '<li><b>%forum_post%</b> : url pour l’écriture d’un nouveau post dans le forum de présentation</li>'
 																	.  '</ul>',
 	// Sous-titres
-	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED"								=> 'Activer le MOD',
-	"INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN"						=> 'Utilisé pour activer ou désactiver ce MOD.',
-	"INTRODUCIATOR_CP_ED_CHECK_DELETE_FIRST_POST_ACTIVATED"			=> 'Autorise le MOD à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
-	"INTRODUCIATOR_CP_ED__CHECK_DELETE_FIRST_POST_ACTIVATED_EXPLAIN"=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation'.
+	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Activer le MOD',
+	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Utilisé pour activer ou désactiver ce MOD.',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Autorise le MOD à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation'.
 																	   '<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.' .
 																	   '<br/>Vous pouvez désactiver cette option mais il peut en résulter des comportements étranges : un membre peut avoir plusieurs présentations, dans ce cas le premier trouvé est pris en compte.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Choix du forum où l’utilisateur doit se présenter',
@@ -132,7 +135,9 @@ $lang = array_merge($lang, array(
 */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
+	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque le MOD est désactivé',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
+	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
 ));
 
 /**

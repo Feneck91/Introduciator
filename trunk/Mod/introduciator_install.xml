@@ -116,8 +116,9 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 			<file from="root/styles/prosilver/template/introduciator_explain.html" to="styles/prosilver/template/introduciator_explain.html"/>
 			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
 			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
-			<file from="root/umil/*.*" to="umil/*.*"/>
 			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
+			<file from="root/images/introduciator/*.*" to="images/introduciator/*.*"/>
+			<file from="root/umil/*.*" to="umil/*.*"/>
 		</copy>
 		<open src="memberlist.php">
 			<edit>

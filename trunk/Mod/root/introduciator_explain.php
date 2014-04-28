@@ -48,9 +48,11 @@ if ($config['allow_introduciator'])
 	// Find Forum name
 	$sql = 'SELECT forum_name, forum_rules, forum_rules_uid, forum_rules_bitfield,forum_rules_options
 			FROM ' . FORUMS_TABLE . '
-				WHERE forum_id = ' . $params['fk_forum_id'];
+			WHERE forum_id = ' . (int) $params['fk_forum_id'];
 	$result = $db->sql_query($sql);
-	while ($row = $db->sql_fetchrow($result))
+	$row = $db->sql_fetchrow($result);
+
+	if ($row)
 	{
 		$forum_name = $row['forum_name'];
 		$forum_rules = array(
@@ -62,7 +64,7 @@ if ($config['allow_introduciator'])
 	}
 	$db->sql_freeresult($result);
 
-	$message = sprintf($user->lang['INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'],$forum_name);
+	$message = $user->lang('INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM',$forum_name);
 	page_header($message);
 
 	$template->set_filenames(array(
@@ -91,7 +93,7 @@ if ($config['allow_introduciator'])
 		array(
 			'%forum_name%'	=> $forum_name,
 			'%forum_url%'	=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']),
-			'%forum_post%'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&f=' . $params['fk_forum_id']),
+			'%forum_post%'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']),
 			));
 
 	// Only display rules if rules field is filled
@@ -101,7 +103,7 @@ if ($config['allow_introduciator'])
 		'S_MOD_ACTIVATED'					=> true,
 		'FORUM_NAME'						=> $forum_name,
 		'FORUM_HREF'						=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']),
-		'FORUM_HREF_POST'					=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&f=' . $params['fk_forum_id']),
+		'FORUM_HREF_POST'					=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']),
 		'FORUM_RULES'						=> generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
 		'INTRODUCIATOR_MOD_EXPLAIN_TITLE'	=> $explanation_title,
 		'INTRODUCIATOR_MOD_EXPLAIN_TEXT'	=> $explanation_text,
@@ -120,10 +122,6 @@ else
 	page_header($user->lang['INTRODUCIATOR_MOD_DISABLED']);
 	$template->set_filenames(array(
 		'body' => 'introduciator_explain.html',
-	));
-
-	$template->assign_vars(array(
-		'S_MOD_ACTIVATED'					=> false,
 	));
 
 	page_footer();

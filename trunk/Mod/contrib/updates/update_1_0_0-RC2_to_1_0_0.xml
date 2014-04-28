@@ -49,8 +49,18 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 	</header>
 	<action-group>
 		<copy>
+			<file from="root/adm/style/acp_introduciator.html" to="adm/style/acp_introduciator.html"/>
 			<file from="root/includes/functions_introduciator.php" to="includes/functions_introduciator.php"/>
+			<file from="root/includes/acp/acp_introduciator.php" to="includes/acp/acp_introduciator.php"/>
+			<file from="root/includes/acp/info/acp_introduciator.php" to="includes/acp/info/acp_introduciator.php"/>
+			<file from="root/language/en/mods/info_acp_introduciator.php" to="language/en/mods/info_acp_introduciator.php"/>
+			<file from="root/language/en/mods/introduciator.php" to="language/en/mods/introduciator.php"/>
+			<file from="root/language/en/mods/permissions_introduciator.php" to="language/en/mods/permissions_introduciator.php"/>
+			<file from="root/styles/prosilver/template/introduciator_explain.html" to="styles/prosilver/template/introduciator_explain.html"/>
+			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
 			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
+			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
+			<file from="root/images/introduciator/*.*" to="images/introduciator/*.*"/>
 		</copy>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion.]]></diy-instructions>

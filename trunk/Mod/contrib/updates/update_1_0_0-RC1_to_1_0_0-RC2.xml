@@ -62,6 +62,7 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			<file from="root/language/en/mods/info_acp_introduciator.php" to="language/en/mods/info_acp_introduciator.php"/>
 			<file from="root/language/en/mods/introduciator.php" to="language/en/mods/introduciator.php"/>
 			<file from="root/language/en/mods/permissions_introduciator.php" to="language/en/mods/permissions_introduciator.php"/>
+			<file from="root/images/introduciator/*.*" to="images/introduciator/*.*"/>
 		</copy>
 		<open src="memberlist.php">
 			<edit>
