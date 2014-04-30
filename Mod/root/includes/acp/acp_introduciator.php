@@ -102,9 +102,6 @@ xdebug_break();
 				global $db; // Database
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
-				// Is Add action ?
-				$introduciator_id = 0; // 0 for new, else it contains the ID
-
 				// Display configuration page
 				$template->assign_vars(array(
 					// Display Configuration page content into ACP .MOD tab
@@ -207,7 +204,7 @@ xdebug_break();
 							{	// Create elements to add by row
 								$values[] = array('fk_group' => (int) $group);
 							}
-							// Create SQL request
+							// Create and execute SQL request
 							$db->sql_multi_insert(INTRODUCIATOR_GROUPS_TABLE, $values);
 
 							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
@@ -215,7 +212,7 @@ xdebug_break();
 							break;
 
 						default:
-							trigger_error('NO_MODE', E_USER_ERROR);
+							trigger_error($user->lang['NO_MODE'] . adm_back_link($this->u_action));
 							break;
 				} // End of switch Action
 			}
