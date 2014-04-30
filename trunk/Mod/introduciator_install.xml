@@ -85,13 +85,15 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 				</changelog>
 			</entry>
 			<entry>
-				<date>2014-04-20</date>
+				<date>2014-05-01</date>
 				<rev-version>1.0.0</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Change version only]]></change>
+					<change><![CDATA[Bug fixes (include functions_user.php twice)]]></change>
 				</changelog>
 				<changelog lang="fr">
 					<change><![CDATA[Changement de la version uniquement]]></change>
+					<change><![CDATA[Correction bugs (inclusion de functions_user.php plusieurs fois)]]></change>
 				</changelog>
 			</entry>
 		</history>
@@ -102,6 +104,8 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 			<link type="contrib" href="contrib/updates/update_1_0_0-RC1_to_1_0_0-RC2.xml" lang="fr">Mette à jour le MOD de la version 1.0.0-RC1 à la version 1.0.0-RC2</link>
 			<link type="contrib" href="contrib/updates/update_1_0_0-RC2_to_1_0_0.xml" lang="en">Update the MOD from 1.0.0-RC2 to 1.0.0</link>
 			<link type="contrib" href="contrib/updates/update_1_0_0-RC2_to_1_0_0.xml" lang="en">Mette à jour le MOD de la version 1.0.0-RC2 à la version 1.0.0</link>
+			<link type="uninstall" href="contrib/updates/uninstall.xml" lang="en">Uninstall this MOD</link>
+			<link type="uninstall" href="contrib/updates/uninstall.xml" lang="fr">Désinstaller ce MOD</link>
 		</link-group>
 	</header>
 	<action-group>
@@ -122,19 +126,10 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 		</copy>
 		<open src="memberlist.php">
 			<edit>
-				<find><![CDATA[// Start session management]]></find>
-				<action type="before-add"><![CDATA[//------------------------------------------------
-// Introduciator - Begin
-include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-// Introduciator - End
-//------------------------------------------------
-
-]]></action>
-			</edit>
-			<edit>
 				<find><![CDATA[	// Dump it out to the template]]></find>
 				<action type="before-add"><![CDATA[	//------------------------------------------------
 	// Introduciator - Begin
+	include_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 	$data_introduciator = introduciator_get_user_infos($user_id,$username);
 	// Introduciator - End
 	//------------------------------------------------
