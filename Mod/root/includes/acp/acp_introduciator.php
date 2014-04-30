@@ -50,7 +50,6 @@ class acp_introduciator
 		$form_key = 'acp_introduciator';
 		add_form_key($form_key);
 
-xdebug_break();
 		$action	= request_var('action', '');
 
 		switch ($mode)

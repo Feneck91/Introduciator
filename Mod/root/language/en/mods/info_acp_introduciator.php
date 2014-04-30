@@ -97,9 +97,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Enable MOD',
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Used to enable or disable this MOD.',
 	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Authorize the MOD to verify the deletion of first introduction post in the forum for introductions',
-	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'When this option is on, the MOD prevents the first post in any topic in the forum for introductions from deletion.' .
-																	   '<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.' .
-																	   '<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'When this option is on, the MOD prevents the first post in any topic in the forum for introductions from deletion.
+																		<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
+																		<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'The forum where the user must introduce himself/herself',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'The MOD will search only in this forum whether forum users have introduced themselves.',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Display explanation page',

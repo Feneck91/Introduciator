@@ -25,7 +25,7 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 		<mod-version>1.0.0</mod-version>
 		<installation>
 			<level>easy</level>
-			<time>60</time>
+			<time>180</time>
 			<target-version>3.0.12</target-version>
 		</installation>
 		<history>
@@ -62,6 +62,20 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			<file from="root/styles/prosilver/theme/images/*.*" to="styles/prosilver/theme/images/*.*"/>
 			<file from="root/images/introduciator/*.*" to="images/introduciator/*.*"/>
 		</copy>
+		<open src="memberlist.php">
+			<edit>
+				<remove><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+// Introduciator - End
+//------------------------------------------------
+]]></remove>
+				<find><![CDATA[// Introduciator - Begin]]></find>
+				<action type="after-add"><![CDATA[	include_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+
+]]></action>
+			</edit>
+		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion.]]></diy-instructions>
 		<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements. Exécutez ensuite le fichier d'installation, intitulé introduciator_install.php, dans votre navigateur Internet puis supprimez-le une fois l'installation effectuée.]]></diy-instructions>
