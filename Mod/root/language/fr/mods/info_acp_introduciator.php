@@ -95,18 +95,18 @@ $lang = array_merge($lang, array(
 																	.  '</ul>',
 	// Sous-titres
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Activer le MOD',
-	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Utilisé pour activer ou désactiver ce MOD.',
+	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Est utilisé pour activer ou désactiver ce MOD.',
 	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Autorise le MOD à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
 	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
 																		<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.
-																		<br/>Vous pouvez désactiver cette option mais il dans ce cas un membre peut avoir plusieurs présentations. Il est recommandé d’activer cette option.',
+																		<br/>Vous pouvez désactiver cette option mais dans ce cas un membre peut avoir plusieurs présentations. Il est recommandé d’activer cette option.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Choix du forum où l’utilisateur doit se présenter',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s’est déjà présenté ou pas.',
-	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Afficher la page d’explication',
-	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Utilisé pour afficher la page d’explication si l’utilisateur tente de poster dans un autre forum que celui des présentations.',
+	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Afficher la page d’explications',
+	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Est utilisé pour afficher la page d’explications si l’utilisateur tente de poster dans un autre forum que celui des présentations.',
 
 	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS'							=> 'Utiliser les permissions de phbBB',
-	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'Vous pouvez utiliser les permissions de phpBB pour indiquer si un utilisateur doit se présenter ou utiliser la configuration de ce MOD (plus simple mais moins performant).<br/><br/>Lorsque l’option « Utiliser les permissions du forums » est utilisée, la configuration ci-dessous est ignorée.',
+	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'Vous pouvez utiliser les permissions de phpBB pour indiquer si un utilisateur doit se présenter ou utiliser la configuration de ce MOD (plus simple mais moins performant).<br/><br/>Lorsque l’option « Utiliser les permissions du forums » est sélectionné, la configuration ci-dessous est ignorée.',
 	'INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION'						=> 'Utiliser les permissions du forum',
 	'INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION'					=> 'Utiliser la configuration du MOD',
 	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'					=> 'Groupes inclus ou groupes exclus',
@@ -116,7 +116,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS'							=> 'Sélection des groupes',
 	'INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN'					=> 'Sélectionne les groupes qui doivent être inclus ou exclus.',
 	'INTRODUCIATOR_CP_ED_IGNORED_USERS'								=> 'Utilisateurs ignorés',
-	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'						=> 'Liste des utilisateurs qui ne sont pas obligés de se présenter.<br/>Entrez un utilisateur par ligne.<br/>Utilisé pour les comptes d’administrations ou de tests par exemple.',
+	'INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN'						=> 'Liste des utilisateurs qui ne sont pas obligés de se présenter.<br/>Entrer un utilisateur par ligne.<br/>Utilisé pour les comptes d’administrations ou de tests par exemple.',
 
 	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE'					=> 'Titre de la page d’explications',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN'			=> 'Défaut = <b>%explanation_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
