@@ -76,7 +76,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>To be able to post, <u>you must</u> introduce yourself</b>',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'As for every new user, you must introduce yourself to other members in the “<a href="%forum_url%">%forum_name%</a>” forum<br/>
 															Only a new topic in the forum for introductions is allowed.<br/>
-															When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions',
+															When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
 	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>The rules are repeated here:</u></b>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
