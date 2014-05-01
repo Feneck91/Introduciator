@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path,$phpEx;	// Php bb root path / php Extension
-require_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+include_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 
 /**
 * @package module_install
