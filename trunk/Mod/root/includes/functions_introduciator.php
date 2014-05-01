@@ -19,7 +19,10 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path, $phpEx, $table_prefix, $introduciator_params;
-include_once($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+if (!function_exists('group_memberships'))
+{
+	include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
+}
 
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
