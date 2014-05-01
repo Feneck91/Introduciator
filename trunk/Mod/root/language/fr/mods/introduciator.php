@@ -77,7 +77,7 @@ $lang = array_merge($lang, array(
 
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le forum “<a href="%forum_url%">%forum_name%</a>”<br/>
 															Seule la création d’un nouveau sujet dans le forum de présentation est autorisée.<br/>
-															Lors de la création de votre présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation',
+															Lors de la création de votre présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation.',
 	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>Les règles sont rappelées ici :</u></b>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Aller dans le forum “%forum_name%” maintenant en cliquant sur ce lien</a>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Commencer votre présentation maintenant en cliquant sur ce lien</a>',
