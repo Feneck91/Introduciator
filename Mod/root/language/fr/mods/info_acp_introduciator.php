@@ -97,9 +97,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Activer le MOD',
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Utilisé pour activer ou désactiver ce MOD.',
 	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Autorise le MOD à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
-	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
 																		<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.
-																		<br/>Vous pouvez désactiver cette option mais il peut en résulter des comportements étranges : un membre peut avoir plusieurs présentations, dans ce cas le premier trouvé est pris en compte.',
+																		<br/>Vous pouvez désactiver cette option mais il dans ce cas un membre peut avoir plusieurs présentations. Il est recommandé d’activer cette option.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Choix du forum où l’utilisateur doit se présenter',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s’est déjà présenté ou pas.',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Afficher la page d’explication',
@@ -138,6 +138,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque le MOD est désactivé',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
+	'INTRODUCIATOR_ERROR_ID_NOT_FOUND'						=> 'Erreur, la configuration du MOD Présentation Forcée ne peut pas être mise à jour !',
 ));
 
 /**

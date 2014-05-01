@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path, $phpEx;
-require_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+include_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 
 /**
 * @package acp
@@ -31,7 +31,7 @@ class acp_introduciator
 	// Folder in web site where download the latest version file info
 	var $folder_version_check	= '/phpbb';
 	// File name to download the latest version file info
-	var $file_version_check		= 'test_introduciator_version.txt';
+	var $file_version_check		= 'introduciator_version.txt';
 
 	// Action
 	var $u_action;
@@ -50,7 +50,7 @@ class acp_introduciator
 		$form_key = 'acp_introduciator';
 		add_form_key($form_key);
 
-		$action	= request_var('action', '');
+		$action	= request_var('introduciator_action', '');
 
 		switch ($mode)
 		{
@@ -70,20 +70,23 @@ class acp_introduciator
 				else
 				{
 					$latest_version_info = explode("\n", $latest_version_info);
+					$version_check = $this->get_update_information('url-',$latest_version_info);
+					$infos = $this->get_update_information('info-',$latest_version_info);
 
 					$template->assign_vars(array(
 						'S_INTRODUCIATOR_VERSION_UP_TO_DATE'	=> phpbb_version_compare(trim($latest_version_info[0]), $config['introduciator_mod_version'], '<='),
-						'U_INTRODUCIATOR_VERSIONCHECK'			=> $this->get_update_information('url-',$latest_version_info),
+						'S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND'=> $version_check[1],
+						'U_INTRODUCIATOR_VERSIONCHECK'			=> $version_check[0],
 						'L_INTRODUCIATOR_UPDATE_VERSION'		=> trim($latest_version_info[0]),
-						'L_INTRODUCIATOR_UPDATE_FILENAME'		=> htmlspecialchars(trim($latest_version_info[2])),
-						'U_INTRODUCIATOR_UPDATE_URL'			=> htmlspecialchars(trim($latest_version_info[3])),
-						'L_INTRODUCIATOR_UPDATE_INFORMATION'	=> $this->get_update_information('info-',$latest_version_info),
+						'L_INTRODUCIATOR_UPDATE_FILENAME'		=> htmlspecialchars(trim(sizeof($latest_version_info) < 3 ? '' : $latest_version_info[2])),
+						'U_INTRODUCIATOR_UPDATE_URL'			=> htmlspecialchars(trim(sizeof($latest_version_info) < 4 ? '' : $latest_version_info[3])),
+						'L_INTRODUCIATOR_UPDATE_INFORMATION'	=> $infos[0],
 					));
 				}
 
 				$template->assign_vars(array(
 					// Display general page content into ACP .MOD tab
-					'S_GENERAL_PAGES'						=> true,
+					'S_INTRODUCIATOR_GENERAL_PAGES'			=> true,
 
 					// Current version of this MOD
 					'INTRODUCIATOR_VERSION'					=> $config['introduciator_mod_version'],
@@ -113,20 +116,19 @@ class acp_introduciator
 					$dp_data = array();
 
 					$params = introduciator_getparams();
-
 					$template->assign_vars(array(
-						'MOD_ACTIVATED'							=> $config['allow_introduciator'],
-						'CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post_enabled'],
-						'DISPLAY_EXPLANATION_ENABLED'			=> $params['is_explanation_enabled'],
-						'USE_PERMISSIONS'						=> $params['is_use_permissions'],
-						'INCLUDE_GROUPS_SELECTED'				=> $params['is_include_groups'],
-						'ITEM_IGNORED_USERS'					=> $params['ignored_users'],
-						'EXPLANATION_MESSAGE_TITLE'				=> $params['explanation_message_title'],
-						'EXPLANATION_MESSAGE_TEXT'				=> $params['explanation_message_text'],
-						'EXPLANATION_IS_DISPLAY_RULES_ENABLED'	=> $params['explanation_display_rules_enabled'],
-						'EXPLANATION_MESSAGE_RULES_TITLE'		=> $params['explanation_message_rules_title'],
-						'EXPLANATION_MESSAGE_RULES_TEXT'		=> $params['explanation_message_rules_text'],
-						'U_ACTION'								=> $this->u_action,
+						'INTRODUCIATOR_MOD_ACTIVATED'							=> $config['allow_introduciator'],
+						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post_enabled'],
+						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'				=> $params['is_explanation_enabled'],
+						'INTRODUCIATOR_USE_PERMISSIONS'							=> $params['is_use_permissions'],
+						'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'					=> $params['is_include_groups'],
+						'INTRODUCIATOR_ITEM_IGNORED_USERS'						=> $params['ignored_users'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE'				=> $params['explanation_message_title'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'				=> $params['explanation_message_text'],
+						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'	=> $params['explanation_display_rules_enabled'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE'			=> $params['explanation_message_rules_title'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT'			=> $params['explanation_message_rules_text'],
+						'U_ACTION'												=> $this->u_action,
 					));
 
 					// Add all forums
@@ -136,8 +138,8 @@ class acp_introduciator
 					$this->add_all_groups();
 
 					$s_hidden_fields = build_hidden_fields(array(
-							'action'		=> 'update',					// Action
-							'id'			=> $params['introduciator_id'],	// Id of row for hident input named "id"
+							'introduciator_action'	=> 'update',					// Action
+							'introduciator_id'		=> $params['introduciator_id'],	// Id of row for hident input named "id"
 						));
 
 					$template->assign_vars(array(
@@ -164,10 +166,15 @@ class acp_introduciator
 							$explanation_display_rules_enabled		= (bool) request_var('explanation_display_rules_enabled', false);
 							$explanation_message_rules_title		= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
 							$explanation_message_rules_text			= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
+							$id										= (int) request_var('introduciator_id', 0);
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
+							}
+							else if ($id === 0)
+							{
+								trigger_error($user->lang['INTRODUCIATOR_ERROR_ID_NOT_FOUND'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
 							$sql_ary = array(
 								'is_check_delete_first_post_enabled'	=> $is_check_delete_first_post_activated,
@@ -189,7 +196,7 @@ class acp_introduciator
 							// Update INTRODUCIATOR_CONFIG_TABLE
 							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
 									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
-									WHERE introduciator_id = ' . (int) request_var('id', 0);
+									WHERE introduciator_id = ' . $id;
 							$db->sql_query($sql);
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
@@ -324,13 +331,16 @@ class acp_introduciator
 	 *
 	 * @param string $tag the tag to found. Searching [$tag{language name}] at the beginning of the line.
 	 * @param array $latest_version_info Array of string, the informations begins at line 2.
-	 * @return The string into the correct language. English if the current language is not found.
+	 * @return An array with:
+	 *   [0] The string into the correct language. English if the current language is not found. Error message if default language was not found
+	 *   [1] Indicate if the string (default or not) was found or not (true / false).
 	 */
 	function get_update_information($tag,$latest_version_info)
 	{
 		global $tag_and_lang,$tag_and_lang_en,$user,$tag_len;
 
 		$information = $user->lang['INTRODUCIATOR_NO_UPDATE_INFO_FOUND'];
+		$found = false;
 
 		$tag_and_lang = '[' . $tag . $user->lang['USER_LANG'] . ']';
 		$tag_and_lang_en =  '[' . $tag . 'en]';
@@ -344,16 +354,21 @@ class acp_introduciator
 				if ($line_lang === $tag_and_lang)
 				{
 					$information = substr($latest_version_info[$index],$tag_len,strlen($latest_version_info[$index]) - $tag_len);
+					$found = true;
 					break; // Found, quit the for
 				}
 				else if ($line_lang === $tag_and_lang_en)
 				{	// English by default if found
 					$information = substr($latest_version_info[$index],$tag_len,strlen($latest_version_info[$index]) - $tag_len);
+					$found = true;
 				}
 			}
 		}
 
-		return str_replace('\\n','<br/>',htmlspecialchars($information));
+		return array(
+			str_replace('\\n','<br/>',htmlspecialchars($information)),
+			$found,
+		);
 	}
 }
 ?>

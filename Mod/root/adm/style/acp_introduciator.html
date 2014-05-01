@@ -1,6 +1,6 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- IF S_GENERAL_PAGES -->
+<!-- IF S_INTRODUCIATOR_GENERAL_PAGES -->
 	<h1>{L_INTRODUCIATOR_GP_TITLE}</h1>
 	{L_INTRODUCIATOR_GP_TITLE_EXPLAIN}
 
@@ -12,7 +12,10 @@
 	<!-- ELSEIF not S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
 		<div class="errorbox">
 			<p>{L_INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE}</p>
-			<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a> &middot; <a href="{U_INTRODUCIATOR_VERSIONCHECK}">{L_MORE_INFORMATION}</a></p>
+			<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>
+			<!-- IF S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND -->
+				&middot; <a href="{U_INTRODUCIATOR_VERSIONCHECK}">{L_MORE_INFORMATION}</a></p>
+			<!-- ENDIF -->
 		</div>
 	<!-- ENDIF -->
 
@@ -45,10 +48,12 @@
 				<td>{L_INTRODUCIATOR_GP_UPDATE_VERSION_TITLE}</td>
 				<td>{L_INTRODUCIATOR_UPDATE_VERSION}</td>
 			</tr>
+			<!-- IF S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND -->
 			<tr>
 				<td>{L_INTRODUCIATOR_GP_UPDATE_URL_TITLE}</td>
 				<td><a href="{U_INTRODUCIATOR_UPDATE_URL}" title="{L_INTRODUCIATOR_UPDATE_FILENAME}">{L_INTRODUCIATOR_UPDATE_FILENAME}</a></td>
 			</tr>
+			<!-- ENDIF -->
 			<tr>
 				<td>{L_INTRODUCIATOR_GP_UPDATE_INFOS_TITLE}</td>
 				<td>{L_INTRODUCIATOR_UPDATE_INFORMATION}</td>
@@ -61,7 +66,7 @@
 <!-- IF S_CONFIGURATION_PAGES -->
 	<h1>{L_INTRODUCIATOR_CP_TITLE}</h1>
 	{L_INTRODUCIATOR_CP_TITLE_EXPLAIN}
-	<form id="acp_introduciator" method="post" action="{U_ACTION}">
+	<form id="acp_introduciator" method="post" introduciator_action="{U_ACTION}">
 		<fieldset>
 			<legend>{L_GENERAL_OPTIONS}</legend>
 			<!--
@@ -69,8 +74,8 @@
 			-->
 			<dl>
 				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN}</span></dt>
-				<dd><label><input id="mod_activated" name="mod_activated" type="radio" class="radio" value="1"<!-- IF MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-					<label><input  name="mod_activated" type="radio" class="radio" value="0"<!-- IF not MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				<dd><label><input id="mod_activated" name="mod_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="mod_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
 			<!--
@@ -78,8 +83,8 @@
 			-->
 			<dl>
 				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN}</span></dt>
-				<dd><label><input id="mod_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-					<label><input  name="check_delete_first_post_activated" type="radio" class="radio" value="0"<!-- IF not CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				<dd><label><input id="mod_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="check_delete_first_post_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
 			<!--
@@ -100,8 +105,8 @@
 			-->
 			<dl>
 				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN}</span></dt>
-				<dd><label><input id="display_explanation" name="display_explanation" type="radio" class="radio" value="1"<!-- IF DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				<dd><label><input id="display_explanation" name="display_explanation" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
 			{S_HIDDEN_FIELDS}
@@ -116,8 +121,8 @@
 			-->
 			<dl>
 				<dt><label for="is_use_permissions">{L_INTRODUCIATOR_CP_ED_USE_PERMISSIONS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN}</span></dt>
-				<dd><label><input id="is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="1"<!-- IF USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION}</label>
-					<label><input  name="is_use_permissions" type="radio" class="radio" value="0"<!-- IF not USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION}</label>
+				<dd><label><input id="is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION}</label>
+					<label><input  name="is_use_permissions" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION}</label>
 				</dd>
 			</dl>
 			<hr/>
@@ -126,8 +131,8 @@
 			-->
 			<dl>
 				<dt><label for="include_group">{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN}</span></dt>
-				<dd><label><input id="include_groups" name="include_groups" type="radio" class="radio" value="1"<!-- IF INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION}</label>
-					<label><input  name="include_groups" type="radio" class="radio" value="0"<!-- IF not INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION}</label>
+				<dd><label><input id="include_groups" name="include_groups" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION}</label>
+					<label><input  name="include_groups" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION}</label>
 				</dd>
 			</dl>
 			<!--
@@ -148,7 +153,7 @@
 			-->
 			<dl>
 				<dt><label for="ignored_users">{L_INTRODUCIATOR_CP_ED_IGNORED_USERS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN}</span></dt>
-				<dd><textarea id="ignored_users" name="ignored_users" rows="10" cols="60">{ITEM_IGNORED_USERS}</textarea></dd>
+				<dd><textarea id="ignored_users" name="ignored_users" rows="10" cols="60">{INTRODUCIATOR_ITEM_IGNORED_USERS}</textarea></dd>
 			</dl>
 		</fieldset>
 		<fieldset>
@@ -166,22 +171,22 @@
 			-->
 			<dl>
 				<dt><label for="explanation_message_title">{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN}</span></dt>
-				<dd><textarea id="explanation_message_title" name="explanation_message_title" rows="5" cols="60">{EXPLANATION_MESSAGE_TITLE}</textarea></dd>
+				<dd><textarea id="explanation_message_title" name="explanation_message_title" rows="5" cols="60">{INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE}</textarea></dd>
 			</dl>
 			<!--
 			     Explanation text
 			-->
 			<dl>
 				<dt><label for="explanation_message_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN}</span></dt>
-				<dd><textarea id="explanation_message_text" name="explanation_message_text" rows="10" cols="60">{EXPLANATION_MESSAGE_TEXT}</textarea></dd>
+				<dd><textarea id="explanation_message_text" name="explanation_message_text" rows="10" cols="60">{INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT}</textarea></dd>
 			</dl>
 			<!--
 			     Activate / Desactivate rules display
 			-->
 			<dl>
 				<dt><label for="explanation_display_rules_enabled">{L_INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN}</span></dt>
-				<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"<!-- IF EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-					<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"<!-- IF not EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+				<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+					<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
 			<!--
@@ -189,14 +194,14 @@
 			-->
 			<dl>
 				<dt><label for="explanation_message_rules_title">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN}</span></dt>
-				<dd><textarea id="explanation_message_rules_title" name="explanation_message_rules_title" rows="5" cols="60">{EXPLANATION_MESSAGE_RULES_TITLE}</textarea></dd>
+				<dd><textarea id="explanation_message_rules_title" name="explanation_message_rules_title" rows="5" cols="60">{INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE}</textarea></dd>
 			</dl>
 			<!--
 			     Explanation text
 			-->
 			<dl>
 				<dt><label for="explanation_message_rules_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN}</span></dt>
-				<dd><textarea id="explanation_message_rules_text" name="explanation_message_rules_text" rows="10" cols="60">{EXPLANATION_MESSAGE_RULES_TEXT}</textarea></dd>
+				<dd><textarea id="explanation_message_rules_text" name="explanation_message_rules_text" rows="10" cols="60">{INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT}</textarea></dd>
 			</dl>
 			<!--
 			     --------------------------- Posting ---------------------------------------------
