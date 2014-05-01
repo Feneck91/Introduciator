@@ -19,7 +19,10 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path, $phpEx;
-include_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+if (!defined('INTRODUCIATOR_CONFIG_TABLE'))
+{
+	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+}
 
 /**
 * @package acp
@@ -78,8 +81,8 @@ class acp_introduciator
 						'S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND'=> $version_check[1],
 						'U_INTRODUCIATOR_VERSIONCHECK'			=> $version_check[0],
 						'L_INTRODUCIATOR_UPDATE_VERSION'		=> trim($latest_version_info[0]),
-						'L_INTRODUCIATOR_UPDATE_FILENAME'		=> htmlspecialchars(trim(sizeof($latest_version_info) < 3 ? '' : $latest_version_info[2])),
-						'U_INTRODUCIATOR_UPDATE_URL'			=> htmlspecialchars(trim(sizeof($latest_version_info) < 4 ? '' : $latest_version_info[3])),
+						'L_INTRODUCIATOR_UPDATE_FILENAME'		=> trim(sizeof($latest_version_info) < 3 ? '' : $latest_version_info[2]),
+						'U_INTRODUCIATOR_UPDATE_URL'			=> trim(sizeof($latest_version_info) < 4 ? '' : $latest_version_info[3]),
 						'L_INTRODUCIATOR_UPDATE_INFORMATION'	=> $infos[0],
 					));
 				}
@@ -366,7 +369,7 @@ class acp_introduciator
 		}
 
 		return array(
-			str_replace('\\n','<br/>',htmlspecialchars($information)),
+			str_replace('\\n','<br/>',$information),
 			$found,
 		);
 	}
