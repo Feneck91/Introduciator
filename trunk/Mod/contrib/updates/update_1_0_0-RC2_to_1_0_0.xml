@@ -71,7 +71,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 //------------------------------------------------
 ]]></remove>
 				<find><![CDATA[// Introduciator - Begin]]></find>
-				<action type="after-add"><![CDATA[	include_once($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+				<action type="after-add"><![CDATA[	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 
 ]]></action>
 			</edit>
