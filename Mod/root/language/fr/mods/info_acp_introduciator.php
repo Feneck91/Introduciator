@@ -87,12 +87,12 @@ $lang = array_merge($lang, array(
 	// Titres
 	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Configuration des groupes et des utilisateurs',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Configuration de la page d’explications',
-	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'Pour tous les champs textes suivants, vous pouvez utiliser :<br/>'
-																	.  '<ul>'
-																	.  '<li><b>%forum_name%</b> : nom du forum de présentation</li>'
-																	.  '<li><b>%forum_url%</b> : url vers le forum de présentation</li>'
-																	.  '<li><b>%forum_post%</b> : url pour l’écriture d’un nouveau post dans le forum de présentation</li>'
-																	.  '</ul>',
+	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'Pour tous les champs textes suivants, vous pouvez utiliser :<br/>
+																		<ul>
+																		<li><b>%forum_name%</b> : nom du forum de présentation</li>
+																		<li><b>%forum_url%</b> : url vers le forum de présentation</li>
+																		<li><b>%forum_post%</b> : url pour l’écriture d’un nouveau post dans le forum de présentation</li>
+																		</ul>',
 	// Sous-titres
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Activer le MOD',
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Est utilisé pour activer ou désactiver ce MOD.',

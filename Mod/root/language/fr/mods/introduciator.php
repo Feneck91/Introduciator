@@ -82,12 +82,11 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Aller dans le forum “%forum_name%” maintenant en cliquant sur ce lien</a>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Commencer votre présentation maintenant en cliquant sur ce lien</a>',
 
-	'INTRODUCIATOR_TOPIC_TITLE'							=> 'Présentation du membre',
+	'INTRODUCIATOR_MEMBER_INTRODUCTION'					=> 'Présentation du membre',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'			=> 'Pas de présentation disponible pour ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'				=> 'Voir la présentation de ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'Présentation en cours d’approbation pour ce membre',
 
-	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Présentation du membre',
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Voir la présentation du membre',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'					=> 'La présentation est en cours d’approbation',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'Aucune présentation disponible',
