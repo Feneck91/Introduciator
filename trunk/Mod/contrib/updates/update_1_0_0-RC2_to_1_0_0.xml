@@ -76,6 +76,22 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 ]]></action>
 			</edit>
 		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[{L_INTRODUCIATOR_VIEW_MEMBER}]]></find>
+				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/viewtopic_body.html">
+			<edit>
+				<find><![CDATA[{L_INTRODUCIATOR_TOPIC_TITLE}]]></find>
+				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[{L_INTRODUCIATOR_TOPIC_TITLE}]]></find>
+				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
+			</edit>
+		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion.]]></diy-instructions>
 		<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements. Exécutez ensuite le fichier d'installation, intitulé introduciator_install.php, dans votre navigateur Internet puis supprimez-le une fois l'installation effectuée.]]></diy-instructions>

@@ -87,12 +87,12 @@ $lang = array_merge($lang, array(
 	// Titles
 	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Groups and users configuration',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Explanations page configuration',
-	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'For all next fields, you can use:<br/>'
-																	.  '<ul>'
-																	.  '<li><b>%forum_name%</b>: name of the forum for introductions</li>'
-																	.  '<li><b>%forum_url%</b>: url to the forum for introductions</li>'
-																	.  '<li><b>%forum_post%</b>: url to write new post into the forum for introductions</li>'
-																	.  '</ul>',
+	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'For all next fields, you can use:<br/>
+																		<ul>
+																		<li><b>%forum_name%</b>: name of the forum for introductions</li>
+																		<li><b>%forum_url%</b>: url to the forum for introductions</li>
+																		<li><b>%forum_post%</b>: url to write new post into the forum for introductions</li>
+																		</ul>',
 	// Sub titles
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Enable MOD',
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Used to enable or disable this MOD.',

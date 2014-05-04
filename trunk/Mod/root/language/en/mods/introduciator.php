@@ -81,12 +81,11 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
 
-	'INTRODUCIATOR_TOPIC_TITLE'							=> 'Member’s introduction',
+	'INTRODUCIATOR_MEMBER_INTRODUCTION'					=> 'Member’s introduction',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'			=> 'No introduction avalaible for this membrer',
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'				=> 'See the member’s introduction',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'The introduction of this member is pending approval',
 
-	'INTRODUCIATOR_VIEW_MEMBER'							=> 'Member’s introduction',
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Go to member’s introduction',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'					=> 'The member’s introduction is pending approval',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'No introduction avalaible for this member',
