@@ -156,20 +156,20 @@ class acp_introduciator
 						case 'update' :
 							// User has request an update : write it into database
 							// Update Database
-							$is_enabled								= (bool) request_var('mod_activated', false);
-							$is_check_delete_first_post_activated	= (bool) request_var('check_delete_first_post_activated', false);
-							$fk_forum_id							= (int)  request_var('forum_choice', 0);
-							$is_explanation_enabled					= (bool) request_var('display_explanation', false);
-							$is_use_permissions						= (bool) request_var('is_use_permissions', false);
-							$is_include_groups						= (bool) request_var('include_groups', false);
+							$is_enabled								= request_var('mod_activated', false);
+							$is_check_delete_first_post_activated	= request_var('check_delete_first_post_activated', false);
+							$fk_forum_id							= request_var('forum_choice', 0);
+							$is_explanation_enabled					= request_var('display_explanation', false);
+							$is_use_permissions						= request_var('is_use_permissions', false);
+							$is_include_groups						= request_var('include_groups', false);
 							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
 							$ignored_users							= utf8_normalize_nfc(request_var('ignored_users', ''));
 							$explanation_message_title				= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
 							$explanation_message_text				= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
-							$explanation_display_rules_enabled		= (bool) request_var('explanation_display_rules_enabled', false);
+							$explanation_display_rules_enabled		= request_var('explanation_display_rules_enabled', false);
 							$explanation_message_rules_title		= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
 							$explanation_message_rules_text			= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
-							$id										= (int) request_var('introduciator_id', 0);
+							$id										= request_var('introduciator_id', 0);
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
@@ -216,7 +216,7 @@ class acp_introduciator
 							// Create and execute SQL request
 							$db->sql_multi_insert(INTRODUCIATOR_GROUPS_TABLE, $values);
 
-							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , $user->lang['INTRODUCIATOR_CONFIGURATION']);
+							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , 'INTRODUCIATOR_CONFIGURATION');
 							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
 							break;
 
@@ -292,16 +292,14 @@ class acp_introduciator
 	 * Obtains the latest version information.
 	 *
 	 * @param bool $force_update Ignores cached data. Defaults to false.
-	 * @param bool $warn_fail Trigger a warning if obtaining the latest version information fails. Defaults to false.
 	 * @param int $ttl Cache version information for $ttl seconds. Defaults to 86400 (24 hours).
 	 *
 	 * @return string | false Version info on success, false on failure.
 	 */
-	function obtain_latest_version_info($force_update = false, $warn_fail = false, $ttl = 86400)
+	function obtain_latest_version_info($force_update = false, $ttl = 86400)
 	{
 		global $cache;
 
-		$info = "";
 		$info = $cache->get('introduciatorversioncheck');
 
 		if ($info === false || $force_update)
@@ -314,10 +312,6 @@ class acp_introduciator
 			if ($info === false)
 			{
 				$cache->destroy('introduciatorversioncheck');
-				if ($warn_fail)
-				{
-					trigger_error($errstr, E_USER_WARNING);
-				}
 				return false;
 			}
 

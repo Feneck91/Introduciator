@@ -43,7 +43,7 @@
 				<!-- ENDIF -->
 				</td>
 			</tr>
-		<!-- IF not S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+		<!-- IF (not S_INTRODUCIATOR_VERSION_UP_TO_DATE) and (not S_INTRODUCIATOR_VERSIONCHECK_FAIL) -->
 			<tr>
 				<td>{L_INTRODUCIATOR_GP_UPDATE_VERSION_TITLE}</td>
 				<td>{L_INTRODUCIATOR_UPDATE_VERSION}</td>
@@ -66,24 +66,24 @@
 <!-- IF S_CONFIGURATION_PAGES -->
 	<h1>{L_INTRODUCIATOR_CP_TITLE}</h1>
 	{L_INTRODUCIATOR_CP_TITLE_EXPLAIN}
-	<form id="acp_introduciator" method="post" introduciator_action="{U_ACTION}">
+	<form id="acp_introduciator" method="post" action="{U_ACTION}">
 		<fieldset>
 			<legend>{L_GENERAL_OPTIONS}</legend>
 			<!--
 			     Activate / Desactivate MOD
 			-->
 			<dl>
-				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN}</span></dt>
+				<dt><label for="mod_activated">{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN}</span></dt>
 				<dd><label><input id="mod_activated" name="mod_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-					<label><input  name="mod_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+					<label><input name="mod_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
 			<!--
 			     Activate / Desactivate Check delete first post
 			-->
 			<dl>
-				<dt><label for="display_explanation">{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN}</span></dt>
-				<dd><label><input id="mod_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<dt><label for="check_delete_first_post_activated">{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN}</span></dt>
+				<dd><label><input id="check_delete_first_post_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 					<label><input  name="check_delete_first_post_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
@@ -93,7 +93,7 @@
 			<dl>
 				<dt><label for="forum_choice">{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN}</span></dt>
 				<dd>
-					<select name="forum_choice" style="width: 100%;" id="forum_choice" size="1">
+					<select id="forum_choice" name="forum_choice" style="width: 100%;" size="1">
 					<!-- BEGIN forums -->
 						<option <!-- IF not forums.CAN_SELECT -->disabled class="disabled-option"<!-- ENDIF --> value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
 					<!-- END items -->
@@ -109,7 +109,6 @@
 					<label><input  name="display_explanation" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 				</dd>
 			</dl>
-			{S_HIDDEN_FIELDS}
 		</fieldset>
 			<!--
 			     --------------------------- Manage groups and users -----------------------------
@@ -130,16 +129,16 @@
 			     Include / Exclude groups
 			-->
 			<dl>
-				<dt><label for="include_group">{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN}</span></dt>
+				<dt><label for="include_groups">{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN}</span></dt>
 				<dd><label><input id="include_groups" name="include_groups" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION}</label>
-					<label><input  name="include_groups" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION}</label>
+					<label><input name="include_groups" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION}</label>
 				</dd>
 			</dl>
 			<!--
 			     Groups list
 			-->
 			<dl>
-				<dt><label for="item_groups">{L_INTRODUCIATOR_CP_ED_SELECTED_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN}</span></dt>
+				<dt><label for="groups_choices">{L_INTRODUCIATOR_CP_ED_SELECTED_GROUPS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN}</span></dt>
 				<dd>
 					<select name="groups_choices[]" style="width: 100%;" id="groups_choices" multiple="multiple" size="10">
 					<!-- BEGIN group -->

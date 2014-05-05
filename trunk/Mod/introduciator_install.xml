@@ -5,7 +5,6 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
 	<header>
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
-		<meta name="generator" content="MODX file generated with PP MODX Creator 1.2.6 by tumba25 (phpBB version)"/>
 		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
 		<title lang="en"><![CDATA[Introduciator]]></title>
 		<title lang="fr"><![CDATA[Présentation Forcée]]></title>
@@ -41,8 +40,6 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 ● Interdiction pour l'utilisateur (ou administrateur mais ceci est configurable) d'effacer le 1er message d'une présentation.
 ● Interdiction pour l'utilisateur de créer plus d'un sujet dans le forum de présentation.
 ● Possibilité d'ajouter ce mod dans un forum contenant déjà beaucoup de messages, ceci forcera les utilisateurs à se présenter avant de pouvoir poster à nouveau.]]></description>
-		<author-notes lang="en"><![CDATA[Once you have installed this MOD, you must activate and configure it into the .MOD tab into the administration console panel.]]></author-notes>
-		<author-notes lang="fr"><![CDATA[Une fois ce MOD installé, vous devez l'activer et le configurer dans le panneau .MOD de la console d'administration.]]></author-notes>
 		<author-group>
 			<author>
 				<realname><![CDATA[CHÂTEAU Stéphane]]></realname>
@@ -266,7 +263,9 @@ ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciato
 			</edit>
 		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
-		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion. Clear your cache and refresh your imagesets from the administration control panel.]]></diy-instructions>
-		<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements. Exécutez ensuite le fichier d'installation, intitulé introduciator_install.php, dans votre navigateur Internet puis supprimez-le une fois l'installation effectuée. Enfin, purgez votre cache et rafraîchissez vos packs d'images depuis le panneau d'administration.]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Once you have installed this MOD, you must activate and configure it into the .MOD tab into the administration console panel.
+Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion. Clear your cache and refresh your imagesets from the administration control panel.]]></diy-instructions>
+		<diy-instructions lang="fr"><![CDATA[Une fois ce MOD installé, vous devez l'activer et le configurer dans le panneau .MOD de la console d'administration.
+Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements. Exécutez ensuite le fichier d'installation, intitulé introduciator_install.php, dans votre navigateur Internet puis supprimez-le une fois l'installation effectuée. Enfin, purgez votre cache et rafraîchissez vos packs d'images depuis le panneau d'administration.]]></diy-instructions>
 	</action-group>
 </mod>
