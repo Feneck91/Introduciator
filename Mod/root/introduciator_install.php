@@ -40,7 +40,7 @@ $mod_name = 'INTRODUCIATOR_MOD';
 $version_config_name = 'introduciator_mod_version';	// <-- includes/acp/acp_introduciator.php and here : change $versions
 
 // The language file which will be included when installing
-$language_file = 'mods/info_acp_introduciator';
+$language_file = 'mods/introduciator';
 
 // logo image
 $logo_img = 'images/introduciator/introduciator_logo_small.png';
@@ -56,12 +56,6 @@ $logo_img = 'images/introduciator/introduciator_logo_small.png';
 // $phpbb_root_path will get prepended to the path specified
 // Image height should be 50px to prevent cut-off or stretching.
 //$logo_img = 'images/introduciator/introduciator_logo_small.png';
-
-// Name of the config variable
-$version_config_name = 'introduciator_mod_version';
-
-// Language file which will be included when installing
-$language_file = 'mods/introduciator';
 
 // Current time needed for 'introduciator_install_date'
 $current_time = time();
@@ -141,14 +135,7 @@ $versions = array(
 		// Add the module in ACP under the .MOD tab
 		'module_add' => array(
 			// ACP_CAT_DOT_MODS is '.MOD' in acp
-			array('acp', 'ACP_CAT_DOT_MODS', array(
-				'module_enabled'	=> 1,
-				'module_display'	=> 1,
-				// ACP_INTRODUCIATOR_MOD is the name of the MOD
-				'module_langname'	=> 'ACP_INTRODUCIATOR_MOD',
-				'module_auth'		=> 'acl_a_introduciator_manage',	// Own permission
-				),
-			),
+            array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD'),
 
 			//---------------------------------------------------------------------
 			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
