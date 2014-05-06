@@ -186,13 +186,7 @@ $versions = array(
 		// Add the module in ACP under the .MOD tab
 		'module_add' => array(
 			// ACP_CAT_DOT_MODS is '.MOD' in acp
-			array('acp', 'ACP_CAT_DOT_MODS', array(
-				'module_enabled'	=> 1,
-				'module_display'	=> 1,
-				// ACP_INTRODUCIATOR_MOD is the name of the MOD
-				'module_langname'	=> 'ACP_INTRODUCIATOR_MOD',
-				'module_auth'		=> 'acl_a_board',	// Acl Admin Introduciator Manage
-				),
+            array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD'),
 			),
 
 			//---------------------------------------------------------------------
