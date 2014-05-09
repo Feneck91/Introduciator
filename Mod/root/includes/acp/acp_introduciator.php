@@ -19,9 +19,14 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path, $phpEx;
-if (!defined('INTRODUCIATOR_CONFIG_TABLE'))
+if (!defined('INTRODUCIATOR_CURRENT_VERSION'))
 {
 	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+}
+
+if (!function_exists('set_config'))
+{
+	include($phpbb_root_path . 'includes/functions_convert.' . $phpEx);
 }
 
 /**
@@ -53,7 +58,7 @@ class acp_introduciator
 		$form_key = 'acp_introduciator';
 		add_form_key($form_key);
 
-		$action	= request_var('introduciator_action', '');
+		$action	= request_var('action', '');
 
 		switch ($mode)
 		{
@@ -120,15 +125,15 @@ class acp_introduciator
 
 					$params = introduciator_getparams();
 					$template->assign_vars(array(
-						'INTRODUCIATOR_MOD_ACTIVATED'							=> $config['allow_introduciator'],
-						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post_enabled'],
+						'INTRODUCIATOR_MOD_ACTIVATED'							=> $params['introduciator_allow'],
+						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post'],
 						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'				=> $params['is_explanation_enabled'],
 						'INTRODUCIATOR_USE_PERMISSIONS'							=> $params['is_use_permissions'],
 						'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'					=> $params['is_include_groups'],
 						'INTRODUCIATOR_ITEM_IGNORED_USERS'						=> $params['ignored_users'],
 						'INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE'				=> $params['explanation_message_title'],
 						'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'				=> $params['explanation_message_text'],
-						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'	=> $params['explanation_display_rules_enabled'],
+						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'	=> $params['is_explanation_display_rules'],
 						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE'			=> $params['explanation_message_rules_title'],
 						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT'			=> $params['explanation_message_rules_text'],
 						'U_ACTION'												=> $this->u_action,
@@ -141,8 +146,7 @@ class acp_introduciator
 					$this->add_all_groups();
 
 					$s_hidden_fields = build_hidden_fields(array(
-							'introduciator_action'	=> 'update',					// Action
-							'introduciator_id'		=> $params['introduciator_id'],	// Id of row for hident input named "id"
+							'action'				=> 'update',					// Action
 						));
 
 					$template->assign_vars(array(
@@ -163,44 +167,30 @@ class acp_introduciator
 							$is_use_permissions						= request_var('is_use_permissions', false);
 							$is_include_groups						= request_var('include_groups', false);
 							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
-							$ignored_users							= utf8_normalize_nfc(request_var('ignored_users', ''));
-							$explanation_message_title				= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
-							$explanation_message_text				= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
+							$ignored_users							= substr(utf8_normalize_nfc(request_var('ignored_users', '')),0,255);
+							$explanation_message_title				= substr(utf8_normalize_nfc(request_var('explanation_message_title', '', true)),0,255);
+							$explanation_message_text				= substr(utf8_normalize_nfc(request_var('explanation_message_text', '', true)),0,255);
 							$explanation_display_rules_enabled		= request_var('explanation_display_rules_enabled', false);
-							$explanation_message_rules_title		= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
-							$explanation_message_rules_text			= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
-							$id										= request_var('introduciator_id', 0);
+							$explanation_message_rules_title		= substr(utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true)),0,255);
+							$explanation_message_rules_text			= substr(utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true)),0,255);
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
-							else if ($id === 0)
-							{
-								trigger_error($user->lang['INTRODUCIATOR_ERROR_ID_NOT_FOUND'] . adm_back_link($this->u_action), E_USER_WARNING);
-							}
-							$sql_ary = array(
-								'is_check_delete_first_post_enabled'	=> $is_check_delete_first_post_activated,
-								'fk_forum_id'							=> $fk_forum_id,
-								'is_explanation_enabled'				=> $is_explanation_enabled,
-								'is_use_permissions'					=> $is_use_permissions,
-								'is_include_groups'						=> $is_include_groups,
-								'ignored_users'							=> $ignored_users,
-								'explanation_message_title'				=> $explanation_message_title,
-								'explanation_message_text'				=> $explanation_message_text,
-								'explanation_display_rules_enabled'		=> $explanation_display_rules_enabled,
-								'explanation_message_rules_title'		=> $explanation_message_rules_title,
-								'explanation_message_rules_text'		=> $explanation_message_rules_text,
-							);
-
-							// Set the activation MOD config
-							set_config('allow_introduciator', $is_enabled ? 1 : 0);
-
-							// Update INTRODUCIATOR_CONFIG_TABLE
-							$sql = 'UPDATE ' . INTRODUCIATOR_CONFIG_TABLE . '
-									SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
-									WHERE introduciator_id = ' . $id;
-							$db->sql_query($sql);
+							
+							set_config('introduciator_allow', $is_enabled); // Set the activation MOD config
+							set_config('introduciator_is_check_delete_first_post',$is_check_delete_first_post_activated);
+							set_config('introduciator_fk_forum_id',$fk_forum_id);
+							set_config('introduciator_is_explanation_enabled',$is_explanation_enabled);
+							set_config('introduciator_is_use_permissions',$is_use_permissions);
+							set_config('introduciator_is_include_groups',$is_include_groups);
+							set_config('introduciator_ignored_users',$ignored_users);
+							set_config('introduciator_explanation_message_title',$explanation_message_title);
+							set_config('introduciator_explanation_message_text',$explanation_message_text);
+							set_config('introduciator_is_explanation_display_rules',$explanation_display_rules_enabled);
+							set_config('introduciator_explanation_message_rules_title',$explanation_message_rules_title);
+							set_config('introduciator_explanation_message_rules_text',$explanation_message_rules_text);
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries

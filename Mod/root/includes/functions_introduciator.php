@@ -27,7 +27,7 @@ if (!function_exists('group_memberships'))
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
 define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.0');
-define('INTRODUCIATOR_CONFIG_TABLE',		$table_prefix . 'introduciator_config');
+define('INTRODUCIATOR_CONFIG_TABLE',		$table_prefix . 'introduciator_config'); // Removed when version is >= 1.0.0
 define('INTRODUCIATOR_GROUPS_TABLE',		$table_prefix . 'introduciator_groups');
 
 /**
@@ -154,14 +154,22 @@ function is_user_in_groups_selected($user_id)
  */
 function introduciator_getparams()
 {
-	global $db; // Database
-
-	$sql = 'SELECT * FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
-	$result = $db->sql_query($sql);
-	$row = $db->sql_fetchrow($result);
-	$db->sql_freeresult($result);
-
-	return $row;
+	global $config;
+	
+	return array(
+		'introduciator_allow'					=> $config['introduciator_allow'],
+		'fk_forum_id'							=> $config['introduciator_fk_forum_id'],
+		'is_check_delete_first_post'			=> $config['introduciator_is_check_delete_first_post'],
+		'is_explanation_enabled'				=> $config['introduciator_is_explanation_enabled'],
+		'is_use_permissions'					=> $config['introduciator_is_use_permissions'],
+		'is_include_groups'						=> $config['introduciator_is_include_groups'],
+		'ignored_users'							=> $config['introduciator_ignored_users'],
+		'explanation_message_title'				=> $config['introduciator_explanation_message_title'],
+		'explanation_message_text'				=> $config['introduciator_explanation_message_text'],
+		'is_explanation_display_rules'			=> $config['introduciator_is_explanation_display_rules'],
+		'explanation_message_rules_title'		=> $config['introduciator_explanation_message_rules_title'],
+		'explanation_message_rules_text'		=> $config['introduciator_explanation_message_rules_text'],
+	);
 }
 
 /**
@@ -264,7 +272,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 
 	if ($poster_id != ANONYMOUS)
 	{	// User is logged and have user authorization
-		if ($config['allow_introduciator'])
+		if ($config['introduciator_allow'])
 		{	// MOD is enabled and the user is not ignored, it can do all he wants
 			// Force forum id because it be moved while user delete the message
 			global $db;
@@ -275,7 +283,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 			{	// Check if the user don't try to remove the first message of it's OWN introduce
 				// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
 				// else he needs to delete all the topic
-				if (!empty($post_id) && $params['fk_forum_id'] == $forum_id && $params['is_check_delete_first_post_enabled'] && $user->data['is_registered'] && $auth->acl_gets('f_delete', 'm_delete', $forum_id))
+				if (!empty($post_id) && $params['fk_forum_id'] == $forum_id && $params['is_check_delete_first_post'] && $user->data['is_registered'] && $auth->acl_gets('f_delete', 'm_delete', $forum_id))
 				{	// This post is into the introduce forum
 					// Find the topic identifier
 					$sql = 'SELECT topic_id,poster_id
@@ -376,7 +384,7 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 	$class = '';
 	$pending = false;
 
-	if ($config['allow_introduciator'])
+	if ($config['introduciator_allow'])
 	{
 		if (empty($introduciator_params))
 		{
