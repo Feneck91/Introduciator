@@ -138,7 +138,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the MOD is desactivated',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this MOD is enabled, your should choose a forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'No update information available',
-	'INTRODUCIATOR_ERROR_ID_NOT_FOUND'						=> 'Error, Introduciator MOD configuration cannot be updated!',
 ));
 
 /**

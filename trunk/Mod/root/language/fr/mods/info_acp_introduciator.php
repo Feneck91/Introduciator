@@ -138,7 +138,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque le MOD est désactivé',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
-	'INTRODUCIATOR_ERROR_ID_NOT_FOUND'						=> 'Erreur, la configuration du MOD Présentation Forcée ne peut pas être mise à jour !',
 ));
 
 /**

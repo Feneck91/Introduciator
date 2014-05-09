@@ -37,7 +37,7 @@ if ($user->data['user_id'] == ANONYMOUS)
 $user->setup('mods/introduciator');
 
 global $config;
-if ($config['allow_introduciator'])
+if ($config['introduciator_allow'])
 {	// Title messagte
 	// Load MOD configuration
 	$params = introduciator_getparams();
@@ -97,7 +97,7 @@ if ($config['allow_introduciator'])
 			));
 
 	// Only display rules if rules field is filled
-	$is_rules_filled = $params['explanation_display_rules_enabled'] && strlen($rules_text) > 0;
+	$is_rules_filled = $params['is_explanation_display_rules'] && strlen($rules_text) > 0;
 
 	$template->assign_vars(array(
 		'S_MOD_ACTIVATED'					=> true,

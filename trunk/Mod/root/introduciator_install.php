@@ -19,7 +19,6 @@ define('IN_PHPBB', true);   // Protect subfoder files to direct access
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
-include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx); // For defines
 
 // Start session management
 $user->session_begin();
@@ -31,6 +30,8 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 {
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
+
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx); // For defines
 
 // The name of the mod to be displayed during installation.
 $mod_name = 'INTRODUCIATOR_MOD';
@@ -72,18 +73,7 @@ $options = array(
 	'legend3'	=> 'ACP_SUBMIT_CHANGES',
 );
 
-// Record value (if exists) 'is_enabled' from RC1 version and set it to 'allow_introduciator'
-// config with this value, else false by default
-$allow_introduciator = false;
-global $config;
-if (isset($config['allow_introduciator']))
-{	// If already installed
-	$introduciator_params = introduciator_getparams();
-	if ($introduciator_params && isset($introduciator_params['is_enabled']))
-	{
-		$allow_introduciator = $introduciator_params['is_enabled'];
-	}
-}
+$old_config = get_old_params();
 
 // The array of versions and actions within each.
 // You do not need to order it a specific way (it will be sorted automatically), however, you must enter every version, even if no actions are done for it.
@@ -92,11 +82,33 @@ if (isset($config['allow_introduciator']))
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
 	'1.0.0' => array(
-		// Nothing changed in this version
+		'config_add' => array(
+			array('introduciator_allow', '0'),
+			array('introduciator_fk_forum_id',						$old_config['fk_forum_id']),
+			array('introduciator_is_check_delete_first_post',		$old_config['is_check_delete_first_post']),
+			array('introduciator_is_explanation_enabled',			$old_config['is_explanation_enabled']),
+			array('introduciator_is_use_permissions',				$old_config['is_use_permissions']),
+			array('introduciator_is_include_groups',				$old_config['is_include_groups']),
+			array('introduciator_ignored_users',					$old_config['ignored_users']),
+			array('introduciator_explanation_message_title',		substr($old_config['explanation_message_title'],0,255)),
+			array('introduciator_explanation_message_text',			substr($old_config['explanation_message_text'],0,255)),
+			array('introduciator_is_explanation_display_rules',		$old_config['is_explanation_display_rules']),
+			array('introduciator_explanation_message_rules_title',	substr($old_config['explanation_message_rules_title'],0,255)),
+			array('introduciator_explanation_message_rules_text',	substr($old_config['explanation_message_rules_text'],0,255)),
+		),
+		
+		// Remove old config entry
+		'config_remove' => array(
+			array('allow_introduciator'),
+		),
+		// remove old mod configuration table
+		'table_remove' => array(
+			$table_prefix . 'introduciator_config',
+		),
 	),
 	'1.0.0-RC2' => array(
 		'config_update' => array(
-			array('allow_introduciator', $allow_introduciator),
+			array('allow_introduciator', '0'),
 		),
 		'table_column_remove' => array(
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_enabled'),
@@ -135,7 +147,7 @@ $versions = array(
 		// Add the module in ACP under the .MOD tab
 		'module_add' => array(
 			// ACP_CAT_DOT_MODS is '.MOD' in acp
-            array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD'),
+			array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD'),
 
 			//---------------------------------------------------------------------
 			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
@@ -168,7 +180,7 @@ $versions = array(
 		// Add new config entry
 		'config_add' => array(
 			array('introduciator_install_date', $current_time),
-			array('allow_introduciator', '1', 0),
+			array('allow_introduciator', '0'),
 		),
 
 		// Now to add some permission settings
@@ -187,7 +199,6 @@ $versions = array(
 		'module_add' => array(
 			// ACP_CAT_DOT_MODS is '.MOD' in acp
             array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD'),
-			),
 
 			//---------------------------------------------------------------------
 			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
@@ -286,3 +297,43 @@ function display_message($lang_string, $class)
 
 	return '<span class="' . $class . '">' . $user->lang[$lang_string] . '</span>';
 }
+
+/**
+ * Get the old introduciator parameters.
+ *
+ * @return The introduciator parameters if installed version is <= 1.0.0, else return false.
+ */
+function get_old_params()
+{
+	global $config;
+	
+	$row = false;
+	if (function_exists('phpbb_version_compare') && !empty($config['introduciator_mod_version']) && phpbb_version_compare($config['introduciator_mod_version'],'1.0.0', '<'))
+	{	// Get old values from INTRODUCIATOR_CONFIG_TABLE, this table is deleted when > 
+		global $db; // Database
+
+		$sql = 'SELECT * FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
+		$result = $db->sql_query($sql);
+		$row = $db->sql_fetchrow($result);
+		$db->sql_freeresult($result);
+	}
+	else
+	{	// Default values
+		$row = array(
+			'fk_forum_id'						=>	'0',
+			'is_check_delete_first_post'		=>	true,
+			'is_explanation_enabled'			=>	false,
+			'is_use_permissions'				=>	true,
+			'is_include_groups'					=>	true,
+			'ignored_users'						=>	'',
+			'explanation_message_title'			=>	'%explanation_title%',
+			'explanation_message_text'			=>	'%explanation_text%',
+			'is_explanation_display_rules'		=>	true,
+			'explanation_message_rules_title'	=>	'%rules_title%',
+			'explanation_message_rules_text'	=>	'%rules_text%',
+		);
+	}
+
+	return $row;
+}
+
