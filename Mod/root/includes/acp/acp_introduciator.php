@@ -178,7 +178,7 @@ class acp_introduciator
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
-							
+
 							set_config('introduciator_allow', $is_enabled); // Set the activation MOD config
 							set_config('introduciator_is_check_delete_first_post',$is_check_delete_first_post_activated);
 							set_config('introduciator_fk_forum_id',$fk_forum_id);
@@ -290,7 +290,7 @@ class acp_introduciator
 	{
 		global $cache;
 
-		$info = $cache->get('introduciatorversioncheck');
+		$info = $cache->get('introduciator_version_check');
 
 		if ($info === false || $force_update)
 		{
@@ -301,11 +301,11 @@ class acp_introduciator
 
 			if ($info === false)
 			{
-				$cache->destroy('introduciatorversioncheck');
+				$cache->destroy('introduciator_version_check');
 				return false;
 			}
 
-			$cache->put('introduciatorversioncheck', $info, $ttl);
+			$cache->put('introduciator_version_check', $info, $ttl);
 		}
 
 		return $info;

@@ -27,7 +27,6 @@ if (!function_exists('group_memberships'))
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
 define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.0');
-define('INTRODUCIATOR_CONFIG_TABLE',		$table_prefix . 'introduciator_config'); // Removed when version is >= 1.0.0
 define('INTRODUCIATOR_GROUPS_TABLE',		$table_prefix . 'introduciator_groups');
 
 /**
@@ -155,7 +154,7 @@ function is_user_in_groups_selected($user_id)
 function introduciator_getparams()
 {
 	global $config;
-	
+
 	return array(
 		'introduciator_allow'					=> $config['introduciator_allow'],
 		'fk_forum_id'							=> $config['introduciator_fk_forum_id'],
