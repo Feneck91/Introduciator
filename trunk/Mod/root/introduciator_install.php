@@ -33,6 +33,8 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx); // For defines
 
+define('INTRODUCIATOR_CONFIG_TABLE',		$table_prefix . 'introduciator_config'); // Removed when version is >= 1.0.0
+//
 // The name of the mod to be displayed during installation.
 $mod_name = 'INTRODUCIATOR_MOD';
 
@@ -96,7 +98,7 @@ $versions = array(
 			array('introduciator_explanation_message_rules_title',	substr($old_config['explanation_message_rules_title'],0,255)),
 			array('introduciator_explanation_message_rules_text',	substr($old_config['explanation_message_rules_text'],0,255)),
 		),
-		
+
 		// Remove old config entry
 		'config_remove' => array(
 			array('allow_introduciator'),
@@ -301,15 +303,19 @@ function display_message($lang_string, $class)
 /**
  * Get the old introduciator parameters.
  *
- * @return The introduciator parameters if installed version is <= 1.0.0, else return false.
+ * In introduciator version < 1.0.0 the parameters was recorded into introduciator_config table.
+ * This configuration was migrated to config table and introduciator_config was deleted.
+ *
+ * @return The introduciator parameters if installed version is <= 1.0.0, else return defaults parameters
+ * used to create config when introduciator release candidate never installed.
  */
 function get_old_params()
 {
 	global $config;
-	
+
 	$row = false;
 	if (function_exists('phpbb_version_compare') && !empty($config['introduciator_mod_version']) && phpbb_version_compare($config['introduciator_mod_version'],'1.0.0', '<'))
-	{	// Get old values from INTRODUCIATOR_CONFIG_TABLE, this table is deleted when > 
+	{	// Get old values from INTRODUCIATOR_CONFIG_TABLE, this table is deleted when >
 		global $db; // Database
 
 		$sql = 'SELECT * FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
