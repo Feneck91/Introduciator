@@ -152,7 +152,7 @@
 			-->
 			<dl>
 				<dt><label for="ignored_users">{L_INTRODUCIATOR_CP_ED_IGNORED_USERS}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN}</span></dt>
-				<dd><textarea id="ignored_users" name="ignored_users" rows="10" cols="60" maxlength="255">{INTRODUCIATOR_ITEM_IGNORED_USERS}</textarea></dd>
+				<dd><textarea id="ignored_users" name="ignored_users" rows="10" cols="60" onDrop="limit_text_area_length(this)" onKeyUp="limit_text_area_length(this)">{INTRODUCIATOR_ITEM_IGNORED_USERS}</textarea></dd>
 			</dl>
 		</fieldset>
 		<fieldset>
@@ -177,7 +177,7 @@
 			-->
 			<dl>
 				<dt><label for="explanation_message_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN}</span></dt>
-				<dd><textarea id="explanation_message_text" name="explanation_message_text" rows="10" cols="60" maxlength="255">{INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT}</textarea></dd>
+				<dd><textarea id="explanation_message_text" name="explanation_message_text" rows="10" cols="60" onDrop="limit_text_area_length(this)" onKeyUp="limit_text_area_length(this)">{INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT}</textarea></dd>
 			</dl>
 			<!--
 			     Activate / Desactivate rules display
@@ -193,14 +193,14 @@
 			-->
 			<dl>
 				<dt><label for="explanation_message_rules_title">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN}</span></dt>
-				<dd><textarea id="explanation_message_rules_title" name="explanation_message_rules_title" rows="5" cols="60" maxlength="255">{INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE}</textarea></dd>
+				<dd><textarea id="explanation_message_rules_title" name="explanation_message_rules_title" rows="5" cols="60" onDrop="limit_text_area_length(this)" onKeyUp="v">{INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE}</textarea></dd>
 			</dl>
 			<!--
 			     Explanation text
 			-->
 			<dl>
 				<dt><label for="explanation_message_rules_text">{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN}</span></dt>
-				<dd><textarea id="explanation_message_rules_text" name="explanation_message_rules_text" rows="10" cols="60" maxlength="255">{INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT}</textarea></dd>
+				<dd><textarea id="explanation_message_rules_text" name="explanation_message_rules_text" rows="10" cols="60" onDrop="limit_text_area_length(this)" onKeyUp="limit_text_area_length(this)">{INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT}</textarea></dd>
 			</dl>
 			<!--
 			     --------------------------- Posting ---------------------------------------------
@@ -225,4 +225,11 @@
 	</form>
 <!-- ENDIF -->
 
+<script type="text/javascript">
+//<![CDATA[
+function limit_text_area_length(txtAreaCtrl){
+	txtAreaCtrl.value = txtAreaCtrl.value.slice(0, 255);
+}
+// ]]>
+</script>
 <!-- INCLUDE overall_footer.html -->
