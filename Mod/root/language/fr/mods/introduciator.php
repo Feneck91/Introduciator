@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD_CONFIRM'			=> 'Êtes-vous prêt à installer le Mod Présentation forcée ?',
 
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Informations',
-	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'Par défaut le MOD est désactivé, vous devez l’activer et le configurer en allant dans <strong>ACP >> .MODS >> Présentation forcée >> Configuration</strong>.
+	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'Par défaut le MOD est désactivé, vous devez l’activer et le configurer en allant dans <strong>ACP &gt;&gt; .MODS &gt;&gt; Présentation forcée &gt;&gt; Configuration</strong>.
 													<br/>N’oubliez pas de paramétrer le nouvelle permission <strong>Doit se présenter</strong> dans l’ACP : « Permissions des utilisateurs »',
 
 	'INTRODUCIATOR_MOD'							=> 'Mod Présentation forcée',
@@ -73,12 +73,12 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'		=> 'Vous n’êtes pas autorisé à supprimer le premier message d’une présentation, supprimez toute la présentation en détruisant le sujet !',
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Veuillez vous présenter dans le Forum : %s',
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'Le MOD Présentation forcée est désactivé. Veuillez l’activer pour l’utiliser !',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</b>',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<strong>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</strong>',
 
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le forum “<a href="%forum_url%">%forum_name%</a>”<br/>
 															Seule la création d’un nouveau sujet dans le forum de présentation est autorisée.<br/>
 															Lors de la création de votre présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation.',
-	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>Les règles sont rappelées ici :</u></b>',
+	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<strong><u>Les règles sont rappelées ici :</u></strong>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Aller dans le forum “%forum_name%” maintenant en cliquant sur ce lien</a>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Commencer votre présentation maintenant en cliquant sur ce lien</a>',
 

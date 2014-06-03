@@ -47,8 +47,8 @@ $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD_CONFIRM'			=> 'Are you ready to install the Introduciator Mod?',
 
 	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Information',
-	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'By default, this MOD is not enabled, you should enable and configure it in <strong>ACP >> .MODS >> Introduciator >> Configuration</strong>.
-													<br/>Do not forget to set up the new permission <strong>Must introduce himself</strong> in the ACP >> « User permissions »',
+	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'By default, this MOD is not enabled, you should enable and configure it in <strong>ACP &gt;&gt; .MODS &gt;&gt; Introduciator &gt;&gt; Configuration</strong>.
+													<br/>Do not forget to set up the new permission <strong>Must introduce himself</strong> in the ACP &gt;&gt; « User permissions »',
 
 	'INTRODUCIATOR_MOD'							=> 'Introduciator Mod',
 	'INTRODUCIATOR_MOD_EXPLAIN'					=> 'Install Introduciator Mod database changes with UMIL auto method.',
@@ -73,11 +73,11 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'		=> 'You are not allowed to delete the first post of this introduction! You can delete this introduction by deleting the topic.',
 	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Please introduce youself into the topic: %s',
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'The Introduciator MOD is disabled. You should enable it to make this MOD workable.',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<b>To be able to post, <u>you must</u> introduce yourself</b>',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'As for every new user, you must introduce yourself to other members in the “<a href="%forum_url%">%forum_name%</a>” forum<br/>
 															Only a new topic in the forum for introductions is allowed.<br/>
 															When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
-	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<b><u>The rules are repeated here:</u></b>',
+	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<strong><u>The rules are repeated here:</u></strong>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
 
