@@ -26,7 +26,7 @@ if (!defined('INTRODUCIATOR_CURRENT_VERSION'))
 
 if (!function_exists('set_config'))
 {
-	include($phpbb_root_path . 'includes/functions_convert.' . $phpEx);
+	include($phpbb_root_path . 'includes/functions.' . $phpEx);
 }
 
 /**
@@ -78,8 +78,8 @@ class acp_introduciator
 				else
 				{
 					$latest_version_info = explode("\n", $latest_version_info);
-					$version_check = $this->get_update_information('url-',$latest_version_info);
-					$infos = $this->get_update_information('info-',$latest_version_info);
+					$version_check = $this->get_update_information('url-', $latest_version_info);
+					$infos = $this->get_update_information('info-', $latest_version_info);
 
 					$template->assign_vars(array(
 						'S_INTRODUCIATOR_VERSION_UP_TO_DATE'	=> phpbb_version_compare(trim($latest_version_info[0]), $config['introduciator_mod_version'], '<='),
@@ -140,7 +140,7 @@ class acp_introduciator
 					));
 
 					// Add all forums
-					$this->add_all_forums($params['fk_forum_id'],0,0);
+					$this->add_all_forums($params['fk_forum_id'], 0, 0);
 
 					// Add all groups
 					$this->add_all_groups();
@@ -167,12 +167,12 @@ class acp_introduciator
 							$is_use_permissions						= request_var('is_use_permissions', false);
 							$is_include_groups						= request_var('include_groups', false);
 							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
-							$ignored_users							= substr(utf8_normalize_nfc(request_var('ignored_users', '')),0,255);
-							$explanation_message_title				= substr(utf8_normalize_nfc(request_var('explanation_message_title', '', true)),0,255);
-							$explanation_message_text				= substr(utf8_normalize_nfc(request_var('explanation_message_text', '', true)),0,255);
+							$ignored_users							= substr(utf8_normalize_nfc(request_var('ignored_users', '')), 0, 255);
+							$explanation_message_title				= substr(utf8_normalize_nfc(request_var('explanation_message_title', '', true)), 0, 255);
+							$explanation_message_text				= substr(utf8_normalize_nfc(request_var('explanation_message_text', '', true)), 0, 255);
 							$explanation_display_rules_enabled		= request_var('explanation_display_rules_enabled', false);
-							$explanation_message_rules_title		= substr(utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true)),0,255);
-							$explanation_message_rules_text			= substr(utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true)),0,255);
+							$explanation_message_rules_title		= substr(utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true)), 0, 255);
+							$explanation_message_rules_text			= substr(utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true)), 0, 255);
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
@@ -180,17 +180,17 @@ class acp_introduciator
 							}
 
 							set_config('introduciator_allow', $is_enabled); // Set the activation MOD config
-							set_config('introduciator_is_check_delete_first_post',$is_check_delete_first_post_activated);
-							set_config('introduciator_fk_forum_id',$fk_forum_id);
-							set_config('introduciator_is_explanation_enabled',$is_explanation_enabled);
-							set_config('introduciator_is_use_permissions',$is_use_permissions);
-							set_config('introduciator_is_include_groups',$is_include_groups);
-							set_config('introduciator_ignored_users',$ignored_users);
-							set_config('introduciator_explanation_message_title',$explanation_message_title);
-							set_config('introduciator_explanation_message_text',$explanation_message_text);
-							set_config('introduciator_is_explanation_display_rules',$explanation_display_rules_enabled);
-							set_config('introduciator_explanation_message_rules_title',$explanation_message_rules_title);
-							set_config('introduciator_explanation_message_rules_text',$explanation_message_rules_text);
+							set_config('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated);
+							set_config('introduciator_fk_forum_id', $fk_forum_id);
+							set_config('introduciator_is_explanation_enabled', $is_explanation_enabled);
+							set_config('introduciator_is_use_permissions', $is_use_permissions);
+							set_config('introduciator_is_include_groups', $is_include_groups);
+							set_config('introduciator_ignored_users', $ignored_users);
+							set_config('introduciator_explanation_message_title', $explanation_message_title);
+							set_config('introduciator_explanation_message_text', $explanation_message_text);
+							set_config('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled);
+							set_config('introduciator_explanation_message_rules_title', $explanation_message_rules_title);
+							set_config('introduciator_explanation_message_rules_text', $explanation_message_rules_text);
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
@@ -218,7 +218,7 @@ class acp_introduciator
 		}
 	}
 
-	function add_all_forums($fk_selected_forum_id,$id_parent,$level)
+	function add_all_forums($fk_selected_forum_id, $id_parent, $level)
 	{
 		global $db, $template, $user;
 
@@ -234,7 +234,7 @@ class acp_introduciator
 		}
 
 		// Add all forums
-		$sql = 'SELECT forum_name,forum_id,forum_desc,forum_type
+		$sql = 'SELECT forum_name, forum_id, forum_desc, forum_type
 				FROM ' . FORUMS_TABLE . '
 				WHERE parent_id = ' . (int) $id_parent;
 
@@ -242,13 +242,13 @@ class acp_introduciator
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('forums', array(
-				'FORUM_NAME'	=> str_repeat("&nbsp;",4 * $level) . $row['forum_name'],
+				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
 				'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
 				'CAN_SELECT'	=> ((int) $row['forum_type']) == FORUM_POST,
 				'TOOLTIP'		=> $row['forum_desc'],
 				));
-			$this->add_all_forums($fk_selected_forum_id,$row['forum_id'],$level + 1);
+			$this->add_all_forums($fk_selected_forum_id, $row['forum_id'], $level + 1);
 		}
 		$db->sql_freeresult($result);
 	}
@@ -262,7 +262,7 @@ class acp_introduciator
 	{
 		global $db, $template;
 
-		$sql = 'SELECT group_id,group_desc
+		$sql = 'SELECT group_id, group_desc
 			FROM ' . GROUPS_TABLE;
 
 		$result = $db->sql_query($sql);
@@ -322,9 +322,9 @@ class acp_introduciator
 	 *   [0] The string into the correct language. English if the current language is not found. Error message if default language was not found
 	 *   [1] Indicate if the string (default or not) was found or not (true / false).
 	 */
-	function get_update_information($tag,$latest_version_info)
+	function get_update_information($tag, $latest_version_info)
 	{
-		global $tag_and_lang,$tag_and_lang_en,$user,$tag_len;
+		global $tag_and_lang, $tag_and_lang_en, $user, $tag_len;
 
 		$information = $user->lang['INTRODUCIATOR_NO_UPDATE_INFO_FOUND'];
 		$found = false;
@@ -337,23 +337,23 @@ class acp_introduciator
 		{
 			if (strlen($latest_version_info[$index]) > $tag_len)
 			{
-				$line_lang = substr($latest_version_info[$index],0,$tag_len);
+				$line_lang = substr($latest_version_info[$index], 0, $tag_len);
 				if ($line_lang === $tag_and_lang)
 				{
-					$information = substr($latest_version_info[$index],$tag_len,strlen($latest_version_info[$index]) - $tag_len);
+					$information = substr($latest_version_info[$index], $tag_len, strlen($latest_version_info[$index]) - $tag_len);
 					$found = true;
 					break; // Found, quit the for
 				}
 				else if ($line_lang === $tag_and_lang_en)
 				{	// English by default if found
-					$information = substr($latest_version_info[$index],$tag_len,strlen($latest_version_info[$index]) - $tag_len);
+					$information = substr($latest_version_info[$index], $tag_len, strlen($latest_version_info[$index]) - $tag_len);
 					$found = true;
 				}
 			}
 		}
 
 		return array(
-			str_replace('\\n','<br/>',$information),
+			str_replace('\\n', '<br/>', $information),
 			$found,
 		);
 	}

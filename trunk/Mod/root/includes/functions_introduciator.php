@@ -18,12 +18,13 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-global $phpbb_root_path, $phpEx, $table_prefix, $introduciator_params;
 if (!function_exists('group_memberships'))
 {
+	global $phpbb_root_path, $phpEx;
 	include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 }
 
+global $table_prefix;
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
 define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.0');
@@ -60,8 +61,8 @@ function is_group_selected($forum_id)
  * Example :
  * 	replace_all_by(
  *		array(
- *			&$var_1,
- *			&$var_2
+ *			$var_1,
+ *			$var_2
  *			),
  *		array(
  *			'search1'	=> 'replaced by this text1',
@@ -73,13 +74,13 @@ function is_group_selected($forum_id)
  * @param $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
  * @return None
  */
-function replace_all_by($arr_fields,$arr_replace_by)
+function replace_all_by($arr_fields, $arr_replace_by)
 {
 	foreach ($arr_fields as &$field)
 	{
 		foreach ($arr_replace_by as $arr_replace_by_key => $arr_replace_by_value)
 		{
-			$field = str_replace($arr_replace_by_key,$arr_replace_by_value,$field);
+			$field = str_replace($arr_replace_by_key, $arr_replace_by_value, $field);
 		}
 	}
 }
@@ -96,7 +97,7 @@ function replace_all_by($arr_fields,$arr_replace_by)
  * @param $topic_approved If this function returns true, it contains true / false if the topic is approved or not
  * @return true if the user already post at least one message into this forum, false else
  */
-function is_user_post_into_forum($forum_id,$user_id,&$topic_id,&$first_post_id,&$topic_approved)
+function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_id, &$topic_approved)
 {
 	global $db; // Database
 
@@ -138,12 +139,12 @@ function is_user_in_groups_selected($user_id)
 	$arr_groups_id = array();
 	while ($row = $db->sql_fetchrow($result))
 	{	// Merge array
-		array_push($arr_groups_id,$row['fk_group']);
+		array_push($arr_groups_id, $row['fk_group']);
 	}
 	$db->sql_freeresult($result);
 
 	// Testing
-	return group_memberships($arr_groups_id,(int) $user_id,true);
+	return group_memberships($arr_groups_id, (int) $user_id, true);
 }
 
 /**
@@ -182,7 +183,7 @@ function introduciator_getparams()
  * @param $introduciator_params Introduce MOD parameters
  * @return true if the user is ignored, false else
  */
-function is_user_ignored($poster_id,$poster_name,$introduciator_params)
+function is_user_ignored($poster_id, $poster_name, $introduciator_params)
 {
 	//$auth->acl_get('u_must_introduce');
 	// Check if :
@@ -194,7 +195,7 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
 	// User is in selected group or out of selected group ?
 	if (($introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$introduciator_params['is_include_groups'] && !$is_in_group_selected))
 	{
-		$user_ignored = in_array(utf8_strtolower($poster_name),explode("\n", utf8_strtolower($introduciator_params['ignored_users'])));
+		$user_ignored = in_array(utf8_strtolower($poster_name), explode("\n", utf8_strtolower($introduciator_params['ignored_users'])));
 	}
 
 	return $user_ignored;
@@ -212,7 +213,7 @@ function is_user_ignored($poster_id,$poster_name,$introduciator_params)
  * @param $introduciator_params Introduce MOD parameters
  * @return true if the user must introduce himself pending of rights, false else
  */
-function is_user_must_introduce_himself($poster_id,$authorisations,$poster_name,$introduciator_param)
+function is_user_must_introduce_himself($poster_id, $authorisations, $poster_name, $introduciator_param)
 {
 	$ret = false;
 
@@ -242,7 +243,7 @@ function is_user_must_introduce_himself($poster_id,$authorisations,$poster_name,
 	}
 	else
 	{
-		$ret = !is_user_ignored($poster_id,$poster_name,$introduciator_param);
+		$ret = !is_user_ignored($poster_id, $poster_name, $introduciator_param);
 	}
 
 	return $ret;
@@ -261,7 +262,7 @@ function is_user_must_introduce_himself($poster_id,$authorisations,$poster_name,
  * @param $post_data Informations about posting
  * @return None.
  */
-function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
+function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_data)
 {
 	global $phpbb_root_path, $phpEx, $template, $auth, $config;
 
@@ -303,7 +304,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 						if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
 						{	// The user try to delete the first post of one introduce topic : may be not allowed
 							// To finish, the $first_poster_id MUST BE not ignored
-							if (is_user_must_introduce_himself($first_poster_id,null,$user->data['username'],$params))
+							if (is_user_must_introduce_himself($first_poster_id, null, $user->data['username'], $params))
 							{
 								$user->setup('mods/introduciator'); // Add lang
 								$message = $user->lang[($first_poster_id == $poster_id && !$auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
@@ -311,21 +312,21 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
 								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
 								// meta_refresh(3, $meta_info); // Go back automatically to topic <- Not for the moment
-								trigger_error($message,E_USER_NOTICE);
+								trigger_error($message, E_USER_NOTICE);
 							}
 						}
 					}
 				}
 			}
-			else if (is_user_must_introduce_himself($poster_id,$auth,$user->data['username'],$params))
+			else if (is_user_must_introduce_himself($poster_id, $auth, $user->data['username'], $params))
 			{
 				$topic_id = 0;
 				$first_post_id = 0;
 				$topic_approved = false;
 
-				if (!is_user_post_into_forum($params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
+				if (!is_user_post_into_forum($params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
 				{	// No post into the introduce topic
-					if ((in_array($mode,array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
+					if ((in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
 					{
 						if ($params['is_explanation_enabled'])
 						{
@@ -337,7 +338,7 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
 						}
 					}
 				}
-				else if (!$topic_approved && in_array($mode,array('reply', 'quote','post')))
+				else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
 				{	// At least one post but not approved !
 					$user->setup('mods/introduciator'); // Add lang
 					$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'];
@@ -373,9 +374,9 @@ function introduciator_verify_posting($user,$mode,$forum_id,$post_id,$post_data)
  *   <li>pending : true if message is pending approval, false else.</li>
  * </ul>.
  */
-function introduciator_get_user_infos($poster_id,$poster_name)
+function introduciator_get_user_infos($poster_id, $poster_name)
 {
-	global $phpbb_root_path, $phpEx, $user, $introduciator_params, $auth,$config;
+	global $phpbb_root_path, $phpEx, $user, $introduciator_params, $auth, $config;
 
 	$display = false;
 	$url = false;
@@ -391,14 +392,14 @@ function introduciator_get_user_infos($poster_id,$poster_name)
 			$user->add_lang('mods/introduciator');
 		}
 
-		if (is_user_must_introduce_himself($poster_id,$auth,$poster_name,$introduciator_params))
+		if (is_user_must_introduce_himself($poster_id, $auth, $poster_name, $introduciator_params))
 		{
 			$display = true;
 			$topic_id = 0;
 			$first_post_id = 0;
 			$topic_approved = false;
 
-			if (!is_user_post_into_forum($introduciator_params['fk_forum_id'],$poster_id,$topic_id,$first_post_id,$topic_approved))
+			if (!is_user_post_into_forum($introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
 			{	// No post into the introduce topic
 				$text = $user->lang['INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'];
 				$class = 'introdno-icon';

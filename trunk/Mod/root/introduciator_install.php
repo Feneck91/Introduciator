@@ -92,11 +92,11 @@ $versions = array(
 			array('introduciator_is_use_permissions',				$old_config['is_use_permissions']),
 			array('introduciator_is_include_groups',				$old_config['is_include_groups']),
 			array('introduciator_ignored_users',					$old_config['ignored_users']),
-			array('introduciator_explanation_message_title',		substr($old_config['explanation_message_title'],0,255)),
-			array('introduciator_explanation_message_text',			substr($old_config['explanation_message_text'],0,255)),
+			array('introduciator_explanation_message_title',		substr($old_config['explanation_message_title'], 0, 255)),
+			array('introduciator_explanation_message_text',			substr($old_config['explanation_message_text'], 0, 255)),
 			array('introduciator_is_explanation_display_rules',		$old_config['is_explanation_display_rules']),
-			array('introduciator_explanation_message_rules_title',	substr($old_config['explanation_message_rules_title'],0,255)),
-			array('introduciator_explanation_message_rules_text',	substr($old_config['explanation_message_rules_text'],0,255)),
+			array('introduciator_explanation_message_rules_title',	substr($old_config['explanation_message_rules_title'], 0, 255)),
+			array('introduciator_explanation_message_rules_text',	substr($old_config['explanation_message_rules_text'], 0, 255)),
 		),
 
 		// Remove old config entry
@@ -116,9 +116,9 @@ $versions = array(
 			array(INTRODUCIATOR_CONFIG_TABLE, 'is_enabled'),
 		),
 		'table_column_add' => array(
-			array(INTRODUCIATOR_CONFIG_TABLE, 'is_use_permissions',	array('BOOL',1)),
-			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL',1)),
-			array(INTRODUCIATOR_CONFIG_TABLE, 'ignored_users',		array('TEXT_UNI', '')),// Users list
+			array(INTRODUCIATOR_CONFIG_TABLE, 'is_use_permissions',	array('BOOL', 1)),
+			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL', 1)),
+			array(INTRODUCIATOR_CONFIG_TABLE, 'ignored_users',		array('TEXT_UNI', '')), // Users list
 		),
 		// Add Groups list table
 		'table_add' => array(
@@ -241,13 +241,13 @@ $versions = array(
 			array(INTRODUCIATOR_CONFIG_TABLE, array(
 				'COLUMNS' => array(
 					'introduciator_id'						=> array('UINT', NULL, 'auto_increment'),
-					'is_enabled'							=> array('BOOL',0),
-					'is_check_delete_first_post_enabled'	=> array('BOOL',0),
-					'is_explanation_enabled'				=> array('BOOL',1),
+					'is_enabled'							=> array('BOOL', 0),
+					'is_check_delete_first_post_enabled'	=> array('BOOL', 0),
+					'is_explanation_enabled'				=> array('BOOL', 1),
 					'fk_forum_id'							=> array('UINT', NULL),		// Foreign key on FORUMS_TABLE primary key
 					'explanation_message_title'				=> array('TEXT_UNI', ''),	// Explanation page: title
 					'explanation_message_text'				=> array('TEXT_UNI', ''),	// Explanation page: explanation text
-					'explanation_display_rules_enabled'		=> array('BOOL',1),
+					'explanation_display_rules_enabled'		=> array('BOOL', 1),
 					'explanation_message_rules_title'		=> array('TEXT_UNI', ''),	// Explanation page: title rules
 					'explanation_message_rules_text'		=> array('TEXT_UNI', ''),	// Explanation page: rules, let empty to get forum rules
 				),
@@ -314,7 +314,7 @@ function get_old_params()
 	global $config;
 
 	$row = false;
-	if (function_exists('phpbb_version_compare') && !empty($config['introduciator_mod_version']) && phpbb_version_compare($config['introduciator_mod_version'],'1.0.0', '<'))
+	if (function_exists('phpbb_version_compare') && !empty($config['introduciator_mod_version']) && phpbb_version_compare($config['introduciator_mod_version'], '1.0.0', '<'))
 	{	// Get old values from INTRODUCIATOR_CONFIG_TABLE, this table is deleted when >
 		global $db; // Database
 

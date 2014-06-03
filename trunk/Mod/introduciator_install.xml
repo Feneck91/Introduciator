@@ -243,7 +243,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 ul.profile-icons li.introd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: icon */
 ul.profile-icons li.introdno-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: no presentation avalaible */
 ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending */
-/* Introduciator - Begin
+/* Introduciator - End
 //------------------------------------------------*/
 
 ]]></action>
@@ -257,7 +257,26 @@ ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciato
 .introd-icon, .introd-icon a		{ background-image: url("{T_THEME_PATH}/images/icon_introduciator.gif"); } 			/* Introduciator MOD: icon */
 .introdno-icon, .introdno-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_nointroduciator.gif"); }		/* Introduciator MOD: no presentation avalaible */
 .introdpd-icon, .introdpd-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_pendingintroduciator.gif"); }	/* Introduciator MOD: presentation is pending */
-/* Introduciator - Begin
+/* Introduciator - End
+//------------------------------------------------*/
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/style.css">
+			<edit>
+				<find><![CDATA[/* Main Panel]]></find>
+				<action type="before-add"><![CDATA[/*------------------------------------------------
+// Introduciator - Begin */
+#introduciator_explain {
+	color: orangered;
+	text-align: center;
+}
+
+#introduciator_disabled {
+	color: red;
+	text-align: center;
+}
+/* Introduciator - End
 //------------------------------------------------*/
 ]]></action>
 			</edit>

@@ -46,7 +46,7 @@ if ($config['introduciator_allow'])
 	$forum_rules = array();
 
 	// Find Forum name
-	$sql = 'SELECT forum_name, forum_rules, forum_rules_uid, forum_rules_bitfield,forum_rules_options
+	$sql = 'SELECT forum_name, forum_rules, forum_rules_uid, forum_rules_bitfield, forum_rules_options
 			FROM ' . FORUMS_TABLE . '
 			WHERE forum_id = ' . (int) $params['fk_forum_id'];
 	$result = $db->sql_query($sql);
@@ -64,16 +64,16 @@ if ($config['introduciator_allow'])
 	}
 	$db->sql_freeresult($result);
 
-	$message = $user->lang('INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM',$forum_name);
+	$message = $user->lang('INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM', $forum_name);
 	page_header($message);
 
 	$template->set_filenames(array(
 		'body' => 'introduciator_explain.html',
 	));
 
-	$explanation_title = str_replace('%explanation_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'],$params['explanation_message_title']);
-	$explanation_text = str_replace('%explanation_text%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'],$params['explanation_message_text']);
-	$rules_title = str_replace('%rules_title%',$user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'],$params['explanation_message_rules_title']);
+	$explanation_title = str_replace('%explanation_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'], $params['explanation_message_title']);
+	$explanation_text = str_replace('%explanation_text%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'], $params['explanation_message_text']);
+	$rules_title = str_replace('%rules_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'], $params['explanation_message_rules_title']);
 	$rules_text = str_replace('%rules_text%',
 							  generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
 							  $params['explanation_message_rules_text']);
@@ -83,12 +83,12 @@ if ($config['introduciator_allow'])
 	// Replace in each string the predefined fields
 	replace_all_by(
 		array(
-			&$explanation_title,
-			&$explanation_text,
-			&$rules_title,
-			&$rules_text,
-			&$link_goto_forum,
-			&$link_post_forum,
+			$explanation_title,
+			$explanation_text,
+			$rules_title,
+			$rules_text,
+			$link_goto_forum,
+			$link_post_forum,
 			),
 		array(
 			'%forum_name%'	=> $forum_name,
