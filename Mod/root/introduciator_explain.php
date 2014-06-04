@@ -83,12 +83,12 @@ if ($config['introduciator_allow'])
 	// Replace in each string the predefined fields
 	replace_all_by(
 		array(
-			$explanation_title,
-			$explanation_text,
-			$rules_title,
-			$rules_text,
-			$link_goto_forum,
-			$link_post_forum,
+			&$explanation_title,
+			&$explanation_text,
+			&$rules_title,
+			&$rules_text,
+			&$link_goto_forum,
+			&$link_post_forum
 			),
 		array(
 			'%forum_name%'	=> $forum_name,

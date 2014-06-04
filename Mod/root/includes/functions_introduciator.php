@@ -61,8 +61,8 @@ function is_group_selected($forum_id)
  * Example :
  * 	replace_all_by(
  *		array(
- *			$var_1,
- *			$var_2
+ *			&$var_1,
+ *			&$var_2
  *			),
  *		array(
  *			'search1'	=> 'replaced by this text1',
