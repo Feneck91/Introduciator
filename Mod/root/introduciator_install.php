@@ -33,7 +33,7 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx); // For defines
 
-define('INTRODUCIATOR_CONFIG_TABLE',		$table_prefix . 'introduciator_config'); // Removed when version is >= 1.0.0
+define('INTRODUCIATOR_CONFIG_TABLE', $table_prefix . 'introduciator_config'); // Removed when version is >= 1.0.0
 //
 // The name of the mod to be displayed during installation.
 $mod_name = 'INTRODUCIATOR_MOD';
@@ -105,7 +105,7 @@ $versions = array(
 		),
 		// remove old mod configuration table
 		'table_remove' => array(
-			$table_prefix . 'introduciator_config',
+			INTRODUCIATOR_CONFIG_TABLE,
 		),
 	),
 	'1.0.0-RC2' => array(

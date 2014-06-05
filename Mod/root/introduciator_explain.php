@@ -60,7 +60,7 @@ if ($config['introduciator_allow'])
 			'rules_uid'			=> $row['forum_rules_uid'],
 			'rules_bitfield'	=> $row['forum_rules_bitfield'],
 			'rules_options'		=> $row['forum_rules_options'],
-			);
+		);
 	}
 	$db->sql_freeresult($result);
 
@@ -74,9 +74,7 @@ if ($config['introduciator_allow'])
 	$explanation_title = str_replace('%explanation_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'], $params['explanation_message_title']);
 	$explanation_text = str_replace('%explanation_text%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'], $params['explanation_message_text']);
 	$rules_title = str_replace('%rules_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'], $params['explanation_message_rules_title']);
-	$rules_text = str_replace('%rules_text%',
-							  generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
-							  $params['explanation_message_rules_text']);
+	$rules_text = str_replace('%rules_text%',generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']), $params['explanation_message_rules_text']);
 	$link_goto_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
 	$link_post_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
 
@@ -89,12 +87,13 @@ if ($config['introduciator_allow'])
 			&$rules_text,
 			&$link_goto_forum,
 			&$link_post_forum
-			),
+		),
 		array(
 			'%forum_name%'	=> $forum_name,
 			'%forum_url%'	=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']),
 			'%forum_post%'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']),
-			));
+		)
+	);
 
 	// Only display rules if rules field is filled
 	$is_rules_filled = $params['is_explanation_display_rules'] && strlen($rules_text) > 0;
