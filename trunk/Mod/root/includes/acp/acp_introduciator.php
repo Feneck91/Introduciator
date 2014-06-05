@@ -230,7 +230,7 @@ class acp_introduciator
 				'SELECTED'		=> ($fk_selected_forum_id === 0),
 				'CAN_SELECT'	=> true,
 				'TOOLTIP'		=> $user->lang['INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'],
-				));
+			));
 		}
 
 		// Add all forums
@@ -247,7 +247,7 @@ class acp_introduciator
 				'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
 				'CAN_SELECT'	=> ((int) $row['forum_type']) == FORUM_POST,
 				'TOOLTIP'		=> $row['forum_desc'],
-				));
+			));
 			$this->add_all_forums($fk_selected_forum_id, $row['forum_id'], $level + 1);
 		}
 		$db->sql_freeresult($result);
@@ -269,10 +269,10 @@ class acp_introduciator
 		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('group', array(
-			'NAME'		=> get_group_name($row['group_id']),
-			'ID'		=> (int) $row['group_id'],
-			'SELECTED'	=> is_group_selected($row['group_id']),
-			'TOOLTIP'	=> $row['group_desc'],
+				'NAME'		=> get_group_name($row['group_id']),
+				'ID'		=> (int) $row['group_id'],
+				'SELECTED'	=> is_group_selected($row['group_id']),
+				'TOOLTIP'	=> $row['group_desc'],
 			));
 		}
 		$db->sql_freeresult($result);
