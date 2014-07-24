@@ -33,7 +33,6 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 
 include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx); // For defines
 
-define('INTRODUCIATOR_CONFIG_TABLE', $table_prefix . 'introduciator_config'); // Removed when version is >= 1.0.0
 //
 // The name of the mod to be displayed during installation.
 $mod_name = 'INTRODUCIATOR_MOD';
@@ -84,67 +83,23 @@ $old_config = get_old_params();
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
 	'1.0.0' => array(
-		'config_add' => array(
-			array('introduciator_allow', '0'),
-			array('introduciator_fk_forum_id',						$old_config['fk_forum_id']),
-			array('introduciator_is_check_delete_first_post',		$old_config['is_check_delete_first_post']),
-			array('introduciator_is_explanation_enabled',			$old_config['is_explanation_enabled']),
-			array('introduciator_is_use_permissions',				$old_config['is_use_permissions']),
-			array('introduciator_is_include_groups',				$old_config['is_include_groups']),
-			array('introduciator_ignored_users',					$old_config['ignored_users']),
-			array('introduciator_explanation_message_title',		substr($old_config['explanation_message_title'], 0, 255)),
-			array('introduciator_explanation_message_text',			substr($old_config['explanation_message_text'], 0, 255)),
-			array('introduciator_is_explanation_display_rules',		$old_config['is_explanation_display_rules']),
-			array('introduciator_explanation_message_rules_title',	substr($old_config['explanation_message_rules_title'], 0, 255)),
-			array('introduciator_explanation_message_rules_text',	substr($old_config['explanation_message_rules_text'], 0, 255)),
-		),
-
-		// Remove old config entry
-		'config_remove' => array(
-			array('allow_introduciator'),
-		),
-		// remove old mod configuration table
-		'table_remove' => array(
-			INTRODUCIATOR_CONFIG_TABLE,
-		),
-	),
-	'1.0.0-RC2' => array(
-		'config_update' => array(
-			array('allow_introduciator', '0'),
-		),
-		'table_column_remove' => array(
-			array(INTRODUCIATOR_CONFIG_TABLE, 'is_enabled'),
-		),
-		'table_column_add' => array(
-			array(INTRODUCIATOR_CONFIG_TABLE, 'is_use_permissions',	array('BOOL', 1)),
-			array(INTRODUCIATOR_CONFIG_TABLE, 'is_include_groups',	array('BOOL', 1)),
-			array(INTRODUCIATOR_CONFIG_TABLE, 'ignored_users',		array('TEXT_UNI', '')), // Users list
-		),
-		// Add Groups list table
-		'table_add' => array(
-			array(INTRODUCIATOR_GROUPS_TABLE, array(
-				'COLUMNS' => array(
-					'fk_group'			=> array('UINT', NULL),
-				),
-			)),
-		),
-
 		//-------------------------------------------------------------
 		// Add new permission to module
 		//-------------------------------------------------------------
 		// Now to add some permission settings
 		'permission_add' => array(
 			array('a_introduciator_manage', true),
+			array('u_must_introduce', true),
 		),
 
-		// 1: remove module
-		'module_remove' => array(
-			array('acp', 'ACP_INTRODUCIATOR_MOD',	'INTRODUCIATOR_GENERAL'),
-			array('acp', 'ACP_INTRODUCIATOR_MOD',	'INTRODUCIATOR_CONFIGURATION'),
-			array('acp', 'ACP_CAT_DOT_MODS',		'ACP_INTRODUCIATOR_MOD'),
+		// Global Role permissions for user mask : Yes to All
+		'permission_set' => array(
+			array('ROLE_USER_STANDARD',		'u_must_introduce'),
+			array('ROLE_USER_LIMITED',		'u_must_introduce'),
+			array('ROLE_USER_NEW_MEMBER',	'u_must_introduce'),
 		),
 
-		// 2: add them back with new permission
+		// Add new permission
 		//-------------------------------------------------------------
 		// Add the module in ACP under the .MOD tab
 		'module_add' => array(
@@ -176,107 +131,31 @@ $versions = array(
 			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
 			//---------------------------------------------------------------------
 		),
-	),
-
-	'1.0.0-RC1' => array(
-		// Add new config entry
 		'config_add' => array(
 			array('introduciator_install_date', $current_time),
 			array('allow_introduciator', '0'),
+			array('introduciator_allow', '0'),
+			array('introduciator_fk_forum_id',						0),
+			array('introduciator_is_check_delete_first_post',		true),
+			array('introduciator_is_explanation_enabled',			false),
+			array('introduciator_is_use_permissions',				true),
+			array('introduciator_is_include_groups',				true),
+			array('introduciator_ignored_users',					''),
+			array('introduciator_explanation_message_title',		'%explanation_title%'),
+			array('introduciator_explanation_message_text',			'%explanation_text%'),
+			array('introduciator_is_explanation_display_rules',		true),
+			array('introduciator_explanation_message_rules_title',	'%rules_title%'),
+			array('introduciator_explanation_message_rules_text',	'%rules_text%'),
 		),
-
-		// Now to add some permission settings
-		'permission_add' => array(
-			array('u_must_introduce', true),
-		),
-
-		// Global Role permissions for user mask : Yes to All
-		'permission_set' => array(
-			array('ROLE_USER_STANDARD',		'u_must_introduce'),
-			array('ROLE_USER_LIMITED',		'u_must_introduce'),
-			array('ROLE_USER_NEW_MEMBER',	'u_must_introduce'),
-		),
-		//-------------------------------------------------------------
-		// Add the module in ACP under the .MOD tab
-		'module_add' => array(
-			// ACP_CAT_DOT_MODS is '.MOD' in acp
-            array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD'),
-
-			//---------------------------------------------------------------------
-			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
-
-			// Add Sub category 'General' into the ACP .MOD tab / Under ACP_INTRODUCIATOR_MOD
-			array('acp', 'ACP_INTRODUCIATOR_MOD', array(
-				'module_basename'	=> 'introduciator',
-				'module_langname'	=> 'INTRODUCIATOR_GENERAL',
-				'module_mode'		=> 'general',
-				'module_auth'		=> 'acl_a_board',	// Acl Admin Introduciator Manage
-				),
-			),
-
-			// Add Sub category 'Configuration' into the ACP .MOD tab / Under ACP_INTRODUCIATOR_MOD
-			array('acp', 'ACP_INTRODUCIATOR_MOD', array(
-				'module_basename'	=> 'introduciator',
-				'module_langname'	=> 'INTRODUCIATOR_CONFIGURATION',
-				'module_mode'		=> 'configuration',
-				'module_auth'		=> 'acl_a_board',	// Acl Admin Introduciator Manage
-				'after'				=> 'INTRODUCIATOR_GENERAL',
-				),
-			),
-
-			// Creation of ACP sub caterories under Introduciator mod into .MOD tab
-			//---------------------------------------------------------------------
-		),
-		// Add the module in ACP under the .MOD tab
-		//-------------------------------------------------------------
-
-		//-------------------------------------------------------------
-		// Creating the tables into database
-
+		
+		// Add Groups list table
 		'table_add' => array(
-			// Table used to record introduciator configuration
-			//   fk_introduciator_id is a foreign key to INTRODUCIATOR_ITEMS_TABLE primary key
-			//   fk_forum_id is a foreign key to FORUMS_TABLE primary key. If is the selected forum where
-			//               user must introduce himself.
-			array(INTRODUCIATOR_CONFIG_TABLE, array(
+			array(INTRODUCIATOR_GROUPS_TABLE, array(
 				'COLUMNS' => array(
-					'introduciator_id'						=> array('UINT', NULL, 'auto_increment'),
-					'is_enabled'							=> array('BOOL', 0),
-					'is_check_delete_first_post_enabled'	=> array('BOOL', 0),
-					'is_explanation_enabled'				=> array('BOOL', 1),
-					'fk_forum_id'							=> array('UINT', NULL),		// Foreign key on FORUMS_TABLE primary key
-					'explanation_message_title'				=> array('TEXT_UNI', ''),	// Explanation page: title
-					'explanation_message_text'				=> array('TEXT_UNI', ''),	// Explanation page: explanation text
-					'explanation_display_rules_enabled'		=> array('BOOL', 1),
-					'explanation_message_rules_title'		=> array('TEXT_UNI', ''),	// Explanation page: title rules
-					'explanation_message_rules_text'		=> array('TEXT_UNI', ''),	// Explanation page: rules, let empty to get forum rules
+					'fk_group'			=> array('UINT', NULL),
 				),
-				'PRIMARY_KEY'	=> 'introduciator_id',
 			)),
 		),
-		// Creating the tables into database
-		//-------------------------------------------------------------
-
-		//-------------------------------------------------------------
-		// Fill config table
-		'table_row_insert' => array(
-			array(INTRODUCIATOR_CONFIG_TABLE,
-				array(
-					'introduciator_id'						=> 1,
-					'is_enabled'							=> false,
-					'is_check_delete_first_post_enabled'	=> true,
-					'is_explanation_enabled'				=> false,
-					'fk_forum_id'							=> 0,
-					'explanation_message_title'				=> '%explanation_title%',	// Explanation page: title
-					'explanation_message_text'				=> '%explanation_text%',	// Explanation page: explanation text
-					'explanation_display_rules_enabled'		=> true,
-					'explanation_message_rules_title'		=> '%rules_title%',			// Explanation page: title rules
-					'explanation_message_rules_text'		=> '%rules_text%',			// Explanation page: rule, let empty to get forum rules
-				),
-			),
-		),
-		// Creating the tables into database
-		//-------------------------------------------------------------
 
 		// Purge cache else
 		'cache_purge' => '',
@@ -299,47 +178,3 @@ function display_message($lang_string, $class)
 
 	return '<span class="' . $class . '">' . $user->lang[$lang_string] . '</span>';
 }
-
-/**
- * Get the old introduciator parameters.
- *
- * In introduciator version < 1.0.0 the parameters was recorded into introduciator_config table.
- * This configuration was migrated to config table and introduciator_config was deleted.
- *
- * @return The introduciator parameters if installed version is <= 1.0.0, else return defaults parameters
- * used to create config when introduciator release candidate never installed.
- */
-function get_old_params()
-{
-	global $config;
-
-	$row = false;
-	if (function_exists('phpbb_version_compare') && !empty($config['introduciator_mod_version']) && phpbb_version_compare($config['introduciator_mod_version'], '1.0.0', '<'))
-	{	// Get old values from INTRODUCIATOR_CONFIG_TABLE, this table is deleted when >
-		global $db; // Database
-
-		$sql = 'SELECT * FROM  ' . INTRODUCIATOR_CONFIG_TABLE;
-		$result = $db->sql_query($sql);
-		$row = $db->sql_fetchrow($result);
-		$db->sql_freeresult($result);
-	}
-	else
-	{	// Default values
-		$row = array(
-			'fk_forum_id'						=>	'0',
-			'is_check_delete_first_post'		=>	true,
-			'is_explanation_enabled'			=>	false,
-			'is_use_permissions'				=>	true,
-			'is_include_groups'					=>	true,
-			'ignored_users'						=>	'',
-			'explanation_message_title'			=>	'%explanation_title%',
-			'explanation_message_text'			=>	'%explanation_text%',
-			'is_explanation_display_rules'		=>	true,
-			'explanation_message_rules_title'	=>	'%rules_title%',
-			'explanation_message_rules_text'	=>	'%rules_text%',
-		);
-	}
-
-	return $row;
-}
-
