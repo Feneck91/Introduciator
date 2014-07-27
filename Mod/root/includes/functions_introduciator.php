@@ -157,18 +157,18 @@ function introduciator_getparams()
 	global $config;
 
 	return array(
-		'introduciator_allow'					=> empty($config['introduciator_allow']) ? false : $config['introduciator_allow'],
-		'fk_forum_id'							=> empty($config['introduciator_fk_forum_id']) ? 0 : $config['introduciator_fk_forum_id'],
-		'is_check_delete_first_post'			=> empty($config['is_check_delete_first_post']) ? true : $config['is_check_delete_first_post'],
-		'is_explanation_enabled'				=> empty($config['introduciator_is_explanation_enabled']) ? true : $config['introduciator_is_explanation_enabled'],
-		'is_use_permissions'					=> empty($config['introduciator_is_use_permissions']) ? true : $config['introduciator_is_use_permissions'],
-		'is_include_groups'						=> empty($config['introduciator_is_include_groups']) ? true : $config['introduciator_is_include_groups'],
-		'ignored_users'							=> empty($config['introduciator_ignored_users']) ? '' : $config['introduciator_ignored_users'],
-		'explanation_message_title'				=> empty($config['introduciator_explanation_message_title']) ? '%explanation_title%' : $config['introduciator_explanation_message_title'],
-		'explanation_message_text'				=> empty($config['introduciator_explanation_message_text']) ? '%explanation_text%' : $config['introduciator_explanation_message_text'],
-		'is_explanation_display_rules'			=> empty($config['introduciator_is_explanation_display_rules']) ? true : $config['introduciator_is_explanation_display_rules'],
-		'explanation_message_rules_title'		=> empty($config['introduciator_explanation_message_rules_title']) ? '%rules_title%' : $config['introduciator_explanation_message_rules_title'],
-		'explanation_message_rules_text'		=> empty($config['introduciator_explanation_message_rules_text']) ? '%rules_text%' : $config['introduciator_explanation_message_rules_text'],
+		'introduciator_allow'					=> isset($config['introduciator_allow']) && $config['introduciator_allow'] != '' ? $config['introduciator_allow'] : false,
+		'fk_forum_id'							=> isset($config['introduciator_fk_forum_id']) &&  $config['introduciator_fk_forum_id'] != '' ? $config['introduciator_fk_forum_id'] : 0,
+		'is_check_delete_first_post'			=> isset($config['introduciator_is_check_delete_first_post']) && $config['introduciator_is_check_delete_first_post'] != '' ? $config['introduciator_is_check_delete_first_post'] : true,
+		'is_explanation_enabled'				=> isset($config['introduciator_is_explanation_enabled']) && $config['introduciator_is_explanation_enabled'] != '' ? $config['introduciator_is_explanation_enabled'] : true,
+		'is_use_permissions'					=> isset($config['introduciator_is_use_permissions']) && $config['introduciator_is_use_permissions'] != '' ? $config['introduciator_is_use_permissions'] : true,
+		'is_include_groups'						=> isset($config['introduciator_is_include_groups']) && $config['introduciator_is_include_groups'] != '' ? $config['introduciator_is_include_groups'] : true,
+		'ignored_users'							=> isset($config['introduciator_ignored_users']) && $config['introduciator_ignored_users'] != '' ? $config['introduciator_ignored_users'] : '',
+		'explanation_message_title'				=> isset($config['introduciator_explanation_message_title']) && $config['introduciator_explanation_message_title'] != '' ? $config['introduciator_explanation_message_title'] : '%explanation_title%',
+		'explanation_message_text'				=> isset($config['introduciator_explanation_message_text']) && $config['introduciator_explanation_message_text'] != '' ? $config['introduciator_explanation_message_text'] : '%explanation_text%',
+		'is_explanation_display_rules'			=> isset($config['introduciator_is_explanation_display_rules']) && $config['introduciator_is_explanation_display_rules'] != '' ? $config['introduciator_is_explanation_display_rules'] : true,
+		'explanation_message_rules_title'		=> isset($config['introduciator_explanation_message_rules_title']) && $config['introduciator_explanation_message_rules_title'] != '' ? $config['introduciator_explanation_message_rules_title'] : '%rules_title%',
+		'explanation_message_rules_text'		=> isset($config['introduciator_explanation_message_rules_text']) && $config['introduciator_explanation_message_rules_text'] != '' ? $config['introduciator_explanation_message_rules_text'] : '%rules_text%',
 	);
 }
 
