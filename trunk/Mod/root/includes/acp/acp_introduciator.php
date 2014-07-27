@@ -122,7 +122,7 @@ class acp_introduciator
 				if (empty($action))
 				{	// no action or update current
 					$dp_data = array();
-
+	
 					$params = introduciator_getparams();
 					$template->assign_vars(array(
 						'INTRODUCIATOR_MOD_ACTIVATED'							=> $params['introduciator_allow'],
@@ -164,8 +164,8 @@ class acp_introduciator
 							$is_check_delete_first_post_activated	= request_var('check_delete_first_post_activated', false);
 							$fk_forum_id							= request_var('forum_choice', 0);
 							$is_explanation_enabled					= request_var('display_explanation', false);
-							$is_use_permissions						= request_var('is_use_permissions', false);
-							$is_include_groups						= request_var('include_groups', false);
+							$is_use_permissions						= request_var('is_use_permissions', true);
+							$is_include_groups						= request_var('include_groups', true);
 							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
 							$ignored_users							= substr(utf8_normalize_nfc(request_var('ignored_users', '')), 0, 255);
 							$explanation_message_title				= substr(utf8_normalize_nfc(request_var('explanation_message_title', '', true)), 0, 255);
@@ -179,16 +179,16 @@ class acp_introduciator
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
 							}
 
-							set_config('introduciator_allow', $is_enabled); // Set the activation MOD config
-							set_config('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated);
+							set_config('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation MOD config
+							set_config('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
 							set_config('introduciator_fk_forum_id', $fk_forum_id);
-							set_config('introduciator_is_explanation_enabled', $is_explanation_enabled);
-							set_config('introduciator_is_use_permissions', $is_use_permissions);
-							set_config('introduciator_is_include_groups', $is_include_groups);
+							set_config('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
+							set_config('introduciator_is_use_permissions', $is_use_permissions ? '1' : '0');
+							set_config('introduciator_is_include_groups', $is_include_groups ? '1' : '0');
 							set_config('introduciator_ignored_users', $ignored_users);
 							set_config('introduciator_explanation_message_title', $explanation_message_title);
 							set_config('introduciator_explanation_message_text', $explanation_message_text);
-							set_config('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled);
+							set_config('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
 							set_config('introduciator_explanation_message_rules_title', $explanation_message_rules_title);
 							set_config('introduciator_explanation_message_rules_text', $explanation_message_rules_text);
 

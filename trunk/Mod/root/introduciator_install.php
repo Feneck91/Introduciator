@@ -74,8 +74,6 @@ $options = array(
 	'legend3'	=> 'ACP_SUBMIT_CHANGES',
 );
 
-$old_config = get_old_params();
-
 // The array of versions and actions within each.
 // You do not need to order it a specific way (it will be sorted automatically), however, you must enter every version, even if no actions are done for it.
 //
@@ -147,7 +145,7 @@ $versions = array(
 			array('introduciator_explanation_message_rules_title',	'%rules_title%'),
 			array('introduciator_explanation_message_rules_text',	'%rules_text%'),
 		),
-		
+
 		// Add Groups list table
 		'table_add' => array(
 			array(INTRODUCIATOR_GROUPS_TABLE, array(
