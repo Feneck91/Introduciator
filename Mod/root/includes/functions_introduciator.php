@@ -358,10 +358,10 @@ function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_d
 }
 
 /**
- * Verify if the posting is allowed or not.
+ * Get informations about the user.
  *
- * If not allowed, it redirect the current page to the introduce forum or the explanation page
- * or error message if action is not allowed.
+ * Is used by several pages to display link to the member presentation. It indicate if the user has introduce himself or not,
+ * the text and tooltip info, etc.
  *
  * @param $poster_id The poster id
  * @param $poster_name The poster name
