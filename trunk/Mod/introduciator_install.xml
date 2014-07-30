@@ -194,7 +194,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 				<find><![CDATA[					<!-- IF postrow.U_JABBER --><li class="jabber-icon"><a href="{postrow.U_JABBER}" onclick="popup(this.href, 550, 320); return false;" title="{L_JABBER}"><span>{L_JABBER}</span></a></li><!-- ENDIF -->
 ]]></find>
 				<action type="after-add"><![CDATA[					<!-- Introduciator - Begin -->
-						<!-- IF postrow.S_INTRODUCIATOR_DISPLAY --><li class="{postrow.T_INTRODUCIATOR_CLASS}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- IF postrow.U_INTRODUCIATOR_URL --><a href="{postrow.U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- ENDIF --><span>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}</span><!-- IF postrow.U_INTRODUCIATOR_URL --></a><!-- ENDIF --><!-- ENDIF -->
+						<!-- IF postrow.S_INTRODUCIATOR_DISPLAY --><li class="{postrow.T_INTRODUCIATOR_CLASS}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- IF postrow.U_INTRODUCIATOR_URL --><a href="{postrow.U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" title="{postrow.T_INTRODUCIATOR_TEXT}"><!-- ENDIF --><span>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}</span><!-- IF postrow.U_INTRODUCIATOR_URL --></a><!-- ENDIF --></li><!-- ENDIF -->
 					<!-- Introduciator - End -->
 
 ]]></action>
