@@ -26,23 +26,27 @@
 		</installation>
 		<history>
 			<entry>
-				<date>2014-04-20</date>
+				<date>2014-07-26</date>
 				<rev-version>1.0.0</rev-version>
 				<changelog lang="en">
-					<change><![CDATA[Change version only]]></change>
+					<change><![CDATA[First MOD version]]></change>
 				</changelog>
 				<changelog lang="fr">
-					<change><![CDATA[Changement de la version uniquement]]></change>
+					<change><![CDATA[Première version du MOD]]></change>
 				</changelog>
 			</entry>
 			<entry>
 				<date>2015-02-04</date>
 				<rev-version>1.0.1</rev-version>
 				<changelog lang="en">
-					<change><![CDATA[Change version only]]></change>
+					<change><![CDATA[Minors source code optimisations]]></change>
+					<change><![CDATA[Replace TRUNCATE SQL Command by DELETE SQL Command to make it work with Firebird and SQLite databases]]></change>
+					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account]]></change>
 				</changelog>
 				<changelog lang="fr">
-					<change><![CDATA[Changement de la version uniquement]]></change>
+					<change><![CDATA[Optimisations mineures du code source]]></change>
+					<change><![CDATA[Replacement de la commande SQL TRUNCATE par la commande SQL DELETE pour le rendre compatible avec les bases de données Firebird et SQLite]]></change>
+					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte]]></change>
 				</changelog>
 			</entry>
 		</history>
