@@ -61,12 +61,10 @@ $lang = array_merge($lang, array(
 
 	'UNUSED_LANG_FILES_TRUE'					=> 'Removal of unused language files.',
 	'UNUSED_LANG_FILES_FALSE'					=> 'The removal of unused files is not necessary.',
-));
 
 /*
 * Other : Messages
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'	=> 'Your introduction message is pending approval, please wait.',
 	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'		=> 'You are not allowed to introduce yourself more than once!',
 	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST'	=> 'You are not allowed to delete the first post of your introduction!',

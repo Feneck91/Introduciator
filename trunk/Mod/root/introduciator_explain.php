@@ -34,9 +34,8 @@ if ($user->data['user_id'] == ANONYMOUS)
 }
 
 // Load langage
-$user->setup('mods/introduciator');
+$user->add_lang('mods/introduciator');
 
-global $config;
 if ($config['introduciator_allow'])
 {	// Title messagte
 	// Load MOD configuration
@@ -103,7 +102,7 @@ if ($config['introduciator_allow'])
 		'FORUM_NAME'						=> $forum_name,
 		'FORUM_HREF'						=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']),
 		'FORUM_HREF_POST'					=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']),
-		'FORUM_RULES'						=> generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']),
+		'FORUM_RULES'						=> $rules_text,
 		'INTRODUCIATOR_MOD_EXPLAIN_TITLE'	=> $explanation_title,
 		'INTRODUCIATOR_MOD_EXPLAIN_TEXT'	=> $explanation_text,
 		'S_RULES_ACTIVATED'					=> $is_rules_filled,

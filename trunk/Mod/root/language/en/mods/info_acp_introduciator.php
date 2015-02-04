@@ -43,21 +43,17 @@ if (empty($lang) || !is_array($lang))
 */
 $lang = array_merge($lang, array(
 	'ACP_INTRODUCIATOR_MOD'							=> 'Introduciator',
-));
 
 /**
 * Titles present on the left side of .MOD ACP's tab under Introduciator item
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_GENERAL'							=> 'General',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
-));
 
 /**
 * mode: general
 * Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_TITLE'						=> 'Generals informations',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Get version of this MOD.',
 
@@ -68,22 +64,18 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'			=> 'Latest version:',
 	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'				=> 'Download link:',
 	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'			=> 'Update information:',
-));
 
 /**
 * mode: configuration
 * Info: language keys are prefixed with 'INTRODUCIATOR_CP_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_'
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE'						=> 'Introduciator configuration settings',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Allow to configure the MOD settings.',
-));
 
 /**
 * mode: configuration : Edit
 * Info: language keys are prefixed with 'INTRODUCIATOR_CP_ED_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
 */
-$lang = array_merge($lang, array(
 	// Titles
 	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Groups and users configuration',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Explanations page configuration',
@@ -128,22 +120,18 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN'			=> 'Default = <b>%rules_title%</b><br/>You can change this text to your own.',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT'					=> 'Text of the rules for the forum for introductions',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN'			=> 'Default = <b>%rules_text%</b><br/>By default, %rules_text% is replaced by rules for the forum for introductions.<br/>You can change this text to your own.',
-));
 
 /**
 * Others
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the MOD is desactivated',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this MOD is enabled, your should choose a forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'No update information available',
-));
 
 /**
 * logs
 */
-$lang = array_merge($lang, array(
 	//logs
 	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Introduciator: settings updated.</strong>',
 

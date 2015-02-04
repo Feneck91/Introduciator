@@ -71,9 +71,7 @@ class acp_introduciator
 
 				if ($latest_version_info === false || !function_exists('phpbb_version_compare'))
 				{
-					$template->assign_vars(array(
-						'S_INTRODUCIATOR_VERSIONCHECK_FAIL'	=> true,
-					));
+					$template->assign_var('S_INTRODUCIATOR_VERSIONCHECK_FAIL',true);
 				}
 				else
 				{
@@ -112,11 +110,8 @@ class acp_introduciator
 				global $db; // Database
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
-				// Display configuration page
-				$template->assign_vars(array(
-					// Display Configuration page content into ACP .MOD tab
-					'S_CONFIGURATION_PAGES'	=> true,
-				));
+				// Display configuration page content into ACP .MOD tab
+				$template->assign_var('S_CONFIGURATION_PAGES',true);
 
 				// If no action, display configuration
 				if (empty($action))
@@ -149,9 +144,7 @@ class acp_introduciator
 							'action'				=> 'update',					// Action
 						));
 
-					$template->assign_vars(array(
-						'S_HIDDEN_FIELDS' => $s_hidden_fields,
-					));
+					$template->assign_var('S_HIDDEN_FIELDS',$s_hidden_fields);
 				}
 				else
 				{	// Action !
@@ -194,7 +187,7 @@ class acp_introduciator
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
-							$sql = 'TRUNCATE TABLE ' . INTRODUCIATOR_GROUPS_TABLE;
+                            $sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;
 							$db->sql_query($sql);
 
 							// 2> Add all entries
