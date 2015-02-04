@@ -43,21 +43,17 @@ if (empty($lang) || !is_array($lang))
 */
 $lang = array_merge($lang, array(
 	'ACP_INTRODUCIATOR_MOD'							=> 'Présentation forcée',
-));
 
 /**
 * Titres présents dans la partie gauche de l'onglet .MOD de l'ACP sous l'item INTRODUCIATOR
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_GENERAL'							=> 'Général',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
-));
 
 /**
 * mode: general
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_GP_' pour 'INTRODUCIATOR_GENERAL_PAGES_'
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_TITLE'						=> 'Informations générales',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Donne la version courante de ce MOD.',
 
@@ -68,22 +64,18 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'			=> 'Dernière version :',
 	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'				=> 'Lien de téléchargement :',
 	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'			=> 'Information de mise à jour :',
-));
 
 /**
 * mode: configuration
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_'
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE'						=> 'Configuration de la Présentation forcée',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de configurer le fonctionnement du MOD.',
-));
 
 /**
 * mode: configuration : Edit
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_ED_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
 */
-$lang = array_merge($lang, array(
 	// Titres
 	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Configuration des groupes et des utilisateurs',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Configuration de la page d’explications',
@@ -128,22 +120,18 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN'			=> 'Défaut = <b>%rules_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT'					=> 'Texte des règles du forum de présentation',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN'			=> 'Défaut = <b>%rules_text%</b><br/>Par défaut %rules_text% est remplacé par le texte des règles du forum de présentation.<br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
-));
 
 /**
 * Autres
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque le MOD est désactivé',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
-));
 
 /**
 * logs
 */
-$lang = array_merge($lang, array(
 	//logs
 	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Présentation forcée : configuration mise à jour.</strong>',
 

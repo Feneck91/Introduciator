@@ -61,12 +61,10 @@ $lang = array_merge($lang, array(
 
 	'UNUSED_LANG_FILES_TRUE'					=> 'Suppression des fichiers non utilisés.',
 	'UNUSED_LANG_FILES_FALSE'					=> 'La suppression des fichiers non utilisés n’est pas nécessaire.',
-));
 
 /*
 * Autre : Messages
 */
-$lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'	=> 'Votre message de présentation est en cours d’approbation, veuillez patienter.',
 	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'		=> 'Vous n’êtes pas autorisé à vous présenter plus d’une fois !',
 	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST'	=> 'Vous n’êtes pas autorisé à supprimer le premier message de votre présentation !',

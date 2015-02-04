@@ -18,38 +18,26 @@
 				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>1.0.0</mod-version>
+		<mod-version>1.0.1</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>60</time>
-			<target-version>3.0.12</target-version>
+			<target-version>3.0.13</target-version>
 		</installation>
 		<history>
 			<entry>
-				<date>2014-04-15</date>
-				<rev-version>1.0.0-RC1</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[First official version of this mod]]></change>
-				</changelog>
-				<changelog lang="fr">
-					<change><![CDATA[Première version de ce mod]]></change>
-				</changelog>
-			</entry>
-			<entry>
-				<date>2014-04-16</date>
-				<rev-version>1.0.0-RC2</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[Add capability to configure permission with the mod parameters]]></change>
-					<change><![CDATA[The language keys are now in a specific file]]></change>
-				</changelog>
-				<changelog lang="fr">
-					<change><![CDATA[Ajout de la possibilité de configurer les permissions via les paramètres du mod]]></change>
-					<change><![CDATA[Les clés de langue sont désormais dans un fichier spécifique]]></change>
-				</changelog>
-			</entry>
-			<entry>
 				<date>2014-04-20</date>
 				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Change version only]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Changement de la version uniquement]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2015-02-04</date>
+				<rev-version>1.0.1</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Change version only]]></change>
 				</changelog>

@@ -27,7 +27,7 @@ if (!function_exists('group_memberships'))
 global $table_prefix;
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.0');
+define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.1');
 define('INTRODUCIATOR_GROUPS_TABLE',		$table_prefix . 'introduciator_groups');
 
 /**
@@ -311,7 +311,6 @@ function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_d
 								$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
 								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
 								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
-								// meta_refresh(3, $meta_info); // Go back automatically to topic <- Not for the moment
 								trigger_error($message, E_USER_NOTICE);
 							}
 						}

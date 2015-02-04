@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Update 1.0.1]]></title>
+		<title lang="fr"><![CDATA[Mise à jour 1.0.1]]></title>
+		<description lang="en"><![CDATA[Ensures to update the MOD from 1.0.0 to the 1.0.1 version]]></description>
+		<description lang="fr"><![CDATA[Permet de mettre à jour le MOD de la version 1.0.0 à la version 1.0.1]]></description>
+		<author-notes lang="en"><![CDATA[If you install this update manually, please turn one's attention to the partial searches.
+That method ensures a better compatibility with the future versions of the software.]]></author-notes>
+		<author-notes lang="fr"><![CDATA[Si vous installez cette mise à jour manuellement, portez une attention particulière aux recherches partielles.
+Cette méthode permet une meilleure compatibilité avec les versions futures du logiciel.]]></author-notes>
+		<author-group>
+			<author>
+				<realname><![CDATA[CHÂTEAU Stéphane]]></realname>
+				<username><![CDATA[Feneck91]]></username>
+				<homepage><![CDATA[http://feneck91.free.fr]]></homepage>
+				<email><![CDATA[feneck91@free.fr]]></email>
+			</author>
+		</author-group>
+		<mod-version>1.0.1</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>180</time>
+			<target-version>3.0.13</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2015-02-04</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Change MOD version from 1.0.0 to 1.0.1]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Changement de la version du MOD de 1.0.0 à 1.0.1]]></change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="parent" href="../../introduciator_install.xml" lang="en">Back to install file</link>
+			<link type="language" href="../../contrib/languages/fr.xml" lang="en" realname="fr">Language file for french boards</link>
+			<link type="parent" href="../../introduciator_install.xml" lang="fr">Retourner au fichier d'installation</link>
+			<link type="language" href="../../contrib/languages/fr.xml" lang="fr" realname="fr">Fichier de langue pour les forums francophones</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/includes/functions_introduciator.php" to="includes/functions_introduciator.php"/>
+			<file from="root/includes/acp/acp_introduciator.php" to="includes/acp/acp_introduciator.php"/>
+			<file from="root/language/en/mods/info_acp_introduciator.php" to="language/en/mods/info_acp_introduciator.php"/>
+			<file from="root/language/en/mods/introduciator.php" to="language/en/mods/introduciator.php"/>
+			<file from="root/language/en/mods/permissions_introduciator.php" to="language/en/mods/permissions_introduciator.php"/>
+			<file from="root/language/fr/mods/info_acp_introduciator.php" to="language/fr/mods/info_acp_introduciator.php"/>
+			<file from="root/language/fr/mods/introduciator.php" to="language/fr/mods/introduciator.php"/>
+			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
+			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
+		</copy>
+		<open src="memberlist.php">
+			<edit>
+				<remove><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+// Introduciator - End
+//------------------------------------------------
+]]></remove>
+				<find><![CDATA[// Introduciator - Begin]]></find>
+				<action type="after-add"><![CDATA[	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+
+]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[{L_INTRODUCIATOR_VIEW_MEMBER}]]></find>
+				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/viewtopic_body.html">
+			<edit>
+				<find><![CDATA[{L_INTRODUCIATOR_TOPIC_TITLE}]]></find>
+				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[{L_INTRODUCIATOR_TOPIC_TITLE}]]></find>
+				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/buttons.css">
+			<edit>
+				<find><![CDATA[/* Introduciator - Begin
+//------------------------------------------------*/]]></find>
+				<action type="replace-with"><![CDATA[/* Introduciator - End
+//------------------------------------------------*/]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/colours.css">
+			<edit>
+				<find><![CDATA[/* Introduciator - Begin
+//------------------------------------------------*/]]></find>
+				<action type="replace-with"><![CDATA[.introduciator_explain {
+	color: orangered !important;
+	text-align: center;
+}
+.introduciator_disabled {
+	color: red !important;
+	text-align: center;
+}
+/* Introduciator - End
+//------------------------------------------------*/
+]]></action>
+			</edit>
+		</open>
+		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
+		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion.]]></diy-instructions>
+		<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements. Exécutez ensuite le fichier d'installation, intitulé introduciator_install.php, dans votre navigateur Internet puis supprimez-le une fois l'installation effectuée.]]></diy-instructions>
+	</action-group>
+</mod>

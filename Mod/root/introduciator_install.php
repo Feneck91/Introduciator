@@ -80,6 +80,13 @@ $options = array(
 // You must use correct version numbering.  Unless you know exactly what you can use, only use X.X.X (replacing X with an integer).
 // The version numbering must otherwise be compatible with the version_compare function - http://php.net/manual/en/function.version-compare.php
 $versions = array(
+	'1.0.1' => array(
+		// Remove old config entry
+		'config_remove' => array(
+			array('allow_introduciator'),
+		),
+	),
+
 	'1.0.0' => array(
 		//-------------------------------------------------------------
 		// Add new permission to module

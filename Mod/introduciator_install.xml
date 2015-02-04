@@ -48,21 +48,43 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>1.0.0</mod-version>
+		<mod-version>1.0.1</mod-version>
 		<installation>
 			<level>intermediate</level>
 			<time>900</time>
-			<target-version>3.0.12</target-version>
+			<target-version>3.0.13</target-version>
 		</installation>
 		<history>
 			<entry>
 				<date>2014-07-26</date>
 				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First MOD version]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Première version du MOD]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2015-02-04</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Minors source code optimisations]]></change>
+					<change><![CDATA[Replace TRUNCATE SQL Command by DELETE SQL Command to make it work with Firebird and SQLite databases]]></change>
+					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Optimisations mineures du code source]]></change>
+					<change><![CDATA[Replacement de la commande SQL TRUNCATE par la commande SQL DELETE pour le rendre compatible avec les bases de données Firebird et SQLite]]></change>
+					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte]]></change>
+				</changelog>
 			</entry>
 		</history>
 		<link-group>
 			<link type="language" href="contrib/languages/fr.xml" lang="en">Language file for french boards</link>
 			<link type="language" href="contrib/languages/fr.xml" lang="fr">Fichier de langue pour les forums francophones</link>
+			<link type="contrib" href="contrib/updates/update_1_0_0_to_1_0_1.xml" lang="en">Update the MOD from 1.0.0 to 1.0.1</link>
+			<link type="contrib" href="contrib/updates/update_1_0_0_to_1_0_1.xml" lang="en">Mette à jour le MOD de la version 1.0.0 à la version 1.0.1</link>
 		</link-group>
 	</header>
 	<action-group>
