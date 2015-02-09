@@ -1,6 +1,6 @@
 ECHO OFF
 
-SET INTRODUCIATOR_VERSION="1_0_0"
+SET INTRODUCIATOR_VERSION="1_1_0"
 SET BATCH_PATH=%~dp0
 
 ECHO ------------------------------------
