@@ -107,7 +107,7 @@ class acp_introduciator
 			break;
 
 			case 'configuration':
-				global $db; // Database
+				global $db, $phpbb_root_path; // Database, Root path
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
 				// Display configuration page content into ACP .MOD tab
@@ -167,6 +167,26 @@ class acp_introduciator
 							$explanation_message_rules_title		= substr(utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true)), 0, 255);
 							$explanation_message_rules_text			= substr(utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true)), 0, 255);
 
+							// Verify message rules text
+							$explanation_message_rules_text_new_uid = $explanation_message_rules_text_new_bitfield = $explanation_message_rules_text_bbcode_options = '';
+							$explanation_message_rules_text_verify = $explanation_message_rules_text;
+		
+							replace_all_by(
+								array(
+									&$explanation_message_rules_text_verify,
+								),
+								array(
+									'%forum_url%'	=> "http://www.dummy.com/aghxkfps.php", // Make link work
+									'%forum_post%'	=> "http://www.dummy.com/aghxkfps.php", // Make link work
+								)
+							);
+							$texts_errors = generate_text_for_storage($explanation_message_rules_text_verify, $explanation_message_rules_text_new_uid, $explanation_message_rules_text_new_bitfield, $explanation_message_rules_text_bbcode_options, true, true, true);
+
+							if (sizeof($texts_errors))
+							{	// Errors occured, show them to the user.
+								trigger_error(implode('<br>', $errors) . adm_back_link($this->u_action, E_USER_WARNING));
+							}
+
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
@@ -187,7 +207,7 @@ class acp_introduciator
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
-                            $sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;
+							$sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;
 							$db->sql_query($sql);
 
 							// 2> Add all entries

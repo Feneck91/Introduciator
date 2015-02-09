@@ -73,7 +73,7 @@ if ($config['introduciator_allow'])
 	$explanation_title = str_replace('%explanation_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'], $params['explanation_message_title']);
 	$explanation_text = str_replace('%explanation_text%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'], $params['explanation_message_text']);
 	$rules_title = str_replace('%rules_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'], $params['explanation_message_rules_title']);
-	$rules_text = str_replace('%rules_text%',generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']), $params['explanation_message_rules_text']);
+	$rules_text = $params['explanation_message_rules_text'];
 	$link_goto_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
 	$link_post_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
 
@@ -89,11 +89,34 @@ if ($config['introduciator_allow'])
 		),
 		array(
 			'%forum_name%'	=> $forum_name,
-			'%forum_url%'	=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']),
-			'%forum_post%'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']),
+			'%forum_url%'	=> "http://www.dummy.com/aghxkfps.php", // Make link work
+			'%forum_post%'	=> "http://www.dummy.com/aghxkfps.php", // Make link work
 		)
 	);
 
+	$explanation_message_rules_text_new_uid = $explanation_message_rules_text_new_bitfield = $explanation_message_rules_text_bbcode_options = '';
+	$texts_errors = generate_text_for_storage($rules_text, $explanation_message_rules_text_new_uid, $explanation_message_rules_text_new_bitfield, $explanation_message_rules_text_bbcode_options, true, true, true);
+	if (sizeof($texts_errors) == 0)
+	{	// Only if no errors
+		$forum_rules_display = generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']);
+		$forum_user_rules_display = generate_text_for_display($rules_text, $explanation_message_rules_text_new_uid, $explanation_message_rules_text_new_bitfield, $explanation_message_rules_text_bbcode_options);
+		$rules_text = str_replace('%rules_text%', $forum_rules_display, $forum_user_rules_display);
+		// Make link work
+		replace_all_by(
+			array(
+				&$rules_text
+			),
+			array(
+				'%forum_name%'						=> $forum_name,
+				'http://www.dummy.com/aghxkfps.php'	=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']),
+				'http://www.dummy.com/aghxkfps.php'	=> append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']),
+			)
+		);
+	}
+	else
+	{
+		$rules_text = implode('<br>', $errors); // If error, no rules displayed
+	}
 	// Only display rules if rules field is filled
 	$is_rules_filled = $params['is_explanation_display_rules'] && strlen($rules_text) > 0;
 
