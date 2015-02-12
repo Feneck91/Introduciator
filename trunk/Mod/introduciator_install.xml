@@ -194,6 +194,20 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 		//------------------------------------------------
 ]]></action>
 			</edit>
+			<edit>
+				<find><![CDATA[$s_quick_reply = (($topic_data['forum_status'] == ITEM_UNLOCKED && $topic_data['topic_status'] == ITEM_UNLOCKED) || $auth->acl_get('m_edit', $forum_id)) ? true : false;
+]]></find>
+				<action type="after-add"><![CDATA[	
+	//------------------------------------------------
+	// Introduciator - Begin
+	if ($s_quick_reply)
+	{	// Remove quick reply if the user is not allowed to reply here
+		$s_quick_reply = introduciator_verify_posting($user, 'reply', $forum_id, 0, null, false);
+	}
+	// Introduciator - End
+	//------------------------------------------------
+]]></action>
+			</edit>
 		</open>
 		<open src="styles/prosilver/template/memberlist_view.html">
 			<edit>

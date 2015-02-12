@@ -27,7 +27,7 @@ if (!function_exists('group_memberships'))
 global $table_prefix;
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.1');
+define('INTRODUCIATOR_CURRENT_VERSION',		'1.1.0');
 define('INTRODUCIATOR_GROUPS_TABLE',		$table_prefix . 'introduciator_groups');
 
 /**
@@ -405,17 +405,17 @@ function is_user_must_introduce_himself($poster_id, $authorisations, $poster_nam
  * @param $poster_id The poster id
  * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
  * @param $forum_id Forum identifier where the user try to post
- * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete
- * @param $post_data Informations about posting
- * @return None.
+ * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete (used only for delete), pass 0 else.
+ * @param $post_data Informations about posting (used only for delete) pass null else.
+ * @param $redirect true if the function should redirect in case of the user is not allowed to make the action, else only return status.
+ * @return true if the user is allowed to make action, false else.
  */
-function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_data)
+function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_data, $redirect = true)
 {
 	global $phpbb_root_path, $phpEx, $template, $auth, $config;
 
 	$poster_id = (int) $user->data['user_id'];
-	$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
-	$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
+	$ret_allowed_action = true;
 
 	if ($poster_id != ANONYMOUS)
 	{	// User is logged and have user authorization
@@ -430,6 +430,8 @@ function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_d
 			{	// Check if the user don't try to remove the first message of it's OWN introduce
 				// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
 				// else he needs to delete all the topic
+				$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
+				$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
 				if (!empty($post_id) && $params['fk_forum_id'] == $forum_id && $params['is_check_delete_first_post'] && $user->data['is_registered'] && $auth->acl_gets('f_delete', 'm_delete', $forum_id))
 				{	// This post is into the introduce forum
 					// Find the topic identifier
@@ -453,12 +455,16 @@ function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_d
 							// To finish, the $first_poster_id MUST BE not ignored
 							if (is_user_must_introduce_himself($first_poster_id, null, $user->data['username'], $params))
 							{
-								$user->setup('mods/introduciator'); // Add lang
-								$message = $user->lang[($first_poster_id == $poster_id && !$auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
-								$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
-								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
-								$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
-								trigger_error($message, E_USER_NOTICE);
+								$ret_allowed_action = false;
+								if ($redirect)
+								{
+									$user->setup('mods/introduciator'); // Add lang
+									$message = $user->lang[($first_poster_id == $poster_id && !$auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
+									$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
+									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
+									$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
+									trigger_error($message, E_USER_NOTICE);
+								}
 							}
 						}
 					}
@@ -474,33 +480,47 @@ function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_d
 				{	// No post into the introduce topic
 					if ((in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $params['fk_forum_id'])))
 					{
-						if ($params['is_explanation_enabled'])
+						$ret_allowed_action = false;
+						if ($redirect)
 						{
-							redirect(append_sid("{$phpbb_root_path}/introduciator_explain.$phpEx", 'f=' . $params['fk_forum_id']));
-						}
-						else
-						{
-							redirect(append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']));
+							if ($params['is_explanation_enabled'])
+							{
+								redirect(append_sid("{$phpbb_root_path}/introduciator_explain.$phpEx", 'f=' . $params['fk_forum_id']));
+							}
+							else
+							{
+								redirect(append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']));
+							}
 						}
 					}
 				}
 				else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
 				{	// At least one post but not approved !
-					$user->setup('mods/introduciator'); // Add lang
-					$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'];
-					$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
-					trigger_error($message,E_USER_NOTICE);
+					$ret_allowed_action = false;
+					if ($redirect)
+					{
+						$user->setup('mods/introduciator'); // Add lang
+						$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'];
+						$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
+						trigger_error($message,E_USER_NOTICE);
+					}
 				}
 				else if ($forum_id == $params['fk_forum_id'] && $mode == 'post')
 				{	// User try to create more than one introduce post
-					$user->setup('mods/introduciator'); // Add lang
-					$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'];
-					$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
-					trigger_error($message,E_USER_NOTICE);
+					$ret_allowed_action = false;
+					if ($redirect)
+					{
+						$user->setup('mods/introduciator'); // Add lang
+						$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'];
+						$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
+						trigger_error($message,E_USER_NOTICE);
+					}
 				}
 			}
 		}
 	}
+
+	return $ret_allowed_action;
 }
 
 /**
