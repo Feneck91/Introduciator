@@ -150,13 +150,16 @@ function is_user_in_groups_selected($user_id)
 /**
  * Get the introduciator parameters.
  *
+ * @param $is_edit if true, return rules texts for editing
+ *                 if false, return rules texts for display
+ *                 if null, don't return rules texts (used only in the MOD configuration and to display rules
  * @return The introduciator parameters
  */
-function introduciator_getparams()
+function introduciator_getparams($is_edit = null)
 {
 	global $config;
 
-	return array(
+	$params = array(
 		'introduciator_allow'					=> isset($config['introduciator_allow']) && $config['introduciator_allow'] != '' ? $config['introduciator_allow'] : false,
 		'fk_forum_id'							=> isset($config['introduciator_fk_forum_id']) &&  $config['introduciator_fk_forum_id'] != '' ? $config['introduciator_fk_forum_id'] : 0,
 		'is_check_delete_first_post'			=> isset($config['introduciator_is_check_delete_first_post']) && $config['introduciator_is_check_delete_first_post'] != '' ? $config['introduciator_is_check_delete_first_post'] : true,
@@ -164,12 +167,156 @@ function introduciator_getparams()
 		'is_use_permissions'					=> isset($config['introduciator_is_use_permissions']) && $config['introduciator_is_use_permissions'] != '' ? $config['introduciator_is_use_permissions'] : true,
 		'is_include_groups'						=> isset($config['introduciator_is_include_groups']) && $config['introduciator_is_include_groups'] != '' ? $config['introduciator_is_include_groups'] : true,
 		'ignored_users'							=> isset($config['introduciator_ignored_users']) && $config['introduciator_ignored_users'] != '' ? $config['introduciator_ignored_users'] : '',
-		'explanation_message_title'				=> isset($config['introduciator_explanation_message_title']) && $config['introduciator_explanation_message_title'] != '' ? $config['introduciator_explanation_message_title'] : '%explanation_title%',
-		'explanation_message_text'				=> isset($config['introduciator_explanation_message_text']) && $config['introduciator_explanation_message_text'] != '' ? $config['introduciator_explanation_message_text'] : '%explanation_text%',
 		'is_explanation_display_rules'			=> isset($config['introduciator_is_explanation_display_rules']) && $config['introduciator_is_explanation_display_rules'] != '' ? $config['introduciator_is_explanation_display_rules'] : true,
-		'explanation_message_rules_title'		=> isset($config['introduciator_explanation_message_rules_title']) && $config['introduciator_explanation_message_rules_title'] != '' ? $config['introduciator_explanation_message_rules_title'] : '%rules_title%',
-		'explanation_message_rules_text'		=> isset($config['introduciator_explanation_message_rules_text']) && $config['introduciator_explanation_message_rules_text'] != '' ? $config['introduciator_explanation_message_rules_text'] : '%rules_text%',
 	);
+
+	if ($is_edit === true || $is_edit === false)
+	{
+		$explanation_message_title						= isset($config['introduciator_explanation_message_title']) && $config['introduciator_explanation_message_title'] != '' ? $config['introduciator_explanation_message_title'] : '%explanation_title%';
+		$explanation_message_title_uid					= isset($config['introduciator_explanation_message_title_uid']) && $config['introduciator_explanation_message_title_uid'] != '' ? $config['introduciator_explanation_message_title_uid'] : '';
+		$explanation_message_title_bitfield				= isset($config['introduciator_explanation_message_title_bitfield']) && $config['introduciator_explanation_message_title_bitfield'] != '' ? $config['introduciator_explanation_message_title_bitfield'] : '';
+		$explanation_message_title_bbcode_options		= isset($config['introduciator_explanation_message_title_bbcode_options']) && $config['introduciator_explanation_message_title_bbcode_options'] != '' ? $config['introduciator_explanation_message_title_bbcode_options'] : '';
+		$explanation_message_text						= isset($config['introduciator_explanation_message_text']) && $config['introduciator_explanation_message_text'] != '' ? $config['introduciator_explanation_message_text'] : '%explanation_text%';
+		$explanation_message_text_uid					= isset($config['introduciator_explanation_message_text_uid']) && $config['introduciator_explanation_message_text_uid'] != '' ? $config['introduciator_explanation_message_text_uid'] : '';
+		$explanation_message_text_bitfield				= isset($config['introduciator_explanation_message_text_bitfield']) && $config['introduciator_explanation_message_text_bitfield'] != '' ? $config['introduciator_explanation_message_text_bitfield'] : '';
+		$explanation_message_text_bbcode_options		= isset($config['introduciator_explanation_message_text_bbcode_options']) && $config['introduciator_explanation_message_text_bbcode_options'] != '' ? $config['introduciator_explanation_message_text_bbcode_options'] : '';
+		$explanation_message_rules_title				= isset($config['introduciator_explanation_message_rules_title']) && $config['introduciator_explanation_message_rules_title'] != '' ? $config['introduciator_explanation_message_rules_title'] : '%rules_title%';
+		$explanation_message_rules_title_uid			= isset($config['introduciator_explanation_message_rules_title_uid']) && $config['introduciator_explanation_message_rules_title_uid'] != '' ? $config['introduciator_explanation_message_rules_title_uid'] : '';
+		$explanation_message_rules_title_bitfield		= isset($config['introduciator_explanation_message_rules_title_bitfield']) && $config['introduciator_explanation_message_rules_title_bitfield'] != '' ? $config['introduciator_explanation_message_rules_title_bitfield'] : '';
+		$explanation_message_rules_title_bbcode_options	= isset($config['introduciator_explanation_message_rules_title_bbcode_options']) && $config['introduciator_explanation_message_rules_title_bbcode_options'] != '' ? $config['introduciator_explanation_message_rules_title_bbcode_options'] : '';
+		$explanation_message_rules_text					= isset($config['introduciator_explanation_message_rules_text']) && $config['introduciator_explanation_message_rules_text'] != '' ? $config['introduciator_explanation_message_rules_text'] : '%rules_text%';
+		$explanation_message_rules_text_uid				= isset($config['introduciator_explanation_message_rules_text_uid']) && $config['introduciator_explanation_message_rules_text_uid'] != '' ? $config['introduciator_explanation_message_rules_text_uid'] : '';
+		$explanation_message_rules_text_bitfield		= isset($config['introduciator_explanation_message_rules_text_bitfield']) && $config['introduciator_explanation_message_rules_text_bitfield'] != '' ? $config['introduciator_explanation_message_rules_text_bitfield'] : '';
+		$explanation_message_rules_text_bbcode_options	= isset($config['introduciator_explanation_message_rules_text_bbcode_options']) && $config['introduciator_explanation_message_rules_text_bbcode_options'] != '' ? $config['introduciator_explanation_message_rules_text_bbcode_options'] : '';
+		
+		$forum_name = '';
+		$forum_rules = array();
+
+		if ($params['introduciator_allow'])
+		{	// Find Forum name
+			global $db;
+
+			$sql = 'SELECT forum_name, forum_rules, forum_rules_uid, forum_rules_bitfield, forum_rules_options
+					FROM ' . FORUMS_TABLE . '
+					WHERE forum_id = ' . (int) $params['fk_forum_id'];
+			$result = $db->sql_query($sql);
+			$row = $db->sql_fetchrow($result);
+
+			if ($row)
+			{
+				$forum_name = $row['forum_name'];
+				$forum_rules = array(
+					'rules'				=> $row['forum_rules'],
+					'rules_uid'			=> $row['forum_rules_uid'],
+					'rules_bitfield'	=> $row['forum_rules_bitfield'],
+					'rules_options'		=> $row['forum_rules_options'],
+				);
+			}
+			$db->sql_freeresult($result);
+		}
+
+		if ($is_edit === true)
+		{
+			$explanation_message_title = generate_text_for_edit($explanation_message_title, $explanation_message_title_uid, $explanation_message_title_bbcode_options);
+			$explanation_message_text = generate_text_for_edit($explanation_message_text, $explanation_message_text_uid, $explanation_message_text_bbcode_options);
+			$explanation_message_rules_title = generate_text_for_edit($explanation_message_rules_title, $explanation_message_rules_title_uid, $explanation_message_rules_title_bbcode_options);
+			$explanation_message_rules_text = generate_text_for_edit($explanation_message_rules_text, $explanation_message_rules_text_uid, $explanation_message_rules_text_bbcode_options);
+
+			$explanation_message_title = $explanation_message_title['text'];
+			$explanation_message_text = $explanation_message_text['text'];
+			$explanation_message_rules_title = $explanation_message_rules_title['text'];
+			$explanation_message_rules_text = $explanation_message_rules_text['text'];
+			
+			// Restore %forum_url% and %forum_post% tags because we must change them else the BBCode URL not work if the URL is not correct
+			replace_all_by(
+				array(
+					&$explanation_message_title,
+					&$explanation_message_text,
+					&$explanation_message_rules_title,
+					&$explanation_message_rules_text,
+				),
+				array(
+					'http&#58;//aghxkfps&#46;com'	=> '%forum_url%',
+					'http&#58;//dqsdfzef&#46;com'	=> '%forum_post%',
+				));
+			
+			$params = array_merge($params, array(
+				'explanation_message_title'				=> $explanation_message_title,
+				'explanation_message_text'				=> $explanation_message_text,
+				'explanation_message_rules_title'		=> $explanation_message_rules_title,
+				'explanation_message_rules_text'		=> $explanation_message_rules_text,
+			));
+		}
+		else
+		{
+			global $user, $phpbb_root_path, $phpEx;
+
+			// Load langage
+			$user->add_lang('mods/introduciator');
+
+			// Generate all string to be displayed
+			$explanation_message_title = generate_text_for_display($explanation_message_title, $explanation_message_title_uid,$explanation_message_title_bitfield, $explanation_message_title_bbcode_options);
+			$explanation_message_text = generate_text_for_display($explanation_message_text, $explanation_message_text_uid, $explanation_message_text_bitfield, $explanation_message_text_bbcode_options);
+			$explanation_message_rules_title = generate_text_for_display($explanation_message_rules_title, $explanation_message_rules_title_uid, $explanation_message_rules_title_bitfield, $explanation_message_rules_title_bbcode_options);
+			$explanation_message_rules_text = generate_text_for_display($explanation_message_rules_text, $explanation_message_rules_text_uid, $explanation_message_rules_text_bitfield, $explanation_message_rules_text_bbcode_options);
+			$explanation_message_rules_text = str_replace('%rules_text%',generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']), $explanation_message_rules_text);
+			
+			$explanation_message_title = str_replace('%explanation_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'], $explanation_message_title);
+			$explanation_message_text = str_replace('%explanation_text%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'], $explanation_message_text);
+			$explanation_message_rules_title = str_replace('%rules_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'], $explanation_message_rules_title);
+			$link_goto_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
+			$link_post_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
+
+			$forum_url = append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']);
+			$forum_post = append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']);
+
+			// Replace in each string the predefined fields
+			replace_all_by(
+				array(
+					&$explanation_message_title,
+					&$explanation_message_text,
+					&$explanation_message_rules_title,
+					&$explanation_message_rules_text,
+				),
+				array(
+					'%forum_name%'			=> $forum_name,
+					'http://aghxkfps.com'	=> $forum_url,	// Restore correct link
+					'http://dqsdfzef.com'	=> $forum_post,	// Restore correct link
+				)
+			);
+
+			// Make links into $link_goto_forum / $link_post_forum
+			replace_all_by(
+				array(
+					&$explanation_message_title,		// if text is from $user->lang[xx],  
+					&$explanation_message_text,
+					&$explanation_message_rules_title,
+					&$explanation_message_rules_text,
+					&$link_goto_forum,
+					&$link_post_forum,
+				),
+				array(
+					'%forum_name%'	=> $forum_name,
+					'%forum_url%'	=> $forum_url,
+					'%forum_post%'	=> $forum_post,
+				)
+			);
+					
+			$params = array_merge($params, array(
+				'explanation_message_title'				=> $explanation_message_title,
+				'explanation_message_text'				=> $explanation_message_text,
+				'explanation_message_rules_title'		=> $explanation_message_rules_title,
+				'explanation_message_rules_text'		=> $explanation_message_rules_text,
+				'explanation_message_goto_forum'		=> $link_goto_forum,
+				'explanation_message_post_forum'		=> $link_post_forum,
+				'forum_name'							=> $forum_name,
+				'forum_url'								=> $forum_url,
+				'forum_post'							=> $forum_post,
+			));
+		}
+	}
+
+	return $params;
 }
 
 /**

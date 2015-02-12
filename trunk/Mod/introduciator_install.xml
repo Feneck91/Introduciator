@@ -72,11 +72,13 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 					<change><![CDATA[Minors source code optimisations]]></change>
 					<change><![CDATA[Replace TRUNCATE SQL Command by DELETE SQL Command to make it work with Firebird and SQLite databases]]></change>
 					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account]]></change>
+					<change><![CDATA[Bug fix: whites blocs around red forum rules corners into introduciator explanation page have been fixed]]></change>
 				</changelog>
 				<changelog lang="fr">
 					<change><![CDATA[Optimisations mineures du code source]]></change>
 					<change><![CDATA[Replacement de la commande SQL TRUNCATE par la commande SQL DELETE pour le rendre compatible avec les bases de données Firebird et SQLite]]></change>
 					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte]]></change>
+					<change><![CDATA[Correction bug : les carrés blancs autour des coins rouges des règles dans la page d'explication ont été corrigé]]></change>
 				</changelog>
 			</entry>
 		</history>
@@ -251,6 +253,21 @@ ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciato
 .introduciator_disabled {
 	color: red !important;
 	text-align: center;
+}
+span.corners-top.corners-top-introduciator {
+	background-image: url("{T_THEME_PATH}/images/corners_left_introduciator.png") ;
+}
+
+span.corners-top.corners-top-introduciator span {
+	background-image: url("{T_THEME_PATH}/images/corners_right_introduciator.png");
+}
+
+span.corners-bottom.corners-bottom-introduciator {
+	background-image: url("{T_THEME_PATH}/images/corners_left_introduciator.png");
+}
+
+span.corners-bottom.corners-bottom-introduciator span {
+	background-image: url("{T_THEME_PATH}/images/corners_right_introduciator.png");
 }
 /* Introduciator - End
 //------------------------------------------------*/

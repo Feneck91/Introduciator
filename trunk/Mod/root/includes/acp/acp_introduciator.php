@@ -118,7 +118,7 @@ class acp_introduciator
 				{	// no action or update current
 					$dp_data = array();
 	
-					$params = introduciator_getparams();
+					$params = introduciator_getparams(true);
 					$template->assign_vars(array(
 						'INTRODUCIATOR_MOD_ACTIVATED'							=> $params['introduciator_allow'],
 						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post'],
@@ -161,35 +161,63 @@ class acp_introduciator
 							$is_include_groups						= request_var('include_groups', true);
 							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
 							$ignored_users							= substr(utf8_normalize_nfc(request_var('ignored_users', '')), 0, 255);
-							$explanation_message_title				= substr(utf8_normalize_nfc(request_var('explanation_message_title', '', true)), 0, 255);
-							$explanation_message_text				= substr(utf8_normalize_nfc(request_var('explanation_message_text', '', true)), 0, 255);
+							$explanation_message_title				= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
+							$explanation_message_text				= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
 							$explanation_display_rules_enabled		= request_var('explanation_display_rules_enabled', false);
-							$explanation_message_rules_title		= substr(utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true)), 0, 255);
-							$explanation_message_rules_text			= substr(utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true)), 0, 255);
-
-							// Verify message rules text
-							$explanation_message_rules_text_new_uid = $explanation_message_rules_text_new_bitfield = $explanation_message_rules_text_bbcode_options = '';
-							$explanation_message_rules_text_verify = $explanation_message_rules_text;
-		
-							replace_all_by(
-								array(
-									&$explanation_message_rules_text_verify,
-								),
-								array(
-									'%forum_url%'	=> "http://www.dummy.com/aghxkfps.php", // Make link work
-									'%forum_post%'	=> "http://www.dummy.com/aghxkfps.php", // Make link work
-								)
-							);
-							$texts_errors = generate_text_for_storage($explanation_message_rules_text_verify, $explanation_message_rules_text_new_uid, $explanation_message_rules_text_new_bitfield, $explanation_message_rules_text_bbcode_options, true, true, true);
-
-							if (sizeof($texts_errors))
-							{	// Errors occured, show them to the user.
-								trigger_error(implode('<br>', $errors) . adm_back_link($this->u_action, E_USER_WARNING));
-							}
+							$explanation_message_rules_title		= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
+							$explanation_message_rules_text			= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
+							}
+
+							// Verify message rules texts and convert with BBCode
+							$explanation_message_rules_text_new_uid = $explanation_message_rules_text_new_bitfield = $explanation_message_rules_text_bbcode_options = '';
+
+							// Replace all url by real fake urls
+							replace_all_by(
+								array(
+									&$explanation_message_title,
+									&$explanation_message_text,
+									&$explanation_message_rules_title,
+									&$explanation_message_rules_text,
+								),
+								array(
+									'%forum_url%'	=> 'http://aghxkfps.com', // Make link work if placed into [url]
+									'%forum_post%'	=> 'http://dqsdfzef.com', // Make link work if placed into [url]
+								)
+							);
+							
+							$explanation_message_array = array(
+								'introduciator_explanation_message_title'			=> $explanation_message_title,
+								'introduciator_explanation_message_text'			=> $explanation_message_text,
+								'introduciator_explanation_message_rules_title'		=> $explanation_message_rules_title,
+								'introduciator_explanation_message_rules_text'		=> $explanation_message_rules_text,
+							);
+
+							// Verify all user inputs
+							$explanation_message_array_result = array();
+							foreach ($explanation_message_array as $key => $value)
+							{
+								$new_uid = $bitfield = $bbcode_options = '';
+								$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
+								if (sizeof($texts_errors))
+								{	// Errors occured, show them to the user.
+									trigger_error(implode('<br>', $errors) . adm_back_link($this->u_action), E_USER_WARNING);
+								}
+								// Merge results into array
+								$explanation_message_array_result = array_merge($explanation_message_array_result, array(
+									$key						=> $value,
+									$key . '_uid'				=> $new_uid,
+									$key . '_bitfield'			=> $bitfield,
+									$key . '_bbcode_options'	=> $bbcode_options,
+								));
+								
+								if (strlen($value) > 255)
+								{	// Errors occured, show them to the user.
+									trigger_error($user->lang['INTRODUCIATOR_ERROR_TOO_LONG_TEXT'] . adm_back_link($this->u_action), E_USER_WARNING);
+								}
 							}
 
 							set_config('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation MOD config
@@ -199,11 +227,12 @@ class acp_introduciator
 							set_config('introduciator_is_use_permissions', $is_use_permissions ? '1' : '0');
 							set_config('introduciator_is_include_groups', $is_include_groups ? '1' : '0');
 							set_config('introduciator_ignored_users', $ignored_users);
-							set_config('introduciator_explanation_message_title', $explanation_message_title);
-							set_config('introduciator_explanation_message_text', $explanation_message_text);
 							set_config('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
-							set_config('introduciator_explanation_message_rules_title', $explanation_message_rules_title);
-							set_config('introduciator_explanation_message_rules_text', $explanation_message_rules_text);
+							// Set results into config
+							foreach ($explanation_message_array_result as $key => $value)
+							{
+								set_config($key, $value);
+							}
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
