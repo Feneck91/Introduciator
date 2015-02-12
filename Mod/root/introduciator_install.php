@@ -85,6 +85,20 @@ $versions = array(
 		'config_remove' => array(
 			array('allow_introduciator'),
 		),
+		'config_add' => array(
+			array('introduciator_explanation_message_title_uid',					''),
+			array('introduciator_explanation_message_title_bitfield',				''),
+			array('introduciator_explanation_message_title_bbcode_options',			''),
+			array('introduciator_explanation_message_text_uid',						''),
+			array('introduciator_explanation_message_text_bitfield',				''),
+			array('introduciator_explanation_message_text_bbcode_options',			''),
+			array('introduciator_explanation_message_rules_title_uid',				''),
+			array('introduciator_explanation_message_rules_title_bitfield',			''),
+			array('introduciator_explanation_message_rules_title_bbcode_options',	''),
+			array('introduciator_explanation_message_rules_text_uid',				''),
+			array('introduciator_explanation_message_rules_text_bitfield',			''),
+			array('introduciator_explanation_message_rules_text_bbcode_options',	''),
+		),
 	),
 
 	'1.0.0' => array(

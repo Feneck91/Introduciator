@@ -84,7 +84,18 @@ $lang = array_merge($lang, array(
 																		<li><b>%forum_name%</b>: name of the forum for introductions</li>
 																		<li><b>%forum_url%</b>: url to the forum for introductions</li>
 																		<li><b>%forum_post%</b>: url to write new post into the forum for introductions</li>
-																		</ul>',
+																		</ul>
+																		You can use BBcodes to make messages.<br/>
+																		<br/>
+																		<u>Examples:</u>
+																		<ul>
+																		<li>Make link to forum for introductions: <i>[url=<b>%forum_url%</b>]Click here to go to forum ’<b>%forum_name%</b>’[/url]</i>
+																		<li>Make link to create topic into forum for introductions: <i>[url=<b>%forum_post%</b>]Click here to create topic into the forum ’<b>%forum_name%</b>’[/url]</i>
+																		</ul>
+																		<br/>
+																		<strong>All fields are limited to 255 characters!</strong>
+																		<br/>
+																		<br/>',
 	// Sub titles
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Enable MOD',
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Used to enable or disable this MOD.',
@@ -128,6 +139,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the MOD is desactivated',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this MOD is enabled, your should choose a forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'No update information available',
+	'INTRODUCIATOR_ERROR_TOO_LONG_TEXT'						=> 'Error,  too long text (all texts are limited to 255 characters)',
 
 /**
 * logs

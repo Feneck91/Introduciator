@@ -84,7 +84,18 @@ $lang = array_merge($lang, array(
 																		<li><b>%forum_name%</b> : nom du forum de présentation</li>
 																		<li><b>%forum_url%</b> : url vers le forum de présentation</li>
 																		<li><b>%forum_post%</b> : url pour l’écriture d’un nouveau post dans le forum de présentation</li>
-																		</ul>',
+																		</ul>
+																		Vous pouvez utiliser les BBcodes pour créer les messages.<br/>
+																		<br/>
+																		<u>Exemples :</u>
+																		<ul>
+																		<li>Créer un lien vers le forum de présentation : <i>[url=<b>%forum_url%</b>]Cliquez ici pour aller au forum ’<b>%forum_name%</b>’[/url]</i>
+																		<li>Créer un lien de création du sujet dans le forum de présentation : <i>[url=<b>%forum_post%</b>]Cliquez ici pour créer un nouveau sujet dans le forum ’<b>%forum_name%</b>’[/url]</i>
+																		</ul>
+																		<br/>
+																		<strong>Tous les champs sont limités à 255 caractères !</strong>
+																		<br/>
+																		<br/>',
 	// Sous-titres
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Activer le MOD',
 	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Est utilisé pour activer ou désactiver ce MOD.',
@@ -128,6 +139,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque le MOD est désactivé',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
+	'INTRODUCIATOR_ERROR_TOO_LONG_TEXT'						=> 'Erreur, texte trop long (tous les textes sont limités à 255 caractères)',
 
 /**
 * logs

@@ -45,12 +45,14 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 				<changelog lang="en">
 					<change><![CDATA[Minors source code optimisations]]></change>
 					<change><![CDATA[Replace TRUNCATE SQL Command by DELETE SQL Command to make it work with Firebird and SQLite databases]]></change>
-					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account]]></change>
+					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account (can use BBCodes)]]></change>
+					<change><![CDATA[Bug fix: whites blocs around red forum rules corners into introduciator explanation page have been fixed]]></change>
 				</changelog>
 				<changelog lang="fr">
 					<change><![CDATA[Optimisations mineures du code source]]></change>
 					<change><![CDATA[Replacement de la commande SQL TRUNCATE par la commande SQL DELETE pour le rendre compatible avec les bases de données Firebird et SQLite]]></change>
-					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte]]></change>
+					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte (utilisation possible des BBCodes)]]></change>
+					<change><![CDATA[Correction bug : les carrés blancs autour des coins rouges des règles dans la page d'explication ont été corrigé]]></change>
 				</changelog>
 			</entry>
 		</history>
@@ -70,62 +72,34 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			<file from="root/language/en/mods/permissions_introduciator.php" to="language/en/mods/permissions_introduciator.php"/>
 			<file from="root/language/fr/mods/info_acp_introduciator.php" to="language/fr/mods/info_acp_introduciator.php"/>
 			<file from="root/language/fr/mods/introduciator.php" to="language/fr/mods/introduciator.php"/>
+			<file from="root/language/fr/mods/permissions_introduciator.php" to="language/fr/mods/permissions_introduciator.php"/>
+			<file from="root/styles/prosilver/template/introduciator_explain.html" to="styles/prosilver/template/introduciator_explain.html"/>
 			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
 			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
+			<file from="root/styles/prosilver/theme/images/corners_left_introduciator.png" to="styles/prosilver/theme/images/corners_left_introduciator.png"/>
+			<file from="root/styles/prosilver/theme/images/corners_right_introduciator.png" to="styles/prosilver/theme/images/corners_right_introduciator.png"/>
 		</copy>
-		<open src="memberlist.php">
-			<edit>
-				<remove><![CDATA[//------------------------------------------------
-// Introduciator - Begin
-include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-// Introduciator - End
-//------------------------------------------------
-]]></remove>
-				<find><![CDATA[// Introduciator - Begin]]></find>
-				<action type="after-add"><![CDATA[	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-
-]]></action>
-			</edit>
-		</open>
-		<open src="styles/prosilver/template/memberlist_view.html">
-			<edit>
-				<find><![CDATA[{L_INTRODUCIATOR_VIEW_MEMBER}]]></find>
-				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
-			</edit>
-		</open>
-		<open src="styles/prosilver/template/viewtopic_body.html">
-			<edit>
-				<find><![CDATA[{L_INTRODUCIATOR_TOPIC_TITLE}]]></find>
-				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
-			</edit>
-			<edit>
-				<find><![CDATA[{L_INTRODUCIATOR_TOPIC_TITLE}]]></find>
-				<action type="replace-with"><![CDATA[{L_INTRODUCIATOR_MEMBER_INTRODUCTION}]]></action>
-			</edit>
-		</open>
-		<open src="styles/prosilver/theme/buttons.css">
-			<edit>
-				<find><![CDATA[/* Introduciator - Begin
-//------------------------------------------------*/]]></find>
-				<action type="replace-with"><![CDATA[/* Introduciator - End
-//------------------------------------------------*/]]></action>
-			</edit>
-		</open>
 		<open src="styles/prosilver/theme/colours.css">
 			<edit>
-				<find><![CDATA[/* Introduciator - Begin
+				<find><![CDATA[/* Introduciator - End
 //------------------------------------------------*/]]></find>
-				<action type="replace-with"><![CDATA[.introduciator_explain {
-	color: orangered !important;
-	text-align: center;
+				<action type="replace-with"><![CDATA[span.corners-top.corners-top-introduciator {
+	background-image: url("{T_THEME_PATH}/images/corners_left_introduciator.png") ;
 }
-.introduciator_disabled {
-	color: red !important;
-	text-align: center;
+
+span.corners-top.corners-top-introduciator span {
+	background-image: url("{T_THEME_PATH}/images/corners_right_introduciator.png");
+}
+
+span.corners-bottom.corners-bottom-introduciator {
+	background-image: url("{T_THEME_PATH}/images/corners_left_introduciator.png");
+}
+
+span.corners-bottom.corners-bottom-introduciator span {
+	background-image: url("{T_THEME_PATH}/images/corners_right_introduciator.png");
 }
 /* Introduciator - End
-//------------------------------------------------*/
-]]></action>
+//------------------------------------------------*/]]></action>
 			</edit>
 		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
