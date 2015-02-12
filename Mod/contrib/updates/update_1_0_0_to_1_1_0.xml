@@ -102,6 +102,22 @@ span.corners-bottom.corners-bottom-introduciator span {
 //------------------------------------------------*/]]></action>
 			</edit>
 		</open>
+		<open src="viewtopic.php">
+			<edit>
+				<find><![CDATA[$s_quick_reply = (($topic_data['forum_status'] == ITEM_UNLOCKED && $topic_data['topic_status'] == ITEM_UNLOCKED) || $auth->acl_get('m_edit', $forum_id)) ? true : false;
+]]></find>
+				<action type="after-add"><![CDATA[	
+	//------------------------------------------------
+	// Introduciator - Begin
+	if ($s_quick_reply)
+	{	// Remove quick reply if the user is not allowed to reply here
+		$s_quick_reply = introduciator_verify_posting($user, 'reply', $forum_id, 0, null, false);
+	}
+	// Introduciator - End
+	//------------------------------------------------
+]]></action>
+			</edit>
+		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
 		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations. Run the SQL install file, introduciator_install.php, in your web browser and delete the file upon script completion.]]></diy-instructions>
 		<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements. Exécutez ensuite le fichier d'installation, intitulé introduciator_install.php, dans votre navigateur Internet puis supprimez-le une fois l'installation effectuée.]]></diy-instructions>
