@@ -50,8 +50,19 @@ PUSHD %CD%
 CD /D "%BATCH_PATH%"
 "%BATCH_PATH%bin\zip.exe" -r "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%.zip" "Introduciator_v%INTRODUCIATOR_VERSION%"
 POPD
-IF %errorlevel% EQU 0 GOTO Done
+IF %errorlevel% EQU 0 GOTO RemoveTempFolder
+GOTO Error
 
+:RemoveTempFolder
+REM Delete the Introduciator export to make clean export
+if exist "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%" (
+    ECHO Deleting export folder...
+    RD "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%" /S /Q
+)
+
+GOTO Done
+
+:Error
 REM Error while creating zip
 ECHO.
 ECHO.
