@@ -52,7 +52,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 		<installation>
 			<level>intermediate</level>
 			<time>900</time>
-			<target-version>3.0.13</target-version>
+			<target-version>3.0.13-PL1</target-version>
 		</installation>
 		<history>
 			<entry>
@@ -73,12 +73,14 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 					<change><![CDATA[Replace TRUNCATE SQL Command by DELETE SQL Command to make it work with Firebird and SQLite databases]]></change>
 					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account]]></change>
 					<change><![CDATA[Bug fix: whites blocs around red forum rules corners into introduciator explanation page have been fixed]]></change>
+					<change><![CDATA[Remove quick reply button when the user is not yet introduce]]></change>
 				</changelog>
 				<changelog lang="fr">
 					<change><![CDATA[Optimisations mineures du code source]]></change>
 					<change><![CDATA[Replacement de la commande SQL TRUNCATE par la commande SQL DELETE pour le rendre compatible avec les bases de données Firebird et SQLite]]></change>
 					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte]]></change>
 					<change><![CDATA[Correction bug : les carrés blancs autour des coins rouges des règles dans la page d'explication ont été corrigé]]></change>
+					<change><![CDATA[Suppression du bouton réponse rapide lorsque l'utilisateur ne s'est pas encore présenté]]></change>
 				</changelog>
 			</entry>
 		</history>

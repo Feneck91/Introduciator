@@ -18,11 +18,11 @@
 				<email><![CDATA[feneck91@free.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>1.0.1</mod-version>
+		<mod-version>1.1.0</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>60</time>
-			<target-version>3.0.13</target-version>
+			<target-version>3.0.13-PL1</target-version>
 		</installation>
 		<history>
 			<entry>
@@ -37,16 +37,18 @@
 			</entry>
 			<entry>
 				<date>2015-02-04</date>
-				<rev-version>1.0.1</rev-version>
+				<rev-version>1.1.0</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Minors source code optimisations]]></change>
 					<change><![CDATA[Replace TRUNCATE SQL Command by DELETE SQL Command to make it work with Firebird and SQLite databases]]></change>
 					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account]]></change>
+					<change><![CDATA[Remove quick reply button when the user is not yet introduce]]></change>
 				</changelog>
 				<changelog lang="fr">
 					<change><![CDATA[Optimisations mineures du code source]]></change>
 					<change><![CDATA[Replacement de la commande SQL TRUNCATE par la commande SQL DELETE pour le rendre compatible avec les bases de données Firebird et SQLite]]></change>
 					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte]]></change>
+					<change><![CDATA[Suppression du bouton réponse rapide lorsque l'utilisateur ne s'est pas encore présenté]]></change>
 				</changelog>
 			</entry>
 		</history>
