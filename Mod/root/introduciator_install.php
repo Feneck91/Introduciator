@@ -31,9 +31,6 @@ if (!file_exists($phpbb_root_path . 'umil/umil_auto.' . $phpEx))
 	trigger_error('Please download the latest UMIL (Unified MOD Install Library) from: <a href="http://www.phpbb.com/mods/umil/">phpBB.com/mods/umil</a>', E_USER_ERROR);
 }
 
-include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx); // For defines
-
-//
 // The name of the mod to be displayed during installation.
 $mod_name = 'INTRODUCIATOR_MOD';
 

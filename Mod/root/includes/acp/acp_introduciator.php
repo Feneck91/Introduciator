@@ -19,7 +19,8 @@ if (!defined('IN_PHPBB'))
 }
 
 global $phpbb_root_path, $phpEx;
-if (!defined('INTRODUCIATOR_CURRENT_VERSION'))
+
+if (!function_exists('introduciator_getparams'))
 {
 	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 }

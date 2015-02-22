@@ -24,12 +24,6 @@ if (!function_exists('group_memberships'))
 	include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 }
 
-global $table_prefix;
-// Define own constants, could be copy into includes\constants.php
-// but here, no need to edit and	 merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',		'1.1.0');
-define('INTRODUCIATOR_GROUPS_TABLE',		$table_prefix . 'introduciator_groups');
-
 /**
  * Check if a group is selected.
  *
@@ -104,7 +98,8 @@ function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_i
 	$sql = 'SELECT topic_id, topic_first_post_id, topic_approved
 			FROM ' . TOPICS_TABLE . '
 				WHERE topic_poster = ' . (int) $user_id . '
-				 AND forum_id = ' . (int) $forum_id;
+				 AND forum_id = ' . (int) $forum_id . '
+				 AND topic_first_post_id <> 0'; // PATCH : Sometimes, the topic_first_post_id is 0
 	$result = $db->sql_query($sql);
 	$topic_row = $db->sql_fetchrow($result);
 	$db->sql_freeresult($result);
@@ -260,9 +255,8 @@ function introduciator_getparams($is_edit = null)
 			$explanation_message_rules_title = generate_text_for_display($explanation_message_rules_title, $explanation_message_rules_title_uid, $explanation_message_rules_title_bitfield, $explanation_message_rules_title_bbcode_options);
 			$explanation_message_rules_text = generate_text_for_display($explanation_message_rules_text, $explanation_message_rules_text_uid, $explanation_message_rules_text_bitfield, $explanation_message_rules_text_bbcode_options);
 			$explanation_message_rules_text = str_replace('%rules_text%',generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']), $explanation_message_rules_text);
-			
 			$explanation_message_title = str_replace('%explanation_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'], $explanation_message_title);
-			$explanation_message_text = str_replace('%explanation_text%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'], $explanation_message_text);
+			$explanation_message_text = str_replace('%explanation_text%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'] . (($params['is_explanation_display_rules'] && strlen($explanation_message_text) > 0 && strlen($explanation_message_rules_text) > 0) ? $user->lang['INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT_RULES'] : ''), $explanation_message_text);
 			$explanation_message_rules_title = str_replace('%rules_title%', $user->lang['INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'], $explanation_message_rules_title);
 			$link_goto_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
 			$link_post_forum = $user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
