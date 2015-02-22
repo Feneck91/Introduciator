@@ -73,7 +73,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_MOD_DISABLED'						=> 'The Introduciator MOD is disabled. You should enable it to make this MOD workable.',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
 	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'As for every new user, you must introduce yourself to other members in the “<a href="%forum_url%">%forum_name%</a>” forum<br/>
-															Only a new topic in the forum for introductions is allowed.<br/>
+															Only a new topic in the forum for introductions is allowed.',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT_RULES'		=> '<br/>
 															When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
 	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<strong><u>The rules are repeated here:</u></strong>',
 	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
