@@ -95,6 +95,7 @@ $versions = array(
 			array('introduciator_explanation_message_rules_text_uid',				''),
 			array('introduciator_explanation_message_rules_text_bitfield',			''),
 			array('introduciator_explanation_message_rules_text_bbcode_options',	''),
+			array('introduciator_posting_approval_level',							0),
 		),
 	),
 
