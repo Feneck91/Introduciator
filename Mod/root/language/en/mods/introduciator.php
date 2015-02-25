@@ -65,29 +65,32 @@ $lang = array_merge($lang, array(
 /*
 * Other : Messages
 */
-	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'	=> 'Your introduction message is pending approval, please wait.',
-	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'		=> 'You are not allowed to introduce yourself more than once!',
-	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST'	=> 'You are not allowed to delete the first post of your introduction!',
-	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'		=> 'You are not allowed to delete the first post of this introduction! You can delete this introduction by deleting the topic.',
-	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'		=> 'Please introduce youself into the topic: %s',
-	'INTRODUCIATOR_MOD_DISABLED'						=> 'The Introduciator MOD is disabled. You should enable it to make this MOD workable.',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'			=> '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'			=> 'As for every new user, you must introduce yourself to other members in the “<a href="%forum_url%">%forum_name%</a>” forum<br/>
-															Only a new topic in the forum for introductions is allowed.',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT_RULES'		=> '<br/>
-															When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
-	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'				=> '<strong><u>The rules are repeated here:</u></strong>',
-	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'			=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
-	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'			=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
+	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'			=> 'Your introduction message is pending approval, please wait.',
+	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only the editing is allowed.',
+	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'				=> 'You are not allowed to introduce yourself more than once!',
+	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'You are not allowed to delete the first post of your introduction!',
+	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'				=> 'You are not allowed to delete the first post of this introduction! You can delete this introduction by deleting the topic.',
+	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'				=> 'Please introduce youself into the topic: %s',
+	'INTRODUCIATOR_MOD_DISABLED'								=> 'The Introduciator MOD is disabled. You should enable it to make this MOD workable.',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'					=> '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'					=> 'As for every new user, you must introduce yourself to other members in the “<a href="%forum_url%">%forum_name%</a>” forum<br/>
+																	Only a new topic in the forum for introductions is allowed.',
+	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
+																	When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
+	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'						=> '<strong><u>The rules are repeated here:</u></strong>',
+	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'					=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
+	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'					=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
+	'INTRODUCIATOR_MOD_POST_APPROVAL_NOTIFY'					=> '<br/>During presentation approval, it remains editable and moderators can reply to you.
+																	<br/>This will allow you to bring it into conformity with the requirements of the forum if necessary.',
 
-	'INTRODUCIATOR_MEMBER_INTRODUCTION'					=> 'Member’s introduction',
-	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'			=> 'No introduction avalaible for this membrer',
-	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'				=> 'See the member’s introduction',
-	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'	=> 'The introduction of this member is pending approval',
+	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Member’s introduction',
+	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'No introduction avalaible for this membrer',
+	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'						=> 'See the member’s introduction',
+	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'			=> 'The introduction of this member is pending approval',
 
-	'INTRODUCIATOR_VIEW_MEMBER_GOTO'					=> 'Go to member’s introduction',
-	'INTRODUCIATOR_VIEW_MEMBER_PENDING'					=> 'The member’s introduction is pending approval',
-	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'					=> 'No introduction avalaible for this member',
+	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Go to member’s introduction',
+	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'The member’s introduction is pending approval',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'No introduction avalaible for this member',
 ));
 
 ?>

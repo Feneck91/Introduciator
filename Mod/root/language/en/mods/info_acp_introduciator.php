@@ -105,6 +105,16 @@ $lang = array_merge($lang, array(
 																		<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'The forum where the user must introduce himself/herself',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'The MOD will search only in this forum whether forum users have introduced themselves.',
+	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL'					=> 'Introduction approval options',
+	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL_EXPLAIN'			=> 'Is used to force introduction to be approved by a moderator:<br/>
+																		<ul>
+																		<li><b>No approval</b>: don’t force introduction to be approved, let the default processing.</li>
+																		<li><b>Simple approval</b>: force introduction to be approved. The user doesn’t see his/her introduction if it is not validated by a moderator (normal processing is used for all messages that use approval).</li>
+																		<li><b>Approval with ability to edit</b>: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbiden.</li>
+																		</ul>',
+	'INTRODUCIATOR_CP_ED_TEXT_POSTING_NO_APPROVAL'					=> 'No approval',
+	'INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL'						=> 'Simple approval',
+	'INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL_WITH_EDIT'			=> 'Approval with ability to edit',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Display explanation page',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'This option is used to display an explanation page if the user is trying to post into another forum than the forum for introductions.',
 

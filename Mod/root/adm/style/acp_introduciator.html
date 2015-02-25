@@ -101,6 +101,16 @@
 				</dd>
 			</dl>
 			<!--
+			     Posting  approval level
+			-->
+			<dl>
+				<dt><label for="posting_approval_level">{L_INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL_EXPLAIN}</span></dt>
+				<dd><label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0" <!-- IF INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_TEXT_POSTING_NO_APPROVAL}</label>
+					<label><input name="posting_approval_level" type="radio" class="radio" value="1" <!-- IF INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL}</label>
+                    <label><input name="posting_approval_level" type="radio" class="radio" value="2" <!-- IF INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED --> checked="checked"<!-- ENDIF --> /> {L_INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL_WITH_EDIT}</label>
+				</dd>
+			</dl>
+			<!--
 			     Display explanation page ?
 			-->
 			<dl>

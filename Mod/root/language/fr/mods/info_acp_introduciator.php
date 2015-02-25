@@ -105,6 +105,16 @@ $lang = array_merge($lang, array(
 																		<br/>Vous pouvez désactiver cette option mais dans ce cas un membre peut avoir plusieurs présentations. Il est recommandé d’activer cette option.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Choix du forum où l’utilisateur doit se présenter',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s’est déjà présenté ou pas.',
+	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL'					=> 'Options d’approbation de la présentation',
+	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL_EXPLAIN'			=> 'Est utilisé pour forcer l’approbation de la présentation par un modérateur :<br/>
+																		<ul>
+																		<li><b>Pas d’approbation</b> : ne force par l’approbation de la présentation, il laisse le traitement par défaut.</li>
+																		<li><b>Approbation simple</b> : force l’approbation de la présentation. L’utilisateur ne voit pas sa présentation jusqu’à ce qu’elle soit validée par un modérateur (traitement normal de tous les messages nécessitants une approbation).</li>
+																		<li><b>Approbation avec édition</b> : force l’approbation de la présentation. L’utilisateur voit sa présentation immédiatement et peut la modifier. Il ne peut pas poster ailleurs tant qu’elle n’est pas validée par un modérateur. Ceci permet aux modérateurs et à l’utilisateur d’échanger afin que ce dernier puisse mettre son message en conformité avant validation par le modérateur (traitement différent des messages nécessitant une approbation). Seule l’édition est autorisée. Répondre et citer sont interdit.</li>
+																		</ul>',
+	'INTRODUCIATOR_CP_ED_TEXT_POSTING_NO_APPROVAL'					=> 'Pas d’approbation',
+	'INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL'						=> 'Approbation simple',
+	'INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL_WITH_EDIT'			=> 'Approbation avec édition',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE'					=> 'Afficher la page d’explications',
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Est utilisé pour afficher la page d’explications si l’utilisateur tente de poster dans un autre forum que celui des présentations.',
 

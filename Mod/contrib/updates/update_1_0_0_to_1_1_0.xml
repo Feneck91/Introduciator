@@ -69,6 +69,7 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 	</header>
 	<action-group>
 		<copy>
+			<file from="root/adm/style/acp_introduciator.html" to="adm/style/acp_introduciator.html"/>
 			<file from="root/includes/functions_introduciator.php" to="includes/functions_introduciator.php"/>
 			<file from="root/includes/acp/acp_introduciator.php" to="includes/acp/acp_introduciator.php"/>
 			<file from="root/language/en/mods/info_acp_introduciator.php" to="language/en/mods/info_acp_introduciator.php"/>
@@ -101,6 +102,97 @@ define('INTRODUCIATOR_CURRENT_VERSION','1.1.0');
 define('INTRODUCIATOR_GROUPS_TABLE',$table_prefix . 'introduciator_groups');
 // Introduciator - End
 //------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="viewforum.php">
+			<edit>
+				<find><![CDATA[$sql_approved = ($auth->acl_get]]></find>
+				<action type="after-add"><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+if (!function_exists('introduciator_getparams'))
+{
+	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+}
+$sql_approved = introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_approved, 't');
+// Introduciator - End
+//------------------------------------------------
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		$topic_unapproved = ]]></find>
+				<action type="after-add"><![CDATA[		//------------------------------------------------
+		// Introduciator - Begin
+		if (introduciator_is_topic_in_forum_is_unapproved_for_introduce($user, $forum_id, $topic_id))
+		{
+			$topic_unapproved = true;
+		}
+		// Introduciator - End
+		//------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="posting.php">
+			<edit>
+				<find><![CDATA[// We need to know some basic information in all cases before we do anything.]]></find>
+				<action type="before-add"><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+// Introduciator - End
+//------------------------------------------------
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[			(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND t.topic_approved = 1'))]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND t.topic_approved = 1')]]></inline-find>
+					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, $forum_id, /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, 't') /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[				(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND p.post_approved = 1')]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND p.post_approved = 1')]]></inline-find>
+					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, $forum_id, /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, 'p') /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[if ($auth->acl_get('m_approve', $forum_id)]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[if (]]></inline-find>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */ !introduciator_ignore_topic_unapproved($user, $forum_id, $mode) && /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<remove><![CDATA[include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+]]></remove>
+			</edit>
+			<edit>
+				<find><![CDATA[			// The last parameter tells submit_post if search indexer has to be run]]></find>
+				<action type="before-add"><![CDATA[			//------------------------------------------------
+			// Introduciator - Begin
+			$introduciator_posting_must_be_approved = introduciator_is_posting_must_be_approved($user, $mode, $forum_id);
+			if ($introduciator_posting_must_be_approved)
+			{	// If posting should not be approved, let $data['force_approved_state'] unchanged (in case of another MOD has modified it)
+				$data['force_approved_state'] = false; // Force approval
+			}
+			// Introduciator - End
+			//------------------------------------------------
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[				$message .= (($user->data['user_id'] == ANONYMOUS) ? '' : ' '. $user->lang['POST_APPROVAL_NOTIFY']);]]></find>
+				<action type="after-add"><![CDATA[				//------------------------------------------------
+				// Introduciator - Begin
+				if ($introduciator_posting_must_be_approved)
+				{	// If approval, add more explanation message to the user
+					meta_refresh(20, $redirect_url); // Message is longuer, let more time to the user
+					$message .= $user->lang['INTRODUCIATOR_MOD_POST_APPROVAL_NOTIFY'];
+				}
+				// Introduciator - End
+				//------------------------------------------------
 ]]></action>
 			</edit>
 		</open>

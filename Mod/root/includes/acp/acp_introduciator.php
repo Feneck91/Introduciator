@@ -72,7 +72,7 @@ class acp_introduciator
 
 				if ($latest_version_info === false || !function_exists('phpbb_version_compare'))
 				{
-					$template->assign_var('S_INTRODUCIATOR_VERSIONCHECK_FAIL',true);
+					$template->assign_var('S_INTRODUCIATOR_VERSIONCHECK_FAIL', true);
 				}
 				else
 				{
@@ -112,7 +112,7 @@ class acp_introduciator
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
 				// Display configuration page content into ACP .MOD tab
-				$template->assign_var('S_CONFIGURATION_PAGES',true);
+				$template->assign_var('S_CONFIGURATION_PAGES', true);
 
 				// If no action, display configuration
 				if (empty($action))
@@ -121,18 +121,21 @@ class acp_introduciator
 	
 					$params = introduciator_getparams(true);
 					$template->assign_vars(array(
-						'INTRODUCIATOR_MOD_ACTIVATED'							=> $params['introduciator_allow'],
-						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'		=> $params['is_check_delete_first_post'],
-						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'				=> $params['is_explanation_enabled'],
-						'INTRODUCIATOR_USE_PERMISSIONS'							=> $params['is_use_permissions'],
-						'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'					=> $params['is_include_groups'],
-						'INTRODUCIATOR_ITEM_IGNORED_USERS'						=> $params['ignored_users'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE'				=> $params['explanation_message_title'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'				=> $params['explanation_message_text'],
-						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'	=> $params['is_explanation_display_rules'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE'			=> $params['explanation_message_rules_title'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT'			=> $params['explanation_message_rules_text'],
-						'U_ACTION'												=> $this->u_action,
+						'INTRODUCIATOR_MOD_ACTIVATED'											=> $params['introduciator_allow'],
+						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
+						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
+						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL,
+						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'	=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
+						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'								=> $params['is_explanation_enabled'],
+						'INTRODUCIATOR_USE_PERMISSIONS'											=> $params['is_use_permissions'],
+						'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'									=> $params['is_include_groups'],
+						'INTRODUCIATOR_ITEM_IGNORED_USERS'										=> $params['ignored_users'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE'								=> $params['explanation_message_title'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'								=> $params['explanation_message_text'],
+						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'					=> $params['is_explanation_display_rules'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE'							=> $params['explanation_message_rules_title'],
+						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT'							=> $params['explanation_message_rules_text'],
+						'U_ACTION'																=> $this->u_action,
 					));
 
 					// Add all forums
@@ -145,7 +148,7 @@ class acp_introduciator
 							'action'				=> 'update',					// Action
 						));
 
-					$template->assign_var('S_HIDDEN_FIELDS',$s_hidden_fields);
+					$template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 				}
 				else
 				{	// Action !
@@ -157,6 +160,7 @@ class acp_introduciator
 							$is_enabled								= request_var('mod_activated', false);
 							$is_check_delete_first_post_activated	= request_var('check_delete_first_post_activated', false);
 							$fk_forum_id							= request_var('forum_choice', 0);
+							$posting_approval_level					= request_var('posting_approval_level', INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
 							$is_explanation_enabled					= request_var('display_explanation', false);
 							$is_use_permissions						= request_var('is_use_permissions', true);
 							$is_include_groups						= request_var('include_groups', true);
@@ -204,8 +208,8 @@ class acp_introduciator
 								$new_uid = $bitfield = $bbcode_options = '';
 								$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
 								if (sizeof($texts_errors))
-								{	// Errors occured, show them to the user.
-									trigger_error(implode('<br>', $errors) . adm_back_link($this->u_action), E_USER_WARNING);
+								{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
+									trigger_error(implode('<b' . 'r>', $errors) . adm_back_link($this->u_action), E_USER_WARNING);
 								}
 								// Merge results into array
 								$explanation_message_array_result = array_merge($explanation_message_array_result, array(
@@ -221,14 +225,21 @@ class acp_introduciator
 								}
 							}
 
+							if ($posting_approval_level != INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+							{	// Verify the level approval values => No correct value ? Set to INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL
+								$posting_approval_level = INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
+							}
+									
 							set_config('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation MOD config
 							set_config('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
 							set_config('introduciator_fk_forum_id', $fk_forum_id);
+							set_config('introduciator_posting_approval_level', $posting_approval_level);
 							set_config('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
 							set_config('introduciator_is_use_permissions', $is_use_permissions ? '1' : '0');
 							set_config('introduciator_is_include_groups', $is_include_groups ? '1' : '0');
 							set_config('introduciator_ignored_users', $ignored_users);
 							set_config('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
+
 							// Set results into config
 							foreach ($explanation_message_array_result as $key => $value)
 							{
