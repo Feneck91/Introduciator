@@ -89,10 +89,10 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 			</entry>
 		</history>
 		<link-group>
-			<link type="language" href="contrib/languages/fr.xml" lang="en">Language file for french boards</link>
-			<link type="language" href="contrib/languages/fr.xml" lang="fr">Fichier de langue pour les forums francophones</link>
+			<link type="language" href="contrib/languages/fr.xml" lang="en">Language files for french boards</link>
+			<link type="language" href="contrib/languages/fr.xml" lang="fr">Fichiers de langue pour les forums francophones</link>
 			<link type="contrib" href="contrib/updates/update_1_0_0_to_1_1_0.xml" lang="en">Update the MOD from 1.0.0 to 1.1.0</link>
-			<link type="contrib" href="contrib/updates/update_1_0_0_to_1_1_0.xml" lang="fr">Mette à jour le MOD de la version 1.0.0 à la version 1.1.0</link>
+			<link type="contrib" href="contrib/updates/update_1_0_0_to_1_1_0.xml" lang="fr">Mettre à jour le MOD de la version 1.0.0 à la version 1.1.0</link>
 		</link-group>
 	</header>
 	<action-group>
