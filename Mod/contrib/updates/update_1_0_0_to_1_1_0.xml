@@ -69,6 +69,8 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 	</header>
 	<action-group>
 		<copy>
+			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
+			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
 			<file from="root/adm/style/acp_introduciator.html" to="adm/style/acp_introduciator.html"/>
 			<file from="root/includes/functions_introduciator.php" to="includes/functions_introduciator.php"/>
 			<file from="root/includes/acp/acp_introduciator.php" to="includes/acp/acp_introduciator.php"/>
@@ -80,8 +82,6 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			<file from="root/language/fr/mods/introduciator.php" to="language/fr/mods/introduciator.php"/>
 			<file from="root/language/fr/mods/permissions_introduciator.php" to="language/fr/mods/permissions_introduciator.php"/>
 			<file from="root/styles/prosilver/template/introduciator_explain.html" to="styles/prosilver/template/introduciator_explain.html"/>
-			<file from="root/introduciator_explain.php" to="introduciator_explain.php"/>
-			<file from="root/introduciator_install.php" to="introduciator_install.php"/>
 			<file from="root/styles/prosilver/theme/images/corners_left_introduciator.png" to="styles/prosilver/theme/images/corners_left_introduciator.png"/>
 			<file from="root/styles/prosilver/theme/images/corners_right_introduciator.png" to="styles/prosilver/theme/images/corners_right_introduciator.png"/>
 		</copy>
@@ -144,7 +144,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 ]]></action>
 			</edit>
 			<edit>
-				<find><![CDATA[			(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND t.topic_approved = 1'))]]></find>
+				<find><![CDATA[			(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND t.topic_approved = 1')]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND t.topic_approved = 1')]]></inline-find>
 					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, $forum_id, /* Introduciator - End */]]></inline-action>
@@ -222,10 +222,26 @@ span.corners-bottom.corners-bottom-introduciator span {
 		</open>
 		<open src="viewtopic.php">
 			<edit>
+				<find><![CDATA[				" . (($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND post_approved = 1') . "]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[(($auth->acl_get('m_approve', $forum_id)) ? '' : 'AND post_approved = 1')]]></inline-find>
+					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, $forum_id, /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, null) /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[					" . (($auth->acl_get('m_approve', $row['forum_id'])) ? '' : 'AND topic_approved = 1') . "]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[(($auth->acl_get('m_approve', $row['forum_id'])) ? '' : 'AND topic_approved = 1')]]></inline-find>
+					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, $forum_id, /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, null) /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
 				<find><![CDATA[if (!$topic_data['topic_approved'] && !$auth->acl_get('m_approve', $forum_id)]]></find>
 				<inline-edit>
 					<inline-find><![CDATA[$forum_id)]]></inline-find>
-					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */ && !introduciator_is_topic_in_forum_is_unapproved_for_introduce($user, $forum_id, $topic_id) /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */ && !introduciator_is_topic_in_forum_is_unapproved_for_introduction($user, $forum_id, $topic_id) /* Introduciator - End */]]></inline-action>
 				</inline-edit>
 			</edit>
 			<edit>
@@ -240,8 +256,7 @@ span.corners-bottom.corners-bottom-introduciator span {
 			<edit>
 				<find><![CDATA[$s_quick_reply = (($topic_data['forum_status'] == ITEM_UNLOCKED && $topic_data['topic_status'] == ITEM_UNLOCKED) || $auth->acl_get('m_edit', $forum_id)) ? true : false;
 ]]></find>
-				<action type="after-add"><![CDATA[	
-	//------------------------------------------------
+				<action type="after-add"><![CDATA[	//------------------------------------------------
 	// Introduciator - Begin
 	if ($s_quick_reply)
 	{	// Remove quick reply if the user is not allowed to reply here
