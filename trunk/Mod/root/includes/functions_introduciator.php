@@ -723,9 +723,9 @@ function introduciator_ignore_topic_unapproved($user, $forum_id, $mode)
  * approval state (only for INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT configuration).
  *
  * @param $user The user informations
- * @param $forum_id Forum identifier to be displayed
+ * @param $forum_id Forum identifier to be displayed or null to don't filter on forum's id
  * @param $sql_approved Current sql approved.
- * @param $table_name Table name used for SQL request, it can be 't' ou 'p' or other.
+ * @param $table_name Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
  * @return The SQL modified request to be able to see the unapproved user presentation.
  */
 function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_approved, $table_name)
@@ -747,7 +747,7 @@ function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_ap
 			}
 		}
 		
-		if ($introduciator_params['fk_forum_id'] == $forum_id && $introduciator_params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+		if (($forum_id === null || $introduciator_params['fk_forum_id'] == $forum_id) && $introduciator_params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 		{
 			$poster_id = (int) $user->data['user_id'];
 			if (is_user_must_introduce_himself($poster_id, $auth, $user->data['username'], $introduciator_params))
@@ -760,7 +760,7 @@ function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_ap
 				{	// Post into this introduce topic
 					if (!$topic_approved)
 					{
-						$sql_approved = str_replace('AND ', 'AND (', $sql_approved) . ' OR ' . $table_name . '.topic_id = ' . (int) $topic_id . ')';
+						$sql_approved = str_replace('AND ', 'AND (', $sql_approved) . ' OR ' . (empty($table_name) ? '' : $table_name . '.') . 'topic_id = ' . (int) $topic_id . ')';
 					}
 				}
 			}
@@ -780,7 +780,7 @@ function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_ap
  * @param $topic_id topic identifier
  * @return true if the topic_id is the presentation of the logged user and is not yet approved.
  */
-function introduciator_is_topic_in_forum_is_unapproved_for_introduce($user, $forum_id, $topic_id)
+function introduciator_is_topic_in_forum_is_unapproved_for_introduction($user, $forum_id, $topic_id)
 {
 	global $introduciator_params, $config, $auth;
 

@@ -123,7 +123,7 @@ $sql_approved = introduciator_generate_sql_approved_for_forum($user, $forum_id, 
 				<find><![CDATA[		$topic_unapproved = ]]></find>
 				<action type="after-add"><![CDATA[		//------------------------------------------------
 		// Introduciator - Begin
-		if (introduciator_is_topic_in_forum_is_unapproved_for_introduce($user, $forum_id, $topic_id))
+		if (introduciator_is_topic_in_forum_is_unapproved_for_introduction($user, $forum_id, $topic_id))
 		{
 			$topic_unapproved = true;
 		}
@@ -221,6 +221,22 @@ span.corners-bottom.corners-bottom-introduciator span {
 		</open>
 		<open src="viewtopic.php">
 			<edit>
+				<find><![CDATA[if (!$topic_data['topic_approved'] && !$auth->acl_get('m_approve', $forum_id)]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[$forum_id)]]></inline-find>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */ && !introduciator_is_topic_in_forum_is_unapproved_for_introduce($user, $forum_id, $topic_id) /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[	WHERE p.topic_id = $topic_id
+		" . ]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[((!$auth->acl_get('m_approve', $forum_id)) ? 'AND p.post_approved = 1' : '')]]></inline-find>
+					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, $forum_id, /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, 'p') /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
 				<find><![CDATA[$s_quick_reply = (($topic_data['forum_status'] == ITEM_UNLOCKED && $topic_data['topic_status'] == ITEM_UNLOCKED) || $auth->acl_get('m_edit', $forum_id)) ? true : false;
 ]]></find>
 				<action type="after-add"><![CDATA[	
@@ -232,6 +248,37 @@ span.corners-bottom.corners-bottom-introduciator span {
 	}
 	// Introduciator - End
 	//------------------------------------------------
+]]></action>
+			</edit>
+		</open>
+		<open src="search.php">
+			<edit>
+				<find><![CDATA[include($phpbb_root_path . 'common.' . $phpEx);]]></find>
+				<action type="after-add"><![CDATA[//------------------------------------------------
+// Introduciator - Begin
+include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
+// Introduciator - End
+//------------------------------------------------
+]]></action>
+			</edit>
+			<edit>
+				<find><![CDATA[		$m_approve_fid_sql = ' AND p.post_approved = 1';]]></find>
+				<inline-edit>
+					<inline-find><![CDATA[' AND p.post_approved = 1']]></inline-find>
+					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, null, /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, 't') /* Introduciator - End */]]></inline-action>
+				</inline-edit>
+			</edit>
+			<edit>
+				<find><![CDATA[$topic_unapproved = (!$row['topic_approved'] && $auth->acl_get('m_approve', $forum_id)) ? true : false;]]></find>
+				<action type="after-add"><![CDATA[				//------------------------------------------------
+				// Introduciator - Begin
+				if (introduciator_is_topic_in_forum_is_unapproved_for_introduction($user,  $forum_id, $row['topic_id']))
+				{
+					$topic_unapproved = true;
+				}
+				// Introduciator - End
+				//------------------------------------------------
 ]]></action>
 			</edit>
 		</open>
