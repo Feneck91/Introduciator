@@ -728,7 +728,7 @@ function introduciator_ignore_topic_unapproved($user, $forum_id, $mode)
  * @param $table_name Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
  * @return The SQL modified request to be able to see the unapproved user presentation.
  */
-function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_approved, $table_name)
+function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_approved, $table_name, &$approve_fid_ary = null)
 {
 	global $introduciator_params, $config, $auth;
 
@@ -761,6 +761,10 @@ function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_ap
 					if (!$topic_approved)
 					{
 						$sql_approved = str_replace('AND ', 'AND (', $sql_approved) . ' OR ' . (empty($table_name) ? '' : $table_name . '.') . 'topic_id = ' . (int) $topic_id . ')';
+						if ($approve_fid_ary !== null)
+						{
+							$approve_fid_ary = array($topic_id);
+						}
 					}
 				}
 			}

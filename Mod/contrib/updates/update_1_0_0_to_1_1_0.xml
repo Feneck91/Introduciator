@@ -282,7 +282,7 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 				<inline-edit>
 					<inline-find><![CDATA[' AND p.post_approved = 1']]></inline-find>
 					<inline-action type="before-add"><![CDATA[/* Introduciator - Begin */ introduciator_generate_sql_approved_for_forum($user, null, /* Introduciator - End */]]></inline-action>
-					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, 't') /* Introduciator - End */]]></inline-action>
+					<inline-action type="after-add"><![CDATA[/* Introduciator - Begin */, 't', $m_approve_fid_ary) /* Introduciator - End */]]></inline-action>
 				</inline-edit>
 			</edit>
 			<edit>
