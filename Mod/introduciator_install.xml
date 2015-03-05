@@ -14,6 +14,7 @@ An explanation page can be displayed to the user when trying to post a message i
 ● Administrator's permission to manage this MOD.
 ● Activate / Deactivate this MOD with only one option.
 ● Select forum where the members must introduce himself.
+● Add introduce approval options.
 ● Display redirection page if the member try to post somewhere else.
 ● Configure redirection page: can be activated or deactivated. It is possible to change the text displayed into this page.
 ● Two way of configuration of wich users must introduce himself:
@@ -30,6 +31,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 ● Permission d'administration pour gérer ce MOD.
 ● Activation / Désactivation de ce MOD via une option.
 ● Selection du forum où les membres doivent se présenter.
+● Ajout d'options d’approbation de la présentation
 ● Affichage d'une page de redirection si un membre tente de poster un message ailleurs.
 ● Configuration de la page de redirection : peut-être activé ou désactivé. Il est possible de changer le text affiché dans cette page.
 ● Deux façon de configurer les utilisateurs qui doivent se présenter :
@@ -66,7 +68,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 				</changelog>
 			</entry>
 			<entry>
-				<date>2015-02-04</date>
+				<date>2015-03-05</date>
 				<rev-version>1.1.0</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Minors source code optimisations]]></change>

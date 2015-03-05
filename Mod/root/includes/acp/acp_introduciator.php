@@ -193,7 +193,7 @@ class acp_introduciator
 									'%forum_post%'	=> 'http://dqsdfzef.com', // Make link work if placed into [url]
 								)
 							);
-							
+
 							$explanation_message_array = array(
 								'introduciator_explanation_message_title'			=> $explanation_message_title,
 								'introduciator_explanation_message_text'			=> $explanation_message_text,

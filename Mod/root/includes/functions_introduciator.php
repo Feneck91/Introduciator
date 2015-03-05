@@ -173,19 +173,19 @@ function introduciator_getparams($is_edit = null)
 
 	if ($is_edit === true || $is_edit === false)
 	{
-		$explanation_message_title						= isset($config['introduciator_explanation_message_title']) && $config['introduciator_explanation_message_title'] != '' ? $config['introduciator_explanation_message_title'] : '%explanation_title%';
+		$explanation_message_title						= isset($config['introduciator_explanation_message_title']) && $config['introduciator_explanation_message_title'] != '' ? $config['introduciator_explanation_message_title'] : '';
 		$explanation_message_title_uid					= isset($config['introduciator_explanation_message_title_uid']) && $config['introduciator_explanation_message_title_uid'] != '' ? $config['introduciator_explanation_message_title_uid'] : '';
 		$explanation_message_title_bitfield				= isset($config['introduciator_explanation_message_title_bitfield']) && $config['introduciator_explanation_message_title_bitfield'] != '' ? $config['introduciator_explanation_message_title_bitfield'] : '';
 		$explanation_message_title_bbcode_options		= isset($config['introduciator_explanation_message_title_bbcode_options']) && $config['introduciator_explanation_message_title_bbcode_options'] != '' ? $config['introduciator_explanation_message_title_bbcode_options'] : '';
-		$explanation_message_text						= isset($config['introduciator_explanation_message_text']) && $config['introduciator_explanation_message_text'] != '' ? $config['introduciator_explanation_message_text'] : '%explanation_text%';
+		$explanation_message_text						= isset($config['introduciator_explanation_message_text']) && $config['introduciator_explanation_message_text'] != '' ? $config['introduciator_explanation_message_text'] : '';
 		$explanation_message_text_uid					= isset($config['introduciator_explanation_message_text_uid']) && $config['introduciator_explanation_message_text_uid'] != '' ? $config['introduciator_explanation_message_text_uid'] : '';
 		$explanation_message_text_bitfield				= isset($config['introduciator_explanation_message_text_bitfield']) && $config['introduciator_explanation_message_text_bitfield'] != '' ? $config['introduciator_explanation_message_text_bitfield'] : '';
 		$explanation_message_text_bbcode_options		= isset($config['introduciator_explanation_message_text_bbcode_options']) && $config['introduciator_explanation_message_text_bbcode_options'] != '' ? $config['introduciator_explanation_message_text_bbcode_options'] : '';
-		$explanation_message_rules_title				= isset($config['introduciator_explanation_message_rules_title']) && $config['introduciator_explanation_message_rules_title'] != '' ? $config['introduciator_explanation_message_rules_title'] : '%rules_title%';
+		$explanation_message_rules_title				= isset($config['introduciator_explanation_message_rules_title']) && $config['introduciator_explanation_message_rules_title'] != '' ? $config['introduciator_explanation_message_rules_title'] : '';
 		$explanation_message_rules_title_uid			= isset($config['introduciator_explanation_message_rules_title_uid']) && $config['introduciator_explanation_message_rules_title_uid'] != '' ? $config['introduciator_explanation_message_rules_title_uid'] : '';
 		$explanation_message_rules_title_bitfield		= isset($config['introduciator_explanation_message_rules_title_bitfield']) && $config['introduciator_explanation_message_rules_title_bitfield'] != '' ? $config['introduciator_explanation_message_rules_title_bitfield'] : '';
 		$explanation_message_rules_title_bbcode_options	= isset($config['introduciator_explanation_message_rules_title_bbcode_options']) && $config['introduciator_explanation_message_rules_title_bbcode_options'] != '' ? $config['introduciator_explanation_message_rules_title_bbcode_options'] : '';
-		$explanation_message_rules_text					= isset($config['introduciator_explanation_message_rules_text']) && $config['introduciator_explanation_message_rules_text'] != '' ? $config['introduciator_explanation_message_rules_text'] : '%rules_text%';
+		$explanation_message_rules_text					= isset($config['introduciator_explanation_message_rules_text']) && $config['introduciator_explanation_message_rules_text'] != '' ? $config['introduciator_explanation_message_rules_text'] : '';
 		$explanation_message_rules_text_uid				= isset($config['introduciator_explanation_message_rules_text_uid']) && $config['introduciator_explanation_message_rules_text_uid'] != '' ? $config['introduciator_explanation_message_rules_text_uid'] : '';
 		$explanation_message_rules_text_bitfield		= isset($config['introduciator_explanation_message_rules_text_bitfield']) && $config['introduciator_explanation_message_rules_text_bitfield'] != '' ? $config['introduciator_explanation_message_rules_text_bitfield'] : '';
 		$explanation_message_rules_text_bbcode_options	= isset($config['introduciator_explanation_message_rules_text_bbcode_options']) && $config['introduciator_explanation_message_rules_text_bbcode_options'] != '' ? $config['introduciator_explanation_message_rules_text_bbcode_options'] : '';
@@ -770,7 +770,7 @@ function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_ap
 			}
 		}
 	}
-	
+
 	return $sql_approved;
 }
 
