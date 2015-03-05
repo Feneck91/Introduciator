@@ -24,6 +24,7 @@ An explanation page can be displayed to the user when trying to post a message i
 ● Add link into the profile to go directly to member presentation topic.
 ● Forbid the user (or admin but it is configurable) to delete the first post of a presentation.
 ● Forbid the user to create more than once topic into the presentation's forum.
+● Remove quick reply button when the user is not yet introduce.
 ● Possibility to add this mod into a forum which already have lot of messages, it will force all users to introduce themselves before continuing to post new messages.]]></description>
 		<description lang="fr"><![CDATA[Est utilisé pour forcer les utilisateurs à poster un message de présentation dans un forum spécifique avant d'être autorisé de poster dans les autres forums.
 Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de poster un message dans un autre forum afin de lui expliquer ce qu'il doit faire.
@@ -40,6 +41,7 @@ Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de 
 ● Ajout d'un bouton (à côté de MP) dans les sujets pour se rendre directement sur la présentation d'un membre.
 ● Ajout d'un lien dans le profile pour se rendre directement sur la présentation d'un membre.
 ● Interdiction pour l'utilisateur (ou administrateur mais ceci est configurable) d'effacer le 1er message d'une présentation.
+● Suppression du bouton réponse rapide lorsque l'utilisateur ne s'est pas encore présenté.
 ● Interdiction pour l'utilisateur de créer plus d'un sujet dans le forum de présentation.
 ● Possibilité d'ajouter ce mod dans un forum contenant déjà beaucoup de messages, ceci forcera les utilisateurs à se présenter avant de pouvoir poster à nouveau.]]></description>
 		<author-group>
