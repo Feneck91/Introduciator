@@ -24,8 +24,8 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 		</author-group>
 		<mod-version>1.1.0</mod-version>
 		<installation>
-			<level>easy</level>
-			<time>180</time>
+			<level>intermediate</level>
+			<time>600</time>
 			<target-version>3.0.13-PL1</target-version>
 		</installation>
 		<history>
@@ -40,7 +40,7 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 				</changelog>
 			</entry>
 			<entry>
-				<date>2015-02-04</date>
+				<date>2015-03-05</date>
 				<rev-version>1.1.0</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[Minors source code optimisations]]></change>
