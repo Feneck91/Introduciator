@@ -61,6 +61,9 @@ if ($config['introduciator_allow'])
 }
 else
 {
+	// In case of introduciator_getparams is not called, I must load the introduciator language file
+	$user->add_lang('mods/introduciator');
+
 	page_header($user->lang['INTRODUCIATOR_MOD_DISABLED']);
 	$template->set_filenames(array(
 		'body' => 'introduciator_explain.html',
