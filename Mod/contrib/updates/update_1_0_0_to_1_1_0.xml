@@ -84,6 +84,7 @@ Cette méthode permet une meilleure compatibilité avec les versions futures du 
 			<file from="root/styles/prosilver/template/introduciator_explain.html" to="styles/prosilver/template/introduciator_explain.html"/>
 			<file from="root/styles/prosilver/theme/images/corners_left_introduciator.png" to="styles/prosilver/theme/images/corners_left_introduciator.png"/>
 			<file from="root/styles/prosilver/theme/images/corners_right_introduciator.png" to="styles/prosilver/theme/images/corners_right_introduciator.png"/>
+			<file from="root/styles/prosilver/theme/images/icon_pendinguintroduciator.gif" to="styles/prosilver/theme/images/icon_pendinguintroduciator.gif"/>
 		</copy>
 		<open src="includes/constants.php">
 			<edit>
@@ -199,6 +200,11 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 		</open>
 		<open src="styles/prosilver/theme/colours.css">
 			<edit>
+				<find><![CDATA[.introdpd-icon, .introdpd-icon a]]></find>
+				<action type="after-add"><![CDATA[.introdpu-icon, .introdpu-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_pendinguintroduciator.gif"); }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
+]]></action>
+			</edit>
+			<edit>
 				<find><![CDATA[/* Introduciator - End
 //------------------------------------------------*/]]></find>
 				<action type="replace-with"><![CDATA[span.corners-top.corners-top-introduciator {
@@ -296,6 +302,20 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 				// Introduciator - End
 				//------------------------------------------------
 ]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/memberlist_view.html">
+			<edit>
+				<find><![CDATA[				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" title="{T_INTRODUCIATOR_TEXT}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b></a><!-- ELSE --><b><!-- IF S_INTRODUCIATOR_PENDING -->{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}<!-- ELSE -->{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}<!-- ENDIF --></b><!-- ENDIF --></ul></dd><!-- ENDIF -->]]></find>
+				<action type="replace-with"><![CDATA[				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" <!-- IF S_INTRODUCIATOR_PENDING -->title="{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}</b><!-- ELSE -->title="{T_INTRODUCIATOR_TEXT}><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b>"<!-- ENDIF --></a><!-- ELSE --><b><!-- IF S_INTRODUCIATOR_PENDING -->{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}<!-- ELSE -->{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}<!-- ENDIF --></b><!-- ENDIF --></ul></dd><!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/buttons.css">
+			<edit>
+				<find><![CDATA[ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending */]]></find>
+				<action type="after-add"><![CDATA[ul.profile-icons li.introdpu-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
+]]></action>
+				</action>
 			</edit>
 		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>

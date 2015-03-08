@@ -332,7 +332,6 @@ function introduciator_getparams($is_edit = null)
  */
 function is_user_ignored($poster_id, $poster_name, $introduciator_params)
 {
-	//$auth->acl_get('u_must_introduce');
 	// Check if :
 	//	1 : Include group is ON and the user is member of at least one group of the selected groups (include groups)
 	//	2 : Include group is OFF (exclude) and the user is not member of one group of the selected groups (exclude groups)
@@ -600,8 +599,17 @@ function introduciator_get_user_infos($poster_id, $poster_name)
 			else
 			{
 				$text = $user->lang['INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'];
-				$class = 'introdpd-icon';
 				$pending = true;
+				if ($auth->acl_get('m_approve', $introduciator_params['fk_forum_id']) || ($introduciator_params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $poster_id == (int) $user->data['user_id']))
+				{	// Display url if user can approve the introduction of this user
+					// or if the current user is the poster (the user can see its own presentation) AND the MOD configuration is INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT
+					$url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
+					$class = 'introdpu-icon';
+				}
+				else
+				{
+					$class = 'introdpd-icon';
+				}
 			}
 		}
 	}
