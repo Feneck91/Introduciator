@@ -392,7 +392,7 @@ define('INTRODUCIATOR_GROUPS_TABLE',$table_prefix . 'introduciator_groups');
 			<!-- ENDIF -->
 ]]></find>
 				<action type="after-add"><![CDATA[			<!-- Introduciator - Begin -->
-				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" title="{T_INTRODUCIATOR_TEXT}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b></a><!-- ELSE --><b><!-- IF S_INTRODUCIATOR_PENDING -->{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}<!-- ELSE -->{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}<!-- ENDIF --></b><!-- ENDIF --></ul></dd><!-- ENDIF -->
+				<!-- IF S_INTRODUCIATOR_DISPLAY --><dt>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}:</dt><dd><!-- IF U_INTRODUCIATOR_URL --><a href="{U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" <!-- IF S_INTRODUCIATOR_PENDING -->title="{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}</b><!-- ELSE -->title="{T_INTRODUCIATOR_TEXT}><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b>"<!-- ENDIF --></a><!-- ELSE --><b><!-- IF S_INTRODUCIATOR_PENDING -->{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}<!-- ELSE -->{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}<!-- ENDIF --></b><!-- ENDIF --></ul></dd><!-- ENDIF -->
 			<!-- Introduciator - End -->
 ]]></action>
 			</edit>
@@ -423,6 +423,7 @@ define('INTRODUCIATOR_GROUPS_TABLE',$table_prefix . 'introduciator_groups');
 ul.profile-icons li.introd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: icon */
 ul.profile-icons li.introdno-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: no presentation avalaible */
 ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending */
+ul.profile-icons li.introdpu-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
 /* Introduciator - End
 //------------------------------------------------*/
 
@@ -437,6 +438,7 @@ ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciato
 .introd-icon, .introd-icon a		{ background-image: url("{T_THEME_PATH}/images/icon_introduciator.gif"); } 			/* Introduciator MOD: icon */
 .introdno-icon, .introdno-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_nointroduciator.gif"); }		/* Introduciator MOD: no presentation avalaible */
 .introdpd-icon, .introdpd-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_pendingintroduciator.gif"); }	/* Introduciator MOD: presentation is pending */
+.introdpu-icon, .introdpu-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_pendinguintroduciator.gif"); }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
 .introduciator_explain {
 	color: orangered !important;
 	text-align: center;
