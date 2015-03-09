@@ -315,7 +315,6 @@ include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
 				<find><![CDATA[ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending */]]></find>
 				<action type="after-add"><![CDATA[ul.profile-icons li.introdpu-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
 ]]></action>
-				</action>
 			</edit>
 		</open>
 		<php-installer><![CDATA[introduciator_install.php]]></php-installer>
