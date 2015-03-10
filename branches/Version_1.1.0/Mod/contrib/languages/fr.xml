@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--NOTICE: Please open this file in your web browser. If presented with a security warning, you may safely tell it to allow the blocked content.-->
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD.\nAlthough MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD.\nNo support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
+		<license><![CDATA[http://opensource.org/licenses/gpl-license.php GNU General Public License v2]]></license>
+		<title lang="en"><![CDATA[Install the french language files]]></title>
+		<title lang="fr"><![CDATA[Installer les fichiers de langue française]]></title>
+		<description lang="en"><![CDATA[Allows to use the MOD for french boards]]></description>
+		<description lang="fr"><![CDATA[Permet aux forums francophones d'utiliser le MOD]]></description>
+		<author-group>
+			<author>
+				<realname><![CDATA[CHÂTEAU Stéphane]]></realname>
+				<username><![CDATA[Feneck91]]></username>
+				<homepage><![CDATA[http://feneck91.free.fr]]></homepage>
+				<email><![CDATA[feneck91@free.fr]]></email>
+			</author>
+		</author-group>
+		<mod-version>1.1.0</mod-version>
+		<installation>
+			<level>easy</level>
+			<time>60</time>
+			<target-version>3.0.13-PL1</target-version>
+		</installation>
+		<history>
+			<entry>
+				<date>2014-07-26</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[First MOD version]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Première version du MOD]]></change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2015-02-04</date>
+				<rev-version>1.1.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Minors source code optimisations]]></change>
+					<change><![CDATA[Replace TRUNCATE SQL Command by DELETE SQL Command to make it work with Firebird and SQLite databases]]></change>
+					<change><![CDATA[Bug fix: the text of the rules for the introduction forum is taken into account]]></change>
+					<change><![CDATA[Remove quick reply button when the user is not yet introduce]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Optimisations mineures du code source]]></change>
+					<change><![CDATA[Replacement de la commande SQL TRUNCATE par la commande SQL DELETE pour le rendre compatible avec les bases de données Firebird et SQLite]]></change>
+					<change><![CDATA[Correction bug : le texte des règles du forum de présentation est pris en compte]]></change>
+					<change><![CDATA[Suppression du bouton réponse rapide lorsque l'utilisateur ne s'est pas encore présenté]]></change>
+				</changelog>
+			</entry>
+		</history>
+		<link-group>
+			<link type="parent" href="../../introduciator_install.xml" lang="en">Back to install file</link>
+			<link type="parent" href="../../introduciator_install.xml" lang="fr">Retourner au fichier d'installation</link>
+		</link-group>
+	</header>
+	<action-group>
+		<copy>
+			<file from="root/language/fr/mods/info_acp_introduciator.php" to="language/fr/mods/info_acp_introduciator.php"/>
+			<file from="root/language/fr/mods/introduciator.php" to="language/fr/mods/introduciator.php"/>
+			<file from="root/language/fr/mods/permissions_introduciator.php" to="language/fr/mods/permissions_introduciator.php"/>
+		</copy>
+		<diy-instructions lang="en"><![CDATA[Make sure all files have been uploaded to the proper locations.]]></diy-instructions>
+		<diy-instructions lang="fr"><![CDATA[Assurez-vous que tous les fichiers ont bien été transférés dans les bons emplacements.]]></diy-instructions>
+	</action-group>
+</mod>
