@@ -1,6 +1,6 @@
 ECHO OFF
 
-SET INTRODUCIATOR_VERSION="1_1_0"
+SET INTRODUCIATOR_VERSION="2_1_0"
 SET BATCH_PATH=%~dp0
 
 ECHO ------------------------------------
@@ -26,8 +26,9 @@ ECHO.
 ECHO ------------------------------------
 ECHO Exporting "Introduciator_v%INTRODUCIATOR_VERSION%"
 ECHO ------------------------------------
-REM svn export "https://subversion.assembla.com/svn/introduciator/trunk/Mod" "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%"
-svn export "%BATCH_PATH%Mod" "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%"
+REM svn export "https://subversion.assembla.com/svn/introduciator/trunk/Mod/feneck91" "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%"
+mkdir ""%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%"
+svn export "%BATCH_PATH%Mod\feneck91" "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%\feneck91"
 IF %errorlevel% EQU 0 GOTO MakeZip
 
 REM Error while exporting Introduciator
@@ -47,8 +48,8 @@ ECHO ------------------------------------
 ECHO Creating Introduciator_v%INTRODUCIATOR_VERSION%.zip
 ECHO ------------------------------------
 PUSHD %CD%
-CD /D "%BATCH_PATH%"
-"%BATCH_PATH%bin\zip.exe" -r "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%.zip" "Introduciator_v%INTRODUCIATOR_VERSION%"
+CD /D "%BATCH_PATH%\Introduciator_v%INTRODUCIATOR_VERSION%"
+"%BATCH_PATH%bin\zip.exe" -r "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%.zip" "feneck91"
 POPD
 IF %errorlevel% EQU 0 GOTO RemoveTempFolder
 GOTO Error

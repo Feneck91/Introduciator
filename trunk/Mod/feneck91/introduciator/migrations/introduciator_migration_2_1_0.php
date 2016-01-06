@@ -92,15 +92,19 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 			array('permission.add', array('a_introduciator_manage',										true)),
 			array('permission.add', array('u_must_introduce', 											true)),
 
-			// Global Role permissions for user mask : Yes to All
+			// Global user role permissions for user mask : Yes to All
 			array('permission.permission_set', array('ROLE_USER_STANDARD', 								'u_must_introduce')),
 			array('permission.permission_set', array('ROLE_USER_LIMITED', 								'u_must_introduce')),
 			array('permission.permission_set', array('ROLE_USER_NEW_MEMBER', 							'u_must_introduce')),
 
+			// Global admin role permissions for admin : Yes to All
+			array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 							'a_introduciator_manage')),
+			array('permission.permission_set', array('ROLE_ADMIN_FULL', 								'a_introduciator_manage')),
+
 			//===============================================================================
 			// Add the module in ACP under the customise tab
 
-			// Add a new category named ACP_INTRODUCIATOR_MOD to ACP_CAT_DOT_MODS (under tab .MOD in ACP)
+			// Add a new category named ACP_INTRODUCIATOR_MOD to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
 			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD')),
 
 			array('module.add', array(
@@ -120,7 +124,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 				)),
 
 			// Add the module in ACP under the customise tab
-			//=============================================================================== */
+			//===============================================================================
 		);
 	}
 }
