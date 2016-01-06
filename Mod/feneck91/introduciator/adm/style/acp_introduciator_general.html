@@ -1,0 +1,64 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_INTRODUCIATOR_GP_TITLE}</h1>
+{L_INTRODUCIATOR_GP_TITLE_EXPLAIN}
+
+<!-- IF S_INTRODUCIATOR_VERSIONCHECK_FAIL -->
+	<div class="errorbox notice">
+		<p>{L_VERSIONCHECK_FAIL}</p>
+		<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a></p>
+	</div>
+<!-- ELSEIF not S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+	<div class="errorbox">
+		<p>{L_INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE}</p>
+		<p><a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>
+		<!-- IF S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND -->
+			&middot; <a href="{U_INTRODUCIATOR_VERSIONCHECK}">{L_MORE_INFORMATION}</a></p>
+		<!-- ENDIF -->
+	</div>
+<!-- ENDIF -->
+
+<table cellspacing="1">
+	<caption>{L_INTRODUCIATOR_GP_STATS}</caption>
+	<col class="col1" /><col class="col2" />
+	<thead>
+		<tr>
+			<th>{L_STATISTIC}</th>
+			<th>{L_VALUE}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{L_INTRODUCIATOR_GP_INSTALL_DATE}</td>
+			<td><strong>{INTRODUCIATOR_INSTALL_DATE}</strong></td>
+		</tr>
+		<tr>
+			<td>{L_INTRODUCIATOR_GP_VERSION}</td>
+			<td>
+			<!-- IF S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+				<strong style="color: #228822;">{INTRODUCIATOR_VERSION}</strong> [&nbsp;<a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>&nbsp;]
+			<!-- ELSE -->
+				<strong><a href="{U_INTRODUCIATOR_VERSIONCHECK}" style="color: #BC2A4D;" title="{L_MORE_INFORMATION}">{INTRODUCIATOR_VERSION}</a></strong> [&nbsp;<a href="{U_INTRODUCIATOR_VERSIONCHECK_FORCE}">{L_VERSIONCHECK_FORCE_UPDATE}</a>&nbsp;]
+			<!-- ENDIF -->
+			</td>
+		</tr>
+	<!-- IF (not S_INTRODUCIATOR_VERSION_UP_TO_DATE) and (not S_INTRODUCIATOR_VERSIONCHECK_FAIL) -->
+		<tr>
+			<td>{L_INTRODUCIATOR_GP_UPDATE_VERSION_TITLE}</td>
+			<td>{L_INTRODUCIATOR_UPDATE_VERSION}</td>
+		</tr>
+		<!-- IF S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND -->
+		<tr>
+			<td>{L_INTRODUCIATOR_GP_UPDATE_URL_TITLE}</td>
+			<td><a href="{U_INTRODUCIATOR_UPDATE_URL}" title="{L_INTRODUCIATOR_UPDATE_FILENAME}">{L_INTRODUCIATOR_UPDATE_FILENAME}</a></td>
+		</tr>
+		<!-- ENDIF -->
+		<tr>
+			<td>{L_INTRODUCIATOR_GP_UPDATE_INFOS_TITLE}</td>
+			<td>{L_INTRODUCIATOR_UPDATE_INFORMATION}</td>
+		</tr>
+	<!-- ENDIF -->
+	</tbody>
+</table>
+
+<!-- INCLUDE overall_footer.html -->
