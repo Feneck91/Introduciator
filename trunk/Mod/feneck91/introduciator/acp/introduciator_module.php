@@ -1,39 +1,25 @@
 <?php
 /**
-*
-* @package Introduciator MOD
-* @author Feneck91 (Stéphane Château) feneck91@free.fr
-* @version $Id$
-* @copyright (c) 2013 @copyright (c) 2014 Feneck91
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-* Documentation : https://wiki.phpbb.com/Creating_modules
-*/
+ *
+ * @package phpBB Extension - Introduciator Extension
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2013 @copyright (c) 2014 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
 
-/**
-* @ignore
-*/
-if (!defined('IN_PHPBB'))
-{
-	exit;
-}
+namespace feneck91\introduciator\acp;
 
-global $phpbb_root_path, $phpEx;
-
+// Include introduciator functions if not yet included
 if (!function_exists('introduciator_getparams'))
 {
-	include($phpbb_root_path . 'includes/functions_introduciator.' . $phpEx);
-}
-
-if (!function_exists('set_config'))
-{
-	include($phpbb_root_path . 'includes/functions.' . $phpEx);
+	global $phpbb_root_path, $phpEx; // Root path, php extension
+	include($phpbb_root_path . 'ext/feneck91/introduciator/includes/functions_introduciator.' . $phpEx);
 }
 
 /**
-* @package acp
-*/
-class acp_introduciator
+ * Module to manage ACP extension configuration.
+ */
+class introduciator_module
 {
 	// URL of web site where download the latest version file info
 	var $url_version_check		= 'feneck91.free.fr';
@@ -44,30 +30,31 @@ class acp_introduciator
 
 	// Action
 	var $u_action;
+	// Template name
+	var $tpl_name;
 
-	function main($id, $mode)
+	public function main($id, $mode)
 	{
-		global $template, $user, $phpEx, $config;
+		global $template, $user, $config;
 
-		$user->add_lang('mods/info_acp_introduciator');
-		$this->tpl_name = 'acp_introduciator'; // Template file : adm/style/introduciator/acp_introduciator.htm
-		$this->page_title = $user->lang['ACP_INTRODUCIATOR_MOD']; // Page Title
+		// Get Action
+		$action	= request_var('action', '');
 
 		// Add a secret token to the form
 		// This functions adds a secret token to any form, a token which should be checked after
 		// submission with the check_form_key function to ensure that the received data is the same as the submitted.
-		$form_key = 'acp_introduciator';
-		add_form_key($form_key);
-
-		$action	= request_var('action', '');
+		add_form_key('feneck91/introduciator');
 
 		switch ($mode)
 		{
 			case 'general':
-				global $phpbb_admin_path;
+				global $phpbb_admin_path, $phpEx;
 
+				// Set the template for this module
+				$this->tpl_name = 'acp_introduciator_general'; // Template file : adm/style/introduciator/acp_introduciator_general.htm
 				$this->page_title = 'INTRODUCIATOR_GENERAL';
-				// Check if a new version of this MOD is available
+				
+				// Check if a new version of this extension is available
 				$latest_version_info = $this->obtain_latest_version_info(request_var('introduciator_versioncheck_force', false));
 
 				if ($latest_version_info === false || !function_exists('phpbb_version_compare'))
@@ -101,14 +88,17 @@ class acp_introduciator
 					'INTRODUCIATOR_INSTALL_DATE'			=> $user->format_date($config['introduciator_install_date']),
 
 					// Check force URL
-					// i is the ID of this MOD (introduciator) / mode is the sub item
-					'U_INTRODUCIATOR_VERSIONCHECK_FORCE'	=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=introduciator&amp;mode=' . $mode . '&amp;introduciator_versioncheck_force=1'),
+					// i is the ID of this MOD (-feneck91-introduciator-acp-introduciator_module) / mode is the sub item
+					'U_INTRODUCIATOR_VERSIONCHECK_FORCE'	=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=-feneck91-introduciator-acp-introduciator_module&amp;mode=' . $mode . '&amp;introduciator_versioncheck_force=1'),
 					'U_ACTION'								=> $this->u_action,
 				));
 			break;
 
 			case 'configuration':
 				global $db, $phpbb_root_path; // Database, Root path
+
+				// Set the template for this module
+				$this->tpl_name = 'acp_introduciator_configuration'; // Template file : adm/style/introduciator/acp_introduciator_configuration.htm
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
 				// Display configuration page content into ACP .MOD tab
