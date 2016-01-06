@@ -20,12 +20,12 @@ class introduciator_info
 			'modes'		=> array(
 				'general'	=> array(
 					'title' => 'INTRODUCIATOR_GENERAL',
-					'auth' => 'ext_feneck91/introduciator && acl_a_board', 
+					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage', 
 					'cat' => array('ACP_INTRODUCIATOR_MOD'),
 				),
 				'configuration'	=> array(
 					'title' => 'INTRODUCIATOR_CONFIGURATION',
-					'auth' => 'ext_feneck91/introduciator && acl_a_introduciator_manage', // acl_a_introduciator_manage
+					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
 					'cat' => array('ACP_INTRODUCIATOR_MOD'),
 				),
 			),
