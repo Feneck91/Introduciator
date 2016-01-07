@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package Introduciator MOD
+* @package Introduciator extension
 * @author Feneck91 (Stéphane Château) feneck91@free.fr
 * @version $Id$
 * @copyright (c) 2013 @copyright (c) 2014 Feneck91
@@ -21,7 +21,6 @@ if (!defined('IN_PHPBB'))
 global $table_prefix;
 // Define own constants, could be copy into includes\constants.php
 // but here, no need to edit and merge this source code with phpBB one.
-define('INTRODUCIATOR_CURRENT_VERSION',		'1.0.0');
 define('INTRODUCIATOR_GROUPS_TABLE',		$table_prefix . 'introduciator_groups');
 
 if (!function_exists('group_memberships'))
@@ -38,23 +37,20 @@ define('INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT',	2); // Approva
 /**
  * Check if a group is selected.
  *
- * @param $forum_id Forum's identifier.
+ * @param $group_id Group's identifier.
  * @return true if the group is selected, false else.
  */
-function is_group_selected($forum_id)
+function is_group_selected($group_id)
 {
 	global $db; // Database
 
-	$sql = 'SELECT *
+	$sql = 'SELECT COUNT(*) AS cnt
 			FROM ' . INTRODUCIATOR_GROUPS_TABLE . '
-			WHERE fk_group = ' . (int) $forum_id;
+			WHERE fk_group = ' . (int) $group_id;
 
 	$result = $db->sql_query($sql);
 	$ret = false;
-	while ($row = $db->sql_fetchrow($result))
-	{
-		$ret = true;
-	}
+	$ret = (int) $db->sql_fetchfield('cnt') > 0;
 	$db->sql_freeresult($result);
 
 	return $ret;
@@ -158,7 +154,7 @@ function is_user_in_groups_selected($user_id)
  *
  * @param $is_edit if true, return rules texts for editing
  *                 if false, return rules texts for display
- *                 if null, don't return rules texts (used only in the MOD configuration and to display rules
+ *                 if null, don't return rules texts (used only in the extension configuration and to display rules
  * @return The introduciator parameters
  */
 function introduciator_getparams($is_edit = null)
@@ -333,7 +329,7 @@ function introduciator_getparams($is_edit = null)
  *
  * @param $poster_id User's ID
  * @param $poster_name User's name
- * @param $introduciator_params Introduce MOD parameters
+ * @param $introduciator_params Introduce extension parameters
  * @return true if the user is ignored, false else
  */
 function is_user_ignored($poster_id, $poster_name, $introduciator_params)
@@ -362,7 +358,7 @@ function is_user_ignored($poster_id, $poster_name, $introduciator_params)
  * @param $poster_id User's ID
  * @param $authorisations User's authorisations
  * @param $poster_name User's name
- * @param $introduciator_params Introduce MOD parameters
+ * @param $introduciator_params Introduce extension parameters
  * @return true if the user must introduce himself pending of rights, false else
  */
 function is_user_must_introduce_himself($poster_id, $authorisations, $poster_name, $introduciator_param)
@@ -425,7 +421,7 @@ function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_d
 	if ($poster_id != ANONYMOUS)
 	{	// User is logged and have user authorization
 		if ($config['introduciator_allow'])
-		{	// MOD is enabled and the user is not ignored, it can do all he wants
+		{	// Extension is enabled and the user is not ignored, it can do all he wants
 			// Force forum id because it be moved while user delete the message
 			global $db, $introduciator_params;
 
@@ -608,7 +604,7 @@ function introduciator_get_user_infos($poster_id, $poster_name)
 				$pending = true;
 				if ($auth->acl_get('m_approve', $introduciator_params['fk_forum_id']) || ($introduciator_params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $poster_id == (int) $user->data['user_id']))
 				{	// Display url if user can approve the introduction of this user
-					// or if the current user is the poster (the user can see its own presentation) AND the MOD configuration is INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT
+					// or if the current user is the poster (the user can see its own presentation) AND the extension configuration is INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT
 					$url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
 					$class = 'introdpu-icon';
 				}
@@ -635,7 +631,7 @@ function introduciator_get_user_infos($poster_id, $poster_name)
  * @param $user The user informations
  * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
  * @param $forum_id Forum identifier where the user try to post
- * @return The approval level for this post, depending of MOD configuration.
+ * @return The approval level for this post, depending of extension configuration.
  */
 function introduciator_get_posting_approval_level($user, $mode, $forum_id)
 {
@@ -647,7 +643,7 @@ function introduciator_get_posting_approval_level($user, $mode, $forum_id)
 	if ($poster_id != ANONYMOUS)
 	{	// User is logged and have user authorization
 		if ($config['introduciator_allow'])
-		{	// MOD is enabled and the user is not ignored, it can do all he wants
+		{	// Extension is enabled and the user is not ignored, it can do all he wants
 			// Force forum id because it be moved while user delete the message
 			$params = introduciator_getparams();
 
@@ -711,7 +707,7 @@ function introduciator_ignore_topic_unapproved($user, $forum_id, $mode)
 	if ($config['introduciator_allow'])
 	{	// Introduciator is activated and $sql_approved has filter
 		if (empty($introduciator_params))
-		{	// Retrieve MOD parameters
+		{	// Retrieve extension parameters
 			$introduciator_params = introduciator_getparams();
 			if (empty($user->lang['RETURN_FORUM']))
 			{
@@ -749,7 +745,7 @@ function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_ap
 	if (!empty($sql_approved) && $config['introduciator_allow'])
 	{	// Introduciator is activated and $sql_approved has filter
 		if (empty($introduciator_params))
-		{	// Retrieve MOD parameters
+		{	// Retrieve extension parameters
 			$introduciator_params = introduciator_getparams();
 			if (empty($user->lang['RETURN_FORUM']))
 			{
@@ -806,7 +802,7 @@ function introduciator_is_topic_in_forum_is_unapproved_for_introduction($user, $
 	if ($config['introduciator_allow'])
 	{	// Introduciator is activated
 		if (empty($introduciator_params))
-		{	// Retrieve MOD parameters
+		{	// Retrieve extension parameters
 			$introduciator_params = introduciator_getparams();
 			if (empty($user->lang['RETURN_FORUM']))
 			{

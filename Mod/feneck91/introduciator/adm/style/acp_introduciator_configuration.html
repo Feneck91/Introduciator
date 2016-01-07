@@ -6,12 +6,12 @@
 	<fieldset>
 		<legend>{L_GENERAL_OPTIONS}</legend>
 		<!--
-			 Activate / Desactivate MOD
+			 Activate / Desactivate extension
 		-->
 		<dl>
-			<dt><label for="mod_activated">{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN}</span></dt>
-			<dd><label><input id="mod_activated" name="mod_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-				<label><input name="mod_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_MOD_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+			<dt><label for="extension_activated">{L_INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED}:</label><br /><span>{L_INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED_EXPLAIN}</span></dt>
+			<dd><label><input id="extension_activated" name="extension_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_EXTENSION_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input name="extension_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_EXTENSION_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {L_NO}</label>
 			</dd>
 		</dl>
 		<!--
@@ -32,7 +32,7 @@
 				<select id="forum_choice" name="forum_choice" style="width: 100%;" size="1">
 				<!-- BEGIN forums -->
 					<option <!-- IF not forums.CAN_SELECT -->disabled class="disabled-option"<!-- ENDIF --> value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
-				<!-- END items -->
+				<!-- END forums -->
 				</select>
 			</dd>
 		</dl>
@@ -89,7 +89,7 @@
 				<select name="groups_choices[]" style="width: 100%;" id="groups_choices" multiple="multiple" size="10">
 				<!-- BEGIN group -->
 					<option value="{group.ID}" name="group_{group.ID}" title="{group.TOOLTIP}" <!-- IF group.SELECTED -->selected="selected"<!-- ENDIF -->>{group.NAME}</option>
-				<!-- END items -->
+				<!-- END group -->
 				</select>
 			</dd>
 		</dl>

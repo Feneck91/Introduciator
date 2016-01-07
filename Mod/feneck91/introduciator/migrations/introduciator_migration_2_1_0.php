@@ -87,6 +87,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 
 			// Misc Settings
 			array('config.add', array('introduciator_install_date', 									time())),
+			array('config.add', array('introduciator_extension_version', 								'2.1.0')), // Current extension's version 
 			
 			// Permissions Add
 			array('permission.add', array('a_introduciator_manage',										true)),
@@ -104,20 +105,20 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 			//===============================================================================
 			// Add the module in ACP under the customise tab
 
-			// Add a new category named ACP_INTRODUCIATOR_MOD to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
-			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_MOD')),
+			// Add a new category named ACP_INTRODUCIATOR_EXTENSIOB to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
+			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_EXTENSION')),
 
 			array('module.add', array(
 					'acp',
-					'ACP_INTRODUCIATOR_MOD',
+					'ACP_INTRODUCIATOR_EXTENSION',
 					array(
 						'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module', 
 						'modes'	  			=> array(
 							//---------------------------------------------------------------------
-							// Creation of ACP sub caterories under Introduciator mod into .MOD tab
+							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 							'general',
 							'configuration',
-							// Creation of ACP sub caterories under Introduciator mod into .MOD tab
+							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 							//---------------------------------------------------------------------
 							),
 					),
