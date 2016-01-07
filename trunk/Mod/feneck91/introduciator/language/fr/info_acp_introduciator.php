@@ -3,7 +3,7 @@
 *
 * info_acp_introduciator.php [Français]
 *
-* @package Introduciator MOD (Présentation forcée)
+* @package Introduciator extension (Présentation forcée)
 * @copyright (c) 2014 Feneck91
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -39,13 +39,13 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : le nom du MOD
+* mode: main : le nom de l'extension
 */
 $lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_MOD'							=> 'Présentation forcée',
+	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Présentation forcée',
 
 /**
-* Titres présents dans la partie gauche de l'onglet .MOD de l'ACP sous l'item INTRODUCIATOR
+* Titres présents dans la partie gauche de l'onglet extensions de l'ACP sous l'item INTRODUCIATOR
 */
 	'INTRODUCIATOR_GENERAL'							=> 'Général',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
@@ -55,12 +55,12 @@ $lang = array_merge($lang, array(
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_GP_' pour 'INTRODUCIATOR_GENERAL_PAGES_'
 */
 	'INTRODUCIATOR_GP_TITLE'						=> 'Informations générales',
-	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Donne la version courante de ce MOD.',
+	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Donne la version courante de cette extension.',
 
-	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'	=> 'Votre installation du MOD Présentation forcée n’est pas à jour.',
-	'INTRODUCIATOR_GP_STATS'						=> 'Statistiques du MOD Présentation forcée',
-	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Date d’installation du MOD <strong>Présentation forcée</strong> :',
-	'INTRODUCIATOR_GP_VERSION'						=> 'Version du MOD <strong>Présentation forcée</strong> :',
+	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'	=> 'Votre installation de l’extension Présentation forcée n’est pas à jour.',
+	'INTRODUCIATOR_GP_STATS'						=> 'Statistiques de l’extension Présentation forcée',
+	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Date d’installation de l’extension <strong>Présentation forcée</strong> :',
+	'INTRODUCIATOR_GP_VERSION'						=> 'Version de l’extension <strong>Présentation forcée</strong> :',
 	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'			=> 'Dernière version :',
 	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'				=> 'Lien de téléchargement :',
 	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'			=> 'Information de mise à jour :',
@@ -70,7 +70,7 @@ $lang = array_merge($lang, array(
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_'
 */
 	'INTRODUCIATOR_CP_TITLE'						=> 'Configuration de la Présentation forcée',
-	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de configurer le fonctionnement du MOD.',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de configurer le fonctionnement de l’extension.',
 
 /**
 * mode: configuration : Edit
@@ -97,10 +97,10 @@ $lang = array_merge($lang, array(
 																		<br/>
 																		<br/>',
 	// Sous-titres
-	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Activer le MOD',
-	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Est utilisé pour activer ou désactiver ce MOD.',
-	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Autorise le MOD à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
-	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'Lorsque cette option est activée, le MOD empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
+	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED'						=> 'Activer l’extension',
+	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED_EXPLAIN'				=> 'Est utilisé pour activer ou désactiver cette extension.',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Autorise l’extension à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'Lorsque cette option est activée, l’extension empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
 																		<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.
 																		<br/>Vous pouvez désactiver cette option mais dans ce cas un membre peut avoir plusieurs présentations. Il est recommandé d’activer cette option.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'Choix du forum où l’utilisateur doit se présenter',
@@ -119,9 +119,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'Est utilisé pour afficher la page d’explications si l’utilisateur tente de poster dans un autre forum que celui des présentations.',
 
 	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS'							=> 'Utiliser les permissions de phbBB',
-	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'Vous pouvez utiliser les permissions de phpBB pour indiquer si un utilisateur doit se présenter ou utiliser la configuration de ce MOD (plus simple mais moins performant).<br/><br/>Lorsque l’option « Utiliser les permissions du forums » est sélectionné, la configuration ci-dessous est ignorée.',
+	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'Vous pouvez utiliser les permissions de phpBB pour indiquer si un utilisateur doit se présenter ou utiliser la configuration de l’extension (plus simple mais moins performant).<br/><br/>Lorsque l’option « Utiliser les permissions du forums » est sélectionné, la configuration ci-dessous est ignorée.',
 	'INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION'						=> 'Utiliser les permissions du forum',
-	'INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION'					=> 'Utiliser la configuration du MOD',
+	'INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION'					=> 'Utiliser la configuration de l’extension',
 	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'					=> 'Groupes inclus ou groupes exclus',
 	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'			=> 'Lorsque les groupes inclus sont sélectionnés, seuls les utilisateurs des groupes sélectionnés doivent se présenter.<br/>Lorsque les groupes exclus sont sélectionnés, seuls les utilisateurs ne faisant pas parti des groupes sélectionnés doivent se présenter.',
 	'INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION'						=> 'Groupes inclus',
@@ -146,8 +146,8 @@ $lang = array_merge($lang, array(
 * Autres
 */
 	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque le MOD est désactivé',
-	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque ce MOD est activé vous devez choisir un forum !',
+	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque l’extension est désactivé',
+	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque cette extension est activé vous devez choisir un forum !',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
 	'INTRODUCIATOR_ERROR_TOO_LONG_TEXT'						=> 'Erreur, texte trop long (tous les textes sont limités à 255 caractères)',
 

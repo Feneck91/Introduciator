@@ -26,7 +26,7 @@ class introduciator_module
 	// Folder in web site where download the latest version file info
 	var $folder_version_check	= '/phpbb';
 	// File name to download the latest version file info
-	var $file_version_check		= 'introduciator_version.txt';
+	var $file_version_check		= 'introduciator_extension_version.txt';
 
 	// Action
 	var $u_action;
@@ -36,9 +36,6 @@ class introduciator_module
 	public function main($id, $mode)
 	{
 		global $template, $user, $config;
-
-		// Get Action
-		$action	= request_var('action', '');
 
 		// Add a secret token to the form
 		// This functions adds a secret token to any form, a token which should be checked after
@@ -68,7 +65,7 @@ class introduciator_module
 					$infos = $this->get_update_information('info-', $latest_version_info);
 
 					$template->assign_vars(array(
-						'S_INTRODUCIATOR_VERSION_UP_TO_DATE'	=> phpbb_version_compare(trim($latest_version_info[0]), $config['introduciator_mod_version'], '<='),
+						'S_INTRODUCIATOR_VERSION_UP_TO_DATE'	=> phpbb_version_compare(trim($latest_version_info[0]), $config['introduciator_extension_version'], '<='),
 						'S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND'=> $version_check[1],
 						'U_INTRODUCIATOR_VERSIONCHECK'			=> $version_check[0],
 						'L_INTRODUCIATOR_UPDATE_VERSION'		=> trim($latest_version_info[0]),
@@ -79,16 +76,16 @@ class introduciator_module
 				}
 
 				$template->assign_vars(array(
-					// Display general page content into ACP .MOD tab
+					// Display general page content into ACP Extensions tab
 					'S_INTRODUCIATOR_GENERAL_PAGES'			=> true,
 
-					// Current version of this MOD
-					'INTRODUCIATOR_VERSION'					=> $config['introduciator_mod_version'],
-					// Install date of this MOD
+					// Current version of this extension
+					'INTRODUCIATOR_VERSION'					=> $config['introduciator_extension_version'],
+					// Install date of this extension
 					'INTRODUCIATOR_INSTALL_DATE'			=> $user->format_date($config['introduciator_install_date']),
 
 					// Check force URL
-					// i is the ID of this MOD (-feneck91-introduciator-acp-introduciator_module) / mode is the sub item
+					// i is the ID of this extension's module (-feneck91-introduciator-acp-introduciator_module) / mode is the sub item
 					'U_INTRODUCIATOR_VERSIONCHECK_FORCE'	=> append_sid("{$phpbb_admin_path}index.$phpEx", 'i=-feneck91-introduciator-acp-introduciator_module&amp;mode=' . $mode . '&amp;introduciator_versioncheck_force=1'),
 					'U_ACTION'								=> $this->u_action,
 				));
@@ -97,11 +94,14 @@ class introduciator_module
 			case 'configuration':
 				global $db, $phpbb_root_path; // Database, Root path
 
+				// Get Action
+				$action = request_var('action', '');
+
 				// Set the template for this module
 				$this->tpl_name = 'acp_introduciator_configuration'; // Template file : adm/style/introduciator/acp_introduciator_configuration.htm
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
-				// Display configuration page content into ACP .MOD tab
+				// Display configuration page content into ACP Extensions tab
 				$template->assign_var('S_CONFIGURATION_PAGES', true);
 
 				// If no action, display configuration
@@ -111,7 +111,7 @@ class introduciator_module
 	
 					$params = introduciator_getparams(true);
 					$template->assign_vars(array(
-						'INTRODUCIATOR_MOD_ACTIVATED'											=> $params['introduciator_allow'],
+						'INTRODUCIATOR_EXTENSION_ACTIVATED'										=> $params['introduciator_allow'],
 						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL,
@@ -142,12 +142,16 @@ class introduciator_module
 				}
 				else
 				{	// Action !
+					if (!check_form_key('feneck91/introduciator'))
+					{
+						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 					switch ($action)
 					{
 						case 'update' :
 							// User has request an update : write it into database
 							// Update Database
-							$is_enabled								= request_var('mod_activated', false);
+							$is_enabled								= request_var('extension_activated', false);
 							$is_check_delete_first_post_activated	= request_var('check_delete_first_post_activated', false);
 							$fk_forum_id							= request_var('forum_choice', 0);
 							$posting_approval_level					= request_var('posting_approval_level', INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
@@ -220,7 +224,7 @@ class introduciator_module
 								$posting_approval_level = INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
 							}
 									
-							set_config('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation MOD config
+							set_config('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation extension config
 							set_config('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
 							set_config('introduciator_fk_forum_id', $fk_forum_id);
 							set_config('introduciator_posting_approval_level', $posting_approval_level);

@@ -3,7 +3,7 @@
 *
 * info_acp_introduciator.php [English]
 *
-* @package Introduciator MOD
+* @package Introduciator extension
 * @copyright (c) 2014 Feneck91
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
@@ -39,13 +39,13 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : the name of the MOD
+* mode: main : the name of the extension
 */
 $lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_MOD'							=> 'Introduciator',
+	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Introduciator',
 
 /**
-* Titles present on the left side of .MOD ACP's tab under Introduciator item
+* Titles present on the left side of Extensions ACP's tab under Introduciator item
 */
 	'INTRODUCIATOR_GENERAL'							=> 'General',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
@@ -55,12 +55,12 @@ $lang = array_merge($lang, array(
 * Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
 */
 	'INTRODUCIATOR_GP_TITLE'						=> 'Generals informations',
-	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Get version of this MOD.',
+	'INTRODUCIATOR_GP_TITLE_EXPLAIN'				=> 'Get version of this extension.',
 
-	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'	=> 'Your Introduciator MOD is not up to date.',
+	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'	=> 'Your Introduciator extension is not up to date.',
 	'INTRODUCIATOR_GP_STATS'						=> 'Introduciator statistics',
-	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Install date of <strong>Introduciator</strong> MOD:',
-	'INTRODUCIATOR_GP_VERSION'						=> '<strong>Introduciator</strong> MOD version:',
+	'INTRODUCIATOR_GP_INSTALL_DATE'					=> 'Install date of <strong>Introduciator</strong> extension:',
+	'INTRODUCIATOR_GP_VERSION'						=> '<strong>Introduciator</strong> extension version:',
 	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'			=> 'Latest version:',
 	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'				=> 'Download link:',
 	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'			=> 'Update information:',
@@ -70,7 +70,7 @@ $lang = array_merge($lang, array(
 * Info: language keys are prefixed with 'INTRODUCIATOR_CP_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_'
 */
 	'INTRODUCIATOR_CP_TITLE'						=> 'Introduciator configuration settings',
-	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Allow to configure the MOD settings.',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Allow to configure the extension settings.',
 
 /**
 * mode: configuration : Edit
@@ -97,14 +97,14 @@ $lang = array_merge($lang, array(
 																		<br/>
 																		<br/>',
 	// Sub titles
-	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED'								=> 'Enable MOD',
-	'INTRODUCIATOR_CP_ED_MOD_ACTIVATED_EXPLAIN'						=> 'Used to enable or disable this MOD.',
-	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Authorize the MOD to verify the deletion of first introduction post in the forum for introductions',
-	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'When this option is on, the MOD prevents the first post in any topic in the forum for introductions from deletion.
+	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED'						=> 'Enable extension',
+	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED_EXPLAIN'				=> 'Used to enable or disable this extension.',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions',
+	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
 																		<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
 																		<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
 	'INTRODUCIATOR_CP_ED_FORUM_CHOICE'								=> 'The forum where the user must introduce himself/herself',
-	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'The MOD will search only in this forum whether forum users have introduced themselves.',
+	'INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN'						=> 'The extension will search only in this forum whether forum users have introduced themselves.',
 	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL'					=> 'Introduction approval options',
 	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL_EXPLAIN'			=> 'Is used to force introduction to be approved by a moderator:<br/>
 																		<ul>
@@ -119,9 +119,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN'			=> 'This option is used to display an explanation page if the user is trying to post into another forum than the forum for introductions.',
 
 	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS'							=> 'Use phpBB permissions',
-	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'You can use either the phpBB permissions or this MOD configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.<br /><br />When the « Use forum’s permissions » option is used, the next configuration is ignored.',
+	'INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN'					=> 'You can use either the phpBB permissions or this extension configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.<br /><br />When the « Use forum’s permissions » option is used, the next configuration is ignored.',
 	'INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION'						=> 'Use forum’s permissions',
-	'INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION'					=> 'Use MOD configuration',
+	'INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION'					=> 'Use extension configuration',
 	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS'					=> 'Include or exclude groups',
 	'INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'			=> 'When « include groups » is selected, only users of selected groups need to introduce themselves.<br />When « exclude groups » is selected, only users that are not into selected groups need to introduce themselves.',
 	'INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION'						=> 'Include groups',
@@ -146,8 +146,8 @@ $lang = array_merge($lang, array(
 * Others
 */
 	'INTRODUCIATOR_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the MOD is desactivated',
-	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this MOD is enabled, your should choose a forum!',
+	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is desactivated',
+	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, your should choose a forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'No update information available',
 	'INTRODUCIATOR_ERROR_TOO_LONG_TEXT'						=> 'Error,  too long text (all texts are limited to 255 characters)',
 
