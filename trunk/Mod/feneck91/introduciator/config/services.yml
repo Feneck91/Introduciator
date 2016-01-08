@@ -1,19 +1,11 @@
 services:      
-    feneck91.introduciator.main_controller:
-        class: feneck91\introduciator\controller\
+    feneck91.introduciator.helper:
+        class: feneck91\introduciator\helper\introduciator_helper
         arguments:
-            - @config
-            - @request
-            - @pagination
-            - @dbal.conn
-            - @auth
-            - @template
-            - @user
-            - @controller.helper
+            - %core.table_prefix%
             - %core.root_path%
             - %core.php_ext%
-    
-   feneck91.introduciator.listener:
-        class: feneck91\introduciator\event\listener
-        tags:
-            - { name: event.listener }
+            - @user
+            - @dbal.conn
+            - @config
+            - @auth
