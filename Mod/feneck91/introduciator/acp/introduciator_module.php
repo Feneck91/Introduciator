@@ -9,13 +9,6 @@
 
 namespace feneck91\introduciator\acp;
 
-// Include introduciator functions if not yet included
-if (!function_exists('introduciator_getparams'))
-{
-	global $phpbb_root_path, $phpEx; // Root path, php extension
-	include($phpbb_root_path . 'ext/feneck91/introduciator/includes/functions_introduciator.' . $phpEx);
-}
-
 /**
  * Module to manage ACP extension configuration.
  */
@@ -27,7 +20,6 @@ class introduciator_module
 	var $folder_version_check	= '/phpbb';
 	// File name to download the latest version file info
 	var $file_version_check		= 'introduciator_extension_version.txt';
-
 	// Action
 	var $u_action;
 	// Template name
@@ -92,7 +84,7 @@ class introduciator_module
 			break;
 
 			case 'configuration':
-				global $db, $phpbb_root_path; // Database, Root path
+				global $db, $phpbb_root_path, $phpbb_container; // Database, Root path
 
 				// Get Action
 				$action = request_var('action', '');
@@ -104,18 +96,20 @@ class introduciator_module
 				// Display configuration page content into ACP Extensions tab
 				$template->assign_var('S_CONFIGURATION_PAGES', true);
 
+				// Get Introduciator class helper
+				$introduciator_helper = $phpbb_container->get('feneck91.introduciator.helper');
+
 				// If no action, display configuration
 				if (empty($action))
 				{	// no action or update current
 					$dp_data = array();
-	
-					$params = introduciator_getparams(true);
+					$params = $introduciator_helper->introduciator_getparams(true);
 					$template->assign_vars(array(
 						'INTRODUCIATOR_EXTENSION_ACTIVATED'										=> $params['introduciator_allow'],
 						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
-						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
-						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL,
-						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'	=> $params['posting_approval_level'] == INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
+						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
+						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL,
+						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'	=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
 						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'								=> $params['is_explanation_enabled'],
 						'INTRODUCIATOR_USE_PERMISSIONS'											=> $params['is_use_permissions'],
 						'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'									=> $params['is_include_groups'],
@@ -132,7 +126,7 @@ class introduciator_module
 					$this->add_all_forums($params['fk_forum_id'], 0, 0);
 
 					// Add all groups
-					$this->add_all_groups();
+					$this->add_all_groups($introduciator_helper);
 
 					$s_hidden_fields = build_hidden_fields(array(
 							'action'				=> 'update',					// Action
@@ -154,7 +148,7 @@ class introduciator_module
 							$is_enabled								= request_var('extension_activated', false);
 							$is_check_delete_first_post_activated	= request_var('check_delete_first_post_activated', false);
 							$fk_forum_id							= request_var('forum_choice', 0);
-							$posting_approval_level					= request_var('posting_approval_level', INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
+							$posting_approval_level					= request_var('posting_approval_level', $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
 							$is_explanation_enabled					= request_var('display_explanation', false);
 							$is_use_permissions						= request_var('is_use_permissions', true);
 							$is_include_groups						= request_var('include_groups', true);
@@ -175,7 +169,7 @@ class introduciator_module
 							$explanation_message_rules_text_new_uid = $explanation_message_rules_text_new_bitfield = $explanation_message_rules_text_bbcode_options = '';
 
 							// Replace all url by real fake urls
-							replace_all_by(
+							$introduciator_helper->replace_all_by(
 								array(
 									&$explanation_message_title,
 									&$explanation_message_text,
@@ -219,9 +213,9 @@ class introduciator_module
 								}
 							}
 
-							if ($posting_approval_level != INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+							if ($posting_approval_level != $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 							{	// Verify the level approval values => No correct value ? Set to INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL
-								$posting_approval_level = INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
+								$posting_approval_level = $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
 							}
 									
 							set_config('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation extension config
@@ -242,7 +236,7 @@ class introduciator_module
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
-							$sql = 'DELETE FROM ' . INTRODUCIATOR_GROUPS_TABLE;
+							$sql = 'DELETE FROM ' . $introduciator_helper->Get_INTRODUCIATOR_GROUPS_TABLE();
 							$db->sql_query($sql);
 
 							// 2> Add all entries
@@ -252,7 +246,7 @@ class introduciator_module
 								$values[] = array('fk_group' => (int) $group);
 							}
 							// Create and execute SQL request
-							$db->sql_multi_insert(INTRODUCIATOR_GROUPS_TABLE, $values);
+							$db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_GROUPS_TABLE(), $values);
 
 							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , 'INTRODUCIATOR_CONFIGURATION');
 							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
@@ -306,7 +300,7 @@ class introduciator_module
 	 *
 	 * Add all elements into the template.
 	 */
-	function add_all_groups()
+	function add_all_groups($introduciator_helper)
 	{
 		global $db, $template;
 
@@ -319,7 +313,7 @@ class introduciator_module
 			$template->assign_block_vars('group', array(
 				'NAME'		=> get_group_name($row['group_id']),
 				'ID'		=> (int) $row['group_id'],
-				'SELECTED'	=> is_group_selected($row['group_id']),
+				'SELECTED'	=> $introduciator_helper->is_group_selected($row['group_id']),
 				'TOOLTIP'	=> $row['group_desc'],
 			));
 		}
