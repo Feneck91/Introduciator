@@ -28,7 +28,7 @@ ECHO Exporting "Introduciator_v%INTRODUCIATOR_VERSION%"
 ECHO ------------------------------------
 REM svn export "https://subversion.assembla.com/svn/introduciator/trunk/Mod/feneck91" "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%"
 mkdir ""%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%"
-svn export "%BATCH_PATH%Mod\feneck91" "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%\feneck91"
+svn export "%BATCH_PATH%Ext\feneck91" "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%\feneck91"
 IF %errorlevel% EQU 0 GOTO MakeZip
 
 REM Error while exporting Introduciator
