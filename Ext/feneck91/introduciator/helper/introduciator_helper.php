@@ -334,11 +334,9 @@ class introduciator_helper
 			if ($this->config['introduciator_allow'])
 			{	// Extension is enabled and the user is not ignored, it can do all he wants
 				// Force forum id because it be moved while user delete the message
-				global $introduciator_params;
-
-				if (empty($introduciator_params))
+				if (empty($this->introduciator_params))
 				{
-					$introduciator_params = $this->introduciator_getparams();
+					$this->introduciator_params = $this->introduciator_getparams();
 					if (empty($user->lang['RETURN_FORUM']))
 					{
 						$user->setup('mods/introduciator');		// Setup & Add lang
@@ -355,7 +353,7 @@ class introduciator_helper
 					// else he needs to delete all the topic
 					$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
 					$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
-					if (!empty($post_id) && !empty($post_data['topic_id']) && $introduciator_params['fk_forum_id'] == $forum_id && $introduciator_params['is_check_delete_first_post'] && $user->data['is_registered'] && $this->auth->acl_gets('f_delete', 'm_delete', $forum_id))
+					if (!empty($post_id) && !empty($post_data['topic_id']) && $this->introduciator_params['fk_forum_id'] == $forum_id && $this->introduciator_params['is_check_delete_first_post'] && $user->data['is_registered'] && $this->auth->acl_gets('f_delete', 'm_delete', $forum_id))
 					{	// This post is into the introduce forum
 						// Find the topic identifier
 						$sql = 'SELECT topic_id, poster_id
@@ -376,7 +374,7 @@ class introduciator_helper
 							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
 							{	// The user try to delete the first post of one introduce topic : may be not allowed
 								// To finish, the $first_poster_id MUST BE not ignored
-								if ($this->is_user_must_introduce_himself($first_poster_id, null, $user->data['username'], $introduciator_params))
+								if ($this->is_user_must_introduce_himself($first_poster_id, null, $user->data['username'], $this->introduciator_params))
 								{
 									$ret_allowed_action = false;
 									if ($redirect)
@@ -392,33 +390,33 @@ class introduciator_helper
 						}
 					}
 				}
-				else if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $user->data['username'], $introduciator_params))
+				else if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $user->data['username'], $this->introduciator_params))
 				{
 					$topic_introduce_id = 0;
 					$first_post_id = 0;
 					$topic_approved = false;
 
-					if (!$this->is_user_post_into_forum($introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
+					if (!$this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
 					{	// No post into the introduce topic
-						if ((in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $introduciator_params['fk_forum_id'])))
+						if ((in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
 						{
 							$ret_allowed_action = false;
 							if ($redirect)
 							{
-								if ($introduciator_params['is_explanation_enabled'])
+								if ($this->introduciator_params['is_explanation_enabled'])
 								{
-									redirect(append_sid("{$phpbb_root_path}/introduciator_explain.$phpEx", 'f=' . $introduciator_params['fk_forum_id']));
+									redirect(append_sid("{$phpbb_root_path}/introduciator_explain.$phpEx", 'f=' . $this->introduciator_params['fk_forum_id']));
 								}
 								else
 								{
-									redirect(append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $introduciator_params['fk_forum_id']));
+									redirect(append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $this->introduciator_params['fk_forum_id']));
 								}
 							}
 						}
 					}
 					else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
 					{	// At least one post but not approved !
-						if (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $introduciator_params['fk_forum_id'] != $forum_id || $introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+						if (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 						{	// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
 							// here we just test if right are approve to don't show next message : here, the right are not correct => display the message
 							$ret_allowed_action = false;
@@ -439,7 +437,7 @@ class introduciator_helper
 							trigger_error($message, E_USER_NOTICE);
 						}
 					}
-					else if ($forum_id == $introduciator_params['fk_forum_id'] && $mode == 'post')
+					else if ($forum_id == $this->introduciator_params['fk_forum_id'] && $mode == 'post')
 					{	// User try to create more than one introduce post
 						$ret_allowed_action = false;
 						if ($redirect)
