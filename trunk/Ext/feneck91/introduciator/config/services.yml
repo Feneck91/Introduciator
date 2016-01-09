@@ -9,3 +9,10 @@ services:
             - @dbal.conn
             - @config
             - @auth
+
+    feneck91.introduciator.listener:
+        class: feneck91\introduciator\event\listener
+        arguments:
+            - @user
+        tags:
+            - { name: event.listener }
