@@ -1,0 +1,50 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDECSS @feneck91_introduciator/css/introduciator_explain.css -->
+<br/>
+<div class="panel">
+<!-- IF S_MOD_ACTIVATED -->
+	<div class="inner" ><span class="corners-top"><span></span></span>
+		<div class="content">
+			<br/>
+			<h2 class="introduciator_explain">{INTRODUCIATOR_MOD_EXPLAIN_TITLE}</h2>
+			<br/>
+			<p>{INTRODUCIATOR_MOD_EXPLAIN_TEXT}</p>
+		</div>
+	</div>
+	<!-- IF S_RULES_ACTIVATED -->
+    <div class="rules">
+        <div class="inner"><span class="corners-top"><span></span></span>
+        <!-- IF S_RULES_TITLE_ACTIVATED -->
+            {INTRODUCIATOR_MOD_RULES_TITLE}
+            <br/>
+        <!-- ENDIF -->
+            <br/>
+            <p>
+                {INTRODUCIATOR_MOD_RULES_TEXT}
+                <br/>
+            </p>
+        <span class="corners-bottom"><span></span></span></div>
+    </div>
+    <br/>
+    <span class="corners-bottom"><span></span></span>
+	<!-- ELSE -->
+	<br/>
+	<!-- ENDIF -->
+	<br/>
+	<span style="text-align: center">{INTRODUCIATOR_MOD_LINK_GOTO_FORUM}</span><br/>
+	<span style="text-align: center">{INTRODUCIATOR_MOD_LINK_POST_FORUM}</span><br/>
+	<br/>
+<!-- ELSE -->
+	<div class="inner"><span class="corners-top"><span></span></span>
+		<div class="content">
+			<br/>
+			<h2 class="introduciator_disabled">{L_INTRODUCIATOR_MOD_DISABLED}</h2>
+		</div>
+		<br/>
+		<span class="corners-bottom"><span></span></span>
+	</div>
+<!-- ENDIF -->
+</div>
+
+<!-- INCLUDE jumpbox.html -->
+<!-- INCLUDE overall_footer.html -->
