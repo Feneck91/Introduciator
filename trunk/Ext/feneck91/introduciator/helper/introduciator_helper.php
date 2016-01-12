@@ -9,7 +9,6 @@
 
 namespace feneck91\introduciator\helper;
 
-
 if (!function_exists('group_memberships'))
 {
 	global $phpbb_root_path, $phpEx;
@@ -17,7 +16,7 @@ if (!function_exists('group_memberships'))
 }
 
 /**
- * Class to manage extension.
+ * Class used to manage extension.
  *
  * Is used to manage ACP and check all needed information to known how the extension should work.
  */ 
@@ -32,6 +31,16 @@ class introduciator_helper
 	 */
 	private $table_prefix;
 
+	/**
+	 * PhpBB Root path.
+	 */
+	private $root_path;
+	
+	/**
+	 * phpBB Extention.
+	 */
+	private $php_ext;
+	
 	/**
 	 * @var \phpbb\user Current connected user.
 	 */
@@ -48,9 +57,14 @@ class introduciator_helper
 	private $config;
 
 	/**
-	 * @var \phpbb\auth\auth $auth current authorization.
+	 * @var \phpbb\auth\auth Current authorization.
 	 */
 	private $auth;
+
+	/**
+	 * @var \phpbb\controller\helper Controller helper, used to generate links to explanation page.
+	 */
+	private $controller_helper;
 
 	/**
 	 * Current introduciator parameters.
@@ -61,19 +75,25 @@ class introduciator_helper
 	 * Constructor
 	 *
 	 * @param string					$table_prefix Table prefix.
+	 * @param string					$root_path phpBB root path.
+	 * @param string					$php_ext phpBB Extention.
 	 * @param \phpbb\user				$user Current connected user.
 	 * @param \phpbb\db\driver\factory	$db Database access.
 	 * @param \phpbb\config\config 		$config Current configuration (config table).
 	 * @param \phpbb\auth\auth 			$auth Current authorizations.
+	 * @param \phpbb\controller\helper  $controller_helper Controller helper, used to generate route.
 	 */
-	public function __construct($table_prefix, $root_path, $php_ext, \phpbb\user $user, \phpbb\db\driver\factory $db, \phpbb\config\config $config, \phpbb\auth\auth $auth)
+	public function __construct($table_prefix, $root_path, $php_ext, \phpbb\user $user, \phpbb\db\driver\factory $db, \phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\controller\helper $controller_helper)
 	{
 		// Record parameters into this
 		$this->table_prefix = $table_prefix;
+		$this->root_path = $root_path;
+		$this->php_ext = $php_ext;
 		$this->user = $user;
 		$this->db = $db;
 		$this->config = $config; 
 		$this->auth = $auth;
+		$this->controller_helper = $controller_helper;
 	}
 
 	/**
@@ -239,10 +259,8 @@ class introduciator_helper
 			}
 			else
 			{
-				global $phpbb_root_path, $phpEx;
-
 				// Load langage
-				$this->user->add_lang('mods/introduciator');
+				$this->load_language_if_needed($this->user);
 
 				// Generate all string to be displayed
 				$explanation_message_title = generate_text_for_display($explanation_message_title, $explanation_message_title_uid, $explanation_message_title_bitfield, $explanation_message_title_bbcode_options);
@@ -256,8 +274,8 @@ class introduciator_helper
 				$link_goto_forum = $this->user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'];
 				$link_post_forum = $this->user->lang['INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'];
 
-				$forum_url = append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $params['fk_forum_id']);
-				$forum_post = append_sid("{$phpbb_root_path}posting.$phpEx", 'mode=post&amp;f=' . $params['fk_forum_id']);
+				$forum_url = append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $params['fk_forum_id']);
+				$forum_post = append_sid("{$this->root_path}posting.$this->php_ext", 'mode=post&amp;f=' . $params['fk_forum_id']);
 
 				// Replace in each string the predefined fields
 				$this->replace_all_by(
@@ -314,18 +332,18 @@ class introduciator_helper
 	 * If not allowed, it redirect the current page to the introduce forum or the explanation page
 	 * or error message if action is not allowed.
 	 *
-	 * @param $poster_id The poster id
-	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
-	 * @param $forum_id Forum identifier where the user try to post
+	 * @param $user The connected user.
+	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
+	 * @param $forum_id Forum identifier where the user try to post.
 	 * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete (used only for delete), pass 0 else.
 	 * @param $post_data Informations about posting (used only for delete) pass null else.
 	 * @param $redirect true if the function should redirect in case of the user is not allowed to make the action, else only return status.
-	 * @return true if the user is allowed to make action, false else.
+	 * @return true if the user is allowed to make action,
+	 *         false else, in this case, just check if allowed or not (remove quick replay if not allowed).
+	 *         RedirectResponse if redirection is needed.
 	 */
-	public function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_data, $redirect = true)
+	public function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_data, $redirect)
 	{
-		global $phpbb_root_path, $phpEx;
-
 		$poster_id = (int) $user->data['user_id'];
 		$ret_allowed_action = true;
 
@@ -337,14 +355,7 @@ class introduciator_helper
 				if (empty($this->introduciator_params))
 				{
 					$this->introduciator_params = $this->introduciator_getparams();
-					if (empty($user->lang['RETURN_FORUM']))
-					{
-						$user->setup('mods/introduciator');		// Setup & Add lang
-					}
-					else
-					{
-						$user->add_lang('mods/introduciator');	// Add lang
-					}
+					$this->load_language_if_needed($user);
 				}
 
 				if ($mode == 'delete')
@@ -380,9 +391,9 @@ class introduciator_helper
 									if ($redirect)
 									{
 										$message = $user->lang[($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'];
-										$meta_info = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=$topic_id");
+										$meta_info = append_sid("{$this->root_path}viewtopic.$this->php_ext", "f=$forum_id&amp;t=$topic_id");
 										$message .= '<br/><br/>' . sprintf($user->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
-										$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", "f=$forum_id") . '">', '</a>');
+										$message .= '<br/><br/>' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", "f=$forum_id") . '">', '</a>');
 										trigger_error($message, E_USER_NOTICE);
 									}
 								}
@@ -400,16 +411,15 @@ class introduciator_helper
 					{	// No post into the introduce topic
 						if ((in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
 						{
-							$ret_allowed_action = false;
 							if ($redirect)
 							{
 								if ($this->introduciator_params['is_explanation_enabled'])
 								{
-									redirect(append_sid("{$phpbb_root_path}/introduciator_explain.$phpEx", 'f=' . $this->introduciator_params['fk_forum_id']));
+									redirect($this->controller_helper->route('feneck91_introduciator_explain', array('forum_id' => (int) $this->introduciator_params['fk_forum_id'])));
 								}
 								else
 								{
-									redirect(append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $this->introduciator_params['fk_forum_id']));
+									redirect(append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $this->introduciator_params['fk_forum_id']));
 								}
 							}
 						}
@@ -433,7 +443,7 @@ class introduciator_helper
 							{
 								$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'];
 							}
-							$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
+							$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
 						}
 					}
@@ -443,7 +453,7 @@ class introduciator_helper
 						if ($redirect)
 						{
 							$message = $user->lang['INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'];
-							$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id) . '">', '</a>');
+							$message .= '<br /><br />' . sprintf($user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
 						}
 					}
@@ -473,8 +483,6 @@ class introduciator_helper
 	 */
 	public function introduciator_get_user_infos($poster_id, $poster_name)
 	{
-		global $phpbb_root_path, $phpEx;
-
 		$display = false;
 		$url = false;
 		$text = '';
@@ -486,7 +494,7 @@ class introduciator_helper
 			if (empty($this->introduciator_params))
 			{
 				$this->introduciator_params = $this->introduciator_getparams();
-				$this->user->add_lang('mods/introduciator');
+				$this->load_language_if_needed($this->user);
 			}
 
 			if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $poster_name, $this->introduciator_params))
@@ -504,7 +512,7 @@ class introduciator_helper
 				else if ($topic_approved)
 				{
 					$text = $this->user->lang['INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'];
-					$url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $this->introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
+					$url = append_sid("{$this->root_path}viewtopic.$this->php_ext", 'f=' . $this->introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
 					$class = 'introd-icon';
 				}
 				else
@@ -514,7 +522,7 @@ class introduciator_helper
 					if ($this->auth->acl_get('m_approve', $this->introduciator_params['fk_forum_id']) || ($this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $poster_id == (int) $this->user->data['user_id']))
 					{	// Display url if user can approve the introduction of this user
 						// or if the current user is the poster (the user can see its own presentation) AND the extension configuration is INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT
-						$url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", 'f=' . $this->introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
+						$url = append_sid("{$this->root_path}viewtopic.$this->php_ext", 'f=' . $this->introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
 						$class = 'introdpu-icon';
 					}
 					else
@@ -573,14 +581,7 @@ class introduciator_helper
 			if (empty($this->introduciator_params))
 			{	// Retrieve extension parameters
 				$this->introduciator_params = $this->introduciator_getparams();
-				if (empty($user->lang['RETURN_FORUM']))
-				{
-					$user->setup('mods/introduciator');		// Setup & Add lang
-				}
-				else
-				{
-					$user->add_lang('mods/introduciator');	// Add lang
-				}
+				$this->load_language_if_needed($user);
 			}
 
 			if (in_array($mode, array('reply', 'quote')) && $this->auth->acl_get('m_approve', $forum_id) && $this->introduciator_params['fk_forum_id'] == $forum_id && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
@@ -609,14 +610,7 @@ class introduciator_helper
 			if (empty($this->introduciator_params))
 			{	// Retrieve extension parameters
 				$this->introduciator_params = $this->introduciator_getparams();
-				if (empty($user->lang['RETURN_FORUM']))
-				{
-					$user->setup('mods/introduciator');		// Setup & Add lang
-				}
-				else
-				{
-					$user->add_lang('mods/introduciator');	// Add lang
-				}
+				$this->load_language_if_needed($user);
 			}
 			
 			if (($forum_id === null || $this->introduciator_params['fk_forum_id'] == $forum_id) && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
@@ -664,14 +658,7 @@ class introduciator_helper
 			if (empty($this->introduciator_params))
 			{	// Retrieve extension parameters
 				$this->introduciator_params = $this->introduciator_getparams();
-				if (empty($user->lang['RETURN_FORUM']))
-				{
-					$user->setup('mods/introduciator');		// Setup & Add lang
-				}
-				else
-				{
-					$user->add_lang('mods/introduciator');	// Add lang
-				}
+				$this->load_language_if_needed($user);
 			}
 
 			if ($this->introduciator_params['fk_forum_id'] == $forum_id && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
@@ -698,6 +685,23 @@ class introduciator_helper
 	}
 
 	/**
+	 * Load language into user if needed.
+	 *
+	 * @param $user The user informations
+	 */
+	public function load_language_if_needed($user)
+	{
+		if (empty($user->lang['RETURN_FORUM']))
+		{
+			$user->setup(array('feneck91/introduciator' => 'introduciator'));	// Setup & Add lang
+		}
+		else
+		{
+			$user->add_lang_ext('feneck91/introduciator', 'introduciator');	// Add lang
+		}
+	}
+	
+	/**
 	 * Check if the user have already posted into this forum.
 	 *
 	 * It must be the creator of one topic into the configured forum.
@@ -711,11 +715,14 @@ class introduciator_helper
 	 */
 	protected function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_id, &$topic_approved)
 	{
-		$sql = 'SELECT topic_id, topic_first_post_id, topic_approved
+		// Visibility state : ITEM_UNAPPROVED / ITEM_APPROVED / ITEM_DELETED / ITEM_REAPPROVE
+		$sql = 'SELECT topic_id, topic_first_post_id, topic_visibility
 				FROM ' . TOPICS_TABLE . '
 					WHERE topic_poster = ' . (int) $user_id . '
 					 AND forum_id = ' . (int) $forum_id . '
+					 AND topic_visibility <> ' . ITEM_DELETED . '
 					 AND topic_first_post_id <> 0'; // PATCH : Sometimes, the topic_first_post_id is 0
+
 		$result = $this->db->sql_query($sql);
 		$topic_row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
@@ -723,7 +730,7 @@ class introduciator_helper
 		{
 			$topic_id = $topic_row['topic_id'];
 			$first_post_id = $topic_row['topic_first_post_id'];
-			$topic_approved = $topic_row['topic_approved'];
+			$topic_approved = $topic_row['topic_visibility']; // Change into phpBB 3.1.x => topic_approved replaced by topic_visibility
 		}
 
 		return $topic_row !== false; // Return true or false
@@ -791,7 +798,7 @@ class introduciator_helper
 	 * Check if it doesn't contains name of ignored username list.
 	 *
 	 * @param $poster_id User's ID
-	 * @param $this->authorisations User's authorisations
+	 * @param $authorisations User's authorisations
 	 * @param $poster_name User's name
 	 * @param $introduciator_params Introduce extension parameters
 	 * @return true if the user must introduce himself pending of rights, false else
@@ -802,7 +809,7 @@ class introduciator_helper
 
 		if ($introduciator_param['is_use_permissions'])
 		{
-			if ($this->authorisations === null)
+			if ($authorisations === null)
 			{
 				$sql = 'SELECT user_id, username, user_permissions, user_type
 						FROM ' . USERS_TABLE . '
@@ -816,11 +823,12 @@ class introduciator_helper
 					trigger_error('NO_USERS', E_USER_ERROR);
 				}
 
-				$this->authorisations = new auth();
-				$this->authorisations->acl($userdata);
+				$authorisations = new auth();
+				$authorisations->acl($userdata);
+				$this->auth = $authorisations;
 			}
 
-			$ret = $this->authorisations->acl_get('u_must_introduce');
+			$ret = $authorisations->acl_get('u_must_introduce');
 		}
 		else
 		{

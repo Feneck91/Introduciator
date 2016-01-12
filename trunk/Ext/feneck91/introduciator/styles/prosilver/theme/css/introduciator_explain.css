@@ -1,0 +1,13 @@
+/*--------------------------------------------------------------
+   Colours and styles for introduciator explanation html page
+----------------------------------------------------------------*/
+
+introduciator_explain {
+	color: orangered !important;
+	text-align: center;
+}
+
+introduciator_disabled {
+	color: red !important;
+	text-align: center;
+}

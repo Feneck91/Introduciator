@@ -9,10 +9,23 @@ services:
             - @dbal.conn
             - @config
             - @auth
+            - @controller.helper
+
+
+    feneck91.introduciator.explain:
+        class: feneck91\introduciator\controller\introduciator_explain
+        arguments:
+            - @config
+            - @auth
+            - @template
+            - @user
 
     feneck91.introduciator.listener:
-        class: feneck91\introduciator\event\listener
+        class: feneck91\introduciator\event\introduciator_listener
         arguments:
             - @user
+            - @template
+            - @template_context
+            - @service_container
         tags:
             - { name: event.listener }
