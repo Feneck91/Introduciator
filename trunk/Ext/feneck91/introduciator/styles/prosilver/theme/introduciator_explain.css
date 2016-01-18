@@ -1,0 +1,18 @@
+/**
+ * Style used only for introduciator_explain.php page.
+ *
+ * @package phpBB Extension - Introduciator Extension
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2013 @copyright (c) 2014 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
+
+.introduciator_explain {
+	color: orangered !important;
+	text-align: center;
+}
+
+.introduciator_disabled {
+	color: red !important;
+	text-align: center;
+}
