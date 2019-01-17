@@ -71,6 +71,11 @@ class introduciator_helper
 	private $language;
 	
 	/**
+	 * @var \phpbb\language\language Language manager, used to translate all messages.
+	 */
+	private $language_loaded;
+
+	/**
 	 * Current introduciator parameters.
 	 */
 	private $introduciator_params;
@@ -100,24 +105,34 @@ class introduciator_helper
 		$this->auth = $auth;
 		$this->controller_helper = $controller_helper;
 		$this->language = $language;
+		$this->language_loaded = false;
 	}
 
 	/**
-	 * Load language into user if needed.
-	 *
-	 * @param $user The user informations
+	 * Load language only if noyt already done.
 	 */
-	public function load_language_if_needed($user, $language)
+	public function load_language_if_needed()
 	{
-		if (empty($language->lang['RETURN_FORUM']))
+		if (empty($this->language->lang['RETURN_FORUM']))
 		{
-			$user->setup(); // Setup
+			$this->user->setup(); // Setup
 		}
 
-		if (empty($language->lang['INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION']))
+		if (!$this->language_loaded)
 		{
-			$language->add_lang('introduciator', 'feneck91/introduciator');	// Add lang
+			$this->language->add_lang('introduciator', 'feneck91/introduciator');	// Add lang
+			$this->language_loaded = true;
 		}
+	}
+	
+	/**
+	 * Get the language instance.
+	 *
+	 * @return The private language instance.
+	 */
+	public function get_language()
+	{
+		return $this->language;
 	}
 	
 	/**
@@ -132,7 +147,6 @@ class introduciator_helper
 	{
 		return $this->table_prefix . 'introduciator_groups';
 	}
-
 
 	/**
 	 * Check if a group is selected.
@@ -284,7 +298,7 @@ class introduciator_helper
 			else
 			{
 				// Load langage
-				$this->load_language_if_needed($this->user, $this->language);
+				$this->load_language_if_needed();
 
 				// Generate all string to be displayed
 				$explanation_message_title = generate_text_for_display($explanation_message_title, $explanation_message_title_uid, $explanation_message_title_bitfield, $explanation_message_title_bbcode_options);
@@ -414,12 +428,12 @@ class introduciator_helper
 									if ($redirect)
 									{
 										// Load langage
-										$this->load_language_if_needed($this->user, $this->language);
+										$this->load_language_if_needed();
 										
-										$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
+										$message = $this->language->lang[($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'];
 										$meta_info = append_sid("{$this->root_path}viewtopic.$this->php_ext", "f=$forum_id&amp;t=$topic_id");
-										$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
-										$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", "f=$forum_id") . '">', '</a>');
+										$message .= '<br/><br/>' . sprintf($this->language->lang['RETURN_TOPIC'], '<a href="' . $meta_info . '">', '</a>');
+										$message .= '<br/><br/>' . sprintf($this->language->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", "f=$forum_id") . '">', '</a>');
 										trigger_error($message, E_USER_NOTICE);
 									}
 								}
@@ -461,7 +475,7 @@ class introduciator_helper
 						if (!$ret_allowed_action && $redirect)
 						{
 							// Load langage
-							$this->load_language_if_needed($this->user, $this->language);
+							$this->load_language_if_needed();
 							
 							// Test : if the user try to quote / reply into his own introduction : change the message
 							if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
@@ -472,7 +486,7 @@ class introduciator_helper
 							{
 								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
 							}
-							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
+							$message .= '<br /><br />' . sprintf($this->language->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
 						}
 					}
@@ -482,10 +496,10 @@ class introduciator_helper
 						if ($redirect)
 						{
 							// Load langage
-							$this->load_language_if_needed($this->user, $this->language);
+							$this->load_language_if_needed();
 							
 							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
-							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
+							$message .= '<br /><br />' . sprintf($this->language->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
 						}
 					}
@@ -536,7 +550,7 @@ class introduciator_helper
 				$topic_approved = false;
 
 				// Load langage
-				$this->load_language_if_needed($this->user, $this->language);
+				$this->load_language_if_needed();
 				
 				if (!$this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
 				{	// No post into the introduce topic
@@ -854,7 +868,7 @@ class introduciator_helper
 				if (!$userdata)
 				{
 					// Load langage
-					$this->load_language_if_needed($this->user, $this->language);
+					$this->load_language_if_needed();
 					
 					trigger_error('NO_USERS', E_USER_ERROR);
 				}

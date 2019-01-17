@@ -53,10 +53,10 @@ class introduciator_explain
 
 		if ($this->config['introduciator_allow'])
 		{	// Title messagte
-			// Load MOD configuration
+			// Load extension configuration + language
 			$params = $this->introduciator_helper->introduciator_getparams(false);
 
-			$message = $this->user->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
+			$message = $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 			page_header($message);
 
 			$this->template->set_filenames(array(
@@ -80,9 +80,9 @@ class introduciator_explain
 		else
 		{
 			// In case of introduciator_getparams is not called, I must load the introduciator language file
-			$this->introduciator_helper->load_language_if_needed($this->user);
+			$this->introduciator_helper->load_language_if_needed();
 
-			page_header($this->user->lang['INTRODUCIATOR_EXT_DISABLED']);
+			page_header($this->introduciator_helper->get_language()->lang['INTRODUCIATOR_EXT_DISABLED']);
 			$this->template->set_filenames(array(
 				'body' => 'introduciator_explain.html',
 			));
