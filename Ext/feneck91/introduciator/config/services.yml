@@ -10,7 +10,7 @@ services:
             - @config
             - @auth
             - @controller.helper
-
+            - @language
 
     feneck91.introduciator.explain:
         class: feneck91\introduciator\controller\introduciator_explain
