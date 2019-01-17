@@ -113,13 +113,9 @@ class introduciator_helper
 	 */
 	public function load_language_if_needed()
 	{
-		if (empty($this->language->lang('RETURN_FORUM')))
-		{
-			$this->user->setup(); // Setup
-		}
-
 		if (!$this->language_loaded)
 		{
+			$this->user->setup();
 			$this->language->add_lang('introduciator', 'feneck91/introduciator');	// Add lang
 			$this->language_loaded = true;
 		}
