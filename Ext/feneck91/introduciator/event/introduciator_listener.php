@@ -84,9 +84,9 @@ $vars = array(
 	'forum_id',
 	'post_author_name',
 );
-extract($phpbb_dispatcher->trigger_event('core.posting_modify_databefore_patch', compact($vars)));
+extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', compact($vars)));
 */
-			'core.posting_modify_databefore_patch'						=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
+			'core.posting_modify_row_data'										=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
 		);
 	}
 	
