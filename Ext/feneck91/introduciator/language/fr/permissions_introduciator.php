@@ -44,7 +44,7 @@ $lang = array_merge($lang, array(
 	'ACL_U_MUST_INTRODUCE'			=> 'Doit se présenter',
 
 	// Permission d'Administrateur (gestion du MOD)
-	'ACL_A_INTRODUCIATOR_MANAGE'	=> 'Peut gérer l''extension Présentation Forcée',
+	'ACL_A_INTRODUCIATOR_MANAGE'	=> "Peut gérer l'extension Présentation Forcée",
 ));
 
 ?>
