@@ -44,7 +44,7 @@ $lang = array_merge($lang, array(
 	'ACL_U_MUST_INTRODUCE'			=> 'Must first post an introduction',
 
 	// Admin Permissions
-	'ACL_A_INTRODUCIATOR_MANAGE'	=> 'Can manage Introduciator MOD',
+	'ACL_A_INTRODUCIATOR_MANAGE'	=> 'Can manage Introduciator extension',
 ));
 
 ?>
