@@ -114,7 +114,7 @@ class introduciator_helper
 			$user->setup(); // Setup
 		}
 
-		if (empty($language->lang['INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION']))
+		if (empty($language->lang['INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION']))
 		{
 			$language->add_lang('introduciator', 'feneck91/introduciator');	// Add lang
 		}
@@ -292,11 +292,11 @@ class introduciator_helper
 				$explanation_message_rules_title = generate_text_for_display($explanation_message_rules_title, $explanation_message_rules_title_uid, $explanation_message_rules_title_bitfield, $explanation_message_rules_title_bbcode_options);
 				$explanation_message_rules_text = generate_text_for_display($explanation_message_rules_text, $explanation_message_rules_text_uid, $explanation_message_rules_text_bitfield, $explanation_message_rules_text_bbcode_options);
 				$explanation_message_rules_text = str_replace('%rules_text%', generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']), $explanation_message_rules_text);
-				$explanation_message_title = str_replace('%explanation_title%', $this->language->lang('INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'), $explanation_message_title);
-				$explanation_message_text = str_replace('%explanation_text%', $this->language->lang('INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT') . (($params['is_explanation_display_rules'] && strlen($explanation_message_text) > 0 && strlen($explanation_message_rules_text) > 0) ? $this->language->lang('INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT_RULES') : ''), $explanation_message_text);
-				$explanation_message_rules_title = str_replace('%rules_title%', $this->language->lang('INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'), $explanation_message_rules_title);
-				$link_goto_forum = $this->language->lang('INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM');
-				$link_post_forum = $this->language->lang('INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM');
+				$explanation_message_title = str_replace('%explanation_title%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'), $explanation_message_title);
+				$explanation_message_text = str_replace('%explanation_text%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT') . (($params['is_explanation_display_rules'] && strlen($explanation_message_text) > 0 && strlen($explanation_message_rules_text) > 0) ? $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES') : ''), $explanation_message_text);
+				$explanation_message_rules_title = str_replace('%rules_title%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'), $explanation_message_rules_title);
+				$link_goto_forum = $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM');
+				$link_post_forum = $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM');
 
 				$forum_url = append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $params['fk_forum_id']);
 				$forum_post = append_sid("{$this->root_path}posting.$this->php_ext", 'mode=post&amp;f=' . $params['fk_forum_id']);
@@ -416,7 +416,7 @@ class introduciator_helper
 										// Load langage
 										$this->load_language_if_needed($this->user, $this->language);
 										
-										$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST');
+										$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
 										$meta_info = append_sid("{$this->root_path}viewtopic.$this->php_ext", "f=$forum_id&amp;t=$topic_id");
 										$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
 										$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", "f=$forum_id") . '">', '</a>');
@@ -466,11 +466,11 @@ class introduciator_helper
 							// Test : if the user try to quote / reply into his own introduction : change the message
 							if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
 							{
-								$message = $this->language->lang('INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
+								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
 							}
 							else
 							{
-								$message = $this->language->lang('INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION');
+								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
 							}
 							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
@@ -484,7 +484,7 @@ class introduciator_helper
 							// Load langage
 							$this->load_language_if_needed($this->user, $this->language);
 							
-							$message = $this->language->lang('INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE');
+							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
 							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
 						}

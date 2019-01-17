@@ -44,20 +44,20 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'INSTALL_INTRODUCIATOR_MOD'					=> 'Install Introduciator Mod',
 
-	'INSTALL_INTRODUCIATOR_MOD_CONFIRM'			=> 'Are you ready to install the Introduciator Mod?',
+	'INSTALL_INTRODUCIATOR_EXT_CONFIRM'			=> 'Are you ready to install the Introduciator Mod?',
 
-	'INSTALL_INTRODUCIATOR_MOD_WELCOME'			=> 'Information',
-	'INSTALL_INTRODUCIATOR_MOD_WELCOME_NOTES'	=> 'By default, this MOD is not enabled, you should enable and configure it in <strong>ACP &gt;&gt; .MODS &gt;&gt; Introduciator &gt;&gt; Configuration</strong>.
+	'INSTALL_INTRODUCIATOR_EXT_WELCOME'			=> 'Information',
+	'INSTALL_INTRODUCIATOR_EXT_WELCOME_NOTES'	=> 'By default, this MOD is not enabled, you should enable and configure it in <strong>ACP &gt;&gt; .MODS &gt;&gt; Introduciator &gt;&gt; Configuration</strong>.
 													<br/>Do not forget to set up the new permission <strong>Must introduce himself</strong> in the ACP &gt;&gt; « User permissions »',
 
 	'INTRODUCIATOR_MOD'							=> 'Introduciator Mod',
-	'INTRODUCIATOR_MOD_EXPLAIN'					=> 'Install Introduciator Mod database changes with UMIL auto method.',
+	'INTRODUCIATOR_EXT_EXPLAIN'					=> 'Install Introduciator Mod database changes with UMIL auto method.',
 
 	'UNINSTALL_INTRODUCIATOR_MOD'				=> 'Uninstall Introduciator Mod',
-	'UNINSTALL_INTRODUCIATOR_MOD_CONFIRM'		=> 'Are you ready to uninstall the Introduciator Mod? All settings and data saved by this mod will be removed!',
+	'UNINSTALL_INTRODUCIATOR_EXT_CONFIRM'		=> 'Are you ready to uninstall the Introduciator Mod? All settings and data saved by this mod will be removed!',
 
 	'UPDATE_INTRODUCIATOR_MOD'					=> 'Update Introduciator Mod',
-	'UPDATE_INTRODUCIATOR_MOD_CONFIRM'			=> 'Are you ready to update the Introduciator Mod?',
+	'UPDATE_INTRODUCIATOR_EXT_CONFIRM'			=> 'Are you ready to update the Introduciator Mod?',
 
 	'UNUSED_LANG_FILES_TRUE'					=> 'Removal of unused language files.',
 	'UNUSED_LANG_FILES_FALSE'					=> 'The removal of unused files is not necessary.',
@@ -65,22 +65,22 @@ $lang = array_merge($lang, array(
 /*
 * Other : Messages
 */
-	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION'			=> 'Your introduction message is pending approval, please wait.',
-	'INTRODUCIATOR_MOD_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only the editing is allowed.',
-	'INTRODUCIATOR_MOD_INTRODUCE_MORE_THAN_ONCE'				=> 'You are not allowed to introduce yourself more than once!',
-	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'You are not allowed to delete the first post of your introduction!',
-	'INTRODUCIATOR_MOD_DELETE_INTRODUCE_FIRST_POST'				=> 'You are not allowed to delete the first post of this introduction! You can delete this introduction by deleting the topic.',
-	'INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM'				=> 'Please introduce youself into the topic: %s',
-	'INTRODUCIATOR_MOD_DISABLED'								=> 'The Introduciator MOD is disabled. You should enable it to make this MOD workable.',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TITLE'					=> '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT'					=> 'As for every new user, you must introduce yourself to other members in the “<a href="%forum_url%">%forum_name%</a>” forum<br/>
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Your introduction message is pending approval, please wait.',
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only the editing is allowed.',
+	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'You are not allowed to introduce yourself more than once!',
+	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'You are not allowed to delete the first post of your introduction!',
+	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'You are not allowed to delete the first post of this introduction! You can delete this introduction by deleting the topic.',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Please introduce youself into the topic: %s',
+	'INTRODUCIATOR_EXT_DISABLED'								=> 'The Introduciator MOD is disabled. You should enable it to make this MOD workable.',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'As for every new user, you must introduce yourself to other members in the “<a href="%forum_url%">%forum_name%</a>” forum<br/>
 																	Only a new topic in the forum for introductions is allowed.',
-	'INTRODUCIATOR_MOD_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
 																	When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
-	'INTRODUCIATOR_MOD_DEFAULT_RULES_TITLE'						=> '<strong><u>The rules are repeated here:</u></strong>',
-	'INTRODUCIATOR_MOD_DEFAULT_LINK_GOTO_FORUM'					=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
-	'INTRODUCIATOR_MOD_DEFAULT_LINK_POST_FORUM'					=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
-	'INTRODUCIATOR_MOD_POST_APPROVAL_NOTIFY'					=> '<br/>During presentation approval, it remains editable and moderators can reply to you.
+	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>The rules are repeated here:</u></strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>During presentation approval, it remains editable and moderators can reply to you.
 																	<br/>This will allow you to bring it into conformity with the requirements of the forum if necessary.',
 
 	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Member’s introduction',

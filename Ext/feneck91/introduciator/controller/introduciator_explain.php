@@ -56,7 +56,7 @@ class introduciator_explain
 			// Load MOD configuration
 			$params = $this->introduciator_helper->introduciator_getparams(false);
 
-			$message = $this->user->lang('INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
+			$message = $this->user->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 			page_header($message);
 
 			$this->template->set_filenames(array(
@@ -64,15 +64,15 @@ class introduciator_explain
 			));
 
 			$this->template->assign_vars(array(
-				'S_MOD_ACTIVATED'					=> true,
-				'INTRODUCIATOR_MOD_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
-				'INTRODUCIATOR_MOD_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
+				'S_EXT_ACTIVATED'					=> true,
+				'INTRODUCIATOR_EXT_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
+				'INTRODUCIATOR_EXT_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
 				'S_RULES_ACTIVATED'					=> $params['is_explanation_display_rules'] && strlen($params['explanation_message_rules_text']) > 0,
 				'S_RULES_TITLE_ACTIVATED'			=> (strlen($params['explanation_message_rules_title']) > 0),
-				'INTRODUCIATOR_MOD_RULES_TITLE'		=> $params['explanation_message_rules_title'],
-				'INTRODUCIATOR_MOD_RULES_TEXT'		=> $params['explanation_message_rules_text'],
-				'INTRODUCIATOR_MOD_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
-				'INTRODUCIATOR_MOD_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
+				'INTRODUCIATOR_EXT_RULES_TITLE'		=> $params['explanation_message_rules_title'],
+				'INTRODUCIATOR_EXT_RULES_TEXT'		=> $params['explanation_message_rules_text'],
+				'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
+				'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
 			));
 
 			page_footer();
@@ -82,7 +82,7 @@ class introduciator_explain
 			// In case of introduciator_getparams is not called, I must load the introduciator language file
 			$this->introduciator_helper->load_language_if_needed($this->user);
 
-			page_header($this->user->lang['INTRODUCIATOR_MOD_DISABLED']);
+			page_header($this->user->lang['INTRODUCIATOR_EXT_DISABLED']);
 			$this->template->set_filenames(array(
 				'body' => 'introduciator_explain.html',
 			));
@@ -112,7 +112,7 @@ if ($config['introduciator_allow'])
 	// Load MOD configuration
 	$params = introduciator_getparams(false);
 
-	$message = $user->lang('INTRODUCIATOR_MOD_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
+	$message = $user->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 	page_header($message);
 
 	$template->set_filenames(array(
@@ -120,15 +120,15 @@ if ($config['introduciator_allow'])
 	));
 	
 	$template->assign_vars(array(
-		'S_MOD_ACTIVATED'					=> true,
-		'INTRODUCIATOR_MOD_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
-		'INTRODUCIATOR_MOD_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
+		'S_EXT_ACTIVATED'					=> true,
+		'INTRODUCIATOR_EXT_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
+		'INTRODUCIATOR_EXT_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
 		'S_RULES_ACTIVATED'					=> $params['is_explanation_display_rules'] && strlen($params['explanation_message_rules_text']) > 0,
 		'S_RULES_TITLE_ACTIVATED'			=> (strlen($params['explanation_message_rules_title']) > 0),
-		'INTRODUCIATOR_MOD_RULES_TITLE'		=> $params['explanation_message_rules_title'],
-		'INTRODUCIATOR_MOD_RULES_TEXT'		=> $params['explanation_message_rules_text'],
-		'INTRODUCIATOR_MOD_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
-		'INTRODUCIATOR_MOD_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
+		'INTRODUCIATOR_EXT_RULES_TITLE'		=> $params['explanation_message_rules_title'],
+		'INTRODUCIATOR_EXT_RULES_TEXT'		=> $params['explanation_message_rules_text'],
+		'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
+		'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
 	));
 
 	page_footer();
@@ -138,7 +138,7 @@ else
 	// In case of introduciator_getparams is not called, I must load the introduciator language file
 	$user->add_lang('mods/introduciator');
 
-	page_header($user->lang['INTRODUCIATOR_MOD_DISABLED']);
+	page_header($user->lang['INTRODUCIATOR_EXT_DISABLED']);
 	$template->set_filenames(array(
 		'body' => 'introduciator_explain.html',
 	));
