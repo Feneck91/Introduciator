@@ -46,5 +46,3 @@ $lang = array_merge($lang, array(
 	// Permission d'Administrateur (gestion du MOD)
 	'ACL_A_INTRODUCIATOR_MANAGE'	=> "Peut gérer l'extension Présentation Forcée",
 ));
-
-?>

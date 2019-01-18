@@ -160,5 +160,3 @@ $lang = array_merge($lang, array(
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'				=> 'The configuration has been updated',
 ));
-
-?>

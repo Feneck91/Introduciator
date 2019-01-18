@@ -93,5 +93,3 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'La présentation est en cours d’approbation',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'Aucune présentation disponible',
 ));
-
-?>

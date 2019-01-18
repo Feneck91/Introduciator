@@ -92,5 +92,3 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'The member’s introduction is pending approval',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'No introduction avalaible for this member',
 ));
-
-?>

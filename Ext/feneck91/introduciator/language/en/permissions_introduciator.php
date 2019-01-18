@@ -46,5 +46,3 @@ $lang = array_merge($lang, array(
 	// Admin Permissions
 	'ACL_A_INTRODUCIATOR_MANAGE'	=> 'Can manage Introduciator extension',
 ));
-
-?>

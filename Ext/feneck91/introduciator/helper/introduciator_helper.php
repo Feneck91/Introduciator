@@ -1003,4 +1003,3 @@ class introduciator_helper
 		return $this->introduciator_verify_posting($user, $mode, $forum_id, 0, $post_data, true);
 	}
 }
-?>

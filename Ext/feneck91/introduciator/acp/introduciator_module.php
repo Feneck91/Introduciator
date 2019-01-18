@@ -14,20 +14,61 @@ namespace feneck91\introduciator\acp;
  */
 class introduciator_module
 {
-	// URL of web site where download the latest version file info
-	var $url_version_check		= 'feneck91.free.fr';
-	// Folder in web site where download the latest version file info
-	var $folder_version_check	= '/phpbb';
-	// File name to download the latest version file info
-	var $file_version_check		= 'introduciator_extension_version.txt';
-	// Action
+	/**
+	 * URL of web site where download the latest version file info
+	 */
+	protected $url_version_check		= 'feneck91.free.fr';
+	
+	/**
+	 * Folder in web site where download the latest version file info
+	 */
+	protected $folder_version_check		= '/phpbb';
+	
+	/**
+	 * File name to download the latest version file info
+	 */
+	protected $file_version_check		= 'introduciator_extension_version.txt';
+	
+	/**
+	 *  Action
+	 */
 	var $u_action;
-	// Template name
+
+	/**
+	 * Template name
+	 */
 	var $tpl_name;
+	
+	/**
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
+	 */
+	protected $container;
+
+	/**
+	 * @var \phpbb\language\language
+	 */
+	protected $language;
+
+	/**
+	 * @var \phpbb\request\request
+	 */
+	protected $request;
+	
+	/**
+	 * @var \phpbb\template\template
+	 */
+	protected $template;
 
 	public function main($id, $mode)
 	{
-		global $template, $user, $config;
+		global $phpbb_container;
+		$this->container = $phpbb_container;
+		$this->language = $phpbb_container->get('language');
+		$this->request = $phpbb_container->get('request');
+		$this->template = $this->container->get('template');
+		$user = $this->container->get('user');
+		$config = $this->container->get('config');
+		$phpbb_log = $this->container->get('log');
 
 		// Add a secret token to the form
 		// This functions adds a secret token to any form, a token which should be checked after
@@ -44,11 +85,11 @@ class introduciator_module
 				$this->page_title = 'INTRODUCIATOR_GENERAL';
 				
 				// Check if a new version of this extension is available
-				$latest_version_info = $this->obtain_latest_version_info(request_var('introduciator_versioncheck_force', false));
+				$latest_version_info = $this->obtain_latest_version_info($this->request->variable('introduciator_versioncheck_force', false));
 
 				if ($latest_version_info === false || !function_exists('phpbb_version_compare'))
 				{
-					$template->assign_var('S_INTRODUCIATOR_VERSIONCHECK_FAIL', true);
+					$this->template->assign_var('S_INTRODUCIATOR_VERSIONCHECK_FAIL', true);
 				}
 				else
 				{
@@ -56,7 +97,7 @@ class introduciator_module
 					$version_check = $this->get_update_information('url-', $latest_version_info);
 					$infos = $this->get_update_information('info-', $latest_version_info);
 
-					$template->assign_vars(array(
+					$this->template->assign_vars(array(
 						'S_INTRODUCIATOR_VERSION_UP_TO_DATE'	=> phpbb_version_compare(trim($latest_version_info[0]), $config['introduciator_extension_version'], '<='),
 						'S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND'=> $version_check[1],
 						'U_INTRODUCIATOR_VERSIONCHECK'			=> $version_check[0],
@@ -67,7 +108,7 @@ class introduciator_module
 					));
 				}
 
-				$template->assign_vars(array(
+				$this->template->assign_vars(array(
 					// Display general page content into ACP Extensions tab
 					'S_INTRODUCIATOR_GENERAL_PAGES'			=> true,
 
@@ -84,27 +125,27 @@ class introduciator_module
 			break;
 
 			case 'configuration':
-				global $db, $phpbb_root_path, $phpbb_container; // Database, Root path
+				global $db, $phpbb_root_path; // Database, Root path
 
 				// Get Action
-				$action = request_var('action', '');
+				$action = $this->request->variable('action', '');
 
 				// Set the template for this module
 				$this->tpl_name = 'acp_introduciator_configuration'; // Template file : adm/style/introduciator/acp_introduciator_configuration.htm
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
 				// Display configuration page content into ACP Extensions tab
-				$template->assign_var('S_CONFIGURATION_PAGES', true);
+				$this->template->assign_var('S_CONFIGURATION_PAGES', true);
 
 				// Get Introduciator class helper
-				$introduciator_helper = $phpbb_container->get('feneck91.introduciator.helper');
+				$introduciator_helper = $this->container->get('feneck91.introduciator.helper');
 
 				// If no action, display configuration
 				if (empty($action))
 				{	// no action or update current
 					$dp_data = array();
 					$params = $introduciator_helper->introduciator_getparams(true);
-					$template->assign_vars(array(
+					$this->template->assign_vars(array(
 						'INTRODUCIATOR_EXTENSION_ACTIVATED'										=> $params['introduciator_allow'],
 						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
@@ -132,41 +173,40 @@ class introduciator_module
 							'action'				=> 'update',					// Action
 						));
 
-					$template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
+					$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 				}
 				else
 				{	// Action !
 					if (!check_form_key('feneck91/introduciator'))
 					{
-						trigger_error($user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
+						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 					}
 					switch ($action)
 					{
 						case 'update' :
 							// User has request an update : write it into database
 							// Update Database
-							$is_enabled								= request_var('extension_activated', false);
-							$is_check_delete_first_post_activated	= request_var('check_delete_first_post_activated', false);
-							$fk_forum_id							= request_var('forum_choice', 0);
-							$posting_approval_level					= request_var('posting_approval_level', $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
-							$is_explanation_enabled					= request_var('display_explanation', false);
-							$is_use_permissions						= request_var('is_use_permissions', true);
-							$is_include_groups						= request_var('include_groups', true);
-							$groups									= request_var('groups_choices', array('' => 0)); // Array of IDs of selected groups
-							$ignored_users							= substr(utf8_normalize_nfc(request_var('ignored_users', '')), 0, 255);
-							$explanation_message_title				= utf8_normalize_nfc(request_var('explanation_message_title', '', true));
-							$explanation_message_text				= utf8_normalize_nfc(request_var('explanation_message_text', '', true));
-							$explanation_display_rules_enabled		= request_var('explanation_display_rules_enabled', false);
-							$explanation_message_rules_title		= utf8_normalize_nfc(request_var('explanation_message_rules_title', '', true));
-							$explanation_message_rules_text			= utf8_normalize_nfc(request_var('explanation_message_rules_text', '', true));
+							$is_enabled								= $this->request->variable('extension_activated', false);
+							$is_check_delete_first_post_activated	= $this->request->variable('check_delete_first_post_activated', false);
+							$fk_forum_id							= $this->request->variable('forum_choice', 0);
+							$posting_approval_level					= $this->request->variable('posting_approval_level', $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
+							$is_explanation_enabled					= $this->request->variable('display_explanation', false);
+							$is_use_permissions						= $this->request->variable('is_use_permissions', true);
+							$is_include_groups						= $this->request->variable('include_groups', true);
+							$groups									= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
+							$ignored_users							= substr(utf8_normalize_nfc($this->request->variable('ignored_users', '')), 0, 255);
+							$explanation_message_title				= utf8_normalize_nfc($this->request->variable('explanation_message_title', '', true));
+							$explanation_message_text				= utf8_normalize_nfc($this->request->variable('explanation_message_text', '', true));
+							$explanation_display_rules_enabled		= $this->request->variable('explanation_display_rules_enabled', false);
+							$explanation_message_rules_title		= utf8_normalize_nfc($this->request->variable('explanation_message_rules_title', '', true));
+							$explanation_message_rules_text			= utf8_normalize_nfc($this->request->variable('explanation_message_rules_text', '', true));
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
-								trigger_error($user->lang['INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'] . adm_back_link($this->u_action), E_USER_WARNING);
+								trigger_error($this->language->lang('INTRODUCIATOR_ERROR_MUST_SELECT_FORUM') . adm_back_link($this->u_action), E_USER_WARNING);
 							}
 
 							// Verify message rules texts and convert with BBCode
-							$explanation_message_rules_text_new_uid = $explanation_message_rules_text_new_bitfield = $explanation_message_rules_text_bbcode_options = '';
 
 							// Replace all url by real fake urls
 							$introduciator_helper->replace_all_by(
@@ -197,7 +237,7 @@ class introduciator_module
 								$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
 								if (sizeof($texts_errors))
 								{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
-									trigger_error(implode('<b' . 'r>', $errors) . adm_back_link($this->u_action), E_USER_WARNING);
+									trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
 								}
 								// Merge results into array
 								$explanation_message_array_result = array_merge($explanation_message_array_result, array(
@@ -209,7 +249,7 @@ class introduciator_module
 								
 								if (strlen($value) > 255)
 								{	// Errors occured, show them to the user.
-									trigger_error($user->lang['INTRODUCIATOR_ERROR_TOO_LONG_TEXT'] . adm_back_link($this->u_action), E_USER_WARNING);
+									trigger_error($this->language->lang('INTRODUCIATOR_ERROR_TOO_LONG_TEXT') . adm_back_link($this->u_action), E_USER_WARNING);
 								}
 							}
 
@@ -218,20 +258,20 @@ class introduciator_module
 								$posting_approval_level = $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
 							}
 									
-							set_config('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation extension config
-							set_config('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
-							set_config('introduciator_fk_forum_id', $fk_forum_id);
-							set_config('introduciator_posting_approval_level', $posting_approval_level);
-							set_config('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
-							set_config('introduciator_is_use_permissions', $is_use_permissions ? '1' : '0');
-							set_config('introduciator_is_include_groups', $is_include_groups ? '1' : '0');
-							set_config('introduciator_ignored_users', $ignored_users);
-							set_config('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
+							$config->set('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation extension config
+							$config->set('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
+							$config->set('introduciator_fk_forum_id', $fk_forum_id);
+							$config->set('introduciator_posting_approval_level', $posting_approval_level);
+							$config->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
+							$config->set('introduciator_is_use_permissions', $is_use_permissions ? '1' : '0');
+							$config->set('introduciator_is_include_groups', $is_include_groups ? '1' : '0');
+							$config->set('introduciator_ignored_users', $ignored_users);
+							$config->set('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
 
 							// Set results into config
 							foreach ($explanation_message_array_result as $key => $value)
 							{
-								set_config($key, $value);
+								$config->set($key, $value);
 							}
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
@@ -248,12 +288,12 @@ class introduciator_module
 							// Create and execute SQL request
 							$db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_GROUPS_TABLE(), $values);
 
-							add_log('admin', 'LOG_INTRODUCIATOR_UPDATED' , 'INTRODUCIATOR_CONFIGURATION');
-							trigger_error($user->lang['INTRODUCIATOR_CP_UPDATED'] . adm_back_link($this->u_action));
+							$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_INTRODUCIATOR_UPDATED');
+							trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
 							break;
 
 						default:
-							trigger_error($user->lang['NO_MODE'] . adm_back_link($this->u_action));
+							trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
 							break;
 				} // End of switch Action
 			}
@@ -262,16 +302,16 @@ class introduciator_module
 
 	function add_all_forums($fk_selected_forum_id, $id_parent, $level)
 	{
-		global $db, $template, $user;
+		global $db;
 
 		if ($id_parent === 0)
 		{	// Add deactivation item
-			$template->assign_block_vars('forums', array(
-				'FORUM_NAME'	=> $user->lang['INTRODUCIATOR_NO_FORUM_CHOICE'],
+			$this->template->assign_block_vars('forums', array(
+				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_NO_FORUM_CHOICE'),
 				'FORUM_ID'		=> (int) 0,
 				'SELECTED'		=> ($fk_selected_forum_id === 0),
 				'CAN_SELECT'	=> true,
-				'TOOLTIP'		=> $user->lang['INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'],
+				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'),
 			));
 		}
 
@@ -283,7 +323,7 @@ class introduciator_module
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
-			$template->assign_block_vars('forums', array(
+			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
 				'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
@@ -302,7 +342,7 @@ class introduciator_module
 	 */
 	function add_all_groups($introduciator_helper)
 	{
-		global $db, $template;
+		global $db;
 
 		$sql = 'SELECT group_id, group_desc
 			FROM ' . GROUPS_TABLE;
@@ -310,7 +350,7 @@ class introduciator_module
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
-			$template->assign_block_vars('group', array(
+			$this->template->assign_block_vars('group', array(
 				'NAME'		=> get_group_name($row['group_id']),
 				'ID'		=> (int) $row['group_id'],
 				'SELECTED'	=> $introduciator_helper->is_group_selected($row['group_id']),
@@ -366,12 +406,12 @@ class introduciator_module
 	 */
 	function get_update_information($tag, $latest_version_info)
 	{
-		global $tag_and_lang, $tag_and_lang_en, $user, $tag_len;
+		global $tag_and_lang, $tag_and_lang_en, $tag_len;
 
-		$information = $user->lang['INTRODUCIATOR_NO_UPDATE_INFO_FOUND'];
+		$information = $this->language->lang('INTRODUCIATOR_NO_UPDATE_INFO_FOUND');
 		$found = false;
 
-		$tag_and_lang = '[' . $tag . $user->lang['USER_LANG'] . ']';
+		$tag_and_lang = '[' . $tag . $this->language->lang('USER_LANG') . ']';
 		$tag_and_lang_en =  '[' . $tag . 'en]';
 		$tag_len = strlen($tag_and_lang_en);
 
@@ -400,4 +440,3 @@ class introduciator_module
 		);
 	}
 }
-?>

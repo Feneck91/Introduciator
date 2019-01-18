@@ -12,10 +12,10 @@
 .Xintrodpd-icon	{ width: 20px; height: 20px; }	/* Introduciator extension: presentation is pending */
 .Xintrodpu-icon	{ width: 20px; height: 20px; }	/* Introduciator extension: presentation is pending but url is present (user can approve it) */
 
-.button .introd-icon		{ background-image: url("{T_THEME_PATH}/images/icon_introduciator.gif"); } 			/* Introduciator extension: icon */
-.button .introdno-icon		{ background-image: url("{T_THEME_PATH}/images/icon_nointroduciator.gif"); }		/* Introduciator extension: no presentation avalaible */
-.button .introdpd-icon		{ background-image: url("{T_THEME_PATH}/images/icon_pendingintroduciator.gif"); }	/* Introduciator extension: presentation is pending */
-.button .introdpu-icon		{ background-image: url("{T_THEME_PATH}/images/icon_pendinguintroduciator.gif"); }	/* Introduciator extension: presentation is pending but url is present (user can approve it) */
+.button .introd-icon		{ background-image: url("{./images/images/icon_introduciator.gif"); } 	/* Introduciator extension: icon */
+.button .introdno-icon		{ background-image: url("./images/icon_nointroduciator.gif"); }			/* Introduciator extension: no presentation avalaible */
+.button .introdpd-icon		{ background-image: url("./images/icon_pendingintroduciator.gif"); }	/* Introduciator extension: presentation is pending */
+.button .introdpu-icon		{ background-image: url("./images/icon_pendinguintroduciator.gif"); }	/* Introduciator extension: presentation is pending but url is present (user can approve it) */
 
 .introduciator_explain {
 	color: orangered !important;
