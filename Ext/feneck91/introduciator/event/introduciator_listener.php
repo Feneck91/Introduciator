@@ -87,6 +87,12 @@ $vars = array(
 extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', compact($vars)));
 */
 			'core.posting_modify_row_data'										=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
+			
+			//=============================================
+			// From here, this is events for template html
+			//=============================================
+			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',
+			'core.viewtopic_post_row_after'										=> 'on_viewtopic_post_row_after',				// Display link to introduce user on view topic.
 		);
 	}
 	
@@ -297,4 +303,44 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 		}
 	}
 
+	//
+	// From here, all event are used into GUI: add new templates
+	//
+	
+	/**
+	 * Loads all user profile introduce data into the user cache for a topic.
+	 *
+	 * @param \phpbb\event\data	$event The event data
+	 */
+	public function on_viewtopic_modify_post_data($event)
+	{
+		if ($this->introduciator_helper->is_introduciator_allowed())
+		{
+			$user_cache = $event['user_cache'];
+
+			foreach ($event['user_cache'] as $user_id => $user_info)
+			{
+				$user_cache[$user_id]['datas_introduciator'] = $this->introduciator_helper->introduciator_get_user_infos($user_id, $user_info['username']);
+			}
+
+			$event['user_cache'] = $user_cache;
+		}
+	}
+	
+	/**
+	 * Assigns user profile flair template block variables for a topic post.
+	 *
+	 * @param \phpbb\event\data	$event The event data
+	 */
+	public function on_viewtopic_post_row_after($event)
+	{
+		$data_introduciator = $event['user_poster_data']['datas_introduciator'];
+		
+		$this->template->assign_block_vars('postrow', array(
+				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
+				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
+				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
+			));
+	}
 }

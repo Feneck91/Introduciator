@@ -144,6 +144,18 @@ class introduciator_helper
 	}
 
 	/**
+	 * Is the introduciator enabled?
+	 *
+	 * Return the introduciator_allow's config field.
+	 *
+	 * @return true if the introduciator is allowed, false else.
+	 */	
+	public function is_introduciator_allowed()
+	{
+		return isset($this->config['introduciator_allow']) && $this->config['introduciator_allow'] != '' ? $this->config['introduciator_allow'] : false;
+	}
+	
+	/**
 	 * Check if a group is selected.
 	 *
 	 * @param $group_id Group's identifier.
@@ -204,7 +216,7 @@ class introduciator_helper
 	public function introduciator_getparams($is_edit = null)
 	{
 		$params = array(
-			'introduciator_allow'					=> isset($this->config['introduciator_allow']) && $this->config['introduciator_allow'] != '' ? $this->config['introduciator_allow'] : false,
+			'introduciator_allow'					=> $this->is_introduciator_allowed(),
 			'fk_forum_id'							=> isset($this->config['introduciator_fk_forum_id']) &&  $this->config['introduciator_fk_forum_id'] != '' ? $this->config['introduciator_fk_forum_id'] : 0,
 			'is_check_delete_first_post'			=> isset($this->config['introduciator_is_check_delete_first_post']) && $this->config['introduciator_is_check_delete_first_post'] != '' ? $this->config['introduciator_is_check_delete_first_post'] : true,
 			'is_explanation_enabled'				=> isset($this->config['introduciator_is_explanation_enabled']) && $this->config['introduciator_is_explanation_enabled'] != '' ? $this->config['introduciator_is_explanation_enabled'] : true,
@@ -382,7 +394,7 @@ class introduciator_helper
 
 		if ($poster_id != ANONYMOUS)
 		{	// User is logged and have user authorization
-			if ($this->config['introduciator_allow'])
+			if ($this->is_introduciator_allowed())
 			{	// Extension is enabled and the user is not ignored, it can do all he wants
 				// Force forum id because it be moved while user delete the message
 				if (empty($this->introduciator_params))
@@ -533,7 +545,7 @@ class introduciator_helper
 		$class = '';
 		$pending = false;
 
-		if ($this->config['introduciator_allow'])
+		if ($this->is_introduciator_allowed())
 		{
 			if (empty($this->introduciator_params))
 			{
@@ -622,7 +634,7 @@ class introduciator_helper
 	public function introduciator_ignore_topic_unapproved($user, $forum_id, $mode)
 	{
 		$ret = false;
-		if ($this->config['introduciator_allow'])
+		if ($this->is_introduciator_allowed())
 		{	// Introduciator is activated and $sql_approved has filter
 			if (empty($this->introduciator_params))
 			{	// Retrieve extension parameters
@@ -651,7 +663,7 @@ class introduciator_helper
 	 */
 	public function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_approved, $table_name, &$approve_fid_ary = null)
 	{
-		if (!empty($sql_approved) && $this->config['introduciator_allow'])
+		if (!empty($sql_approved) && $this->is_introduciator_allowed())
 		{	// Introduciator is activated and $sql_approved has filter
 			if (empty($this->introduciator_params))
 			{	// Retrieve extension parameters
@@ -701,7 +713,7 @@ class introduciator_helper
 	public function introduciator_is_topic_in_forum_is_unapproved_for_introduction($user, $forum_id, $topic_id, $check_moderator_permissions)
 	{
 		$ret = false;
-		if ($this->config['introduciator_allow'])
+		if ($this->is_introduciator_allowed())
 		{	// Introduciator is activated
 			if (empty($this->introduciator_params))
 			{	// Retrieve extension parameters
@@ -900,7 +912,7 @@ class introduciator_helper
 
 		if ($poster_id != ANONYMOUS)
 		{	// User is logged and have user authorization
-			if ($this->config['introduciator_allow'])
+			if ($this->is_introduciator_allowed())
 			{	// Extension is enabled and the user is not ignored, it can do all he wants
 				// Force forum id because it be moved while user delete the message
 				if (empty($this->introduciator_params))
@@ -927,7 +939,6 @@ class introduciator_helper
 
 		return $ret_posting_approval_level;
 	}
-	
 
 	/**
 	 * Get the approval level for the post using introduciator configuration.
@@ -948,7 +959,7 @@ class introduciator_helper
 		if ($poster_id != ANONYMOUS && !$this->auth->acl_get('m_approve', $forum_id))
 		{	// User is logged and have user authorization
 			// If the user has m_approve right, nothing to do, he will see the topic
-			if ($this->config['introduciator_allow'])
+			if ($this->is_introduciator_allowed())
 			{	// Extension is enabled
 				if (empty($this->introduciator_params))
 				{
