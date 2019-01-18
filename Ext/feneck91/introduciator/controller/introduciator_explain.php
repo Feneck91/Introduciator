@@ -48,7 +48,9 @@ class introduciator_explain
 		// If user not connected, go to login page
 		if ($this->user->data['user_id'] == ANONYMOUS)
 		{
-			login_box('', $this->user->lang['LOGIN']);
+			// In case of introduciator_getparams is not called, I must load the introduciator language file
+			$this->introduciator_helper->load_language_if_needed();
+			login_box('', $this->introduciator_helper->get_language()->lang('LOGIN'));
 		}
 
 		if ($this->config['introduciator_allow'])

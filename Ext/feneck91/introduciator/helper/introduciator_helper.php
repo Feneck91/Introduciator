@@ -115,7 +115,6 @@ class introduciator_helper
 	{
 		if (!$this->language_loaded)
 		{
-			$this->user->setup();
 			$this->language->add_lang('introduciator', 'feneck91/introduciator');	// Add lang
 			$this->language_loaded = true;
 		}
@@ -424,6 +423,7 @@ class introduciator_helper
 									if ($redirect)
 									{
 										// Load langage
+										$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
 										$this->load_language_if_needed();
 										
 										$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
@@ -471,6 +471,7 @@ class introduciator_helper
 						if (!$ret_allowed_action && $redirect)
 						{
 							// Load langage
+							$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
 							$this->load_language_if_needed();
 							
 							// Test : if the user try to quote / reply into his own introduction : change the message
@@ -492,6 +493,7 @@ class introduciator_helper
 						if ($redirect)
 						{
 							// Load langage
+							$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
 							$this->load_language_if_needed();
 							
 							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
@@ -863,8 +865,7 @@ class introduciator_helper
 
 				if (!$userdata)
 				{
-					// Load langage
-					$this->load_language_if_needed();
+					$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
 					
 					trigger_error('NO_USERS', E_USER_ERROR);
 				}
