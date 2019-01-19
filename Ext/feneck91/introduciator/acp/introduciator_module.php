@@ -147,6 +147,7 @@ class introduciator_module
 					$params = $introduciator_helper->introduciator_getparams(true);
 					$this->template->assign_vars(array(
 						'INTRODUCIATOR_EXTENSION_ACTIVATED'										=> $params['introduciator_allow'],
+						'INTRODUCIATOR_INTRODUCTION_MANDATORY'									=> $params['is_introduction_mandatory'],
 						'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL,

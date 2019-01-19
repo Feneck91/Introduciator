@@ -99,6 +99,9 @@ $lang = array_merge($lang, array(
 	// Sous-titres
 	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED'						=> 'Activer l’extension',
 	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED_EXPLAIN'				=> 'Est utilisé pour activer ou désactiver cette extension.',
+	'INTRODUCIATOR_CP_ED_MANDATORY_INTRODUCE'						=> 'Forcer l’utilisateur à se présenter',
+	'INTRODUCIATOR_CP_ED_MANDATORY_INTRODUCE_EXPLAIN'				=> 'Quand cet option est activée, l’extension force l’utilisateur à poster sa propre présentation avant d’être autorisé à poster dans les autres sujets.
+																		<br/>Si cette fonctionalité n’est pas activée, toutes les autres options restent actives.',
 	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST'						=> 'Autorise l’extension à vérifier la suppression du premier message d’un sujet dans le forum de présentation',
 	'INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN'				=> 'Lorsque cette option est activée, l’extension empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
 																		<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.
@@ -108,7 +111,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL'					=> 'Options d’approbation de la présentation',
 	'INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL_EXPLAIN'			=> 'Est utilisé pour forcer l’approbation de la présentation par un modérateur :<br/>
 																		<ul>
-																		<li><b>Pas d’approbation</b> : ne force par l’approbation de la présentation, il laisse le traitement par défaut.</li>
+																		<li><b>Pas d’approbation</b> : ne force pas l’approbation de la présentation, il laisse le traitement par défaut.</li>
 																		<li><b>Approbation simple</b> : force l’approbation de la présentation. L’utilisateur ne voit pas sa présentation jusqu’à ce qu’elle soit validée par un modérateur (traitement normal de tous les messages nécessitants une approbation).</li>
 																		<li><b>Approbation avec édition</b> : force l’approbation de la présentation. L’utilisateur voit sa présentation immédiatement et peut la modifier. Il ne peut pas poster ailleurs tant qu’elle n’est pas validée par un modérateur. Ceci permet aux modérateurs et à l’utilisateur d’échanger afin que ce dernier puisse mettre son message en conformité avant validation par le modérateur (traitement différent des messages nécessitant une approbation). Seule l’édition est autorisée. Répondre et citer sont interdit.</li>
 																		</ul>',

@@ -218,6 +218,7 @@ class introduciator_helper
 		$params = array(
 			'introduciator_allow'					=> $this->is_introduciator_allowed(),
 			'fk_forum_id'							=> isset($this->config['introduciator_fk_forum_id']) &&  $this->config['introduciator_fk_forum_id'] != '' ? $this->config['introduciator_fk_forum_id'] : 0,
+			'is_introduction_mandatory'				=> isset($this->config['introduciator_is_introduction_mandatory']) &&  $this->config['introduciator_is_introduction_mandatory'] != '' ? $this->config['introduciator_is_introduction_mandatory'] : 1,
 			'is_check_delete_first_post'			=> isset($this->config['introduciator_is_check_delete_first_post']) && $this->config['introduciator_is_check_delete_first_post'] != '' ? $this->config['introduciator_is_check_delete_first_post'] : true,
 			'is_explanation_enabled'				=> isset($this->config['introduciator_is_explanation_enabled']) && $this->config['introduciator_is_explanation_enabled'] != '' ? $this->config['introduciator_is_explanation_enabled'] : true,
 			'is_use_permissions'					=> isset($this->config['introduciator_is_use_permissions']) && $this->config['introduciator_is_use_permissions'] != '' ? $this->config['introduciator_is_use_permissions'] : true,

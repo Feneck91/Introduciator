@@ -335,7 +335,7 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 	public function on_viewtopic_post_row_after($event)
 	{
 		$data_introduciator = $event['user_poster_data']['datas_introduciator'];
-		
+
 		$this->template->assign_block_vars('postrow', array(
 				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
 				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],

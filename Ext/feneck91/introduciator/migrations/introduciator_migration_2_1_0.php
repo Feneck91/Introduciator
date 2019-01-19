@@ -74,6 +74,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 			array('config.add', array('introduciator_posting_approval_level',							0)),
 			array('config.add', array('introduciator_allow', 											'0')),
 			array('config.add', array('introduciator_fk_forum_id', 										0)),
+			array('config.add', array('introduciator_is_introduction_mandatory', 						true)),
 			array('config.add', array('introduciator_is_check_delete_first_post', 						true)),
 			array('config.add', array('introduciator_is_explanation_enabled', 							false)),
 			array('config.add', array('introduciator_is_use_permissions', 								true)),
