@@ -7,15 +7,15 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
-.Xintrod-icon	{ width: 20px; height: 20px; }	/* Introduciator extension: icon */
-.Xintrodno-icon	{ width: 20px; height: 20px; }	/* Introduciator extension: no presentation avalaible */
-.Xintrodpd-icon	{ width: 20px; height: 20px; }	/* Introduciator extension: presentation is pending */
-.Xintrodpu-icon	{ width: 20px; height: 20px; }	/* Introduciator extension: presentation is pending but url is present (user can approve it) */
+ul.profile-icons li.introd-icon		{ width: 20px; height: 20px; }	/* Introduciator MOD: icon */
+ul.profile-icons li.introdno-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: no presentation avalaible */
+ul.profile-icons li.introdpd-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending */
+ul.profile-icons li.introdpu-icon	{ width: 20px; height: 20px; }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
 
-.button .introd-icon		{ background-image: url("{./images/images/icon_introduciator.gif"); } 	/* Introduciator extension: icon */
-.button .introdno-icon		{ background-image: url("./images/icon_nointroduciator.gif"); }			/* Introduciator extension: no presentation avalaible */
-.button .introdpd-icon		{ background-image: url("./images/icon_pendingintroduciator.gif"); }	/* Introduciator extension: presentation is pending */
-.button .introdpu-icon		{ background-image: url("./images/icon_pendinguintroduciator.gif"); }	/* Introduciator extension: presentation is pending but url is present (user can approve it) */
+.introd-icon, .introd-icon a		{ background-image: url("{T_THEME_PATH}/images/icon_introduciator.gif"); } 			/* Introduciator MOD: icon */
+.introdno-icon, .introdno-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_nointroduciator.gif"); }		/* Introduciator MOD: no presentation avalaible */
+.introdpd-icon, .introdpd-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_pendingintroduciator.gif"); }	/* Introduciator MOD: presentation is pending */
+.introdpu-icon, .introdpu-icon a	{ background-image: url("{T_THEME_PATH}/images/icon_pendinguintroduciator.gif"); }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
 
 .introduciator_explain {
 	color: orangered !important;
@@ -26,17 +26,17 @@
 	text-align: center;
 }
 span.corners-top.corners-top-introduciator {
-	background-image: url("{T_THEME_PATH}/images/corners_left_introduciator.png") ;
+	background-image: url("./images/corners_left_introduciator.png") ;
 }
 
 span.corners-top.corners-top-introduciator span {
-	background-image: url("{T_THEME_PATH}/images/corners_right_introduciator.png");
+	background-image: url("./images/corners_right_introduciator.png");
 }
 
 span.corners-bottom.corners-bottom-introduciator {
-	background-image: url("{T_THEME_PATH}/images/corners_left_introduciator.png");
+	background-image: url("./images/corners_left_introduciator.png");
 }
 
 span.corners-bottom.corners-bottom-introduciator span {
-	background-image: url("{T_THEME_PATH}/images/corners_right_introduciator.png");
+	background-image: url("./images/corners_right_introduciator.png");
 }

@@ -711,7 +711,7 @@ class introduciator_helper
 	 *         If should return true and check_moderator_permissions is set to true, this function also return false if the user has moderator privilege (to
 	 *         let approval fields visible).
 	 */
-	public function introduciator_is_topic_in_forum_is_unapproved_for_introduction($user, $forum_id, $topic_id, $check_moderator_permissions)
+	public function introduction_is_unapproved_topic($user, $forum_id, $topic_id, $check_moderator_permissions)
 	{
 		$ret = false;
 		if ($this->is_introduciator_allowed())

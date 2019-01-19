@@ -187,20 +187,21 @@ class introduciator_module
 						case 'update' :
 							// User has request an update : write it into database
 							// Update Database
-							$is_enabled								= $this->request->variable('extension_activated', false);
-							$is_check_delete_first_post_activated	= $this->request->variable('check_delete_first_post_activated', false);
-							$fk_forum_id							= $this->request->variable('forum_choice', 0);
-							$posting_approval_level					= $this->request->variable('posting_approval_level', $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
-							$is_explanation_enabled					= $this->request->variable('display_explanation', false);
-							$is_use_permissions						= $this->request->variable('is_use_permissions', true);
-							$is_include_groups						= $this->request->variable('include_groups', true);
-							$groups									= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
-							$ignored_users							= substr(utf8_normalize_nfc($this->request->variable('ignored_users', '')), 0, 255);
-							$explanation_message_title				= utf8_normalize_nfc($this->request->variable('explanation_message_title', '', true));
-							$explanation_message_text				= utf8_normalize_nfc($this->request->variable('explanation_message_text', '', true));
-							$explanation_display_rules_enabled		= $this->request->variable('explanation_display_rules_enabled', false);
-							$explanation_message_rules_title		= utf8_normalize_nfc($this->request->variable('explanation_message_rules_title', '', true));
-							$explanation_message_rules_text			= utf8_normalize_nfc($this->request->variable('explanation_message_rules_text', '', true));
+							$is_enabled									= $this->request->variable('extension_activated', false);
+							$is_check_introduction_mandatory_activated  = $this->request->variable('check_introduction_mandatory_activated', true);
+							$is_check_delete_first_post_activated		= $this->request->variable('check_delete_first_post_activated', false);
+							$fk_forum_id								= $this->request->variable('forum_choice', 0);
+							$posting_approval_level						= $this->request->variable('posting_approval_level', $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
+							$is_explanation_enabled						= $this->request->variable('display_explanation', false);
+							$is_use_permissions							= $this->request->variable('is_use_permissions', true);
+							$is_include_groups							= $this->request->variable('include_groups', true);
+							$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
+							$ignored_users								= substr(utf8_normalize_nfc($this->request->variable('ignored_users', '')), 0, 255);
+							$explanation_message_title					= utf8_normalize_nfc($this->request->variable('explanation_message_title', '', true));
+							$explanation_message_text					= utf8_normalize_nfc($this->request->variable('explanation_message_text', '', true));
+							$explanation_display_rules_enabled			= $this->request->variable('explanation_display_rules_enabled', false);
+							$explanation_message_rules_title			= utf8_normalize_nfc($this->request->variable('explanation_message_rules_title', '', true));
+							$explanation_message_rules_text				= utf8_normalize_nfc($this->request->variable('explanation_message_rules_text', '', true));
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
@@ -260,6 +261,7 @@ class introduciator_module
 							}
 									
 							$config->set('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation extension config
+							$config->set('introduciator_is_introduction_mandatory', $is_check_introduction_mandatory_activated ? '1' : '0');
 							$config->set('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
 							$config->set('introduciator_fk_forum_id', $fk_forum_id);
 							$config->set('introduciator_posting_approval_level', $posting_approval_level);

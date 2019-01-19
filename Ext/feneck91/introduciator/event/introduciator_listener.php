@@ -70,7 +70,7 @@ class introduciator_listener implements \Symfony\Component\EventDispatcher\Event
 			'core.viewforum_modify_topicrow'							=> 'on_display_unapproved_question_mark',		// Allow displaying '?' into the topic list when the user see its own introduce
 			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
 			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',					// Allow phpBB to retrieve a topic for the user that post it into introduce
-			'core.viewtopic_modify_post_row'							=> 'on_view_topic_modify_post_row_unapproved',	// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right.
+			'core.viewtopic_modify_post_row'							=> 'on_viewtopic_modify_post_row',				// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
 			
 /* Patch to add to posting.php :
  * Search      : // Not able to reply to unapproved posts/topics
@@ -91,8 +91,7 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 			//=============================================
 			// From here, this is events for template html
 			//=============================================
-			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',
-			'core.viewtopic_post_row_after'										=> 'on_viewtopic_post_row_after',				// Display link to introduce user on view topic.
+			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',				// Prepare data to be displayed in viewtopic
 		);
 	}
 	
@@ -179,7 +178,7 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 			case 'edit_first_post':
 			case 'edit_last_post':
 			case 'edit':
-				if ($this->introduciator_helper->introduciator_is_topic_in_forum_is_unapproved_for_introduction($this->user, $event['data']['forum_id'], $event['data']['topic_id'], false))
+				if ($this->introduciator_helper->introduction_is_unapproved_topic($this->user, $event['data']['forum_id'], $event['data']['topic_id'], false))
 				{
 					$params = '&amp;t=' . $event['data']['topic_id'];
 					$params .= '&amp;p=' . $event['data']['post_id'];
@@ -225,7 +224,7 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 	*/
 	public function on_display_unapproved_question_mark($event)
 	{
-		if ($this->introduciator_helper->introduciator_is_topic_in_forum_is_unapproved_for_introduction($this->user, $event['row']['forum_id'], $event['row']['topic_id'], false))
+		if ($this->introduciator_helper->introduction_is_unapproved_topic($this->user, $event['row']['forum_id'], $event['row']['topic_id'], false))
 		{
 			$topic_row = $event['topic_row'];
 			$topic_row['REPLIES'] = $topic_row['REPLIES'] + 1; // Else count = -1
@@ -245,7 +244,7 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 	{
 		if ($event['mode'] === "topic")
 		{
-			if ($this->introduciator_helper->introduciator_is_topic_in_forum_is_unapproved_for_introduction($this->user, $event['forum_id'], $event['data']['topic_id'], false))
+			if ($this->introduciator_helper->introduction_is_unapproved_topic($this->user, $event['forum_id'], $event['data']['topic_id'], false))
 			{
 				$event['is_visible'] = true;
 			}
@@ -274,15 +273,30 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 	 * hide this fields.
 	 * Hide S_POST_UNAPPROVED if the user is into his own introduce.
 	 *
+	 * Prepare row with data to display: the link to the user's introduce.
+	 *
 	 * @param $event The event.
 	*/
-	public function on_view_topic_modify_post_row_unapproved($event)
+	public function on_viewtopic_modify_post_row($event)
 	{
-		if ($this->introduciator_helper->introduciator_is_topic_in_forum_is_unapproved_for_introduction($this->user, $event['topic_data']['forum_id'], $event['row']['topic_id'], false))
+		if ($this->introduciator_helper->is_introduciator_allowed())
 		{
-			$row = $event['post_row'];
-			$row['S_POST_UNAPPROVED'] = false;
-			$event['post_row'] = $row;
+			// Step1: remove approval post if needed
+			if ($this->introduciator_helper->introduction_is_unapproved_topic($this->user, $event['topic_data']['forum_id'], $event['row']['topic_id'], false))
+			{
+				$row = $event['post_row'];
+				$row['S_POST_UNAPPROVED'] = false;
+				$event['post_row'] = $row;
+			}
+
+			// Prepare data to display link to suer's introduce
+			$data_introduciator = $event['user_poster_data']['datas_introduciator'];
+			$event['post_row'] += array(
+				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
+				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
+				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
+			);
 		}
 	}
 
@@ -309,6 +323,8 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 	
 	/**
 	 * Loads all user profile introduce data into the user cache for a topic.
+	 * 
+	 * Prepare data to be displayed in viewtopic.
 	 *
 	 * @param \phpbb\event\data	$event The event data
 	 */
@@ -325,22 +341,5 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 
 			$event['user_cache'] = $user_cache;
 		}
-	}
-	
-	/**
-	 * Assigns user profile flair template block variables for a topic post.
-	 *
-	 * @param \phpbb\event\data	$event The event data
-	 */
-	public function on_viewtopic_post_row_after($event)
-	{
-		$data_introduciator = $event['user_poster_data']['datas_introduciator'];
-
-		$this->template->assign_block_vars('postrow', array(
-				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
-				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
-				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
-				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
-			));
 	}
 }
