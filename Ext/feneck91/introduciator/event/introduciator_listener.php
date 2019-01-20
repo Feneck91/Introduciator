@@ -27,9 +27,7 @@ class introduciator_listener implements \Symfony\Component\EventDispatcher\Event
 	private $template_context;
 	
 	/**
-	 * Introduciator helper.
-	 *
-	 * The important code is into this helper.
+	 * @var Introduciator helper. The important code is into this helper.
 	 */
 	private $introduciator_helper;
 
@@ -64,7 +62,8 @@ class introduciator_listener implements \Symfony\Component\EventDispatcher\Event
 		return array(
 			'core.viewtopic_modify_page_title'							=> array('on_before_quickreply_displayed', -2),	// Hide quick reply if user is not allowed to post
 			'core.posting_modify_template_vars'							=> 'on_displaying_posting_screen',				// Verify if the posting is allowed or not; display message if not
-			'core.posting_modify_submit_post_before'					=> 'on_submit_post',							// When user post a message, verify the introduce has been done
+			'core.posting_modify_submit_post_before'					=> 'on_submit_post_before',						// When user post a message, verify the introduce has been done
+			'core.posting_modify_submit_post_after'						=> 'on_submit_post_after',						// When user post a message, if the post is an introduce and must be approved, indicate it to the user
 			'core.submit_post_end'										=> 'on_submit_post_end',						// Change the url to go to if the user edit it's own unapproved introduction
 			'core.viewforum_get_topic_ids_data'							=> 'on_get_topic_ids',							// Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce
 			'core.viewforum_modify_topicrow'							=> 'on_display_unapproved_question_mark',		// Allow displaying '?' into the topic list when the user see its own introduce
@@ -144,21 +143,50 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 	 *
 	 * @param $event The event.
 	 */
-	public function on_submit_post($event)
+	public function on_submit_post_before($event)
 	{
 		if ($this->introduciator_helper->introduciator_verify_posting($this->user, $event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true))
 		{	// Posting is allowed
 			$introduciator_posting_must_be_approved = $this->introduciator_helper->introduciator_is_posting_must_be_approved($this->user, $event['mode'], $event['data']['forum_id']);
 			if ($introduciator_posting_must_be_approved)
-			{	// If posting should not be approved, let $data['force_approved_state'] unchanged (in case of another MOD has modified it)
+			{	// If posting should not be approved, let $data['force_approved_state'] unchanged (in case of another extension has modified it)
 				$data = $event['data'];
-				$data['force_visibility'] = ITEM_UNAPPROVED; // Force approval
+				$data['force_visibility'] = ITEM_UNAPPROVED;    // Force approval
+				$data['introduciator_force_unapproved'] = $this->introduciator_helper->introduciator_get_posting_approval_level($this->user, $event['mode'], $event['data']['forum_id']); // Force approval
 				$event['data'] = $data;
 			}
 		}
 	}
 	
-
+	/**
+	 * Verify if the posting is allowed or not.
+	 *
+	 * Called when the user submit a post.
+	 * If user is not allowed to post, an error message is displayed, else if 
+	 * the extension has been configure with force introduce approval, set option
+	 * to make this message with moderator approval.
+	 *
+	 * @param $event The event.
+	 */
+	public function on_submit_post_after($event)
+	{
+		$data = $event['data'];
+		if (isset($data['introduciator_force_unapproved']))
+		{
+			global $phpbb_root_path, $phpEx;
+			
+			meta_refresh(20, $event['redirect_url']); // More time to read
+			$message = $this->user->lang['POST_STORED_MOD'] . ' '. $this->user->lang['POST_APPROVAL_NOTIFY'];
+			if ($data['introduciator_force_unapproved'] == $this->introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+			{	// Add more explanation: the user can modify his introduce
+				$this->introduciator_helper->load_language_if_needed();
+				$message .= $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY');
+			}
+			$message .= '<br /><br />' . sprintf($this->user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $data['forum_id']) . '">', '</a>');
+			trigger_error($message);
+		}
+	}
+	
 	/**
 	 * Verify if the user is editing it's own introduction.
 	 *

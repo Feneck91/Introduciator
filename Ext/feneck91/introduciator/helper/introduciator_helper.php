@@ -192,7 +192,7 @@ class introduciator_helper
 	 *
 	 * @param $arr_fields Array of variables to update
 	 * @param $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
-	 * @return None
+	 * @return void
 	 */
 	public function replace_all_by($arr_fields, $arr_replace_by)
 	{
@@ -906,7 +906,7 @@ class introduciator_helper
 	 * @param $forum_id Forum identifier where the user try to post
 	 * @return The approval level for this post, depending of extension configuration.
 	 */
-	protected function introduciator_get_posting_approval_level($user, $mode, $forum_id)
+	public function introduciator_get_posting_approval_level($user, $mode, $forum_id)
 	{
 		$poster_id = (int) $user->data['user_id'];
 		$ret_posting_approval_level = $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
