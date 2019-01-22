@@ -39,32 +39,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 /*
-* UMIL : These string are used when introduciator MOD is installed
+* Messages généraux
 */
 $lang = array_merge($lang, array(
-	'INSTALL_INTRODUCIATOR_MOD'					=> 'Installer le Mod Présentation forcée',
-
-	'INSTALL_INTRODUCIATOR_EXT_CONFIRM'			=> 'Êtes-vous prêt à installer le Mod Présentation forcée ?',
-
-	'INSTALL_INTRODUCIATOR_EXT_WELCOME'			=> 'Informations',
-	'INSTALL_INTRODUCIATOR_EXT_WELCOME_NOTES'	=> 'Par défaut le MOD est désactivé, vous devez l’activer et le configurer en allant dans <strong>ACP &gt;&gt; .MODS &gt;&gt; Présentation forcée &gt;&gt; Configuration</strong>.
-													<br/>N’oubliez pas de paramétrer le nouvelle permission <strong>Doit se présenter</strong> dans l’ACP : « Permissions des utilisateurs »',
-
-	'INTRODUCIATOR_MOD'							=> 'Mod Présentation forcée',
-	'INTRODUCIATOR_EXT_EXPLAIN'					=> 'UMIL effectuera automatiquement, dans la base de données, tous les changements nécessaires pour le MOD Présentation forcée.',
-
-	'UNINSTALL_INTRODUCIATOR_MOD'				=> 'Désinstaller le Mod Présentation forcée',
-	'UNINSTALL_INTRODUCIATOR_EXT_CONFIRM'		=> 'Êtes-vous prêt à désinstaller le Mod Présentation forcée ? Tous les réglages et données sauvegardées par ce MOD seront supprimés !',
-
-	'UPDATE_INTRODUCIATOR_MOD'					=> 'Mettre à jour le Mod Présentation forcée',
-	'UPDATE_INTRODUCIATOR_EXT_CONFIRM'			=> 'Êtes-vous prêt à mettre à jour le Mod Présentation forcée ?',
-
-	'UNUSED_LANG_FILES_TRUE'					=> 'Suppression des fichiers non utilisés.',
-	'UNUSED_LANG_FILES_FALSE'					=> 'La suppression des fichiers non utilisés n’est pas nécessaire.',
-
-/*
-* Autre : Messages
-*/
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Votre message de présentation est en cours d’approbation, veuillez patienter.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Pendant l’approbation de votre message de présentation, seule l’édition est autorisée.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'Vous n’êtes pas autorisé à vous présenter plus d’une fois !',
@@ -73,7 +50,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Veuillez vous présenter dans le Forum : %s',
 	'INTRODUCIATOR_EXT_DISABLED'								=> 'Le MOD Présentation forcée est désactivé. Veuillez l’activer pour l’utiliser !',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</strong>',
-
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le forum “<a href="%forum_url%">%forum_name%</a>”<br/>
 																	Seule la création d’un nouveau sujet dans le forum de présentation est autorisée.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>

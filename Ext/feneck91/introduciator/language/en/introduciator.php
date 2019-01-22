@@ -39,32 +39,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 /*
-* UMIL : These string are used when introduciator MOD is installed
+* General messages
 */
 $lang = array_merge($lang, array(
-	'INSTALL_INTRODUCIATOR_MOD'					=> 'Install Introduciator Mod',
-
-	'INSTALL_INTRODUCIATOR_EXT_CONFIRM'			=> 'Are you ready to install the Introduciator Mod?',
-
-	'INSTALL_INTRODUCIATOR_EXT_WELCOME'			=> 'Information',
-	'INSTALL_INTRODUCIATOR_EXT_WELCOME_NOTES'	=> 'By default, this MOD is not enabled, you should enable and configure it in <strong>ACP &gt;&gt; .MODS &gt;&gt; Introduciator &gt;&gt; Configuration</strong>.
-													<br/>Do not forget to set up the new permission <strong>Must introduce himself</strong> in the ACP &gt;&gt; « User permissions »',
-
-	'INTRODUCIATOR_MOD'							=> 'Introduciator Mod',
-	'INTRODUCIATOR_EXT_EXPLAIN'					=> 'Install Introduciator Mod database changes with UMIL auto method.',
-
-	'UNINSTALL_INTRODUCIATOR_MOD'				=> 'Uninstall Introduciator Mod',
-	'UNINSTALL_INTRODUCIATOR_EXT_CONFIRM'		=> 'Are you ready to uninstall the Introduciator Mod? All settings and data saved by this mod will be removed!',
-
-	'UPDATE_INTRODUCIATOR_MOD'					=> 'Update Introduciator Mod',
-	'UPDATE_INTRODUCIATOR_EXT_CONFIRM'			=> 'Are you ready to update the Introduciator Mod?',
-
-	'UNUSED_LANG_FILES_TRUE'					=> 'Removal of unused language files.',
-	'UNUSED_LANG_FILES_FALSE'					=> 'The removal of unused files is not necessary.',
-
-/*
-* Other : Messages
-*/
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Your introduction message is pending approval, please wait.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only the editing is allowed.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'You are not allowed to introduce yourself more than once!',
