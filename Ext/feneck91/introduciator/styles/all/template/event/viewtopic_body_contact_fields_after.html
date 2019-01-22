@@ -1,15 +1,13 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator.css' %}
 
 <!-- IF postrow.S_INTRODUCIATOR_DISPLAY -->
-	<ul clas="profile-icons">
-		<li class="{postrow.T_INTRODUCIATOR_CLASS}" title="{postrow.T_INTRODUCIATOR_TEXT}">
-		<!-- IF postrow.U_INTRODUCIATOR_URL -->
-			<a href="{postrow.U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" title="{postrow.T_INTRODUCIATOR_TEXT}">
-		<!-- ENDIF -->
-		<span>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}</span>
-		<!-- IF postrow.U_INTRODUCIATOR_URL -->
-			</a>
-		<!-- ENDIF -->
-		</li>
-	</ul>
+	<div class="introduciator-base-icon {postrow.T_INTRODUCIATOR_CLASS}" title="{postrow.T_INTRODUCIATOR_TEXT}">
+	<!-- IF postrow.U_INTRODUCIATOR_URL -->
+		<a href="{postrow.U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}" title="{postrow.T_INTRODUCIATOR_TEXT}">
+	<!-- ENDIF -->
+	<span>{L_INTRODUCIATOR_MEMBER_INTRODUCTION}</span>
+	<!-- IF postrow.U_INTRODUCIATOR_URL -->
+		</a>
+	<!-- ENDIF -->
+	 </div>
 <!-- ENDIF -->

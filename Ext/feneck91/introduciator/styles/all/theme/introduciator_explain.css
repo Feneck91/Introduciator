@@ -16,3 +16,19 @@
 	color: red !important;
 	text-align: center;
 }
+
+span.corners-top.corners-top-introduciator {
+	background-image: url("./images/corners_left_introduciator.png") ;
+}
+
+span.corners-top.corners-top-introduciator span {
+	background-image: url("./images/corners_right_introduciator.png");
+}
+
+span.corners-bottom.corners-bottom-introduciator {
+	background-image: url("./images/corners_left_introduciator.png");
+}
+
+span.corners-bottom.corners-bottom-introduciator span {
+	background-image: url("./images/corners_right_introduciator.png");
+}
