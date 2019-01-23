@@ -60,7 +60,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>Pendant l’approbation de votre présentation, celle-ci reste modifiable et les modérateurs peuvent vous répondre.
 																	<br/>Ceci pourra vous permettre de la mettre en conformité avec les exigences du forum le cas échéant.',
 
-	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Présentation du membre',
+	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Présentation du membre ',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'Pas de présentation disponible pour ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'						=> 'Voir la présentation de ce membre',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'			=> 'Présentation en cours d’approbation pour ce membre',

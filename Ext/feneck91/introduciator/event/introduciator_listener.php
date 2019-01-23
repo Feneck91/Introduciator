@@ -83,7 +83,7 @@ $vars = array(
 	'forum_id',
 	'post_author_name',
 );
-extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', compact($vars)));
+extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact($vars)));
 */
 			'core.posting_modify_row_data'										=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
 			
@@ -91,6 +91,7 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 			// From here, this is events for template html
 			//=============================================
 			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',				// Prepare data to be displayed in viewtopic
+			'core.memberlist_prepare_profile_data'								=> 'on_display_profile_data',					// Prepare data to be displayed in several pages
 		);
 	}
 	
@@ -369,5 +370,32 @@ extract($phpbb_dispatcher->trigger_event('core.core.posting_modify_row_data', co
 
 			$event['user_cache'] = $user_cache;
 		}
+	}
+	
+	/**
+	 * Loads all user profile introduce data into the template_data to be displayed when it's needed.
+	 * 
+	 * Prepare data to be displayed in several pages  like memberlist.
+	 *
+	 * @param \phpbb\event\data	$event The event data
+	 */
+	public function on_display_profile_data($event)
+	{
+		if ($this->introduciator_helper->is_introduciator_allowed())
+		{
+			$data = $event['data'];
+			$data_introduciator = $this->introduciator_helper->introduciator_get_user_infos($data['user_id'], $data['username']);
+
+			$event['template_data'] += array(
+				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+				'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
+				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
+				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
+				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
+			);
+			//$profile_fields
+		}
+		
+		return $event;
 	}
 }

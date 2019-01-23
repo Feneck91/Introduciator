@@ -3,7 +3,7 @@
 *
 * info_acp_introduciator.php [Italian]
 *
-* @package Introduciator MOD
+* @package Introduciator extension
 * @copyright (c) 2014 Feneck91
 * @copyright (c) Traduzione MOD by Galandas (Rey) 2016 www.phpbb3world.altervista.org/
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -99,7 +99,7 @@ $lang = array_merge($lang, array(
 																		<br/>',
 	// Sub titles
 	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED'						=> 'Abilita MOD',
-	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED_EXPLAIN				=> 'Utilizzato per abilitare o disabilitare questa MOD.',
+	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED_EXPLAIN'				=> 'Utilizzato per abilitare o disabilitare questa MOD.',
 	'INTRODUCIATOR_CP_ED_MANDATORY_INTRODUCE'						=> 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Force the user to introduce himself',
 	'INTRODUCIATOR_CP_ED_MANDATORY_INTRODUCE_EXPLAIN'				=> 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
 																		xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx <br/>Il this feature is not enabled, all other options remain active.',
@@ -164,5 +164,3 @@ $lang = array_merge($lang, array(
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'				=> 'La configurazione è stata aggiornata con successo',
 ));
-
-?>
