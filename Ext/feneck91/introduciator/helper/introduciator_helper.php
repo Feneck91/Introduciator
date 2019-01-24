@@ -458,8 +458,9 @@ class introduciator_helper
 
 					if (!$this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
 					{	// No post into the introduce topic
-						if ((in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
+						if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
 						{
+							// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
 							if ($redirect)
 							{
 								if ($this->introduciator_params['is_explanation_enabled'])
@@ -475,9 +476,11 @@ class introduciator_helper
 					}
 					else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
 					{	// At least one post but not approved !
-						if (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
-						{	// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
-							// here we just test if right are approve to don't show next message : here, the right are not correct => display the message
+						if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
+							 &&	(!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
+						{	// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
+							// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
+							// here we just test if right are approve to don't show next message: here, the right are not correct => display the message
 							$ret_allowed_action = false;
 						}
 
@@ -493,9 +496,10 @@ class introduciator_helper
 								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
 							}
 							else
-							{
+							{	// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
 								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
 							}
+							
 							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
 						}
@@ -850,6 +854,7 @@ class introduciator_helper
 	 *
 	 * Check if it contains include groups or if doesn't contains exclude group.
 	 * Check if it doesn't contains name of ignored username list.
+	 * Be careful: the option 'is_introduction_mandatory' is not taken into account.
 	 *
 	 * @param $poster_id User's ID
 	 * @param $authorisations User's authorisations
