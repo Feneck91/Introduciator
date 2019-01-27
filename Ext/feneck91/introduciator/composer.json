@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums. An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.",
 	"homepage": "http://feneck91.free.fr/forum/index.php",
-	"version": "2.1.0",
-	"time": "2015-03-12",
+	"version": "3.0.0",
+	"time": "2019-03-12",
 	"keywords": ["phpbb", "extension", "feneck91", "introduciator"],
 	"license": "GPL-2.0",
 	"authors": [

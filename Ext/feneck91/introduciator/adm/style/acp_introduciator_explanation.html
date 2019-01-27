@@ -1,0 +1,93 @@
+{% INCLUDECSS '@feneck91_introduciator/introduciator_configuration.css' %}
+<!-- INCLUDE overall_header.html -->
+
+<h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_CP_TITLE') }}</h1>
+
+{{ lang('INTRODUCIATOR_CP_TITLE_EXPLAIN') }}
+
+<form id="acp_introduciator" method="post" action="{U_ACTION}">
+	<fieldset>
+		<legend>{{ lang('GENERAL_OPTIONS_EXPLANATION_SETTINGS') }}</legend>
+		<!--
+			 Display explanation page ?
+		-->
+		<dl>
+			<dt><label for="display_explanation">{{ lang('INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN') }}</span></dt>
+			<dd><label><input id="display_explanation"   name="display_explanation" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('YES') }}</label>
+				<label><input id="nodisplay_explanation" name="display_explanation" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('NO') }}</label>
+			</dd>
+		</dl>
+		<!--
+			 Activate / Desactivate rules display
+		-->
+		<dl>
+			<dt><label for="explanation_display_rules_enabled">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN') }}</span></dt>
+			<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('YES') }}</label>
+				<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('NO') }}</label>
+			</dd>
+		</dl>
+		<br/>
+	</fieldset>
+		<!--
+			 --------------------------- Manage explanation texts ----------------------------
+		-->
+	<fieldset>
+		<legend>{{ lang('GENERAL_OPTIONS_EXPLANATION_TEXTS') }}</legend>
+		<!--
+			 General explanation
+		-->
+		<span>{{ lang('GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN') }}</span>
+		<!--
+			 Display explanation page text and title: iterate over all languages
+		-->
+		{% for explanation in loops.explanations %}
+			<hr/>
+			<!--
+				 Title text
+			-->
+			<h1>{{ explanation.LANG_NR }} - {{ explanation.LANG_NAME }} ({{ explanation.LANG_ISO }})</h1>
+			<br/>
+			<dl>
+				<dt><label for="explanation_message_title_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN') }}</span></dt>
+				<dd><textarea id="explanation_message_title_{{ explanation.LANG_ISO }}" name="explanation_message_title_{{ explanation.LANG_ISO }}" rows="5" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE }}</textarea></dd>
+			</dl>
+			<!--
+				 Explanation text
+			-->
+			<dl>
+				<dt><label for="explanation_message_text_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN') }}</span></dt>
+				<dd><textarea id="explanation_message_text_{{ explanation.LANG_ISO }}" name="explanation_message_text_{{ explanation.LANG_ISO }}" rows="10" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT }}</textarea></dd>
+			</dl>
+			<!--
+				 Rule title text
+			-->
+			<dl>
+				<dt><label for="explanation_rules_title_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN') }}</span></dt>
+				<dd><textarea id="explanation_rules_title_{{ explanation.LANG_ISO }}" name="explanation_rules_title_{{ explanation.LANG_ISO }}" rows="5" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_RULES_TITLE }}</textarea></dd>
+			</dl>
+			<!--
+				 Explanation text
+			-->
+			<dl>
+				<dt><label for="explanation_rules_text_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN') }}</span></dt>
+				<dd><textarea id="explanation_rules_text_{{ explanation.LANG_ISO }}" name="explanation_rules_text_{{ explanation.LANG_ISO }}" rows="10" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_RULES_TEXT }}</textarea></dd>
+			</dl>
+		{% endfor %}
+	</fieldset>
+		<!--
+			 --------------------------- Posting ---------------------------------------------
+		-->
+	<!-- IF S_EDIT_ERROR -->
+	<fieldset class="errorbox">
+		<label for="item_filter_tags">{ITEM_EDIT_ERROR}</label>
+	</fieldset>
+	<!-- ENDIF -->
+	<fieldset>
+		<p class="submit-buttons">
+			{S_HIDDEN_FIELDS}
+			<input class="button1" type="submit" id="submit" name="update" value="{{ lang('SUBMIT') }}" />&nbsp;
+			<input class="button2" type="reset"  id="reset"  name="reset" value="{{ lang('RESET') }}" />
+			{S_FORM_TOKEN}
+		</p>
+	</fieldset>
+</form>

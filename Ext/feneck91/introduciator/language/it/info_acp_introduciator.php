@@ -50,6 +50,7 @@ $lang = array_merge($lang, array(
 */
 	'INTRODUCIATOR_GENERAL'							=> 'Generale',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configurazione',
+	'INTRODUCIATOR_EXPLANATION'						=> '????',
 
 /**
 * mode: general
@@ -79,7 +80,8 @@ $lang = array_merge($lang, array(
 */
 	// Titles
 	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Configurazione gruppi e utenti',
-	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Spiegazioni pagina di configurazione',
+	'GENERAL_OPTIONS_EXPLANATION_SETTINGS'							=> 'Spiegazioni pagina di configurazione',
+	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Spiegazioni pagina ?????? di configurazione',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'Per tutti i campi successivi, è possibile utilizzare:<br/>
 																		<ul>
 																		<li><b>%forum_name%</b>: NOME del forum per la presentazione</li>
@@ -93,9 +95,6 @@ $lang = array_merge($lang, array(
 																		<li>Fare Link al forum per le presentazioni: <i>[url=<b>%forum_url%</b>]Clicca qui per andare al forum ’<b>%forum_name%</b>’[/url]</i>
 																		<li>Fare link per creare l’argomento e forum per le presentazioni: <i>[url=<b>%forum_post%</b>]Clicca qui per creare topic nel forum ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
-																		<br/>
-																		<strong>Tutti i campi sono limitati a 255 caratteri!</strong>
-																		<br/>
 																		<br/>',
 	// Sub titles
 	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED'						=> 'Abilita MOD',
@@ -153,13 +152,13 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Nessun Forum selezionato, utilizzare solo quando la MOD è disabilitata',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Quando questa MOD è abilitata, si dovrebbe scegliere un forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Nessuna informazione e aggiornamento disponibile',
-	'INTRODUCIATOR_ERROR_TOO_LONG_TEXT'						=> 'Errore, il testo è troppo lungo (tutti i testi sono limitati a 255 caratteri)',
 
 /**
 * logs
 */
 	//logs
 	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Introduzione: aggiornamento impostazioni.</strong>',
+	'LOG_INTRODUCIATOR_EXPLANATION_UPDATED'	=> '<strong>?????</strong>',
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'				=> 'La configurazione è stata aggiornata con successo',

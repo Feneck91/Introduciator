@@ -45,7 +45,7 @@ $lang = array_merge($lang, array(
 	'acl_u_must_introduce'			=> array('lang' => 'Deve prima postare un introduzione',	'cat' => 'post'),
 
 	// Admin Permissions
-	'acl_a_introduciator_manage'	=> array('lang' => 'Può gestire Introduzione MOD',		'cat' => 'misc'),
+	'acl_a_introduciator_manage'	=> array('lang' => 'Può gestire Introduzione MOD',			'cat' => 'misc'),
 ));
 
 ?>

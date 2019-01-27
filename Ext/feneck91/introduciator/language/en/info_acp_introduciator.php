@@ -49,6 +49,7 @@ $lang = array_merge($lang, array(
 */
 	'INTRODUCIATOR_GENERAL'							=> 'General',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
+	'INTRODUCIATOR_EXPLANATION'						=> 'Explanation',
 
 /**
 * mode: general
@@ -78,7 +79,8 @@ $lang = array_merge($lang, array(
 */
 	// Titles
 	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Groups and users configuration',
-	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Explanations page configuration',
+	'GENERAL_OPTIONS_EXPLANATION_SETTINGS'							=> 'Explanations page configuration',
+	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Explanations text page configuration',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'For all next fields, you can use:<br/>
 																		<ul>
 																		<li><b>%forum_name%</b>: name of the forum for introductions</li>
@@ -92,9 +94,6 @@ $lang = array_merge($lang, array(
 																		<li>Make link to forum for introductions: <i>[url=<b>%forum_url%</b>]Click here to go to forum ’<b>%forum_name%</b>’[/url]</i>
 																		<li>Make link to create topic into forum for introductions: <i>[url=<b>%forum_post%</b>]Click here to create topic into the forum ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
-																		<br/>
-																		<strong>All fields are limited to 255 characters!</strong>
-																		<br/>
 																		<br/>',
 	// Sub titles
 	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED'						=> 'Enable extension',
@@ -152,13 +151,13 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is desactivated',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, your should choose a forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'No update information available',
-	'INTRODUCIATOR_ERROR_TOO_LONG_TEXT'						=> 'Error,  too long text (all texts are limited to 255 characters)',
 
 /**
 * logs
 */
 	//logs
 	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Introduciator: settings updated.</strong>',
+	'LOG_INTRODUCIATOR_EXPLANATION_UPDATED'	=> '<strong>Introduciator: explanation’s settings updated.</strong>',
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'				=> 'The configuration has been updated',

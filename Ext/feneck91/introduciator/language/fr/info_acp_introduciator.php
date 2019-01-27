@@ -49,6 +49,7 @@ $lang = array_merge($lang, array(
 */
 	'INTRODUCIATOR_GENERAL'							=> 'Général',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
+	'INTRODUCIATOR_EXPLANATION'						=> 'Explication',
 
 /**
 * mode: general
@@ -78,7 +79,8 @@ $lang = array_merge($lang, array(
 */
 	// Titres
 	'GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'						=> 'Configuration des groupes et des utilisateurs',
-	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Configuration de la page d’explications',
+	'GENERAL_OPTIONS_EXPLANATION_SETTINGS'							=> 'Configuration de la page d’explications',
+	'GENERAL_OPTIONS_EXPLANATION_TEXTS'								=> 'Configuration des textes de la page d’explications',
 	'GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN'						=> 'Pour tous les champs textes suivants, vous pouvez utiliser :<br/>
 																		<ul>
 																		<li><b>%forum_name%</b> : nom du forum de présentation</li>
@@ -92,9 +94,6 @@ $lang = array_merge($lang, array(
 																		<li>Créer un lien vers le forum de présentation : <i>[url=<b>%forum_url%</b>]Cliquez ici pour aller au forum ’<b>%forum_name%</b>’[/url]</i>
 																		<li>Créer un lien de création du sujet dans le forum de présentation : <i>[url=<b>%forum_post%</b>]Cliquez ici pour créer un nouveau sujet dans le forum ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
-																		<br/>
-																		<strong>Tous les champs sont limités à 255 caractères !</strong>
-																		<br/>
 																		<br/>',
 	// Sous-titres
 	'INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED'						=> 'Activer l’extension',
@@ -152,13 +151,13 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque l’extension est désactivé',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque cette extension est activé vous devez choisir un forum !',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
-	'INTRODUCIATOR_ERROR_TOO_LONG_TEXT'						=> 'Erreur, texte trop long (tous les textes sont limités à 255 caractères)',
 
 /**
 * logs
 */
 	//logs
 	'LOG_INTRODUCIATOR_UPDATED'				=> '<strong>Présentation forcée : configuration mise à jour.</strong>',
+	'LOG_INTRODUCIATOR_EXPLANATION_UPDATED'	=> '<strong>Présentation forcée : configuration des explications mise à jour.</strong>',
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'				=> 'La configuration a été mise à jour',

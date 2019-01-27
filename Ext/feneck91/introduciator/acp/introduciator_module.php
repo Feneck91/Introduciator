@@ -125,7 +125,7 @@ class introduciator_module
 			break;
 
 			case 'configuration':
-				global $db, $phpbb_root_path; // Database, Root path
+				global $db; // Database
 
 				// Get Action
 				$action = $this->request->variable('action', '');
@@ -135,7 +135,7 @@ class introduciator_module
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
 				// Display configuration page content into ACP Extensions tab
-				$this->template->assign_var('S_CONFIGURATION_PAGES', true);
+				$this->template->assign_var('S_CONFIGURATION_PAGES', true); // TODO : a voir si ça sert encore !!
 
 				// Get Introduciator class helper
 				$introduciator_helper = $this->container->get('feneck91.introduciator.helper');
@@ -152,15 +152,9 @@ class introduciator_module
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL,
 						'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'	=> $params['posting_approval_level'] == $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
-						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'								=> $params['is_explanation_enabled'],
 						'INTRODUCIATOR_USE_PERMISSIONS'											=> $params['is_use_permissions'],
 						'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'									=> $params['is_include_groups'],
 						'INTRODUCIATOR_ITEM_IGNORED_USERS'										=> $params['ignored_users'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE'								=> $params['explanation_message_title'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'								=> $params['explanation_message_text'],
-						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'					=> $params['is_explanation_display_rules'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TITLE'							=> $params['explanation_message_rules_title'],
-						'INTRODUCIATOR_EXPLANATION_MESSAGE_RULES_TEXT'							=> $params['explanation_message_rules_text'],
 						'U_ACTION'																=> $this->u_action,
 					));
 
@@ -192,67 +186,14 @@ class introduciator_module
 							$is_check_delete_first_post_activated		= $this->request->variable('check_delete_first_post_activated', false);
 							$fk_forum_id								= $this->request->variable('forum_choice', 0);
 							$posting_approval_level						= $this->request->variable('posting_approval_level', $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
-							$is_explanation_enabled						= $this->request->variable('display_explanation', false);
 							$is_use_permissions							= $this->request->variable('is_use_permissions', true);
 							$is_include_groups							= $this->request->variable('include_groups', true);
 							$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
 							$ignored_users								= substr(utf8_normalize_nfc($this->request->variable('ignored_users', '')), 0, 255);
-							$explanation_message_title					= utf8_normalize_nfc($this->request->variable('explanation_message_title', '', true));
-							$explanation_message_text					= utf8_normalize_nfc($this->request->variable('explanation_message_text', '', true));
-							$explanation_display_rules_enabled			= $this->request->variable('explanation_display_rules_enabled', false);
-							$explanation_message_rules_title			= utf8_normalize_nfc($this->request->variable('explanation_message_rules_title', '', true));
-							$explanation_message_rules_text				= utf8_normalize_nfc($this->request->variable('explanation_message_rules_text', '', true));
 
 							if ($is_enabled && $fk_forum_id === 0)
 							{
 								trigger_error($this->language->lang('INTRODUCIATOR_ERROR_MUST_SELECT_FORUM') . adm_back_link($this->u_action), E_USER_WARNING);
-							}
-
-							// Verify message rules texts and convert with BBCode
-
-							// Replace all url by real fake urls
-							$introduciator_helper->replace_all_by(
-								array(
-									&$explanation_message_title,
-									&$explanation_message_text,
-									&$explanation_message_rules_title,
-									&$explanation_message_rules_text,
-								),
-								array(
-									'%forum_url%'	=> 'http://aghxkfps.com', // Make link work if placed into [url]
-									'%forum_post%'	=> 'http://dqsdfzef.com', // Make link work if placed into [url]
-								)
-							);
-
-							$explanation_message_array = array(
-								'introduciator_explanation_message_title'			=> $explanation_message_title,
-								'introduciator_explanation_message_text'			=> $explanation_message_text,
-								'introduciator_explanation_message_rules_title'		=> $explanation_message_rules_title,
-								'introduciator_explanation_message_rules_text'		=> $explanation_message_rules_text,
-							);
-
-							// Verify all user inputs
-							$explanation_message_array_result = array();
-							foreach ($explanation_message_array as $key => $value)
-							{
-								$new_uid = $bitfield = $bbcode_options = '';
-								$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
-								if (sizeof($texts_errors))
-								{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
-									trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
-								}
-								// Merge results into array
-								$explanation_message_array_result = array_merge($explanation_message_array_result, array(
-									$key						=> $value,
-									$key . '_uid'				=> $new_uid,
-									$key . '_bitfield'			=> $bitfield,
-									$key . '_bbcode_options'	=> $bbcode_options,
-								));
-								
-								if (strlen($value) > 255)
-								{	// Errors occured, show them to the user.
-									trigger_error($this->language->lang('INTRODUCIATOR_ERROR_TOO_LONG_TEXT') . adm_back_link($this->u_action), E_USER_WARNING);
-								}
 							}
 
 							if ($posting_approval_level != $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != $introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
@@ -265,17 +206,9 @@ class introduciator_module
 							$config->set('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
 							$config->set('introduciator_fk_forum_id', $fk_forum_id);
 							$config->set('introduciator_posting_approval_level', $posting_approval_level);
-							$config->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
 							$config->set('introduciator_is_use_permissions', $is_use_permissions ? '1' : '0');
 							$config->set('introduciator_is_include_groups', $is_include_groups ? '1' : '0');
 							$config->set('introduciator_ignored_users', $ignored_users);
-							$config->set('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
-
-							// Set results into config
-							foreach ($explanation_message_array_result as $key => $value)
-							{
-								$config->set($key, $value);
-							}
 
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
@@ -298,8 +231,160 @@ class introduciator_module
 						default:
 							trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
 							break;
-				} // End of switch Action
-			}
+					} // End of switch Action
+				} // End of switch configuration
+			break;
+			
+			case 'explanation':
+				global $db; // Database
+
+				// Get Action
+				$action = $this->request->variable('action', '');
+
+				// Set the template for this module
+				$this->tpl_name = 'acp_introduciator_explanation'; // Template file : adm/style/introduciator/acp_introduciator_explanation.htm
+				$this->page_title = 'INTRODUCIATOR_EXPLANATION';
+
+				// Display configuration page content into ACP Extensions tab
+				$this->template->assign_var('S_CONFIGURATION_PAGES', true); // TODO : a voir si ça sert encore !!
+				
+				// Get Introduciator class helper
+				$introduciator_helper = $this->container->get('feneck91.introduciator.helper');
+				
+				// If no action, display configuration
+				if (empty($action))
+				{	// no action or update current
+					$dp_data = array();
+					$params = $introduciator_helper->introduciator_getparams(true);
+					$this->template->assign_vars(array(
+						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'								=> $params['is_explanation_enabled'],
+						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'					=> $params['is_explanation_display_rules'],
+						'U_ACTION'																=> $this->u_action,
+					));
+					
+					
+					$i = 1;
+					foreach ($params['explanations'] as $explanation_value)
+					{
+						$explanation = $explanation_value['explanation'];
+						$this->template->assign_block_vars('explanations', array(
+							'LANG_NR'									=> $i,
+							'LANG_NAME'									=> $explanation_value['lang_local_name'],
+							'LANG_ISO'									=> $explanation_value['lang_iso'],
+							'INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE'	=> $explanation['edit_message_title'],
+							'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'	=> $explanation['edit_message_text'],
+							'INTRODUCIATOR_EXPLANATION_RULES_TITLE'		=> $explanation['edit_rules_title'],
+							'INTRODUCIATOR_EXPLANATION_RULES_TEXT'		=> $explanation['edit_rules_text'],
+						));
+						$i++;
+					}
+					
+					$s_hidden_fields = build_hidden_fields(array(
+							'action'				=> 'update',					// Action
+						));
+
+					$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
+				}
+				else
+				{	// Action !
+					if (!check_form_key('feneck91/introduciator'))
+					{
+						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+					}
+					switch ($action)
+					{
+						case 'update' :
+							// User has request an update : write it into database
+							// Update Database
+							// Verify message rules texts and convert with BBCode
+							$is_explanation_enabled				= $this->request->variable('display_explanation', false);
+							$explanation_display_rules_enabled	= $this->request->variable('explanation_display_rules_enabled', false);
+							$explanation_message_array_result	= array();
+
+							// Get All languages
+							$sql = $db->sql_build_query('SELECT', array(
+								'SELECT'    => 'l.lang_iso',
+								'FROM'      => array(LANG_TABLE => 'l'),
+								'ORDER BY'	=> 'lang_id',
+							));
+							$result = $db->sql_query($sql);
+							// Fill $explanation_message_array_result
+							while ($row = $db->sql_fetchrow($result))
+							{
+								$iso = $row['lang_iso'];
+								$explanation_message_title	= utf8_normalize_nfc($this->request->variable("explanation_message_title_$iso", '', true));
+								$explanation_message_text	= utf8_normalize_nfc($this->request->variable("explanation_message_text_$iso", '', true));
+								$explanation_rules_title	= utf8_normalize_nfc($this->request->variable("explanation_rules_title_$iso", '', true));
+								$explanation_rules_text		= utf8_normalize_nfc($this->request->variable("explanation_rules_text_$iso", '', true));
+
+								// Replace all url by real fake urls
+								$introduciator_helper->replace_all_by(
+									array(
+										&$explanation_message_title,
+										&$explanation_message_text,
+										&$explanation_rules_title,
+										&$explanation_rules_text,
+									),
+									array(
+										'%forum_url%'	=> 'http://aghxkfps.com', // Make link work if placed into [url]
+										'%forum_post%'	=> 'http://dqsdfzef.com', // Make link work if placed into [url]
+									)
+								);
+
+								$explanation_message_array = array(
+									'message_title'		=> $explanation_message_title,
+									'message_text'		=> $explanation_message_text,
+									'rules_title'		=> $explanation_rules_title,
+									'rules_text'		=> $explanation_rules_text,
+								);
+								
+								// One row result
+								$explanation_message_array_row_result = array(
+									'lang'	=> $iso,
+								);
+								// Verify all user inputs and get uuid / bitfield / bbcode_options
+								foreach ($explanation_message_array as $key => $value)
+								{
+									$new_uid = $bitfield = $bbcode_options = '';
+									$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
+									if (sizeof($texts_errors))
+									{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
+										trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
+									}
+									// Merge results into array
+									$explanation_message_array_row_result = array_merge($explanation_message_array_row_result, array(
+										$key						=> $value,
+										$key . '_uid'				=> $new_uid,
+										$key . '_bitfield'			=> $bitfield,
+										$key . '_bbcode_options'	=> $bbcode_options,
+									));
+								}
+								array_push($explanation_message_array_result, $explanation_message_array_row_result);
+							}
+							
+							// Update INTRODUCIATOR_EXPLANATION_TABLE
+							// 1> Remove all entries
+							$sql = 'DELETE FROM ' . $introduciator_helper->Get_INTRODUCIATOR_EXPLANATION_TABLE();
+							$db->sql_query($sql);
+
+							// 2> Add all entries
+							// Create and execute SQL request
+							$db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_EXPLANATION_TABLE(), $explanation_message_array_result);
+
+							// 3> Set enabled explanations
+							$config->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
+							$config->set('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
+
+							$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_INTRODUCIATOR_EXPLANATION_UPDATED');
+							trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
+							break;
+
+						default:
+							trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
+							break;
+					} // End of switch Action
+				}
+			break;
 		}
 	}
 

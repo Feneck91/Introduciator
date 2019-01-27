@@ -16,7 +16,7 @@ class introduciator_info
 		return array(
 			'filename'	=> '\feneck91\introduciator\acp\introduciator_module',
 			'title'		=> 'ACP_INTRODUCIATOR_MOD',
-			'version'	=> "2.1.0",
+			'version'	=> "3.0.0",
 			'modes'		=> array(
 				'general'	=> array(
 					'title' => 'INTRODUCIATOR_GENERAL',
@@ -25,6 +25,11 @@ class introduciator_info
 				),
 				'configuration'	=> array(
 					'title' => 'INTRODUCIATOR_CONFIGURATION',
+					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
+					'cat' => array('ACP_INTRODUCIATOR_MOD'),
+				),
+				'explanation'	=> array(
+					'title' => 'INTRODUCIATOR_EXPLANATION',
 					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
 					'cat' => array('ACP_INTRODUCIATOR_MOD'),
 				),
