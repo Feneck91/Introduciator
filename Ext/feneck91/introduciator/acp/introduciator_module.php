@@ -32,12 +32,12 @@ class introduciator_module
 	/**
 	 *  Action
 	 */
-	var $u_action;
+	public $u_action;
 
 	/**
 	 * Template name
 	 */
-	var $tpl_name;
+	public $tpl_name;
 	
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
