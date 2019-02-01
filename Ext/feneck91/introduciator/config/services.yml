@@ -1,4 +1,9 @@
-services:      
+services:
+    feneck91.introduciator.acp_listener:
+        class: feneck91\introduciator\event\introduciator_acp_listener
+        tags:
+            - { name: event.listener }
+
     feneck91.introduciator.helper:
         class: feneck91\introduciator\helper\introduciator_helper
         arguments:

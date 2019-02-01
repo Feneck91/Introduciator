@@ -1,14 +1,13 @@
 <?php
 /**
-*
-* info_acp_introduciator.php [Italian]
-*
-* @package Introduciator extension
-* @copyright (c) 2014 Feneck91
-* @copyright (c) Traduzione MOD by Galandas (Rey) 2016 www.phpbb3world.altervista.org/
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
+ * info_acp_introduciator.php [Italian]
+ *
+ * @package phpBB Extension - Introduciator Extension
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019 Feneck91
+ * @copyright (c) Traduzione MOD by Galandas (Rey) 2016 www.phpbb3world.altervista.org/
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
 
 /**
 * DO NOT CHANGE
@@ -50,7 +49,8 @@ $lang = array_merge($lang, array(
 */
 	'INTRODUCIATOR_GENERAL'							=> 'Generale',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configurazione',
-	'INTRODUCIATOR_EXPLANATION'						=> '????',
+	'INTRODUCIATOR_EXPLANATION'						=> 'Spiegazione',
+	'INTRODUCIATOR_STATISCICS'						=> 'Statistica',
 
 /**
 * mode: general
@@ -73,6 +73,17 @@ $lang = array_merge($lang, array(
 */
 	'INTRODUCIATOR_CP_TITLE'						=> 'Introduzione impostazioni di configurazione',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permette di configurare le impostazioni della MOD.',
+
+/**
+* mode: statistics
+* Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
+*/
+	'INTRODUCIATOR_ST_TITLE'						=> '????Statistics and checks about user’s introduction',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> '????Used to display database informations:
+														<ul>
+														<li>????The statistics about introductions.</li>
+														<li>????The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
+														</ul>',
 
 /**
 * mode: configuration : Edit
@@ -152,6 +163,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Nessun Forum selezionato, utilizzare solo quando la MOD è disabilitata',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Quando questa MOD è abilitata, si dovrebbe scegliere un forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Nessuna informazione e aggiornamento disponibile',
+	'INTRODUCIATOR_CHECK'									=> '????',
+	'INTRODUCIATOR_NOT_ENABLED_FOR_STATISTICS'				=> '????',
 
 /**
 * logs

@@ -1,13 +1,12 @@
 <?php
 /**
-*
-* info_acp_introduciator.php [Français]
-*
-* @package Introduciator extension (Présentation forcée)
-* @copyright (c) 2014 Feneck91
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
+ * info_acp_introduciator.php [Français]
+ *
+ * @package phpBB Extension - Introduciator Extension (Présentation forcée)
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
 
 /**
 * DO NOT CHANGE
@@ -50,6 +49,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GENERAL'							=> 'Général',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
 	'INTRODUCIATOR_EXPLANATION'						=> 'Explication',
+	'INTRODUCIATOR_STATISCICS'						=> 'Statistiques',
 
 /**
 * mode: general
@@ -73,6 +73,17 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE'						=> 'Configuration de la Présentation forcée',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Permet de configurer le fonctionnement de l’extension.',
 
+/**
+* mode: statistics
+* Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_ST_' pour 'INTRODUCIATOR_STATISTICS_PAGES_'
+*/
+	'INTRODUCIATOR_ST_TITLE'						=> 'Statistiques et vérifications sur les présentations des membres',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Permet d’afficher les informations de la base de données :
+														<ul>
+														<li>Les statistiques sur les présentations.</li>
+														<li>La vérification de la base de données concernant les présentations (vérification que les utilisateurs n’ont pas postés plus d’une seule présentation).</li>
+														</ul>',
+	
 /**
 * mode: configuration : Edit
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_ED_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
@@ -151,6 +162,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque l’extension est désactivé',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque cette extension est activé vous devez choisir un forum !',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'Aucune information de mise à jour disponible',
+	'INTRODUCIATOR_CHECK'									=> 'Vérifier',
+	'INTRODUCIATOR_NOT_ENABLED_FOR_STATISTICS'				=> 'Pour voir les statistiques vous devez activer et configurer l’extension Présentation forcée !',
 
 /**
 * logs

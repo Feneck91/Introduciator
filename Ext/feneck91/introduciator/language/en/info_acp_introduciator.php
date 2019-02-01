@@ -1,13 +1,12 @@
 <?php
 /**
-*
-* info_acp_introduciator.php [English]
-*
-* @package Introduciator extension
-* @copyright (c) 2014 Feneck91
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
+ * info_acp_introduciator.php [English]
+ *
+ * @package phpBB Extension - Introduciator Extension
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
 
 /**
 * DO NOT CHANGE
@@ -50,6 +49,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GENERAL'							=> 'General',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
 	'INTRODUCIATOR_EXPLANATION'						=> 'Explanation',
+	'INTRODUCIATOR_STATISCICS'						=> 'Statistics',
 
 /**
 * mode: general
@@ -73,6 +73,17 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE'						=> 'Introduciator configuration settings',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'				=> 'Allow to configure the extension settings.',
 
+/**
+* mode: statistics
+* Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
+*/
+	'INTRODUCIATOR_ST_TITLE'						=> 'Statistics and checks about user’s introduction',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Used to display database informations:
+														<ul>
+														<li>The statistics about introductions.</li>
+														<li>The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
+														</ul>',
+	
 /**
 * mode: configuration : Edit
 * Info: language keys are prefixed with 'INTRODUCIATOR_CP_ED_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
@@ -151,6 +162,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is desactivated',
 	'INTRODUCIATOR_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, your should choose a forum!',
 	'INTRODUCIATOR_NO_UPDATE_INFO_FOUND'					=> 'No update information available',
+	'INTRODUCIATOR_CHECK'									=> 'Check',
+	'INTRODUCIATOR_NOT_ENABLED_FOR_STATISTICS'				=> 'To get statistics you should enabled and configure the Introduciator extension!',
 
 /**
 * logs

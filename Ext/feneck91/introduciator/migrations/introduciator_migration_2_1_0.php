@@ -4,7 +4,7 @@
 *
 * @package phpBB Extension - Introduciator Extension
 * @author Feneck91 (Stéphane Château) feneck91@free.fr
-* @copyright (c) 2013 @copyright (c) 2014 Feneck91
+* @copyright (c) 2019 Feneck91
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
@@ -84,33 +84,47 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 	{
 		return array(
 			// Introduciator Settings
-			array('config.add', array('introduciator_posting_approval_level',							0)),
-			array('config.add', array('introduciator_allow', 											'0')),
-			array('config.add', array('introduciator_fk_forum_id', 										0)),
-			array('config.add', array('introduciator_is_introduction_mandatory', 						true)),
-			array('config.add', array('introduciator_is_check_delete_first_post', 						true)),
-			array('config.add', array('introduciator_is_explanation_enabled', 							false)),
-			array('config.add', array('introduciator_is_use_permissions', 								true)),
-			array('config.add', array('introduciator_is_include_groups', 								true)),
-			array('config.add', array('introduciator_ignored_users', 									'')),
-			array('config.add', array('introduciator_is_explanation_display_rules', 					true)),
+			array('config.add', array('introduciator_posting_approval_level', 0)),
+			array('config.add', array('introduciator_allow', '0')),
+			array('config.add', array('introduciator_fk_forum_id', 0)),
+			array('config.add', array('introduciator_is_introduction_mandatory', true)),
+			array('config.add', array('introduciator_is_check_delete_first_post', true)),
+			array('config.add', array('introduciator_is_explanation_enabled', false)),
+			array('config.add', array('introduciator_is_use_permissions', true)),
+			array('config.add', array('introduciator_is_include_groups', true)),
+			array('config.add', array('introduciator_ignored_users', '')),
+			array('config.add', array('introduciator_is_explanation_display_rules', true)),
 
 			// Misc Settings
-			array('config.add', array('introduciator_install_date', 									time())),
-			array('config.add', array('introduciator_extension_version', 								'3.0.0')), // Current extension's version 
+			array('config.add', array('introduciator_install_date', time())),
+			array('config.add', array('introduciator_extension_version', '3.0.0')), // Current extension's version 
 			
-			// Permissions Add
-			array('permission.add', array('a_introduciator_manage',										true)),
-			array('permission.add', array('u_must_introduce', 											true)),
+			// Add admin permissions
+			array('permission.add', array('a_introduciator_manage', true)),
 
-			// Global user role permissions for user mask : Yes to All
-			array('permission.permission_set', array('ROLE_USER_STANDARD', 								'u_must_introduce')),
-			array('permission.permission_set', array('ROLE_USER_LIMITED', 								'u_must_introduce')),
-			array('permission.permission_set', array('ROLE_USER_NEW_MEMBER', 							'u_must_introduce')),
+			// Add user permissions
+			array('permission.add', array('u_must_introduce', true)),
 
-			// Global admin role permissions for admin : Yes to All
-			array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 							'a_introduciator_manage')),
-			array('permission.permission_set', array('ROLE_ADMIN_FULL', 								'a_introduciator_manage')),
+			// Set permissions users
+			array('permission.permission_set', array('ADMINISTRATORS', 'u_must_introduce', 'group', false)), // Set to never for adminitrators
+			array('permission.permission_set', array('GLOBAL_MODERATORS', 'u_must_introduce', 'group')),
+			array('permission.permission_set', array('REGISTERED', 'u_must_introduce', 'group')),
+			array('permission.permission_set', array('NEWLY_REGISTERED', 'u_must_introduce', 'group')),
+			
+			// Set permissions administration
+			array('permission.permission_set', array('ADMINISTRATORS', 'a_introduciator_manage', 'group')),
+
+			// Global user role permissions for user mask
+			array('permission.permission_set', array('ROLE_USER_STANDARD', 'u_must_introduce', 'role')),
+			array('permission.permission_set', array('ROLE_USER_LIMITED', 'u_must_introduce', 'role')),
+			array('permission.permission_set', array('ROLE_USER_FULL', 'u_must_introduce', 'role')),
+			array('permission.permission_set', array('ROLE_USER_NOPM', 'u_must_introduce', 'role')),
+			array('permission.permission_set', array('ROLE_USER_NOAVATAR', 'u_must_introduce', 'role')),
+			array('permission.permission_set', array('ROLE_USER_NEW_MEMBER', 'u_must_introduce', 'role')),
+
+			// Global admin role permissions for admin
+			array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 'a_introduciator_manage', 'role')),
+			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_introduciator_manage', 'role')),
 
 			//===============================================================================
 			// Add the module in ACP under the customise tab
@@ -128,7 +142,8 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 							'general',
 							'configuration',
-							'explanation'
+							'explanation',
+							'statistics',							
 							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 							//---------------------------------------------------------------------
 							),

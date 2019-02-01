@@ -1,4 +1,4 @@
-{% INCLUDECSS '@feneck91_introduciator/introduciator_configuration.css' %}
+{% INCLUDECSS '@feneck91_introduciator/introduciator_acp.css' %}
 <!-- INCLUDE overall_header.html -->
 
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_CP_TITLE') }}</h1>
@@ -6,7 +6,7 @@
 {{ lang('INTRODUCIATOR_CP_TITLE_EXPLAIN') }}
 <form id="acp_introduciator" method="post" action="{{ U_ACTION }}">
 	<fieldset>
-		<legend>{{ lang('GENERAL_OPTIONS') }}</legend>
+		<legend><a class="acp_img_configuration" title="{{ lang('GENERAL_OPTIONS') }}"></a>{{ lang('GENERAL_OPTIONS') }}</legend><br/>
 		<!--
 			 Activate / Desactivate extension
 		-->
@@ -62,7 +62,7 @@
 			 --------------------------- Manage groups and users -----------------------------
 		-->
 	<fieldset>
-		<legend>{{ lang('GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS') }}</legend>
+		<legend><a class="acp_img_groups" title="{{ lang('GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS') }}"></a>{{ lang('GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS') }}</legend><br/>
 		<!--
 			 Use permissions or Include / Exclude groups
 		-->
@@ -106,12 +106,8 @@
 		<!--
 			 --------------------------- Posting ---------------------------------------------
 		-->
-	<!-- IF S_EDIT_ERROR -->
-	<fieldset class="errorbox">
-		<label for="item_filter_tags">{ITEM_EDIT_ERROR}</label>
-	</fieldset>
-	<!-- ENDIF -->
 	<fieldset>
+		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
 		<p class="submit-buttons">
 			{S_HIDDEN_FIELDS}
 			<input class="button1" type="submit" id="submit" name="update" value="{{ lang('SUBMIT') }}" />&nbsp;

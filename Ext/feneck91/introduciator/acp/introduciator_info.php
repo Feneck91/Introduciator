@@ -3,7 +3,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2013 @copyright (c) 2014 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -30,6 +30,11 @@ class introduciator_info
 				),
 				'explanation'	=> array(
 					'title' => 'INTRODUCIATOR_EXPLANATION',
+					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
+					'cat' => array('ACP_INTRODUCIATOR_MOD'),
+				),
+				'statistics'	=> array(
+					'title' => 'INTRODUCIATOR_STATISCICS',
 					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
 					'cat' => array('ACP_INTRODUCIATOR_MOD'),
 				),

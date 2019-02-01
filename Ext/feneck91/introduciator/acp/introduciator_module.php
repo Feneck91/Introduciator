@@ -3,7 +3,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2013 @copyright (c) 2014 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -58,6 +58,11 @@ class introduciator_module
 	 * @var \phpbb\template\template
 	 */
 	protected $template;
+	
+	/**
+	 * @var \phpbb\db\driver\driver_interface
+	 */
+	protected $db;
 
 	public function main($id, $mode)
 	{
@@ -66,6 +71,7 @@ class introduciator_module
 		$this->language = $phpbb_container->get('language');
 		$this->request = $phpbb_container->get('request');
 		$this->template = $this->container->get('template');
+		$this->db = $this->container->get('dbal.conn');
 		$user = $this->container->get('user');
 		$config = $this->container->get('config');
 		$phpbb_log = $this->container->get('log');
@@ -73,7 +79,8 @@ class introduciator_module
 		// Add a secret token to the form
 		// This functions adds a secret token to any form, a token which should be checked after
 		// submission with the check_form_key function to ensure that the received data is the same as the submitted.
-		add_form_key('feneck91/introduciator');
+		$form_key = 'feneck91/acp_introduciator';
+		add_form_key($form_key);
 
 		switch ($mode)
 		{
@@ -125,8 +132,6 @@ class introduciator_module
 			break;
 
 			case 'configuration':
-				global $db; // Database
-
 				// Get Action
 				$action = $this->request->variable('action', '');
 
@@ -134,16 +139,12 @@ class introduciator_module
 				$this->tpl_name = 'acp_introduciator_configuration'; // Template file : adm/style/introduciator/acp_introduciator_configuration.htm
 				$this->page_title = 'INTRODUCIATOR_CONFIGURATION';
 
-				// Display configuration page content into ACP Extensions tab
-				$this->template->assign_var('S_CONFIGURATION_PAGES', true); // TODO : a voir si ça sert encore !!
-
 				// Get Introduciator class helper
 				$introduciator_helper = $this->container->get('feneck91.introduciator.helper');
 
 				// If no action, display configuration
 				if (empty($action))
 				{	// no action or update current
-					$dp_data = array();
 					$params = $introduciator_helper->introduciator_getparams(true);
 					$this->template->assign_vars(array(
 						'INTRODUCIATOR_EXTENSION_ACTIVATED'										=> $params['introduciator_allow'],
@@ -165,14 +166,14 @@ class introduciator_module
 					$this->add_all_groups($introduciator_helper);
 
 					$s_hidden_fields = build_hidden_fields(array(
-							'action'				=> 'update',					// Action
-						));
+						'action'				=> 'update',					// Action
+					));
 
 					$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 				}
 				else
 				{	// Action !
-					if (!check_form_key('feneck91/introduciator'))
+					if (!check_form_key($form_key))
 					{
 						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 					}
@@ -213,7 +214,7 @@ class introduciator_module
 							// Update INTRODUCIATOR_GROUPS_TABLE
 							// 1> Remove all entries
 							$sql = 'DELETE FROM ' . $introduciator_helper->Get_INTRODUCIATOR_GROUPS_TABLE();
-							$db->sql_query($sql);
+							$this->db->sql_query($sql);
 
 							// 2> Add all entries
 							$values = array();
@@ -222,7 +223,7 @@ class introduciator_module
 								$values[] = array('fk_group' => (int) $group);
 							}
 							// Create and execute SQL request
-							$db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_GROUPS_TABLE(), $values);
+							$this->db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_GROUPS_TABLE(), $values);
 
 							$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_INTRODUCIATOR_UPDATED');
 							trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
@@ -236,8 +237,6 @@ class introduciator_module
 			break;
 			
 			case 'explanation':
-				global $db; // Database
-
 				// Get Action
 				$action = $this->request->variable('action', '');
 
@@ -245,23 +244,18 @@ class introduciator_module
 				$this->tpl_name = 'acp_introduciator_explanation'; // Template file : adm/style/introduciator/acp_introduciator_explanation.htm
 				$this->page_title = 'INTRODUCIATOR_EXPLANATION';
 
-				// Display configuration page content into ACP Extensions tab
-				$this->template->assign_var('S_CONFIGURATION_PAGES', true); // TODO : a voir si ça sert encore !!
-				
 				// Get Introduciator class helper
 				$introduciator_helper = $this->container->get('feneck91.introduciator.helper');
 				
 				// If no action, display configuration
 				if (empty($action))
 				{	// no action or update current
-					$dp_data = array();
 					$params = $introduciator_helper->introduciator_getparams(true);
 					$this->template->assign_vars(array(
 						'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'								=> $params['is_explanation_enabled'],
 						'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'					=> $params['is_explanation_display_rules'],
 						'U_ACTION'																=> $this->u_action,
 					));
-					
 					
 					$i = 1;
 					foreach ($params['explanations'] as $explanation_value)
@@ -278,16 +272,16 @@ class introduciator_module
 						));
 						$i++;
 					}
-					
+
 					$s_hidden_fields = build_hidden_fields(array(
-							'action'				=> 'update',					// Action
-						));
+						'action'				=> 'update',					// Action
+					));
 
 					$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 				}
 				else
 				{	// Action !
-					if (!check_form_key('feneck91/introduciator'))
+					if (!check_form_key($form_key))
 					{
 						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 					}
@@ -302,14 +296,14 @@ class introduciator_module
 							$explanation_message_array_result	= array();
 
 							// Get All languages
-							$sql = $db->sql_build_query('SELECT', array(
+							$sql = $this->db->sql_build_query('SELECT', array(
 								'SELECT'    => 'l.lang_iso',
 								'FROM'      => array(LANG_TABLE => 'l'),
 								'ORDER BY'	=> 'lang_id',
 							));
-							$result = $db->sql_query($sql);
+							$result = $this->db->sql_query($sql);
 							// Fill $explanation_message_array_result
-							while ($row = $db->sql_fetchrow($result))
+							while ($row = $this->db->sql_fetchrow($result))
 							{
 								$iso = $row['lang_iso'];
 								$explanation_message_title	= utf8_normalize_nfc($this->request->variable("explanation_message_title_$iso", '', true));
@@ -365,11 +359,11 @@ class introduciator_module
 							// Update INTRODUCIATOR_EXPLANATION_TABLE
 							// 1> Remove all entries
 							$sql = 'DELETE FROM ' . $introduciator_helper->Get_INTRODUCIATOR_EXPLANATION_TABLE();
-							$db->sql_query($sql);
+							$this->db->sql_query($sql);
 
 							// 2> Add all entries
 							// Create and execute SQL request
-							$db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_EXPLANATION_TABLE(), $explanation_message_array_result);
+							$this->db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_EXPLANATION_TABLE(), $explanation_message_array_result);
 
 							// 3> Set enabled explanations
 							$config->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
@@ -385,13 +379,226 @@ class introduciator_module
 					} // End of switch Action
 				}
 			break;
+			
+			case 'statistics':
+				// Get Action
+				$action = $this->request->variable('action', '');
+
+				// Set the template for this module
+				$this->tpl_name = 'acp_introduciator_statistics'; // Template file : adm/style/introduciator/acp_introduciator_statistics.htm
+				$this->page_title = 'INTRODUCIATOR_STATISCICS';
+
+				// Get Introduciator class helper
+				$introduciator_helper = $this->container->get('feneck91.introduciator.helper');
+				$params = $introduciator_helper->introduciator_getparams();
+				if (!$introduciator_helper->is_introduciator_allowed())
+				{	// The introduciator must be enable else it can be not configure correctly
+					trigger_error($this->language->lang('INTRODUCIATOR_NOT_ENABLED_FOR_STATISTICS') . adm_back_link($this->u_action), E_USER_WARNING);
+				}
+				
+				// If no action, display configuration
+				if (empty($action))
+				{	// no action or update current
+					$this->template->assign_vars(array(
+						'U_ACTION'					=> $this->u_action,
+					));
+					
+					$s_hidden_fields = build_hidden_fields(array(
+						'action'				=> 'check', // Action
+					));
+
+					$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
+				}
+				else
+				{	// Action !
+					if (!check_form_key($form_key))
+					{
+						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+					}
+					
+					switch ($action)
+					{
+						case 'check' :
+							// Here, we must check database to see if some user have more than one introduction
+							// 1> Get the number of introduce errors
+							 $sql = $this->db->sql_build_query('SELECT', array(
+								'SELECT'    => "COUNT(result.topic_id)",
+								'FROM'      => array(
+									$this->db->sql_build_query('SELECT', array(
+										'SELECT'    => "topic_id",
+										'FROM'      => array('phpbb_topics' => 'phpbbtopics'),
+										'WHERE'		=> '(' . $this->db->sql_build_query('SELECT', array(
+											'SELECT'    => "COUNT(topic_id)",
+											'FROM'      => array('phpbb_topics' => 'phpbb_topics'),
+											'WHERE'		=> "phpbbtopics.topic_poster = phpbb_topics.topic_poster AND phpbb_topics.forum_id = {$params['fk_forum_id']}",
+										)) . ') > 1',
+										'GROUP_BY'	=> 'topic_poster',
+									)) => ''),
+								)) . " result";
+							$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
+							$nb_several_introduce = reset($row);
+
+/*
+
+
+							 $sql = $this->db->sql_build_query('SELECT', array(
+								'SELECT'    => "COUNT(result.topic_id)",
+								'FROM'      => array(
+									$this->db->sql_build_query('SELECT', array(
+										'SELECT'    => "topic_id",
+										'FROM'      => array('phpbb_topics' => 'phpbbtopics'),
+										'WHERE'		=> '(' . $this->db->sql_build_query('SELECT', array(
+											'SELECT'    => "COUNT(topic_id)",
+											'FROM'      => array('phpbb_topics' => 'phpbb_topics'),
+											'WHERE'		=> "phpbbtopics.topic_poster = phpbb_topics.topic_poster AND phpbb_topics.forum_id = {$params['fk_forum_id']}",
+										)) . ') > 1',
+										'GROUP_BY'	=> 'topic_poster',
+									)) => 'result'),
+								));
+
+
+ */
+
+							 $sql = $this->db->sql_build_query('SELECT', array(
+								'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND forum_id = {$params['fk_forum_id']}) as nb_introduce",
+								'FROM'      => array('phpbb_topics' => 'phpbbtopics'),
+								'WHERE'		=> "forum_id = {$params['fk_forum_id']} HAVING nb_introduce > 1",
+								'ORDER_BY'	=> 'topic_poster, topic_time',
+							));
+							
+							{
+								$a=0;
+							}
+
+/*						
+								SELECT COUNT(result.topic_id) FROM (SELECT topic_id
+FROM phpbb_topics as phpbbtopics
+WHERE (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND phpbb_topics.forum_id = 2) > 99
+GROUP BY topic_poster) as result
+
+								SELECT COUNT(result.topic_id) FROM (SELECT topic_id
+FROM phpbb_topics as phpbbtopics
+WHERE (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND phpbb_topics.forum_id = 2) > 1
+GROUP BY topic_poster) as \mysql_xdevapi\Result::
+								
+								
+								
+								
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour
+FROM phpbb_topics as phpbbtopics
+WHERE (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND phpbb_topics.forum_id = 2) > 1
+GROUP BY topic_poster
+ORDER BY topic_first_poster_name
+								
+							 $sql = $db->sql_build_query('SELECT', array(
+								'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND forum_id = {$params['fk_forum_id']}) as nb_introduce",
+								'FROM'      => array('phpbb_topics' => 'phpbbtopics'),
+								'WHERE'		=> "forum_id = {$params['fk_forum_id']} HAVING nb_introduce > 1",
+								'ORDER_BY'	=> 'topic_poster, topic_time',
+							));
+							$result = $db->sql_query_limit($sql, 2, 0);
+							while ($row = $db->sql_fetchrow($result))
+							{
+								$a=0;
+							}
+							S_DISPLAY_MESSAGES
+									/*
+							$params['fk_forum_id'];
+							 * SELECT topic_id, topic_first_post_id, topic_first_poster_colour, topic_first_poster_name, topic_visibility FROM phpbb_topics where forum_id = 1
+							 * 
+							 * SELECT topic_id, topic_first_post_id, topic_visibility, user_id, username, phpbb_users.user_colour FROM phpbb_topics INNER JOIN phpbb_users ON phpbb_users.user_id = phpbb_topics.topic_first_post_id where forum_id = 2
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_poster, topic_first_poster_name, topic_first_poster_colour FROM phpbb_topics where forum_id = 2 AND topic_poster = 2
+
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_poster, topic_poster as tpposter, topic_first_poster_name, topic_first_poster_colour, (SELECT COUNT(*) FROM phpbb_topics WHERE tpposter = topic_poster) AS nb_introduce FROM phpbb_topics where forum_id = 2 AND nb_introduce > 1
+
+
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour FROM phpbb_topics where forum_id = 2 and topic_poster = 49
+
+
+
+SELECT * FROM (
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, (SELECT COUNT(*) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster) as nb_introduce FROM phpbb_topics as phpbbtopics where forum_id = 2
+) AS tmp WHERE tmp.nb_introduce > 1 ORDER BY topic_poster, topic_time
+							 * 
+							 * 
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour FROM phpbb_topics where forum_id = 2 and topic_poster = 49
+							 *
+
+Ne fonctionne pas :
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour,
+(SELECT COUNT(*) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND forum_id = 2) as nb_introduce FROM phpbb_topics as phpbbtopics
+WHERE forum_id = 2 and topic_poster = 49
+							 *
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour
+FROM phpbb_topics as phpbbtopics
+WHERE forum_id = 2 and (SELECT COUNT(*) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster) > 1
+
+
+SELECT topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour
+(SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND forum_id = 2) as nb_introduce
+FROM phpbb_topics as phpbbtopics
+WHERE forum_id = 2 and 
+HAVING nb_introduce > 1
+ORDER BY topic_poster, topic_time
+
+
+
+
+
+
+
+
+							 $sql = $this->db->sql_build_query('SELECT', array(
+								'SELECT'    => 's.*, u.user_id, u.username, u.user_colour',
+								'FROM'      => array($this->shoutbox_priv_table => 's'),
+								'LEFT_JOIN'	=> array(
+									array(
+										'FROM'	=> array(USERS_TABLE => 'u'),
+										'ON'	=> 's.shout_user_id = u.user_id'
+									)
+								),
+								'WHERE'		=> 'shout_inp = 0 OR shout_inp = ' .$this->user->data['user_id']. ' OR shout_user_id = ' .$this->user->data['user_id'],
+								'ORDER_BY'	=> 's.shout_time DESC',
+							));
+							
+		$sql = 'SELECT topic_id, topic_first_post_id, topic_visibility
+				FROM ' . TOPICS_TABLE . '
+					WHERE topic_poster = ' . (int) $user_id . '
+					 AND forum_id = ' . (int) $forum_id . '
+					 AND topic_visibility <> ' . ITEM_DELETED . '
+					 AND topic_first_post_id <> 0'; // PATCH : Sometimes, the topic_first_post_id is 0
+		
+		
+		
+							$result = $this->db->sql_query_limit($sql, $shout_number, $start);
+							while ($row = $this->db->sql_fetchrow($result))
+							{
+							*/
+
+							$this->template->assign_vars(array(
+								'U_ACTION'					=> $this->u_action,
+								'S_CHECK_DATABASE'			=> true,
+							));
+
+							// Enable to re-run the database check
+							$s_hidden_fields = build_hidden_fields(array(
+								'action'				=> 'check', // Action
+							));
+							$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
+
+							break;
+
+						default:
+							trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
+							break;
+					} // End of switch Action
+				}
+			break;			
 		}
 	}
 
 	function add_all_forums($fk_selected_forum_id, $id_parent, $level)
 	{
-		global $db;
-
 		if ($id_parent === 0)
 		{	// Add deactivation item
 			$this->template->assign_block_vars('forums', array(
@@ -408,8 +615,8 @@ class introduciator_module
 				FROM ' . FORUMS_TABLE . '
 				WHERE parent_id = ' . (int) $id_parent;
 
-		$result = $db->sql_query($sql);
-		while ($row = $db->sql_fetchrow($result))
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
@@ -420,7 +627,7 @@ class introduciator_module
 			));
 			$this->add_all_forums($fk_selected_forum_id, $row['forum_id'], $level + 1);
 		}
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 	}
 
 	/**
@@ -430,13 +637,11 @@ class introduciator_module
 	 */
 	function add_all_groups($introduciator_helper)
 	{
-		global $db;
-
 		$sql = 'SELECT group_id, group_desc
 			FROM ' . GROUPS_TABLE;
 
-		$result = $db->sql_query($sql);
-		while ($row = $db->sql_fetchrow($result))
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$this->template->assign_block_vars('group', array(
 				'NAME'		=> get_group_name($row['group_id']),
@@ -445,7 +650,7 @@ class introduciator_module
 				'TOOLTIP'	=> $row['group_desc'],
 			));
 		}
-		$db->sql_freeresult($result);
+		$this->db->sql_freeresult($result);
 	}
 
 	/**
