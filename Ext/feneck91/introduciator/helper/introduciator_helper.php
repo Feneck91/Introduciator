@@ -951,7 +951,7 @@ class introduciator_helper
 	 * Be careful: the option 'is_introduction_mandatory' is not taken into account.
 	 *
 	 * @param $poster_id User's ID
-	 * @param $authorisations User's authorisations
+	 * @param $authorisations User's authorisations. It can be null if the we check authorisation from another user thant the current one.
 	 * @param $poster_name User's name
 	 * @return true if the user must introduce himself pending of rights, false else
 	 */
@@ -984,7 +984,6 @@ class introduciator_helper
 
 				$authorisations = new auth();
 				$authorisations->acl($userdata);
-				$this->auth = $authorisations;
 			}
 
 			$ret = $authorisations->acl_get('u_must_introduce');
