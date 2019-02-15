@@ -236,7 +236,7 @@ class introduciator_module
 							// Create and execute SQL request
 							$this->db->sql_multi_insert($introduciator_helper->Get_INTRODUCIATOR_GROUPS_TABLE(), $values);
 
-							$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_INTRODUCIATOR_UPDATED');
+							$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_INTRODUCIATOR_UPDATED');
 							trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
 							break;
 
@@ -380,7 +380,7 @@ class introduciator_module
 							$config->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
 							$config->set('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
 
-							$phpbb_log->add('admin', $user->data['user_id'], $user->ip, 'LOG_INTRODUCIATOR_EXPLANATION_UPDATED');
+							$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_INTRODUCIATOR_EXPLANATION_UPDATED');
 							trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
 							break;
 
@@ -545,6 +545,17 @@ class introduciator_module
 		}
 	}
 
+	/**
+	 * Add all forum recursivly to template 'forums' var.
+	 *
+	 * Used to fill the template 'forums' var to be able to show to the user all avalaible
+	 * forums with correct hierarchy.
+	 *
+	 * @param int $fk_selected_forum_id the current selected forum id.
+	 * @param int $id_parent the parent's forum id, if 0 it is the root one.
+	 * @param int $level hierarchy level, 0 for root, 1 for children, 2 for children's children, etc.
+	 * @return void
+	 */
 	function add_all_forums($fk_selected_forum_id, $id_parent, $level)
 	{
 		if ($id_parent === 0)
@@ -582,6 +593,9 @@ class introduciator_module
 	 * Find all groups to propose it to the user.
 	 *
 	 * Add all elements into the template.
+	 * 
+	 * @param \feneck91\introduciator\helper\introduciator_helper $introduciator_helper pointer on introduciator helper.
+	 * @return void
 	 */
 	function add_all_groups($introduciator_helper)
 	{
@@ -604,10 +618,12 @@ class introduciator_module
 	/**
 	 * Obtains the latest version information.
 	 *
+	 * Return Version info on success, false on failure.
+	 * 
 	 * @param bool $force_update Ignores cached data. Defaults to false.
 	 * @param int $ttl Cache version information for $ttl seconds. Defaults to 86400 (24 hours).
 	 *
-	 * @return string | false Version info on success, false on failure.
+	 * @return string boolean
 	 */
 	function obtain_latest_version_info($force_update = false, $ttl = 86400)
 	{
@@ -638,12 +654,13 @@ class introduciator_module
 	 * Get the update information string from text loaded from update web site.
 	 *
 	 * The language is written at the beginning of each lines, like [en] ou [fr].
+	 * Returns an array with:
+	 *   [0] The string into the correct language. English if the current language is not found. Error message if default language was not found
+	 *   [1] Indicate if the string (default or not) was found or not (true / false).
 	 *
 	 * @param string $tag the tag to found. Searching [$tag{language name}] at the beginning of the line.
 	 * @param array $latest_version_info Array of string, the informations begins at line 2.
-	 * @return An array with:
-	 *   [0] The string into the correct language. English if the current language is not found. Error message if default language was not found
-	 *   [1] Indicate if the string (default or not) was found or not (true / false).
+	 * @return array
 	 */
 	function get_update_information($tag, $latest_version_info)
 	{

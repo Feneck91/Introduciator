@@ -76,7 +76,7 @@ class introduciator_helper
 	private $language_loaded;
 
 	/**
-	 * Current introduciator parameters.
+	 * @var array Current introduciator parameters with key / value.
 	 */
 	private $introduciator_params;
 
@@ -110,6 +110,8 @@ class introduciator_helper
 
 	/**
 	 * Load language only if noyt already done.
+	 * 
+	 * @return void
 	 */
 	public function load_language_if_needed()
 	{
@@ -122,8 +124,10 @@ class introduciator_helper
 	
 	/**
 	 * Get the language instance.
+	 * 
+	 * Return the private language instance.
 	 *
-	 * @return The private language instance.
+	 * @return \phpbb\language\language
 	 */
 	public function get_language()
 	{
@@ -135,8 +139,10 @@ class introduciator_helper
 	 *
 	 * It's not possible to create const INTRODUCIATOR_GROUPS_TABLE because it need table prefix.
 	 * So, I use a method to get this name.
+	 * 
+	 * Return the full group table name.
 	 *
-	 * @return The full group table name.
+	 * @return string
 	 */
 	public function Get_INTRODUCIATOR_GROUPS_TABLE()
 	{
@@ -149,7 +155,9 @@ class introduciator_helper
 	 * It's not possible to create const INTRODUCIATOR_EXPLANATION_TABLE because it need table prefix.
 	 * So, I use a method to get this name.
 	 *
-	 * @return The full explanation table name.
+	 * Return the full explanation table name.
+	 * 
+	 * @return string
 	 */
 	public function Get_INTRODUCIATOR_EXPLANATION_TABLE()
 	{
@@ -159,9 +167,9 @@ class introduciator_helper
 	/**
 	 * Is the introduciator enabled?
 	 *
-	 * Return the introduciator_allow's config field.
+	 * Return the introduciator_allow's config field: true if the introduciator is allowed, false else.
 	 *
-	 * @return true if the introduciator is allowed, false else.
+	 * @return boolean
 	 */	
 	public function is_introduciator_allowed()
 	{
@@ -172,11 +180,13 @@ class introduciator_helper
 	 * Compute the url to a specific post.
 	 *
 	 * It can be used to return the introduction url where to go to the the user introduction.
+	 * 
+	 * Return the url to a specific post.
 	 *
 	 * @param int $forum_id The forum's identifier.
 	 * @param int $topic_id The topic's identifier.
 	 * @param int $post_id The post's identifier.
-	 * @return string The url to a specific post.
+	 * @return string
 	 */	
 	public function get_url_to_post($forum_id, $topic_id, $post_id)
 	{
@@ -186,8 +196,10 @@ class introduciator_helper
 	/**
 	 * Check if a group is selected.
 	 *
+	 * Return true if the group is selected, false else.
+	 * 
 	 * @param $group_id Group's identifier.
-	 * @return true if the group is selected, false else.
+	 * @return boolean
 	 */
 	public function is_group_selected($group_id)
 	{
@@ -235,11 +247,15 @@ class introduciator_helper
 
 	/**
 	 * Get the explanations informations.
-	 * 
-	 * @param $is_edit if true, return rules texts for editing
+	 *
+	 * Return an array of explanation text used to edit or display.
+	 *
+	 * @param boolean $is_edit if true, return rules texts for editing
 	 *                 else return rules texts for display
-	 * @param $only_current_lang if true, return only user's default language.
+	 * @param boolean $only_current_lang if true, return only user's default language.
 	 *                 else return alls languages (used only in the extension configuration and to display all rules in all languages)
+	 * @return array
+	 * 
 	 */
 	public function introduciator_getexplanations($is_edit = null, $only_current_lang = null)
 	{
@@ -355,10 +371,12 @@ class introduciator_helper
 	/**
 	 * Get the introduciator parameters.
 	 *
+	 * Return the introduciator parameters.
+	 * 
 	 * @param $is_edit if true, return rules texts for editing
 	 *                 if false, return rules texts for display
 	 *                 if null, don't return rules texts (used only in the extension configuration and to display rules)
-	 * @return The introduciator parameters
+	 * @return array
 	 */
 	public function introduciator_getparams($is_edit = null)
 	{
@@ -487,15 +505,17 @@ class introduciator_helper
 	 * If not allowed, it redirect the current page to the introduce forum or the explanation page
 	 * or error message if action is not allowed.
 	 *
+	 * Return true if the user is allowed to make action,
+	 *         false else, in this case, just check if allowed or not (remove quick reply if not allowed).
+	 *         RedirectResponse if redirection is needed.
+	 * 
 	 * @param $user The connected user.
 	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
 	 * @param $forum_id Forum identifier where the user try to post.
 	 * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete (used only for delete), pass 0 else.
 	 * @param $post_data Informations about posting (used only for delete) pass null else.
 	 * @param $redirect true if the function should redirect in case of the user is not allowed to make the action, else only return status.
-	 * @return true if the user is allowed to make action,
-	 *         false else, in this case, just check if allowed or not (remove quick reply if not allowed).
-	 *         RedirectResponse if redirection is needed.
+	 * @return boolean
 	 */
 	public function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_data, $redirect)
 	{
@@ -640,9 +660,7 @@ class introduciator_helper
 	 * Is used by several pages to display link to the member presentation. It indicate if the user has introduce himself or not,
 	 * the text and tooltip info, etc.
 	 *
-	 * @param $poster_id The poster id
-	 * @param $poster_name The poster name
-	 * @return Array with :
+	 * Return an array with :
 	 * <ul>
 	 *   <li>display : true if the user must introduce himself, false else.</li>
 	 *   <li>url : url to member introduction, empty string if user has no presentation.</li>
@@ -650,6 +668,10 @@ class introduciator_helper
 	 *   <li>class : class to use for the button.</li>
 	 *   <li>pending : true if message is pending approval, false else.</li>
 	 * </ul>.
+	 * 
+	 * @param $poster_id The poster id
+	 * @param $poster_name The poster name
+	 * @return array
 	 */
 	public function introduciator_get_user_infos($poster_id, $poster_name)
 	{
@@ -721,10 +743,12 @@ class introduciator_helper
 	 * the function return always false: no need to make manage approval to a user
 	 * that can approve himself its own message.
 	 * 
+	 * Return true if the post must be approved, false else.
+	 * 
 	 * @param $user The user informations
 	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
 	 * @param $forum_id Forum identifier where the user try to post
-	 * @return true if the post must be approved, false else.
+	 * @return boolean
 	 */
 	public function introduciator_is_posting_must_be_approved($user, $mode, $forum_id)
 	{
@@ -732,48 +756,17 @@ class introduciator_helper
 	}
 
 	/**
-	 * Check if the user try to reply / quote to an unapproved message.
-	 * 
-	 * Usually, no user is able to reply / quote to an unapproved message. When trying,
-	 * an error message indicate that the user is not able to do this action.
-	 * This function test if the mode is INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT and
-	 * if the logged user have the capability to approved the message, and the message is a presentation
-	 * message. In this case, the error message is bypass.
-	 * 
-	 * @param type $user Logged user informations
-	 * @param type $forum_id Forum's ID
-	 * @param $mode Current reply mode (quote / bump / reply)
-	 * @return true if the error message should be bypassed, false else.
-	 */
-	public function introduciator_ignore_topic_unapproved($user, $forum_id, $mode)
-	{
-		$ret = false;
-		if ($this->is_introduciator_allowed())
-		{	// Introduciator is activated and $sql_approved has filter
-			if (empty($this->introduciator_params))
-			{	// Retrieve extension parameters
-				$this->introduciator_params = $this->introduciator_getparams();
-			}
-
-			if (in_array($mode, array('reply', 'quote')) && $this->auth->acl_get('m_approve', $forum_id) && $this->introduciator_params['fk_forum_id'] == $forum_id && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
-			{	// Into the introduce forum, the moderator can approve this message and can edit / reply
-				$ret = true;
-			}
-		}
-		
-		return $ret;
-	}
-
-	/**
 	 * Generate the request to make topic visible to user when the topic owned by the user and is into
 	 * approval state (only for INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT configuration).
 	 *
-	 * @param $user The user informations
-	 * @param $forum_id Forum identifier to be displayed or null to don't filter on forum's id
-	 * @param $sql_approved Current sql approved.
-	 * @param $table_name Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
-	 * @param $approve_fid_ary Used to retrieve approve_fid_ary if needed, else pass null or ignore parameter.
-	 * @return The SQL modified request to be able to see the unapproved user presentation.
+	 * Return the SQL modified request to be able to see the unapproved user presentation.
+	 * 
+	 * @param \phpbb\user $user The user informations
+	 * @param int $forum_id Forum identifier to be displayed or null to don't filter on forum's id
+	 * @param string $sql_approved Current sql approved.
+	 * @param string $table_name Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
+	 * @param array $approve_fid_ary Used to retrieve approve_fid_ary if needed, else pass null to ignore parameter.
+	 * @return string
 	 */
 	public function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_approved, $table_name, &$approve_fid_ary = null)
 	{
@@ -816,13 +809,15 @@ class introduciator_helper
 	 *
 	 * This function is used only for INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT level.
 	 * 
-	 * @param $user The user informations
-	 * @param $forum_id Forum identifier
-	 * @param $topic_id topic identifier
-	 * @param $check_moderator_permissions If set to true, the function check moderator permissions to reply true or false.
-	 * @return true if the topic_id is the presentation of the logged user and is not yet approved.
-	 *         If should return true and check_moderator_permissions is set to true, this function also return false if the user has moderator privilege (to
-	 *         let approval fields visible).
+	 * Return true if the topic_id is the presentation of the logged user and is not yet approved.
+	 * If should return true and check_moderator_permissions is set to true, this function also return false if the user has moderator privilege (to
+	 * let approval fields visible).
+	 * 
+	 * @param \phpbb\user $user The user informations
+	 * @param int $forum_id Forum identifier
+	 * @param int $topic_id topic identifier
+	 * @param boolean $check_moderator_permissions If set to true, the function check moderator permissions to reply true or false.
+	 * @return boolean
 	 */
 	public function introduction_is_unapproved_topic($user, $forum_id, $topic_id, $check_moderator_permissions)
 	{
@@ -869,12 +864,14 @@ class introduciator_helper
 	 *
 	 * It must be the creator of one topic into the configured forum.
 	 *
-	 * @param type $forum_id Forum's ID
-	 * @param type $user_id User's ID
-	 * @param $topic_id If this function returns true, it contains the Topic ID where the user hast post it's presentation
-	 * @param $first_post_id If this function returns true, it contains the post ID of the post that has created the topic
-	 * @param $topic_approved If this function returns true, it contains true / false if the topic is approved or not
-	 * @return true if the user already post at least one message into this forum, false else
+	 * Return true if the user already post at least one message into this forum, false else.
+	 * 
+	 * @param int $forum_id Forum's ID
+	 * @param int $user_id User's ID
+	 * @param int $topic_id If this function returns true, it contains the Topic ID where the user hast post it's presentation
+	 * @param int $first_post_id If this function returns true, it contains the post ID of the post that has created the topic
+	 * @param int $topic_approved If this function returns true, it contains true / false if the topic is approved or not
+	 * @return boolean
 	 */
 	protected function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_id, &$topic_approved)
 	{
@@ -905,8 +902,10 @@ class introduciator_helper
 	 * These groups are selected into ACP, recorded into INTRODUCIATOR_GROUPS_TABLE table.
 	 * Call group_memberships function into includes/functions_user.php file.
 	 *
-	 * @param $user_id User identifier into database
-	 * @return true if one of the user's group has been selected into configuration, false else
+	 * Return true if one of the user's group has been selected into configuration, false else.
+	 * 
+	 * @param int $user_id User identifier into database
+	 * @return boolean
 	 */
 	protected function is_user_in_groups_selected($user_id)
 	{
@@ -932,9 +931,11 @@ class introduciator_helper
 	 * Check if it contains include groups or if doesn't contains exclude group.
 	 * Check if it doesn't contains name of ignored username list.
 	 *
-	 * @param $poster_id User's ID
-	 * @param $poster_name User's name
-	 * @return true if the user is ignored, false else
+	 * Return true if the user is ignored, false else.
+	 * 
+	 * @param int $poster_id User's ID
+	 * @param string $poster_name User's name
+	 * @return boolean
 	 */
 	protected function is_user_ignored($poster_id, $poster_name)
 	{
@@ -965,10 +966,12 @@ class introduciator_helper
 	 * Check if it doesn't contains name of ignored username list.
 	 * Be careful: the option 'is_introduction_mandatory' is not taken into account.
 	 *
-	 * @param $poster_id User's ID
-	 * @param $authorisations User's authorisations. It can be null if the we check authorisation from another user thant the current one.
-	 * @param $poster_name User's name
-	 * @return true if the user must introduce himself pending of rights, false else
+	 * Return true if the user must introduce himself pending of rights, false else.
+	 * 
+	 * @param int $poster_id User's ID
+	 * @param \phpbb\auth\auth $authorisations User's authorisations. It can be null if the we check authorisation from another user thant the current one.
+	 * @param string $poster_name User's name
+	 * @return boolean
 	 */
 	public function is_user_must_introduce_himself($poster_id, $authorisations, $poster_name)
 	{
@@ -1014,10 +1017,12 @@ class introduciator_helper
 	/**
 	 * Get the approval level for the post using introduciator configuration.
 	 *
-	 * @param $user The user informations
-	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
-	 * @param $forum_id Forum identifier where the user try to post
-	 * @return The approval level for this post, depending of extension configuration.
+	 * Return the approval level for this post, depending of extension configuration.
+	 * 
+	 * @param \phpbb\user $user The user informations
+	 * @param string $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
+	 * @param int $forum_id Forum identifier where the user try to post
+	 * @return int
 	 */
 	public function introduciator_get_posting_approval_level($user, $mode, $forum_id)
 	{
@@ -1057,13 +1062,15 @@ class introduciator_helper
 	/**
 	 * Get the approval level for the post using introduciator configuration.
 	 *
-	 * @param $user The user informations
-	 * @param $forum_id Forum identifier where the user try to post
-	 * @param $where_sql Current SQL WHERE used, must be concatenate with it.
-	 * @param $mode topic or post.
-	 * @param $table_alias alias table to use.
-	 * @param $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
-	 * @return true if the sql visibility mmust be overwrite, false else.
+	 * Return true if the sql visibility mmust be overwrite, false else.
+	 * 
+	 * @param \phpbb\user $user The user informations
+	 * @param int $forum_id Forum identifier where the user try to post
+	 * @param string $where_sql Current SQL WHERE used, must be concatenate with it.
+	 * @param string $mode topic or post.
+	 * @param string $table_alias alias table to use.
+	 * @param string $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
+	 * @return boolean
 	 */
 	public function get_topic_sql_visibility($user, $forum_id, $where_sql, $mode, $table_alias, &$get_visibility_sql_overwrite)
 	{
@@ -1104,13 +1111,15 @@ class introduciator_helper
 	/**
 	 * Get the approval level for the post using introduciator configuration.
 	 *
-	 * @param $user The user informations
-	 * @param $forum_id Forum identifier where the user try to post
-	 * @param $where_sql Current SQL WHERE used, must be concatenate with it.
-	 * @param $mode topic or post.
-	 * @param $table_alias alias table to use.
-	 * @param $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
-	 * @return true if the sql visibility mmust be overwrite, false else.
+	 * Return true if the sql visibility mmust be overwrite, false else.
+	 * 
+	 * @param \phpbb\user $user The user informations
+	 * @param int $forum_id Forum identifier where the user try to post
+	 * @param string $where_sql Current SQL WHERE used, must be concatenate with it.
+	 * @param string $mode topic or post.
+	 * @param string $table_alias alias table to use.
+	 * @param string $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
+	 * @return boolean
 	 */
 	public function introduciator_let_user_posting_or_editing($user, $mode, $forum_id, $topic_id, $post_data)
 	{
