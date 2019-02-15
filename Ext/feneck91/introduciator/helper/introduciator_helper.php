@@ -870,7 +870,7 @@ class introduciator_helper
 	 * @param int $user_id User's ID
 	 * @param int $topic_id If this function returns true, it contains the Topic ID where the user hast post it's presentation
 	 * @param int $first_post_id If this function returns true, it contains the post ID of the post that has created the topic
-	 * @param int $topic_approved If this function returns true, it contains true / false if the topic is approved or not
+	 * @param boolean $topic_approved If this function returns true, it contains true / false if the topic is approved or not
 	 * @return boolean
 	 */
 	protected function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_id, &$topic_approved)
@@ -890,7 +890,7 @@ class introduciator_helper
 		{
 			$topic_id = $topic_row['topic_id'];
 			$first_post_id = $topic_row['topic_first_post_id'];
-			$topic_approved = $topic_row['topic_visibility']; // Change into phpBB 3.1.x => topic_approved replaced by topic_visibility
+			$topic_approved = $topic_row['topic_visibility'] == ITEM_APPROVED; // Change into phpBB 3.1.x => topic_approved replaced by topic_visibility
 		}
 
 		return $topic_row !== false; // Return true or false
