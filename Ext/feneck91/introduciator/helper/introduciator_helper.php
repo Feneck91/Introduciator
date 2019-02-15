@@ -167,6 +167,21 @@ class introduciator_helper
 	{
 		return isset($this->config['introduciator_allow']) && $this->config['introduciator_allow'] != '' ? $this->config['introduciator_allow'] : false;
 	}
+
+	/**
+	 * Compute the url to a specific post.
+	 *
+	 * It can be used to return the introduction url where to go to the the user introduction.
+	 *
+	 * @param int $forum_id The forum's identifier.
+	 * @param int $topic_id The topic's identifier.
+	 * @param int $post_id The post's identifier.
+	 * @return string The url to a specific post.
+	 */	
+	public function get_url_to_post($forum_id, $topic_id, $post_id)
+	{
+		return append_sid("{$this->root_path}viewtopic.$this->php_ext", 'f=' . $forum_id . '&amp;t=' . $topic_id . '#p' . $post_id);
+	}
 	
 	/**
 	 * Check if a group is selected.
@@ -669,7 +684,7 @@ class introduciator_helper
 				else if ($topic_approved)
 				{
 					$text = $this->language->lang('INTRODUCIATOR_TOPIC_VIEW_PRESENTATION');
-					$url = append_sid("{$this->root_path}viewtopic.$this->php_ext", 'f=' . $this->introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
+					$url = $this->get_url_to_post($this->introduciator_params['fk_forum_id'], $topic_id, $first_post_id);
 					$class = 'introd-icon';
 				}
 				else
@@ -955,7 +970,7 @@ class introduciator_helper
 	 * @param $poster_name User's name
 	 * @return true if the user must introduce himself pending of rights, false else
 	 */
-	protected function is_user_must_introduce_himself($poster_id, $authorisations, $poster_name)
+	public function is_user_must_introduce_himself($poster_id, $authorisations, $poster_name)
 	{
 		$ret = false;
 
@@ -982,7 +997,7 @@ class introduciator_helper
 					trigger_error('NO_USERS', E_USER_ERROR);
 				}
 
-				$authorisations = new auth();
+				$authorisations = new \phpbb\auth\auth();
 				$authorisations->acl($userdata);
 			}
 

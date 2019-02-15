@@ -156,6 +156,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT'					=> 'Testo delle regole per il forum per le presentazioni',
 	'INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN'			=> 'Default = <b>%rules_text%</b><br/>Per impostazione predefinita, %rules_text% è sostituito dalle regole per il forum per le presentazioni.<br/>È possibile modificare questo testo con il proprio.',
 
+	'INTRODUCIATOR_ST_USER'											=> '????USER',
+	'INTRODUCIATOR_ST_DATE'											=> '????DATE',
+	'INTRODUCIATOR_ST_INTRODUCE'									=> '????INTRODUCTIONS',
+
 /**
 * Others
 */

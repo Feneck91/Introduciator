@@ -4,18 +4,10 @@
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_ST_TITLE') }}</h1>
 
 {{ lang('INTRODUCIATOR_ST_TITLE_EXPLAIN') }}
-
 <form id="acp_introduciator" method="post" action="{U_ACTION}">
 		<!--
 			 --------------------------- Posting ---------------------------------------------
 		-->
-	<fieldset>
-		<p class="submit-buttons">
-			{S_HIDDEN_FIELDS}
-			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_CHECK') }}" />&nbsp;
-			{S_FORM_TOKEN}
-		</p>
-	</fieldset>
 	<!-- IF S_CHECK_DATABASE -->
 	<fieldset>
 	<div class="pagination top-pagination">
@@ -26,28 +18,25 @@
 		{% endif %}
 	</div>
 
-	<form id="action_delete_form" method="post" action="{{ U_ACTION }}">
 	<table cellspacing="1">
 		<thead>
 			<tr>
 				<th style="text-align:center;width:3%;">#</th>
-				<th style="text-align:center;width:3%;">ID</th>
-				<th style="text-align:center;width:12%;">{{ lang('SHOUT_DATE') }}</th>
-				<th style="text-align:center;width:11%;">{{ lang('SHOUT_USER') }}</th>
-				<th>{{ lang('MESSAGE') }}</th>
-				<th style="text-align:center;width:5%;">{{ lang('MARK') }}</th>
+				<th style="text-align:center;width:11%;">{{ lang('INTRODUCIATOR_ST_USER') }}</th>
+				<th style="text-align:center;width:11%;">{{ lang('INTRODUCIATOR_ST_DATE') }}</th>
+				<th>{{ lang('INTRODUCIATOR_ST_INTRODUCE') }}</th>
 			</tr>
 		</thead>
 		<tbody>
-		{% if S_DISPLAY_MESSAGES %}
-			{% for messages in loops.messages %}
-			<tr class="row{% if messages.ROW_NUMBER is even %}1{% else %}2{% endif %}">
-				<td style="text-align:center">{{ messages.ROW_NUMBER }}</td>
-				<td style="text-align:center">{{ messages.ID }}</td>
-				<td>{{ messages.TIME }}</td>
-				<td>{{ messages.POSTER }}</td>
-				<td>{{ messages.MESSAGE }}</td>
-				<td style="text-align:center;"><input type="checkbox" class="radio" name="mark[]" value="{messages.ID}" /></td>
+		{% if S_DISPLAY_INTRODUCES %}
+			{% for introduce in loops.introduces %}
+			<tr class="row{% if introduce.ROW_NUMBER is even %}1{% else %}2{% endif %}">
+				{% if introduce.FIRST_ROW_SPAN %}
+					<td rowspan="{{ introduce.ROW_SPAN }}" style="text-align:center">{{ introduce.ROW_NUMBER }}</td>
+					<td rowspan="{{ introduce.ROW_SPAN }}" style="text-align:center"> {{ introduce.POSTER }}</td>
+				{% endif %}
+				<td style="text-align:center">{{ introduce.DATE }}</td>
+				<td>{{ introduce.INTRODUCE }}</td>
 			</tr>
 			{% endfor %}
 		{% else %}
@@ -67,6 +56,15 @@
 		&bull; {{ PAGE_NUMBER }}
 		{% endif %}
 	</div>
+	</fieldset>
+	<!-- ELSE -->
+	<fieldset>
+		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
+		<p class="submit-buttons">
+			{S_HIDDEN_FIELDS}
+			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_CHECK') }}" />&nbsp;
+			{S_FORM_TOKEN}
+		</p>
 	</fieldset>
 	<!-- ENDIF -->
 </form>
