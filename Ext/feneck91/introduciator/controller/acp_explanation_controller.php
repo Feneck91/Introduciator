@@ -16,19 +16,19 @@ use phpbb\log\log;
 use phpbb\language\language;
 use phpbb\request\request;
 use phpbb\template\template;
-use phpbb\user; 
+use phpbb\user;
 use phpbb\config\db;
 
 /**
  * Class to manage explanation acp page.
- */ 
+ */
 class acp_explanation_controller extends acp_main_controller
 {
 	/**
 	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper.
 	 */
-	protected $helper;	
-	
+	protected $helper;
+
 	/**
 	 * @var \phpbb\db\driver\driver_interface Database interface
 	 */
@@ -57,7 +57,7 @@ class acp_explanation_controller extends acp_main_controller
 		$this->helper = $helper;
 		$this->db = $db;
 		$this->log = $log;
-		
+
 		parent::__construct(
 			$table_prefix,
 			$root_path,
@@ -69,13 +69,13 @@ class acp_explanation_controller extends acp_main_controller
 			$dbconfig
 		);
  	}
-	
+
 	/**
 	 * Manage the page.
-	 * 
+	 *
 	 * @param string $mode
 	 * @param string $action
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access public
@@ -109,11 +109,11 @@ class acp_explanation_controller extends acp_main_controller
 
 	/**
 	 * Manage the page: fill content.
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access private
-	 */	
+	 */
 	private function do_empty_action()
 	{
 		// no action or update current
@@ -149,11 +149,11 @@ class acp_explanation_controller extends acp_main_controller
 
 	/**
 	 * Manage the page: fill database with form content post by user.
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access private
-	 */	
+	 */
 	private function do_update_action()
 	{
 		// User has request an update : write it into database
@@ -170,7 +170,7 @@ class acp_explanation_controller extends acp_main_controller
 			'ORDER BY'	=> 'lang_id',
 		));
 		$result = $this->db->sql_query($sql);
-		
+
 		// Fill $explanation_message_array_result
 		while ($row = $this->db->sql_fetchrow($result))
 		{

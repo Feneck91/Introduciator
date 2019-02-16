@@ -16,12 +16,12 @@ use phpbb\db\driver\factory;
 use phpbb\language\language;
 use phpbb\request\request;
 use phpbb\template\template;
-use phpbb\user; 
+use phpbb\user;
 use phpbb\config\db;
 
 /**
  * Class to manage explanation acp page.
- */ 
+ */
 class acp_statistics_controller extends acp_main_controller
 {
 	/**
@@ -31,8 +31,8 @@ class acp_statistics_controller extends acp_main_controller
 	/**
 	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper.
 	 */
-	protected $helper;	
-	
+	protected $helper;
+
 	/**
 	 * @var \phpbb\db\driver\driver_interface Database interface
 	 */
@@ -41,7 +41,7 @@ class acp_statistics_controller extends acp_main_controller
 	/**
 	 * @var \phpbb\pagination
 	 */
-	private $pagination;	
+	private $pagination;
 	/**
 	 * Constructor
 	 *
@@ -60,7 +60,7 @@ class acp_statistics_controller extends acp_main_controller
 		$this->helper = $helper;
 		$this->db = $db;
 		$this->pagination = $pagination;
-		
+
 		parent::__construct(
 			$table_prefix,
 			$root_path,
@@ -72,13 +72,13 @@ class acp_statistics_controller extends acp_main_controller
 			$dbconfig
 		);
  	}
-	
+
 	/**
 	 * Manage the page.
-	 * 
+	 *
 	 * @param string $mode
 	 * @param string $action
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access public
@@ -89,7 +89,7 @@ class acp_statistics_controller extends acp_main_controller
 		{	// The introduciator must be enable else it can be not configure correctly
 			trigger_error($this->language->lang('INTRODUCIATOR_NOT_ENABLED_FOR_STATISTICS') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
-		
+
 		// If no action, display configuration
 		if (empty($action))
 		{	// no action or update current
@@ -106,7 +106,7 @@ class acp_statistics_controller extends acp_main_controller
 					}
 					$this->do_check_action();
 				break;
-			
+
 				case 'otherpage':
 					$this->do_check_action();
 				break;
@@ -120,11 +120,11 @@ class acp_statistics_controller extends acp_main_controller
 
 	/**
 	 * Manage the page: fill content.
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access private
-	 */	
+	 */
 	private function do_empty_action()
 	{
 		$this->template->assign_vars(array(
@@ -140,15 +140,15 @@ class acp_statistics_controller extends acp_main_controller
 
 	/**
 	 * Manage the page: fill database with form content post by user.
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access private
-	 */	
+	 */
 	private function do_check_action()
 	{
 		$params = $this->helper->introduciator_getparams();
-		
+
 		$start = $this->request->variable('start', 0);
 		//
 		// Here, we must check database to see if some user have more than one introduction
@@ -167,7 +167,7 @@ class acp_statistics_controller extends acp_main_controller
 					'GROUP_BY'	=> 'topic_poster',
 				)) => ''),
 			)) . " result";
-						
+
 		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
 		$nb_several_introduce = reset($row);
 
@@ -236,7 +236,7 @@ class acp_statistics_controller extends acp_main_controller
 				}
 				$this->template->assign_vars(array(
 					'S_DISPLAY_INTRODUCES'		=> ($nb_several_introduce > 0) ? true : false,
-					'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start),	
+					'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start),
 				));
 				$this->pagination->generate_template_pagination($this->u_action . "&amp;action=otherpage", 'pagination', 'start', $nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start);
 			}

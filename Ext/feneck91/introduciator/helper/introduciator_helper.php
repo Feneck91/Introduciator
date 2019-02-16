@@ -18,7 +18,7 @@ if (!function_exists('group_memberships'))
  * Class used to manage extension.
  *
  * Is used to manage ACP and check all needed information to known how the extension should work.
- */ 
+ */
 class introduciator_helper
 {
 	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL          = 0; // No approval introduce
@@ -34,12 +34,12 @@ class introduciator_helper
 	 * PhpBB Root path.
 	 */
 	private $root_path;
-	
+
 	/**
 	 * phpBB Extention.
 	 */
 	private $php_ext;
-	
+
 	/**
 	 * @var \phpbb\user Current connected user.
 	 */
@@ -69,7 +69,7 @@ class introduciator_helper
 	 * @var \phpbb\language\language Language manager, used to translate all messages.
 	 */
 	private $language;
-	
+
 	/**
 	 * @var \phpbb\language\language Language manager, used to translate all messages.
 	 */
@@ -101,7 +101,7 @@ class introduciator_helper
 		$this->php_ext = $php_ext;
 		$this->user = $user;
 		$this->db = $db;
-		$this->config = $config; 
+		$this->config = $config;
 		$this->auth = $auth;
 		$this->controller_helper = $controller_helper;
 		$this->language = $language;
@@ -110,7 +110,7 @@ class introduciator_helper
 
 	/**
 	 * Load language only if noyt already done.
-	 * 
+	 *
 	 * @return void
 	 * @access public
 	 */
@@ -122,10 +122,10 @@ class introduciator_helper
 			$this->language_loaded = true;
 		}
 	}
-	
+
 	/**
 	 * Get the language instance.
-	 * 
+	 *
 	 * Return the private language instance.
 	 *
 	 * @return \phpbb\language\language
@@ -135,13 +135,13 @@ class introduciator_helper
 	{
 		return $this->language;
 	}
-	
+
 	/**
 	 * Get the introduciator groups table name (with prefix).
 	 *
 	 * It's not possible to create const INTRODUCIATOR_GROUPS_TABLE because it need table prefix.
 	 * So, I use a method to get this name.
-	 * 
+	 *
 	 * Return the full group table name.
 	 *
 	 * @return string
@@ -151,7 +151,7 @@ class introduciator_helper
 	{
 		return $this->table_prefix . 'introduciator_groups';
 	}
-	
+
 	/**
 	 * Get the introduciator groups table name (with prefix).
 	 *
@@ -159,7 +159,7 @@ class introduciator_helper
 	 * So, I use a method to get this name.
 	 *
 	 * Return the full explanation table name.
-	 * 
+	 *
 	 * @return string
 	 * @access public
 	 */
@@ -175,7 +175,7 @@ class introduciator_helper
 	 *
 	 * @return boolean
 	 * @access public
-	 */	
+	 */
 	public function is_introduciator_allowed()
 	{
 		return isset($this->config['introduciator_allow']) && $this->config['introduciator_allow'] != '' ? $this->config['introduciator_allow'] : false;
@@ -185,26 +185,26 @@ class introduciator_helper
 	 * Compute the url to a specific post.
 	 *
 	 * It can be used to return the introduction url where to go to the the user introduction.
-	 * 
+	 *
 	 * Return the url to a specific post.
 	 *
 	 * @param int $forum_id The forum's identifier.
 	 * @param int $topic_id The topic's identifier.
 	 * @param int $post_id The post's identifier.
-	 * 
+	 *
 	 * @return string
 	 * @access public
-	 */	
+	 */
 	public function get_url_to_post($forum_id, $topic_id, $post_id)
 	{
 		return append_sid("{$this->root_path}viewtopic.$this->php_ext", 'f=' . $forum_id . '&amp;t=' . $topic_id . '#p' . $post_id);
 	}
-	
+
 	/**
 	 * Check if a group is selected.
 	 *
 	 * Return true if the group is selected, false else.
-	 * 
+	 *
 	 * @param $group_id Group's identifier.
 
 	 * @return boolean
@@ -223,7 +223,7 @@ class introduciator_helper
 
 		return $ret;
 	}
-	
+
 	/**
 	 * Replace all variables with several values.
 	 *
@@ -241,7 +241,7 @@ class introduciator_helper
 	 *
 	 * @param $arr_fields Array of variables to update
 	 * @param $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
-	 * 
+	 *
 	 * @return void
 	 * @access public
 	 */
@@ -282,16 +282,16 @@ class introduciator_helper
 			),
 			'ORDER BY'	=> 'l.lang_id',
 		);
-		
+
 		if ($only_current_lang === true)
 		{
 			// Add WHERE to get only the current user language
 			$arr_request = array_merge($arr_request, array(
 					'WHERE'		=> "l.lang_iso = '" . $this->user->lang_name . "'",
 				)
-			);				
+			);
 		}
-		
+
 		$sql = $this->db->sql_build_query('SELECT', $arr_request);
 		$ret_value = array();
 		$result = $this->db->sql_query($sql);
@@ -314,7 +314,7 @@ class introduciator_helper
 			$rules_text_uid					= isset($row['rules_text_uid']) ? $row['rules_text_uid'] : '';
 			$rules_textbitfield				= isset($row['rules_text_bitfield']) ? $row['rules_text_bitfield'] : '';
 			$rules_text_bbcode_options		= isset($row['rules_text_bbcode_options']) ? $row['rules_text_bbcode_options'] : '';
-			
+
 			if ($is_edit === true)
 			{
 				$message_title = generate_text_for_edit($message_title, $message_title_uid, (int) $message_title_bbcode_options);
@@ -326,7 +326,7 @@ class introduciator_helper
 				$message_text = $message_text['text'];
 				$rules_title = $rules_title['text'];
 				$rules_text = $rules_text['text'];
-				
+
 				// Restore %forum_url% and %forum_post% tags because we must change them else the BBCode URL not work if the URL is not correct
 				$this->replace_all_by(
 					array(
@@ -377,15 +377,15 @@ class introduciator_helper
 				));
 			}
 		}
-		
+
 		return $ret_value;
 	}
-	
+
 	/**
 	 * Get the introduciator parameters.
 	 *
 	 * Return the introduciator parameters.
-	 * 
+	 *
 	 * @param $is_edit if true, return rules texts for editing
 	 *                 if false, return rules texts for display
 	 *                 if null, don't return rules texts (used only in the extension configuration and to display rules)
@@ -483,7 +483,7 @@ class introduciator_helper
 					// Make links into $link_goto_forum / $link_post_forum
 					$this->replace_all_by(
 						array(
-							&$explanation_message_title,		// if text is from $this->language->lang(xx),  
+							&$explanation_message_title,		// if text is from $this->language->lang(xx),
 							&$explanation_message_text,
 							&$explanation_rules_title,
 							&$explanation_rules_text,
@@ -496,7 +496,7 @@ class introduciator_helper
 							'%forum_post%'	=> $forum_post,
 						)
 					);
-						
+
 					$params = array_merge($params, array(
 						'explanation_message_title'				=> $explanation_message_title,
 						'explanation_message_text'				=> $explanation_message_text,
@@ -524,7 +524,7 @@ class introduciator_helper
 	 * Return true if the user is allowed to make action,
 	 *         false else, in this case, just check if allowed or not (remove quick reply if not allowed).
 	 *         RedirectResponse if redirection is needed.
-	 * 
+	 *
 	 * @param $user The connected user.
 	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
 	 * @param $forum_id Forum identifier where the user try to post.
@@ -592,7 +592,7 @@ class introduciator_helper
 										// Load langage
 										$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
 										$this->load_language_if_needed();
-										
+
 										$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
 										$meta_info = append_sid("{$this->root_path}viewtopic.$this->php_ext", "f=$forum_id&amp;t=$topic_id");
 										$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
@@ -646,7 +646,7 @@ class introduciator_helper
 							// Load langage
 							$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
 							$this->load_language_if_needed();
-							
+
 							// Test : if the user try to quote / reply into his own introduction : change the message
 							if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
 							{
@@ -657,7 +657,7 @@ class introduciator_helper
 								// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
 								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
 							}
-							
+
 							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
 						}
@@ -671,7 +671,7 @@ class introduciator_helper
 							// Load langage
 							$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
 							$this->load_language_if_needed();
-							
+
 							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
 							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", 'f=' . $forum_id) . '">', '</a>');
 							trigger_error($message, E_USER_NOTICE);
@@ -698,7 +698,7 @@ class introduciator_helper
 	 *   <li>class : class to use for the button.</li>
 	 *   <li>pending : true if message is pending approval, false else.</li>
 	 * </ul>.
-	 * 
+	 *
 	 * @param $poster_id The poster id
 	 * @param $poster_name The poster name
 	 *
@@ -729,7 +729,7 @@ class introduciator_helper
 
 				// Load langage
 				$this->load_language_if_needed();
-				
+
 				if (!$this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
 				{
 					// No post into the introduce topic
@@ -776,13 +776,13 @@ class introduciator_helper
 	 * If the user that post have right to approved it's own presentation,
 	 * the function return always false: no need to make manage approval to a user
 	 * that can approve himself its own message.
-	 * 
+	 *
 	 * Return true if the post must be approved, false else.
-	 * 
+	 *
 	 * @param $user The user informations
 	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
 	 * @param $forum_id Forum identifier where the user try to post
-	 * 
+	 *
 	 * @return boolean
 	 * @access public
 	 */
@@ -796,13 +796,13 @@ class introduciator_helper
 	 * approval state (only for INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT configuration).
 	 *
 	 * Return the SQL modified request to be able to see the unapproved user presentation.
-	 * 
+	 *
 	 * @param \phpbb\user $user The user informations
 	 * @param int $forum_id Forum identifier to be displayed or null to don't filter on forum's id
 	 * @param string $sql_approved Current sql approved.
 	 * @param string $table_name Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
 	 * @param array $approve_fid_ary Used to retrieve approve_fid_ary if needed, else pass null to ignore parameter.
-	 * 
+	 *
 	 * @return string
 	 * @access public
 	 */
@@ -816,7 +816,7 @@ class introduciator_helper
 				// Retrieve extension parameters
 				$this->introduciator_params = $this->introduciator_getparams();
 			}
-			
+
 			if (($forum_id === null || $this->introduciator_params['fk_forum_id'] == $forum_id) && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 			{
 				$poster_id = (int) $user->data['user_id'];
@@ -849,16 +849,16 @@ class introduciator_helper
 	 * Test if the topic into the forum is unapproved and contains current introduce of logged user.
 	 *
 	 * This function is used only for INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT level.
-	 * 
+	 *
 	 * Return true if the topic_id is the presentation of the logged user and is not yet approved.
 	 * If should return true and check_moderator_permissions is set to true, this function also return false if the user has moderator privilege (to
 	 * let approval fields visible).
-	 * 
+	 *
 	 * @param \phpbb\user $user The user informations
 	 * @param int $forum_id Forum identifier
 	 * @param int $topic_id topic identifier
 	 * @param boolean $check_moderator_permissions If set to true, the function check moderator permissions to reply true or false.
-	 * 
+	 *
 	 * @return boolean
 	 * @access public
 	 */
@@ -902,7 +902,7 @@ class introduciator_helper
 				}
 			}
 		}
-		
+
 		return $ret;
 	}
 
@@ -912,13 +912,13 @@ class introduciator_helper
 	 * It must be the creator of one topic into the configured forum.
 	 *
 	 * Return true if the user already post at least one message into this forum, false else.
-	 * 
+	 *
 	 * @param int $forum_id Forum's ID
 	 * @param int $user_id User's ID
 	 * @param int $topic_id If this function returns true, it contains the Topic ID where the user hast post it's presentation
 	 * @param int $first_post_id If this function returns true, it contains the post ID of the post that has created the topic
 	 * @param boolean $topic_approved If this function returns true, it contains true / false if the topic is approved or not
-	 * 
+	 *
 	 * @return boolean
 	 * @access protected
 	 */
@@ -952,9 +952,9 @@ class introduciator_helper
 	 * Call group_memberships function into includes/functions_user.php file.
 	 *
 	 * Return true if one of the user's group has been selected into configuration, false else.
-	 * 
+	 *
 	 * @param int $user_id User identifier into database
-	 * 
+	 *
 	 * @return boolean
 	 * @access protected
 	 */
@@ -984,10 +984,10 @@ class introduciator_helper
 	 * Check if it doesn't contains name of ignored username list.
 	 *
 	 * Return true if the user is ignored, false else.
-	 * 
+	 *
 	 * @param int $poster_id User's ID
 	 * @param string $poster_name User's name
-	 * 
+	 *
 	 * @return boolean
 	 * @access protected
 	 */
@@ -997,7 +997,7 @@ class introduciator_helper
 		{
 			$this->introduciator_params = $this->introduciator_getparams();
 		}
-		
+
 		// Check if :
 		//	1 : Include group is ON and the user is member of at least one group of the selected groups (include groups)
 		//	2 : Include group is OFF (exclude) and the user is not member of one group of the selected groups (exclude groups)
@@ -1021,11 +1021,11 @@ class introduciator_helper
 	 * Be careful: the option 'is_introduction_mandatory' is not taken into account.
 	 *
 	 * Return true if the user must introduce himself pending of rights, false else.
-	 * 
+	 *
 	 * @param int $poster_id User's ID
 	 * @param \phpbb\auth\auth $authorisations User's authorisations. It can be null if the we check authorisation from another user thant the current one.
 	 * @param string $poster_name User's name
-	 * 
+	 *
 	 * @return boolean
 	 * @access public
 	 */
@@ -1037,7 +1037,7 @@ class introduciator_helper
 		{
 			$this->introduciator_params = $this->introduciator_getparams();
 		}
-		
+
 		if ($this->introduciator_params['is_use_permissions'])
 		{
 			if ($authorisations === null)
@@ -1073,11 +1073,11 @@ class introduciator_helper
 	 * Get the approval level for the post using introduciator configuration.
 	 *
 	 * Return the approval level for this post, depending of extension configuration.
-	 * 
+	 *
 	 * @param \phpbb\user $user The user informations
 	 * @param string $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
 	 * @param int $forum_id Forum identifier where the user try to post
-	 * 
+	 *
 	 * @return int
 	 * @access public
 	 */
@@ -1123,14 +1123,14 @@ class introduciator_helper
 	 * Get the approval level for the post using introduciator configuration.
 	 *
 	 * Return true if the sql visibility mmust be overwrite, false else.
-	 * 
+	 *
 	 * @param \phpbb\user $user The user informations
 	 * @param int $forum_id Forum identifier where the user try to post
 	 * @param string $where_sql Current SQL WHERE used, must be concatenate with it.
 	 * @param string $mode topic or post.
 	 * @param string $table_alias alias table to use.
 	 * @param string $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
-	 * 
+	 *
 	 * @return boolean
 	 * @access public
 	 */
@@ -1173,12 +1173,12 @@ class introduciator_helper
 
 		return $ret;
 	}
-	
+
 	/**
 	 * Get the approval level for the post using introduciator configuration.
 	 *
 	 * Return true if the sql visibility mmust be overwrite, false else.
-	 * 
+	 *
 	 * @param \phpbb\user $user The user informations
 	 * @param int $forum_id Forum identifier where the user try to post
 	 * @param string $where_sql Current SQL WHERE used, must be concatenate with it.

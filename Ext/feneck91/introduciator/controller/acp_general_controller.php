@@ -12,29 +12,29 @@ namespace feneck91\introduciator\controller;
 use phpbb\language\language;
 use phpbb\request\request;
 use phpbb\template\template;
-use phpbb\user; 
+use phpbb\user;
 use phpbb\config\db;
 
 /**
  * Class to manage general acp page.
- */ 
+ */
 class acp_general_controller extends acp_main_controller
 {
 	/**
 	 * URL of web site where download the latest version file info
 	 */
 	const url_version_check           = 'feneck91.free.fr';
-	
+
 	/**
 	 * Folder in web site where download the latest version file info
 	 */
 	const folder_version_check       = '/phpbb';
-	
+
 	/**
 	 * File name to download the latest version file info
 	 */
 	const file_version_check         = 'introduciator_extension_version.txt';
-	
+
 	/**
 	 * Constructor
 	 *
@@ -61,13 +61,13 @@ class acp_general_controller extends acp_main_controller
 			$dbconfig
 		);
  	}
-	
+
 	/**
 	 * Manage the page.
-	 * 
+	 *
 	 * @param string $mode
 	 * @param string $action
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access public
@@ -75,7 +75,7 @@ class acp_general_controller extends acp_main_controller
 	public function do_action($mode, $action)
 	{
 		global $phpbb_admin_path;
-		
+
 		// Check if a new version of this extension is available
 		$latest_version_info = $this->obtain_latest_version_info($this->request->variable('introduciator_versioncheck_force', false));
 
@@ -99,7 +99,7 @@ class acp_general_controller extends acp_main_controller
 				'L_INTRODUCIATOR_UPDATE_INFORMATION'	=> $infos[0],
 			));
 		}
-		
+
 		$this->template->assign_vars(array(
 			// Display general page content into ACP Extensions tab
 			'S_INTRODUCIATOR_GENERAL_PAGES'			=> true,
@@ -120,7 +120,7 @@ class acp_general_controller extends acp_main_controller
 	 * Obtains the latest version information.
 	 *
 	 * Return Version info on success, false on failure.
-	 * 
+	 *
 	 * @param bool $force_update Ignores cached data. Defaults to false.
 	 * @param int $ttl Cache version information for $ttl seconds. Defaults to 86400 (24 hours).
 	 *
@@ -150,7 +150,7 @@ class acp_general_controller extends acp_main_controller
 
 		return $info;
 	}
-	
+
 	/**
 	 * Get the update information string from text loaded from update web site.
 	 *

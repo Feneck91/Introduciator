@@ -24,13 +24,13 @@ abstract class acp_main_controller
 	/**
 	 * @var string Action URL
 	 */
-	protected $u_action;	
+	protected $u_action;
 
 	/**
 	 * @var string Table prefix.
 	 */
 	protected $table_prefix;
-	
+
 	/**
 	 * @var string phpBB root path
 	 */
@@ -39,18 +39,18 @@ abstract class acp_main_controller
 	/**
 	 * @var string phpBB Extention
 	 */
-	protected $php_ext;	
+	protected $php_ext;
 
 	/**
 	 * @var \phpbb\language\language
 	 */
 	protected $language;
-	
+
 	/**
 	 * @var \phpbb\request\request
 	 */
 	protected $request;
-	
+
 	/**
 	 * @var \phpbb\template\template
 	 */
@@ -60,7 +60,7 @@ abstract class acp_main_controller
 	 * @var \phpbb\user Current connected user.
 	 */
 	protected $user;
-	
+
 	/**
 	 * @var \phpbb\config\db
 	 */
@@ -77,7 +77,7 @@ abstract class acp_main_controller
 	 * @param template	                                         $template      Template object
 	 * @param user                                               $user          User object
 	 * @param db                                                 $dbconfig      Config object
-	 * 
+	 *
 	 * @access public
 	 */
 	public function __construct($table_prefix, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
@@ -91,7 +91,7 @@ abstract class acp_main_controller
 		$this->user = $user;
 		$this->dbconfig = $dbconfig;
 	}
-	
+
 	/**
 	 * Set page url
 	 *
@@ -104,13 +104,13 @@ abstract class acp_main_controller
 	{
 		$this->u_action = $u_action;
 	}
-	
+
 	/**
 	 * Used by derived classes to manage page.
-	 * 
+	 *
 	 * @param string $mode
 	 * @param string $action
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access public

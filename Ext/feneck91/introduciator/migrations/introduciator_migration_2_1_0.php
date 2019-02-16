@@ -16,7 +16,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 	 * Add the table schema to the database
 	 *
 	 * Only add the introduciator group table is added
-	 * 
+	 *
 	 * Return an array of table schema to create / update
 	 *
 	 * @return array
@@ -58,7 +58,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 			),
 		);
 	}
-	
+
 	/**
 	 * Drop the Introduciator groups table schema from the database.
 	 *
@@ -99,8 +99,8 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 
 			// Misc Settings
 			array('config.add', array('introduciator_install_date', time())),
-			array('config.add', array('introduciator_extension_version', '3.0.0')), // Current extension's version 
-			
+			array('config.add', array('introduciator_extension_version', '3.0.0')), // Current extension's version
+
 			// Add admin permissions
 			array('permission.add', array('a_introduciator_manage', true)),
 
@@ -112,7 +112,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 			array('permission.permission_set', array('GLOBAL_MODERATORS', 'u_must_introduce', 'group')),
 			array('permission.permission_set', array('REGISTERED', 'u_must_introduce', 'group')),
 			array('permission.permission_set', array('NEWLY_REGISTERED', 'u_must_introduce', 'group')),
-			
+
 			// Set permissions administration
 			array('permission.permission_set', array('ADMINISTRATORS', 'a_introduciator_manage', 'group')),
 
@@ -138,14 +138,14 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 					'acp',
 					'ACP_INTRODUCIATOR_EXTENSION',
 					array(
-						'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module', 
+						'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
 						'modes'	  			=> array(
 							//---------------------------------------------------------------------
 							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 							'general',
 							'configuration',
 							'explanation',
-							'statistics',							
+							'statistics',
 							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 							//---------------------------------------------------------------------
 							),

@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 														<li>Les statistiques sur les présentations.</li>
 														<li>La vérification de la base de données concernant les présentations (vérification que les utilisateurs n’ont pas postés plus d’une seule présentation).</li>
 														</ul>',
-	
+
 /**
 * mode: configuration : Edit
 * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_ED_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'

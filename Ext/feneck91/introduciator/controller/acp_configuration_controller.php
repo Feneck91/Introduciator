@@ -16,19 +16,19 @@ use phpbb\log\log;
 use phpbb\language\language;
 use phpbb\request\request;
 use phpbb\template\template;
-use phpbb\user; 
+use phpbb\user;
 use phpbb\config\db;
 
 /**
  * Class to manage configuration acp page.
- */ 
+ */
 class acp_configuration_controller extends acp_main_controller
 {
 	/**
 	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper.
 	 */
-	protected $helper;	
-	
+	protected $helper;
+
 	/**
 	 * @var \phpbb\db\driver\driver_interface Database interface
 	 */
@@ -57,7 +57,7 @@ class acp_configuration_controller extends acp_main_controller
 		$this->helper = $helper;
 		$this->db = $db;
 		$this->log = $log;
-		
+
 		parent::__construct(
 			$table_prefix,
 			$root_path,
@@ -69,13 +69,13 @@ class acp_configuration_controller extends acp_main_controller
 			$dbconfig
 		);
  	}
-	
+
 	/**
 	 * Manage the page.
-	 * 
+	 *
 	 * @param string $mode
 	 * @param string $action
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access public
@@ -110,11 +110,11 @@ class acp_configuration_controller extends acp_main_controller
 
 	/**
 	 * Manage the page: fill content.
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access private
-	 */	
+	 */
 	private function do_empty_action()
 	{
 		$params = $this->helper->introduciator_getparams(true);
@@ -146,11 +146,11 @@ class acp_configuration_controller extends acp_main_controller
 
 	/**
 	 * Manage the page: fill database with form content post by user.
-	 * 
+	 *
 	 * @throws \Exception
 	 * @return void
 	 * @access private
-	 */	
+	 */
 	private function do_update_action()
 	{
 		// User has request an update : write it into database
@@ -203,7 +203,7 @@ class acp_configuration_controller extends acp_main_controller
 		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_INTRODUCIATOR_UPDATED');
 		trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
 	}
-	
+
 	/**
 	 * Add all forum recursivly to template 'forums' var.
 	 *
@@ -213,7 +213,7 @@ class acp_configuration_controller extends acp_main_controller
 	 * @param int $fk_selected_forum_id the current selected forum id.
 	 * @param int $id_parent the parent's forum id, if 0 it is the root one.
 	 * @param int $level hierarchy level, 0 for root, 1 for children, 2 for children's children, etc.
-	 * 
+	 *
 	 * @return void
 	 * @access private
 	 */
@@ -255,7 +255,7 @@ class acp_configuration_controller extends acp_main_controller
 	 * Find all groups to propose it to the user.
 	 *
 	 * Add all elements into the template.
-	 * 
+	 *
 	 * @return void
 	 * @access private
 	 */

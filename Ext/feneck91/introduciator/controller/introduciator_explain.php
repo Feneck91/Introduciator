@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * This page is displayed when user try to post and have not yet written it's introduce.
  * It explain that the introduce is mandatory and display links to help user to begin it's introduce.
- */ 
+ */
 class introduciator_explain
 {
 	protected $config;
@@ -30,7 +30,7 @@ class introduciator_explain
 	 * The important code is into this helper.
 	 */
 	private $introduciator_helper;
-	
+
 	public function __construct(\phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		global $phpbb_container;
@@ -42,7 +42,7 @@ class introduciator_explain
 		$this->template = $template;
 		$this->user = $user;
 	}
-	
+
 	public function display($forum_id)
 	{
 		// If user not connected, go to login page

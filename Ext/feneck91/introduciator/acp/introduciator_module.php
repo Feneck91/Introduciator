@@ -20,7 +20,7 @@ class introduciator_module
 	 * Constant form key used to verify that the form comes from ACP post.
 	 */
 	const form_key = 'feneck91/acp_introduciator';
-	
+
 	/**
 	 * @var array
 	 */
@@ -35,20 +35,20 @@ class introduciator_module
 	 *  @var string
 	 */
 	public $u_action;
-	
+
 	/**
 	 * @var string
 	 */
 	public $tpl_name;
-	
+
 	/**
 	 * @var array
 	 */
 	private $module_info;
-	
+
 	/**
-	 * Main function call 
-	 * 
+	 * Main function call
+	 *
 	 * @param string $id
 	 * @param string $mode
 	 *
@@ -78,7 +78,7 @@ class introduciator_module
 			// This functions adds a secret token to any form, a token which should be checked after
 			// submission with the check_form_key function to ensure that the received data is the same as the submitted.
 			add_form_key(introduciator_module::form_key);
-			
+
 			$this->switch_mode($id, $mode, $acp_controller);
 		}
 		else
@@ -86,7 +86,7 @@ class introduciator_module
 			trigger_error('NO_MODE', E_USER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * Check if value is in array
 	 *
@@ -134,7 +134,7 @@ class introduciator_module
 
 		return array();
 	}
-	
+
 	/**
 	 * Switch to the mode selected.
 	 *
@@ -161,7 +161,7 @@ class introduciator_module
 			case 'general':
 				$this->do_action($id, $mode, $action, $acp_controller);
 			break;
-		
+
 			case 'configuration':
 				$this->do_action($id, $mode, $action, $acp_controller);
 			break;
@@ -169,7 +169,7 @@ class introduciator_module
 			case 'explanation':
 				$this->do_action($id, $mode, $action, $acp_controller);
 			break;
-		
+
 			case 'statistics':
 				$this->do_action($id, $mode, $action, $acp_controller);
 			break;
@@ -179,7 +179,7 @@ class introduciator_module
 			break;
 		}
 	}
-	
+
 	/**
 	 * Performs action requested by the module
 	 *

@@ -38,7 +38,7 @@ class introduciator_acp_listener implements EventSubscriberInterface
 			// Users
 			'u_shout_bbcode'		=> array('lang' => 'ACL_U_MUST_INTRODUCE',			'cat' => 'post'),
 		);
-		
+
 		$event['permissions'] = $permissions;
 	}
 }

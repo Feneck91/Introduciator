@@ -17,17 +17,17 @@ class introduciator_listener implements EventSubscriberInterface
 	 * @var \phpbb\user Current connected user.
 	 */
 	private $user;
-	
+
 	/**
 	 * @var \phpbb\template\template Template.
-	 */	
+	 */
 	private $template;
 
 	/**
 	 * @var \phpbb\template\context Template context.
-	 */	
+	 */
 	private $template_context;
-	
+
 	/**
 	 * @var Introduciator helper. The important code is into this helper.
 	 */
@@ -72,10 +72,10 @@ class introduciator_listener implements EventSubscriberInterface
 			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
 			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',					// Allow phpBB to retrieve a topic for the user that post it into introduce
 			'core.viewtopic_modify_post_row'							=> 'on_viewtopic_modify_post_row',				// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
-			
+
 /* Patch to add to posting.php :
  * Search      : // Not able to reply to unapproved posts/topics
- * Add-Before  :  
+ * Add-Before  :
 // Feneck91 - Patch
 $vars = array(
 	'post_data',
@@ -88,7 +88,7 @@ $vars = array(
 extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact($vars)));
 */
 			'core.posting_modify_row_data'										=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
-			
+
 			//=============================================
 			// From here, this is events for template html
 			//=============================================
@@ -96,7 +96,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			'core.memberlist_prepare_profile_data'								=> 'on_display_profile_data',					// Prepare data to be displayed in several pages
 		);
 	}
-	
+
 	/**
 	 * Hide the Quick Reply fields if needed.
 	 *
@@ -107,7 +107,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 	 * @return true, false or RedirectResponse if redirection is needed.
 	 */
 	public function on_before_quickreply_displayed($event)
-	{	
+	{
 		$ret = null;
 		$root_ref = &$this->template_context->get_root_ref();
 		if (!empty($root_ref['S_QUICK_REPLY']))
@@ -118,7 +118,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 				$this->template->assign_var('S_QUICK_REPLY', false);
 			}
 		}
-		
+
 		return $ret;
 	}
 
@@ -134,13 +134,13 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 	public function on_displaying_posting_screen($event)
 	{
 		$this->introduciator_helper->introduciator_verify_posting($this->user, $event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true);
-	} 
+	}
 
 	/**
 	 * Verify if the posting is allowed or not.
 	 *
 	 * Called when the user submit a post.
-	 * If user is not allowed to post, an error message is displayed, else if 
+	 * If user is not allowed to post, an error message is displayed, else if
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
@@ -160,12 +160,12 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			}
 		}
 	}
-	
+
 	/**
 	 * Verify if the posting is allowed or not.
 	 *
 	 * Called when the user submit a post.
-	 * If user is not allowed to post, an error message is displayed, else if 
+	 * If user is not allowed to post, an error message is displayed, else if
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
@@ -177,7 +177,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 		if (isset($data['introduciator_force_unapproved']))
 		{
 			global $phpbb_root_path, $phpEx;
-			
+
 			meta_refresh(20, $event['redirect_url']); // More time to read
 			$message = $this->user->lang['POST_STORED_MOD'] . ' '. $this->user->lang['POST_APPROVAL_NOTIFY'];
 			if ($data['introduciator_force_unapproved'] == $this->introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
@@ -189,12 +189,12 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			trigger_error($message);
 		}
 	}
-	
+
 	/**
 	 * Verify if the user is editing it's own introduction.
 	 *
 	 * Called when the user submit a post.
-	 * If user is not allowed to post, an error message is displayed, else if 
+	 * If user is not allowed to post, an error message is displayed, else if
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
@@ -203,7 +203,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 	public function on_submit_post_end($event)
 	{
 		global $phpEx, $phpbb_root_path;
-		
+
 		switch ($event['mode'])
 		{
 			case 'edit_first_post':
@@ -224,9 +224,9 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			case 'edit_topic':
 				// Nothing to do here
 			break;
-		}		
+		}
 	}
-	
+
 	/**
 	 * Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce.
 	 *
@@ -245,7 +245,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			}
 		}
 	}
-	
+
 	/**
 	 * Allow displaying '?' into the topic list when the user see its own introduce.
 	 *
@@ -263,7 +263,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			$event['topic_row'] = $topic_row;
 		}
 	}
-	
+
 	/**
 	 * Allow the user that create own introduction to view it when it open the unapproved topic introduction.
 	 *
@@ -281,7 +281,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			}
 		}
 	}
-	
+
 	/**
 	 * Allow the user that create own introduction to view it into the list of the topic, even the topic is unapproved.
 	 *
@@ -298,7 +298,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 
 	/**
 	 * Called when the topic is view.
-	 * 
+	 *
 	 * But it display Approve / Unapproved field even the user has no right to do this.
 	 * If it is a simple user with extension configured as "approvel with edit" we must
 	 * hide this fields.
@@ -333,7 +333,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 
 	/**
 	 * Called when a user whant to post, before write the message.
-	 * 
+	 *
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode, allow the moderator to post a reply into an unapproved message.
 	 *
 	 * @param $event The event.
@@ -351,10 +351,10 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 	//
 	// From here, all event are used into GUI: add new templates
 	//
-	
+
 	/**
 	 * Loads all user profile introduce data into the user cache for a topic.
-	 * 
+	 *
 	 * Prepare data to be displayed in viewtopic.
 	 *
 	 * @param \phpbb\event\data	$event The event data
@@ -373,10 +373,10 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			$event['user_cache'] = $user_cache;
 		}
 	}
-	
+
 	/**
 	 * Loads all user profile introduce data into the template_data to be displayed when it's needed.
-	 * 
+	 *
 	 * Prepare data to be displayed in several pages  like memberlist.
 	 *
 	 * @param \phpbb\event\data	$event The event data
@@ -397,7 +397,7 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			);
 			//$profile_fields
 		}
-		
+
 		return $event;
 	}
 }

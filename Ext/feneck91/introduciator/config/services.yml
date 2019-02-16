@@ -1,6 +1,6 @@
 imports:
     - { resource: controllers.yml }
-    
+
 services:
     feneck91.introduciator.acp_listener:
         class: feneck91\introduciator\event\introduciator_acp_listener

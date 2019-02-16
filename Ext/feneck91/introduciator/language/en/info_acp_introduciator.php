@@ -83,7 +83,7 @@ $lang = array_merge($lang, array(
 														<li>The statistics about introductions.</li>
 														<li>The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
 														</ul>',
-	
+
 /**
 * mode: configuration : Edit
 * Info: language keys are prefixed with 'INTRODUCIATOR_CP_ED_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_EDIT_'
@@ -158,7 +158,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_USER'											=> 'USER',
 	'INTRODUCIATOR_ST_DATE'											=> 'DATE',
 	'INTRODUCIATOR_ST_INTRODUCE'									=> 'INTRODUCTIONS',
-	
+
 /**
 * Others
 */
