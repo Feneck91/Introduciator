@@ -5,24 +5,30 @@
 	"homepage": "http://feneck91.free.fr/forum/index.php",
 	"version": "3.0.0",
 	"time": "2019-03-12",
-	"keywords": ["phpbb", "extension", "feneck91", "introduciator"],
-	"license": "GPL-2.0",
+	"keywords": [
+		"phpbb",
+		"extension",
+		"feneck91",
+		"introduciator"
+	],
+	"license": "GPL-2.0-only",
 	"authors": [
 		{
 			"name": "Stéphane Château",
 			"email": "feneck91@free.fr",
 			"homepage": "http://feneck91.free.fr/forum",
-			"role": "Extension Developer"
+			"role": "Developer"
 		}
 	],
 	"require": {
 		"php": ">=5.3.3",
-		"composer/installers": "~1.0"
+		"composer/installers": "~1.0.0",
+		"phpbb/phpbb": ">=3.2.0,<3.6.0@dev"
 	},
 	"extra": {
 		"display-name": "Introduciator",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.0,<3.6.*@dev"
+			"phpbb/phpbb": ">=3.2.0,<3.6.0@dev"
 		},
 		"version-check": {
 			"host": "feneck91.free.fr",
