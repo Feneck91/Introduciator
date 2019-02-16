@@ -9,6 +9,8 @@
 
 namespace feneck91\introduciator\acp;
 
+use feneck91\introduciator\controller\introduciator_acp_main;
+
 /**
  * Module to manage ACP extension configuration.
  */
@@ -34,7 +36,6 @@ class introduciator_module
 	 */
 	public $u_action;
 	
-	
 	/**
 	 * @var string
 	 */
@@ -59,8 +60,6 @@ class introduciator_module
 	{
 		global $phpbb_container;
 
-		$this->language = $phpbb_container->get('language');
-		
 		if ($this->in_array_field($mode, 'module_name', $this::$available_mode))
 		{
 			$this->module_info = $this->array_value($mode, 'module_name', $this::$available_mode);
@@ -71,9 +70,6 @@ class introduciator_module
 
 			// Make the $u_action url available in the admin controller
 			$acp_controller->set_page_url($this->u_action);
-
-			// Set the page title for our ACP page
-			$this->page_title = 'INTRODUCIATOR_' . strtoupper($mode);
 
 			// Load a template from adm/style for our ACP page
 			$this->tpl_name = 'introduciator_acp_page_' . strtolower($mode);
@@ -142,9 +138,9 @@ class introduciator_module
 	/**
 	 * Switch to the mode selected.
 	 *
-	 * @param int                                                       $id
-	 * @param string                                                    $mode
-	 * @param \feneck91\introduciator\controller\introduciator_acp_main $acp_controller
+	 * @param string                    $id
+	 * @param string                    $mode
+	 * @param introduciator_acp_main    $acp_controller
 	 *
 	 * @throws \Exception
 	 * @return void
@@ -187,10 +183,10 @@ class introduciator_module
 	/**
 	 * Performs action requested by the module
 	 *
-	 * @param int                                                    $id
-	 * @param string                                                 $mode
-	 * @param string                                                 $action
-	 * @param \feneck91\introduciator\controller\acp_main_controller $acp_controller
+	 * @param string                    $id
+	 * @param string                    $mode
+	 * @param string                    $action
+	 * @param introduciator_acp_main    $acp_controller
 	 *
 	 * @throws \Exception
 	 * @return void
