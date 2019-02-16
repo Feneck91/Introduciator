@@ -21,9 +21,9 @@ if (!function_exists('group_memberships'))
  */ 
 class introduciator_helper
 {
-	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL 			= 0; // No approval introduce
-	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL				= 1; // Approval introduce : the user don't see his introduce and cannot edit it
-	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT	= 2; // Approval introduce : the user see his introduce and can edit it
+	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL          = 0; // No approval introduce
+	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL             = 1; // Approval introduce : the user don't see his introduce and cannot edit it
+	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT   = 2; // Approval introduce : the user see his introduce and can edit it
 
 	/**
 	 * @var string Table prefix.
@@ -112,6 +112,7 @@ class introduciator_helper
 	 * Load language only if noyt already done.
 	 * 
 	 * @return void
+	 * @access public
 	 */
 	public function load_language_if_needed()
 	{
@@ -128,6 +129,7 @@ class introduciator_helper
 	 * Return the private language instance.
 	 *
 	 * @return \phpbb\language\language
+	 * @access public
 	 */
 	public function get_language()
 	{
@@ -143,8 +145,9 @@ class introduciator_helper
 	 * Return the full group table name.
 	 *
 	 * @return string
+	 * @access public
 	 */
-	public function Get_INTRODUCIATOR_GROUPS_TABLE()
+	public function get_introduciator_groups_table()
 	{
 		return $this->table_prefix . 'introduciator_groups';
 	}
@@ -158,8 +161,9 @@ class introduciator_helper
 	 * Return the full explanation table name.
 	 * 
 	 * @return string
+	 * @access public
 	 */
-	public function Get_INTRODUCIATOR_EXPLANATION_TABLE()
+	public function get_introduciator_explanation_table()
 	{
 		return $this->table_prefix . 'introduciator_explanation';
 	}
@@ -170,6 +174,7 @@ class introduciator_helper
 	 * Return the introduciator_allow's config field: true if the introduciator is allowed, false else.
 	 *
 	 * @return boolean
+	 * @access public
 	 */	
 	public function is_introduciator_allowed()
 	{
@@ -186,7 +191,9 @@ class introduciator_helper
 	 * @param int $forum_id The forum's identifier.
 	 * @param int $topic_id The topic's identifier.
 	 * @param int $post_id The post's identifier.
+	 * 
 	 * @return string
+	 * @access public
 	 */	
 	public function get_url_to_post($forum_id, $topic_id, $post_id)
 	{
@@ -199,7 +206,9 @@ class introduciator_helper
 	 * Return true if the group is selected, false else.
 	 * 
 	 * @param $group_id Group's identifier.
+
 	 * @return boolean
+	 * @access public
 	 */
 	public function is_group_selected($group_id)
 	{
@@ -232,7 +241,9 @@ class introduciator_helper
 	 *
 	 * @param $arr_fields Array of variables to update
 	 * @param $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
+	 * 
 	 * @return void
+	 * @access public
 	 */
 	public function replace_all_by($arr_fields, $arr_replace_by)
 	{
@@ -254,8 +265,9 @@ class introduciator_helper
 	 *                 else return rules texts for display
 	 * @param boolean $only_current_lang if true, return only user's default language.
 	 *                 else return alls languages (used only in the extension configuration and to display all rules in all languages)
+	 *
 	 * @return array
-	 * 
+	 * @access public
 	 */
 	public function introduciator_getexplanations($is_edit = null, $only_current_lang = null)
 	{
@@ -272,7 +284,8 @@ class introduciator_helper
 		);
 		
 		if ($only_current_lang === true)
-		{	// Add WHERE to get only the current user language
+		{
+			// Add WHERE to get only the current user language
 			$arr_request = array_merge($arr_request, array(
 					'WHERE'		=> "l.lang_iso = '" . $this->user->lang_name . "'",
 				)
@@ -376,7 +389,9 @@ class introduciator_helper
 	 * @param $is_edit if true, return rules texts for editing
 	 *                 if false, return rules texts for display
 	 *                 if null, don't return rules texts (used only in the extension configuration and to display rules)
+	 *
 	 * @return array
+	 * @access public
 	 */
 	public function introduciator_getparams($is_edit = null)
 	{
@@ -399,7 +414,8 @@ class introduciator_helper
 			$forum_rules = array();
 
 			if ($params['introduciator_allow'])
-			{	// Find Forum name
+			{
+				// Find Forum name
 				$sql = 'SELECT forum_name, forum_rules, forum_rules_uid, forum_rules_bitfield, forum_rules_options
 						FROM ' . FORUMS_TABLE . '
 						WHERE forum_id = ' . (int) $params['fk_forum_id'];
@@ -515,7 +531,9 @@ class introduciator_helper
 	 * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete (used only for delete), pass 0 else.
 	 * @param $post_data Informations about posting (used only for delete) pass null else.
 	 * @param $redirect true if the function should redirect in case of the user is not allowed to make the action, else only return status.
+	 *
 	 * @return boolean
+	 * @access public
 	 */
 	public function introduciator_verify_posting($user, $mode, $forum_id, $post_id, $post_data, $redirect)
 	{
@@ -523,9 +541,11 @@ class introduciator_helper
 		$ret_allowed_action = true;
 
 		if ($poster_id != ANONYMOUS)
-		{	// User is logged and have user authorization
+		{
+			// User is logged and have user authorization
 			if ($this->is_introduciator_allowed())
-			{	// Extension is enabled and the user is not ignored, it can do all he wants
+			{
+				// Extension is enabled and the user is not ignored, it can do all he wants
 				// Force forum id because it be moved while user delete the message
 				if (empty($this->introduciator_params))
 				{
@@ -533,13 +553,16 @@ class introduciator_helper
 				}
 
 				if (in_array($mode, array('delete', 'soft_delete')))
-				{	// Check if the user don't try to remove the first message of it's OWN introduce
+				{
+					// Check if the user don't try to remove the first message of it's OWN introduce
 					// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
 					// else he needs to delete all the topic
 					$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
 					$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
+
 					if (!empty($post_id) && !empty($post_data['topic_id']) && $this->introduciator_params['fk_forum_id'] == $forum_id && $this->introduciator_params['is_check_delete_first_post'] && $user->data['is_registered'] && $this->auth->acl_gets('f_delete', 'm_delete', $forum_id))
-					{	// This post is into the introduce forum
+					{
+						// This post is into the introduce forum
 						// Find the topic identifier
 						$sql = 'SELECT topic_id, poster_id
 								FROM ' . POSTS_TABLE . '
@@ -551,13 +574,15 @@ class introduciator_helper
 
 						$topic_id = (int) $row['topic_id'];
 						$first_poster_id = (int) $row['poster_id'];	// <-- $poster_id could be <> from current user id
-																	// It's this case when moderator try to delete post of another user
+						                                            // It's this case when moderator try to delete post of another user
 						if (!empty($topic_id) && !empty($first_poster_id))
-						{	// Check if this post is the first one, ie this is the post that created the Topic
+						{
+							// Check if this post is the first one, ie this is the post that created the Topic
 							$topic_first_post_id = (int) $post_data['topic_first_post_id'];
 
 							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
-							{	// The user try to delete the first post of one introduce topic : may be not allowed
+							{
+								// The user try to delete the first post of one introduce topic : may be not allowed
 								// To finish, the $first_poster_id MUST BE not ignored
 								if ($this->is_user_must_introduce_himself($first_poster_id, null, $user->data['username']))
 								{
@@ -586,7 +611,8 @@ class introduciator_helper
 					$topic_approved = false;
 
 					if (!$this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
-					{	// No post into the introduce topic
+					{
+						// No post into the introduce topic
 						if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
 						{
 							// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
@@ -604,10 +630,12 @@ class introduciator_helper
 						}
 					}
 					else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
-					{	// At least one post but not approved !
+					{
+						// At least one post but not approved !
 						if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
-							 &&	(!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
-						{	// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
+						    && (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
+						{
+							// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
 							// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
 							// here we just test if right are approve to don't show next message: here, the right are not correct => display the message
 							$ret_allowed_action = false;
@@ -625,7 +653,8 @@ class introduciator_helper
 								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
 							}
 							else
-							{	// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
+							{
+								// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
 								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
 							}
 							
@@ -634,7 +663,8 @@ class introduciator_helper
 						}
 					}
 					else if ($forum_id == $this->introduciator_params['fk_forum_id'] && $mode == 'post')
-					{	// User try to create more than one introduce post
+					{
+						// User try to create more than one introduce post
 						$ret_allowed_action = false;
 						if ($redirect)
 						{
@@ -671,7 +701,9 @@ class introduciator_helper
 	 * 
 	 * @param $poster_id The poster id
 	 * @param $poster_name The poster name
+	 *
 	 * @return array
+	 * @access public
 	 */
 	public function introduciator_get_user_infos($poster_id, $poster_name)
 	{
@@ -699,7 +731,8 @@ class introduciator_helper
 				$this->load_language_if_needed();
 				
 				if (!$this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
-				{	// No post into the introduce topic
+				{
+					// No post into the introduce topic
 					$text = $this->language->lang('INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION');
 					$class = 'introdno-icon';
 				}
@@ -714,7 +747,8 @@ class introduciator_helper
 					$text = $this->language->lang('INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION');
 					$pending = true;
 					if ($this->auth->acl_get('m_approve', $this->introduciator_params['fk_forum_id']) || ($this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $poster_id == (int) $this->user->data['user_id']))
-					{	// Display url if user can approve the introduction of this user
+					{
+						// Display url if user can approve the introduction of this user
 						// or if the current user is the poster (the user can see its own presentation) AND the extension configuration is INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT
 						$url = append_sid("{$this->root_path}viewtopic.$this->php_ext", 'f=' . $this->introduciator_params['fk_forum_id'] . '&amp;t=' . $topic_id . '#p' . $first_post_id);
 						$class = 'introdpu-icon';
@@ -748,7 +782,9 @@ class introduciator_helper
 	 * @param $user The user informations
 	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
 	 * @param $forum_id Forum identifier where the user try to post
+	 * 
 	 * @return boolean
+	 * @access public
 	 */
 	public function introduciator_is_posting_must_be_approved($user, $mode, $forum_id)
 	{
@@ -766,14 +802,18 @@ class introduciator_helper
 	 * @param string $sql_approved Current sql approved.
 	 * @param string $table_name Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
 	 * @param array $approve_fid_ary Used to retrieve approve_fid_ary if needed, else pass null to ignore parameter.
+	 * 
 	 * @return string
+	 * @access public
 	 */
 	public function introduciator_generate_sql_approved_for_forum($user, $forum_id, $sql_approved, $table_name, &$approve_fid_ary = null)
 	{
 		if (!empty($sql_approved) && $this->is_introduciator_allowed())
-		{	// Introduciator is activated and $sql_approved has filter
+		{
+			// Introduciator is activated and $sql_approved has filter
 			if (empty($this->introduciator_params))
-			{	// Retrieve extension parameters
+			{
+				// Retrieve extension parameters
 				$this->introduciator_params = $this->introduciator_getparams();
 			}
 			
@@ -787,7 +827,8 @@ class introduciator_helper
 					$topic_approved = false;
 
 					if ($this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
-					{	// Post into this introduce topic
+					{
+						// Post into this introduce topic
 						if (!$topic_approved)
 						{
 							$sql_approved = str_replace('AND ', 'AND (', $sql_approved) . ' OR ' . (empty($table_name) ? '' : $table_name . '.') . 'topic_id = ' . (int) $topic_id . ')';
@@ -817,15 +858,19 @@ class introduciator_helper
 	 * @param int $forum_id Forum identifier
 	 * @param int $topic_id topic identifier
 	 * @param boolean $check_moderator_permissions If set to true, the function check moderator permissions to reply true or false.
+	 * 
 	 * @return boolean
+	 * @access public
 	 */
 	public function introduction_is_unapproved_topic($user, $forum_id, $topic_id, $check_moderator_permissions)
 	{
 		$ret = false;
 		if ($this->is_introduciator_allowed())
-		{	// Introduciator is activated
+		{
+			// Introduciator is activated
 			if (empty($this->introduciator_params))
-			{	// Retrieve extension parameters
+			{
+				// Retrieve extension parameters
 				$this->introduciator_params = $this->introduciator_getparams();
 			}
 
@@ -839,9 +884,11 @@ class introduciator_helper
 					$topic_approved = false;
 
 					if ($this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
-					{	// Post into this introduce forum, retrieve informations about topic_id and topic approved or not
+					{
+						// Post into this introduce forum, retrieve informations about topic_id and topic approved or not
 						if (!$topic_approved && $topic_id == $topic_introduce_id)
-						{	// This topic is unaproved and is the introduce of the current logged user
+						{
+							// This topic is unaproved and is the introduce of the current logged user
 							if ($check_moderator_permissions)
 							{
 								$ret = !$this->auth->acl_get('m_approve', $forum_id);
@@ -871,7 +918,9 @@ class introduciator_helper
 	 * @param int $topic_id If this function returns true, it contains the Topic ID where the user hast post it's presentation
 	 * @param int $first_post_id If this function returns true, it contains the post ID of the post that has created the topic
 	 * @param boolean $topic_approved If this function returns true, it contains true / false if the topic is approved or not
+	 * 
 	 * @return boolean
+	 * @access protected
 	 */
 	protected function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_id, &$topic_approved)
 	{
@@ -905,7 +954,9 @@ class introduciator_helper
 	 * Return true if one of the user's group has been selected into configuration, false else.
 	 * 
 	 * @param int $user_id User identifier into database
+	 * 
 	 * @return boolean
+	 * @access protected
 	 */
 	protected function is_user_in_groups_selected($user_id)
 	{
@@ -916,7 +967,8 @@ class introduciator_helper
 		// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
 		$arr_groups_id = array();
 		while ($row = $this->db->sql_fetchrow($result))
-		{	// Merge array
+		{
+			// Merge array
 			array_push($arr_groups_id, $row['fk_group']);
 		}
 		$this->db->sql_freeresult($result);
@@ -935,7 +987,9 @@ class introduciator_helper
 	 * 
 	 * @param int $poster_id User's ID
 	 * @param string $poster_name User's name
+	 * 
 	 * @return boolean
+	 * @access protected
 	 */
 	protected function is_user_ignored($poster_id, $poster_name)
 	{
@@ -971,7 +1025,9 @@ class introduciator_helper
 	 * @param int $poster_id User's ID
 	 * @param \phpbb\auth\auth $authorisations User's authorisations. It can be null if the we check authorisation from another user thant the current one.
 	 * @param string $poster_name User's name
+	 * 
 	 * @return boolean
+	 * @access public
 	 */
 	public function is_user_must_introduce_himself($poster_id, $authorisations, $poster_name)
 	{
@@ -996,7 +1052,6 @@ class introduciator_helper
 				if (!$userdata)
 				{
 					$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
-					
 					trigger_error('NO_USERS', E_USER_ERROR);
 				}
 
@@ -1022,7 +1077,9 @@ class introduciator_helper
 	 * @param \phpbb\user $user The user informations
 	 * @param string $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
 	 * @param int $forum_id Forum identifier where the user try to post
+	 * 
 	 * @return int
+	 * @access public
 	 */
 	public function introduciator_get_posting_approval_level($user, $mode, $forum_id)
 	{
@@ -1030,9 +1087,11 @@ class introduciator_helper
 		$ret_posting_approval_level = $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
 
 		if ($poster_id != ANONYMOUS)
-		{	// User is logged and have user authorization
+		{
+			// User is logged and have user authorization
 			if ($this->is_introduciator_allowed())
-			{	// Extension is enabled and the user is not ignored, it can do all he wants
+			{
+				// Extension is enabled and the user is not ignored, it can do all he wants
 				// Force forum id because it be moved while user delete the message
 				if (empty($this->introduciator_params))
 				{
@@ -1046,7 +1105,8 @@ class introduciator_helper
 					$topic_approved = false;
 
 					if (!$this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
-					{	// No post into the introduce topic
+					{
+						// No post into the introduce topic
 						if ($mode == 'post' && $forum_id == $this->introduciator_params['fk_forum_id'] && ($this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL || $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
 						{
 							$ret_posting_approval_level = $this->introduciator_params['posting_approval_level'];
@@ -1070,7 +1130,9 @@ class introduciator_helper
 	 * @param string $mode topic or post.
 	 * @param string $table_alias alias table to use.
 	 * @param string $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
+	 * 
 	 * @return boolean
+	 * @access public
 	 */
 	public function get_topic_sql_visibility($user, $forum_id, $where_sql, $mode, $table_alias, &$get_visibility_sql_overwrite)
 	{
@@ -1078,7 +1140,8 @@ class introduciator_helper
 		$ret = false;
 
 		if ($poster_id != ANONYMOUS && !$this->auth->acl_get('m_approve', $forum_id))
-		{	// User is logged and have user authorization
+		{
+			// User is logged and have user authorization
 			// If the user has m_approve right, nothing to do, he will see the topic
 			if ($this->is_introduciator_allowed())
 			{	// Extension is enabled
@@ -1088,15 +1151,18 @@ class introduciator_helper
 				}
 
 				if ($forum_id == (int) $this->introduciator_params['fk_forum_id'] && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $this->is_user_must_introduce_himself($poster_id, $this->auth, $user->data['username']))
-				{	// It is the forum with approval level + edit and user should introduce himself
+				{
+					// It is the forum with approval level + edit and user should introduce himself
 					$topic_id = 0;
 					$first_post_id = 0;
 					$topic_approved = false;
 
 					if ($this->is_user_post_into_forum($forum_id, $poster_id, $topic_id, $first_post_id, $topic_approved))
-					{	// Is is the introduce forum and he post into it
+					{
+						// Is is the introduce forum and he post into it
 						if (!$topic_approved)
-						{	// The topic is waiting approval: the user is allowed to see and modify it's own message into this mode
+						{
+							// The topic is waiting approval: the user is allowed to see and modify it's own message into this mode
 							$ret = true;
 							$get_visibility_sql_overwrite = $where_sql . '(' . $table_alias . $mode . '_visibility = ' . ITEM_APPROVED . ' OR ' . $table_alias . 'topic_id = ' . $topic_id . ')';
 						}
@@ -1119,7 +1185,9 @@ class introduciator_helper
 	 * @param string $mode topic or post.
 	 * @param string $table_alias alias table to use.
 	 * @param string $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
+	 *
 	 * @return boolean
+	 * @access public
 	 */
 	public function introduciator_let_user_posting_or_editing($user, $mode, $forum_id, $topic_id, $post_data)
 	{

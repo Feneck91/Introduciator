@@ -13,11 +13,13 @@ namespace feneck91\introduciator\migrations;
 class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 {
 	/**
-	 * Add the table schema to the database.
+	 * Add the table schema to the database
 	 *
 	 * Only add the introduciator group table is added
+	 * 
+	 * Return an array of table schema to create / update
 	 *
-	 * @return array Array of table schema to create / update
+	 * @return array
 	 * @access public
 	 */
 	public function update_schema()
