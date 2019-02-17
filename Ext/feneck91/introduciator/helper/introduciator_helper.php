@@ -8,6 +8,11 @@
  */
 namespace feneck91\introduciator\helper;
 
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+
 if (!function_exists('group_memberships'))
 {
 	global $phpbb_root_path, $phpEx;
@@ -213,7 +218,7 @@ class introduciator_helper
 	public function is_group_selected($group_id)
 	{
 		$sql = 'SELECT COUNT(*) AS cnt
-				FROM ' . $this->Get_INTRODUCIATOR_GROUPS_TABLE() . '
+				FROM ' . $this->get_introduciator_groups_table() . '
 				WHERE fk_group = ' . (int) $group_id;
 
 		$result = $this->db->sql_query($sql);
@@ -276,7 +281,7 @@ class introduciator_helper
 			'FROM'      => array(LANG_TABLE => 'l'),
 			'LEFT_JOIN'	=> array(
 				array(
-					'FROM'	=> array($this->Get_INTRODUCIATOR_EXPLANATION_TABLE() => 'e'),
+					'FROM'	=> array($this->get_introduciator_explanation_table() => 'e'),
 					'ON'	=> 'e.lang = l.lang_iso'
 				)
 			),
@@ -287,7 +292,7 @@ class introduciator_helper
 		{
 			// Add WHERE to get only the current user language
 			$arr_request = array_merge($arr_request, array(
-					'WHERE'		=> "l.lang_iso = '" . $this->user->lang_name . "'",
+					'WHERE'		=> "l.lang_iso = '{$this->user->lang_name}'",
 				)
 			);
 		}
@@ -961,7 +966,7 @@ class introduciator_helper
 	protected function is_user_in_groups_selected($user_id)
 	{
 		$sql = 'SELECT *
-				FROM ' . $this->Get_INTRODUCIATOR_GROUPS_TABLE();
+				FROM ' . $this->get_introduciator_groups_table();
 		$result = $this->db->sql_query($sql);
 
 		// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table

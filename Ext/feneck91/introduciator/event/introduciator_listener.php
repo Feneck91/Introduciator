@@ -52,16 +52,35 @@ class introduciator_listener implements EventSubscriberInterface
 		$this->template_context = $template_context;
 	}
 
+	 //=====================================================================================================
+	 // Patch to add to posting.php :
+	 // Search      : // Not able to reply to unapproved posts/topics
+	 // Add-Before  :
+	 // // Feneck91 - Patch
+	 // $vars = array(
+	 // 	'post_data',
+	 // 	'poll',
+	 // 	'mode',
+	 // 	'topic_id',
+	 // 	'forum_id',
+	 // 	'post_author_name',
+	 // );
+	 // extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact($vars)));
+	 //=====================================================================================================
+
 	/**
 	 * Called by framework to get event list.
 	 *
-	 * See : https://wiki.phpbb.com/Event_List
+	 * Return an array that contains event list with associated callback for each event.
 	 *
-	 * @return An array that contains event list with associated callback for each event.
+	 * @return array
+	 * @static
+	 * @access public
 	 */
 	static public function getSubscribedEvents()
 	{
 		return array(
+			'core.user_setup'											=> 'load_language_on_setup',					// Load languages files
 			'core.viewtopic_modify_page_title'							=> array('on_before_quickreply_displayed', -2),	// Hide quick reply if user is not allowed to post
 			'core.posting_modify_template_vars'							=> 'on_displaying_posting_screen',				// Verify if the posting is allowed or not; display message if not
 			'core.posting_modify_submit_post_before'					=> 'on_submit_post_before',						// When user post a message, verify the introduce has been done
@@ -72,21 +91,6 @@ class introduciator_listener implements EventSubscriberInterface
 			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
 			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',					// Allow phpBB to retrieve a topic for the user that post it into introduce
 			'core.viewtopic_modify_post_row'							=> 'on_viewtopic_modify_post_row',				// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
-
-/* Patch to add to posting.php :
- * Search      : // Not able to reply to unapproved posts/topics
- * Add-Before  :
-// Feneck91 - Patch
-$vars = array(
-	'post_data',
-	'poll',
-	'mode',
-	'topic_id',
-	'forum_id',
-	'post_author_name',
-);
-extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact($vars)));
-*/
 			'core.posting_modify_row_data'										=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
 
 			//=============================================
@@ -95,6 +99,24 @@ extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact
 			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',				// Prepare data to be displayed in viewtopic
 			'core.memberlist_prepare_profile_data'								=> 'on_display_profile_data',					// Prepare data to be displayed in several pages
 		);
+	}
+
+	/**
+	 * Load language files during user setup
+	 *
+	 * @param \phpbb\event\data $event The event object
+	 *
+	 * @return void
+	 * @access public
+	 */
+	public function load_language_on_setup($event)
+	{
+		$lang_set_ext = $event['lang_set_ext'];
+		$lang_set_ext[] = array(
+			'ext_name' => 'feneck91/introduciator',
+			'lang_set' => array('introduciator'),
+		);
+		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
 	/**

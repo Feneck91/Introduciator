@@ -20,6 +20,16 @@ class introduciator_acp_listener implements EventSubscriberInterface
 	{
 	}
 
+	/**
+	 * Called by framework to get event list.
+	 *
+	 * Return an array that contains event list with associated callback for each event.
+	 *
+	 * @return array
+	 * @static
+	 * @access public
+	 */
+
 	static public function getSubscribedEvents()
 	{
 		return array(
@@ -27,6 +37,12 @@ class introduciator_acp_listener implements EventSubscriberInterface
 		);
 	}
 
+	/**
+	 * Manage Introduciator permissions
+	 *
+	 * @param array $event
+	 * @access public
+	 */
 	public function add_permission($event)
 	{
 		$permissions = $event['permissions'];

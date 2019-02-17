@@ -153,17 +153,19 @@ class acp_statistics_controller extends acp_main_controller
 		//
 		// Here, we must check database to see if some user have more than one introduction
 		// 1> Get the number of introduce errors (more than once)
+
+		$sql_where = $this->db->sql_build_query('SELECT', array(
+				'SELECT'	=> 'COUNT(topic_id)',
+				'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
+				'WHERE'		=> 'phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+			));
 		 $sql = $this->db->sql_build_query('SELECT', array(
 			'SELECT'	=> 'COUNT(result.topic_id)',
 			'FROM'		=> array(
 				$this->db->sql_build_query('SELECT', array(
 					'SELECT'	=> 'topic_id',
 					'FROM'		=> array(TOPICS_TABLE => 'phpbbtopics'),
-					'WHERE'		=> '(' . $this->db->sql_build_query('SELECT', array(
-						'SELECT'	=> 'COUNT(topic_id)',
-						'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-						'WHERE'		=> 'phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
-					)) . ') > 1',
+					'WHERE'		=> "( {$sql_where} ) > 1",
 					'GROUP_BY'	=> 'topic_poster',
 				)) => ''),
 			)) . " result";
@@ -175,14 +177,15 @@ class acp_statistics_controller extends acp_main_controller
 		{
 			$users_to_check = array(); // Receive all users info
 
-			$sql = $this->db->sql_build_query('SELECT', array(
-				'SELECT'	=> 'topic_poster, topic_first_poster_name',
-				'FROM'		=> array(TOPICS_TABLE => 'phpbbtopics'),
-				'WHERE'		=> '(' . $this->db->sql_build_query('SELECT', array(
+			$sql_where = $this->db->sql_build_query('SELECT', array(
 					'SELECT'	=> 'COUNT(topic_id)',
 					'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
 					'WHERE'		=> 'phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
-				)) . ') > 1',
+				));
+			$sql = $this->db->sql_build_query('SELECT', array(
+				'SELECT'	=> 'topic_poster, topic_first_poster_name',
+				'FROM'		=> array(TOPICS_TABLE => 'phpbbtopics'),
+				'WHERE'		=> "( {$sql_where} ) > 1",
 				'GROUP_BY'	=> 'topic_poster',
 				'ORDER_BY'	=> 'topic_first_poster_name',
 			));
@@ -216,7 +219,6 @@ class acp_statistics_controller extends acp_main_controller
 					));
 
 					$result = $this->db->sql_query($sql);
-					$num_rows = mysqli_num_rows($result);
 					$first_row = true;
 					while ($row = $this->db->sql_fetchrow($result))
 					{
@@ -224,7 +226,7 @@ class acp_statistics_controller extends acp_main_controller
 
 						$this->template->assign_block_vars('introduces', array(
 							'FIRST_ROW_SPAN'	=> $first_row,
-							'ROW_SPAN'			=> $num_rows,
+							'ROW_SPAN'			=> $result->num_rows,
 							'POSTER'			=> get_username_string('full', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
 							'DATE'				=> $this->user->format_date($row['topic_time']),
 							'INTRODUCE'			=> "<a href='{$link_to_introduce}'>{$row['topic_title']}</a>",

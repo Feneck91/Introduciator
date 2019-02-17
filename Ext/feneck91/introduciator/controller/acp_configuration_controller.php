@@ -186,7 +186,7 @@ class acp_configuration_controller extends acp_main_controller
 
 		// Update INTRODUCIATOR_GROUPS_TABLE
 		// 1> Remove all entries
-		$sql = 'DELETE FROM ' . $this->helper->Get_INTRODUCIATOR_GROUPS_TABLE();
+		$sql = 'DELETE FROM ' . $this->helper->get_introduciator_groups_table();
 		$this->db->sql_query($sql);
 
 		// 2> Add all entries
@@ -198,7 +198,7 @@ class acp_configuration_controller extends acp_main_controller
 		}
 
 		// Create and execute SQL request
-		$this->db->sql_multi_insert($this->helper->Get_INTRODUCIATOR_GROUPS_TABLE(), $values);
+		$this->db->sql_multi_insert($this->helper->get_introduciator_groups_table(), $values);
 
 		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_INTRODUCIATOR_UPDATED');
 		trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));

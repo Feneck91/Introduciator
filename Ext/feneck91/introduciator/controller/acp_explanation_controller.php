@@ -227,12 +227,12 @@ class acp_explanation_controller extends acp_main_controller
 
 		// Update INTRODUCIATOR_EXPLANATION_TABLE
 		// 1> Remove all entries
-		$sql = 'DELETE FROM ' . $this->helper->Get_INTRODUCIATOR_EXPLANATION_TABLE();
+		$sql = 'DELETE FROM ' . $this->helper->get_introduciator_explanation_table();
 		$this->db->sql_query($sql);
 
 		// 2> Add all entries
 		// Create and execute SQL request
-		$this->db->sql_multi_insert($this->helper->Get_INTRODUCIATOR_EXPLANATION_TABLE(), $explanation_message_array_result);
+		$this->db->sql_multi_insert($this->helper->get_introduciator_explanation_table(), $explanation_message_array_result);
 
 		// 3> Set enabled explanations
 		$this->dbconfig->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
