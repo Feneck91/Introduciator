@@ -28,8 +28,9 @@ class acp_statistics_controller extends acp_main_controller
 	 * Number of items displayed into statistics table.
 	 */
 	const NUMBER_ITEMS_BY_PAGE = 10;
+
 	/**
-	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper.
+	 * @var helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
 

@@ -44,7 +44,7 @@ div.introduciator-base-icon a:hover		{ background: none; }
 /**
  * Set the images.
  */
-div.introd-icon, div.introd-icon a		{ background-image: url("./images/icon_introduciator.gif"); }			/* Introduciator MOD: icon */
-div.introdno-icon, div.introdno-icon a	{ background-image: url("./images/icon_nointroduciator.gif"); }			/* Introduciator MOD: no presentation avalaible */
-div.introdpd-icon, div.introdpd-icon a	{ background-image: url("./images/icon_pendingintroduciator.gif"); }	/* Introduciator MOD: presentation is pending */
-div.introdpu-icon, div.introdpu-icon a	{ background-image: url("./images/icon_pendinguintroduciator.gif"); }	/* Introduciator MOD: presentation is pending but url is present (user can approve it) */
+div.introd-icon, div.introd-icon a		{ background-image: url("./images/icon_introduciator.gif"); }			/* Introduciator extension: icon */
+div.introdno-icon, div.introdno-icon a	{ background-image: url("./images/icon_nointroduciator.gif"); }			/* Introduciator extension: no presentation avalaible */
+div.introdpd-icon, div.introdpd-icon a	{ background-image: url("./images/icon_pendingintroduciator.gif"); }	/* Introduciator extension: presentation is pending */
+div.introdpu-icon, div.introdpu-icon a	{ background-image: url("./images/icon_pendinguintroduciator.gif"); }	/* Introduciator extension: presentation is pending but url is present (user can approve it) */

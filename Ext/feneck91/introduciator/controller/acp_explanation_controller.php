@@ -25,7 +25,7 @@ use phpbb\config\db;
 class acp_explanation_controller extends acp_main_controller
 {
 	/**
-	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper.
+	 * @var helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
 
@@ -189,8 +189,8 @@ class acp_explanation_controller extends acp_main_controller
 					&$explanation_rules_text,
 				),
 				array(
-					'%forum_url%'	=> 'http://aghxkfps.com', // Make link work if placed into [url]
-					'%forum_post%'	=> 'http://dqsdfzef.com', // Make link work if placed into [url]
+					'%forum_url%'	=> 'http://aghxkfps.tld', // Make link work if placed into [url]
+					'%forum_post%'	=> 'http://dqsdfzef.tld', // Make link work if placed into [url]
 				)
 			);
 

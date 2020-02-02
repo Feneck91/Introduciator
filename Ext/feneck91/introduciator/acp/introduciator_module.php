@@ -9,7 +9,7 @@
 
 namespace feneck91\introduciator\acp;
 
-use feneck91\introduciator\controller\introduciator_acp_main;
+use feneck91\introduciator\controller\introduciator_acp_main_controller;
 
 /**
  * Module to manage ACP extension configuration.
@@ -65,7 +65,7 @@ class introduciator_module
 			$this->module_info = $this->array_value($mode, 'module_name', $this::$available_mode);
 
 			// Get an instance of the acp controller
-			/** @type \feneck91.introduciator.controller.introduciator_acp_main $acp_controller */
+			/** @type \feneck91.introduciator.controller.introduciator_acp_main_controller $acp_controller */
 			$acp_controller = $phpbb_container->get('feneck91.introduciator.controller.acp_' . $mode);
 
 			// Make the $u_action url available in the admin controller
@@ -79,7 +79,12 @@ class introduciator_module
 			// submission with the check_form_key function to ensure that the received data is the same as the submitted.
 			add_form_key(introduciator_module::form_key);
 
-			$this->switch_mode($id, $mode, $acp_controller);
+			/** @type \phpbb\request\request $request Request object */
+			$request = $phpbb_container->get('request');
+			// Requests
+			$action = $request->variable('action', '');
+
+			$acp_controller->do_action($mode, $action);
 		}
 		else
 		{
@@ -133,68 +138,5 @@ class introduciator_module
 		unset($item);
 
 		return array();
-	}
-
-	/**
-	 * Switch to the mode selected.
-	 *
-	 * @param string                    $id
-	 * @param string                    $mode
-	 * @param introduciator_acp_main    $acp_controller
-	 *
-	 * @throws \Exception
-	 * @return void
-	 * @access private
-	 */
-	private function switch_mode($id, $mode, $acp_controller)
-	{
-		global $phpbb_container;
-
-		/** @type \phpbb\request\request $request Request object */
-		$request = $phpbb_container->get('request');
-
-		// Requests
-		$action = $request->variable('action', '');
-
-		switch ($mode)
-		{
-			case 'general':
-				$this->do_action($id, $mode, $action, $acp_controller);
-			break;
-
-			case 'configuration':
-				$this->do_action($id, $mode, $action, $acp_controller);
-			break;
-
-			case 'explanation':
-				$this->do_action($id, $mode, $action, $acp_controller);
-			break;
-
-			case 'statistics':
-				$this->do_action($id, $mode, $action, $acp_controller);
-			break;
-
-			default:
-				trigger_error('NO_MODE', E_USER_ERROR);
-			break;
-		}
-	}
-
-	/**
-	 * Performs action requested by the module
-	 *
-	 * @param string                    $id
-	 * @param string                    $mode
-	 * @param string                    $action
-	 * @param introduciator_acp_main    $acp_controller
-	 *
-	 * @throws \Exception
-	 * @return void
-	 * @access private
-	 */
-	private function do_action($id, $mode, $action, $acp_controller)
-	{
-		// Manage the action in the specific controller
-		$acp_controller->do_action($mode, $action);
 	}
 }

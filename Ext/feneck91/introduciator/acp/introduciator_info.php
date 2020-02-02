@@ -15,28 +15,28 @@ class introduciator_info
 	{
 		return array(
 			'filename'	=> '\feneck91\introduciator\acp\introduciator_module',
-			'title'		=> 'ACP_INTRODUCIATOR_MOD',
+			'title'		=> 'ACP_INTRODUCIATOR_EXTENSION',
 			'version'	=> "3.0.0",
 			'modes'		=> array(
 				'general'	=> array(
 					'title' => 'INTRODUCIATOR_GENERAL',
 					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
-					'cat' => array('ACP_INTRODUCIATOR_MOD'),
+					'cat' => array('ACP_INTRODUCIATOR_EXTENSION'),
 				),
 				'configuration'	=> array(
 					'title' => 'INTRODUCIATOR_CONFIGURATION',
 					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
-					'cat' => array('ACP_INTRODUCIATOR_MOD'),
+					'cat' => array('ACP_INTRODUCIATOR_EXTENSION'),
 				),
 				'explanation'	=> array(
 					'title' => 'INTRODUCIATOR_EXPLANATION',
 					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
-					'cat' => array('ACP_INTRODUCIATOR_MOD'),
+					'cat' => array('ACP_INTRODUCIATOR_EXTENSION'),
 				),
 				'statistics'	=> array(
 					'title' => 'INTRODUCIATOR_STATISCICS',
 					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
-					'cat' => array('ACP_INTRODUCIATOR_MOD'),
+					'cat' => array('ACP_INTRODUCIATOR_EXTENSION'),
 				),
 			),
 		);

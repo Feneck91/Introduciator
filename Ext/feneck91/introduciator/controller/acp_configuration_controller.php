@@ -25,7 +25,7 @@ use phpbb\config\db;
 class acp_configuration_controller extends acp_main_controller
 {
 	/**
-	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper.
+	 * @var helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
 

@@ -28,7 +28,7 @@
 	"extra": {
 		"display-name": "Introduciator",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.0,<3.6.0@dev"
+			"phpbb/phpbb": ">=3.3.0,<4.6.0@dev"
 		},
 		"version-check": {
 			"host": "feneck91.free.fr",

@@ -36,6 +36,16 @@ class acp_general_controller extends acp_main_controller
 	const file_version_check         = 'introduciator_extension_version.txt';
 
 	/**
+	 * @var \phpbb\phpbb_admin_path XXXX.
+	 */
+	protected $phpbb_admin_path;
+
+	/**
+	 * @var \phpbb\config\cache 
+	 */
+	protected $cache;
+
+	/**
 	 * Constructor
 	 *
 	 * @param string    $php_ext          phpBB Extention
@@ -44,13 +54,17 @@ class acp_general_controller extends acp_main_controller
 	 * @param template	$template         Template object
 	 * @param user      $user             User object
 	 * @param db        $dbconfig         Config object
+	 * @param string    $phpbb_admin_path Admin path
+	 * @param string    $cache            Cache
 	 *
 	 * @access public
 	 */
-	public function __construct($php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
+	public function __construct($php_ext, language $language, request $request, template $template, user $user, db $dbconfig) /* , $phpbb_admin_path, $cache)*/
 	{
+		// ICI $this->phpbb_admin_path = $phpbb_admin_path;
+		// ICI $this->cache = $cache;
+
 		parent::__construct(
-			//null,        // helper
 			null,        // table prefix
 			null,        // root path
 			$php_ext,

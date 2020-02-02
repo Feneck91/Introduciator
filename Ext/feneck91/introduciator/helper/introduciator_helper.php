@@ -244,8 +244,8 @@ class introduciator_helper
 	 *			'search3'	=> 'replaced by this text3',
 	 *			));
 	 *
-	 * @param $arr_fields Array of variables to update
-	 * @param $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
+	 * @param array $arr_fields Array of variables to update
+	 * @param array $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
 	 *
 	 * @return void
 	 * @access public
@@ -480,8 +480,8 @@ class introduciator_helper
 						),
 						array(
 							'%forum_name%'			=> $forum_name,
-							'http://aghxkfps.com'	=> $forum_url,	// Restore correct link
-							'http://dqsdfzef.com'	=> $forum_post,	// Restore correct link
+							'http://aghxkfps.tld'	=> $forum_url,	// Restore correct link
+							'http://dqsdfzef.tld'	=> $forum_post,	// Restore correct link
 						)
 					);
 

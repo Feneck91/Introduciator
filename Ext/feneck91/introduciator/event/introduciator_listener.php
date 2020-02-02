@@ -52,22 +52,6 @@ class introduciator_listener implements EventSubscriberInterface
 		$this->template_context = $template_context;
 	}
 
-	 //=====================================================================================================
-	 // Patch to add to posting.php :
-	 // Search      : // Not able to reply to unapproved posts/topics
-	 // Add-Before  :
-	 // // Feneck91 - Patch
-	 // $vars = array(
-	 // 	'post_data',
-	 // 	'poll',
-	 // 	'mode',
-	 // 	'topic_id',
-	 // 	'forum_id',
-	 // 	'post_author_name',
-	 // );
-	 // extract($phpbb_dispatcher->trigger_event('core.posting_modify_row_data', compact($vars)));
-	 //=====================================================================================================
-
 	/**
 	 * Called by framework to get event list.
 	 *
@@ -91,7 +75,7 @@ class introduciator_listener implements EventSubscriberInterface
 			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
 			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',					// Allow phpBB to retrieve a topic for the user that post it into introduce
 			'core.viewtopic_modify_post_row'							=> 'on_viewtopic_modify_post_row',				// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
-			'core.posting_modify_row_data'										=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
+			'core.posting_modify_row_data'								=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
 
 			//=============================================
 			// From here, this is events for template html
@@ -354,7 +338,7 @@ class introduciator_listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * Called when a user whant to post, before write the message.
+	 * Called when a user whant to post, before write the message or when he choose to begin posting a new subject.
 	 *
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode, allow the moderator to post a reply into an unapproved message.
 	 *
@@ -362,6 +346,7 @@ class introduciator_listener implements EventSubscriberInterface
 	*/
 	public function on_user_want_post($event)
 	{
+		// If $event['post_data'] == null => it begin to post a new subject, nothing to do into this function
 		if ($this->introduciator_helper->introduciator_let_user_posting_or_editing($this->user, $event['mode'], $event['forum_id'], $event['topic_id'], $event['post_data']))
 		{
 			$data = $event['post_data'];

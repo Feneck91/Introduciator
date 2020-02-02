@@ -25,17 +25,15 @@ class introduciator_explain
 	protected $user;
 
 	/**
-	 * Introduciator helper.
-	 *
-	 * The important code is into this helper.
+	 * @var helper Introduciator helper. The important code is into this helper.
 	 */
-	private $introduciator_helper;
+	protected $helper;
 
 	public function __construct(\phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		global $phpbb_container;
 		// Get Introduciator class helper
-		$this->introduciator_helper = $phpbb_container->get('feneck91.introduciator.helper');
+		$this->helper = $phpbb_container->get('feneck91.introduciator.helper');
 
 		$this->config = $config;
 		$this->auth = $auth;
@@ -43,22 +41,22 @@ class introduciator_explain
 		$this->user = $user;
 	}
 
-	public function display($forum_id)
+	public function handle($forum_id)
 	{
 		// If user not connected, go to login page
 		if ($this->user->data['user_id'] == ANONYMOUS)
 		{
 			// In case of introduciator_getparams is not called, I must load the introduciator language file
-			$this->introduciator_helper->load_language_if_needed();
-			login_box('', $this->introduciator_helper->get_language()->lang('LOGIN'));
+			$this->helper->load_language_if_needed();
+			login_box('', $this->helper->get_language()->lang('LOGIN'));
 		}
 
 		if ($this->config['introduciator_allow'])
 		{	// Title messagte
 			// Load extension configuration + language
-			$params = $this->introduciator_helper->introduciator_getparams(false);
+			$params = $this->helper->introduciator_getparams(false);
 
-			$message = $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
+			$message = $this->helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 			page_header($message);
 
 			$this->template->set_filenames(array(
@@ -82,15 +80,14 @@ class introduciator_explain
 		else
 		{
 			// In case of introduciator_getparams is not called, I must load the introduciator language file
-			$this->introduciator_helper->load_language_if_needed();
+			$this->helper->load_language_if_needed();
 
-			page_header($this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_DISABLED'));
+			page_header($this->helper->get_language()->lang('INTRODUCIATOR_EXT_DISABLED'));
 			$this->template->set_filenames(array(
 				'body' => 'introduciator_explain.html',
 			));
 
 			page_footer();
 		}
-		return new Response($this->template->return_display('body'), 200);
 	}
 }

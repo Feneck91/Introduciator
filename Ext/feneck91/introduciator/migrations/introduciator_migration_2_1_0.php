@@ -79,7 +79,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 	/**
 	 * Update data of the databse.
 	 *
-	 * @return Array of elements to update.
+	 * @return array Array of elements to update.
 	 * @access public
 	 */
 	public function update_data()
@@ -131,7 +131,7 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 			//===============================================================================
 			// Add the module in ACP under the customise tab
 
-			// Add a new category named ACP_INTRODUCIATOR_EXTENSIOB to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
+			// Add a new category named ACP_INTRODUCIATOR_EXTENSION to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
 			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_EXTENSION')),
 
 			array('module.add', array(
