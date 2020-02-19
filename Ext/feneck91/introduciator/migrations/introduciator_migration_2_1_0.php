@@ -99,7 +99,6 @@ class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
 
 			// Misc Settings
 			array('config.add', array('introduciator_install_date', time())),
-			array('config.add', array('introduciator_extension_version', '3.0.0')), // Current extension's version
 
 			// Add admin permissions
 			array('permission.add', array('a_introduciator_manage', true)),

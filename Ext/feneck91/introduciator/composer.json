@@ -1,39 +1,39 @@
 {
-	"name": "feneck91/introduciator",
-	"type": "phpbb-extension",
-	"description": "Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums. An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.",
-	"homepage": "http://feneck91.free.fr/forum/index.php",
-	"version": "3.0.0",
-	"time": "2019-03-12",
-	"keywords": [
-		"phpbb",
-		"extension",
-		"feneck91",
-		"introduciator"
-	],
-	"license": "GPL-2.0-only",
-	"authors": [
-		{
-			"name": "Stéphane Château",
-			"email": "feneck91@free.fr",
-			"homepage": "http://feneck91.free.fr/forum",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"php": ">=5.3.3",
-		"composer/installers": "~1.0.0",
-		"phpbb/phpbb": ">=3.2.0,<3.6.0@dev"
-	},
-	"extra": {
-		"display-name": "Introduciator",
-		"soft-require": {
-			"phpbb/phpbb": ">=3.3.0,<4.6.0@dev"
-		},
-		"version-check": {
-			"host": "feneck91.free.fr",
-			"directory": "/feneck91",
-			"filename": "introduciator_versions.json"
-		}
-	}
+    "name": "feneck91/introduciator",
+    "type": "phpbb-extension",
+    "description": "Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums. An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.",
+    "homepage": "http://feneck91.free.fr/forum/index.php",
+    "version": "3.0.0",
+    "time": "2019-03-12",
+    "keywords": [
+        "phpbb",
+        "extension",
+        "feneck91",
+        "introduciator"
+    ],
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Stéphane Château",
+            "email": "feneck91@free.fr",
+            "homepage": "https://github.com/Feneck91/Introduciator",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "composer/installers": "~1.0.0",
+        "phpbb/phpbb": ">=3.2.8,<3.3.0@dev"
+    },
+    "extra": {
+        "display-name": "Introduciator",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.3.0,<3.3.0@dev"
+        },
+        "version-check": {
+            "host": "www.phpbb.com",
+            "directory": "/customise/db/extension/introduciator",
+            "filename": "version_check"
+        }
+    }
 }

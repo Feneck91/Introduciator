@@ -20,12 +20,16 @@ use phpbb\user;
 use phpbb\config\db;
 
 /**
- * Class to manage explanation acp page.
+ * Class used to manage explanation acp page.
+ *
+ * This is the page used to configure the explanation informations displayed to the user when
+ * he try to post a message without beeing introduce.
+ *
  */
 class acp_explanation_controller extends acp_main_controller
 {
 	/**
-	 * @var helper Introduciator helper. The important code is into this helper.
+	 * @var helper Introduciator helper. The important code is into this helper
 	 */
 	protected $helper;
 
@@ -35,20 +39,24 @@ class acp_explanation_controller extends acp_main_controller
 	protected $db;
 
 	/**
-	 * @var \phpbb\log\log
+	 * @var \phpbb\log\log Object used to add info into admin log
 	 */
 	protected $log;
 
 	/**
 	 * Constructor
 	 *
-	 * @param introduciator_helper $helper Extension helper
-	 * @param factory              $db Database interface
-	 * @param language             $language Language user object
-	 * @param request              $request  Request object
-	 * @param template	           $template Template object
-	 * @param user                 $user     User object
-	 * @param db                   $dbconfig Config object
+	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
+	 * @param \phpbb\db\driver\factory                              $db             Database interface
+	 * @param \phpbb\log\log                                        $log            Object used to add info into admin log
+	 * @param string                                                $table_prefix   Table prefix
+	 * @param string                                                $root_path      phpBB root path
+	 * @param string                                                $php_ext        phpBB Extention
+	 * @param \phpbb\language\language                              $language       Language user object
+	 * @param \phpbb\request\request                                $request        Request object
+	 * @param \phpbb\template\template                              $template       Template object
+	 * @param \phpbb\user                                           $user           User object
+	 * @param \phpbb\config\db                                      $dbconfig       Config object
 	 *
 	 * @access public
 	 */
@@ -73,8 +81,11 @@ class acp_explanation_controller extends acp_main_controller
 	/**
 	 * Manage the page.
 	 *
-	 * @param string $mode
-	 * @param string $action
+	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
+	 * is really comming from this extension by checking form key.
+	 *
+	 * @param string $mode Current mode
+	 * @param string $action Current action to manage
 	 *
 	 * @throws \Exception
 	 * @return void
@@ -238,7 +249,7 @@ class acp_explanation_controller extends acp_main_controller
 		$this->dbconfig->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
 		$this->dbconfig->set('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
 
-		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_INTRODUCIATOR_EXPLANATION_UPDATED');
-		trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED');
+		trigger_error($this->language->lang('INTRODUCIATOR_EP_UPDATED') . adm_back_link($this->u_action));
 	}
 }

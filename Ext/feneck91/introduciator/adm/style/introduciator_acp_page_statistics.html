@@ -1,20 +1,18 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator_acp.css' %}
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_ST_TITLE') }}</h1>
 
 {{ lang('INTRODUCIATOR_ST_TITLE_EXPLAIN') }}
 <form id="acp_introduciator" method="post" action="{U_ACTION}">
-		<!--
-			 --------------------------- Posting ---------------------------------------------
-		-->
-	<!-- IF S_CHECK_DATABASE -->
+	{# --------------------------- Posting --------------------------------------------- #}
+	{% if S_CHECK_DATABASE %}
 	<fieldset>
 	<div class="pagination top-pagination">
 		{% if loops.pagination|length %}
-		{% INCLUDE 'pagination.html' %}
+			{% INCLUDE 'pagination.html' %}
 		{% else %}
-		&bull; {{ PAGE_NUMBER }}
+			&bull; {{ PAGE_NUMBER }}
 		{% endif %}
 	</div>
 
@@ -57,14 +55,16 @@
 		{% endif %}
 	</div>
 	</fieldset>
-	<!-- ELSE -->
+	{% else %}
 	<fieldset>
 		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
 		<p class="submit-buttons">
 			{S_HIDDEN_FIELDS}
-			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_CHECK') }}" />&nbsp;
+			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_ST_CHECK') }}" />&nbsp;
 			{S_FORM_TOKEN}
 		</p>
 	</fieldset>
-	<!-- ENDIF -->
+	{% endif %}
 </form>
+
+{% INCLUDE 'overall_footer.html' %}

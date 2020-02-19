@@ -1,5 +1,5 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator_acp.css' %}
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_CP_TITLE') }}</h1>
 
@@ -7,105 +7,83 @@
 <form id="acp_introduciator" method="post" action="{{ U_ACTION }}">
 	<fieldset>
 		<legend><a class="acp_img_configuration" title="{{ lang('GENERAL_OPTIONS') }}"></a>{{ lang('GENERAL_OPTIONS') }}</legend><br/>
-		<!--
-			 Activate / Desactivate extension
-		-->
+		{# Activate / Desactivate extension #}
 		<dl>
-			<dt><label for="extension_activated">{{ lang('INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXTENSION_ACTIVATED_EXPLAIN') }}</span></dt>
-			<dd><label><input id="extension_activated"    name="extension_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_EXTENSION_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {{ lang('YES') }}</label>
-				<label><input id="no_extension_activated" name="extension_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_EXTENSION_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {{ lang('NO') }}</label>
+			<dt><label for="extension_activated">{{ lang('INTRODUCIATOR_CP_EXTENSION_ACTIVATED') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN') }}</span></dt>
+			<dd><label><input id="extension_activated"    name="extension_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_EXTENSION_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label><input id="no_extension_activated" name="extension_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_EXTENSION_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
-		<!--
-			 Activate / Desactivate Mandatory introduction
-		-->
+		{# Activate / Desactivate Mandatory introduction #}
 		<dl>
-			<dt><label for="check_introduction_mandatory_activated" >{{ lang('INTRODUCIATOR_CP_ED_MANDATORY_INTRODUCE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_MANDATORY_INTRODUCE_EXPLAIN') }}</span></dt>
-			<dd><label><input id="check_introduction_mandatory_activated"    name="check_introduction_mandatory_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_INTRODUCTION_MANDATORY --> checked="checked"<!-- ENDIF --> /> {{ lang('YES') }}</label>
-				<label><input id="no_check_introduction_mandatory_activated" name="check_introduction_mandatory_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_INTRODUCTION_MANDATORY --> checked="checked"<!-- ENDIF --> /> {{ lang('NO') }}</label>
+			<dt><label for="check_introduction_mandatory_activated" >{{ lang('INTRODUCIATOR_CP_MANDATORY_INTRODUCE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN') }}</span></dt>
+			<dd><label><input id="check_introduction_mandatory_activated"    name="check_introduction_mandatory_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_INTRODUCTION_MANDATORY %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label><input id="no_check_introduction_mandatory_activated" name="check_introduction_mandatory_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_INTRODUCTION_MANDATORY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
-		<!--
-			 Activate / Desactivate Check delete first post
-		-->
+		{# Activate / Desactivate Check delete first post #}
 		<dl>
-			<dt><label for="check_delete_first_post_activated">{{ lang('INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_CHECK_DEL_1ST_POST_EXPLAIN') }}</span></dt>
-			<dd><label><input id="check_delete_first_post_activated"   name="check_delete_first_post_activated" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {{ lang('YES') }}</label>
-				<label><input id="nocheck_delete_first_post_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED --> checked="checked"<!-- ENDIF --> /> {{ lang('NO') }}</label>
+			<dt><label for="check_delete_first_post_activated">{{ lang('INTRODUCIATOR_CP_CHECK_DEL_1ST_POST') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN') }}</span></dt>
+			<dd><label><input id="check_delete_first_post_activated"   name="check_delete_first_post_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label><input id="nocheck_delete_first_post_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
-		<!--
-			 Forum Choice (where the user MUST introduce himself
-		-->
+		{# Forum Choice (where the user MUST introduce himself #}
 		<dl>
-			<dt><label for="forum_choice">{{ lang('INTRODUCIATOR_CP_ED_FORUM_CHOICE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_FORUM_CHOICE_EXPLAIN') }}</span></dt>
+			<dt><label for="forum_choice">{{ lang('INTRODUCIATOR_CP_FORUM_CHOICE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN') }}</span></dt>
 			<dd>
 				<select id="forum_choice" name="forum_choice" style="width: 100%;" size="1">
-				<!-- BEGIN forums -->
-					<option <!-- IF not forums.CAN_SELECT -->disabled class="disabled-option"<!-- ENDIF --> value="{forums.FORUM_ID}" name="forum_{forums.FORUM_ID}" title="{forums.TOOLTIP}" <!-- IF forums.SELECTED -->selected="selected"<!-- ENDIF -->>{forums.FORUM_NAME}</option>
-				<!-- END forums -->
+				{% for forum in loops.forums %}
+					<option {% if not forum.CAN_SELECT%}disabled class="disabled-option"{% endif %} value="{forum.FORUM_ID}" name="forum_{forum.FORUM_ID}" title="{forum.TOOLTIP}" {% if forum.SELECTED %}selected="selected"{% endif %}>{forum.FORUM_NAME}</option>
+				{% endfor %}
 				</select>
 			</dd>
 		</dl>
-		<!--
-			 Posting  approval level
-		-->
+		{# Posting  approval level #}
 		<dl>
-			<dt><label for="posting_approval_level">{{ lang('INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_POSTING_APPROVAL_LEVEL_EXPLAIN') }}</span></dt>
-			<dd><label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0" <!-- IF INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('INTRODUCIATOR_CP_ED_TEXT_POSTING_NO_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="1" <!-- IF INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="2" <!-- IF INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('INTRODUCIATOR_CP_ED_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
+			<dt><label for="posting_approval_level">{{ lang('INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN') }}</span></dt>
+			<dd><label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0" {% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="1" {% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="2" {% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
 			</dd>
 		</dl>
 	</fieldset>
-		<!--
-			 --------------------------- Manage groups and users -----------------------------
-		-->
+	{# --------------------------- Manage groups and users ----------------------------- #}
 	<fieldset>
-		<legend><a class="acp_img_groups" title="{{ lang('GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS') }}"></a>{{ lang('GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS') }}</legend><br/>
-		<!--
-			 Use permissions or Include / Exclude groups
-		-->
+		<legend><a class="acp_img_groups" title="{{ lang('INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS') }}"></a>{{ lang('INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS') }}</legend><br/>
+		{#  Use permissions or Include / Exclude groups #}
 		<dl>
-			<dt><label for="is_use_permissions">{{ lang('INTRODUCIATOR_CP_ED_USE_PERMISSIONS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_USE_PERMISSIONS_EXPLAIN') }}</span></dt>
-			<dd><label><input id="is_use_permissions"    name="is_use_permissions" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {{ lang('INTRODUCIATOR_CP_ED_USE_PERMISSION_OPTION') }}</label>
-				<label><input id="no_is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_USE_PERMISSIONS --> checked="checked"<!-- ENDIF --> /> {{ lang('INTRODUCIATOR_CP_ED_NOT_USE_PERMISSION_OPTION') }}</label>
+			<dt><label for="is_use_permissions">{{ lang('INTRODUCIATOR_CP_USE_PERMISSIONS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN') }}</span></dt>
+			<dd><label><input id="is_use_permissions"    name="is_use_permissions" type="radio" class="radio" value="1"{% if INTRODUCIATOR_USE_PERMISSIONS %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_USE_PERMISSION_OPTION') }}</label>
+				<label><input id="no_is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_USE_PERMISSIONS %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION') }}</label>
 			</dd>
 		</dl>
 		<hr/>
-		<!--
-			 Include / Exclude groups
-		-->
+		{# Include / Exclude groups #}
 		<dl>
-			<dt><label for="include_groups">{{ lang('INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_INCLUDE_EXCLUDE_GROUPS_EXPLAIN') }}</span></dt>
-			<dd><label><input id="include_groups"    name="include_groups" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {{ lang('INTRODUCIATOR_CP_ED_INCLUDE_GROUPS_OPTION') }}</label>
-				<label><input id="no_include_groups" name="include_groups" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_INCLUDE_GROUPS_SELECTED --> checked="checked"<!-- ENDIF --> /> {{ lang('INTRODUCIATOR_CP_ED_EXCLUDE_GROUPS_OPTION') }}</label>
+			<dt><label for="include_groups">{{ lang('INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS_EXPLAIN') }}</span></dt>
+			<dd><label><input id="include_groups"    name="include_groups" type="radio" class="radio" value="1"{% if INTRODUCIATOR_INCLUDE_GROUPS_SELECTED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION') }}</label>
+				<label><input id="no_include_groups" name="include_groups" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_INCLUDE_GROUPS_SELECTED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION') }}</label>
 			</dd>
 		</dl>
-		<!--
-			 Groups list
-		-->
+		{# Groups list #}
 		<dl>
-			<dt><label for="groups_choices">{{ lang('INTRODUCIATOR_CP_ED_SELECTED_GROUPS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_SELECTED_GROUPS_EXPLAIN') }}</span></dt>
+			<dt><label for="groups_choices">{{ lang('INTRODUCIATOR_CP_SELECTED_GROUPS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_SELECTED_GROUPS_EXPLAIN') }}</span></dt>
 			<dd>
 				<select name="groups_choices[]" style="width: 100%;" id="groups_choices" multiple="multiple" size="10">
-				<!-- BEGIN group -->
-					<option value="{group.ID}" name="group_{group.ID}" title="{group.TOOLTIP}" <!-- IF group.SELECTED -->selected="selected"<!-- ENDIF -->>{group.NAME}</option>
-				<!-- END group -->
+				{% for group in loops.groups %}
+					<option value="{group.ID}" name="group_{group.ID}" title="{group.TOOLTIP}" {% if group.SELECTED %}selected="selected"{% endif %}>{group.NAME}</option>
+				{% endfor %}
 				</select>
 			</dd>
 		</dl>
-		<!--
-			 Ignored users list
-		-->
+		{# Ignored users list #}
 		<dl>
-			<dt><label for="ignored_users">{{ lang('INTRODUCIATOR_CP_ED_IGNORED_USERS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_IGNORED_USERS_EXPLAIN') }}</span></dt>
+			<dt><label for="ignored_users">{{ lang('INTRODUCIATOR_CP_IGNORED_USERS') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN') }}</span></dt>
 			<dd><textarea id="ignored_users" name="ignored_users" rows="10" cols="60" maxlength="255">{INTRODUCIATOR_ITEM_IGNORED_USERS}</textarea></dd>
 		</dl>
 	</fieldset>
-		<!--
-			 --------------------------- Posting ---------------------------------------------
-		-->
+	{# --------------------------- Posting --------------------------------------------- #}
 	<fieldset>
 		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
 		<p class="submit-buttons">
@@ -117,4 +95,4 @@
 	</fieldset>
 </form>
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}

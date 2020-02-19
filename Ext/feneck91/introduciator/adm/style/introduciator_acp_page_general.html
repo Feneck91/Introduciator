@@ -1,31 +1,31 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator_acp.css' %}
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_GP_TITLE') }}</h1>
 {{ lang('INTRODUCIATOR_GP_TITLE_EXPLAIN') }}
 
-<!-- IF S_INTRODUCIATOR_VERSIONCHECK_FAIL -->
+{% if S_INTRODUCIATOR_VERSIONCHECK_FAIL %}
 	<div class="errorbox notice">
 		<p>{{ lang('VERSIONCHECK_FAIL') }}</p>
 		<p><a href="{{ U_INTRODUCIATOR_VERSIONCHECK_FORCE }}">{{ lang('VERSIONCHECK_FORCE_UPDATE') }}</a></p>
 	</div>
-<!-- ELSEIF not S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+{% elseif not S_INTRODUCIATOR_VERSION_UP_TO_DATE %}
 	<div class="errorbox">
 		<p>{{ lang('INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE') }}</p>
 		<p><a href="{{ U_INTRODUCIATOR_VERSIONCHECK_FORCE }}">{{ lang('VERSIONCHECK_FORCE_UPDATE') }}</a>
-		<!-- IF S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND -->
+		{% if S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND %}
 			&middot; <a href="{{ U_INTRODUCIATOR_VERSIONCHECK }}">{{ lang('MORE_INFORMATION') }}</a></p>
-		<!-- ENDIF -->
+		{% endif %}
 	</div>
-<!-- ENDIF -->
+{% endif %}
 
 <table cellspacing="1">
-	<caption>{{ lang('INTRODUCIATOR_GP_STATS') }}</caption>
+	<caption>{{ lang('INTRODUCIATOR_GP_INFOS') }}</caption>
 	<col class="col1" /><col class="col2" />
 	<thead>
 		<tr>
-			<th>{{ lang('STATISTIC') }}</th>
-			<th>{{ lang('VALUE') }}</th>
+			<th>{{ lang('INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS') }}</th>
+			<th>{{ lang('INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES') }}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,30 +36,30 @@
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_VERSION') }}</td>
 			<td>
-			<!-- IF S_INTRODUCIATOR_VERSION_UP_TO_DATE -->
+			{% if S_INTRODUCIATOR_VERSION_UP_TO_DATE %}
 				<strong style="color: #228822;">{INTRODUCIATOR_VERSION}</strong> [&nbsp;<a href="{{ U_INTRODUCIATOR_VERSIONCHECK_FORCE }}">{{ lang('VERSIONCHECK_FORCE_UPDATE') }}</a>&nbsp;]
-			<!-- ELSE -->
+			{% else %}
 				<strong><a href="{{ U_INTRODUCIATOR_VERSIONCHECK }}" style="color: #BC2A4D;" title="{{ lang('MORE_INFORMATION') }}">{INTRODUCIATOR_VERSION}</a></strong> [&nbsp;<a href="{{ U_INTRODUCIATOR_VERSIONCHECK_FORCE }}">{{ lang('VERSIONCHECK_FORCE_UPDATE') }}</a>&nbsp;]
-			<!-- ENDIF -->
+			{% endif %}
 			</td>
 		</tr>
-	<!-- IF (not S_INTRODUCIATOR_VERSION_UP_TO_DATE) and (not S_INTRODUCIATOR_VERSIONCHECK_FAIL) -->
+	{% if (not S_INTRODUCIATOR_VERSION_UP_TO_DATE) and (not S_INTRODUCIATOR_VERSIONCHECK_FAIL) %}
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_UPDATE_VERSION_TITLE') }}</td>
 			<td>{{ lang('INTRODUCIATOR_UPDATE_VERSION') }}</td>
 		</tr>
-		<!-- IF S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND -->
+		{% if S_INTRODUCIATOR_VERSIONCHECK_URL_FOUND %}
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_UPDATE_URL_TITLE') }}</td>
 			<td><a href="{{ U_INTRODUCIATOR_UPDATE_URL }}" title="{{ lang('INTRODUCIATOR_UPDATE_FILENAME') }}">{{ lang('INTRODUCIATOR_UPDATE_FILENAME') }}</a></td>
 		</tr>
-		<!-- ENDIF -->
+		{% endif %}
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_UPDATE_INFOS_TITLE') }}</td>
 			<td>{{ lang('INTRODUCIATOR_UPDATE_INFORMATION') }}</td>
 		</tr>
-	<!-- ENDIF -->
+	{% endif %}
 	</tbody>
 </table>
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}

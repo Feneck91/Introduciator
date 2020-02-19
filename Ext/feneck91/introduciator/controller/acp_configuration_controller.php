@@ -20,12 +20,14 @@ use phpbb\user;
 use phpbb\config\db;
 
 /**
- * Class to manage configuration acp page.
+ * Class used to manage configuration acp page.
+ *
+ * This is the main page used to configure most extension options.
  */
 class acp_configuration_controller extends acp_main_controller
 {
 	/**
-	 * @var helper Introduciator helper. The important code is into this helper.
+	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
 
@@ -35,20 +37,24 @@ class acp_configuration_controller extends acp_main_controller
 	protected $db;
 
 	/**
-	 * @var \phpbb\log\log
+	 * @var \phpbb\log\log Object used to add info into admin log
 	 */
 	protected $log;
 
 	/**
 	 * Constructor
 	 *
-	 * @param introduciator_helper $helper Extension helper
-	 * @param factory              $db Database interface
-	 * @param language             $language Language user object
-	 * @param request              $request  Request object
-	 * @param template	           $template Template object
-	 * @param user                 $user     User object
-	 * @param db                   $dbconfig Config object
+	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
+	 * @param \phpbb\db\driver\factory                              $db             Database interface
+	 * @param \phpbb\log\log                                        $log            Object used to add info into admin log
+	 * @param string                                                $table_prefix   Table prefix
+	 * @param string                                                $root_path      phpBB root path
+	 * @param string                                                $php_ext        phpBB Extention
+	 * @param \phpbb\language\language                              $language       Language user object
+	 * @param \phpbb\request\request                                $request        Request object
+	 * @param \phpbb\template\template                              $template       Template object
+	 * @param \phpbb\user                                           $user           User object
+	 * @param \phpbb\config\db                                      $dbconfig       Config object
 	 *
 	 * @access public
 	 */
@@ -73,8 +79,11 @@ class acp_configuration_controller extends acp_main_controller
 	/**
 	 * Manage the page.
 	 *
-	 * @param string $mode
-	 * @param string $action
+	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
+	 * is really comming from this extension by checking form key.
+	 *
+	 * @param string $mode Current mode
+	 * @param string $action Current action to manage
 	 *
 	 * @throws \Exception
 	 * @return void
@@ -167,7 +176,7 @@ class acp_configuration_controller extends acp_main_controller
 
 		if ($is_enabled && $fk_forum_id === 0)
 		{
-			trigger_error($this->language->lang('INTRODUCIATOR_ERROR_MUST_SELECT_FORUM') . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->language->lang('INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		if ($posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
@@ -201,7 +210,7 @@ class acp_configuration_controller extends acp_main_controller
 		$this->db->sql_multi_insert($this->helper->get_introduciator_groups_table(), $values);
 
 		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_INTRODUCIATOR_UPDATED');
-		trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
+		trigger_error($this->language->lang('INTRODUCIATOR_CP_LOG_UPDATED') . adm_back_link($this->u_action));
 	}
 
 	/**
@@ -223,11 +232,11 @@ class acp_configuration_controller extends acp_main_controller
 		{
 			// Add deactivation item
 			$this->template->assign_block_vars('forums', array(
-				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_NO_FORUM_CHOICE'),
+				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'),
 				'FORUM_ID'		=> (int) 0,
 				'SELECTED'		=> ($fk_selected_forum_id === 0),
 				'CAN_SELECT'	=> true,
-				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_NO_FORUM_CHOICE_TOOLTIP'),
+				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'),
 			));
 		}
 
@@ -267,7 +276,7 @@ class acp_configuration_controller extends acp_main_controller
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$this->template->assign_block_vars('group', array(
+			$this->template->assign_block_vars('groups', array(
 				'NAME'		=> get_group_name($row['group_id']),
 				'ID'		=> (int) $row['group_id'],
 				'SELECTED'	=> $this->helper->is_group_selected($row['group_id']),

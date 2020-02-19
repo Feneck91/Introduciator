@@ -60,9 +60,15 @@ class introduciator_module
 	{
 		global $phpbb_container;
 
+		/** @type \phpbb\language\language $language Language object */
+		$language = $phpbb_container->get('language');
+
 		if ($this->in_array_field($mode, 'module_name', $this::$available_mode))
 		{
 			$this->module_info = $this->array_value($mode, 'module_name', $this::$available_mode);
+
+			// Load the module language file currently in use
+			$language->add_lang('acp_' . $mode, 'feneck91/introduciator');
 
 			// Get an instance of the acp controller
 			/** @type \feneck91.introduciator.controller.introduciator_acp_main_controller $acp_controller */

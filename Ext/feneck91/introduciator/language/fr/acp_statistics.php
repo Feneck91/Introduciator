@@ -38,16 +38,23 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : le nom de l'extension
+* mode: statistics
+* Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_ST_' pour 'INTRODUCIATOR_STATISTICS_PAGES_'
 */
 $lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Présentation forcée',
+	// Titres
+	'INTRODUCIATOR_ST_TITLE'						=> 'Statistiques et vérifications sur les présentations des membres',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Permet d’afficher les informations de la base de données :
+														<ul>
+														<li>Les statistiques sur les présentations.</li>
+														<li>La vérification de la base de données concernant les présentations (vérification que les utilisateurs n’ont pas postés plus d’une seule présentation).</li>
+														</ul>',
 
-/**
-* Titres présents dans la partie gauche de l'onglet extensions de l'ACP sous l'item INTRODUCIATOR
-*/
-	'INTRODUCIATOR_GENERAL'							=> 'Général',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Explication',
-	'INTRODUCIATOR_STATISCICS'						=> 'Statistiques',
+	// Textes du tableau
+	'INTRODUCIATOR_ST_USER'							=> 'UTILISATEUR',
+	'INTRODUCIATOR_ST_DATE'							=> 'DATE',
+	'INTRODUCIATOR_ST_INTRODUCE'					=> 'PRÉSENTATIONS',
+
+	// Boutons
+	'INTRODUCIATOR_ST_CHECK'						=> 'Vérifier',
 ));

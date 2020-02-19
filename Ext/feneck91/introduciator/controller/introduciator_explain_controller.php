@@ -9,32 +9,63 @@
 
 namespace feneck91\introduciator\controller;
 
+use feneck91\introduciator\helper\introduciator_helper;
+use phpbb\config\config;
+use phpbb\auth\auth;
+use phpbb\template\template;
+use phpbb\user;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class to manage introduciator explanation page.
+ * Class used to display introduciator explanation page.
  *
  * This page is displayed when user try to post and have not yet written it's introduce.
  * It explain that the introduce is mandatory and display links to help user to begin it's introduce.
  */
-class introduciator_explain
+class introduciator_explain_controller
 {
-	protected $config;
-	protected $auth;
-	protected $template;
-	protected $user;
-
 	/**
 	 * @var helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
 
-	public function __construct(\phpbb\config\config $config, \phpbb\auth\auth $auth, \phpbb\template\template $template, \phpbb\user $user)
-	{
-		global $phpbb_container;
-		// Get Introduciator class helper
-		$this->helper = $phpbb_container->get('feneck91.introduciator.helper');
+	/**
+	 * @var \phpbb\config\config Current configuration (config table).
+	 */
+	protected $config;
 
+	/**
+	 * @var \phpbb\auth\auth Current authorization.
+	 */
+	protected $auth;
+
+	/**
+	 * @var \phpbb\template\template Template object
+	 */
+	protected $template;
+
+	/**
+	 * @var \phpbb\user Current connected user.
+	 */
+	protected $user;
+
+	/**
+	 * Constructor
+	 *
+	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
+	 * @param \phpbb\config\config                                  $config         Current configuration (config table).
+	 * @param \phpbb\auth\auth                                      $auth           Current authorization.
+	 * @param \phpbb\template\template                              $template       Template object
+	 * @param \phpbb\user                                           $user           User object
+	 *
+	 * @access public
+	 */
+	public function __construct(introduciator_helper $helper, config $config, auth $auth, template $template, user $user)
+	{
+		//global $phpbb_container;
+		// Get Introduciator class helper
+		//$this->helper = $phpbb_container->get('feneck91.introduciator.helper');
+		$this->helper = $helper;
 		$this->config = $config;
 		$this->auth = $auth;
 		$this->template = $template;

@@ -1,82 +1,62 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator_acp.css' %}
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
-<h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_CP_TITLE') }}</h1>
+<h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_EP_TITLE') }}</h1>
 
-{{ lang('INTRODUCIATOR_CP_TITLE_EXPLAIN') }}
+{{ lang('INTRODUCIATOR_EP_TITLE_EXPLAIN') }}
 
 <form id="acp_introduciator" method="post" action="{U_ACTION}">
 	<fieldset>
-		<legend><a class="acp_img_configuration" title="{{ lang('GENERAL_OPTIONS_EXPLANATION_SETTINGS') }}"></a>{{ lang('GENERAL_OPTIONS_EXPLANATION_SETTINGS') }}</legend><br/>
-		<!--
-			 Display explanation page ?
-		-->
+		<legend><a class="acp_img_configuration" title="{{ lang('INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE') }}</legend><br/>
+		{# Display explanation page ? #}
 		<dl>
-			<dt><label for="display_explanation">{{ lang('INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_DISPLAY_EXPLANATION_PAGE_EXPLAIN') }}</span></dt>
-			<dd><label><input id="display_explanation"   name="display_explanation" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('YES') }}</label>
-				<label><input id="nodisplay_explanation" name="display_explanation" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('NO') }}</label>
+			<dt><label for="display_explanation">{{ lang('INTRODUCIATOR_EP_DISPLAY_PAGE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_EP_DISPLAY_PAGE_EXPLAIN') }}</span></dt>
+			<dd><label><input id="display_explanation"   name="display_explanation" type="radio" class="radio" value="1"{% if INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label><input id="nodisplay_explanation" name="display_explanation" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
-		<!--
-			 Activate / Desactivate rules display
-		-->
+		{#  Activate / Desactivate rules display #}
 		<dl>
-			<dt><label for="explanation_display_rules_enabled">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_DISPLAY_RULES_ENABLED_EXPLAIN') }}</span></dt>
-			<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"<!-- IF INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('YES') }}</label>
-				<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"<!-- IF not INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED --> checked="checked"<!-- ENDIF --> /> {{ lang('NO') }}</label>
+			<dt><label for="explanation_display_rules_enabled">{{ lang('INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED') }}:</label><br /><span>{{ lang('INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED_EXPLAIN') }}</span></dt>
+			<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"{% if INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		<br/>
 	</fieldset>
-		<!--
-			 --------------------------- Manage explanation texts ----------------------------
-		-->
+	{# --------------------------- Manage explanation texts ---------------------------- #}
 	<fieldset>
-		<legend><a class="acp_img_texts" title="{{ lang('GENERAL_OPTIONS_EXPLANATION_TEXTS') }}"></a>{{ lang('GENERAL_OPTIONS_EXPLANATION_TEXTS') }}</legend><br/>
-		<!--
-			 General explanation
-		-->
-		<span>{{ lang('GENERAL_OPTIONS_EXPLANATION_TEXTS_EXPLAIN') }}</span>
-		<!--
-			 Display explanation page text and title: iterate over all languages
-		-->
+		<legend><a class="acp_img_texts" title="{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE') }}</legend><br/>
+		{# General explanation #}
+		<span>{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN') }}</span>
+		{# Display explanation page text and title: iterate over all languages #}
 		{% for explanation in loops.explanations %}
 			<hr/>
-			<!--
-				 Title text
-			-->
+			{# Title text #}
 			<h1>{{ explanation.LANG_NR }} - {{ explanation.LANG_NAME }} ({{ explanation.LANG_ISO }})</h1>
 			<br/>
 			<dl>
-				<dt><label for="explanation_message_title_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TITLE_EXPLAIN') }}</span></dt>
+				<dt><label for="explanation_message_title_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_EP_MESSAGE_TITLE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN') }}</span></dt>
 				<dd><textarea id="explanation_message_title_{{ explanation.LANG_ISO }}" name="explanation_message_title_{{ explanation.LANG_ISO }}" rows="5" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE }}</textarea></dd>
 			</dl>
-			<!--
-				 Explanation text
-			-->
+			{# Explanation text #}
 			<dl>
-				<dt><label for="explanation_message_text_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_MESSAGE_TEXT_EXPLAIN') }}</span></dt>
+				<dt><label for="explanation_message_text_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_EP_MESSAGE_TEXT') }}:</label><br /><span>{{ lang('INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN') }}</span></dt>
 				<dd><textarea id="explanation_message_text_{{ explanation.LANG_ISO }}" name="explanation_message_text_{{ explanation.LANG_ISO }}" rows="10" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT }}</textarea></dd>
 			</dl>
-			<!--
-				 Rule title text
-			-->
+			{# Rule title text #}
 			<dl>
-				<dt><label for="explanation_rules_title_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TITLE_EXPLAIN') }}</span></dt>
+				<dt><label for="explanation_rules_title_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_EP_RULES_TITLE') }}:</label><br /><span>{{ lang('INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN') }}</span></dt>
 				<dd><textarea id="explanation_rules_title_{{ explanation.LANG_ISO }}" name="explanation_rules_title_{{ explanation.LANG_ISO }}" rows="5" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_RULES_TITLE }}</textarea></dd>
 			</dl>
-			<!--
-				 Explanation text
-			-->
+			{# Explanation text #}
 			<dl>
-				<dt><label for="explanation_rules_text_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT') }}:</label><br /><span>{{ lang('INTRODUCIATOR_CP_ED_EXPLANATION_RULES_TEXT_EXPLAIN') }}</span></dt>
+				<dt><label for="explanation_rules_text_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_EP_RULES_TEXT') }}:</label><br /><span>{{ lang('INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN') }}</span></dt>
 				<dd><textarea id="explanation_rules_text_{{ explanation.LANG_ISO }}" name="explanation_rules_text_{{ explanation.LANG_ISO }}" rows="10" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_RULES_TEXT }}</textarea></dd>
 			</dl>
 		{% endfor %}
 	</fieldset>
-		<!--
-			 --------------------------- Posting ---------------------------------------------
-		-->
+	{# --------------------------- Posting --------------------------------------------- #}
 	<fieldset>
 		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
 		<p class="submit-buttons">
@@ -87,3 +67,5 @@
 		</p>
 	</fieldset>
 </form>
+
+{% INCLUDE 'overall_footer.html' %}

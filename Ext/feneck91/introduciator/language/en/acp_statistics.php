@@ -1,8 +1,8 @@
 <?php
 /**
- * info_acp_introduciator.php [Français]
+ * info_acp_introduciator.php [English]
  *
- * @package phpBB Extension - Introduciator Extension (Présentation forcée)
+ * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -38,16 +38,24 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : le nom de l'extension
+* mode: explanation
+* Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
+
 */
 $lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Présentation forcée',
+	// Titles
+	'INTRODUCIATOR_ST_TITLE'						=> 'Statistics and checks about user’s introduction',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Used to display database informations:
+														<ul>
+														<li>The statistics about introductions.</li>
+														<li>The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
+														</ul>',
 
-/**
-* Titres présents dans la partie gauche de l'onglet extensions de l'ACP sous l'item INTRODUCIATOR
-*/
-	'INTRODUCIATOR_GENERAL'							=> 'Général',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Explication',
-	'INTRODUCIATOR_STATISCICS'						=> 'Statistiques',
+	// Array's texts
+	'INTRODUCIATOR_ST_USER'							=> 'USER',
+	'INTRODUCIATOR_ST_DATE'							=> 'DATE',
+	'INTRODUCIATOR_ST_INTRODUCE'					=> 'INTRODUCTIONS',
+
+	// Buttons
+	'INTRODUCIATOR_ST_CHECK'						=> 'Check',
 ));

@@ -17,7 +17,7 @@ use phpbb\user;
 use phpbb\config\db;
 
 /**
- * Main class for all acp classes.
+ * Main used class for all acp classes.
  */
 abstract class acp_main_controller
 {
@@ -42,17 +42,17 @@ abstract class acp_main_controller
 	protected $php_ext;
 
 	/**
-	 * @var \phpbb\language\language
+	 * @var \phpbb\language\language Language user object
 	 */
 	protected $language;
 
 	/**
-	 * @var \phpbb\request\request
+	 * @var \phpbb\request\request Request object
 	 */
 	protected $request;
 
 	/**
-	 * @var \phpbb\template\template
+	 * @var \phpbb\template\template Template object
 	 */
 	protected $template;
 
@@ -62,21 +62,21 @@ abstract class acp_main_controller
 	protected $user;
 
 	/**
-	 * @var \phpbb\config\db
+	 * @var \phpbb\config\db Config object
 	 */
 	protected $dbconfig;
 
 	/**
 	 * Constructor
 	 *
-	 * @param string                                             $table_prefix  Table prefix
-	 * @param string                                             $root_path     phpBB root path
-	 * @param string                                             $php_ext       phpBB Extention
-	 * @param language                                           $language      Language user object
-	 * @param request                                            $request       Request object
-	 * @param template	                                         $template      Template object
-	 * @param user                                               $user          User object
-	 * @param db                                                 $dbconfig      Config object
+	 * @param string                        $table_prefix   Table prefix
+	 * @param string                        $root_path      phpBB root path
+	 * @param string                        $php_ext        phpBB Extention
+	 * @param \phpbb\language\language      $language       Language user object
+	 * @param \phpbb\request\request        $request        Request object
+	 * @param \phpbb\template\template      $template       Template object
+	 * @param \phpbb\user                   $user           User object
+	 * @param \phpbb\config\db              $dbconfig       Config object
 	 *
 	 * @access public
 	 */

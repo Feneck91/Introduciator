@@ -1,26 +1,26 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator.css' %}
 
-<!-- IF S_INTRODUCIATOR_DISPLAY -->
+{% if S_INTRODUCIATOR_DISPLAY %}
 	<dt>
 		{L_INTRODUCIATOR_MEMBER_INTRODUCTION}:
 	</dt>
 	<dd>
-		<!-- IF U_INTRODUCIATOR_URL -->
+		{% if U_INTRODUCIATOR_URL %}
 			<a href="{U_INTRODUCIATOR_URL}" alt="{L_INTRODUCIATOR_MEMBER_INTRODUCTION}"
-				<!-- IF S_INTRODUCIATOR_PENDING -->
+				{% if S_INTRODUCIATOR_PENDING %}
 					title="{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}</b>
-				<!-- ELSE -->
+				{% else %}
 					title="{T_INTRODUCIATOR_TEXT}"><b>{L_INTRODUCIATOR_VIEW_MEMBER_GOTO}</b>
-				<!-- ENDIF -->
+				{% endif %}
 			</a>
-		<!-- ELSE -->
+		{% else %}
 		<b>
-		<!-- IF S_INTRODUCIATOR_PENDING -->
+		{% if S_INTRODUCIATOR_PENDING %}
 			{L_INTRODUCIATOR_VIEW_MEMBER_PENDING}
-		<!-- ELSE -->
+		{% else %}
 			{L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO}
-		<!-- ENDIF -->
+		{% endif %}
 		</b>
-	<!-- ENDIF -->
+	{% endif %}
 	</dd>
-<!-- ENDIF -->
+{% endif %}

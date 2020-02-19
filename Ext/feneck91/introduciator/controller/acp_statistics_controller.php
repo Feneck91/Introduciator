@@ -9,18 +9,20 @@
 
 namespace feneck91\introduciator\controller;
 
-use feneck91\introduciator\helper\introduciator_helper;
 use feneck91\introduciator\acp\introduciator_module;
+use feneck91\introduciator\helper\introduciator_helper;
+use phpbb\config\db;
 use phpbb\pagination;
 use phpbb\db\driver\factory;
 use phpbb\language\language;
 use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
-use phpbb\config\db;
 
 /**
- * Class to manage explanation acp page.
+ * Class used to manage statistics acp page.
+ *
+ * This is the page where admin can see if some users post more than one introduce.
  */
 class acp_statistics_controller extends acp_main_controller
 {
@@ -30,7 +32,7 @@ class acp_statistics_controller extends acp_main_controller
 	const NUMBER_ITEMS_BY_PAGE = 10;
 
 	/**
-	 * @var helper Introduciator helper. The important code is into this helper.
+	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper
 	 */
 	protected $helper;
 
@@ -40,19 +42,24 @@ class acp_statistics_controller extends acp_main_controller
 	protected $db;
 
 	/**
-	 * @var \phpbb\pagination
+	 * @var \phpbb\pagination Used to manage information split to display it into several pages
 	 */
 	private $pagination;
+
 	/**
 	 * Constructor
 	 *
-	 * @param introduciator_helper $helper Extension helper
-	 * @param factory              $db Database interface
-	 * @param language             $language Language user object
-	 * @param request              $request  Request object
-	 * @param template	           $template Template object
-	 * @param user                 $user     User object
-	 * @param db                   $dbconfig Config object
+	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
+	 * @param \phpbb\db\driver\factory                              $db             Database interface
+	 * @param \phpbb\pagination                                     $pagination     Used to manage information split to display it into several pages
+	 * @param string                                                $table_prefix   Table prefix
+	 * @param string                                                $root_path      phpBB root path
+	 * @param string                                                $php_ext        phpBB Extention
+	 * @param \phpbb\language\language                              $language       Language user object
+	 * @param \phpbb\request\request                                $request        Request object
+	 * @param \phpbb\template\template                              $template       Template object
+	 * @param \phpbb\user                                           $user           User object
+	 * @param \phpbb\config\db                                      $dbconfig       Config object
 	 *
 	 * @access public
 	 */
@@ -77,8 +84,13 @@ class acp_statistics_controller extends acp_main_controller
 	/**
 	 * Manage the page.
 	 *
-	 * @param string $mode
-	 * @param string $action
+	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
+	 * is really comming from this extension by checking form key
+	 *
+	 * @param string $mode Current mode
+	 * @param string $action Current action to manage:
+	 *    check to display first page
+	 *    otherpage to change the informations page displayed to the user
 	 *
 	 * @throws \Exception
 	 * @return void
