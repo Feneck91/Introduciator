@@ -1195,6 +1195,6 @@ class introduciator_helper
 	 */
 	public function introduciator_let_user_posting_or_editing($user, $mode, $forum_id, $post_data)
 	{
-		$is_allowed = $this->introduciator_verify_posting($user, $mode, $forum_id, 0, $post_data, true);
+		return $this->introduciator_verify_posting($user, $mode, $forum_id, 0, $post_data, true);
 	}
 }
