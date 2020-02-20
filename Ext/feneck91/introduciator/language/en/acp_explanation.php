@@ -82,5 +82,5 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>Introduciator: explanation’s settings updated.</strong>',
 
 	// Confirm box
-	'INTRODUCIATOR_CP_UPDATED'										=> 'The configuration has been updated',
+	'INTRODUCIATOR_EP_UPDATED'										=> 'The explanation’s page settings has been updated',
 ));

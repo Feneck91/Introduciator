@@ -3,7 +3,7 @@
     "type": "phpbb-extension",
     "description": "Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums. An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.",
     "homepage": "http://feneck91.free.fr/forum/index.php",
-    "version": "3.0.0",
+    "version": "2.0.0",
     "time": "2019-03-12",
     "keywords": [
         "phpbb",

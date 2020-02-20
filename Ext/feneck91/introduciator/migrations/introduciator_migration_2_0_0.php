@@ -10,7 +10,7 @@
 
 namespace feneck91\introduciator\migrations;
 
-class introduciator_migration_2_1_0 extends \phpbb\db\migration\migration
+class introduciator_migration_2_0_0 extends \phpbb\db\migration\migration
 {
 	/**
 	 * Add the table schema to the database

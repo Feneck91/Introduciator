@@ -83,6 +83,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>?????</strong>',
 
 	// Confirm box
-	'INTRODUCIATOR_EP_UPDATED'										=> 'La configurazione è stata aggiornata con successo',
+	'INTRODUCIATOR_EP_UPDATED'										=> '????La configurazione è stata aggiornata con successo',
 
 ));
