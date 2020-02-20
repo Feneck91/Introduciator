@@ -210,7 +210,7 @@ class introduciator_helper
 	 *
 	 * Return true if the group is selected, false else.
 	 *
-	 * @param $group_id Group's identifier.
+	 * @param int $group_id Group's identifier.
 
 	 * @return boolean
 	 * @access public
@@ -267,9 +267,9 @@ class introduciator_helper
 	 * Return an array of explanation text used to edit or display.
 	 *
 	 * @param boolean $is_edit if true, return rules texts for editing
-	 *                 else return rules texts for display
+	 *                         else return rules texts for display
 	 * @param boolean $only_current_lang if true, return only user's default language.
-	 *                 else return alls languages (used only in the extension configuration and to display all rules in all languages)
+	 *                                    else return alls languages (used only in the extension configuration and to display all rules in all languages)
 	 *
 	 * @return array
 	 * @access public
@@ -391,9 +391,9 @@ class introduciator_helper
 	 *
 	 * Return the introduciator parameters.
 	 *
-	 * @param $is_edit if true, return rules texts for editing
-	 *                 if false, return rules texts for display
-	 *                 if null, don't return rules texts (used only in the extension configuration and to display rules)
+	 * @param boolean $is_edit if true, return rules texts for editing
+	 *                         if false, return rules texts for display
+	 *                         if null, don't return rules texts (used only in the extension configuration and to display rules)
 	 *
 	 * @return array
 	 * @access public
@@ -527,15 +527,15 @@ class introduciator_helper
 	 * or error message if action is not allowed.
 	 *
 	 * Return true if the user is allowed to make action,
-	 *         false else, in this case, just check if allowed or not (remove quick reply if not allowed).
-	 *         RedirectResponse if redirection is needed.
+	 *        false else, in this case, just check if allowed or not (remove quick reply if not allowed).
+	 *        RedirectResponse if redirection is needed.
 	 *
-	 * @param $user The connected user.
-	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
-	 * @param $forum_id Forum identifier where the user try to post.
-	 * @param $post_id Post's id : it cannot be deleted if it is the first one and action is delete (used only for delete), pass 0 else.
-	 * @param $post_data Informations about posting (used only for delete) pass null else.
-	 * @param $redirect true if the function should redirect in case of the user is not allowed to make the action, else only return status.
+	 * @param \phpbb\user		$user		Current connected user.
+	 * @param string			$mode		Posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
+	 * @param int				$forum_id	Forum identifier where the user try to post.
+	 * @param int				$post_id	Post's id: it cannot be deleted if it is the first one and action is delete (used only for delete), pass 0 else.
+	 * @param array				$post_data	Informations about posting (used only for delete) pass null else.
+	 * @param boolean			$redirect	true if the function should redirect in case of the user is not allowed to make the action, else only return status.
 	 *
 	 * @return boolean
 	 * @access public
@@ -704,8 +704,8 @@ class introduciator_helper
 	 *   <li>pending : true if message is pending approval, false else.</li>
 	 * </ul>.
 	 *
-	 * @param $poster_id The poster id
-	 * @param $poster_name The poster name
+	 * @param int		$poster_id		The poster id
+	 * @param string	$poster_name	The poster name
 	 *
 	 * @return array
 	 * @access public
@@ -784,9 +784,9 @@ class introduciator_helper
 	 *
 	 * Return true if the post must be approved, false else.
 	 *
-	 * @param $user The user informations
-	 * @param $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
-	 * @param $forum_id Forum identifier where the user try to post
+	 * @param \phpbb\user		$user		Current connected user.
+	 * @param string			$mode		Posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
+	 * @param int				$forum_id	Forum identifier where the user try to post
 	 *
 	 * @return boolean
 	 * @access public
@@ -802,11 +802,11 @@ class introduciator_helper
 	 *
 	 * Return the SQL modified request to be able to see the unapproved user presentation.
 	 *
-	 * @param \phpbb\user $user The user informations
-	 * @param int $forum_id Forum identifier to be displayed or null to don't filter on forum's id
-	 * @param string $sql_approved Current sql approved.
-	 * @param string $table_name Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
-	 * @param array $approve_fid_ary Used to retrieve approve_fid_ary if needed, else pass null to ignore parameter.
+	 * @param \phpbb\user		$user				The user informations
+	 * @param int				$forum_id			Forum identifier to be displayed or null to don't filter on forum's id
+	 * @param string			$sql_approved		Current sql approved.
+	 * @param string			$table_name			Table name used for SQL request, it can be 't' ou 'p' or other. Empty if not needed.
+	 * @param array				$approve_fid_ary	Used to retrieve approve_fid_ary if needed, else pass null to ignore parameter.
 	 *
 	 * @return string
 	 * @access public
@@ -859,10 +859,10 @@ class introduciator_helper
 	 * If should return true and check_moderator_permissions is set to true, this function also return false if the user has moderator privilege (to
 	 * let approval fields visible).
 	 *
-	 * @param \phpbb\user $user The user informations
-	 * @param int $forum_id Forum identifier
-	 * @param int $topic_id topic identifier
-	 * @param boolean $check_moderator_permissions If set to true, the function check moderator permissions to reply true or false.
+	 * @param \phpbb\user		$user							The user informations
+	 * @param int				$forum_id						Forum identifier
+	 * @param int				$topic_id						topic identifier
+	 * @param boolean			$check_moderator_permissions	If set to true, the function check moderator permissions to reply true or false.
 	 *
 	 * @return boolean
 	 * @access public
@@ -918,11 +918,11 @@ class introduciator_helper
 	 *
 	 * Return true if the user already post at least one message into this forum, false else.
 	 *
-	 * @param int $forum_id Forum's ID
-	 * @param int $user_id User's ID
-	 * @param int $topic_id If this function returns true, it contains the Topic ID where the user hast post it's presentation
-	 * @param int $first_post_id If this function returns true, it contains the post ID of the post that has created the topic
-	 * @param boolean $topic_approved If this function returns true, it contains true / false if the topic is approved or not
+	 * @param int		$forum_id			Forum's ID
+	 * @param int		$user_id			User's ID
+	 * @param int		$topic_id			If this function returns true, it contains the Topic ID where the user hast post it's presentation
+	 * @param int		$first_post_id		If this function returns true, it contains the post ID of the post that has created the topic
+	 * @param boolean	$topic_approved		If this function returns true, it contains true / false if the topic is approved or not
 	 *
 	 * @return boolean
 	 * @access protected
@@ -990,8 +990,8 @@ class introduciator_helper
 	 *
 	 * Return true if the user is ignored, false else.
 	 *
-	 * @param int $poster_id User's ID
-	 * @param string $poster_name User's name
+	 * @param int		$poster_id		User's ID
+	 * @param string	$poster_name	User's name
 	 *
 	 * @return boolean
 	 * @access protected
@@ -1027,9 +1027,9 @@ class introduciator_helper
 	 *
 	 * Return true if the user must introduce himself pending of rights, false else.
 	 *
-	 * @param int $poster_id User's ID
-	 * @param \phpbb\auth\auth $authorisations User's authorisations. It can be null if the we check authorisation from another user thant the current one.
-	 * @param string $poster_name User's name
+	 * @param int					$poster_id			User's ID
+	 * @param \phpbb\auth\auth		$authorisations		User's authorisations. It can be null if the we check authorisation from another user than the current one.
+	 * @param string				$poster_name		User's name
 	 *
 	 * @return boolean
 	 * @access public
@@ -1079,9 +1079,9 @@ class introduciator_helper
 	 *
 	 * Return the approval level for this post, depending of extension configuration.
 	 *
-	 * @param \phpbb\user $user The user informations
-	 * @param string $mode posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
-	 * @param int $forum_id Forum identifier where the user try to post
+	 * @param \phpbb\user	$user		The user informations
+	 * @param string		$mode		Posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc
+	 * @param int			$forum_id	Forum identifier where the user try to post
 	 *
 	 * @return int
 	 * @access public
@@ -1129,12 +1129,12 @@ class introduciator_helper
 	 *
 	 * Return true if the sql visibility mmust be overwrite, false else.
 	 *
-	 * @param \phpbb\user $user The user informations
-	 * @param int $forum_id Forum identifier where the user try to post
-	 * @param string $where_sql Current SQL WHERE used, must be concatenate with it.
-	 * @param string $mode topic or post.
-	 * @param string $table_alias alias table to use.
-	 * @param string $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
+	 * @param \phpbb\user	$user							The user informations
+	 * @param int			$forum_id						Forum identifier where the user try to post
+	 * @param string		$where_sql						Current SQL WHERE used, must be concatenate with it.
+	 * @param string		$mode							Topic or post.
+	 * @param string		$table_alias alias				Table's name to use.
+	 * @param string		$get_visibility_sql_overwrite	Contains the SQL to send to get correct topic visibility if the function returns true.
 	 *
 	 * @return boolean
 	 * @access public
@@ -1182,20 +1182,19 @@ class introduciator_helper
 	/**
 	 * Get the approval level for the post using introduciator configuration.
 	 *
-	 * Return true if the sql visibility mmust be overwrite, false else.
+	 * Return true if the user is allowed to make action,
+	 *        false else, in this case, just check if allowed or not (remove quick reply if not allowed).
+	 *        RedirectResponse if redirection is needed.
 	 *
-	 * @param \phpbb\user $user The user informations
-	 * @param int $forum_id Forum identifier where the user try to post
-	 * @param string $where_sql Current SQL WHERE used, must be concatenate with it.
-	 * @param string $mode topic or post.
-	 * @param string $table_alias alias table to use.
-	 * @param string $get_visibility_sql_overwrite Contains the SQL to send to get correct topic visibility if the function returns true.
+	 * @param \phpbb\user		$user		The user informations
+	 * @param string			$mode		Posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
+	 * @param array				$post_data	Informations about posting.
 	 *
 	 * @return boolean
 	 * @access public
 	 */
-	public function introduciator_let_user_posting_or_editing($user, $mode, $forum_id, $topic_id, $post_data)
+	public function introduciator_let_user_posting_or_editing($user, $mode, $forum_id, $post_data)
 	{
-		return $this->introduciator_verify_posting($user, $mode, $forum_id, 0, $post_data, true);
+		$is_allowed = $this->introduciator_verify_posting($user, $mode, $forum_id, 0, $post_data, true);
 	}
 }

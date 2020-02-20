@@ -346,8 +346,7 @@ class introduciator_listener implements EventSubscriberInterface
 	*/
 	public function on_user_want_post($event)
 	{
-		// If $event['post_data'] == null => it begin to post a new subject, nothing to do into this function
-		if ($this->introduciator_helper->introduciator_let_user_posting_or_editing($this->user, $event['mode'], $event['forum_id'], $event['topic_id'], $event['post_data']))
+		if ($this->introduciator_helper->introduciator_let_user_posting_or_editing($this->user, $event['mode'], $event['forum_id'], $event['post_data']))
 		{
 			$data = $event['post_data'];
 			$data['topic_visibility'] = ITEM_APPROVED; // Force approval

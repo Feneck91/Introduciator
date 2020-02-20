@@ -37,7 +37,7 @@ GOTO End
 
 :Done
 ECHO.
-ECHO.	
+ECHO.
 ECHO "Introduciator_v%INTRODUCIATOR_VERSION%.zip" successfully created.
 pause
 
