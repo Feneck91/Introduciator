@@ -4,6 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @Simplified Chinese Language (c) David Yin <https://www.phpbbchinese.com>
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
@@ -44,18 +45,18 @@ if (empty($lang) || !is_array($lang))
 */
 $lang = array_merge($lang, array(
 	// Titles
-	'INTRODUCIATOR_ST_TITLE'						=> 'Statistics and checks about user’s introduction',
-	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Used to display database informations:
+	'INTRODUCIATOR_ST_TITLE'						=> '用户自我介绍的统计信息和检查',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> '用于显示数据库信息：
 														<ul>
-														<li>The statistics about introductions.</li>
-														<li>The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
+														<li>自我介绍的统计信息。</li>
+														<li>用户自我介绍的数据库一致性检查（检查用户是否发布了多个自我介绍）。</li>
 														</ul>',
 
 	// Array's texts
-	'INTRODUCIATOR_ST_USER'							=> 'USER',
-	'INTRODUCIATOR_ST_DATE'							=> 'DATE',
-	'INTRODUCIATOR_ST_INTRODUCE'					=> 'INTRODUCTIONS',
+	'INTRODUCIATOR_ST_USER'							=> '用户',
+	'INTRODUCIATOR_ST_DATE'							=> '日期',
+	'INTRODUCIATOR_ST_INTRODUCE'					=> '自我介绍',
 
 	// Buttons
-	'INTRODUCIATOR_ST_CHECK'						=> 'Check',
+	'INTRODUCIATOR_ST_CHECK'						=> '检查',
 ));

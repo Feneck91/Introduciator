@@ -4,6 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @Simplified Chinese Language (c) David Yin <https://www.phpbbchinese.com>
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
@@ -39,8 +40,8 @@ if (empty($lang) || !is_array($lang))
 // Adding the permissions
 $lang = array_merge($lang, array(
 	// User Permissions
-	'ACL_U_MUST_INTRODUCE'			=> 'Must first post an introduction',
+	'ACL_U_MUST_INTRODUCE'			=> '必须先发布一个自我介绍',
 
 	// Admin Permissions
-	'ACL_A_INTRODUCIATOR_MANAGE'	=> 'Can manage Introduciator extension',
+	'ACL_A_INTRODUCIATOR_MANAGE'	=> '能管理自我介绍扩展',
 ));

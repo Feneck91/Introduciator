@@ -4,6 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @Simplified Chinese Language (c) David Yin <https://www.phpbbchinese.com>
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
@@ -43,56 +44,56 @@ if (empty($lang) || !is_array($lang))
 */
 $lang = array_merge($lang, array(
 	// Titles
-	'INTRODUCIATOR_CP_TITLE'										=> 'Introduciator configuration settings',
-	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Allow to configure the extension settings.',
+	'INTRODUCIATOR_CP_TITLE'										=> '自我介绍 配置设置',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> '允许地扩展的设置做修改。',
 
 	// Settings: general
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Enable extension',
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Used to enable or disable this extension.',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
-																			<br/>When this feature is not enabled, all other options remain active.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
-																			<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
-																			<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
-	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'The forum where the user must introduce himself/herself',
-	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'The extension will search only in this forum whether forum users have introduced themselves.',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Introduction approval options',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Is used to force introduction to be approved by a moderator:<br/>
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> '启用扩展',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> '用于开启或者禁用这个扩展。',
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> '强制用户做一个自我介绍',
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> '当此选项启用时，此扩展会强制用户在发布其它帖子之前先发表一个自我介绍。
+																			<br/>当没有启用时，所有其它的选项保持激活状态。',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> '授权扩展在自我介绍板块中检查是否删除主题的第一个帖子',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> '激活此选项后，扩展将阻止在自我介绍板块中，任何主题的第一个帖子被删除。
+																			<br/>甚至版主或者管理员都没有此权限，来确保每个主题的第一个帖子是真正的自我介绍。 但是任然保留了删除主题的权限。
+																			<br/>你可以不启用此选项，但是这会给与用户发布多个自我介绍的能力。建议启用此选项。',
+	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> '用户必须做自我介绍的论坛板块',
+	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> '此扩展将只用于此板块，以确认用户已经做了自我介绍。',
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> '自我介绍的审核选项',
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> '用于版主对于自我介绍的审核：<br/>
 																			<ul>
-																			<li><b>No approval</b>: don’t force introduction to be approved, let the default processing.</li>
-																			<li><b>Simple approval</b>: force introduction to be approved. The user doesn’t see his/her introduction if it is not validated by a moderator (normal processing is used for all messages that use approval).</li>
-																			<li><b>Approval with ability to edit</b>: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbiden.</li>
+																			<li><b>无需批准</b>： 不强制批准介绍。默认保留。</li>
+																			<li><b>简单批准</b>： 必须审核。 未经版主审核批准，用户看不到自我介绍。 （所有需要审核的消息都是用常规处理）</li>
+																			<li><b>带有编辑的批准</b>： 必须审核。用户可以即刻查看自我介绍并且可以修改它。 在版主还未审核之前，他不能在其他地方发布。这可以让让版主和用户交换信息，达成一致，然后再由版主进行审核通过（不寻常的消息处理）。只有编辑是允许的，回复和引用都是禁止的。</li>
 																			</ul>',
-	'INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL'						=> 'No approval',
-	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL'						=> 'Simple approval',
-	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT'				=> 'Approval with ability to edit',
+	'INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL'						=> '无需批准',
+	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL'						=> '简单批准',
+	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT'				=> '带有编辑的批准',
 
 	// Settings: groups and users
-	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Groups and users configuration',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Use phpBB permissions',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'You can use either the phpBB permissions or this extension configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.<br /><br />When the « Use forum’s permissions » option is used, the next configuration is ignored.',
-	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Use forum’s permissions',
-	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Use extension configuration',
-	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Include or exclude groups',
-	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'				=> 'When « include groups » is selected, only users of selected groups need to introduce themselves.<br />When « exclude groups » is selected, only users that are not into selected groups need to introduce themselves.',
-	'INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION'						=> 'Include groups',
-	'INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION'						=> 'Exclude groups',
-	'INTRODUCIATOR_CP_SELECTED_GROUPS'								=> 'Groups selections',
-	'INTRODUCIATOR_CP_SELECTED_GROUPS_EXPLAIN'						=> 'Select groups that should be included or excluded.',
-	'INTRODUCIATOR_CP_IGNORED_USERS'								=> 'Ignored users',
-	'INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN'						=> 'Users who are not required to introduce themselves.<br />Enter one username on each line.<br />The option is used, for example, for the administrators or test accounts.',
+	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> '用户组和用户的配置',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> '使用 phpBB 权限',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> '你可以使用 phpBB 权限或者扩展配置（最简单但效率低） 来指示用户是应该自我介绍否。<br /><br />当 « 用户论坛权限 » 选项开启，后面的配置都被忽略。',
+	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> '用户论坛权限',
+	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> '用户扩展配置',
+	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> '包括或者不包括用户组',
+	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'				=> '当 « 包括用户组 » 被选择时，只有被选中的用户或者用户组需要做自我介绍。<br />当 « 不包括用户组 » 被选择时，只有不被选中的用户组才需要做自我介绍。',
+	'INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION'						=> '包括用户组',
+	'INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION'						=> '不包括用户组',
+	'INTRODUCIATOR_CP_SELECTED_GROUPS'								=> '用户组选择',
+	'INTRODUCIATOR_CP_SELECTED_GROUPS_EXPLAIN'						=> '选择应当被包括或者不包括的用户组。',
+	'INTRODUCIATOR_CP_IGNORED_USERS'								=> '忽略的用户',
+	'INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN'						=> '不被要求做自我介绍的用户。<br />每行输入一个用户名。.<br />这个选项用于测试账号或者管理员账号。',
 
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is desactivated',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, your should choose a forum!',
-	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> 'No update information available',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> '未选择论坛版块，仅在扩展被禁用的时候使用',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> '当启用此扩展，你应当先选择一个论坛版块！',
+	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> '没有可用的更新信息',
 
 	// Logs
-	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Introduciator: configuration settings updated.</strong>',
+	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>自我介绍： 配置设置更新完成。</strong>',
 
 	// Confirm box
-	'INTRODUCIATOR_CP_UPDATED'										=> 'The configuration has been updated',
+	'INTRODUCIATOR_CP_UPDATED'										=> ' 配置已更新',
 ));

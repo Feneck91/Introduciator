@@ -4,6 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @Simplified Chinese Language (c) David Yin <https://www.phpbbchinese.com>
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
@@ -41,13 +42,13 @@ if (empty($lang) || !is_array($lang))
 * mode: main : the name of the extension
 */
 $lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Introduciator',
+	'ACP_INTRODUCIATOR_EXTENSION'					=> '自我介绍',
 
 /**
 * Titles present on the left side of Extensions ACP's tab under Introduciator item
 */
-	'INTRODUCIATOR_GENERAL'							=> 'General',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Explanation',
-	'INTRODUCIATOR_STATISCICS'						=> 'Statistics',
+	'INTRODUCIATOR_GENERAL'							=> '通用',
+	'INTRODUCIATOR_CONFIGURATION'					=> '配置',
+	'INTRODUCIATOR_EXPLANATION'						=> '说明',
+	'INTRODUCIATOR_STATISCICS'						=> '统计',
 ));
