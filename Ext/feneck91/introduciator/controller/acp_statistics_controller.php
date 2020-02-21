@@ -168,7 +168,7 @@ class acp_statistics_controller extends acp_main_controller
 		$sql = $this->db->sql_build_query('SELECT', array(
 				'SELECT'	=> 'COUNT(topic_id)',
 				'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-				'WHERE'		=> 'topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+				'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
 			));
 		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
 		$nb_introductions = reset($row);
@@ -187,7 +187,7 @@ class acp_statistics_controller extends acp_main_controller
 		$sql_where = $this->db->sql_build_query('SELECT', array(
 				'SELECT'	=> 'COUNT(topic_id)',
 				'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-				'WHERE'		=> 'phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+				'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
 			));
 		 $sql = $this->db->sql_build_query('SELECT', array(
 			'SELECT'	=> 'COUNT(result.topic_id)',
@@ -210,7 +210,7 @@ class acp_statistics_controller extends acp_main_controller
 			$sql_where = $this->db->sql_build_query('SELECT', array(
 					'SELECT'	=> 'COUNT(topic_id)',
 					'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-					'WHERE'		=> 'phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+					'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
 				));
 			$sql = $this->db->sql_build_query('SELECT', array(
 				'SELECT'	=> 'topic_poster, topic_first_poster_name',
@@ -242,9 +242,9 @@ class acp_statistics_controller extends acp_main_controller
 				for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index)
 				{
 					$sql = $this->db->sql_build_query('SELECT', array(
-						'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND forum_id = {$params['fk_forum_id']}) as nb_introduce",
+						'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type, (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND forum_id = {$params['fk_forum_id']}) as nb_introduce",
 						'FROM'      => array(TOPICS_TABLE => 'phpbbtopics'),
-						'WHERE'		=> "forum_id = {$params['fk_forum_id']} HAVING nb_introduce > 1 AND topic_poster = {$users_to_check[$index]['topic_poster']} AND topic_visibility = " . ITEM_APPROVED,
+						'WHERE'		=> "forum_id = {$params['fk_forum_id']} HAVING nb_introduce > 1 AND topic_poster = {$users_to_check[$index]['topic_poster']} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
 						'ORDER_BY'	=> 'topic_time',
 					));
 

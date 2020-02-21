@@ -933,6 +933,7 @@ class introduciator_helper
 		$sql = 'SELECT topic_id, topic_first_post_id, topic_visibility
 				FROM ' . TOPICS_TABLE . '
 					WHERE topic_poster = ' . (int) $user_id . '
+					 AND topic_type = ' . POST_NORMAL . '
 					 AND forum_id = ' . (int) $forum_id . '
 					 AND topic_visibility <> ' . ITEM_DELETED . '
 					 AND topic_first_post_id <> 0'; // PATCH : Sometimes, the topic_first_post_id is 0
