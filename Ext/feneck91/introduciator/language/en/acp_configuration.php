@@ -47,18 +47,18 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Allow to configure the extension settings.',
 
 	// Settings: general
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Enable extension',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Enable extension:',
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Used to enable or disable this extension.',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself',
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
 																			<br/>When this feature is not enabled, all other options remain active.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions:',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
 																			<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
 																			<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
-	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'The forum where the user must introduce himself/herself',
+	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'The forum where the user must introduce himself/herself:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'The extension will search only in this forum whether forum users have introduced themselves.',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Introduction approval options',
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Introduction approval options:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Is used to force introduction to be approved by a moderator:<br/>
 																			<ul>
 																			<li><b>No approval</b>: don’t force introduction to be approved, let the default processing.</li>
@@ -71,17 +71,17 @@ $lang = array_merge($lang, array(
 
 	// Settings: groups and users
 	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Groups and users configuration',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Use phpBB permissions',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Use phpBB permissions:',
 	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'You can use either the phpBB permissions or this extension configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.<br /><br />When the « Use forum’s permissions » option is used, the next configuration is ignored.',
 	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Use forum’s permissions',
 	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Use extension configuration',
-	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Include or exclude groups',
+	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Include or exclude groups:',
 	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'				=> 'When « include groups » is selected, only users of selected groups need to introduce themselves.<br />When « exclude groups » is selected, only users that are not into selected groups need to introduce themselves.',
 	'INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION'						=> 'Include groups',
 	'INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION'						=> 'Exclude groups',
-	'INTRODUCIATOR_CP_SELECTED_GROUPS'								=> 'Groups selections',
+	'INTRODUCIATOR_CP_SELECTED_GROUPS'								=> 'Groups selections:',
 	'INTRODUCIATOR_CP_SELECTED_GROUPS_EXPLAIN'						=> 'Select groups that should be included or excluded.',
-	'INTRODUCIATOR_CP_IGNORED_USERS'								=> 'Ignored users',
+	'INTRODUCIATOR_CP_IGNORED_USERS'								=> 'Ignored users:',
 	'INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN'						=> 'Users who are not required to introduce themselves.<br />Enter one username on each line.<br />The option is used, for example, for the administrators or test accounts.',
 
 	// Messages

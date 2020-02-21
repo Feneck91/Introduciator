@@ -35,7 +35,7 @@ class introduciator_migration_2_0_0 extends \phpbb\db\migration\migration
 				$this->table_prefix . 'introduciator_explanation' => array(
 					'COLUMNS'		=> array(
 						'id'							=> array('UINT', null, 'auto_increment'),
-						'lang'							=> array('VCHAR:2', ''),
+						'lang'							=> array('VCHAR:30', ''),
 						'message_title'					=> array('MTEXT_UNI', ''),
 						'message_title_uid'				=> array('VCHAR:8', ''),
 						'message_title_bitfield'		=> array('VCHAR:255', ''),

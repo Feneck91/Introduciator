@@ -52,10 +52,14 @@ $lang = array_merge($lang, array(
 														<li>用户自我介绍的数据库一致性检查（检查用户是否发布了多个自我介绍）。</li>
 														</ul>',
 
+	// Number of introduce's texts
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> '??Generales statistics',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '??Number of introduction into the forum:',
+	
 	// Array's texts
-	'INTRODUCIATOR_ST_USER'							=> '用户',
-	'INTRODUCIATOR_ST_DATE'							=> '日期',
-	'INTRODUCIATOR_ST_INTRODUCE'					=> '自我介绍',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '用户',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '日期',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '自我介绍',
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK'						=> '检查',

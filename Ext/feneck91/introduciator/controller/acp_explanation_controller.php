@@ -176,8 +176,8 @@ class acp_explanation_controller extends acp_main_controller
 
 		// Get All languages
 		$sql = $this->db->sql_build_query('SELECT', array(
-			'SELECT'    => 'l.lang_iso',
-			'FROM'      => array(LANG_TABLE => 'l'),
+			'SELECT'	=> 'l.lang_iso',
+			'FROM'		=> array(LANG_TABLE => 'l'),
 			'ORDER BY'	=> 'lang_id',
 		));
 		$result = $this->db->sql_query($sql);

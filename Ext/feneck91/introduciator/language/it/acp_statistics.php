@@ -51,10 +51,15 @@ $lang = array_merge($lang, array(
 														<li>????The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
 														</ul>',
 
+	// Number of introduce's texts
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> 'NNNGenerales statistics',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '???Number of introduction into the forum:',
+
 	// Array's texts
-	'INTRODUCIATOR_ST_USER'							=> '????USER',
-	'INTRODUCIATOR_ST_DATE'							=> '????DATE',
-	'INTRODUCIATOR_ST_INTRODUCE'					=> '????INTRODUCTIONS',
+	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> '???This array indicate all the introduction that have been posted more than once',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '????USER',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '????DATE',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '????INTRODUCTIONS',
 
 	// Buttons
 	'INTRODUCIATOR_CHECK'							=> '????',

@@ -50,10 +50,15 @@ $lang = array_merge($lang, array(
 														<li>La vérification de la base de données concernant les présentations (vérification que les utilisateurs n’ont pas postés plus d’une seule présentation).</li>
 														</ul>',
 
+	// Number of introduce's texts
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> 'Statistiques générales',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> 'Nombre de présentations dans le forum :',
+
 	// Textes du tableau
-	'INTRODUCIATOR_ST_USER'							=> 'UTILISATEUR',
-	'INTRODUCIATOR_ST_DATE'							=> 'DATE',
-	'INTRODUCIATOR_ST_INTRODUCE'					=> 'PRÉSENTATIONS',
+	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> 'Ce tableau indique toutes les présentations qui ont été postées plus d’une fois',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> 'UTILISATEUR',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'DATE',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'PRÉSENTATIONS',
 
 	// Boutons
 	'INTRODUCIATOR_ST_CHECK'						=> 'Vérifier',

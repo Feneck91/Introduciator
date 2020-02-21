@@ -49,9 +49,9 @@ $lang = array_merge($lang, array(
 
 	// Settings: page configuration
 	'INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE'						=> 'Spiegazioni pagina di configurazione',
-	'INTRODUCIATOR_EP_DISPLAY_PAGE'									=> 'Visualizza Pagina spiegazione',
+	'INTRODUCIATOR_EP_DISPLAY_PAGE'									=> 'Visualizza Pagina spiegazione:',
 	'INTRODUCIATOR_EP_DISPLAY_PAGE_EXPLAIN'							=> 'Questa opzione viene utilizzata per visualizzare una pagina di spiegazione se l’utente sta cercando di inserire il messaggio in un altro forum invece del forum per le presentazioni.',
-	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED'						=> 'Visualizza le regole del Forum per le introduzioni',
+	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED'						=> 'Visualizza le regole del Forum per le introduzioni:',
 	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED_EXPLAIN'				=> 'Utilizzato per visualizzare le regole per il forum per le introduzioni sulla pagina di spiegazione.',
 
 	// Settings: page text configuration
@@ -70,13 +70,13 @@ $lang = array_merge($lang, array(
 																		<li>Fare link per creare l’argomento e forum per le presentazioni: <i>[url=<b>%forum_post%</b>]Clicca qui per creare topic nel forum ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
 																		<br/>',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Titolo per la pagina di spiegazione',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Titolo per la pagina di spiegazione:',
 	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Default = <b>%explanation_title%</b><br/>È possibile modificare questo testo con il proprio.',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Testo per la pagina di Spiegazione',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Testo per la pagina di Spiegazione:',
 	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Default = <b>%explanation_text%</b><br/>È possibile modificare questo testo con il proprio.',
-	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Titolo spiegazione regole',
+	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Titolo spiegazione regole:',
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Default = <b>%rules_title%</b><br/>È possibile modificare questo testo con il proprio.',
-	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Testo delle regole per il forum per le presentazioni',
+	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Testo delle regole per il forum per le presentazioni:',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Default = <b>%rules_text%</b><br/>Per impostazione predefinita, %rules_text% è sostituito dalle regole per il forum per le presentazioni.<br/>È possibile modificare questo testo con il proprio.',
 
 	// Logs

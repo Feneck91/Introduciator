@@ -48,9 +48,9 @@ $lang = array_merge($lang, array(
 
 	// Settings: page configuration
 	'INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE'						=> 'Explanations page configuration',
-	'INTRODUCIATOR_EP_DISPLAY_PAGE'									=> 'Display explanation page',
+	'INTRODUCIATOR_EP_DISPLAY_PAGE'									=> 'Display explanation page:',
 	'INTRODUCIATOR_EP_DISPLAY_PAGE_EXPLAIN'							=> 'This option is used to display an explanation page if the user is trying to post into another forum than the forum for introductions.',
-	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED'						=> 'Display rules of the forum for introductions',
+	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED'						=> 'Display rules of the forum for introductions:',
 	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED_EXPLAIN'				=> 'Used to display the rules for the forum for introductions on the explanation page.',
 
 	// Settings: page text configuration
@@ -69,13 +69,13 @@ $lang = array_merge($lang, array(
 																		<li>Make link to create topic into forum for introductions: <i>[url=<b>%forum_post%</b>]Click here to create topic into the forum ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
 																		<br/>',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Explanation page title',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Explanation page title:',
 	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Default = <b>%explanation_title%</b><br/>You can change this text to your own.',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Explanation page text',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Explanation page text:',
 	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Default = <b>%explanation_text%</b><br/>You can change this text to your own.',
-	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Explanation rules title',
+	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Explanation rules title:',
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Default = <b>%rules_title%</b><br/>You can change this text to your own.',
-	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Text of the rules for the forum for introductions',
+	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Text of the rules for the forum for introductions:',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Default = <b>%rules_text%</b><br/>By default, %rules_text% is replaced by rules for the forum for introductions.<br/>You can change this text to your own.',
 
 	// Logs

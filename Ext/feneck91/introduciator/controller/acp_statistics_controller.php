@@ -162,6 +162,23 @@ class acp_statistics_controller extends acp_main_controller
 	{
 		$params = $this->helper->introduciator_getparams();
 
+		//
+		// Compute number of introductions
+		//
+		$sql = $this->db->sql_build_query('SELECT', array(
+				'SELECT'	=> 'COUNT(topic_id)',
+				'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
+				'WHERE'		=> 'topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+			));
+		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
+		$nb_introductions = reset($row);
+		$this->template->assign_vars(array(
+			'INTRODUCTIONS_NUMBER' 	=> $nb_introductions,
+		));
+
+		//
+		// Compute multiple introduction
+		//
 		$start = $this->request->variable('start', 0);
 		//
 		// Here, we must check database to see if some user have more than one introduction
