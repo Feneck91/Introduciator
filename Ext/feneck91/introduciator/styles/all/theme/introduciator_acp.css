@@ -20,7 +20,7 @@
 /**
  * Add image to acp all legends.
  */
-.acp_img_configuration, .acp_img_groups, .acp_img_submit, .acp_img_texts{
+.acp_img_configuration, .acp_img_groups, .acp_img_submit, .acp_img_texts, .acp_img_statistics, .acp_img_too_much_introduction {
 	padding-left: 50px;
 	padding-top: 10px;
 	padding-bottom: 28px;
@@ -54,4 +54,19 @@
  */
 .acp_img_texts {
 	background: url("./images/texts.png") no-repeat;
+}
+
+/**
+ * Add image to acp statistics legend.
+ */
+.acp_img_statistics {
+	background: url("./images/statistics.png") no-repeat;
+	padding-left: 59px;
+}
+
+/**
+ * Add image to acp statistics legend: too much introduction.
+ */
+.acp_img_too_much_introduction {
+	background: url("./images/too_much_introduction.png") no-repeat;
 }
