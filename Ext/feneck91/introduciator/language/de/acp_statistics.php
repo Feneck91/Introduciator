@@ -55,7 +55,6 @@ $lang = array_merge($lang, array(
 	// Number of introduce's texts
 	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> 'Allgemeine Statistik',
 	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> 'Anzahl der Vorstellung im Forum:',
-	'NO_MESSAGE'									=> 'Keine Einträge',
 
 	// Array's texts
 	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> 'Dieses Array zeigt alle Vorstellungen an, die mehr als einmal veröffentlicht wurden.',
