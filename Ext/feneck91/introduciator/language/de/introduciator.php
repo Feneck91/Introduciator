@@ -60,12 +60,12 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>Während der Genehmigung der Vorstellung bleibt sie editierbar und die Moderatoren können dir antworten..
 																	<br/>Dies ermöglicht es dir, sie gegebenenfalls mit den Anforderungen des Forums in Einklang zu bringen.',
 
-	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Vorstellung der Benutzer',
+	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Vorstellung des Benutzers',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'Für diesen Benutzer ist keine Vorstellung verfügbar.',
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'						=> 'Siehe die Vorstellung des Benutzers',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'			=> 'Die Vorstellung dieses Benutzers ist noch nicht genehmigt.',
 
-	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Zur Vorstellung der Benutzer',
+	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Zur Vorstellung des Benutzers',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'Die Vorstellung des Benutzers ist noch nicht genehmigt.',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'Für diesen Benutzer ist keine Vorstellung verfügbar.',
 ));

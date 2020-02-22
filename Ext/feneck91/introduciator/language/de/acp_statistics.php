@@ -64,5 +64,5 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'INTRODUCTIONS',
 
 	// Buttons
-	'INTRODUCIATOR_ST_CHECK'						=> 'Check',
+	'INTRODUCIATOR_ST_CHECK'						=> 'Überprüfen',
 ));

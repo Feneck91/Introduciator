@@ -51,19 +51,19 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Extension aktivieren:',
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Hier kannst Du die Extension aktivieren oder deaktivieren.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Der Benutzer wird gezwungen, sich vorzustellen:',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, zwingt die Extension den Benutzer, seine eigene Vorstellung zu posten, bevor er in anderen Themen posten darf.
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird der Benutzer gezwungen, seine eigene Vorstellung zu posten, bevor er in anderen Themen posten darf.
 																			<br/>Wenn diese Funktion nicht aktiviert ist, bleiben alle anderen Optionen aktiv.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Erlauben Sie der Extension, die Löschung des ersten Vorstellungsbeitrag im Forum für Vorstellungen zu überprüfen:',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, verhindert die Extension, dass der erste Beitrag in einem beliebigen Thema im Forum für Vorstellungen gelöscht werden kann.
-																			<br/>Selbst Moderatoren oder Administratoren haben diese Erlaubnis nicht, um sicher zu sein, dass der erste Beitrag in einem vorstellenden Thema wirklich die Vorstellung eines Forenmitglieds ist. Es ist jedoch weiterhin möglich, das Thema zu löschen, wenn die Berechtigungen dies zulassen.
-																			<br/>Sie können diese Option deaktivieren, aber in diesem Fall kann ein Benutzer mehrere Vorstellungen haben. Die Aktivierung dieser Option ist zu empfehlen.',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Die Löschung des ersten Vorstellungsbeitrag im Forum für Vorstellungen wird überprüft:',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird verhindert, dass der erste Beitrag in einem beliebigen Thema im Forum für Vorstellungen gelöscht werden kann.
+																			<br/>Selbst Moderatoren oder Administratoren haben dazu keine Berechtigung, um sicher zu sein, dass der erste Beitrag in einem vorstellenden Thema wirklich die Vorstellung eines Forenmitglieds ist. Es ist jedoch weiterhin möglich, das Thema zu löschen, wenn die Berechtigungen dies zulassen.
+																			<br/>Du kannst diese Option deaktivieren, aber in diesem Fall kann ein Benutzer mehrere Vorstellungen haben. Die Aktivierung dieser Option ist zu empfehlen.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'Das Forum, in dem der Benutzer sich vorstellen muss:',
-	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'Die Extension sucht nur in diesem Forum, ob sich Forenbenutzer vorgestellt haben.',
+	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'Es wird nur dieses Forum überwacht, ob sich Forenbenutzer vorgestellt haben.',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Genehmigungsoptionen der Vorstellung:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Wird verwendet, um eine Vorstellung durch einem Moderator zu genehmigen:<br/>
 																			<ul>
 																			<li><b>Keine Genehmigung</b>: Die Vorstellung muss nicht genehmigt werden.</li>
-																			<li><b>Einfache Genehmigung</b>: Die Vorstellung muss genehmigt werden. Der Benutzer sieht seine Vorstellung nicht, wenn sie nicht von einem Moderator validiert wird (die normale Vorgehensweise).</li>
+																			<li><b>Einfache Genehmigung</b>: Die Vorstellung muss genehmigt werden. Der Benutzer sieht seine Vorstellung nicht, wenn sie nicht von einem Moderator validiert wird (die Standard Vorgehensweise).</li>
 																			<li><b>Genehmigung mit Bearbeitung</b>: Die Vorstellung muss genehmigt werden. Der Benutzer kann seine Vorstellung sofort sehen und ändern. Er kann nicht an anderer Stelle posten, solange seine Vorstellung nicht von einem Moderator validiert wurde. Dies ermöglicht es Moderatoren und Benutzern, sich auszutauschen, um Nachrichten vor der Validierung durch einen Moderator in Übereinstimmung mit den Vorgaben zu bringen. Nur die Bearbeitung ist erlaubt. Antworten und Zitieren sind verboten.</li>
 																			</ul>',
 	'INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL'						=> 'Keine Genehmigung',
@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
 	// Settings: groups and users
 	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Konfiguration von Gruppen und Benutzern',
 	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Benuntze phpBB Berechtigungen:',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'Du kannst entweder die phpBB Berechtigungen oder diese Extension Konfiguration (einfachster Weg, aber weniger effizient) verwenden, um anzuzeigen, dass der Benutzer sich vorstellen muss.<br /><br /> Wenn die Option " Forenrechte verwenden " verwendet wird, wird die nächste Konfiguration ignoriert.',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'Du kannst entweder die phpBB Berechtigungen oder die folgende Konfiguration (einfachster Weg, aber weniger effizient) verwenden, um anzuzeigen, dass der Benutzer sich vorstellen muss.<br /><br /> Wenn die Option " Forenrechte verwenden " verwendet wird, wird die nächste Konfiguration ignoriert.',
 	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Forenrechte verwenden',
 	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Extension Konfiguration verwenden',
 	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Gruppen einschließen oder ausschließen:',
@@ -88,7 +88,7 @@ $lang = array_merge($lang, array(
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Keine Forenauswahl, bitte nur verwenden, wenn die Extension deaktiviert ist.',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Wenn diese Extension aktiviert ist, solltest du ein Forum wählen!',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Wenn diese Extension aktiviert ist, solltest Du ein Forum wählen!',
 	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> 'Keine Aktualiserungen gefunden',
 
 	// Logs
