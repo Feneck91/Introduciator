@@ -53,10 +53,11 @@ $lang = array_merge($lang, array(
 														</ul>',
 
 	// Number of introduce's texts
-	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> '??Generales statistics',
-	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '??Number of introduction into the forum:',
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> '通用统计',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '有多少个自我介绍：',
 	
 	// Array's texts
+	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> '这个列表显示有多少个用户发布了超过一次自我介绍的帖子',	
 	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '用户',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '日期',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '自我介绍',
