@@ -17,7 +17,17 @@
             "name": "Stéphane Château",
             "email": "feneck91@free.fr",
             "homepage": "https://github.com/Feneck91/Introduciator",
-            "role": "Developer"
+            "role": "Main developer"
+        },
+        {
+            "name": "David Yin",
+            "homepage": "https://www.phpbbchinese.com",
+            "role": "Simplified chinese translator"
+        },
+        {
+            "name": "Dr.Death",
+            "homepage": "http://www.lpi-clan.de",
+            "role": "German translator"
         }
     ],
     "require": {
