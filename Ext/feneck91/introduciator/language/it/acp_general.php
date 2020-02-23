@@ -47,16 +47,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_TITLE'							=> 'Informazioni Generali',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'					=> 'Ottieni la versione di questa MOD.',
 
-	// Extension's update message
-	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'		=> 'Il tuo Introduzione MOD non è aggiornata.',
-
 	// Extension's informations
 	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS'	=> '??Informations',
 	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES'		=> '??Values',
 	'INTRODUCIATOR_GP_INFOS'							=> '??informations Introduzione',
 	'INTRODUCIATOR_GP_INSTALL_DATE'						=> 'Data Installazione <strong>Introduzione</strong> MOD:',
 	'INTRODUCIATOR_GP_VERSION'							=> '<strong>Introduzione</strong> Versione MOD:',
-	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'				=> 'Ultima versione:',
-	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'					=> 'Download link:',
-	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'				=> 'Aggiorna informazioni:',
 ));

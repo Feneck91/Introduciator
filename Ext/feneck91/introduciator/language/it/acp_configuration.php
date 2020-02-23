@@ -89,7 +89,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Nessun Forum selezionato, utilizzare solo quando la MOD è disabilitata',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'		 			=> 'Quando questa MOD è abilitata, si dovrebbe scegliere un forum!',
-	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> 'Nessuna informazione e aggiornamento disponibile',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Introduzione: ???????? aggiornamento impostazioni.</strong>',

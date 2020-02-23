@@ -88,7 +88,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque l’extension est désactivé',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque cette extension est activé vous devez choisir un forum !',
-	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> 'Aucune information de mise à jour disponible',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Présentation forcée : paramètres de configuration mis à jour.</strong>',

@@ -9,8 +9,6 @@ services:
             - '@template'
             - '@user'
             - '@config'
-            - '@path_helper'
-            - '@cache.driver'
 
     feneck91.introduciator.controller.acp_configuration:
         class: feneck91\introduciator\controller\acp_configuration_controller

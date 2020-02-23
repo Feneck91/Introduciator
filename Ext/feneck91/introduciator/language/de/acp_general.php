@@ -47,16 +47,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_TITLE'							=> 'Allgemeine Informationen',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'					=> 'Version dieser Extension anzeigen lassen.',
 
-	// Extension's update message
-	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'		=> 'Die Introduciator Extension ist nicht auf dem neuesten Stand.',
-	//
 	// Extension's informations
 	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS'	=> 'Informationen',
 	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES'		=> 'Werte',
 	'INTRODUCIATOR_GP_INFOS'							=> 'Introduciator Infos',
 	'INTRODUCIATOR_GP_INSTALL_DATE'						=> 'Installationsdatum der <strong>Introduciator</strong> Extension:',
 	'INTRODUCIATOR_GP_VERSION'							=> '<strong>Introduciator</strong> Extension Version:',
-	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'				=> 'Aktuellste version:',
-	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'					=> 'Download Link:',
-	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'				=> 'Update Information:',
 ));

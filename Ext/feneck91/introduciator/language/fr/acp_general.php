@@ -46,16 +46,10 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_TITLE'							=> 'Informations générales',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'					=> 'Donne la version courante de cette extension.',
 
-	// Message de mise à jour de l'extension's
-	'INTRODUCIATOR_GP_VERSION_NOT_UP_TO_DATE_TITLE'		=> 'Votre installation de l’extension Présentation forcée n’est pas à jour.',
-
 	// Informations de l'extension
 	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS'	=> 'Informations',
 	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES'		=> 'Valeurs',
 	'INTRODUCIATOR_GP_INFOS'							=> 'Statistiques de l’extension Présentation forcée',
 	'INTRODUCIATOR_GP_INSTALL_DATE'						=> 'Date d’installation de l’extension <strong>Présentation forcée</strong> :',
 	'INTRODUCIATOR_GP_VERSION'							=> 'Version de l’extension <strong>Présentation forcée</strong> :',
-	'INTRODUCIATOR_GP_UPDATE_VERSION_TITLE'				=> 'Dernière version :',
-	'INTRODUCIATOR_GP_UPDATE_URL_TITLE'					=> 'Lien de téléchargement :',
-	'INTRODUCIATOR_GP_UPDATE_INFOS_TITLE'				=> 'Information de mise à jour :',
 ));

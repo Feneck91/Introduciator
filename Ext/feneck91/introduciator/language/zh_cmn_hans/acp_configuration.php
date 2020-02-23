@@ -89,7 +89,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> '未选择论坛版块，仅在扩展被禁用的时候使用',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> '当启用此扩展，你应当先选择一个论坛版块！',
-	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> '没有可用的更新信息',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>自我介绍： 配置设置更新完成。</strong>',

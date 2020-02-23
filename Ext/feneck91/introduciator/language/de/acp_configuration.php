@@ -89,7 +89,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Keine Forenauswahl, bitte nur verwenden, wenn die Extension deaktiviert ist.',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Wenn diese Extension aktiviert ist, solltest du ein Forum wählen!',
-	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> 'Keine Aktualiserungen gefunden',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Introducators: Konfigurationseinstellungen aktualisiert.</strong>',
