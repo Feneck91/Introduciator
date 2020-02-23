@@ -56,11 +56,11 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> 'Anzahl der Vorstellung im Forum:',
 
 	// Array's texts
-	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> 'Dieses Array zeigt alle Vorstellungen an, die mehr als einmal veröffentlicht wurden.',
-	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> '??No multiple introduction detected',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '??User',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '??Date',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '??Introductions',
+	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> 'Diese Tabelle zeigt alle Vorstellungen an, die mehr als einmal veröffentlicht wurden.',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> 'Keine mehrfachen Vorstellungen erkannt',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> 'Benutzer',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'Datum',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'Vorstellungen',
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK'						=> 'Überprüfen',

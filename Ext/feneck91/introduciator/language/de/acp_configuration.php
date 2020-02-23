@@ -45,11 +45,11 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	// Titles
 	'INTRODUCIATOR_CP_TITLE'										=> 'Konfigurationseinstellungen des Introducators',
-	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Hier kannst Du die Konfiguration der Extension vornehmen.',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Hier kannst du die Konfiguration der Extension vornehmen.',
 
 	// Settings: general
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Extension aktivieren:',
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Hier kannst Du die Extension aktivieren oder deaktivieren.',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Hier kannst du die Extension aktivieren oder deaktivieren.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Der Benutzer wird gezwungen, sich vorzustellen:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird der Benutzer gezwungen, seine eigene Vorstellung zu posten, bevor er in anderen Themen posten darf.
 																			<br/>Wenn diese Funktion nicht aktiviert ist, bleiben alle anderen Optionen aktiv.',
@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
 	// Settings: groups and users
 	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Konfiguration von Gruppen und Benutzern',
 	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Benuntze phpBB Berechtigungen:',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'Du kannst entweder die phpBB Berechtigungen oder die folgende Konfiguration (einfachster Weg, aber weniger effizient) verwenden, um anzuzeigen, dass der Benutzer sich vorstellen muss.<br /><br /> Wenn die Option " Forenrechte verwenden " verwendet wird, wird die nächste Konfiguration ignoriert.',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'Du kannst entweder die phpBB Berechtigungen oder die folgende Konfiguration (einfachster Weg, aber weniger effizient) verwenden, um anzuzeigen, dass der Benutzer sich vorstellen muss.<br /><br />Wenn die Option " Forenrechte verwenden " verwendet wird, wird die nächste Konfiguration ignoriert.',
 	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Forenrechte verwenden',
 	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Extension Konfiguration verwenden',
 	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Gruppen einschließen oder ausschließen:',
@@ -88,7 +88,7 @@ $lang = array_merge($lang, array(
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Keine Forenauswahl, bitte nur verwenden, wenn die Extension deaktiviert ist.',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Wenn diese Extension aktiviert ist, solltest Du ein Forum wählen!',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Wenn diese Extension aktiviert ist, solltest du ein Forum wählen!',
 	'INTRODUCIATOR_CP_MSG_NO_UPDATE_INFO_FOUND'						=> 'Keine Aktualiserungen gefunden',
 
 	// Logs
