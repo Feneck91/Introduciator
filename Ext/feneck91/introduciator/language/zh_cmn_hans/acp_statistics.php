@@ -39,9 +39,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: explanation
+* mode: statistics
 * Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
-
 */
 $lang = array_merge($lang, array(
 	// Titles
@@ -55,9 +54,10 @@ $lang = array_merge($lang, array(
 	// Number of introduce's texts
 	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> '通用统计',
 	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '有多少个自我介绍：',
-	
+
 	// Array's texts
-	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> '这个列表显示有多少个用户发布了超过一次自我介绍的帖子',	
+	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> '这个列表显示有多少个用户发布了超过一次自我介绍的帖子',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> '??No multiple introduction detected =>? 未检测到多个介绍',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '用户',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '日期',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '自我介绍',

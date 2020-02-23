@@ -44,24 +44,24 @@ if (empty($lang) || !is_array($lang))
 */
 $lang = array_merge($lang, array(
 	// Titles
-	'INTRODUCIATOR_ST_TITLE'						=> '????Statistics and checks about user’s introduction',
-	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> '????Used to display database informations:
+	'INTRODUCIATOR_ST_TITLE'						=> '??Statistics and checks about user’s introduction',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> '??Used to display database informations:
 														<ul>
-														<li>????The statistics about introductions.</li>
-														<li>????The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
+														<li>The statistics about introductions.</li>
+														<li>The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
 														</ul>',
 
 	// Number of introduce's texts
-	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> 'NNNGenerales statistics',
-	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '???Number of introduction into the forum:',
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> '??Generales statistics',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '??Number of introduction into the forum:',
 
 	// Array's texts
 	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> '???This array indicate all the introduction that have been posted more than once',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '????USER',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '????DATE',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '????INTRODUCTIONS',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> '??No multiple introduction detected',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '??User',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '??Date',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '??Introductions',
 
 	// Buttons
-	'INTRODUCIATOR_CHECK'							=> '????',
-
+	'INTRODUCIATOR_CHECK'							=> '??Check',
 ));

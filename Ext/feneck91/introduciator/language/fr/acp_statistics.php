@@ -56,9 +56,10 @@ $lang = array_merge($lang, array(
 
 	// Textes du tableau
 	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> 'Ce tableau indique toutes les présentations qui ont été postées plus d’une fois',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> 'UTILISATEUR',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'DATE',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'PRÉSENTATIONS',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> 'Aucune présentation multiple n’a été détectée',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> 'Utilisateur',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'Date',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'Présentations',
 
 	// Boutons
 	'INTRODUCIATOR_ST_CHECK'						=> 'Vérifier',

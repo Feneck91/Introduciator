@@ -38,9 +38,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: explanation
+* mode: statistics
 * Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
-
 */
 $lang = array_merge($lang, array(
 	// Titles
@@ -57,9 +56,10 @@ $lang = array_merge($lang, array(
 
 	// Array's texts
 	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> 'This array indicate all the introduction that have been posted more than once',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> 'USER',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'DATE',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'INTRODUCTIONS',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> 'No multiple introduction detected',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> 'User',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'Date',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'Introductions',
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK'						=> 'Check',
