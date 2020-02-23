@@ -71,13 +71,13 @@ $lang = array_merge($lang, array(
 																		</ul>
 																		<br/>',
 	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Erläuterung Seitentitel:',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Default = <b>%explanation_title%</b><br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Standard = <b>%explanation_title%</b><br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
 	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Text der Erklärungsseite:',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Default = <b>%explanation_text%</b><br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Standard = <b>%explanation_text%</b><br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
 	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Erläuterung der Regeln Titel:',
-	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Default = <b>%rules_title%</b><br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Standard = <b>%rules_title%</b><br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Text der Regeln für das Forum der Vorstellungen:',
-	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Default = <b>%rules_text%</b><br/>Standardmäßig wird %rules_text% durch die Regeln für das Forum für Vorstellungen ersetzt.<br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Standard = <b>%rules_text%</b><br/>Standardmäßig wird %rules_text% durch die Regeln für das Forum für Vorstellungen ersetzt.<br/>Du kannst diesen Text mit deinem eigenen ersetzen.',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>Introduciator: Die Einstellungen der Erklärung wurden aktualisiert.</strong>',

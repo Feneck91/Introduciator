@@ -45,11 +45,11 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Die Freigabe deiner Vorstellung steht noch aus, bitte warte.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Während der Genehmigung deiner Vorstellung ist nur die Bearbeitung erlaubt.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'Du darfst dich nicht mehr als einmal vorstellen!',
-	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'Es ist nicht erlaubt, den ersten Beitrag Deiner Vorstellung zu löschen!',
+	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'Es ist nicht erlaubt, den ersten Beitrag deiner Vorstellung zu löschen!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'Es ist nicht erlaubt, den ersten Beitrag dieser Vorstellung zu löschen! Du kannst diese Vorstellung löschen, indem du das Thema löschst.',
-	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Bitte stellen Sie sich in diesem Thema vor: %s',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Bitte stelle dich in diesem Thema vor: %s',
 	'INTRODUCIATOR_EXT_DISABLED'								=> 'Die Introduciator Extension ist deaktiviert. Du solltest sie aktivieren, um diese Extension benutzbar zu machen.',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Um posten zu können, <u>musst</u> Du dich selbst vorstellen</strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Um posten zu können, <u>musst</u> du dich selbst vorstellen</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Wie bei jedem neuen Benutzer musst du dich den anderen Mitgliedern im “<a href="%forum_url%">%forum_name%</a>” Forum vorstellen<br/>
 																	Es ist nur <strong>ein</strong> neues Thema im Forum für Vorstellungen erlaubt.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
