@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 
 	// Array's texts
 	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> '这个列表显示有多少个用户发布了超过一次自我介绍的帖子',
-	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> '??No multiple introduction detected =>? 未检测到多个介绍',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> '未检测到多个介绍',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '用户',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '日期',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '自我介绍',
