@@ -100,7 +100,7 @@ class acp_statistics_controller extends acp_main_controller
 	{
 		if (!$this->helper->is_introduciator_allowed())
 		{	// The introduciator must be enable else it can be not configure correctly
-			trigger_error($this->language->lang('INTRODUCIATOR_NOT_ENABLED_FOR_STATISTICS') . adm_back_link($this->u_action), E_USER_WARNING);
+			trigger_error($this->language->lang('INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
 		// If no action, display configuration

@@ -61,6 +61,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'Date',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'Introductions',
 
+	// Errors
+	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS'	=> 'To get statistics you should enabled and configure the Introduciator extension!',
+
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK'						=> 'Check',
 ));

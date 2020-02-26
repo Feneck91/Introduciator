@@ -61,6 +61,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'Date',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'Présentations',
 
+	// Erreurs
+	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS'	=> 'Pour voir les statistiques vous devez activer et configurer l’extension Présentation forcée !',
+
 	// Boutons
 	'INTRODUCIATOR_ST_CHECK'						=> 'Vérifier',
 ));
