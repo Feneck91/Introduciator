@@ -576,10 +576,10 @@ class introduciator_helper
 						$result = $this->db->sql_query($sql);
 						$row = $this->db->sql_fetchrow($result);
 						$this->db->sql_freeresult($result);
-
 						$topic_id = (int) $row['topic_id'];
 						$first_poster_id = (int) $row['poster_id'];	// <-- $poster_id could be <> from current user id
 						                                            // It's this case when moderator try to delete post of another user
+
 						if (!empty($topic_id) && !empty($first_poster_id))
 						{
 							// Check if this post is the first one, ie this is the post that created the Topic
@@ -588,22 +588,20 @@ class introduciator_helper
 							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
 							{
 								// The user try to delete the first post of one introduce topic : may be not allowed
-								// To finish, the $first_poster_id MUST BE not ignored
-								if ($this->is_user_must_introduce_himself($first_poster_id, null, $user->data['username']))
+								// Even the the $first_poster_id is ignored, no way to delete the first post of any introduction of any users
+								// if the configuration option (authorize extension to verify the deletion of first post introduction) is selected
+								$ret_allowed_action = false;
+								if ($redirect)
 								{
-									$ret_allowed_action = false;
-									if ($redirect)
-									{
-										// Load langage
-										$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
-										$this->load_language_if_needed();
+									// Load langage
+									$this->user->setup(); // Mandatory here else all forum is not in same language as user's one
+									$this->load_language_if_needed();
 
-										$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
-										$meta_info = append_sid("{$this->root_path}viewtopic.$this->php_ext", "f=$forum_id&amp;t=$topic_id");
-										$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
-										$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", "f=$forum_id") . '">', '</a>');
-										trigger_error($message, E_USER_NOTICE);
-									}
+									$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
+									$meta_info = append_sid("{$this->root_path}viewtopic.$this->php_ext", "f=$forum_id&amp;t=$topic_id");
+									$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
+									$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.$this->php_ext", "f=$forum_id") . '">', '</a>');
+									trigger_error($message, E_USER_NOTICE);
 								}
 							}
 						}
