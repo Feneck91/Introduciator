@@ -11,6 +11,8 @@ phpBB's extension used to force member to introduce himself into a specific foru
 
 It's a port from [MOD Introduciator](https://www.phpbb.com/customise/db/mod/introduciator/), with new features.
 
+The phpBB link to the extension development is  [[3.2][3.3][RC] Introduciator](https://www.phpbb.com/community/viewtopic.php?p=15442601&sid=0fc39dbaff6f3a24903b326e05f8f4f6#p15442601)
+
 **Features:**
 - Permission to let administrator manage the Introduciator extension or not.
 - Possibility to configure user permission from forum's permission or with the extension configuration (must choose one or other).
