@@ -65,7 +65,7 @@ class introduciator_listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.user_setup'											=> 'load_language_on_setup',					// Load languages files
-			'core.viewtopic_modify_page_title'							=> array('on_before_quickreply_displayed', -2),	// Hide quick reply if user is not allowed to post
+			'core.quickreply_editor_panel_before'						=> array('on_before_quickreply_displayed', -2),	// Hide quick reply if user is not allowed to post
 			'core.posting_modify_template_vars'							=> 'on_displaying_posting_screen',				// Verify if the posting is allowed or not; display message if not
 			'core.posting_modify_submit_post_before'					=> 'on_submit_post_before',						// When user post a message, verify the introduce has been done
 			'core.posting_modify_submit_post_after'						=> 'on_submit_post_after',						// When user post a message, if the post is an introduce and must be approved, indicate it to the user

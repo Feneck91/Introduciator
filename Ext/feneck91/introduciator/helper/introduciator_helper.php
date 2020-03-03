@@ -618,6 +618,7 @@ class introduciator_helper
 						// No post into the introduce topic
 						if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
 						{
+							$ret_allowed_action = false;
 							// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
 							if ($redirect)
 							{
