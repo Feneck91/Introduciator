@@ -1,7 +1,4 @@
-# Introduciator
-phpBB's extension used to force member to introduce himself into a specific forum before beeing able to post everywhere into the forum.
-
-**Extension Name:** Introduciator - 3.2.8 Compatible / 3.3.x Compatible
+# Introduciator - 3.2.8 Compatible / 3.3.x Compatible
 
 **Author:** Feneck91
 
@@ -10,8 +7,6 @@ phpBB's extension used to force member to introduce himself into a specific foru
 **Extension Version:** 2.0.0
 
 It's a port from [MOD Introduciator](https://www.phpbb.com/customise/db/mod/introduciator/), with new features.
-
-The phpBB link to the extension development is  [[3.2][3.3][RC] Introduciator](https://www.phpbb.com/community/viewtopic.php?p=15442601&sid=0fc39dbaff6f3a24903b326e05f8f4f6#p15442601)
 
 **Features:**
 - Permission to let administrator manage the Introduciator extension or not.
@@ -26,7 +21,7 @@ The phpBB link to the extension development is  [[3.2][3.3][RC] Introduciator](h
 - Select redirection page if the user try to post somewhere else.
 - Configure redirection page. Now the text displayed into the introduce redirection page is multi-langual **(New)**.
 - Add permission to disable this feature for some accounts (administators and / or moderator for example).
-- Add button (near MP) into the topic to go directly to member presentation's topic.
+- Add button under avatar into the topic to go directly to member presentation's topic.
 - Add link into the profile to go directly to member presentation topic.
 - Forbid the user (or admin but it is configurable) to delete the first post of a presentation.
 - Forbid the user to create more than once topic into the presentation's forum.
@@ -37,3 +32,9 @@ The phpBB link to the extension development is  [[3.2][3.3][RC] Introduciator](h
 - Statistic page in the ACP **(New)**. It display number of introduction present into the forum and a list of all users that have post more than one introduction (it is possible if the extension is added into an old forum that already contains lot of messages).[/list]
 
 This extension need at least **phpBB's version 3.2.8**.
+
+
+**Big thanks for translation team:**
+- Simplified Chinese: David Yin (https://www.phpbbchinese.com)
+- German honorifics: Dr.Death (http://www.lpi-clan.de)
+- German: Dr.Death (http://www.lpi-clan.de)
