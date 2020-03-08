@@ -66,5 +66,5 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS'	=> '??To get statistics you should enabled and configure the Introduciator extension!',
 
 	// Buttons
-	'INTRODUCIATOR_CHECK'							=> '??Check',
+	'INTRODUCIATOR_ST_CHECK'						=> '??Check',
 ));
