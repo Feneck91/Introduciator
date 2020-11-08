@@ -44,9 +44,10 @@ services:
     feneck91.introduciator.listener:
         class: feneck91\introduciator\event\introduciator_listener
         arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@feneck91.introduciator.helper'
             - '@user'
             - '@template'
-            - '@template_context'
-            - '@service_container'
         tags:
             - { name: event.listener }

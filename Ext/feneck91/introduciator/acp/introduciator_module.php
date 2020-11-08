@@ -9,7 +9,7 @@
 
 namespace feneck91\introduciator\acp;
 
-use feneck91\introduciator\controller\introduciator_acp_main_controller;
+use feneck91\introduciator\controller\acp_main_controller;
 
 /**
  * Module to manage ACP extension configuration.

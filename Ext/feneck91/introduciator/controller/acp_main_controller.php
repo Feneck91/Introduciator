@@ -115,7 +115,5 @@ abstract class acp_main_controller
 	 * @return void
 	 * @access public
 	 */
-	public function do_action($mode, $action)
-	{
-	}
+	abstract public function do_action($mode, $action);
 }

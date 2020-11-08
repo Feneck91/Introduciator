@@ -186,10 +186,10 @@ class acp_explanation_controller extends acp_main_controller
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$iso = $row['lang_iso'];
-			$explanation_message_title	= utf8_normalize_nfc($this->request->variable("explanation_message_title_$iso", '', true));
-			$explanation_message_text	= utf8_normalize_nfc($this->request->variable("explanation_message_text_$iso", '', true));
-			$explanation_rules_title	= utf8_normalize_nfc($this->request->variable("explanation_rules_title_$iso", '', true));
-			$explanation_rules_text		= utf8_normalize_nfc($this->request->variable("explanation_rules_text_$iso", '', true));
+			$explanation_message_title	= $this->request->variable("explanation_message_title_$iso", '', true);
+			$explanation_message_text	= $this->request->variable("explanation_message_text_$iso", '', true);
+			$explanation_rules_title	= $this->request->variable("explanation_rules_title_$iso", '', true);
+			$explanation_rules_text		= $this->request->variable("explanation_rules_text_$iso", '', true);
 
 			// Replace all url by real fake urls
 			$this->helper->replace_all_by(

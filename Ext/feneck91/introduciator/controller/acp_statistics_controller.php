@@ -205,8 +205,6 @@ class acp_statistics_controller extends acp_main_controller
 
 		if ($nb_several_introduce > 0)
 		{
-			$users_to_check = array(); // Receive all users info
-
 			$sql_where = $this->db->sql_build_query('SELECT', array(
 					'SELECT'	=> 'COUNT(topic_id)',
 					'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
@@ -220,17 +218,25 @@ class acp_statistics_controller extends acp_main_controller
 				'ORDER_BY'	=> 'topic_first_poster_name',
 			));
 
-			// Chek all users to know if they are not ignored
+			// Get all users that post more than one introduce
 			$result = $this->db->sql_query($sql);
+			$all_users = array(); // Receive all users info
 			while ($row = $this->db->sql_fetchrow($result))
 			{
-				if ($this->helper->is_user_must_introduce_himself($row['topic_poster'], null, $row['topic_first_poster_name']))
-				{
-					// User is not ignored, check it
-					array_push($users_to_check, $row);
-				}
+				array_push($all_users, $row);
 			}
 			$this->db->sql_freeresult($result);
+
+			// For all these users, Chek to know if they are not ignored
+			$users_to_check = array(); // Receive all users info
+			foreach ($all_users as $user)
+			{
+				if ($this->helper->is_user_must_introduce_himself($user['topic_poster'], null, $user['topic_first_poster_name']))
+				{
+					// User is not ignored, check it
+					array_push($users_to_check, $user);
+				}
+			}
 
 			// Here it is the list of all user (not ignored) that have post more than one introduce
 			$nb_several_introduce = count($users_to_check);
@@ -241,10 +247,11 @@ class acp_statistics_controller extends acp_main_controller
 
 				for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index)
 				{
+					// Here, no more need to test if number of introduce > 1 because it is already done just before
 					$sql = $this->db->sql_build_query('SELECT', array(
-						'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type, (SELECT COUNT(topic_id) FROM phpbb_topics WHERE phpbbtopics.topic_poster = phpbb_topics.topic_poster AND forum_id = {$params['fk_forum_id']}) as nb_introduce",
-						'FROM'      => array(TOPICS_TABLE => 'phpbbtopics'),
-						'WHERE'		=> "forum_id = {$params['fk_forum_id']} HAVING nb_introduce > 1 AND topic_poster = {$users_to_check[$index]['topic_poster']} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
+						'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type",
+						'FROM'      => array(TOPICS_TABLE => TOPICS_TABLE),
+						'WHERE'		=> "forum_id = {$params['fk_forum_id']} AND topic_poster = {$users_to_check[$index]['topic_poster']} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
 						'ORDER_BY'	=> 'topic_time',
 					));
 
@@ -259,7 +266,7 @@ class acp_statistics_controller extends acp_main_controller
 							'ROW_SPAN'			=> $result->num_rows,
 							'POSTER'			=> get_username_string('full', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
 							'DATE'				=> $this->user->format_date($row['topic_time']),
-							'INTRODUCE'			=> "<a href='{$link_to_introduce}'>{$row['topic_title']}</a>",
+							'INTRODUCE'			=> "<a href=\"{$link_to_introduce}\">{$row['topic_title']}</a>",
 							'ROW_NUMBER'		=> $index - $start + 1,
 						));
 						$first_row = false;

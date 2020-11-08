@@ -172,7 +172,7 @@ class acp_configuration_controller extends acp_main_controller
 		$is_use_permissions							= $this->request->variable('is_use_permissions', true);
 		$is_include_groups							= $this->request->variable('include_groups', true);
 		$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
-		$ignored_users								= substr(utf8_normalize_nfc($this->request->variable('ignored_users', '')), 0, 255);
+		$ignored_users								= substr($this->request->variable('ignored_users', ''), 0, 255);
 
 		if ($is_enabled && $fk_forum_id === 0)
 		{
@@ -200,7 +200,7 @@ class acp_configuration_controller extends acp_main_controller
 
 		// 2> Add all entries
 		$values = array();
-		foreach ($groups as &$group)
+		foreach ($groups as $group)
 		{
 			// Create elements to add by row
 			$values[] = array('fk_group' => (int) $group);
@@ -233,7 +233,7 @@ class acp_configuration_controller extends acp_main_controller
 			// Add deactivation item
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'),
-				'FORUM_ID'		=> (int) 0,
+				'FORUM_ID'		=> 0,
 				'SELECTED'		=> ($fk_selected_forum_id === 0),
 				'CAN_SELECT'	=> true,
 				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'),
@@ -270,6 +270,11 @@ class acp_configuration_controller extends acp_main_controller
 	 */
 	private function add_all_groups()
 	{
+		if (!function_exists('get_group_name'))
+		{
+			include($this->root_path . 'includes/functions_user.' . $this->php_ext);
+		}
+
 		$sql = 'SELECT group_id, group_desc
 			FROM ' . GROUPS_TABLE;
 

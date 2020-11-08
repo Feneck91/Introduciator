@@ -4,7 +4,7 @@
 <br/>
 <div class="panel">
 {% if S_EXT_ACTIVATED %}
-	<div class="inner" ><span class="corners-top"><span></span></span>
+	<div class="inner" >
 		<div class="content">
 			<br/>
 			<h2 class="introduciator_explain">{INTRODUCIATOR_EXT_EXPLAIN_TITLE}</h2>
@@ -14,7 +14,7 @@
 	</div>
 	{% if S_RULES_ACTIVATED %}
 	<div class="rules">
-		<div class="inner"><span class="corners-top"><span></span></span>
+		<div class="inner">
 		{% if S_RULES_TITLE_ACTIVATED %}
 			{INTRODUCIATOR_EXT_RULES_TITLE}
 			<br/>
@@ -24,10 +24,9 @@
 				{INTRODUCIATOR_EXT_RULES_TEXT}
 				<br/>
 			</p>
-		<span class="corners-bottom"><span></span></span></div>
+		</div>
 	</div>
 	<br/>
-	<span class="corners-bottom"><span></span></span>
 	{% else %}
 	<br/>
 	{% endif %}
@@ -36,13 +35,12 @@
 	<span style="text-align: center">{INTRODUCIATOR_EXT_LINK_POST_FORUM}</span><br/>
 	<br/>
 {% else %}
-	<div class="inner"><span class="corners-top"><span></span></span>
+	<div class="inner">
 		<div class="content">
 			<br/>
 			<h2 class="introduciator_disabled">{L_INTRODUCIATOR_EXT_DISABLED}</h2>
 		</div>
 		<br/>
-		<span class="corners-bottom"><span></span></span>
 	</div>
 {% endif %}
 </div>

@@ -14,7 +14,6 @@ use phpbb\config\config;
 use phpbb\auth\auth;
 use phpbb\template\template;
 use phpbb\user;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class used to display introduciator explanation page.
@@ -62,9 +61,6 @@ class introduciator_explain_controller
 	 */
 	public function __construct(introduciator_helper $helper, config $config, auth $auth, template $template, user $user)
 	{
-		//global $phpbb_container;
-		// Get Introduciator class helper
-		//$this->helper = $phpbb_container->get('feneck91.introduciator.helper');
 		$this->helper = $helper;
 		$this->config = $config;
 		$this->auth = $auth;
@@ -91,7 +87,7 @@ class introduciator_explain_controller
 			page_header($message);
 
 			$this->template->set_filenames(array(
-				'body' => 'introduciator_explain.html',
+				'body' => '@feneck91_introduciator/introduciator_explain.html',
 			));
 
 			$this->template->assign_vars(array(
@@ -115,7 +111,7 @@ class introduciator_explain_controller
 
 			page_header($this->helper->get_language()->lang('INTRODUCIATOR_EXT_DISABLED'));
 			$this->template->set_filenames(array(
-				'body' => 'introduciator_explain.html',
+				'body' => '@feneck91_introduciator/introduciator_explain.html',
 			));
 
 			page_footer();
