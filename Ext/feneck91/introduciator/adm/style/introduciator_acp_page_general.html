@@ -4,15 +4,16 @@
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_GP_TITLE') }}</h1>
 {{ lang('INTRODUCIATOR_GP_TITLE_EXPLAIN') }}
 
-<table cellspacing="1">
+<table>
 	<caption>{{ lang('INTRODUCIATOR_GP_INFOS') }}</caption>
-	<col class="col1" /><col class="col2" />
-	<thead>
-		<tr>
-			<th>{{ lang('INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS') }}</th>
-			<th>{{ lang('INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES') }}</th>
-		</tr>
-	</thead>
+	<colgroup>
+		<col class="col1"/>
+		<col class="col2"/>
+	</colgroup>
+	<tr>
+		<th>{{ lang('INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS') }}</th>
+		<th>{{ lang('INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES') }}</th>
+	</tr>
 	<tbody>
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_INSTALL_DATE') }}</td>
@@ -21,7 +22,7 @@
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_VERSION') }}</td>
 			<td>
-				<strong>{INTRODUCIATOR_VERSION}</strong>
+				<strong>{INTRODUCIATOR_VERSION} <a href="{{ lang('INTRODUCIATOR_GP_URL_DETAILS') }}" title="{{ lang('INTRODUCIATOR_GP_URL_DETAILS') }}" target="_blank"><b>[{{ lang('INTRODUCIATOR_GP_DETAILS') }}]</b></a>
 			</td>
 		</tr>
 	</tbody>

@@ -52,7 +52,6 @@ class acp_statistics_controller extends acp_main_controller
 	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
 	 * @param \phpbb\db\driver\factory                              $db             Database interface
 	 * @param \phpbb\pagination                                     $pagination     Used to manage information split to display it into several pages
-	 * @param string                                                $table_prefix   Table prefix
 	 * @param string                                                $root_path      phpBB root path
 	 * @param string                                                $php_ext        phpBB Extention
 	 * @param \phpbb\language\language                              $language       Language user object
@@ -63,14 +62,13 @@ class acp_statistics_controller extends acp_main_controller
 	 *
 	 * @access public
 	 */
-	public function __construct(introduciator_helper $helper, factory $db, pagination $pagination, $table_prefix, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
+	public function __construct(introduciator_helper $helper, factory $db, pagination $pagination, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
 	{
 		$this->helper = $helper;
 		$this->db = $db;
 		$this->pagination = $pagination;
 
 		parent::__construct(
-			$table_prefix,
 			$root_path,
 			$php_ext,
 			$language,

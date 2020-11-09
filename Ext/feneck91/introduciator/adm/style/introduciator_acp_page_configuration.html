@@ -10,15 +10,15 @@
 		{# Activate / Desactivate Mandatory introduction #}
 		<dl>
 			<dt><label for="check_introduction_mandatory_activated" >{{ lang('INTRODUCIATOR_CP_MANDATORY_INTRODUCE') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN') }}</span></dt>
-			<dd><label><input id="check_introduction_mandatory_activated"    name="check_introduction_mandatory_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_INTRODUCTION_MANDATORY %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-				<label><input id="no_check_introduction_mandatory_activated" name="check_introduction_mandatory_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_INTRODUCTION_MANDATORY %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
+			<dd><label><input id="check_introduction_mandatory_activated"    name="check_introduction_mandatory_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_INTRODUCTION_MANDATORY %} checked="checked"{% endif %}/> {{ lang('YES') }}</label>
+				<label><input id="no_check_introduction_mandatory_activated" name="check_introduction_mandatory_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_INTRODUCTION_MANDATORY %} checked="checked"{% endif %}/> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		{# Activate / Desactivate Check delete first post #}
 		<dl>
 			<dt><label for="check_delete_first_post_activated">{{ lang('INTRODUCIATOR_CP_CHECK_DEL_1ST_POST') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN') }}</span></dt>
-			<dd><label><input id="check_delete_first_post_activated"   name="check_delete_first_post_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
-				<label><input id="nocheck_delete_first_post_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
+			<dd><label><input id="check_delete_first_post_activated"   name="check_delete_first_post_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED %} checked="checked"{% endif %}/> {{ lang('YES') }}</label>
+				<label><input id="nocheck_delete_first_post_activated" name="check_delete_first_post_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED %} checked="checked"{% endif %}/> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		{# Forum Choice (where the user MUST introduce himself #}
@@ -27,7 +27,7 @@
 			<dd>
 				<select id="forum_choice" name="forum_choice" style="width: 100%;" size="1">
 				{% for forum in loops.forums %}
-					<option {% if not forum.CAN_SELECT%}disabled class="disabled-option"{% endif %} value="{forum.FORUM_ID}" name="forum_{forum.FORUM_ID}" title="{forum.TOOLTIP}" {% if forum.SELECTED %}selected="selected"{% endif %}>{forum.FORUM_NAME}</option>
+					<option {% if not forum.CAN_SELECT %}disabled class="disabled-option" {% endif %}value="{forum.FORUM_ID}" name="forum_{forum.FORUM_ID}" title="{forum.TOOLTIP}"{% if forum.SELECTED %} selected="selected"{% endif %}>{forum.FORUM_NAME}</option>
 				{% endfor %}
 				</select>
 			</dd>
@@ -35,9 +35,9 @@
 		{# Posting  approval level #}
 		<dl>
 			<dt><label for="posting_approval_level">{{ lang('INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN') }}</span></dt>
-			<dd><label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0" {% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="1" {% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="2" {% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
+			<dd><label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="1"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="2"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
 			</dd>
 		</dl>
 	</fieldset>
@@ -47,16 +47,16 @@
 		{#  Use permissions or Include / Exclude groups #}
 		<dl>
 			<dt><label for="is_use_permissions">{{ lang('INTRODUCIATOR_CP_USE_PERMISSIONS') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN') }}</span></dt>
-			<dd><label><input id="is_use_permissions"    name="is_use_permissions" type="radio" class="radio" value="1"{% if INTRODUCIATOR_USE_PERMISSIONS %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_USE_PERMISSION_OPTION') }}</label>
-				<label><input id="no_is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_USE_PERMISSIONS %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION') }}</label>
+			<dd><label><input id="is_use_permissions"    name="is_use_permissions" type="radio" class="radio" value="1"{% if INTRODUCIATOR_USE_PERMISSIONS %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_USE_PERMISSION_OPTION') }}</label>
+				<label><input id="no_is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_USE_PERMISSIONS %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION') }}</label>
 			</dd>
 		</dl>
 		<hr/>
 		{# Include / Exclude groups #}
 		<dl>
 			<dt><label for="include_groups">{{ lang('INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS_EXPLAIN') }}</span></dt>
-			<dd><label><input id="include_groups"    name="include_groups" type="radio" class="radio" value="1"{% if INTRODUCIATOR_INCLUDE_GROUPS_SELECTED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION') }}</label>
-				<label><input id="no_include_groups" name="include_groups" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_INCLUDE_GROUPS_SELECTED %} checked="checked"{% endif %} /> {{ lang('INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION') }}</label>
+			<dd><label><input id="include_groups"    name="include_groups" type="radio" class="radio" value="1"{% if INTRODUCIATOR_INCLUDE_GROUPS_SELECTED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION') }}</label>
+				<label><input id="no_include_groups" name="include_groups" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_INCLUDE_GROUPS_SELECTED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION') }}</label>
 			</dd>
 		</dl>
 		{# Groups list #}
@@ -65,7 +65,7 @@
 			<dd>
 				<select name="groups_choices[]" style="width: 100%;" id="groups_choices" multiple="multiple" size="10">
 				{% for group in loops.groups %}
-					<option value="{group.ID}" name="group_{group.ID}" title="{group.TOOLTIP}" {% if group.SELECTED %}selected="selected"{% endif %}>{group.NAME}</option>
+					<option value="{group.ID}" name="group_{group.ID}" title="{group.TOOLTIP}"{% if group.SELECTED %} selected="selected"{% endif %}>{group.NAME}</option>
 				{% endfor %}
 				</select>
 			</dd>

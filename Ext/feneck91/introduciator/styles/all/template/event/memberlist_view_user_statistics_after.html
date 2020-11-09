@@ -2,23 +2,23 @@
 
 {% if S_INTRODUCIATOR_DISPLAY %}
 	<dt>
-		{{ lang('L_INTRODUCIATOR_MEMBER_INTRODUCTION') }}:
+		{{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}:
 	</dt>
 	<dd>
 		{% if U_INTRODUCIATOR_URL %}
-			<a href="{{ lang('U_INTRODUCIATOR_URL') }}" alt="{{ lang('L_INTRODUCIATOR_MEMBER_INTRODUCTION') }}"
+			<a href="{U_INTRODUCIATOR_URL}" alt="{{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}"
 				{% if S_INTRODUCIATOR_PENDING %}
-					title="{{ lang('L_INTRODUCIATOR_VIEW_MEMBER_PENDING') }}"><b>{{ lang('L_INTRODUCIATOR_VIEW_MEMBER_PENDING') }}</b>
+					title="{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}"><b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}</b>
 				{% else %}
-					title="{{ lang('T_INTRODUCIATOR_TEXT') }}"><b>{{ lang('L_INTRODUCIATOR_VIEW_MEMBER_GOTO') }}</b>
+					title="{{ lang('T_INTRODUCIATOR_TEXT') }}"><b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_GOTO') }}</b>
 				{% endif %}
 			</a>
 		{% else %}
 		<b>
 		{% if S_INTRODUCIATOR_PENDING %}
-			{{ lang('L_INTRODUCIATOR_VIEW_MEMBER_PENDING') }}
+			{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}
 		{% else %}
-			{{ lang('L_INTRODUCIATOR_VIEW_MEMBER_NO_GOTO') }}
+			{{ lang('INTRODUCIATOR_VIEW_MEMBER_NO_GOTO') }}
 		{% endif %}
 		</b>
 	{% endif %}

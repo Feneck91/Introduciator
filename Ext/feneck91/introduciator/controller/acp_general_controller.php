@@ -10,8 +10,6 @@
 namespace feneck91\introduciator\controller;
 
 use \feneck91\introduciator\helper\extension_manager_helper;
-use \phpbb\language\language;
-use \phpbb\request\request;
 use \phpbb\template\template;
 use \phpbb\user;
 use \phpbb\config\db;
@@ -21,7 +19,7 @@ use \phpbb\config\db;
  *
  * This is the page used to display current version, installed date version and check if new version is avalaible.
  */
-class acp_general_controller extends acp_main_controller
+class acp_general_controller
 {
 	/**
 	 * @var string The phpBB admin path.
@@ -32,32 +30,36 @@ class acp_general_controller extends acp_main_controller
 	protected $ext_manager_helper;
 
 	/**
+	 * @var \phpbb\template\template Template object
+	 */
+	protected $template;
+
+	/**
+	 * @var \phpbb\user Current connected user.
+	 */
+	protected $user;
+
+	/**
+	 * @var \phpbb\config\db Config object
+	 */
+	protected $dbconfig;
+
+	/**
 	 * Constructor
 	 *
 	 * @param \feneck91\introduciator\helper\extension_manager_helper       $ext_manager_helper         Extension manager object
-	 * @param string                                                        $php_ext                    phpBB Extention
-	 * @param \phpbb\language\language                                      $language                   Language user object
-	 * @param \phpbb\request\request                                        $request                    Request object
 	 * @param \phpbb\template\template                                      $template                   Template object
 	 * @param \phpbb\user                                                   $user                       User object
 	 * @param \phpbb\config\db                                              $dbconfig                   Config object
 	 *
 	 * @access public
 	 */
-	public function __construct(extension_manager_helper $ext_manager_helper, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
+	public function __construct(extension_manager_helper $ext_manager_helper, template $template, user $user, db $dbconfig)
 	{
 		$this->ext_manager_helper = $ext_manager_helper;
-
-		parent::__construct(
-			null,        // table prefix
-			null,        // root path
-			$php_ext,
-			$language,
-			$request,
-			$template,
-			$user,
-			$dbconfig
-		);
+		$this->template = $template;
+		$this->user = $user;
+		$this->dbconfig = $dbconfig;
  	}
 
 	/**

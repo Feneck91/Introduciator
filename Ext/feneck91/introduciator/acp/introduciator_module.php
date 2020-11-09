@@ -74,9 +74,6 @@ class introduciator_module
 			/** @type \feneck91.introduciator.controller.introduciator_acp_main_controller $acp_controller */
 			$acp_controller = $phpbb_container->get('feneck91.introduciator.controller.acp_' . $mode);
 
-			// Make the $u_action url available in the admin controller
-			$acp_controller->set_page_url($this->u_action);
-
 			// Load a template from adm/style for our ACP page
 			$this->tpl_name = 'introduciator_acp_page_' . strtolower($mode);
 

@@ -14,13 +14,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class introduciator_acp_listener implements EventSubscriberInterface
 {
 	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-	}
-
-	/**
 	 * Called by framework to get event list.
 	 *
 	 * Return an array that contains event list with associated callback for each event.

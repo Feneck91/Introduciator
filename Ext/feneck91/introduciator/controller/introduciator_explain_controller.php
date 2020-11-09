@@ -11,7 +11,6 @@ namespace feneck91\introduciator\controller;
 
 use feneck91\introduciator\helper\introduciator_helper;
 use phpbb\config\config;
-use phpbb\auth\auth;
 use phpbb\template\template;
 use phpbb\user;
 
@@ -24,7 +23,7 @@ use phpbb\user;
 class introduciator_explain_controller
 {
 	/**
-	 * @var helper Introduciator helper. The important code is into this helper.
+	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
 
@@ -32,11 +31,6 @@ class introduciator_explain_controller
 	 * @var \phpbb\config\config Current configuration (config table).
 	 */
 	protected $config;
-
-	/**
-	 * @var \phpbb\auth\auth Current authorization.
-	 */
-	protected $auth;
 
 	/**
 	 * @var \phpbb\template\template Template object
@@ -53,17 +47,15 @@ class introduciator_explain_controller
 	 *
 	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
 	 * @param \phpbb\config\config                                  $config         Current configuration (config table).
-	 * @param \phpbb\auth\auth                                      $auth           Current authorization.
 	 * @param \phpbb\template\template                              $template       Template object
 	 * @param \phpbb\user                                           $user           User object
 	 *
 	 * @access public
 	 */
-	public function __construct(introduciator_helper $helper, config $config, auth $auth, template $template, user $user)
+	public function __construct(introduciator_helper $helper, config $config, template $template, user $user)
 	{
 		$this->helper = $helper;
 		$this->config = $config;
-		$this->auth = $auth;
 		$this->template = $template;
 		$this->user = $user;
 	}

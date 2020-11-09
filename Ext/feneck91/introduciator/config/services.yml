@@ -37,7 +37,6 @@ services:
         arguments:
             - '@feneck91.introduciator.helper'
             - '@config'
-            - '@auth'
             - '@template'
             - '@user'
 

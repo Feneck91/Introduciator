@@ -29,7 +29,7 @@ use phpbb\config\db;
 class acp_explanation_controller extends acp_main_controller
 {
 	/**
-	 * @var helper Introduciator helper. The important code is into this helper
+	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper
 	 */
 	protected $helper;
 
@@ -49,7 +49,6 @@ class acp_explanation_controller extends acp_main_controller
 	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
 	 * @param \phpbb\db\driver\factory                              $db             Database interface
 	 * @param \phpbb\log\log                                        $log            Object used to add info into admin log
-	 * @param string                                                $table_prefix   Table prefix
 	 * @param string                                                $root_path      phpBB root path
 	 * @param string                                                $php_ext        phpBB Extention
 	 * @param \phpbb\language\language                              $language       Language user object
@@ -60,14 +59,13 @@ class acp_explanation_controller extends acp_main_controller
 	 *
 	 * @access public
 	 */
-	public function __construct(introduciator_helper $helper, factory $db, log $log, $table_prefix, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
+	public function __construct(introduciator_helper $helper, factory $db, log $log, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
 	{
 		$this->helper = $helper;
 		$this->db = $db;
 		$this->log = $log;
 
 		parent::__construct(
-			$table_prefix,
 			$root_path,
 			$php_ext,
 			$language,

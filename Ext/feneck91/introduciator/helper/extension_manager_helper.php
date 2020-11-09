@@ -18,7 +18,7 @@ class extension_manager_helper extends \phpbb\extension\manager
 
 	/**
 	 *
-	 * @var type
+	 * @var array Metadata for this extension
 	 */
 	protected $ext_meta;
 

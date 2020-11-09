@@ -69,7 +69,6 @@ abstract class acp_main_controller
 	/**
 	 * Constructor
 	 *
-	 * @param string                        $table_prefix   Table prefix
 	 * @param string                        $root_path      phpBB root path
 	 * @param string                        $php_ext        phpBB Extention
 	 * @param \phpbb\language\language      $language       Language user object
@@ -80,9 +79,8 @@ abstract class acp_main_controller
 	 *
 	 * @access public
 	 */
-	public function __construct($table_prefix, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
+	public function __construct($root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
 	{
-		$this->table_prefix = $table_prefix;
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 		$this->language = $language;

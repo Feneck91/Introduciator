@@ -118,7 +118,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Called before displaying Quick Reply fields, hide all this fields if the user is not allowed to post.
 	 * Must change S_QUICK_REPLY and set it to false.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	 */
 	public function on_before_quickreply_displayed($event)
 	{
@@ -136,8 +136,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Called when the user want to post, when it's display panel.
 	 * Return true, false or RedirectResponse if redirection is needed.
 	 *
-	 * @param $event The event.
-	 * @return Response|RedirectResponse
+	 * @param $event Event.
 	 */
 	public function on_displaying_posting_screen($event)
 	{
@@ -152,7 +151,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	 */
 	public function on_submit_post_before($event)
 	{
@@ -177,7 +176,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	 */
 	public function on_submit_post_after($event)
 	{
@@ -186,7 +185,7 @@ class introduciator_listener implements EventSubscriberInterface
 		{
 			meta_refresh(20, $event['redirect_url']); // More time to read
 			$message = $this->user->lang['POST_STORED_MOD'] . ' '. $this->user->lang['POST_APPROVAL_NOTIFY'];
-			if ($data['introduciator_force_unapproved'] == $this->helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+			if ($data['introduciator_force_unapproved'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 			{	// Add more explanation: the user can modify his introduce
 				$this->helper->load_language_if_needed();
 				$message .= $this->helper->get_language()->lang('INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY');
@@ -204,7 +203,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	 */
 	public function on_submit_post_end($event)
 	{
@@ -228,7 +227,7 @@ class introduciator_listener implements EventSubscriberInterface
 	/**
 	 * Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	*/
 	public function on_get_topic_ids($event)
 	{
@@ -249,7 +248,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 *
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	*/
 	public function on_display_unapproved_question_mark($event)
 	{
@@ -267,7 +266,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 *
 	 * Else phpBB say that the topic doesn't exists.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	*/
 	public function is_topic_visible($event)
 	{
@@ -283,7 +282,7 @@ class introduciator_listener implements EventSubscriberInterface
 	/**
 	 * Allow the user that create own introduction to view it into the list of the topic, even the topic is unapproved.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	*/
 	public function get_topic_sql_visibility($event)
 	{
@@ -304,7 +303,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 *
 	 * Prepare row with data to display: the link to the user's introduce.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	*/
 	public function on_viewtopic_modify_post_row($event)
 	{
@@ -331,7 +330,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 *
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode, allow the moderator to post a reply into an unapproved message.
 	 *
-	 * @param $event The event.
+	 * @param $event Event.
 	*/
 	public function on_user_want_post($event)
 	{
@@ -372,6 +371,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Prepare data to be displayed in several pages  like memberlist.
 	 *
 	 * @param \phpbb\event\data	$event The event data
+	 * @return Event datas that contains informations to display into the profile.
 	 */
 	public function on_display_profile_data($event)
 	{
