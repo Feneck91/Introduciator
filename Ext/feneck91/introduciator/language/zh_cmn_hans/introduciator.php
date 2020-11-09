@@ -48,7 +48,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> '你不可以删除你的自我介绍的首个帖子！',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> '你不可以删除你的自我介绍的首个帖子！但你可以删除整个自我介绍主题。',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> '请在主题P %s 中介绍你自己',
-	'INTRODUCIATOR_EXT_DISABLED'								=> '自我介绍扩展已禁用，请启用它，来使自我介绍扩展工作。',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>要发表帖子， <u>你必须</u> 先自我介绍</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> '作为一个新用户，你必须先对其他用户作自我介绍，到板块 “<a href="%forum_url%">%forum_name%</a>” 发表自我介绍<br/>
 																	在自我介绍板块只有新主题才被允许。',

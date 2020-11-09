@@ -48,7 +48,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'Non è consentito di eliminare il primo messaggio della vostra introduzione!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'Non è consentito di eliminare il primo post di questa introduzione! È possibile eliminare questa introduzione eliminando il topic.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Si prega di introdurre te stesso in un topic: %s',
-	'INTRODUCIATOR_EXT_DISABLED'								=> 'Introduzione Mod è disabilitato. Si dovrebbe abilitarlo per rendere questa MOD praticabile.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Per essere in grado di pubblicare, <u>devi</u> introdurre/presentare te stesso</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Come per ogni nuovo utente, è necessario presentarsi agli altri membri del “<a href="%forum_url%">%forum_name%</a>” forum<br/>
 																	è solo permesso un nuovo argomento nel forum per le presentazioni.',

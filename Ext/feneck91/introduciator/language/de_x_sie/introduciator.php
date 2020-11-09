@@ -48,7 +48,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'Es ist nicht erlaubt, den ersten Beitrag Ihrer Vorstellung zu löschen!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'Es ist nicht erlaubt, den ersten Beitrag dieser Vorstellung zu löschen! Sie können diese Vorstellung löschen, indem Sie das Thema löschen.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Bitte stellen Sie sich in diesem Thema vor: %s',
-	'INTRODUCIATOR_EXT_DISABLED'								=> 'Die Introduciator Extension ist deaktiviert. Sie sollten sie aktivieren, um diese Extension benutzbar zu machen.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Um posten zu können, <u>müssen</u> Sie sich selbst vorstellen</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Wie bei jedem neuen Benutzer müssen Sie sich den anderen Mitgliedern im “<a href="%forum_url%">%forum_name%</a>” Forum vorstellen<br/>
 																	Es ist nur <strong>ein</strong> neues Thema im Forum für Vorstellungen erlaubt.',

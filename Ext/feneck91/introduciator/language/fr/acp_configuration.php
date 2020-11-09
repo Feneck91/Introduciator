@@ -47,8 +47,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Permet de configurer le fonctionnement de l’extension.',
 
 	// Settings: général
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Activer l’extension :',
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Est utilisé pour activer ou désactiver cette extension.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Forcer l’utilisateur à se présenter :',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Quand cet option est activée, l’extension force l’utilisateur à poster sa propre présentation avant d’être autorisé à poster dans les autres sujets.
 																			<br/>Lorsque cette fonctionalité n’est pas activée, toutes les autres options restent actives.',
@@ -86,8 +84,8 @@ $lang = array_merge($lang, array(
 
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné, à utiliser uniquement lorsque l’extension est désactivé',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Lorsque cette extension est activé vous devez choisir un forum !',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Aucun forum sélectionné',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Merci de sélectionner un forum !',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Présentation forcée : paramètres de configuration mis à jour.</strong>',

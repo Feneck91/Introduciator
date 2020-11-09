@@ -47,8 +47,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Allow to configure the extension settings.',
 
 	// Settings: general
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Enable extension:',
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Used to enable or disable this extension.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
 																			<br/>When this feature is not enabled, all other options remain active.',
@@ -86,8 +84,8 @@ $lang = array_merge($lang, array(
 
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is desactivated',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, your should choose a forum!',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Your must choose a forum!',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Introduciator: configuration settings updated.</strong>',

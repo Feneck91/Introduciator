@@ -48,8 +48,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Hier kannst du die Konfiguration der Extension vornehmen.',
 
 	// Settings: general
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Extension aktivieren:',
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Hier kannst du die Extension aktivieren oder deaktivieren.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Der Benutzer wird gezwungen, sich vorzustellen:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird der Benutzer gezwungen, seine eigene Vorstellung zu posten, bevor er in anderen Themen posten darf.
 																			<br/>Wenn diese Funktion nicht aktiviert ist, bleiben alle anderen Optionen aktiv.',
@@ -87,8 +85,8 @@ $lang = array_merge($lang, array(
 
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Keine Forenauswahl, bitte nur verwenden, wenn die Extension deaktiviert ist.',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Wenn diese Extension aktiviert ist, solltest du ein Forum wählen!',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Keine Forenauswahl',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Sie müssen ein Forum auswählen!',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Introducators: Konfigurationseinstellungen aktualisiert.</strong>',

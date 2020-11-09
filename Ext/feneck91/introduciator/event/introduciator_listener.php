@@ -308,25 +308,22 @@ class introduciator_listener implements EventSubscriberInterface
 	*/
 	public function on_viewtopic_modify_post_row($event)
 	{
-		if ($this->helper->is_introduciator_allowed())
+		// Step1: remove approval post if needed
+		if ($this->helper->introduction_is_unapproved_topic($event['topic_data']['forum_id'], $event['row']['topic_id'], false))
 		{
-			// Step1: remove approval post if needed
-			if ($this->helper->introduction_is_unapproved_topic($event['topic_data']['forum_id'], $event['row']['topic_id'], false))
-			{
-				$row = $event['post_row'];
-				$row['S_POST_UNAPPROVED'] = false;
-				$event['post_row'] = $row;
-			}
-
-			// Prepare data to display link to suer's introduce
-			$data_introduciator = $event['user_poster_data']['datas_introduciator'];
-			$event['post_row'] += array(
-				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
-				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
-				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
-				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
-			);
+			$row = $event['post_row'];
+			$row['S_POST_UNAPPROVED'] = false;
+			$event['post_row'] = $row;
 		}
+
+		// Prepare data to display link to suer's introduce
+		$data_introduciator = $event['user_poster_data']['datas_introduciator'];
+		$event['post_row'] += array(
+			'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+			'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
+			'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
+			'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
+		);
 	}
 
 	/**
@@ -359,17 +356,14 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_viewtopic_modify_post_data($event)
 	{
-		if ($this->helper->is_introduciator_allowed())
+		$user_cache = $event['user_cache'];
+
+		foreach ($event['user_cache'] as $user_id => $user_info)
 		{
-			$user_cache = $event['user_cache'];
-
-			foreach ($event['user_cache'] as $user_id => $user_info)
-			{
-				$user_cache[$user_id]['datas_introduciator'] = $this->helper->introduciator_get_user_infos($user_id, $user_info['username']);
-			}
-
-			$event['user_cache'] = $user_cache;
+			$user_cache[$user_id]['datas_introduciator'] = $this->helper->introduciator_get_user_infos($user_id, $user_info['username']);
 		}
+
+		$event['user_cache'] = $user_cache;
 	}
 
 	/**
@@ -381,19 +375,16 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_display_profile_data($event)
 	{
-		if ($this->helper->is_introduciator_allowed())
-		{
-			$data = $event['data'];
-			$data_introduciator = $this->helper->introduciator_get_user_infos($data['user_id'], $data['username']);
+		$data = $event['data'];
+		$data_introduciator = $this->helper->introduciator_get_user_infos($data['user_id'], $data['username']);
 
-			$event['template_data'] += array(
-				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
-				'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
-				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
-				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
-				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
-			);
-		}
+		$event['template_data'] += array(
+			'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
+			'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
+			'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
+			'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
+			'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
+		);
 
 		return $event;
 	}
