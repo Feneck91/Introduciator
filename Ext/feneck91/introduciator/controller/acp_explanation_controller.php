@@ -233,6 +233,7 @@ class acp_explanation_controller extends acp_main_controller
 			}
 			array_push($explanation_message_array_result, $explanation_message_array_row_result);
 		}
+		$this->db->sql_freeresult($result);
 
 		// Update INTRODUCIATOR_EXPLANATION_TABLE
 		// 1> Remove all entries

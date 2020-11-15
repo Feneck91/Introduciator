@@ -8,76 +8,32 @@
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
 
-namespace feneck91\introduciator\migrations;
+namespace feneck91\introduciator\migrations\v2_0_0;
 
-class introduciator_migration_2_0_0 extends \phpbb\db\migration\migration
+class introduciator_migration_2_0_0_data extends \phpbb\db\migration\migration
 {
 	/**
-	 * Add the table schema to the database
+	 * Get the migration dependencie.
 	 *
-	 * Only add the introduciator group table is added
-	 *
-	 * Return an array of table schema to create / update
-	 *
-	 * @return array
-	 * @access public
+	 * @return array Array of depending items.
 	 */
-	public function update_schema()
+	public static function depends_on()
 	{
-		return array(
-			// Add Groups list table
-			'add_tables' => array(
-				$this->table_prefix . 'introduciator_groups' => array(
-					'COLUMNS' => array(
-						'fk_group'			=> array('UINT', null),
-					),
-				),
-				$this->table_prefix . 'introduciator_explanation' => array(
-					'COLUMNS'		=> array(
-						'id'							=> array('UINT', null, 'auto_increment'),
-						'lang'							=> array('VCHAR:30', ''),
-						'message_title'					=> array('MTEXT_UNI', ''),
-						'message_title_uid'				=> array('VCHAR:8', ''),
-						'message_title_bitfield'		=> array('VCHAR:255', ''),
-						'message_title_bbcode_options'	=> array('VCHAR:255', ''),
-						'message_text'					=> array('MTEXT_UNI', ''),
-						'message_text_uid'				=> array('VCHAR:8', ''),
-						'message_text_bitfield'			=> array('VCHAR:255', ''),
-						'message_text_bbcode_options'	=> array('VCHAR:255', ''),
-						'rules_title'					=> array('MTEXT_UNI', ''),
-						'rules_title_uid'				=> array('VCHAR:8', ''),
-						'rules_title_bitfield'			=> array('VCHAR:255', ''),
-						'rules_title_bbcode_options'	=> array('VCHAR:255', ''),
-						'rules_text'					=> array('MTEXT_UNI', ''),
-						'rules_text_uid'				=> array('VCHAR:8', ''),
-						'rules_text_bitfield'			=> array('VCHAR:255', ''),
-						'rules_text_bbcode_options'		=> array('VCHAR:255', ''),
-					),
-					'PRIMARY_KEY'	=> 'id',
-				),
-			),
-		);
+		return array('\phpbb\db\migration\data\v320\v320rc2');
 	}
 
 	/**
-	 * Drop the Introduciator groups table schema from the database.
+	 * Run migration if introduciator_fk_forum_id config doesn't exists
 	 *
-	 * @return array Array of table schema to revert
-	 * @access public
+	 * @return bool Is effectively installed?
 	 */
-	public function revert_schema()
+	public function effectively_installed()
 	{
-		return array(
-			// Remove table
-			'drop_tables' => array(
-				$this->table_prefix . 'introduciator_groups',
-				$this->table_prefix . 'introduciator_explanation',
-			),
-		);
+		return isset($this->config['introduciator_fk_forum_id']);
 	}
 
 	/**
-	 * Update data of the databse.
+	 * Update data of the database.
 	 *
 	 * @return array Array of elements to update.
 	 * @access public
@@ -131,23 +87,22 @@ class introduciator_migration_2_0_0 extends \phpbb\db\migration\migration
 			// Add the module in ACP under the customise tab
 
 			// Add a new category named ACP_INTRODUCIATOR_EXTENSION to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
-			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_EXTENSION')),
-
 			array('module.add', array(
-					'acp',
-					'ACP_INTRODUCIATOR_EXTENSION',
-					array(
-						'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
-						'modes'	  			=> array(
-							//---------------------------------------------------------------------
-							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
-							'general',
-							'configuration',
-							'explanation',
-							'statistics',
-							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
-							//---------------------------------------------------------------------
-							),
+				'acp',
+				'ACP_CAT_DOT_MODS',
+				'ACP_INTRODUCIATOR_EXTENSION',
+				array(
+					'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
+					'modes'	  			=> array(
+						//---------------------------------------------------------------------
+						// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+						'general',
+						'configuration',
+						'explanation',
+						'statistics',
+						// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+						//---------------------------------------------------------------------
+						),
 					),
 				)),
 

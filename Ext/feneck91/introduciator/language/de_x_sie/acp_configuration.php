@@ -71,7 +71,7 @@ $lang = array_merge($lang, array(
 	// Settings: groups and users
 	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Konfiguration von Gruppen und Benutzern',
 	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Benuntze phpBB Berechtigungen:',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'Sie können entweder die phpBB Berechtigungen oder die folgende Konfiguration (einfachster Weg, aber weniger effizient) verwenden, um anzuzeigen, dass der Benutzer sich vorstellen muss.<br /><br />Wenn die Option " Forenrechte verwenden " verwendet wird, wird die nächste Konfiguration ignoriert.',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'Sie können entweder die phpBB Berechtigungen oder die folgende Konfiguration (einfachster Weg, aber weniger effizient) verwenden, um anzuzeigen, dass der Benutzer sich vorstellen muss.',
 	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Forenrechte verwenden',
 	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Extension Konfiguration verwenden',
 	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Gruppen einschließen oder ausschließen:',

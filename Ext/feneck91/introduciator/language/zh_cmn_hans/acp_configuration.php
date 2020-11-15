@@ -73,7 +73,7 @@ $lang = array_merge($lang, array(
 	// Settings: groups and users
 	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> '用户组和用户的配置',
 	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> '使用 phpBB 权限：',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> '你可以使用 phpBB 权限或者扩展配置（最简单但效率低） 来指示用户是应该自我介绍否。<br /><br />当 « 用户论坛权限 » 选项开启，后面的配置都被忽略。',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> '你可以使用 phpBB 权限或者扩展配置（最简单但效率低） 来指示用户是应该自我介绍否。',
 	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> '用户论坛权限',
 	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> '用户扩展配置',
 	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> '包括或者不包括用户组：',

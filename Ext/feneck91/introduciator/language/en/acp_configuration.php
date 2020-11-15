@@ -70,7 +70,7 @@ $lang = array_merge($lang, array(
 	// Settings: groups and users
 	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Groups and users configuration',
 	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Use phpBB permissions:',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'You can use either the phpBB permissions or this extension configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.<br /><br />When the « Use forum’s permissions » option is used, the next configuration is ignored.',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'You can use either the phpBB permissions or this extension configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.',
 	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Use forum’s permissions',
 	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Use extension configuration',
 	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Include or exclude groups:',

@@ -499,7 +499,6 @@ class introduciator_helper
 	 *
 	 * Return true if the user is allowed to make action,
 	 *        false else, in this case, just check if allowed or not (remove quick reply if not allowed).
-	 *        RedirectResponse if redirection is needed.
 	 *
 	 * @param string			$mode		Posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
 	 * @param int				$forum_id	Forum identifier where the user try to post.
@@ -562,6 +561,7 @@ class introduciator_helper
 							if ($redirect)
 							{
 								// Load langage
+								$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
 								$this->load_language_if_needed();
 
 								$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
@@ -573,79 +573,79 @@ class introduciator_helper
 						}
 					}
 				}
-				else if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
+			}
+			else if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
+			{
+				$topic_introduce_id = 0;
+				$first_post_id = 0;
+				$topic_approved = false;
+
+				if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
 				{
-					$topic_introduce_id = 0;
-					$first_post_id = 0;
-					$topic_approved = false;
-
-					if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
+					// No post into the introduce topic
+					if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
 					{
-						// No post into the introduce topic
-						if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
+						$ret_allowed_action = false;
+						// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
+						if ($redirect)
 						{
-							$ret_allowed_action = false;
-							// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
-							if ($redirect)
+							if ($this->introduciator_params['is_explanation_enabled'])
 							{
-								if ($this->introduciator_params['is_explanation_enabled'])
-								{
-									redirect($this->controller_helper->route('feneck91_introduciator_explain', array('forum_id' => (int) $this->introduciator_params['fk_forum_id'])));
-								}
-								else
-								{
-									redirect(append_sid("{$this->root_path}viewforum.{$this->php_ext}",'f=' . (int) $this->introduciator_params['fk_forum_id']));
-								}
-							}
-						}
-					}
-					else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
-					{
-						// At least one post but not approved !
-						if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
-						    && (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
-						{
-							// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
-							// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
-							// here we just test if right are approve to don't show next message: here, the right are not correct => display the message
-							$ret_allowed_action = false;
-						}
-
-						if (!$ret_allowed_action && $redirect)
-						{
-							// Load langage
-							#$this->language->set_default_language($this->config['default_lang']); // Mandatory here else all forum is not in same language as user's one
-							$this->language->set_user_language($user_lang_name);
-							$this->load_language_if_needed();
-
-							// Test : if the user try to quote / reply into his own introduction : change the message
-							if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
-							{
-								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
+								redirect($this->controller_helper->route('feneck91_introduciator_explain', array('forum_id' => (int) $this->introduciator_params['fk_forum_id'])));
 							}
 							else
 							{
-								// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
-								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
+								redirect(append_sid("{$this->root_path}viewforum.{$this->php_ext}",'f=' . (int) $this->introduciator_params['fk_forum_id']));
 							}
-
-							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $forum_id) . '">', '</a>');
-							trigger_error($message, E_USER_NOTICE);
 						}
 					}
-					else if ($forum_id == $this->introduciator_params['fk_forum_id'] && $mode == 'post')
+				}
+				else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
+				{
+					// At least one post but not approved !
+					if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
+						&& (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
 					{
-						// User try to create more than one introduce post
+						// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
+						// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
+						// here we just test if right are approve to don't show next message: here, the right are not correct => display the message
 						$ret_allowed_action = false;
-						if ($redirect)
-						{
-							// Load langage
-							$this->load_language_if_needed();
+					}
 
-							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
-							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
-							trigger_error($message, E_USER_NOTICE);
+					if (!$ret_allowed_action && $redirect)
+					{
+						// Load langage
+						$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+						$this->load_language_if_needed();
+
+						// Test : if the user try to quote / reply into his own introduction : change the message
+						if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
+						{
+							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
 						}
+						else
+						{
+							// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
+							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
+						}
+
+						$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $forum_id) . '">', '</a>');
+						trigger_error($message, E_USER_NOTICE);
+					}
+				}
+				else if ($forum_id == $this->introduciator_params['fk_forum_id'] && $mode == 'post')
+				{
+					// User try to create more than one introduce post
+					$ret_allowed_action = false;
+					if ($redirect)
+					{
+						// Load langage
+						$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+						$this->load_language_if_needed();
+
+						$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
+						$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
+						trigger_error($message, E_USER_NOTICE);
 					}
 				}
 			}
@@ -1034,6 +1034,7 @@ class introduciator_helper
 
 				if (!$userdata)
 				{
+					$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
 					trigger_error('NO_USERS', E_USER_ERROR);
 				}
 
@@ -1153,7 +1154,6 @@ class introduciator_helper
 	 *
 	 * Return true if the user is allowed to make action,
 	 *        false else, in this case, just check if allowed or not (remove quick reply if not allowed).
-	 *        RedirectResponse if redirection is needed.
 	 *
 	 * @param string			$mode		Posting mode, could be 'reply' or 'quote' or 'post' or 'delete', etc.
 	 * @param array				$post_data	Informations about posting.

@@ -84,7 +84,7 @@ class introduciator_listener implements EventSubscriberInterface
 			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
 			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',					// Allow phpBB to retrieve a topic for the user that post it into introduce
 			'core.viewtopic_modify_post_row'							=> 'on_viewtopic_modify_post_row',				// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
-			'core.posting_modify_row_data'								=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce.
+			'core.posting_modify_row_data'								=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce. Added in 3.2.8 version of phpBB: https://tracker.phpbb.com/browse/PHPBB3-15946
 
 			//=============================================
 			// From here, this is events for template html

@@ -175,103 +175,64 @@ class acp_statistics_controller extends acp_main_controller
 		$start = $this->request->variable('start', 0);
 		//
 		// Here, we must check database to see if some user have more than one introduction
-		// 1> Get the number of introduce errors (more than once)
-
-		$sql_where = $this->db->sql_build_query('SELECT', array(
-				'SELECT'	=> 'COUNT(topic_id)',
-				'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-				'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
-			));
+		// 1> Get the ids of users that post more than one introduce
 		 $sql = $this->db->sql_build_query('SELECT', array(
-			'SELECT'	=> 'COUNT(result.topic_id)',
-			'FROM'		=> array(
-				$this->db->sql_build_query('SELECT', array(
-					'SELECT'	=> 'topic_id',
-					'FROM'		=> array(TOPICS_TABLE => 'phpbbtopics'),
-					'WHERE'		=> "( {$sql_where} ) > 1",
-					'GROUP_BY'	=> 'topic_poster',
-				)) => ''),
-			)) . " result";
+			'SELECT'	=> 'topic_poster, topic_first_poster_name',
+			'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
+			'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . '.forum_id = ' . (int) $params['fk_forum_id'] . ' AND ' . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+			'GROUP_BY'	=> 'topic_poster HAVING count(1) > 1' ,
+			));
 
-		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
-		$nb_several_introduce = reset($row);
+		 // Record all users that have more than one posted intruction and MUST introduce (not ignored)
+		$users_ids = array();
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			if ($this->helper->is_user_must_introduce_himself((int) $row['topic_poster'], null, $row['topic_first_poster_name']))
+			{
+				// Record this users (not ignored)
+				$users_ids[] = (int) $row['topic_poster'];
+			}
+		}
 
+		$nb_several_introduce = count($users_ids);
 		if ($nb_several_introduce > 0)
 		{
-			$sql_where = $this->db->sql_build_query('SELECT', array(
-					'SELECT'	=> 'COUNT(topic_id)',
-					'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-					'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND phpbbtopics.topic_poster = ' . TOPICS_TABLE . '.topic_poster AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+			$start = min($start, $nb_several_introduce - 1);
+
+			for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index)
+			{
+				// Here, no more need to test if number of introduce > 1 because it is already done just before
+				$sql = $this->db->sql_build_query('SELECT', array(
+					'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type",
+					'FROM'      => array(TOPICS_TABLE => TOPICS_TABLE),
+					'WHERE'		=> "forum_id = {$params['fk_forum_id']} AND topic_poster = {$users_ids[$index]} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
+					'ORDER_BY'	=> 'topic_time',
 				));
-			$sql = $this->db->sql_build_query('SELECT', array(
-				'SELECT'	=> 'topic_poster, topic_first_poster_name',
-				'FROM'		=> array(TOPICS_TABLE => 'phpbbtopics'),
-				'WHERE'		=> "( {$sql_where} ) > 1",
-				'GROUP_BY'	=> 'topic_poster',
-				'ORDER_BY'	=> 'topic_first_poster_name',
-			));
 
-			// Get all users that post more than one introduce
-			$result = $this->db->sql_query($sql);
-			$all_users = array(); // Receive all users info
-			while ($row = $this->db->sql_fetchrow($result))
-			{
-				array_push($all_users, $row);
-			}
-			$this->db->sql_freeresult($result);
-
-			// For all these users, Chek to know if they are not ignored
-			$users_to_check = array(); // Receive all users info
-			foreach ($all_users as $user)
-			{
-				if ($this->helper->is_user_must_introduce_himself($user['topic_poster'], null, $user['topic_first_poster_name']))
+				$result = $this->db->sql_query($sql);
+				$first_row = true;
+				while ($row = $this->db->sql_fetchrow($result))
 				{
-					// User is not ignored, check it
-					array_push($users_to_check, $user);
-				}
-			}
+					$link_to_introduce = $this->helper->get_url_to_post($params['fk_forum_id'], $row['topic_id'], $row['topic_first_post_id']);
 
-			// Here it is the list of all user (not ignored) that have post more than one introduce
-			$nb_several_introduce = count($users_to_check);
-
-			if ($nb_several_introduce > 0)
-			{
-				$start = min($start, $nb_several_introduce - 1);
-
-				for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index)
-				{
-					// Here, no more need to test if number of introduce > 1 because it is already done just before
-					$sql = $this->db->sql_build_query('SELECT', array(
-						'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type",
-						'FROM'      => array(TOPICS_TABLE => TOPICS_TABLE),
-						'WHERE'		=> "forum_id = {$params['fk_forum_id']} AND topic_poster = {$users_to_check[$index]['topic_poster']} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
-						'ORDER_BY'	=> 'topic_time',
+					$this->template->assign_block_vars('introduces', array(
+						'FIRST_ROW_SPAN'	=> $first_row,
+						'ROW_SPAN'			=> $result->num_rows,
+						'POSTER'			=> get_username_string('full', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
+						'DATE'				=> $this->user->format_date($row['topic_time']),
+						'INTRODUCE'			=> "<a href=\"{$link_to_introduce}\">{$row['topic_title']}</a>",
+						'ROW_NUMBER'		=> $index - $start + 1,
 					));
-
-					$result = $this->db->sql_query($sql);
-					$first_row = true;
-					while ($row = $this->db->sql_fetchrow($result))
-					{
-						$link_to_introduce = $this->helper->get_url_to_post($params['fk_forum_id'], $row['topic_id'], $row['topic_first_post_id']);
-
-						$this->template->assign_block_vars('introduces', array(
-							'FIRST_ROW_SPAN'	=> $first_row,
-							'ROW_SPAN'			=> $result->num_rows,
-							'POSTER'			=> get_username_string('full', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
-							'DATE'				=> $this->user->format_date($row['topic_time']),
-							'INTRODUCE'			=> "<a href=\"{$link_to_introduce}\">{$row['topic_title']}</a>",
-							'ROW_NUMBER'		=> $index - $start + 1,
-						));
-						$first_row = false;
-					}
-					$this->db->sql_freeresult($result);
+					$first_row = false;
 				}
-				$this->template->assign_vars(array(
-					'S_DISPLAY_INTRODUCES'		=> ($nb_several_introduce > 0) ? true : false,
-					'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start),
-				));
-				$this->pagination->generate_template_pagination($this->u_action . "&amp;action=otherpage", 'pagination', 'start', $nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start);
+				$this->db->sql_freeresult($result);
 			}
+			$this->template->assign_vars(array(
+				'S_DISPLAY_INTRODUCES'		=> ($nb_several_introduce > 0) ? true : false,
+				'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start),
+			));
+			$this->pagination->generate_template_pagination($this->u_action . "&amp;action=otherpage", 'pagination', 'start', $nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start);
 		}
 
 		$this->template->assign_vars(array(

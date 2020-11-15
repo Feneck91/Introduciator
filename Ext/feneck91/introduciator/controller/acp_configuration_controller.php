@@ -134,6 +134,7 @@ class acp_configuration_controller extends acp_main_controller
 			'INTRODUCIATOR_USE_PERMISSIONS'											=> $params['is_use_permissions'],
 			'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'									=> $params['is_include_groups'],
 			'INTRODUCIATOR_ITEM_IGNORED_USERS'										=> $params['ignored_users'],
+			'INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP'								=> $params['is_use_permissions'] ? "none" : "block",
 			'U_ACTION'																=> $this->u_action,
 		));
 

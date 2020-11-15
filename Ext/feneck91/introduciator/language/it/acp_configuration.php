@@ -71,7 +71,7 @@ $lang = array_merge($lang, array(
 	// Settings: groups and users
 	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Configurazione gruppi e utenti',
 	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Usa i permessi di phpBB:',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'È possibile utilizzare i permessi di phpBB per questa configurazione MOD (modo più semplice ma meno efficace) per indicare che l’utente deve introdurre se stesso/se stessa.<br /><br />Quando si « Usa permessi forum » l’opzione viene utilizzata, la configurazione successiva viene ignorata.',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'È possibile utilizzare i permessi di phpBB per questa configurazione MOD (modo più semplice ma meno efficace) per indicare che l’utente deve introdurre se stesso/se stessa.',
 	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Utilizza permessi forum',
 	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Utilizza la configurazione MOD',
 	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Includere o escludere gruppi:',
