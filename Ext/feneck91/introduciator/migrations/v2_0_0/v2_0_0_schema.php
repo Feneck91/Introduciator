@@ -10,7 +10,7 @@
 
 namespace feneck91\introduciator\migrations\v2_0_0;
 
-class introduciator_migration_2_0_0_schema extends \phpbb\db\migration\migration
+class v2_0_0_schema extends \phpbb\db\migration\migration
 {
 	/**
 	 * Get the migration dependencie.
@@ -19,7 +19,7 @@ class introduciator_migration_2_0_0_schema extends \phpbb\db\migration\migration
 	 */
 	public static function depends_on()
 	{
-		return array('\feneck91\introduciator\migrations\v2_0_0\introduciator_migration_v2_0_0_data');
+		return array('\feneck91\introduciator\migrations\v2_0_0\v2_0_0_data');
 	}
 
 	/**

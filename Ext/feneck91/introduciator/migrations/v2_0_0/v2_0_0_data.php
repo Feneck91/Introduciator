@@ -10,7 +10,7 @@
 
 namespace feneck91\introduciator\migrations\v2_0_0;
 
-class introduciator_migration_2_0_0_data extends \phpbb\db\migration\migration
+class v2_0_0_data extends \phpbb\db\migration\migration
 {
 	/**
 	 * Get the migration dependencie.
