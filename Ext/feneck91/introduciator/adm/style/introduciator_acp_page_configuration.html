@@ -57,7 +57,7 @@
       <dd>
         <select id="forum_choice" name="forum_choice" style="width: 100%;" size="1">
           {% for forum in loops.forums %}
-            <option {% if not forum.CAN_SELECT %} disabled="disabled" class="disabled-option" {% endif %} value="{{ forum.FORUM_ID }}" name="forum_{{ forum.FORUM_ID }}" title="{{ forum.TOOLTIP }}" {% if forum.SELECTED %} selected="selected">{{ forum.FORUM_NAME }}</option>
+            <option {% if not forum.CAN_SELECT %} disabled="disabled" class="disabled-option" {% endif %} value="{{ forum.FORUM_ID }}" name="forum_{{ forum.FORUM_ID }}" title="{{ forum.TOOLTIP }}" {% if forum.SELECTED %} selected="selected"{% endif %}>{{ forum.FORUM_NAME }}</option>
           {% endfor %}
         </select>
       </dd>
