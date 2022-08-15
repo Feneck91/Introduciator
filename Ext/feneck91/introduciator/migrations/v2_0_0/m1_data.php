@@ -56,55 +56,22 @@ class m1_data extends \phpbb\db\migration\migration
 			// Misc Settings
 			['config.add', ['introduciator_install_date', time()]],
 
-			// Add admin permissions
-			['permission.add', ['a_introduciator_manage', true]],
-
-			// Add user permissions
-			['permission.add', ['u_must_introduce', true]],
-
-			// Set permissions users
-			['permission.permission_set', ['ADMINISTRATORS', 'u_must_introduce', 'group', false]], // Set to never for adminitrators
-			['permission.permission_set', ['GLOBAL_MODERATORS', 'u_must_introduce', 'group']],
-			['permission.permission_set', ['REGISTERED', 'u_must_introduce', 'group']],
-			['permission.permission_set', ['NEWLY_REGISTERED', 'u_must_introduce', 'group']],
-
-			// Set permissions administration
-			['permission.permission_set', ['ADMINISTRATORS', 'a_introduciator_manage', 'group']],
-
-			// Global user role permissions for user mask
-			['if', [
-				['permission.role_exists', ['ROLE_USER_STANDARD']],
-				['permission.permission_set', ['ROLE_USER_STANDARD', 'u_must_introduce']],
-			]],
-			['if', [
-				['permission.role_exists', ['ROLE_USER_LIMITED']],
-				['permission.permission_set', ['ROLE_USER_LIMITED', 'u_must_introduce']],
-			]],
-			['if', [
-				['permission.role_exists', ['ROLE_USER_FULL']],
-				['permission.permission_unset', ['ROLE_USER_FULL', 'u_must_introduce']],	// Set to no for adminitrators
-			]],
-			['if', [
-				['permission.role_exists', ['ROLE_USER_NOPM']],
-				['permission.permission_set', ['ROLE_USER_NOPM', 'u_must_introduce']],
-			]],
-			['if', [
-				['permission.role_exists', ['ROLE_USER_NOAVATAR']],
-				['permission.permission_set', ['ROLE_USER_NOAVATAR', 'u_must_introduce']],
-			]],
-			['if', [
-				['permission.role_exists', ['ROLE_USER_NEW_MEMBER']],
-				['permission.permission_set', ['ROLE_USER_NEW_MEMBER', 'u_must_introduce']],
-			]],
-
-			// Global admin role permissions for admin
-			['if', [
-				['permission.role_exists', ['ROLE_ADMIN_STANDARD']],
-				['permission.permission_set', ['ROLE_ADMIN_STANDARD', 'a_introduciator_manage']],
-			]],
-			['if', [
-				['permission.role_exists', ['ROLE_ADMIN_FULL']],
-				['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_introduciator_manage']],
+			// Add the module in ACP under the customise tab
+			// Add a new category named ACP_INTRODUCIATOR_EXTENSION to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
+			['module.add', [
+				'acp',
+				'ACP_CAT_DOT_MODS',
+				'ACP_INTRODUCIATOR_EXTENSION',
+				// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+				[
+					'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
+					'modes'	  			=> [
+						'general',
+						'configuration',
+						'explanation',
+						'statistics',
+					],
+				],
 			]],
 		];
 	}
