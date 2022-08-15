@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -43,7 +43,7 @@ if (empty($lang) || !is_array($lang))
  * mode: general
  * Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Titles
 	'INTRODUCIATOR_GP_TITLE'							=> 'Informazioni Generali',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'					=> 'Ottieni la versione di questa MOD.',
@@ -56,4 +56,4 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_VERSION'							=> '<strong>Introduzione</strong> Versione MOD:',
 	'INTRODUCIATOR_GP_DETAILS'							=> 'xxxxxxx',
 	'INTRODUCIATOR_GP_URL_DETAILS'						=> 'https://www.phpbb.com/customise/db/extension/introduciator/',
-));
+]);

@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -43,7 +43,7 @@ if (empty($lang) || !is_array($lang))
  * mode: statistics
  * Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Titles
 	'INTRODUCIATOR_ST_TITLE'						=> '用户自我介绍的统计信息和检查',
 	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> '用于显示数据库信息：
@@ -65,4 +65,4 @@ $lang = array_merge($lang, array(
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK'						=> '检查',
-));
+]);

@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -42,7 +42,7 @@ if (empty($lang) || !is_array($lang))
  * mode: explication
  * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_EP_' pour 'INTRODUCIATOR_EXPLANATION_PAGES_'
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Titres
 	'INTRODUCIATOR_EP_TITLE'										=> 'Configuration de la page d’explications de la Présentation forcée',
 	'INTRODUCIATOR_EP_TITLE_EXPLAIN'								=> 'Permet de configurer la page d’explications de l’extension.',
@@ -84,4 +84,4 @@ $lang = array_merge($lang, array(
 
 	// Confirm box
 	'INTRODUCIATOR_EP_UPDATED'										=> 'La configuration de la page d’explication a été mise à jour',
-));
+]);

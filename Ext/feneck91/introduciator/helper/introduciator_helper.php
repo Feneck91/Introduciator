@@ -210,15 +210,15 @@ class introduciator_helper
 	 *
 	 * Example :
 	 * 	replace_all_by(
-	 *		array(
+	 *		[
 	 *			&$var_1,
 	 *			&$var_2
-	 *			),
-	 *		array(
+	 *		],
+	 *		[
 	 *			'search1'	=> 'replaced by this text1',
 	 *			'search2'	=> 'replaced by this text2',
 	 *			'search3'	=> 'replaced by this text3',
-	 *			));
+	 *		]);
 	 *
 	 * @param array $arr_fields Array of variables to update
 	 * @param array $arr_replace_by Array of maps with key is the text to replace, value is the text to replace with
@@ -250,46 +250,46 @@ class introduciator_helper
 	 */
 	public function introduciator_get_explanations($is_edit = null, $only_current_lang = null)
 	{
-		$arr_request = array(
+		$arr_request = [
 			'SELECT'    => 'l.lang_iso, l.lang_local_name, e.*',
-			'FROM'      => array(LANG_TABLE => 'l'),
-			'LEFT_JOIN'	=> array(
-				array(
-					'FROM'	=> array($this->get_introduciator_explanation_table() => 'e'),
+			'FROM'      => [LANG_TABLE => 'l'],
+			'LEFT_JOIN'	=> [
+				[
+					'FROM'	=> [$this->get_introduciator_explanation_table() => 'e'],
 					'ON'	=> 'e.lang = l.lang_iso'
-				)
-			),
+				]
+			],
 			'ORDER BY'	=> 'l.lang_id',
-		);
+		];
 
 		if ($only_current_lang === true) {
 			// Add WHERE to get only the current user language
 			$arr_request = array_merge(
 				$arr_request,
-				array(
+				[
 					'WHERE'		=> "l.lang_iso = '{$this->db->sql_escape($this->user->lang_name)}'",
-				)
+				]
 			);
 		}
 
 		$sql = $this->db->sql_build_query('SELECT', $arr_request);
-		$ret_value = array();
+		$ret_value = [];
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result)) {
-			$message_title					= isset($row['message_title']) ? $row['message_title'] : '%explanation_title%';
+			$message_title						= isset($row['message_title']) ? $row['message_title'] : '%explanation_title%';
 			$message_title_uid				= isset($row['message_title_uid']) ? $row['message_title_uid'] : '';
 			$message_title_bitfield 		= isset($row['message_title_bitfield']) ? $row['message_title_bitfield'] : '';
-			$message_title_bbcode_options 	= isset($row['message_title_bbcode_options']) ? $row['message_title_bbcode_options'] : '';
-			$message_text					= isset($row['message_text']) ? $row['message_text'] : '%explanation_text%';
-			$message_text_uid				= isset($row['message_text_uid']) ? $row['message_text_uid'] : '';
+			$message_title_bbcode_options = isset($row['message_title_bbcode_options']) ? $row['message_title_bbcode_options'] : '';
+			$message_text						= isset($row['message_text']) ? $row['message_text'] : '%explanation_text%';
+			$message_text_uid					= isset($row['message_text_uid']) ? $row['message_text_uid'] : '';
 			$message_textbitfield			= isset($row['message_text_bitfield']) ? $row['message_text_bitfield'] : '';
 			$message_text_bbcode_options 	= isset($row['message_text_bbcode_options']) ? $row['message_text_bbcode_options'] : '';
 
-			$rules_title					= isset($row['rules_title']) ? $row['rules_title'] : '%rules_title%';
-			$rules_title_uid				= isset($row['rules_title_uid']) ? $row['rules_title_uid'] : '';
+			$rules_title						= isset($row['rules_title']) ? $row['rules_title'] : '%rules_title%';
+			$rules_title_uid					= isset($row['rules_title_uid']) ? $row['rules_title_uid'] : '';
 			$rules_title_bitfield			= isset($row['rules_title_bitfield']) ? $row['rules_title_bitfield'] : '';
-			$rules_title_bbcode_options		= isset($row['rules_title_bbcode_options']) ? $row['rules_title_bbcode_options'] : '';
-			$rules_text						= isset($row['rules_text']) ? $row['rules_text'] : '%rules_text%';
+			$rules_title_bbcode_options	= isset($row['rules_title_bbcode_options']) ? $row['rules_title_bbcode_options'] : '';
+			$rules_text							= isset($row['rules_text']) ? $row['rules_text'] : '%rules_text%';
 			$rules_text_uid					= isset($row['rules_text_uid']) ? $row['rules_text_uid'] : '';
 			$rules_textbitfield				= isset($row['rules_text_bitfield']) ? $row['rules_text_bitfield'] : '';
 			$rules_text_bbcode_options		= isset($row['rules_text_bbcode_options']) ? $row['rules_text_bbcode_options'] : '';
@@ -307,51 +307,51 @@ class introduciator_helper
 
 				// Restore %forum_url% and %forum_post% tags because we must change them else the BBCode URL not work if the URL is not correct
 				$this->replace_all_by(
-					array(
+					[
 						&$message_title,
 						&$message_text,
 						&$rules_title,
 						&$rules_text,
-					),
-					array(
+					],
+					[
 						'http&#58;//aghxkfps&#46;com'	=> '%forum_url%',
 						'http&#58;//dqsdfzef&#46;com'	=> '%forum_post%',
-					)
+					]
 				);
 
-				array_push($ret_value, array(
+				array_push($ret_value, [
 					'lang_local_name'		=>	$row['lang_local_name'],
-					'lang_iso'				=> 	$row['lang_iso'],
-					'explanation'			=> array(
+					'lang_iso'				=> $row['lang_iso'],
+					'explanation'			=> [
 						'edit_message_title'	=> $message_title,
-						'edit_message_text'		=> $message_text,
-						'edit_rules_title'		=> $rules_title,
+						'edit_message_text'	=> $message_text,
+						'edit_rules_title'	=> $rules_title,
 						'edit_rules_text'		=> $rules_text,
-					),
-				));
+					],
+				]);
 			} else {
-				array_push($ret_value, array(
+				array_push($ret_value, [
 					'lang_local_name'		=>	$row['lang_local_name'],
 					'lang_iso'				=> 	$row['lang_iso'],
-					'explanation'			=> array(
-						'message_title'					=> $message_title,
-						'message_title_uid'				=> $message_title_uid,
-						'message_title_bitfield'		=> $message_title_bitfield,
+					'explanation'			=> [
+						'message_title'						=> $message_title,
+						'message_title_uid'					=> $message_title_uid,
+						'message_title_bitfield'			=> $message_title_bitfield,
 						'message_title_bbcode_options'	=> $message_title_bbcode_options,
-						'message_text'					=> $message_text,
+						'message_text'						=> $message_text,
 						'message_text_uid'				=> $message_text_uid,
 						'message_text_bitfield'			=> $message_textbitfield,
-						'message_text_bbcode_options' 	=> $message_text_bbcode_options,
-						'rules_title'					=> $rules_title,
-						'rules_title_uid'				=> $rules_title_uid,
+						'message_text_bbcode_options' => $message_text_bbcode_options,
+						'rules_title'						=> $rules_title,
+						'rules_title_uid'					=> $rules_title_uid,
 						'rules_title_bitfield'			=> $rules_title_bitfield,
 						'rules_title_bbcode_options'	=> $rules_title_bbcode_options,
-						'rules_text'					=> $rules_text,
-						'rules_text_uid'				=> $rules_text_uid,
+						'rules_text'						=> $rules_text,
+						'rules_text_uid'					=> $rules_text_uid,
 						'rules_text_bitfield'			=> $rules_textbitfield,
-						'rules_text_bbcode_options'		=> $rules_text_bbcode_options,
-					),
-				));
+						'rules_text_bbcode_options'	=> $rules_text_bbcode_options,
+					],
+				]);
 			}
 		}
 
@@ -372,7 +372,7 @@ class introduciator_helper
 	 */
 	public function introduciator_getparams($is_edit = null)
 	{
-		$params = array(
+		$params = [
 			'fk_forum_id'							=> $this->config['introduciator_fk_forum_id'],
 			'is_introduction_mandatory'				=> $this->config['introduciator_is_introduction_mandatory'],
 			'is_check_delete_first_post'			=> $this->config['introduciator_is_check_delete_first_post'],
@@ -382,11 +382,11 @@ class introduciator_helper
 			'ignored_users'							=> $this->config['introduciator_ignored_users'],
 			'is_explanation_display_rules'			=> $this->config['introduciator_is_explanation_display_rules'],
 			'posting_approval_level'				=> $this->config['introduciator_posting_approval_level'],
-		);
+		];
 
 		if ($is_edit === true || $is_edit === false) {
 			$forum_name = '';
-			$forum_rules = array();
+			$forum_rules = [];
 
 			// Find Forum name
 			$sql = 'SELECT forum_name, forum_rules, forum_rules_uid, forum_rules_bitfield, forum_rules_options
@@ -397,19 +397,19 @@ class introduciator_helper
 
 			if ($row) {
 				$forum_name = $row['forum_name'];
-				$forum_rules = array(
+				$forum_rules = [
 					'rules'				=> $row['forum_rules'],
 					'rules_uid'			=> $row['forum_rules_uid'],
 					'rules_bitfield'	=> $row['forum_rules_bitfield'],
 					'rules_options'		=> $row['forum_rules_options'],
-				);
+				];
 			}
 			$this->db->sql_freeresult($result);
 
 			if ($is_edit === true) {
-				$params = array_merge($params, array(
+				$params = array_merge($params, [
 					'explanations' => $this->introduciator_get_explanations($is_edit, false),
-				));
+				]);
 			} else {
 				// Load langage
 				$this->load_language_if_needed();
@@ -434,47 +434,47 @@ class introduciator_helper
 
 					// Replace in each string the predefined fields
 					$this->replace_all_by(
-						array(
+						[
 							&$explanation_message_title,
 							&$explanation_message_text,
 							&$explanation_rules_title,
 							&$explanation_rules_text,
-						),
-						array(
+						],
+						[
 							'%forum_name%'			=> $forum_name,
 							'http://aghxkfps.tld'	=> $forum_url,	// Restore correct link
 							'http://dqsdfzef.tld'	=> $forum_post,	// Restore correct link
-						)
+						]
 					);
 
 					// Make links into $link_goto_forum / $link_post_forum
 					$this->replace_all_by(
-						array(
+						[
 							&$explanation_message_title,		// if text is from $this->language->lang(xx),
 							&$explanation_message_text,
 							&$explanation_rules_title,
 							&$explanation_rules_text,
 							&$link_goto_forum,
 							&$link_post_forum,
-						),
-						array(
+						],
+						[
 							'%forum_name%'	=> $forum_name,
 							'%forum_url%'	=> $forum_url,
 							'%forum_post%'	=> $forum_post,
-						)
+						]
 					);
 
-					$params = array_merge($params, array(
-						'explanation_message_title'				=> $explanation_message_title,
-						'explanation_message_text'				=> $explanation_message_text,
-						'explanation_rules_title'				=> $explanation_rules_title,
-						'explanation_rules_text'				=> $explanation_rules_text,
-						'explanation_message_goto_forum'		=> $link_goto_forum,
-						'explanation_message_post_forum'		=> $link_post_forum,
+					$params = array_merge($params, [
+						'explanation_message_title'		=> $explanation_message_title,
+						'explanation_message_text'			=> $explanation_message_text,
+						'explanation_rules_title'			=> $explanation_rules_title,
+						'explanation_rules_text'			=> $explanation_rules_text,
+						'explanation_message_goto_forum'	=> $link_goto_forum,
+						'explanation_message_post_forum'	=> $link_post_forum,
 						'forum_name'							=> $forum_name,
 						'forum_url'								=> $forum_url,
 						'forum_post'							=> $forum_post,
-					));
+					]);
 				}
 			}
 		}
@@ -513,7 +513,7 @@ class introduciator_helper
 				$this->introduciator_params = $this->introduciator_getparams();
 			}
 
-			if (in_array($mode, array('delete', 'soft_delete'))) {
+			if (in_array($mode, ['delete', 'soft_delete'])) {
 				// Check if the user don't try to remove the first message of it's OWN introduce
 				// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
 				// else he needs to delete all the topic
@@ -564,21 +564,21 @@ class introduciator_helper
 
 				if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved)) {
 					// No post into the introduce topic
-					if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id']))) {
+					if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, ['reply', 'quote']) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id']))) {
 						$ret_allowed_action = false;
 						// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
 						if ($redirect) {
 							if ($this->introduciator_params['is_explanation_enabled']) {
-								redirect($this->controller_helper->route('feneck91_introduciator_explain', array('forum_id' => (int) $this->introduciator_params['fk_forum_id'])));
+								redirect($this->controller_helper->route('feneck91_introduciator_explain', ['forum_id' => (int) $this->introduciator_params['fk_forum_id']]));
 							} else {
 								redirect(append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $this->introduciator_params['fk_forum_id']));
 							}
 						}
 					}
-				} else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post'))) {
+				} else if (!$topic_approved && in_array($mode, ['reply', 'quote', 'post'])) {
 					// At least one post but not approved !
 					if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
-						&& (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+						&& (!in_array($mode, ['reply', 'quote']) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 					) {
 						// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
 						// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
@@ -685,13 +685,13 @@ class introduciator_helper
 			}
 		}
 
-		return array(
-			'display'		=> $display,
+		return [
+			'display'	=> $display,
 			'url'			=> $url,
-			'text'			=> $text,
-			'class'			=> $class,
-			'pending'		=> $pending,
-		);
+			'text'		=> $text,
+			'class'		=> $class,
+			'pending'	=> $pending,
+		];
 	}
 
 	/**
@@ -768,7 +768,7 @@ class introduciator_helper
 					if (!$topic_approved) {
 						$sql_approved = $this->str_replace_once('AND (t.topic_visibility', 'AND ((t.topic_visibility', $sql_approved) . ' OR ' . (empty($table_name) ? '' : $table_name . '.') . 'topic_id = ' . (int) $topic_id . ')';
 						if ($approve_fid_ary !== null) {
-							$approve_fid_ary = array($topic_id);
+							$approve_fid_ary = [$topic_id];
 						}
 					}
 				}
@@ -886,7 +886,7 @@ class introduciator_helper
 		$result = $this->db->sql_query($sql);
 
 		// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
-		$arr_groups_id = array();
+		$arr_groups_id = [];
 		while ($row = $this->db->sql_fetchrow($result)) {
 			// Merge array
 			array_push($arr_groups_id, $row['fk_group']);
@@ -929,7 +929,7 @@ class introduciator_helper
 
 		// User is in selected group or out of selected group ?
 		if (($this->introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$this->introduciator_params['is_include_groups'] && !$is_in_group_selected)) {
-			$user_ignored = in_array(utf8_strtolower($poster_name), explode("\n", utf8_strtolower($this->introduciator_params['ignored_users'])));
+			$user_ignored = in_[utf8_strtolower($poster_name] explode("\n", utf8_strtolower($this->introduciator_params['ignored_users'])));
 		}
 
 		return $user_ignored;

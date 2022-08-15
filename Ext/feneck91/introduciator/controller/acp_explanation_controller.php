@@ -123,30 +123,30 @@ class acp_explanation_controller extends acp_main_controller
 	{
 		// no action or update current
 		$params = $this->helper->introduciator_getparams(true);
-		$this->template->assign_vars(array(
-			'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'								=> $params['is_explanation_enabled'],
-			'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'					=> $params['is_explanation_display_rules'],
+		$this->template->assign_vars([
+			'INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED'					=> $params['is_explanation_enabled'],
+			'INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED'		=> $params['is_explanation_display_rules'],
 			'U_ACTION'																=> $this->u_action,
-		));
+		]);
 
 		$i = 1;
 		foreach ($params['explanations'] as $explanation_value) {
 			$explanation = $explanation_value['explanation'];
-			$this->template->assign_block_vars('explanations', array(
-				'LANG_NR'									=> $i,
-				'LANG_NAME'									=> $explanation_value['lang_local_name'],
-				'LANG_ISO'									=> $explanation_value['lang_iso'],
+			$this->template->assign_block_vars('explanations', [
+				'LANG_NR'											=> $i,
+				'LANG_NAME'											=> $explanation_value['lang_local_name'],
+				'LANG_ISO'											=> $explanation_value['lang_iso'],
 				'INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE'	=> $explanation['edit_message_title'],
 				'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'	=> $explanation['edit_message_text'],
-				'INTRODUCIATOR_EXPLANATION_RULES_TITLE'		=> $explanation['edit_rules_title'],
+				'INTRODUCIATOR_EXPLANATION_RULES_TITLE'	=> $explanation['edit_rules_title'],
 				'INTRODUCIATOR_EXPLANATION_RULES_TEXT'		=> $explanation['edit_rules_text'],
-			));
+			]);
 			$i++;
 		}
 
-		$s_hidden_fields = build_hidden_fields(array(
+		$s_hidden_fields = build_hidden_fields([
 			'action'				=> 'update',					// Action
-		));
+		]);
 
 		$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 	}
@@ -165,14 +165,14 @@ class acp_explanation_controller extends acp_main_controller
 		// Verify message rules texts and convert with BBCode
 		$is_explanation_enabled				= $this->request->variable('display_explanation', false);
 		$explanation_display_rules_enabled	= $this->request->variable('explanation_display_rules_enabled', false);
-		$explanation_message_array_result	= array();
+		$explanation_message_array_result	= [];
 
 		// Get All languages
-		$sql = $this->db->sql_build_query('SELECT', array(
+		$sql = $this->db->sql_build_query('SELECT', [
 			'SELECT'	=> 'l.lang_iso',
-			'FROM'		=> array(LANG_TABLE => 'l'),
+			'FROM'		=> [LANG_TABLE => 'l'],
 			'ORDER BY'	=> 'lang_id',
-		));
+		]);
 		$result = $this->db->sql_query($sql);
 
 		// Fill $explanation_message_array_result
@@ -185,29 +185,29 @@ class acp_explanation_controller extends acp_main_controller
 
 			// Replace all url by real fake urls
 			$this->helper->replace_all_by(
-				array(
+				[
 					&$explanation_message_title,
 					&$explanation_message_text,
 					&$explanation_rules_title,
 					&$explanation_rules_text,
-				),
-				array(
+				],
+				[
 					'%forum_url%'	=> 'http://aghxkfps.tld', // Make link work if placed into [url]
 					'%forum_post%'	=> 'http://dqsdfzef.tld', // Make link work if placed into [url]
-				)
+				],
 			);
 
-			$explanation_message_array = array(
+			$explanation_message_array = [
 				'message_title'		=> $explanation_message_title,
 				'message_text'		=> $explanation_message_text,
 				'rules_title'		=> $explanation_rules_title,
 				'rules_text'		=> $explanation_rules_text,
-			);
+			];
 
 			// One row result
-			$explanation_message_array_row_result = array(
+			$explanation_message_array_row_result = [
 				'lang'	=> $iso,
-			);
+			];
 			// Verify all user inputs and get uuid / bitfield / bbcode_options
 			foreach ($explanation_message_array as $key => $value) {
 				$new_uid = $bitfield = $bbcode_options = '';
@@ -216,12 +216,12 @@ class acp_explanation_controller extends acp_main_controller
 					trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 				// Merge results into array
-				$explanation_message_array_row_result = array_merge($explanation_message_array_row_result, array(
+				$explanation_message_array_row_result = array_merge($explanation_message_array_row_result, [
 					$key						=> $value,
 					$key . '_uid'				=> $new_uid,
 					$key . '_bitfield'			=> $bitfield,
 					$key . '_bbcode_options'	=> $bbcode_options,
-				));
+				]);
 			}
 			array_push($explanation_message_array_result, $explanation_message_array_row_result);
 		}

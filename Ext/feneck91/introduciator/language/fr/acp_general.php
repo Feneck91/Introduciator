@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -42,7 +42,7 @@ if (empty($lang) || !is_array($lang))
  * mode: general
  * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_GP_' pour 'INTRODUCIATOR_GENERAL_PAGES_'
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Titres
 	'INTRODUCIATOR_GP_TITLE'							=> 'Informations générales',
 	'INTRODUCIATOR_GP_TITLE_EXPLAIN'					=> 'Donne la version courante de cette extension.',
@@ -55,4 +55,4 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GP_VERSION'							=> 'Version de l’extension <strong>Présentation forcée</strong> :',
 	'INTRODUCIATOR_GP_DETAILS'							=> 'Détails',
 	'INTRODUCIATOR_GP_URL_DETAILS'						=> 'http://www.phpbb-fr.com/customise/db/extension/introduciator_2',
-));
+]);

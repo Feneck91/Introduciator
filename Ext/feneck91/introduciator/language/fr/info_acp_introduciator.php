@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 /**
  * mode: main : le nom de l'extension
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Présentation forcée',
 
 	/**
@@ -51,4 +51,4 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
 	'INTRODUCIATOR_EXPLANATION'						=> 'Explication',
 	'INTRODUCIATOR_STATISCICS'						=> 'Statistiques',
-));
+]);

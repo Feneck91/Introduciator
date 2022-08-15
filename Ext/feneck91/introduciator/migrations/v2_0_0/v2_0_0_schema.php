@@ -19,7 +19,7 @@ class v2_0_0_schema extends \phpbb\db\migration\migration
 	 */
 	public static function depends_on()
 	{
-		return array('\feneck91\introduciator\migrations\v2_0_0\v2_0_0_data');
+		return ['\feneck91\introduciator\migrations\v2_0_0\v2_0_0_data'];
 	}
 
 	/**
@@ -44,39 +44,39 @@ class v2_0_0_schema extends \phpbb\db\migration\migration
 	 */
 	public function update_schema()
 	{
-		return array(
+		return [
 			// Add Groups list table
-			'add_tables' => array(
-				$this->table_prefix . 'introduciator_groups' => array(
-					'COLUMNS' => array(
-						'fk_group'			=> array('UINT', null),
-					),
-				),
-				$this->table_prefix . 'introduciator_explanation' => array(
-					'COLUMNS'		=> array(
-						'id'							=> array('UINT', null, 'auto_increment'),
-						'lang'							=> array('VCHAR:30', ''),
-						'message_title'					=> array('MTEXT_UNI', ''),
-						'message_title_uid'				=> array('VCHAR:8', ''),
-						'message_title_bitfield'		=> array('VCHAR:255', ''),
-						'message_title_bbcode_options'	=> array('VCHAR:255', ''),
-						'message_text'					=> array('MTEXT_UNI', ''),
-						'message_text_uid'				=> array('VCHAR:8', ''),
-						'message_text_bitfield'			=> array('VCHAR:255', ''),
-						'message_text_bbcode_options'	=> array('VCHAR:255', ''),
-						'rules_title'					=> array('MTEXT_UNI', ''),
-						'rules_title_uid'				=> array('VCHAR:8', ''),
-						'rules_title_bitfield'			=> array('VCHAR:255', ''),
-						'rules_title_bbcode_options'	=> array('VCHAR:255', ''),
-						'rules_text'					=> array('MTEXT_UNI', ''),
-						'rules_text_uid'				=> array('VCHAR:8', ''),
-						'rules_text_bitfield'			=> array('VCHAR:255', ''),
-						'rules_text_bbcode_options'		=> array('VCHAR:255', ''),
-					),
+			'add_tables' => [
+				$this->table_prefix . 'introduciator_groups' => [
+					'COLUMNS' => [
+						'fk_group'			=> ['UINT', null],
+					],
+				],
+				$this->table_prefix . 'introduciator_explanation' => [
+					'COLUMNS'		=> [
+						'id'										=> ['UINT', null, 'auto_increment'],
+						'lang'									=> ['VCHAR:30', ''],
+						'message_title'						=> ['MTEXT_UNI', ''],
+						'message_title_uid'					=> ['VCHAR:8', ''],
+						'message_title_bitfield'			=> ['VCHAR:255', ''],
+						'message_title_bbcode_options'	=> ['VCHAR:255', ''],
+						'message_text'							=> ['MTEXT_UNI', ''],
+						'message_text_uid'					=> ['VCHAR:8', ''],
+						'message_text_bitfield'				=> ['VCHAR:255', ''],
+						'message_text_bbcode_options'		=> ['VCHAR:255', ''],
+						'rules_title'							=> ['MTEXT_UNI', ''],
+						'rules_title_uid'						=> ['VCHAR:8', ''],
+						'rules_title_bitfield'				=> ['VCHAR:255', ''],
+						'rules_title_bbcode_options'		=> ['VCHAR:255', ''],
+						'rules_text'							=> ['MTEXT_UNI', ''],
+						'rules_text_uid'						=> ['VCHAR:8', ''],
+						'rules_text_bitfield'				=> ['VCHAR:255', ''],
+						'rules_text_bbcode_options'		=> ['VCHAR:255', ''],
+					],
 					'PRIMARY_KEY'	=> 'id',
-				),
-			),
-		);
+				],
+			],
+		];
 	}
 
 	/**
@@ -87,12 +87,12 @@ class v2_0_0_schema extends \phpbb\db\migration\migration
 	 */
 	public function revert_schema()
 	{
-		return array(
+		return [
 			// Remove table
-			'drop_tables' => array(
+			'drop_tables' => [
 				$this->table_prefix . 'introduciator_groups',
 				$this->table_prefix . 'introduciator_explanation',
-			),
-		);
+			],
+		];
 	}
 }

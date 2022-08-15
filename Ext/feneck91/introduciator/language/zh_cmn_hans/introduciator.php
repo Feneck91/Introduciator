@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -42,7 +42,7 @@ if (empty($lang) || !is_array($lang))
 /*
 * General messages
 */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> '你的自我介绍消息还未审核，请稍后。',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> '在等待审核阶段，只允许编辑自我介绍。',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> '你不可以自我介绍一次以上！',
@@ -68,4 +68,4 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> '到用户的自我介绍',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> '用户的自我介绍等待审核',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> '此用户没有自我介绍',
-));
+]);

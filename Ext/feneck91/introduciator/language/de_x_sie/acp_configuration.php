@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -43,7 +43,7 @@ if (empty($lang) || !is_array($lang))
  * mode: configuration
  * Info: language keys are prefixed with 'INTRODUCIATOR_CP_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_'
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Titles
 	'INTRODUCIATOR_CP_TITLE'										=> 'Konfigurationseinstellungen des Introducators',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Hier können Sie die Konfiguration der Extension vornehmen.',
@@ -94,4 +94,4 @@ $lang = array_merge($lang, array(
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'										=> 'Die Konfiguration wurde aktualisiert',
-));
+]);

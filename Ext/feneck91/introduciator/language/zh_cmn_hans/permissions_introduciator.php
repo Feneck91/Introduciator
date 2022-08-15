@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,10 +39,10 @@ if (empty($lang) || !is_array($lang))
 //
 
 // Adding the permissions
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// User Permissions
 	'ACL_U_MUST_INTRODUCE'			=> '必须先发布一个自我介绍',
 
 	// Admin Permissions
 	'ACL_A_INTRODUCIATOR_MANAGE'	=> '能管理自我介绍扩展',
-));
+]);

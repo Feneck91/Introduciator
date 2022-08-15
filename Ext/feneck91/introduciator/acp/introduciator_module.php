@@ -24,12 +24,12 @@ class introduciator_module
 	/**
 	 * @var array
 	 */
-	private static $available_mode = array(
-		array('module_name' => 'general'),
-		array('module_name' => 'configuration'),
-		array('module_name' => 'explanation'),
-		array('module_name' => 'statistics'),
-	);
+	private static $available_mode = [
+		['module_name' => 'general'],
+		['module_name' => 'configuration'],
+		['module_name' => 'explanation'],
+		['module_name' => 'statistics'],
+	];
 
 	/**
 	 *  @var string
@@ -140,6 +140,6 @@ class introduciator_module
 		}
 		unset($item);
 
-		return array();
+		return [];
 	}
 }

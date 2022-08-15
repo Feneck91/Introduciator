@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -43,7 +43,7 @@ if (empty($lang) || !is_array($lang))
  * mode: explanation
  * Info: language keys are prefixed with 'INTRODUCIATOR_EP_' for 'INTRODUCIATOR_EXPLANATION_PAGES_'
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Titles
 	'INTRODUCIATOR_EP_TITLE'										=> 'Introduzione impostazioni di configurazione',
 	'INTRODUCIATOR_EP_TITLE_EXPLAIN'								=> 'Permette di configurare le impostazioni della MOD.',
@@ -85,4 +85,4 @@ $lang = array_merge($lang, array(
 
 	// Confirm box
 	'INTRODUCIATOR_EP_UPDATED'										=> '????La configurazione è stata aggiornata con successo',
-));
+]);

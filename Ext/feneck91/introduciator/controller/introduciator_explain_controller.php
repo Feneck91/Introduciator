@@ -77,11 +77,11 @@ class introduciator_explain_controller
 		$message = $this->helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 		page_header($message);
 
-		$this->template->set_filenames(array(
+		$this->template->set_filenames([
 			'body' => '@feneck91_introduciator/introduciator_explain.html',
-		));
+		]);
 
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'S_EXT_ACTIVATED'					=> true,
 			'INTRODUCIATOR_EXT_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
 			'INTRODUCIATOR_EXT_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
@@ -91,6 +91,6 @@ class introduciator_explain_controller
 			'INTRODUCIATOR_EXT_RULES_TEXT'		=> $params['explanation_rules_text'],
 			'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
 			'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
-		));
+		]);
 	}
 }

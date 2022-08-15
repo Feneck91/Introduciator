@@ -73,26 +73,26 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	static public function getSubscribedEvents()
 	{
-		return array(
-			'core.user_setup'											=> 'load_language_on_setup',					// Load languages files
-			'core.viewtopic_modify_quick_reply_template_vars'			=> 'on_before_quickreply_displayed',			// Hide quick reply if user is not allowed to post
-			'core.posting_modify_template_vars'							=> 'on_displaying_posting_screen',				// Verify if the posting is allowed or not; display message if not
-			'core.posting_modify_submit_post_before'					=> 'on_submit_post_before',						// When user post a message, verify the introduce has been done
-			'core.posting_modify_submit_post_after'						=> 'on_submit_post_after',						// When user post a message, if the post is an introduce and must be approved, indicate it to the user
-			'core.submit_post_end'										=> 'on_submit_post_end',						// Change the url to go to if the user edit it's own unapproved introduction
-			'core.viewforum_get_topic_ids_data'							=> 'on_get_topic_ids',							// Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce
-			'core.viewforum_modify_topicrow'							=> 'on_display_unapproved_question_mark',		// Allow displaying '?' into the topic list when the user see its own introduce
-			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
-			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',					// Allow phpBB to retrieve a topic for the user that post it into introduce
-			'core.viewtopic_modify_post_row'							=> 'on_viewtopic_modify_post_row',				// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
-			'core.posting_modify_row_data'								=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce. Added in 3.2.8 version of phpBB: https://tracker.phpbb.com/browse/PHPBB3-15946
+		return [
+			'core.user_setup'															=> 'load_language_on_setup',					// Load languages files
+			'core.viewtopic_modify_quick_reply_template_vars'				=> 'on_before_quickreply_displayed',		// Hide quick reply if user is not allowed to post
+			'core.posting_modify_template_vars'									=> 'on_displaying_posting_screen',			// Verify if the posting is allowed or not; display message if not
+			'core.posting_modify_submit_post_before'							=> 'on_submit_post_before',					// When user post a message, verify the introduce has been done
+			'core.posting_modify_submit_post_after'							=> 'on_submit_post_after',						// When user post a message, if the post is an introduce and must be approved, indicate it to the user
+			'core.submit_post_end'													=> 'on_submit_post_end',						// Change the url to go to if the user edit it's own unapproved introduction
+			'core.viewforum_get_topic_ids_data'									=> 'on_get_topic_ids',							// Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce
+			'core.viewforum_modify_topicrow'										=> 'on_display_unapproved_question_mark',	// Allow displaying '?' into the topic list when the user see its own introduce
+			'core.phpbb_content_visibility_is_visible'						=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
+			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',				// Allow phpBB to retrieve a topic for the user that post it into introduce
+			'core.viewtopic_modify_post_row'										=> 'on_viewtopic_modify_post_row',			// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
+			'core.posting_modify_row_data'										=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce. Added in 3.2.8 version of phpBB: https://tracker.phpbb.com/browse/PHPBB3-15946
 
 			//=============================================
 			// From here, this is events for template html
 			//=============================================
-			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',				// Prepare data to be displayed in viewtopic
-			'core.memberlist_prepare_profile_data'								=> 'on_display_profile_data',					// Prepare data to be displayed in several pages
-		);
+			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',		// Prepare data to be displayed in viewtopic
+			'core.memberlist_prepare_profile_data'								=> 'on_display_profile_data',				// Prepare data to be displayed in several pages
+		];
 	}
 
 	/**
@@ -106,10 +106,10 @@ class introduciator_listener implements EventSubscriberInterface
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
+		$lang_set_ext[] = [
 			'ext_name' => 'feneck91/introduciator',
-			'lang_set' => array('introduciator'),
-		);
+			'lang_set' => ['introduciator'],
+		];
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
@@ -304,12 +304,12 @@ class introduciator_listener implements EventSubscriberInterface
 
 		// Prepare data to display link to suer's introduce
 		$data_introduciator = $event['user_poster_data']['datas_introduciator'];
-		$event['post_row'] += array(
+		$event['post_row'] += [
 			'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
 			'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
 			'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
 			'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
-		);
+		];
 	}
 
 	/**
@@ -363,13 +363,13 @@ class introduciator_listener implements EventSubscriberInterface
 		$data = $event['data'];
 		$data_introduciator = $this->helper->introduciator_get_user_infos($data['user_id'], $data['username']);
 
-		$event['template_data'] += array(
+		$event['template_data'] += [
 			'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
 			'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
 			'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
 			'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
 			'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
-		);
+		];
 
 		return $event;
 	}

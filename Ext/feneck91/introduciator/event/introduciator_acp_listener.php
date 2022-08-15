@@ -26,9 +26,9 @@ class introduciator_acp_listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.permissions'		=> 'add_permissions',
-		);
+		];
 	}
 
 	/**
@@ -41,7 +41,7 @@ class introduciator_acp_listener implements EventSubscriberInterface
 	 */
 	public function add_permissions($event)
 	{
-		$event->update_subarray('permissions', 'a_introduciator_manage', array('lang' => 'ACL_A_INTRODUCIATOR_MANAGE', 'cat' => 'misc'));
-		$event->update_subarray('permissions', 'u_must_introduce', array('lang' => 'ACL_U_MUST_INTRODUCE', 'cat' => 'post'));
+		$event->update_subarray('permissions', 'a_introduciator_manage', ['lang' => 'ACL_A_INTRODUCIATOR_MANAGE', 'cat' => 'misc']);
+		$event->update_subarray('permissions', 'u_must_introduce', ['lang' => 'ACL_U_MUST_INTRODUCE', 'cat' => 'post']);
 	}
 }

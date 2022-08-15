@@ -19,7 +19,7 @@ class v2_0_0_data extends \phpbb\db\migration\migration
 	 */
 	public static function depends_on()
 	{
-		return array('\phpbb\db\migration\data\v320\v320rc2');
+		return ['\phpbb\db\migration\data\v320\v320rc2');
 	}
 
 	/**
@@ -40,60 +40,60 @@ class v2_0_0_data extends \phpbb\db\migration\migration
 	 */
 	public function update_data()
 	{
-		return array(
+		return [
 			// Introduciator Settings
-			array('config.add', array('introduciator_posting_approval_level', 0)),
-			array('config.add', array('introduciator_allow', '0')),
-			array('config.add', array('introduciator_fk_forum_id', 0)),
-			array('config.add', array('introduciator_is_introduction_mandatory', true)),
-			array('config.add', array('introduciator_is_check_delete_first_post', true)),
-			array('config.add', array('introduciator_is_explanation_enabled', false)),
-			array('config.add', array('introduciator_is_use_permissions', true)),
-			array('config.add', array('introduciator_is_include_groups', true)),
-			array('config.add', array('introduciator_ignored_users', '')),
-			array('config.add', array('introduciator_is_explanation_display_rules', true)),
+			['config.add', ['introduciator_posting_approval_level', 0]],
+			['config.add', ['introduciator_allow', '0']],
+			['config.add', ['introduciator_fk_forum_id', 0]],
+			['config.add', ['introduciator_is_introduction_mandatory', true]],
+			['config.add', ['introduciator_is_check_delete_first_post', true]],
+			['config.add', ['introduciator_is_explanation_enabled', false]],
+			['config.add', ['introduciator_is_use_permissions', true]],
+			['config.add', ['introduciator_is_include_groups', true]],
+			['config.add', ['introduciator_ignored_users', '']],
+			['config.add', ['introduciator_is_explanation_display_rules', true]],
 
 			// Misc Settings
-			array('config.add', array('introduciator_install_date', time())),
+			['config.add', ['introduciator_install_date', time()]],
 
 			// Add admin permissions
-			array('permission.add', array('a_introduciator_manage', true)),
+			['permission.add', ['a_introduciator_manage', true]],
 
 			// Add user permissions
-			array('permission.add', array('u_must_introduce', true)),
+			['permission.add', ['u_must_introduce', true]],
 
 			// Set permissions users
-			array('permission.permission_set', array('ADMINISTRATORS', 'u_must_introduce', 'group', false)), // Set to never for adminitrators
-			array('permission.permission_set', array('GLOBAL_MODERATORS', 'u_must_introduce', 'group')),
-			array('permission.permission_set', array('REGISTERED', 'u_must_introduce', 'group')),
-			array('permission.permission_set', array('NEWLY_REGISTERED', 'u_must_introduce', 'group')),
+			['permission.permission_set', ['ADMINISTRATORS', 'u_must_introduce', 'group', false]], // Set to never for adminitrators
+			['permission.permission_set', ['GLOBAL_MODERATORS', 'u_must_introduce', 'group']],
+			['permission.permission_set', ['REGISTERED', 'u_must_introduce', 'group']],
+			['permission.permission_set', ['NEWLY_REGISTERED', 'u_must_introduce', 'group']],
 
 			// Set permissions administration
-			array('permission.permission_set', array('ADMINISTRATORS', 'a_introduciator_manage', 'group')),
+			['permission.permission_set', ['ADMINISTRATORS', 'a_introduciator_manage', 'group']],
 
 			// Global user role permissions for user mask
-			array('permission.permission_set', array('ROLE_USER_STANDARD', 'u_must_introduce', 'role')),
-			array('permission.permission_set', array('ROLE_USER_LIMITED', 'u_must_introduce', 'role')),
-			array('permission.permission_unset', array('ROLE_USER_FULL', 'u_must_introduce', 'role')),	// Set to no for adminitrators
-			array('permission.permission_set', array('ROLE_USER_NOPM', 'u_must_introduce', 'role')),
-			array('permission.permission_set', array('ROLE_USER_NOAVATAR', 'u_must_introduce', 'role')),
-			array('permission.permission_set', array('ROLE_USER_NEW_MEMBER', 'u_must_introduce', 'role')),
+			['permission.permission_set', ['ROLE_USER_STANDARD', 'u_must_introduce', 'role']],
+			['permission.permission_set', ['ROLE_USER_LIMITED', 'u_must_introduce', 'role']],
+			['permission.permission_unset', ['ROLE_USER_FULL', 'u_must_introduce', 'role']],	// Set to no for adminitrators
+			['permission.permission_set', ['ROLE_USER_NOPM', 'u_must_introduce', 'role']],
+			['permission.permission_set', ['ROLE_USER_NOAVATAR', 'u_must_introduce', 'role']],
+			['permission.permission_set', ['ROLE_USER_NEW_MEMBER', 'u_must_introduce', 'role']],
 
 			// Global admin role permissions for admin
-			array('permission.permission_set', array('ROLE_ADMIN_STANDARD', 'a_introduciator_manage', 'role')),
-			array('permission.permission_set', array('ROLE_ADMIN_FULL', 'a_introduciator_manage', 'role')),
+			['permission.permission_set', ['ROLE_ADMIN_STANDARD', 'a_introduciator_manage', 'role']],
+			['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_introduciator_manage', 'role']],
 
 			//===============================================================================
 			// Add the module in ACP under the customise tab
 
 			// Add a new category named ACP_INTRODUCIATOR_EXTENSION to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
-			array('module.add', array(
+			['module.add', [
 				'acp',
 				'ACP_CAT_DOT_MODS',
 				'ACP_INTRODUCIATOR_EXTENSION',
-				array(
+				[
 					'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
-					'modes'	  			=> array(
+					'modes'	  			=> [
 						//---------------------------------------------------------------------
 						// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 						'general',
@@ -102,12 +102,12 @@ class v2_0_0_data extends \phpbb\db\migration\migration
 						'statistics',
 						// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 						//---------------------------------------------------------------------
-					),
-				),
-			)),
+					],
+				],
+			]],
 
 			// Add the module in ACP under the customise tab
 			//===============================================================================
-		);
+		];
 	}
 }

@@ -129,13 +129,13 @@ class acp_statistics_controller extends acp_main_controller
 	 */
 	private function do_empty_action()
 	{
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'U_ACTION'				=> $this->u_action,
-		));
+		]);
 
-		$s_hidden_fields = build_hidden_fields(array(
+		$s_hidden_fields = build_hidden_fields([
 			'action'				=> 'check', // Action
-		));
+		]);
 
 		$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 	}
@@ -154,16 +154,16 @@ class acp_statistics_controller extends acp_main_controller
 		//
 		// Compute number of introductions
 		//
-		$sql = $this->db->sql_build_query('SELECT', array(
+		$sql = $this->db->sql_build_query('SELECT', [
 			'SELECT'	=> 'COUNT(topic_id)',
-			'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
+			'FROM'		=> [TOPICS_TABLE => TOPICS_TABLE],
 			'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
-		));
+		]);
 		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
 		$nb_introductions = reset($row);
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'INTRODUCTIONS_NUMBER' 	=> $nb_introductions,
-		));
+		]);
 
 		//
 		// Compute multiple introduction
@@ -172,15 +172,15 @@ class acp_statistics_controller extends acp_main_controller
 		//
 		// Here, we must check database to see if some user have more than one introduction
 		// 1> Get the ids of users that post more than one introduce
-		$sql = $this->db->sql_build_query('SELECT', array(
+		$sql = $this->db->sql_build_query('SELECT', [
 			'SELECT'	=> 'topic_poster, topic_first_poster_name',
-			'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
+			'FROM'		=> [TOPICS_TABLE => TOPICS_TABLE],
 			'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . '.forum_id = ' . (int) $params['fk_forum_id'] . ' AND ' . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
 			'GROUP_BY'	=> 'topic_poster HAVING count(1) > 1',
-		));
+		]);
 
 		// Record all users that have more than one posted intruction and MUST introduce (not ignored)
-		$users_ids = array();
+		$users_ids = [];
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result)) {
 			if ($this->helper->is_user_must_introduce_himself((int) $row['topic_poster'], null, $row['topic_first_poster_name'])) {
@@ -195,40 +195,40 @@ class acp_statistics_controller extends acp_main_controller
 
 			for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index) {
 				// Here, no more need to test if number of introduce > 1 because it is already done just before
-				$sql = $this->db->sql_build_query('SELECT', array(
+				$sql = $this->db->sql_build_query('SELECT', [
 					'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type",
-					'FROM'      => array(TOPICS_TABLE => TOPICS_TABLE),
+					'FROM'      => [TOPICS_TABLE => TOPICS_TABLE],
 					'WHERE'		=> "forum_id = {$params['fk_forum_id']} AND topic_poster = {$users_ids[$index]} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
 					'ORDER_BY'	=> 'topic_time',
-				));
+				]);
 
 				$result = $this->db->sql_query($sql);
 				$first_row = true;
 				while ($row = $this->db->sql_fetchrow($result)) {
 					$link_to_introduce = $this->helper->get_url_to_post($params['fk_forum_id'], $row['topic_id'], $row['topic_first_post_id']);
 
-					$this->template->assign_block_vars('introduces', array(
+					$this->template->assign_block_vars('introduces', [
 						'FIRST_ROW_SPAN'	=> $first_row,
 						'ROW_SPAN'			=> $result->num_rows,
 						'POSTER'			=> get_username_string('full', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
 						'DATE'				=> $this->user->format_date($row['topic_time']),
 						'INTRODUCE'			=> "<a href=\"{$link_to_introduce}\">{$row['topic_title']}</a>",
 						'ROW_NUMBER'		=> $index - $start + 1,
-					));
+					]);
 					$first_row = false;
 				}
 				$this->db->sql_freeresult($result);
 			}
-			$this->template->assign_vars(array(
+			$this->template->assign_vars([
 				'S_DISPLAY_INTRODUCES'		=> ($nb_several_introduce > 0) ? true : false,
 				'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start),
-			));
+			]);
 			$this->pagination->generate_template_pagination($this->u_action . "&amp;action=otherpage", 'pagination', 'start', $nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start);
 		}
 
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'U_ACTION'					=> $this->u_action,
 			'S_CHECK_DATABASE'			=> true,
-		));
+		]);
 	}
 }

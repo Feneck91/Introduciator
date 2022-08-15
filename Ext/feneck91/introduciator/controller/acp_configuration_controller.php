@@ -121,7 +121,7 @@ class acp_configuration_controller extends acp_main_controller
 	private function do_empty_action()
 	{
 		$params = $this->helper->introduciator_getparams(true);
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'INTRODUCIATOR_INTRODUCTION_MANDATORY'									=> $params['is_introduction_mandatory'],
 			'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
 			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
@@ -132,7 +132,7 @@ class acp_configuration_controller extends acp_main_controller
 			'INTRODUCIATOR_ITEM_IGNORED_USERS'										=> $params['ignored_users'],
 			'INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP'								=> $params['is_use_permissions'] ? "none" : "block",
 			'U_ACTION'																=> $this->u_action,
-		));
+		]);
 
 		// Add all forums
 		$this->add_all_forums($params['fk_forum_id'], 0, 0);
@@ -140,9 +140,9 @@ class acp_configuration_controller extends acp_main_controller
 		// Add all groups
 		$this->add_all_groups();
 
-		$s_hidden_fields = build_hidden_fields(array(
+		$s_hidden_fields = build_hidden_fields([
 			'action'				=> 'update',					// Action
-		));
+		]);
 
 		$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 	}
@@ -164,7 +164,7 @@ class acp_configuration_controller extends acp_main_controller
 		$posting_approval_level						= $this->request->variable('posting_approval_level', introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
 		$is_use_permissions							= $this->request->variable('is_use_permissions', true);
 		$is_include_groups							= $this->request->variable('include_groups', true);
-		$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
+		$groups										= $this->request->variable('groups_choices', ['' => 0]); // Array of IDs of selected groups
 		$ignored_users								= substr($this->request->variable('ignored_users', ''), 0, 255);
 
 		if ($fk_forum_id === 0) {
@@ -189,10 +189,10 @@ class acp_configuration_controller extends acp_main_controller
 		$this->db->sql_query($sql);
 
 		// 2> Add all entries
-		$values = array();
+		$values = [];
 		foreach ($groups as $group) {
 			// Create elements to add by row
-			$values[] = array('fk_group' => (int) $group);
+			$values[] = ['fk_group' => (int) $group];
 		}
 
 		// Create and execute SQL request
@@ -219,13 +219,13 @@ class acp_configuration_controller extends acp_main_controller
 	{
 		if ($id_parent === 0) {
 			// Add deactivation item
-			$this->template->assign_block_vars('forums', array(
+			$this->template->assign_block_vars('forums', [
 				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'),
 				'FORUM_ID'		=> 0,
 				'SELECTED'		=> ($fk_selected_forum_id === 0),
 				'CAN_SELECT'	=> true,
 				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'),
-			));
+			]);
 		}
 
 		// Add all forums
@@ -235,13 +235,13 @@ class acp_configuration_controller extends acp_main_controller
 
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result)) {
-			$this->template->assign_block_vars('forums', array(
+			$this->template->assign_block_vars('forums', [
 				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
 				'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
 				'CAN_SELECT'	=> ((int) $row['forum_type']) == FORUM_POST,
 				'TOOLTIP'		=> $row['forum_desc'],
-			));
+			]);
 			$this->add_all_forums($fk_selected_forum_id, $row['forum_id'], $level + 1);
 		}
 		$this->db->sql_freeresult($result);
@@ -266,12 +266,12 @@ class acp_configuration_controller extends acp_main_controller
 
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result)) {
-			$this->template->assign_block_vars('groups', array(
+			$this->template->assign_block_vars('groups', [
 				'NAME'		=> get_group_name($row['group_id']),
 				'ID'		=> (int) $row['group_id'],
 				'SELECTED'	=> $this->helper->is_group_selected($row['group_id']),
 				'TOOLTIP'	=> $row['group_desc'],
-			));
+			]);
 		}
 		$this->db->sql_freeresult($result);
 	}

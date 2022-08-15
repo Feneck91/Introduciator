@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 /*
 * General messages
 */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Your introduction message is pending approval, please wait.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only the editing is allowed.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'You are not allowed to introduce yourself more than once!',
@@ -67,4 +67,4 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Go to member’s introduction',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'The member’s introduction is pending approval',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'No introduction avalaible for this member',
-));
+]);

@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -42,7 +42,7 @@ if (empty($lang) || !is_array($lang))
  * mode: statistics
  * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_ST_' pour 'INTRODUCIATOR_STATISTICS_PAGES_'
  */
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// Titres
 	'INTRODUCIATOR_ST_TITLE'						=> 'Statistiques et vérifications sur les présentations des membres',
 	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Permet d’afficher les informations de la base de données :
@@ -64,4 +64,4 @@ $lang = array_merge($lang, array(
 
 	// Boutons
 	'INTRODUCIATOR_ST_CHECK'						=> 'Vérifier',
-));
+]);
