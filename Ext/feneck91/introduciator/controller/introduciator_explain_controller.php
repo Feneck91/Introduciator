@@ -11,6 +11,7 @@
 namespace feneck91\introduciator\controller;
 
 use feneck91\introduciator\helper\introduciator_helper;
+use phpbb\controller\helper;
 use phpbb\config\config;
 use phpbb\template\template;
 use phpbb\user;
@@ -26,6 +27,9 @@ class introduciator_explain_controller
 	/**
 	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
+	protected $introduciator_helper;
+
+	/** @var \phpbb\controller\helper */
 	protected $helper;
 
 	/**
@@ -53,8 +57,9 @@ class introduciator_explain_controller
 	 *
 	 * @access public
 	 */
-	public function __construct(introduciator_helper $helper, config $config, template $template, user $user)
+	public function __construct(introduciator_helper $introduciator_helper, helper $helper, config $config, template $template, user $user)
 	{
+		$this->introduciator_helper = $introduciator_helper;
 		$this->helper = $helper;
 		$this->config = $config;
 		$this->template = $template;
@@ -66,20 +71,16 @@ class introduciator_explain_controller
 		// If user not connected, go to login page
 		if ($this->user->data['user_id'] == ANONYMOUS) {
 			// In case of introduciator_getparams is not called, I must load the introduciator language file
-			$this->helper->load_language_if_needed();
-			login_box('', $this->helper->get_language()->lang('LOGIN'));
+			$this->introduciator_helper->load_language_if_needed();
+			login_box('', $this->introduciator_helper->get_language()->lang('LOGIN'));
 		}
 
 		// Title message
 		// Load extension configuration + language
-		$params = $this->helper->introduciator_getparams(false);
+		$params = $this->introduciator_helper->introduciator_getparams(false);
 
-		$message = $this->helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
+		$message = $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 		page_header($message);
-
-		$this->template->set_filenames([
-			'body' => '@feneck91_introduciator/introduciator_explain.html',
-		]);
 
 		$this->template->assign_vars([
 			'S_EXT_ACTIVATED'							=> true,
@@ -92,5 +93,7 @@ class introduciator_explain_controller
 			'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
 			'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
 		]);
+
+		return $this->helper->render('introduciator_explain.html');
 	}
 }

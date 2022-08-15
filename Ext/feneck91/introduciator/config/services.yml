@@ -36,6 +36,7 @@ services:
         class: feneck91\introduciator\controller\introduciator_explain_controller
         arguments:
             - '@feneck91.introduciator.helper'
+            - '@controller.helper'
             - '@config'
             - '@template'
             - '@user'
