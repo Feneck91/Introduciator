@@ -51,8 +51,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
 																			<br/>When this feature is not enabled, all other options remain active.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions:',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST'							=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions:',
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST_EXPLAIN'					=> 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
 																			<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
 																			<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'The forum where the user must introduce himself/herself:',

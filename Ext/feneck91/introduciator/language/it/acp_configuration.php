@@ -52,8 +52,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Force the user to introduce himself:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
 																			xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx <br/>Il this feature is not enabled, all other options remain active.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Autorizzo il MOD per verificare l’eliminazione del primo post introduzione nel forum per le presentazioni:',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'Quando questa opzione è abilitata, il MOD impedisce il primo post in qualsiasi argomento nel forum per le presentazioni dall’eliminazione.
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST'							=> 'Autorizzo il MOD per verificare l’eliminazione del primo post introduzione nel forum per le presentazioni:',
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST_EXPLAIN'					=> 'Quando questa opzione è abilitata, il MOD impedisce il primo post in qualsiasi argomento nel forum per le presentazioni dall’eliminazione.
 																			<br/>Anche i moderatori o gli amministratori non hanno questo permesso per essere sicuri che il primo messaggio in qualsiasi argomento introduttivo è davvero l’introduzione di un membro del forum. Tuttavia, rimane possibile cancellare l’argomento se i permessi lo consentono.
 																			<br/>È possibile disattivare questa opzione, ma in questo caso un utente sarà in grado di avere diverse presentazioni. L’attivazione di questa opzione è preferibile.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'Il forum in cui l’utente deve introdurre se stesso/se stessa:',

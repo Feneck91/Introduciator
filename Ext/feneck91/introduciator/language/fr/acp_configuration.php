@@ -51,8 +51,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Forcer l’utilisateur à se présenter :',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Quand cet option est activée, l’extension force l’utilisateur à poster sa propre présentation avant d’être autorisé à poster dans les autres sujets.
 																			<br/>Lorsque cette fonctionalité n’est pas activée, toutes les autres options restent actives.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Autorise l’extension à vérifier la suppression du premier message d’un sujet dans le forum de présentation :',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'Lorsque cette option est activée, l’extension empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST'							=> 'Autorise l’extension à vérifier la suppression du premier message d’un sujet dans le forum de présentation :',
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST_EXPLAIN'					=> 'Lorsque cette option est activée, l’extension empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
 																			<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.
 																			<br/>Vous pouvez désactiver cette option mais dans ce cas un membre peut avoir plusieurs présentations. Il est recommandé d’activer cette option.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'Choix du forum où l’utilisateur doit se présenter :',

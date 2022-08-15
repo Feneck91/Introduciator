@@ -52,8 +52,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Der Benutzer wird gezwungen, sich vorzustellen:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird der Benutzer gezwungen, seine eigene Vorstellung zu posten, bevor er in anderen Themen posten darf.
 																			<br/>Wenn diese Funktion nicht aktiviert ist, bleiben alle anderen Optionen aktiv.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Die Löschung des ersten Vorstellungsbeitrag im Forum für Vorstellungen wird überprüft:',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird verhindert, dass der erste Beitrag in einem beliebigen Thema im Forum für Vorstellungen gelöscht werden kann.
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST'							=> 'Die Löschung des ersten Vorstellungsbeitrag im Forum für Vorstellungen wird überprüft:',
+	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird verhindert, dass der erste Beitrag in einem beliebigen Thema im Forum für Vorstellungen gelöscht werden kann.
 																			<br/>Selbst Moderatoren oder Administratoren haben dazu keine Berechtigung, um sicher zu sein, dass der erste Beitrag in einem vorstellenden Thema wirklich die Vorstellung eines Forenmitglieds ist. Es ist jedoch weiterhin möglich, das Thema zu löschen, wenn die Berechtigungen dies zulassen.
 																			<br/>Sie können diese Option deaktivieren, aber in diesem Fall kann ein Benutzer mehrere Vorstellungen haben. Die Aktivierung dieser Option ist zu empfehlen.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'Das Forum, in dem der Benutzer sich vorstellen muss:',
