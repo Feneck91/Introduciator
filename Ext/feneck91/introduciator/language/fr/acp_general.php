@@ -1,4 +1,5 @@
 <?php
+
 /**
  * info_acp_introduciator.php [Français]
  *
@@ -9,15 +10,13 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
-if (!defined('IN_PHPBB'))
-{
+ * DO NOT CHANGE
+ */
+if (!defined('IN_PHPBB')) {
 	exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
+if (empty($lang) || !is_array($lang)) {
 	$lang = array();
 }
 
@@ -38,9 +37,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: general
-* Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_GP_' pour 'INTRODUCIATOR_GENERAL_PAGES_'
-*/
+ * mode: general
+ * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_GP_' pour 'INTRODUCIATOR_GENERAL_PAGES_'
+ */
 $lang = array_merge($lang, array(
 	// Titres
 	'INTRODUCIATOR_GP_TITLE'							=> 'Informations générales',

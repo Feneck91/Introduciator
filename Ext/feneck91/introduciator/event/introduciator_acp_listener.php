@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension

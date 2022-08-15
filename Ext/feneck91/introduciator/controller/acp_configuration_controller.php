@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension
@@ -72,7 +73,7 @@ class acp_configuration_controller extends acp_main_controller
 			$user,
 			$dbconfig
 		);
- 	}
+	}
 
 	/**
 	 * Manage the page.
@@ -90,27 +91,22 @@ class acp_configuration_controller extends acp_main_controller
 	public function do_action($mode, $action)
 	{
 		// If no action, display configuration
-		if (empty($action))
-		{
+		if (empty($action)) {
 			// no action or update current
 			$this->do_empty_action();
-		}
-		else
-		{
+		} else {
 			// Action !
-			if (!check_form_key(introduciator_module::form_key))
-			{
+			if (!check_form_key(introduciator_module::form_key)) {
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
-			switch ($action)
-			{
-				case 'update' :
+			switch ($action) {
+				case 'update':
 					$this->do_update_action();
-				break;
+					break;
 
 				default:
 					trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
-				break;
+					break;
 			}
 		}
 	}
@@ -171,13 +167,11 @@ class acp_configuration_controller extends acp_main_controller
 		$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
 		$ignored_users								= substr($this->request->variable('ignored_users', ''), 0, 255);
 
-		if ($fk_forum_id === 0)
-		{
+		if ($fk_forum_id === 0) {
 			trigger_error($this->language->lang('INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
-		if ($posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
-		{	// Verify the level approval values => No correct value ? Set to INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL
+		if ($posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT) {	// Verify the level approval values => No correct value ? Set to INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL
 			$posting_approval_level = introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
 		}
 
@@ -196,8 +190,7 @@ class acp_configuration_controller extends acp_main_controller
 
 		// 2> Add all entries
 		$values = array();
-		foreach ($groups as $group)
-		{
+		foreach ($groups as $group) {
 			// Create elements to add by row
 			$values[] = array('fk_group' => (int) $group);
 		}
@@ -224,8 +217,7 @@ class acp_configuration_controller extends acp_main_controller
 	 */
 	private function add_all_forums($fk_selected_forum_id, $id_parent, $level)
 	{
-		if ($id_parent === 0)
-		{
+		if ($id_parent === 0) {
 			// Add deactivation item
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'),
@@ -242,8 +234,7 @@ class acp_configuration_controller extends acp_main_controller
 				WHERE parent_id = ' . (int) $id_parent;
 
 		$result = $this->db->sql_query($sql);
-		while ($row = $this->db->sql_fetchrow($result))
-		{
+		while ($row = $this->db->sql_fetchrow($result)) {
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
@@ -266,8 +257,7 @@ class acp_configuration_controller extends acp_main_controller
 	 */
 	private function add_all_groups()
 	{
-		if (!function_exists('get_group_name'))
-		{
+		if (!function_exists('get_group_name')) {
 			include($this->root_path . 'includes/functions_user.' . $this->php_ext);
 		}
 
@@ -275,8 +265,7 @@ class acp_configuration_controller extends acp_main_controller
 			FROM ' . GROUPS_TABLE;
 
 		$result = $this->db->sql_query($sql);
-		while ($row = $this->db->sql_fetchrow($result))
-		{
+		while ($row = $this->db->sql_fetchrow($result)) {
 			$this->template->assign_block_vars('groups', array(
 				'NAME'		=> get_group_name($row['group_id']),
 				'ID'		=> (int) $row['group_id'],

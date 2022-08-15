@@ -3,38 +3,38 @@
 
 <br/>
 <div class="panel">
-{% if S_EXT_ACTIVATED %}
-	<div class="inner" >
-		<div class="content">
-			<br/>
-			<h2 class="introduciator_explain">{{ lang('INTRODUCIATOR_EXT_EXPLAIN_TITLE') }}</h2>
-			<br/>
-			<p>{{ lang('INTRODUCIATOR_EXT_EXPLAIN_TEXT') }}</p>
-		</div>
-	</div>
-	{% if S_RULES_ACTIVATED %}
-	<div class="rules">
-		<div class="inner">
-		{% if S_RULES_TITLE_ACTIVATED %}
-			{{ lang('INTRODUCIATOR_EXT_RULES_TITLE') }}
-			<br/>
-		{% endif %}
-			<br/>
-			<p>
-				{{ lang('INTRODUCIATOR_EXT_RULES_TEXT') }}
-				<br/>
-			</p>
-		</div>
-	</div>
-	<br/>
-	{% else %}
-	<br/>
-	{% endif %}
-	<br/>
-	<span style="text-align: center">{{ lang('INTRODUCIATOR_EXT_LINK_GOTO_FORUM') }}</span><br/>
-	<span style="text-align: center">{{ lang('INTRODUCIATOR_EXT_LINK_POST_FORUM') }}</span><br/>
-	<br/>
-{% endif %}
+  {% if S_EXT_ACTIVATED %}
+    <div class="inner">
+      <div class="content">
+        <br/>
+        <h2 class="introduciator_explain">{{ lang('INTRODUCIATOR_EXT_EXPLAIN_TITLE') }}</h2>
+        <br/>
+        <p>{{ lang('INTRODUCIATOR_EXT_EXPLAIN_TEXT') }}</p>
+      </div>
+    </div>
+    {% if S_RULES_ACTIVATED %}
+      <div class="rules">
+        <div class="inner">
+          {% if S_RULES_TITLE_ACTIVATED %}
+            {{ lang('INTRODUCIATOR_EXT_RULES_TITLE') }}
+            <br/>
+          {% endif %}
+          <br/>
+          <p>
+            {{ lang('INTRODUCIATOR_EXT_RULES_TEXT') }}
+            <br/>
+          </p>
+        </div>
+      </div>
+      <br/>
+    {% else %}
+      <br/>
+    {% endif %}
+    <br/>
+    <span style="text-align: center">{{ lang('INTRODUCIATOR_EXT_LINK_GOTO_FORUM') }}</span><br/>
+    <span style="text-align: center">{{ lang('INTRODUCIATOR_EXT_LINK_POST_FORUM') }}</span><br/>
+    <br/>
+  {% endif %}
 </div>
 
 {% INCLUDE 'jumpbox.html' %}

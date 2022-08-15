@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension
@@ -122,8 +123,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_before_quickreply_displayed($event)
 	{
-		if ($event['tpl_ary']['S_QUICK_REPLY'] === true && false === $this->helper->introduciator_verify_posting('reply', $event['forum_id'], 0, null, false))
-		{	// Quick Reply should be show and is not allowed, hide it !
+		if ($event['tpl_ary']['S_QUICK_REPLY'] === true && false === $this->helper->introduciator_verify_posting('reply', $event['forum_id'], 0, null, false)) {	// Quick Reply should be show and is not allowed, hide it !
 			$tpl_ary = $event['tpl_ary'];
 			$tpl_ary['S_QUICK_REPLY'] = false;
 			$event['tpl_ary'] = $tpl_ary;
@@ -155,11 +155,9 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_submit_post_before($event)
 	{
-		if ($this->helper->introduciator_verify_posting($event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true))
-		{	// Posting is allowed
+		if ($this->helper->introduciator_verify_posting($event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true)) {	// Posting is allowed
 			$introduciator_posting_must_be_approved = $this->helper->introduciator_is_posting_must_be_approved($event['mode'], $event['data']['forum_id']);
-			if ($introduciator_posting_must_be_approved)
-			{	// If posting should not be approved, let $data['force_approved_state'] unchanged (in case of another extension has modified it)
+			if ($introduciator_posting_must_be_approved) {	// If posting should not be approved, let $data['force_approved_state'] unchanged (in case of another extension has modified it)
 				$data = $event['data'];
 				$data['force_visibility'] = ITEM_UNAPPROVED;    // Force approval
 				$data['introduciator_force_unapproved'] = $this->helper->introduciator_get_posting_approval_level($event['mode'], $event['data']['forum_id']); // Force approval
@@ -181,12 +179,10 @@ class introduciator_listener implements EventSubscriberInterface
 	public function on_submit_post_after($event)
 	{
 		$data = $event['data'];
-		if (isset($data['introduciator_force_unapproved']))
-		{
+		if (isset($data['introduciator_force_unapproved'])) {
 			meta_refresh(20, $event['redirect_url']); // More time to read
-			$message = $this->user->lang['POST_STORED_MOD'] . ' '. $this->user->lang['POST_APPROVAL_NOTIFY'];
-			if ($data['introduciator_force_unapproved'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
-			{	// Add more explanation: the user can modify his introduce
+			$message = $this->user->lang['POST_STORED_MOD'] . ' ' . $this->user->lang['POST_APPROVAL_NOTIFY'];
+			if ($data['introduciator_force_unapproved'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT) {	// Add more explanation: the user can modify his introduce
 				$this->helper->load_language_if_needed();
 				$message .= $this->helper->get_language()->lang('INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY');
 			}
@@ -207,20 +203,18 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_submit_post_end($event)
 	{
-		switch ($event['mode'])
-		{
+		switch ($event['mode']) {
 			case 'edit_first_post':
 			case 'edit_last_post':
 			case 'edit':
-				if ($this->helper->introduction_is_unapproved_topic($event['data']['forum_id'], $event['data']['topic_id'], false))
-				{
+				if ($this->helper->introduction_is_unapproved_topic($event['data']['forum_id'], $event['data']['topic_id'], false)) {
 					$params = '&amp;t=' . $event['data']['topic_id'];
 					$params .= '&amp;p=' . $event['data']['post_id'];
 					$add_anchor = '#p' . $event['data']['post_id'];
 					$url = "{$this->root_path}viewtopic.{$this->php_ext}";
 					$event['url'] = append_sid($url, 'f=' . $event['data']['forum_id'] . $params) . $add_anchor;
 				}
-			break;
+				break;
 		}
 	}
 
@@ -228,14 +222,12 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce.
 	 *
 	 * @param $event Event.
-	*/
+	 */
 	public function on_get_topic_ids($event)
 	{
-		if (!empty($event['sql_approved']))
-		{
+		if (!empty($event['sql_approved'])) {
 			$sql_approved = $this->helper->introduciator_generate_sql_approved_for_forum($event['forum_data']['forum_id'], $event['sql_approved'], 't');
-			if ($sql_approved !== $event['sql_approved'])
-			{	// Modified by function, should re-inject into sql statement
+			if ($sql_approved !== $event['sql_approved']) {	// Modified by function, should re-inject into sql statement
 				$sql_ary = $event['sql_ary'];
 				$sql_ary['WHERE'] = str_replace($event['sql_approved'], $sql_approved, $event['sql_ary']['WHERE']);
 				$event['sql_ary'] = $sql_ary;
@@ -249,11 +241,10 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode.
 	 *
 	 * @param $event Event.
-	*/
+	 */
 	public function on_display_unapproved_question_mark($event)
 	{
-		if ($this->helper->introduction_is_unapproved_topic($event['row']['forum_id'], $event['row']['topic_id'], false))
-		{
+		if ($this->helper->introduction_is_unapproved_topic($event['row']['forum_id'], $event['row']['topic_id'], false)) {
 			$topic_row = $event['topic_row'];
 			$topic_row['REPLIES'] = $topic_row['REPLIES'] + 1; // Else count = -1
 			$topic_row['S_TOPIC_UNAPPROVED'] = true;
@@ -267,13 +258,11 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Else phpBB say that the topic doesn't exists.
 	 *
 	 * @param $event Event.
-	*/
+	 */
 	public function is_topic_visible($event)
 	{
-		if ($event['mode'] === "topic")
-		{
-			if ($this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
-			{
+		if ($event['mode'] === "topic") {
+			if ($this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false)) {
 				$event['is_visible'] = true;
 			}
 		}
@@ -283,12 +272,11 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Allow the user that create own introduction to view it into the list of the topic, even the topic is unapproved.
 	 *
 	 * @param $event Event.
-	*/
+	 */
 	public function get_topic_sql_visibility($event)
 	{
 		$get_visibility_sql_overwrite = null;
-		if ($this->helper->get_topic_sql_visibility($event['forum_id'], $event['where_sql'], $event['mode'], $event['table_alias'], $get_visibility_sql_overwrite))
-		{
+		if ($this->helper->get_topic_sql_visibility($event['forum_id'], $event['where_sql'], $event['mode'], $event['table_alias'], $get_visibility_sql_overwrite)) {
 			$event['get_visibility_sql_overwrite'] = $get_visibility_sql_overwrite;
 		}
 	}
@@ -304,12 +292,11 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Prepare row with data to display: the link to the user's introduce.
 	 *
 	 * @param $event Event.
-	*/
+	 */
 	public function on_viewtopic_modify_post_row($event)
 	{
 		// Step1: remove approval post if needed
-		if ($this->helper->introduction_is_unapproved_topic($event['topic_data']['forum_id'], $event['row']['topic_id'], false))
-		{
+		if ($this->helper->introduction_is_unapproved_topic($event['topic_data']['forum_id'], $event['row']['topic_id'], false)) {
 			$row = $event['post_row'];
 			$row['S_POST_UNAPPROVED'] = false;
 			$event['post_row'] = $row;
@@ -331,11 +318,10 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode, allow the moderator to post a reply into an unapproved message.
 	 *
 	 * @param $event Event.
-	*/
+	 */
 	public function on_user_want_post($event)
 	{
-		if ($this->helper->introduciator_let_user_posting_or_editing($event['mode'], $event['forum_id'], $event['post_data']))
-		{
+		if ($this->helper->introduciator_let_user_posting_or_editing($event['mode'], $event['forum_id'], $event['post_data'])) {
 			$data = $event['post_data'];
 			$data['topic_visibility'] = ITEM_APPROVED; // Force approval
 			$event['post_data'] = $data;
@@ -357,8 +343,7 @@ class introduciator_listener implements EventSubscriberInterface
 	{
 		$user_cache = $event['user_cache'];
 
-		foreach ($event['user_cache'] as $user_id => $user_info)
-		{
+		foreach ($event['user_cache'] as $user_id => $user_info) {
 			$user_cache[$user_id]['datas_introduciator'] = $this->helper->introduciator_get_user_infos($user_id, $user_info['username']);
 		}
 

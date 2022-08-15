@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension
@@ -60,7 +61,7 @@ class acp_general_controller
 		$this->template = $template;
 		$this->user = $user;
 		$this->dbconfig = $dbconfig;
- 	}
+	}
 
 	/**
 	 * When action is empty, the page is filled with current extension configuration, else it check if the current action

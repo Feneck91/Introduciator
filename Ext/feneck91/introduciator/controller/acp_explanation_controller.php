@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension
@@ -74,7 +75,7 @@ class acp_explanation_controller extends acp_main_controller
 			$user,
 			$dbconfig
 		);
- 	}
+	}
 
 	/**
 	 * Manage the page.
@@ -92,26 +93,21 @@ class acp_explanation_controller extends acp_main_controller
 	public function do_action($mode, $action)
 	{
 		// If no action, display configuration
-		if (empty($action))
-		{	// no action or update current
+		if (empty($action)) {	// no action or update current
 			$this->do_empty_action();
-		}
-		else
-		{
+		} else {
 			// Action !
-			if (!check_form_key(introduciator_module::form_key))
-			{
+			if (!check_form_key(introduciator_module::form_key)) {
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
-			switch ($action)
-			{
-				case 'update' :
+			switch ($action) {
+				case 'update':
 					$this->do_update_action();
-				break;
+					break;
 
 				default:
 					trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
-				break;
+					break;
 			}
 		}
 	}
@@ -134,8 +130,7 @@ class acp_explanation_controller extends acp_main_controller
 		));
 
 		$i = 1;
-		foreach ($params['explanations'] as $explanation_value)
-		{
+		foreach ($params['explanations'] as $explanation_value) {
 			$explanation = $explanation_value['explanation'];
 			$this->template->assign_block_vars('explanations', array(
 				'LANG_NR'									=> $i,
@@ -181,8 +176,7 @@ class acp_explanation_controller extends acp_main_controller
 		$result = $this->db->sql_query($sql);
 
 		// Fill $explanation_message_array_result
-		while ($row = $this->db->sql_fetchrow($result))
-		{
+		while ($row = $this->db->sql_fetchrow($result)) {
 			$iso = $row['lang_iso'];
 			$explanation_message_title	= $this->request->variable("explanation_message_title_$iso", '', true);
 			$explanation_message_text	= $this->request->variable("explanation_message_text_$iso", '', true);
@@ -215,12 +209,10 @@ class acp_explanation_controller extends acp_main_controller
 				'lang'	=> $iso,
 			);
 			// Verify all user inputs and get uuid / bitfield / bbcode_options
-			foreach ($explanation_message_array as $key => $value)
-			{
+			foreach ($explanation_message_array as $key => $value) {
 				$new_uid = $bitfield = $bbcode_options = '';
 				$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
-				if (sizeof($texts_errors))
-				{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
+				if (sizeof($texts_errors)) {	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
 					trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 				// Merge results into array

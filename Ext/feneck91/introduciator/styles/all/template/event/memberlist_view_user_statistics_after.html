@@ -1,26 +1,25 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator.css' %}
 
 {% if S_INTRODUCIATOR_DISPLAY %}
-	<dt>
-		{{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}:
-	</dt>
-	<dd>
-		{% if U_INTRODUCIATOR_URL %}
-			<a href="{U_INTRODUCIATOR_URL}" alt="{{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}"
-				{% if S_INTRODUCIATOR_PENDING %}
-					title="{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}"><b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}</b>
-				{% else %}
-					title="{{ lang('T_INTRODUCIATOR_TEXT') }}"><b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_GOTO') }}</b>
-				{% endif %}
-			</a>
-		{% else %}
-		<b>
-		{% if S_INTRODUCIATOR_PENDING %}
-			{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}
-		{% else %}
-			{{ lang('INTRODUCIATOR_VIEW_MEMBER_NO_GOTO') }}
-		{% endif %}
-		</b>
-	{% endif %}
-	</dd>
+  <dt>
+    {{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}:
+  </dt>
+  <dd>
+    {% if U_INTRODUCIATOR_URL %}
+      <a href="{U_INTRODUCIATOR_URL}" alt="{{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}" {% if S_INTRODUCIATOR_PENDING %} title="{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}">
+        <b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}</b>
+      {% else %}
+        title="{{ lang('T_INTRODUCIATOR_TEXT') }}"><b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_GOTO') }}</b>
+      {% endif %}
+    </a>
+  {% else %}
+    <b>
+      {% if S_INTRODUCIATOR_PENDING %}
+        {{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}
+      {% else %}
+        {{ lang('INTRODUCIATOR_VIEW_MEMBER_NO_GOTO') }}
+      {% endif %}
+    </b>
+  {% endif %}
+</dd>
 {% endif %}

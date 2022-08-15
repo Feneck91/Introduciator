@@ -1,4 +1,5 @@
 <?php
+
 /**
  * info_acp_introduciator.php [English]
  *
@@ -10,15 +11,13 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
-if (!defined('IN_PHPBB'))
-{
+ * DO NOT CHANGE
+ */
+if (!defined('IN_PHPBB')) {
 	exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
+if (empty($lang) || !is_array($lang)) {
 	$lang = array();
 }
 
@@ -39,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: configuration
-* Info: language keys are prefixed with 'INTRODUCIATOR_CP_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_'
-*/
+ * mode: configuration
+ * Info: language keys are prefixed with 'INTRODUCIATOR_CP_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_'
+ */
 $lang = array_merge($lang, array(
 	// Titles
 	'INTRODUCIATOR_CP_TITLE'										=> '自我介绍 配置设置',

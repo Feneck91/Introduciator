@@ -1,12 +1,12 @@
 <?php
 
 /**
-*
-* @package phpBB Extension - Introduciator Extension
-* @author Feneck91 (Stéphane Château) feneck91@free.fr
-* @copyright (c) 2019 Feneck91
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*/
+ *
+ * @package phpBB Extension - Introduciator Extension
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
 
 namespace feneck91\introduciator\migrations\v2_0_0;
 
@@ -102,9 +102,9 @@ class v2_0_0_data extends \phpbb\db\migration\migration
 						'statistics',
 						// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 						//---------------------------------------------------------------------
-						),
 					),
-				)),
+				),
+			)),
 
 			// Add the module in ACP under the customise tab
 			//===============================================================================

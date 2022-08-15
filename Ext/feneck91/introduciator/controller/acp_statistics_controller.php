@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension
@@ -77,7 +78,7 @@ class acp_statistics_controller extends acp_main_controller
 			$user,
 			$dbconfig
 		);
- 	}
+	}
 
 	/**
 	 * Manage the page.
@@ -97,29 +98,24 @@ class acp_statistics_controller extends acp_main_controller
 	public function do_action($mode, $action)
 	{
 		// If no action, display configuration
-		if (empty($action))
-		{	// no action or update current
+		if (empty($action)) {	// no action or update current
 			$this->do_empty_action();
-		}
-		else
-		{
-			switch ($action)
-			{
-				case 'check' :
-					if (!check_form_key(introduciator_module::form_key))
-					{
+		} else {
+			switch ($action) {
+				case 'check':
+					if (!check_form_key(introduciator_module::form_key)) {
 						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 					}
 					$this->do_check_action();
-				break;
+					break;
 
 				case 'otherpage':
 					$this->do_check_action();
-				break;
+					break;
 
 				default:
 					trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
-				break;
+					break;
 			}
 		}
 	}
@@ -159,10 +155,10 @@ class acp_statistics_controller extends acp_main_controller
 		// Compute number of introductions
 		//
 		$sql = $this->db->sql_build_query('SELECT', array(
-				'SELECT'	=> 'COUNT(topic_id)',
-				'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-				'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
-			));
+			'SELECT'	=> 'COUNT(topic_id)',
+			'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
+			'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+		));
 		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
 		$nb_introductions = reset($row);
 		$this->template->assign_vars(array(
@@ -176,32 +172,28 @@ class acp_statistics_controller extends acp_main_controller
 		//
 		// Here, we must check database to see if some user have more than one introduction
 		// 1> Get the ids of users that post more than one introduce
-		 $sql = $this->db->sql_build_query('SELECT', array(
+		$sql = $this->db->sql_build_query('SELECT', array(
 			'SELECT'	=> 'topic_poster, topic_first_poster_name',
 			'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
 			'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . '.forum_id = ' . (int) $params['fk_forum_id'] . ' AND ' . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
-			'GROUP_BY'	=> 'topic_poster HAVING count(1) > 1' ,
-			));
+			'GROUP_BY'	=> 'topic_poster HAVING count(1) > 1',
+		));
 
-		 // Record all users that have more than one posted intruction and MUST introduce (not ignored)
+		// Record all users that have more than one posted intruction and MUST introduce (not ignored)
 		$users_ids = array();
 		$result = $this->db->sql_query($sql);
-		while ($row = $this->db->sql_fetchrow($result))
-		{
-			if ($this->helper->is_user_must_introduce_himself((int) $row['topic_poster'], null, $row['topic_first_poster_name']))
-			{
+		while ($row = $this->db->sql_fetchrow($result)) {
+			if ($this->helper->is_user_must_introduce_himself((int) $row['topic_poster'], null, $row['topic_first_poster_name'])) {
 				// Record this users (not ignored)
 				$users_ids[] = (int) $row['topic_poster'];
 			}
 		}
 
 		$nb_several_introduce = count($users_ids);
-		if ($nb_several_introduce > 0)
-		{
+		if ($nb_several_introduce > 0) {
 			$start = min($start, $nb_several_introduce - 1);
 
-			for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index)
-			{
+			for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index) {
 				// Here, no more need to test if number of introduce > 1 because it is already done just before
 				$sql = $this->db->sql_build_query('SELECT', array(
 					'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type",
@@ -212,8 +204,7 @@ class acp_statistics_controller extends acp_main_controller
 
 				$result = $this->db->sql_query($sql);
 				$first_row = true;
-				while ($row = $this->db->sql_fetchrow($result))
-				{
+				while ($row = $this->db->sql_fetchrow($result)) {
 					$link_to_introduce = $this->helper->get_url_to_post($params['fk_forum_id'], $row['topic_id'], $row['topic_first_post_id']);
 
 					$this->template->assign_block_vars('introduces', array(

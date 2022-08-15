@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension
@@ -63,8 +64,7 @@ class introduciator_explain_controller
 	public function handle($forum_id)
 	{
 		// If user not connected, go to login page
-		if ($this->user->data['user_id'] == ANONYMOUS)
-		{
+		if ($this->user->data['user_id'] == ANONYMOUS) {
 			// In case of introduciator_getparams is not called, I must load the introduciator language file
 			$this->helper->load_language_if_needed();
 			login_box('', $this->helper->get_language()->lang('LOGIN'));

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * info_acp_introduciator.php [German honorifics]
  *
@@ -10,15 +11,13 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
-if (!defined('IN_PHPBB'))
-{
+ * DO NOT CHANGE
+ */
+if (!defined('IN_PHPBB')) {
 	exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
+if (empty($lang) || !is_array($lang)) {
 	$lang = array();
 }
 
@@ -39,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: general
-* Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
-*/
+ * mode: general
+ * Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
+ */
 $lang = array_merge($lang, array(
 	// Titles
 	'INTRODUCIATOR_GP_TITLE'							=> 'Allgemeine Informationen',

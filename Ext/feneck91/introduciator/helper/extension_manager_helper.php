@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * @package phpBB Extension - Introduciator Extension
@@ -43,12 +44,9 @@ class extension_manager_helper extends \phpbb\extension\manager
 	{
 		$md_manager = $this->create_extension_metadata_manager($this::EXT_NAME);
 
-		try
-		{
+		try {
 			$this->ext_meta = $md_manager->get_metadata('all');
-		}
-		catch (\phpbb\extension\exception $e)
-		{
+		} catch (\phpbb\extension\exception $e) {
 			trigger_error($e, E_USER_WARNING);
 		}
 
