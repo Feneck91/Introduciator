@@ -70,7 +70,7 @@ class introduciator_explain_controller
 			login_box('', $this->helper->get_language()->lang('LOGIN'));
 		}
 
-		// Title messagte
+		// Title message
 		// Load extension configuration + language
 		$params = $this->helper->introduciator_getparams(false);
 
@@ -82,11 +82,11 @@ class introduciator_explain_controller
 		]);
 
 		$this->template->assign_vars([
-			'S_EXT_ACTIVATED'					=> true,
+			'S_EXT_ACTIVATED'							=> true,
 			'INTRODUCIATOR_EXT_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
-			'INTRODUCIATOR_EXT_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
-			'S_RULES_ACTIVATED'					=> $params['is_explanation_display_rules'] && strlen($params['explanation_rules_text']) > 0,
-			'S_RULES_TITLE_ACTIVATED'			=> (strlen($params['explanation_rules_title']) > 0),
+			'INTRODUCIATOR_EXT_EXPLAIN_TEXT'		=> $params['explanation_message_text'],
+			'S_RULES_ACTIVATED'						=> $params['is_explanation_display_rules'] && strlen($params['explanation_rules_text']) > 0,
+			'S_RULES_TITLE_ACTIVATED'				=> (strlen($params['explanation_rules_title']) > 0),
 			'INTRODUCIATOR_EXT_RULES_TITLE'		=> $params['explanation_rules_title'],
 			'INTRODUCIATOR_EXT_RULES_TEXT'		=> $params['explanation_rules_text'],
 			'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
