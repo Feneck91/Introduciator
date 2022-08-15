@@ -61,8 +61,12 @@ class m1_data extends \phpbb\db\migration\migration
 			['module.add', [
 				'acp',
 				'ACP_CAT_DOT_MODS',
+				'ACP_INTRODUCIATOR_EXTENSION'
+			]],
+			// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+			['module.add', [
+				'acp',
 				'ACP_INTRODUCIATOR_EXTENSION',
-				// Creation of ACP sub caterories under Introduciator extension into Extensions tab
 				[
 					'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
 					'modes'				=> [
