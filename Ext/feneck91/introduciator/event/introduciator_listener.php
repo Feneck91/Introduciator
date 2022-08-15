@@ -108,7 +108,7 @@ class introduciator_listener implements EventSubscriberInterface
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = [
 			'ext_name' => 'feneck91/introduciator',
-			'lang_set' => ['introduciator'],
+			'lang_set' => 'introduciator',
 		];
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
