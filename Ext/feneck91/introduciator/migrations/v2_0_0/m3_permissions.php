@@ -10,7 +10,7 @@
 
 namespace feneck91\introduciator\migrations\v2_0_0;
 
-class m3_permissions extends \phpbb\db\migration\migration
+class m4_permissions extends \phpbb\db\migration\migration
 {
 	/**
 	 * Get the migration dependencie.
@@ -21,7 +21,8 @@ class m3_permissions extends \phpbb\db\migration\migration
 	{
 		return [
 			'\feneck91\introduciator\migrations\v2_0_0\m1_data',
-			'\feneck91\introduciator\migrations\v2_0_0\m2_schema'
+			'\feneck91\introduciator\migrations\v2_0_0\m2_acp_module',
+			'\feneck91\introduciator\migrations\v2_0_0\m3_schema',
 		];
 	}
 
