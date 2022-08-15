@@ -72,16 +72,40 @@ class v2_0_0_data extends \phpbb\db\migration\migration
 			['permission.permission_set', ['ADMINISTRATORS', 'a_introduciator_manage', 'group']],
 
 			// Global user role permissions for user mask
-			['permission.permission_set', ['ROLE_USER_STANDARD', 'u_must_introduce', 'role']],
-			['permission.permission_set', ['ROLE_USER_LIMITED', 'u_must_introduce', 'role']],
-			['permission.permission_unset', ['ROLE_USER_FULL', 'u_must_introduce', 'role']],	// Set to no for adminitrators
-			['permission.permission_set', ['ROLE_USER_NOPM', 'u_must_introduce', 'role']],
-			['permission.permission_set', ['ROLE_USER_NOAVATAR', 'u_must_introduce', 'role']],
-			['permission.permission_set', ['ROLE_USER_NEW_MEMBER', 'u_must_introduce', 'role']],
+			['if', [
+				['permission.role_exists', ['ROLE_USER_STANDARD']],
+				['permission.permission_set', ['ROLE_USER_STANDARD', 'u_must_introduce']],
+			]],
+			['if', [
+				['permission.role_exists', ['ROLE_USER_LIMITED']],
+				['permission.permission_set', ['ROLE_USER_LIMITED', 'u_must_introduce']],
+			]],
+			['if', [
+				['permission.role_exists', ['ROLE_USER_FULL']],
+				['permission.permission_unset', ['ROLE_USER_FULL', 'u_must_introduce']],	// Set to no for adminitrators
+			]],
+			['if', [
+				['permission.role_exists', ['ROLE_USER_NOPM']],
+				['permission.permission_set', ['ROLE_USER_NOPM', 'u_must_introduce']],
+			]],
+			['if', [
+				['permission.role_exists', ['ROLE_USER_NOAVATAR']],
+				['permission.permission_set', ['ROLE_USER_NOAVATAR', 'u_must_introduce']],
+			]],
+			['if', [
+				['permission.role_exists', ['ROLE_USER_NEW_MEMBER']],
+				['permission.permission_set', ['ROLE_USER_NEW_MEMBER', 'u_must_introduce']],
+			]],
 
 			// Global admin role permissions for admin
-			['permission.permission_set', ['ROLE_ADMIN_STANDARD', 'a_introduciator_manage', 'role']],
-			['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_introduciator_manage', 'role']],
+			['if', [
+				['permission.role_exists', ['ROLE_ADMIN_STANDARD']],
+				['permission.permission_set', ['ROLE_ADMIN_STANDARD', 'a_introduciator_manage']],
+			]],
+			['if', [
+				['permission.role_exists', ['ROLE_ADMIN_FULL']],
+				['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_introduciator_manage']],
+			]],
 
 			//===============================================================================
 			// Add the module in ACP under the customise tab
