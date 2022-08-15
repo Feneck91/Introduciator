@@ -929,7 +929,7 @@ class introduciator_helper
 
 		// User is in selected group or out of selected group ?
 		if (($this->introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$this->introduciator_params['is_include_groups'] && !$is_in_group_selected)) {
-			$user_ignored = in_[utf8_strtolower($poster_name] explode("\n", utf8_strtolower($this->introduciator_params['ignored_users'])));
+			$user_ignored = in_array(utf8_strtolower($poster_name), explode("\n", utf8_strtolower($this->introduciator_params['ignored_users'])));
 		}
 
 		return $user_ignored;
