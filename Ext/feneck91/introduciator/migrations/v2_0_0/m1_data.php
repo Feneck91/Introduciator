@@ -10,7 +10,7 @@
 
 namespace feneck91\introduciator\migrations\v2_0_0;
 
-class v2_0_0_data extends \phpbb\db\migration\migration
+class m1_data extends \phpbb\db\migration\migration
 {
 	/**
 	 * Get the migration dependencie.
@@ -106,32 +106,6 @@ class v2_0_0_data extends \phpbb\db\migration\migration
 				['permission.role_exists', ['ROLE_ADMIN_FULL']],
 				['permission.permission_set', ['ROLE_ADMIN_FULL', 'a_introduciator_manage']],
 			]],
-
-			//===============================================================================
-			// Add the module in ACP under the customise tab
-
-			// Add a new category named ACP_INTRODUCIATOR_EXTENSION to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
-			['module.add', [
-				'acp',
-				'ACP_CAT_DOT_MODS',
-				'ACP_INTRODUCIATOR_EXTENSION',
-				[
-					'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
-					'modes'	  			=> [
-						//---------------------------------------------------------------------
-						// Creation of ACP sub caterories under Introduciator extension into Extensions tab
-						'general',
-						'configuration',
-						'explanation',
-						'statistics',
-						// Creation of ACP sub caterories under Introduciator extension into Extensions tab
-						//---------------------------------------------------------------------
-					],
-				],
-			]],
-
-			// Add the module in ACP under the customise tab
-			//===============================================================================
 		];
 	}
 }
