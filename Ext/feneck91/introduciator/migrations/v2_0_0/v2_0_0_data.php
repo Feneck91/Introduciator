@@ -19,7 +19,7 @@ class v2_0_0_data extends \phpbb\db\migration\migration
 	 */
 	public static function depends_on()
 	{
-		return ['\phpbb\db\migration\data\v320\v320rc2');
+		return ['\phpbb\db\migration\data\v320\v320rc2'];
 	}
 
 	/**
