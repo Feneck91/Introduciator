@@ -1,5 +1,5 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator_acp.css' %}
-{% INCLUDE 'overall_header.html' %}
+{% include 'overall_header.html' %}
 
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_ST_TITLE') }}</h1>
 
@@ -68,7 +68,7 @@
 
       <div class="pagination bottom-pagination">
         {% if loops.pagination | length %}
-          {% INCLUDE 'pagination.html' %}
+          {% include 'pagination.html' %}
         {% else %}
           &bull;
           {{ PAGE_NUMBER }}
@@ -87,4 +87,4 @@
   {% endif %}
 </form>
 
-{% INCLUDE 'overall_footer.html' %}
+{% include 'overall_footer.html' %}
