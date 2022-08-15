@@ -2,11 +2,11 @@
 
 {% if S_INTRODUCIATOR_DISPLAY %}
   <dt>
-    {{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}:
+    {{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}{{ lang('COLON') }}
   </dt>
   <dd>
     {% if U_INTRODUCIATOR_URL %}
-      <a href="{U_INTRODUCIATOR_URL}" alt="{{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}" {% if S_INTRODUCIATOR_PENDING %} title="{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}">
+      <a href="{{ U_INTRODUCIATOR_URL }}" alt="{{ lang('INTRODUCIATOR_MEMBER_INTRODUCTION') }}" {% if S_INTRODUCIATOR_PENDING %} title="{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}">
         <b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_PENDING') }}</b>
       {% else %}
         title="{{ lang('T_INTRODUCIATOR_TEXT') }}"><b>{{ lang('INTRODUCIATOR_VIEW_MEMBER_GOTO') }}</b>

@@ -4,7 +4,7 @@
 <h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_ST_TITLE') }}</h1>
 
 {{ lang('INTRODUCIATOR_ST_TITLE_EXPLAIN') }}
-<form id="acp_introduciator" method="post" action="{U_ACTION}">
+<form id="acp_introduciator" method="post" action="{{ U_ACTION }}">
   {# --------------------------- Posting --------------------------------------------- #}
   {% if S_CHECK_DATABASE %}
     <fieldset>
@@ -80,8 +80,8 @@
       <legend>
         <a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
       <p class="submit-buttons">
-        {S_HIDDEN_FIELDS}
-        <input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_ST_CHECK') }}"/>&nbsp; {S_FORM_TOKEN}
+        {{ S_HIDDEN_FIELDS }}
+				<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_ST_CHECK') }}"/>&nbsp; {S_FORM_TOKEN}
       </p>
     </fieldset>
   {% endif %}

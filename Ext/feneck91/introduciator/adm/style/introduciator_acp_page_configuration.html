@@ -57,7 +57,7 @@
       <dd>
         <select id="forum_choice" name="forum_choice" style="width: 100%;" size="1">
           {% for forum in loops.forums %}
-            <option {% if not forum.CAN_SELECT %} disabled="disabled" class="disabled-option" {% endif %} value="{forum.FORUM_ID}" name="forum_{forum.FORUM_ID}" title="{forum.TOOLTIP}" {% if forum.SELECTED %} selected="selected">{forum.FORUM_NAME}</option>
+            <option {% if not forum.CAN_SELECT %} disabled="disabled" class="disabled-option" {% endif %} value="{{ forum.FORUM_ID }}" name="forum_{{ forum.FORUM_ID }}" title="{{ forum.TOOLTIP }}" {% if forum.SELECTED %} selected="selected">{{ forum.FORUM_NAME }}</option>
           {% endfor %}
         </select>
       </dd>
@@ -93,7 +93,7 @@
           {{ lang('INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION') }}</label>
       </dd>
     </dl>
-    <span id="permissions_group_options" style="display: {INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP}">
+    <span id="permissions_group_options" style="display: '{{ INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP }}'">
       <hr/>
       {# Include / Exclude groups #}
       <dl>
@@ -115,7 +115,7 @@
         <dd>
           <select name="groups_choices[]" style="width: 100%;" id="groups_choices" multiple="multiple" size="10">
             {% for group in loops.groups %}
-              <option value="{group.ID}" name="group_{group.ID}" title="{group.TOOLTIP}" {% if group.SELECTED %} selected="selected" {% endif %}>{group.NAME}</option>
+              <option value="{{ group.ID }}" name="group_{{ group.ID }}" title="{{ group.TOOLTIP }}" {% if group.SELECTED %} selected="selected" {% endif %}>{{ group.NAME }}</option>
             {% endfor %}
           </select>
         </dd>
@@ -126,7 +126,7 @@
           <label for="ignored_users">{{ lang('INTRODUCIATOR_CP_IGNORED_USERS') }}</label><br/>
           <span>{{ lang('INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN') }}</span></dt>
         <dd>
-          <textarea id="ignored_users" name="ignored_users" rows="10" cols="60" maxlength="255">{INTRODUCIATOR_ITEM_IGNORED_USERS}</textarea>
+          <textarea id="ignored_users" name="ignored_users" rows="10" cols="60" maxlength="255">{{ INTRODUCIATOR_ITEM_IGNORED_USERS }}</textarea>
         </dd>
       </dl>
     </span>
@@ -136,10 +136,10 @@
     <legend>
       <a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
     <p class="submit-buttons">
-      {S_HIDDEN_FIELDS}
-      <input class="button1" type="submit" id="submit" name="update" value="{{ lang('SUBMIT') }}"/>&nbsp;
+      {{ S_HIDDEN_FIELDS }}
+			<input class="button1" type="submit" id="submit" name="update" value="{{ lang('SUBMIT') }}"/>&nbsp;
       <input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}"/>
-      {S_FORM_TOKEN}
+      {{ S_FORM_TOKEN }}
     </p>
   </fieldset>
 </form>
