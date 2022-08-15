@@ -80,7 +80,6 @@ class introduciator_explain_controller
 		$params = $this->introduciator_helper->introduciator_getparams(false);
 
 		$message = $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
-		page_header($message);
 
 		$this->template->assign_vars([
 			'S_EXT_ACTIVATED'							=> true,
@@ -94,6 +93,6 @@ class introduciator_explain_controller
 			'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
 		]);
 
-		return $this->helper->render('introduciator_explain.html');
+		return $this->helper->render('introduciator_explain.html', $message);
 	}
 }
