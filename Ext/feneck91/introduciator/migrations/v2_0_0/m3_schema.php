@@ -1,16 +1,17 @@
 <?php
 
 /**
-*
-* @package phpBB Extension - Introduciator Extension
-* @author Feneck91 (Stéphane Château) feneck91@free.fr
-* @copyright (c) 2019 Feneck91
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*/
+ *
+ * @package phpBB Extension - Introduciator Extension
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2022 Leinad4Mind
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
 
 namespace feneck91\introduciator\migrations\v2_0_0;
 
-class v2_0_0_schema extends \phpbb\db\migration\migration
+class m3_schema extends \phpbb\db\migration\migration
 {
 	/**
 	 * Get the migration dependencie.
@@ -19,7 +20,7 @@ class v2_0_0_schema extends \phpbb\db\migration\migration
 	 */
 	public static function depends_on()
 	{
-		return array('\feneck91\introduciator\migrations\v2_0_0\v2_0_0_data');
+		return array('\feneck91\introduciator\migrations\v2_0_0\m2_acp_module');
 	}
 
 	/**
@@ -49,7 +50,7 @@ class v2_0_0_schema extends \phpbb\db\migration\migration
 			'add_tables' => array(
 				$this->table_prefix . 'introduciator_groups' => array(
 					'COLUMNS' => array(
-						'fk_group'			=> array('UINT', null),
+						'fk_group'	=> array('UINT', null),
 					),
 				),
 				$this->table_prefix . 'introduciator_explanation' => array(
