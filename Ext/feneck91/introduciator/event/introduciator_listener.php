@@ -58,7 +58,6 @@ class introduciator_listener implements EventSubscriberInterface
 		$this->helper = $helper;
 		$this->user = $user;
 		$this->template = $template;
-		$this->template_context = $template_context;
 	}
 
 	/**
