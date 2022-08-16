@@ -22,6 +22,13 @@ function introduciator_display_permissions()
 <form id="acp_introduciator" method="post" action="{{ U_ACTION }}">
 	<fieldset>
 		<legend><a class="acp_img_configuration" title="{{ lang('GENERAL_OPTIONS') }}"></a>{{ lang('GENERAL_OPTIONS') }}</legend><br/>
+		{# Activate / Desactivate extension #}
+		<dl>
+			<dt><label for="extension_activated">{{ lang('INTRODUCIATOR_CP_EXTENSION_ACTIVATED') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN') }}</span></dt>
+			<dd><label><input id="extension_activated"    name="extension_activated" type="radio" class="radio" value="1"{% if INTRODUCIATOR_EXTENSION_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label><input id="no_extension_activated" name="extension_activated" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_EXTENSION_ACTIVATED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
+			</dd>
+		</dl>
 		{# Activate / Desactivate Mandatory introduction #}
 		<dl>
 			<dt><label for="check_introduction_mandatory_activated" >{{ lang('INTRODUCIATOR_CP_MANDATORY_INTRODUCE') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN') }}</span></dt>

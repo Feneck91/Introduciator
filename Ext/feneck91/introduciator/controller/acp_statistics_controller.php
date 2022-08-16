@@ -96,6 +96,11 @@ class acp_statistics_controller extends acp_main_controller
 	 */
 	public function do_action($mode, $action)
 	{
+		if (!$this->helper->is_introduciator_allowed())
+		{	// The introduciator must be enable else it can be not configure correctly
+			trigger_error($this->language->lang('INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS') . adm_back_link(append_sid("{$this->root_path}adm/index.$this->php_ext", 'i=-feneck91-introduciator-acp-introduciator_module&amp;mode=configuration')), E_USER_WARNING);
+		}
+
 		// If no action, display configuration
 		if (empty($action))
 		{	// no action or update current

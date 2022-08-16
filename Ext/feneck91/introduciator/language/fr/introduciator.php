@@ -47,6 +47,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'Vous n’êtes pas autorisé à supprimer le premier message de votre présentation !',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'Vous n’êtes pas autorisé à supprimer le premier message d’une présentation, supprimez toute la présentation en détruisant le sujet !',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Veuillez vous présenter dans le Forum : %s',
+	'INTRODUCIATOR_EXT_DISABLED'								=> 'Le MOD Présentation forcée est désactivé. Veuillez l’activer pour l’utiliser !',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le forum “<a href="%forum_url%">%forum_name%</a>”<br/>
 																	Seule la création d’un nouveau sujet dans le forum de présentation est autorisée.',

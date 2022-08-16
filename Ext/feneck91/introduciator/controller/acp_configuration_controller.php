@@ -126,6 +126,7 @@ class acp_configuration_controller extends acp_main_controller
 	{
 		$params = $this->helper->introduciator_getparams(true);
 		$this->template->assign_vars(array(
+			'INTRODUCIATOR_EXTENSION_ACTIVATED'										=> $params['introduciator_allow'],
 			'INTRODUCIATOR_INTRODUCTION_MANDATORY'									=> $params['is_introduction_mandatory'],
 			'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
 			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
@@ -162,6 +163,7 @@ class acp_configuration_controller extends acp_main_controller
 	{
 		// User has request an update : write it into database
 		// Update Database
+		$is_enabled									= $this->request->variable('extension_activated', false);
 		$is_check_introduction_mandatory_activated  = $this->request->variable('check_introduction_mandatory_activated', true);
 		$is_check_delete_first_post_activated		= $this->request->variable('check_delete_first_post_activated', false);
 		$fk_forum_id								= $this->request->variable('forum_choice', 0);
@@ -171,7 +173,7 @@ class acp_configuration_controller extends acp_main_controller
 		$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
 		$ignored_users								= substr($this->request->variable('ignored_users', ''), 0, 255);
 
-		if ($fk_forum_id === 0)
+		if ($is_enabled && $fk_forum_id === 0)
 		{
 			trigger_error($this->language->lang('INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
@@ -181,6 +183,7 @@ class acp_configuration_controller extends acp_main_controller
 			$posting_approval_level = introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
 		}
 
+		$this->dbconfig->set('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation extension config
 		$this->dbconfig->set('introduciator_is_introduction_mandatory', $is_check_introduction_mandatory_activated ? '1' : '0');
 		$this->dbconfig->set('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
 		$this->dbconfig->set('introduciator_fk_forum_id', $fk_forum_id);

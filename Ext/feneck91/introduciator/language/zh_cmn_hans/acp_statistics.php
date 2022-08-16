@@ -62,6 +62,9 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '日期',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '自我介绍',
 
+	// Errors
+	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS'	=> '启用并配置好自我介绍的扩展后，才能查看相关统计信息！',
+
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK'						=> '检查',
 ));
