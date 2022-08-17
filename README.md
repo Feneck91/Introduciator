@@ -1,6 +1,7 @@
 # Introduciator - 3.2.8 Compatible / 3.3.x Compatible
 
 **Author:** Feneck91
+
 **Developer Helper:** Leinad4Mind
 
 **Extension Description:** This extension force member to introduce himself into a specific forum before beeing able to post everywhere into the forum.
@@ -41,14 +42,13 @@ This extension need at least **phpBB's version 3.2.8**.
 - German: Dr.Death (http://www.lpi-clan.de)
 - Portuguese: Leinad4Mind (https://leinad4mind.top/forum)
 
-===================================================================================================================================================================================================================
-===================================================================================================================================================================================================================
-===================================================================================================================================================================================================================
-===================================================================================================================================================================================================================
+#
+#
 
 # Introduciator - 3.2.8 Compatible / 3.3.x Compatible
 
 **Auteur :** Feneck91
+
 **Assistant développeur:** Leinad4Mind
 
 **Description de l'extension :** Est utilisé pour forcer les utilisateurs à poster un message de présentation dans un forum spécifique avant d'être autorisé de poster dans les autres forums.
