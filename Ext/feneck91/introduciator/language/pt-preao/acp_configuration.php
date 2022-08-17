@@ -49,6 +49,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Permite configurar a extensão.',
 
 	// Settings: general
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'						=> 'Activar extensão:',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'			=> 'Usado para activar ou desactivar esta extensão.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'						=> 'Força o utilizador a apresentar-se:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'			=> 'Quando esta opção se encontra activa, a extensão força o utilizador a apresentar-se no tópico respectivo antes de poder participar noutros tópicos.
 																				<br/>Quando esta funcionalidade não se encontra activa, todas as outras opções continuam a funcionar.',
@@ -86,8 +88,8 @@ $lang = array_merge($lang, [
 
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'								=> '',
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Nenhum fórum seleccionado',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Deves seleccionar um fórum!',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Nenhum fórum seleccionado, apenas para quando a extensão está desactivada',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Quando a extensão se encontra activa, deves seleccionar um fórum!',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introduciator: configuração actualizada com sucesso.</strong>',

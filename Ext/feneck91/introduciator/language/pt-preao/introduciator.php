@@ -49,6 +49,7 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'		=> 'Não tens permissão para remover a primeira mensagem da tua apresentação!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'			=> 'Não tens permissão para remover a primeira mensagem da tua apresentação! Podes remover a apresentação apagando o tópico.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'			=> 'Por favor, apresenta-te: %s',
+	'INTRODUCIATOR_EXT_DISABLED'									=> 'A extensão está desactivada. Tens de a activar para que funcione.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Para poderes usar o fórum, <u>deves</u> apresentar-te</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Tal como para qualquer novo utilizador, deves apresentar-te à comunidade no fórum “<a href="%forum_url%">%forum_name%</a>”<br/>
 																				Apenas é permitido criar um  único tópico nas apresentações.',
