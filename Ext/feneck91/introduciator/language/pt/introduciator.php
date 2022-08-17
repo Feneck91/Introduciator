@@ -44,7 +44,7 @@ if (empty($lang) || !is_array($lang))
 */
 $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'		=> 'A tua apresentação está em aprovação, por favor, aguarde.',
-	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Enquanto a apresentação se encontrar em aprovação, apenas lhe é possível editar a mensagem.',
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Enquanto a apresentação se encontrar em aprovação, apenas te é possível editar a mensagem.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'Não te podes apresentar pela segunda vez!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'		=> 'Não tens permissão para remover a primeira mensagem da tua apresentação!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'			=> 'Não tens permissão para remover a primeira mensagem da tua apresentação! Podes remover a apresentação apagando o tópico.',
@@ -53,12 +53,12 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Tal como para qualquer novo utilizador, deves apresentar-te à comunidade no fórum “<a href="%forum_url%">%forum_name%</a>”<br/>
 																				Apenas é permitido criar um  único tópico nas apresentações.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'			=> '<br/>
-																				When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
-	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'					=> '<strong><u>The rules are repeated here:</u></strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'				=> '<a href="%forum_url%">Go to the “%forum_name%” forum now by clicking on this link</a>',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'				=> '<a href="%forum_post%">Introduce yourself now by clicking on this link</a>',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>During presentation approval, it remains editable and moderators can reply to you.
-																				<br/>This will allow you to bring it into conformity with the requirements of the forum if necessary.',
+																				Ao criar o tópico de apresentação, por favor, observa as regras que são exibidas no topo do fórum das apresentações.',
+	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'					=> '<strong><u>As regras repetem-se aqui:</u></strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'				=> '<a href="%forum_url%">Ir para o fórum “%forum_name%”</a>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'				=> '<a href="%forum_post%">Apresenta-te</a>',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>Durante a aprovação da apresentação, é possível editar e os moderadores podem responder-te.
+																				<br/>O que te irá permitir corrigir a tua apresentação caso seja necessário, conforme os requisitos do fórum.',
 
 	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Apresentação do Utilizador',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'				=> 'Não existe nenhuma apresentação disponível para este utilizador',

@@ -51,12 +51,12 @@ $lang = array_merge($lang, [
 
 	// Settings: general
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'						=> 'Força o utilizador a apresentar-se:',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'			=> 'Quando esta opção se encontra ativa, a extensão força o utilizador a apresentar-se no tópico respectivo antes de poder participar noutros tópicos.
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'			=> 'Quando esta opção se encontra ativa, a extensão força o utilizador a apresentar-se no tópico respetivo antes de poder participar noutros tópicos.
 																				<br/>Quando esta funcionalidade não se encontra ativa, todas as outras opções continuam a funcionar.',
 	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST'					=> 'Autoriza a extensão a verificar a remoção da primeira mensagem da apresentação no fórum das apresentações:',
 	'INTRODUCIATOR_CP_CHECK_DEL_FIRST_POST_EXPLAIN'			=> 'Quando esta opção se encontra ativa, a extensão previne que a primeira mensagem de qualquer tópico que se encontra no fórum das apresentações seja removido.
 																				<br/>Mesmo moderadores ou administradores não têm permissões para garantir que a primeira mensagem de qualquer tópico de apresentação é a apresentação do utilizador. No entanto, é possível apagar o tópico caso haja permissões para isso.
-																				<br/>Podes desactivar esta opção, mas irás permitir que o utiliador possa criar múltiplas apresentações. É recomendado ter esta opção ativa.',
+																				<br/>Podes desativar esta opção, mas irás permitir que o utilizador possa criar múltiplas apresentações. É recomendado ter esta opção ativa.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'								=> 'O fórum onde o utilizador se deve apresentar:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'					=> 'A extensão irá procurar apenas neste fórum por apresentações.',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'					=> 'Opções de aprovação das apresentações:',
@@ -83,7 +83,7 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_SELECTED_GROUPS'									=> 'Seleção de Grupos:',
 	'INTRODUCIATOR_CP_SELECTED_GROUPS_EXPLAIN'						=> 'Seleciona os grupos que devem ser incluídos ou excluídos.',
 	'INTRODUCIATOR_CP_IGNORED_USERS'										=> 'Ignorar utilizadores:',
-	'INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN'							=> 'Utilizadores que não precisam de ser apresentar.<br />Coloca os nomes de utilizador um por linha.<br />Esta opção serve para colocar os administradores ou contas de teste.',
+	'INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN'							=> 'Utilizadores que não precisam de se apresentar.<br />Coloca os nomes de utilizador um por linha.<br />Esta opção serve para colocar os administradores ou contas de teste.',
 
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'								=> '',
@@ -91,7 +91,7 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Deves selecionar um fórum!',
 
 	// Logs
-	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introduciator: configuração acualizada com sucesso.</strong>',
+	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introduciator: configuração atualizada com sucesso.</strong>',
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'										=> 'A configuração foi atualizada com sucesso',

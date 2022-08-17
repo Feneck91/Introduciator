@@ -58,7 +58,7 @@ $lang = array_merge($lang, [
 
 	// Array's texts
 	'INTRODUCIATOR_ST_ARRAY_TITLE'						=> 'Este array indica todas as apresentações que foram colocadas em excesso',
-	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> 'Nenhuma apresentação repetida detectada',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> 'Nenhuma apresentação repetida detetada',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'				=> 'Utilizador',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'				=> 'Data',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'			=> 'Apresentações',
