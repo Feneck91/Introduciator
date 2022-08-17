@@ -9,8 +9,8 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
+ * DO NOT CHANGE
+ */
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -38,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: general
-* Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
-*/
+ * Mode: general
+ * Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
+ */
 $lang = array_merge($lang, array(
 	// Titles
 	'INTRODUCIATOR_GP_TITLE'							=> 'Generals informations',

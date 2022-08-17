@@ -9,8 +9,8 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
+ * DO NOT CHANGE
+ */
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -37,9 +37,9 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-/*
-* General messages
-*/
+/**
+ * General messages
+ */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Your introduction message is pending approval, please wait.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only the editing is allowed.',

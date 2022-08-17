@@ -10,8 +10,8 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
+ * DO NOT CHANGE
+ */
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -39,8 +39,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : the name of the extension
-*/
+ * Mode: main : the name of the extension
+ */
 $lang = array_merge($lang, array(
 	'ACP_INTRODUCIATOR_EXTENSION'					=> '自我介绍',
 

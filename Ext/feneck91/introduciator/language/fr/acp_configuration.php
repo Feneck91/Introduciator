@@ -9,8 +9,8 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
+ * DO NOT CHANGE
+ */
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -38,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode : configuration
-* Info : Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_'
-*/
+ * Mode : configuration
+ * Info : Les clefs de langages sont préfixés avec 'INTRODUCIATOR_CP_' pour 'INTRODUCIATOR_CONFIGURATION_PAGES_'
+ */
 $lang = array_merge($lang, array(
 	// Titres
 	'INTRODUCIATOR_CP_TITLE'										=> 'Configuration de la Présentation forcée',

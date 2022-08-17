@@ -9,8 +9,8 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
+ * DO NOT CHANGE
+ */
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -38,14 +38,14 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : le nom de l'extension
-*/
+ * Mode: main : le nom de l'extension
+ */
 $lang = array_merge($lang, array(
 	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Présentation forcée',
 
-/**
-* Titres présents dans la partie gauche de l'onglet extensions de l'ACP sous l'item INTRODUCIATOR
-*/
+	/**
+	 * Titres présents dans la partie gauche de l'onglet extensions de l'ACP sous l'item INTRODUCIATOR
+	 */
 	'INTRODUCIATOR_GENERAL'							=> 'Général',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
 	'INTRODUCIATOR_EXPLANATION'						=> 'Explication',

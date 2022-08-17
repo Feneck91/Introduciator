@@ -1,6 +1,7 @@
 # Introduciator - 3.2.8 Compatible / 3.3.x Compatible
 
 **Author:** Feneck91
+**Developer Helper:** Leinad4Mind
 
 **Extension Description:** This extension force member to introduce himself into a specific forum before beeing able to post everywhere into the forum.
 
@@ -38,6 +39,7 @@ This extension need at least **phpBB's version 3.2.8**.
 - Simplified Chinese: David Yin (https://www.phpbbchinese.com)
 - German honorifics: Dr.Death (http://www.lpi-clan.de)
 - German: Dr.Death (http://www.lpi-clan.de)
+- Portuguese: Leinad4Mind (https://leinad4mind.top/forum)
 
 ===================================================================================================================================================================================================================
 ===================================================================================================================================================================================================================
@@ -47,6 +49,7 @@ This extension need at least **phpBB's version 3.2.8**.
 # Introduciator - 3.2.8 Compatible / 3.3.x Compatible
 
 **Auteur :** Feneck91
+**Assistant développeur:** Leinad4Mind
 
 **Description de l'extension :** Est utilisé pour forcer les utilisateurs à poster un message de présentation dans un forum spécifique avant d'être autorisé de poster dans les autres forums.
 Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de poster un message dans un autre forum afin de lui expliquer ce qu'il doit faire..
@@ -86,3 +89,4 @@ Cette extension n'est compatible qu'à partir de la **version 3.2.8 de phpBB**.
 - Chinois simplifié : David Yin (https://www.phpbbchinese.com)
 - Allemand honorifique : Dr.Death (http://www.lpi-clan.de)
 - Allemand : Dr.Death (http://www.lpi-clan.de)
+- Portugais: Leinad4Mind (https://leinad4mind.top/forum)

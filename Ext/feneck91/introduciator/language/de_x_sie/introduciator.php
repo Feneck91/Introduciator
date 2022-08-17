@@ -10,8 +10,8 @@
  */
 
 /**
-* DO NOT CHANGE
-*/
+ * DO NOT CHANGE
+ */
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -38,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-/*
-* General messages
-*/
+/**
+ * General messages
+ */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Die Freigabe Ihrer Vorstellung steht noch aus, bitte warte.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Während der Genehmigung Ihrer Vorstellung ist nur die Bearbeitung erlaubt.',
