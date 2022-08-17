@@ -1,7 +1,7 @@
 <?php
 
 /**
- * info_acp_introduciator.php [English]
+ * info_acp_introduciator.php [Portuguese-PreAO]
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr

@@ -1,13 +1,12 @@
 <?php
 
 /**
- * info_acp_introduciator.php [English]
+ * info_acp_introduciator.php [Portuguese-PreAO]
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @copyright (c) 2019-2022 Feneck91
  * @copyright (c) 2022 Leinad4Mind
- * @copyright (c) Traduzione MOD by Galandas (Rey) 2016 www.phpbb3world.altervista.org/
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 

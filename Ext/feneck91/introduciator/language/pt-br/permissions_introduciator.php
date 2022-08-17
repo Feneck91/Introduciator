@@ -1,7 +1,7 @@
 <?php
 
 /**
- * permissions_introduciator.php [English]
+ * permissions_introduciator.php [Portuguese-Brazil]
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
