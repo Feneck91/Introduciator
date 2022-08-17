@@ -593,79 +593,79 @@ class introduciator_helper
 						}
 					}
 				}
-			}
-			else if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
-			{
-				$topic_introduce_id = 0;
-				$first_post_id = 0;
-				$topic_approved = false;
-
-				if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
+				else if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
 				{
-					// No post into the introduce topic
-					if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
+					$topic_introduce_id = 0;
+					$first_post_id = 0;
+					$topic_approved = false;
+
+					if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
 					{
-						$ret_allowed_action = false;
-						// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
-						if ($redirect)
+						// No post into the introduce topic
+						if ($this->introduciator_params['is_introduction_mandatory'] && (in_array($mode, array('reply', 'quote')) || ($mode == 'post' && $forum_id != $this->introduciator_params['fk_forum_id'])))
 						{
-							if ($this->introduciator_params['is_explanation_enabled'])
+							$ret_allowed_action = false;
+							// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
+							if ($redirect)
 							{
-								redirect($this->controller_helper->route('feneck91_introduciator_explain', array('forum_id' => (int) $this->introduciator_params['fk_forum_id'])));
+								if ($this->introduciator_params['is_explanation_enabled'])
+								{
+									redirect($this->controller_helper->route('feneck91_introduciator_explain', array('forum_id' => (int) $this->introduciator_params['fk_forum_id'])));
+								}
+								else
+								{
+									redirect(append_sid("{$this->root_path}viewforum.{$this->php_ext}",'f=' . (int) $this->introduciator_params['fk_forum_id']));
+								}
+							}
+						}
+					}
+					else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
+					{
+						// At least one post but not approved !
+						if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
+							&& (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
+						{
+							// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
+							// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
+							// here we just test if right are approve to don't show next message: here, the right are not correct => display the message
+							$ret_allowed_action = false;
+						}
+
+						if (!$ret_allowed_action && $redirect)
+						{
+							// Load langage
+							$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+							$this->load_language_if_needed();
+
+							// Test : if the user try to quote / reply into his own introduction : change the message
+							if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
+							{
+								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
 							}
 							else
 							{
-								redirect(append_sid("{$this->root_path}viewforum.{$this->php_ext}",'f=' . (int) $this->introduciator_params['fk_forum_id']));
+								// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
+								$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
 							}
+
+							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $forum_id) . '">', '</a>');
+							trigger_error($message, E_USER_NOTICE);
 						}
 					}
-				}
-				else if (!$topic_approved && in_array($mode, array('reply', 'quote', 'post')))
-				{
-					// At least one post but not approved !
-					if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
-						&& (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
+					else if ($forum_id == $this->introduciator_params['fk_forum_id'] && $mode == 'post')
 					{
-						// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
-						// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
-						// here we just test if right are approve to don't show next message: here, the right are not correct => display the message
+						// User try to create more than one introduce post
 						$ret_allowed_action = false;
-					}
-
-					if (!$ret_allowed_action && $redirect)
-					{
-						// Load langage
-						$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
-						$this->load_language_if_needed();
-
-						// Test : if the user try to quote / reply into his own introduction : change the message
-						if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
+						if ($redirect)
 						{
-							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT');
-						}
-						else
-						{
-							// Make these test ONLY if the introduction is mandatory (is_introduction_mandatory) else ignore all, the user post even he is not introduce
-							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION');
-						}
+							// Load langage
+							$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+							$this->load_language_if_needed();
 
-						$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $forum_id) . '">', '</a>');
-						trigger_error($message, E_USER_NOTICE);
-					}
-				}
-				else if ($forum_id == $this->introduciator_params['fk_forum_id'] && $mode == 'post')
-				{
-					// User try to create more than one introduce post
-					$ret_allowed_action = false;
-					if ($redirect)
-					{
-						// Load langage
-						$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
-						$this->load_language_if_needed();
-
-						$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
-						$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
-						trigger_error($message, E_USER_NOTICE);
+							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
+							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
+							trigger_error($message, E_USER_NOTICE);
+						}
 					}
 				}
 			}
