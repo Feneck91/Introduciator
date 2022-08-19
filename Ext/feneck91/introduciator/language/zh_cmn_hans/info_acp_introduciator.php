@@ -5,7 +5,7 @@
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @Simplified Chinese Language (c) David Yin <https://www.phpbbchinese.com>
- * @copyright (c) 2019 Feneck91
+ * @copyright (c) 2019-2022 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
