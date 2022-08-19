@@ -42,7 +42,7 @@ if (empty($lang) || !is_array($lang))
  * Mode: explanation
  * Info: language keys are prefixed with 'INTRODUCIATOR_EP_' for 'INTRODUCIATOR_EXPLANATION_PAGES_'
  */
-$lang = array_merge($lang, [
+$lang = array_merge($lang, array(
 	// Titles
 	'INTRODUCIATOR_EP_TITLE'										=> 'Configuração da Página de Explicação',
 	'INTRODUCIATOR_EP_TITLE_EXPLAIN'								=> 'Permite configurar a página de explicação das apresentações.',
