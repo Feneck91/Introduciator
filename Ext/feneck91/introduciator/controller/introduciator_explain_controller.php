@@ -96,6 +96,8 @@ class introduciator_explain_controller
 				'INTRODUCIATOR_EXT_RULES_TEXT'		=> $params['explanation_rules_text'],
 				'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
 				'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
+				'INTRODUCIATOR_EXT_LINK_FORUM_URL'	=> $params['forum_url'],
+				'INTRODUCIATOR_EXT_LINK_FORUM_POST'	=> $params['forum_post'],
 				));
 		}
 		else

@@ -31,8 +31,11 @@
 	<br/>
 	{% endif %}
 	<br/>
-	<span style="text-align: center">{{ INTRODUCIATOR_EXT_LINK_GOTO_FORUM }}</span><br/>
-	<span style="text-align: center">{{ INTRODUCIATOR_EXT_LINK_POST_FORUM }}</span><br/>
+	<div style="text-align: center">
+		<a href="{{ INTRODUCIATOR_EXT_LINK_FORUM_URL }}" class="button"><span>{{ INTRODUCIATOR_EXT_LINK_GOTO_FORUM }}</span></a>
+		<a href="{{ INTRODUCIATOR_EXT_LINK_FORUM_POST }}" class="button"><span>{{ INTRODUCIATOR_EXT_LINK_POST_FORUM }}</span></a>
+	</div>
+	<br/>
 	<br/>
 {% else %}
 	<div class="inner">
