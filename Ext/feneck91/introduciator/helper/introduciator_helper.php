@@ -443,20 +443,19 @@ class introduciator_helper
 				foreach ($this->introduciator_get_explanations($is_edit, true) as $explanation_value)
 				{
 					$explanation = $explanation_value['explanation'];
+					$forum_url = append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $params['fk_forum_id']);
+					$forum_post = append_sid("{$this->root_path}posting.{$this->php_ext}", 'mode=post&amp;f=' . (int) $params['fk_forum_id']);
 					// Generate all string to be displayed
 					$explanation_message_title = generate_text_for_display($explanation['message_title'], $explanation['message_title_uid'], $explanation['message_title_bitfield'], $explanation['message_title_bbcode_options']);
 					$explanation_message_text = generate_text_for_display($explanation['message_text'], $explanation['message_text_uid'], $explanation['message_text_bitfield'], $explanation['message_text_bbcode_options']);
 					$explanation_rules_title = generate_text_for_display($explanation['rules_title'], $explanation['rules_title_uid'], $explanation['rules_title_bitfield'], $explanation['rules_title_bbcode_options']);
 					$explanation_rules_text = generate_text_for_display($explanation['rules_text'], $explanation['rules_text_uid'], $explanation['rules_text_bitfield'], $explanation['rules_text_bbcode_options']);
 					$explanation_message_title = str_replace('%explanation_title%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'), $explanation_message_title);
-					$explanation_message_text = str_replace('%explanation_text%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT') . (($params['is_explanation_display_rules'] && strlen($explanation_message_text) > 0 && strlen($explanation_rules_text) > 0) ? $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES') : ''), $explanation_message_text);
+					$explanation_message_text = str_replace('%explanation_text%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT', $forum_url, $forum_name) . (($params['is_explanation_display_rules'] && strlen($explanation_message_text) > 0 && strlen($explanation_rules_text) > 0) ? $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES') : ''), $explanation_message_text);
 					$explanation_rules_title = str_replace('%rules_title%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'), $explanation_rules_title);
 					$explanation_rules_text = str_replace('%rules_text%', generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']), $explanation_rules_text);
-					$link_goto_forum = $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM');
+					$link_goto_forum = $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM', $forum_name);
 					$link_post_forum = $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM');
-
-					$forum_url = append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $params['fk_forum_id']);
-					$forum_post = append_sid("{$this->root_path}posting.{$this->php_ext}", 'mode=post&amp;f=' . (int) $params['fk_forum_id']);
 
 					// Replace in each string the predefined fields
 					$this->replace_all_by(
