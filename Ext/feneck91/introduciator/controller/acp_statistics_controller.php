@@ -166,7 +166,7 @@ class acp_statistics_controller extends acp_main_controller
 		$sql = $this->db->sql_build_query('SELECT', array(
 				'SELECT'	=> 'COUNT(topic_id)',
 				'FROM'		=> array(TOPICS_TABLE => TOPICS_TABLE),
-				'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . ".forum_id = {$params['fk_forum_id']} AND " . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
+				'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . '.forum_id = ' . (int) $params['fk_forum_id'] . ' AND ' . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
 			));
 		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
 		$nb_introductions = reset($row);
