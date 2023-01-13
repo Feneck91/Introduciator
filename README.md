@@ -19,7 +19,7 @@ It's a port from [MOD Introduciator](https://www.phpbb.com/customise/db/mod/intr
 - Add introduce approval options is used to force introduction to be approved by a moderator or not:
   - No approval: don’t force introduction to be approved, let the default processing.
   - Simple approval: force introduction to be approved. The user doesn’t see his/her introduction if it is not validated by a moderator (normal processing is used for all messages that use approval).
-  - Approval with ability to edit: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbiden.
+  - Approval with ability to edit: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbidden.
 - Select redirection page if the user try to post somewhere else.
 - Configure redirection page. Now the text displayed into the introduce redirection page is multi-langual **(New)**.
 - Add permission to disable this feature for some accounts (administators and / or moderator for example).
