@@ -4,7 +4,7 @@
 
 **Developer Helper:** Leinad4Mind
 
-**Extension Description:** This extension force member to introduce himself into a specific forum before beeing able to post everywhere into the forum.
+**Extension Description:** This extension force member to introduce himself into a specific forum before being able to post everywhere into the forum.
 
 **Extension Version:** 2.0.0
 
