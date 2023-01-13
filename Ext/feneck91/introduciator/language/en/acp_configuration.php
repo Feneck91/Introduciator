@@ -51,19 +51,19 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Used to enable or disable this extension.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
-																			<br/>When this feature is not enabled, all other options remain active.',
+																			<br />When this feature is not enabled, all other options remain active.',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions:',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
-																			<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
-																			<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
+																			<br />Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
+																			<br />You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'The forum where the user must introduce himself/herself:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'The extension will search only in this forum whether forum users have introduced themselves.',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Introduction approval options:',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Is used to force introduction to be approved by a moderator:<br/>
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Is used to force introduction to be approved by a moderator:<br />
 																			<ul>
 																			<li><b>No approval</b>: don’t force introduction to be approved, let the default processing.</li>
 																			<li><b>Simple approval</b>: force introduction to be approved. The user doesn’t see his/her introduction if it is not validated by a moderator (normal processing is used for all messages that use approval).</li>
-																			<li><b>Approval with ability to edit</b>: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbiden.</li>
+																			<li><b>Approval with ability to edit</b>: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbidden.</li>
 																			</ul>',
 	'INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL'						=> 'No approval',
 	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL'						=> 'Simple approval',
@@ -86,7 +86,7 @@ $lang = array_merge($lang, array(
 
 	// Messages
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is desactivated',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is deactivated',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, you should choose a forum!',
 
 	// Logs

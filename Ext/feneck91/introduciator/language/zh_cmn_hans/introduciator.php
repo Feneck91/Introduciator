@@ -50,15 +50,15 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> '请在主题P %s 中介绍你自己',
 	'INTRODUCIATOR_EXT_DISABLED'								=> '自我介绍扩展已禁用，请启用它，来使自我介绍扩展工作。',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>要发表帖子， <u>你必须</u> 先自我介绍</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> '作为一个新用户，你必须先对其他用户作自我介绍，到板块 “<a href="%s">%s</a>” 发表自我介绍<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> '作为一个新用户，你必须先对其他用户作自我介绍，到板块 “<a href="%s">%s</a>” 发表自我介绍<br />
 																	在自我介绍板块只有新主题才被允许。',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br />
 																	当创建自我介绍主题，请先看一下显示在论坛版块顶部的规则。',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>版规也重复显示在：“</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> '点击前往 “%s” 板块',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> '自我介绍',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>在等待审核期间，你可以编辑它，版主也可以回复你。
-																	<br/>这可以让你的自我介绍更加的合乎版规的要求。',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br />在等待审核期间，你可以编辑它，版主也可以回复你。
+																	<br />这可以让你的自我介绍更加的合乎版规的要求。',
 
 	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> '用户的自我介绍',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> '此用户没有自我介绍',

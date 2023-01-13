@@ -14,7 +14,7 @@ namespace feneck91\introduciator\migrations\v2_0_0;
 class m3_schema extends \phpbb\db\migration\migration
 {
 	/**
-	 * Get the migration dependencie.
+	 * Get the migration dependencies.
 	 *
 	 * @return array Array of depending items.
 	 */

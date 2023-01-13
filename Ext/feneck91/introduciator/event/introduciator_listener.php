@@ -11,7 +11,7 @@ namespace feneck91\introduciator\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use feneck91\introduciator\helper\introduciator_helper;
-use phpbb\user;
+use phpbb\language\language;
 use phpbb\template\template;
 
 class introduciator_listener implements EventSubscriberInterface
@@ -22,19 +22,14 @@ class introduciator_listener implements EventSubscriberInterface
 	private $root_path;
 
 	/**
-	 * phpBB Extention.
+	 * phpBB Extension.
 	 */
 	private $php_ext;
 
 	/**
-	 * @var \phpbb\user Current connected user.
+	 * @var \phpbb\language\language Language manager, used to translate all messages.
 	 */
-	private $user;
-
-	/**
-	 * @var \phpbb\template\template Template.
-	 */
-	private $template;
+	private $language;
 
 	/**
 	 * @var Introduciator helper. The important code is into this helper.
@@ -45,19 +40,17 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Constructor
 	 *
 	 * @param string                                                $root_path          phpBB root path.
-	 * @param string                                                $php_ext            phpBB Extention.
+	 * @param string                                                $php_ext            phpBB Extension.
 	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper             Extension helper
-	 * @param \phpbb\user                                           $user               Current connected user.
-	 * @param \phpbb\template\template                              $template           Template.
+	 * @param \phpbb\language\language                              $language           Language manager, used to translate all messages.
 	 */
-	public function __construct($root_path, $php_ext, introduciator_helper $helper, user $user, template $template)
+	public function __construct($root_path, $php_ext, introduciator_helper $helper, language $language)
 	{
 		// Record parameters into this
 		$this->root_path = $root_path;
 		$this->php_ext = $php_ext;
 		$this->helper = $helper;
-		$this->user = $user;
-		$this->template = $template;
+		$this->language = $language;
 	}
 
 	/**
@@ -69,7 +62,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * @static
 	 * @access public
 	 */
-	static public function getSubscribedEvents()
+	public static function getSubscribedEvents()
 	{
 		return array(
 			'core.user_setup'											=> 'load_language_on_setup',					// Load languages files
@@ -80,7 +73,7 @@ class introduciator_listener implements EventSubscriberInterface
 			'core.submit_post_end'										=> 'on_submit_post_end',						// Change the url to go to if the user edit it's own unapproved introduction
 			'core.viewforum_get_topic_ids_data'							=> 'on_get_topic_ids',							// Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce
 			'core.viewforum_modify_topicrow'							=> 'on_display_unapproved_question_mark',		// Allow displaying '?' into the topic list when the user see its own introduce
-			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topix doesn't exists.
+			'core.phpbb_content_visibility_is_visible'					=> 'is_topic_visible',							// Allow the user that create own introduction to view it when it open the unapproved topic introduction. Else phpBB say that the topic doesn't exists.
 			'core.phpbb_content_visibility_get_visibility_sql_before'	=> 'get_topic_sql_visibility',					// Allow phpBB to retrieve a topic for the user that post it into introduce
 			'core.viewtopic_modify_post_row'							=> 'on_viewtopic_modify_post_row',				// Hide S_POST_UNAPPROVED if the user is into his own introduce (hide approved / unapproved) if has not this right + prepare data to be displayed.
 			'core.posting_modify_row_data'								=> 'on_user_want_post',							// Let the moderator to post into an unapproved post and user to edit own introduce. Added in 3.2.8 version of phpBB: https://tracker.phpbb.com/browse/PHPBB3-15946
@@ -117,7 +110,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Called before displaying Quick Reply fields, hide all this fields if the user is not allowed to post.
 	 * Must change S_QUICK_REPLY and set it to false.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	 */
 	public function on_before_quickreply_displayed($event)
 	{
@@ -135,7 +128,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Called when the user want to post, when it's display panel.
 	 * Return true, false or RedirectResponse if redirection is needed.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	 */
 	public function on_displaying_posting_screen($event)
 	{
@@ -150,7 +143,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	 */
 	public function on_submit_post_before($event)
 	{
@@ -175,7 +168,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	 */
 	public function on_submit_post_after($event)
 	{
@@ -183,13 +176,15 @@ class introduciator_listener implements EventSubscriberInterface
 		if (isset($data['introduciator_force_unapproved']))
 		{
 			meta_refresh(20, $event['redirect_url']); // More time to read
-			$message = $this->user->lang['POST_STORED_MOD'] . ' '. $this->user->lang['POST_APPROVAL_NOTIFY'];
+
+
+			$message = $this->language->lang['POST_STORED_MOD'] . ' '. $this->language->lang['POST_APPROVAL_NOTIFY'];
 			if ($data['introduciator_force_unapproved'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 			{	// Add more explanation: the user can modify his introduce
 				$this->helper->load_language_if_needed();
 				$message .= $this->helper->get_language()->lang('INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY');
 			}
-			$message .= '<br /><br />' . sprintf($this->user->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $data['forum_id']) . '">', '</a>');
+			$message .= '<br /><br />' . sprintf($this->language->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $data['forum_id']) . '">', '</a>');
 			trigger_error($message);
 		}
 	}
@@ -202,7 +197,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * the extension has been configure with force introduce approval, set option
 	 * to make this message with moderator approval.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	 */
 	public function on_submit_post_end($event)
 	{
@@ -226,7 +221,7 @@ class introduciator_listener implements EventSubscriberInterface
 	/**
 	 * Allow the user that create own introduction to view it into the list of the topic, changing the SQL request to get approved topic + own introduce.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	*/
 	public function on_get_topic_ids($event)
 	{
@@ -247,14 +242,14 @@ class introduciator_listener implements EventSubscriberInterface
 	 *
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	*/
 	public function on_display_unapproved_question_mark($event)
 	{
 		if ($this->helper->introduction_is_unapproved_topic($event['row']['forum_id'], $event['row']['topic_id'], false))
 		{
 			$topic_row = $event['topic_row'];
-			$topic_row['REPLIES'] = $topic_row['REPLIES'] + 1; // Else count = -1
+			$topic_row['REPLIES'] += 1; // Else count = -1
 			$topic_row['S_TOPIC_UNAPPROVED'] = true;
 			$event['topic_row'] = $topic_row;
 		}
@@ -265,23 +260,20 @@ class introduciator_listener implements EventSubscriberInterface
 	 *
 	 * Else phpBB say that the topic doesn't exists.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	*/
 	public function is_topic_visible($event)
 	{
-		if ($event['mode'] === "topic")
+		if ($event['mode'] === "topic" && $this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
 		{
-			if ($this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
-			{
-				$event['is_visible'] = true;
-			}
+			$event['is_visible'] = true;
 		}
 	}
 
 	/**
 	 * Allow the user that create own introduction to view it into the list of the topic, even the topic is unapproved.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	*/
 	public function get_topic_sql_visibility($event)
 	{
@@ -296,13 +288,13 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Called when the topic is view.
 	 *
 	 * But it display Approve / Unapproved field even the user has no right to do this.
-	 * If it is a simple user with extension configured as "approvel with edit" we must
+	 * If it is a simple user with extension configured as "approval with edit" we must
 	 * hide this fields.
 	 * Hide S_POST_UNAPPROVED if the user is into his own introduce.
 	 *
 	 * Prepare row with data to display: the link to the user's introduce.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	*/
 	public function on_viewtopic_modify_post_row($event)
 	{
@@ -316,7 +308,7 @@ class introduciator_listener implements EventSubscriberInterface
 				$event['post_row'] = $row;
 			}
 
-			// Prepare data to display link to suer's introduce
+			// Prepare data to display link to user's introduce
 			$data_introduciator = $event['user_poster_data']['datas_introduciator'];
 			$event['post_row'] += array(
 				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
@@ -328,11 +320,11 @@ class introduciator_listener implements EventSubscriberInterface
 	}
 
 	/**
-	 * Called when a user whant to post, before write the message or when he choose to begin posting a new subject.
+	 * Called when a user wants to post, before write the message or when he choose to begin posting a new subject.
 	 *
 	 * Only in the INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT mode, allow the moderator to post a reply into an unapproved message.
 	 *
-	 * @param $event Event.
+	 * @param \phpbb\event\data $event Event.
 	*/
 	public function on_user_want_post($event)
 	{

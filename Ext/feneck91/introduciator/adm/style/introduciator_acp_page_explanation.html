@@ -6,7 +6,7 @@
 {{ lang('INTRODUCIATOR_EP_TITLE_EXPLAIN') }}
 <form id="acp_introduciator" method="post" action="{U_ACTION}">
 	<fieldset>
-		<legend><a class="acp_img_configuration" title="{{ lang('INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE') }}</legend><br/>
+		<legend><a class="acp_img_configuration" title="{{ lang('INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE') }}</legend><br />
 		{# Display explanation page ? #}
 		<dl>
 			<dt><label for="display_explanation">{{ lang('INTRODUCIATOR_EP_DISPLAY_PAGE') }}</label><br /><span>{{ lang('INTRODUCIATOR_EP_DISPLAY_PAGE_EXPLAIN') }}</span></dt>
@@ -21,11 +21,11 @@
 				<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED %} checked="checked"{% endif %} /> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
-		<br/>
+		<br />
 	</fieldset>
 	{# --------------------------- Manage explanation texts ---------------------------- #}
 	<fieldset>
-		<legend><a class="acp_img_texts" title="{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE') }}</legend><br/>
+		<legend><a class="acp_img_texts" title="{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE') }}</legend><br />
 		{# General explanation #}
 		<span>{{ lang('INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN') }}</span>
 		{# Display explanation page text and title: iterate over all languages #}
@@ -33,7 +33,7 @@
 			<hr/>
 			{# Title text #}
 			<h1>{{ explanation.LANG_NR }} - {{ explanation.LANG_NAME }} ({{ explanation.LANG_ISO }})</h1>
-			<br/>
+			<br />
 			<dl>
 				<dt><label for="explanation_message_title_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_EP_MESSAGE_TITLE') }}</label><br /><span>{{ lang('INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN') }}</span></dt>
 				<dd><textarea id="explanation_message_title_{{ explanation.LANG_ISO }}" name="explanation_message_title_{{ explanation.LANG_ISO }}" rows="5" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_MESSAGE_TITLE }}</textarea></dd>
@@ -57,7 +57,7 @@
 	</fieldset>
 	{# --------------------------- Posting --------------------------------------------- #}
 	<fieldset>
-		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
+		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br />
 		<p class="submit-buttons">
 			{S_HIDDEN_FIELDS}
 			<input class="button1" type="submit" id="submit" name="update" value="{{ lang('SUBMIT') }}" />&nbsp;

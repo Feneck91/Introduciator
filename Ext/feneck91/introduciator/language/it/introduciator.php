@@ -50,15 +50,15 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Si prega di introdurre te stesso in un topic: %s',
 	'INTRODUCIATOR_EXT_DISABLED'								=> 'Introduzione Mod è disabilitato. Si dovrebbe abilitarlo per rendere questa MOD praticabile.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Per essere in grado di pubblicare, <u>devi</u> introdurre/presentare te stesso</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Come per ogni nuovo utente, è necessario presentarsi agli altri membri del “<a href="%s">%s</a>” forum<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Come per ogni nuovo utente, è necessario presentarsi agli altri membri del “<a href="%s">%s</a>” forum<br />
 																	è solo permesso un nuovo argomento nel forum per le presentazioni.',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br />
 																	Quando si crea l’argomento introduzione, osservare le seguenti regole che vengono anche visualizzate nella parte superiore del forum per le presentazioni.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>Le regole sono ripetute qui:</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> 'Vai al “%s” forum',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> 'Introduci te stesso',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>Durante l’approvazione della presentazione, il topic rimane modificabile e i moderatori possono rispondere a voi.
-																	<br/>Questo vi permetterà di renderla conforme ai requisiti del forum se necessario.',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br />Durante l’approvazione della presentazione, il topic rimane modificabile e i moderatori possono rispondere a voi.
+																	<br />Questo vi permetterà di renderla conforme ai requisiti del forum se necessario.',
 
 	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Introduzione Utenti',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'Nessuna introduzione disponibile per questo utente',

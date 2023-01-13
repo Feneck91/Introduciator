@@ -52,15 +52,15 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> '用于开启或者禁用这个扩展。',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> '强制用户做一个自我介绍：',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> '当此选项启用时，此扩展会强制用户在发布其它帖子之前先发表一个自我介绍。
-																			<br/>当没有启用时，所有其它的选项保持激活状态。',
+																			<br />当没有启用时，所有其它的选项保持激活状态。',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> '授权扩展在自我介绍板块中检查是否删除主题的第一个帖子：',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> '激活此选项后，扩展将阻止在自我介绍板块中，任何主题的第一个帖子被删除。
-																			<br/>甚至版主或者管理员都没有此权限，来确保每个主题的第一个帖子是真正的自我介绍。 但是任然保留了删除主题的权限。
-																			<br/>你可以不启用此选项，但是这会给与用户发布多个自我介绍的能力。建议启用此选项。',
+																			<br />甚至版主或者管理员都没有此权限，来确保每个主题的第一个帖子是真正的自我介绍。 但是任然保留了删除主题的权限。
+																			<br />你可以不启用此选项，但是这会给与用户发布多个自我介绍的能力。建议启用此选项。',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> '用户必须做自我介绍的论坛板块：',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> '此扩展将只用于此板块，以确认用户已经做了自我介绍。',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> '自我介绍的审核选项：',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> '用于版主对于自我介绍的审核：<br/>
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> '用于版主对于自我介绍的审核：<br />
 																			<ul>
 																			<li><b>无需批准</b>： 不强制批准介绍。默认保留。</li>
 																			<li><b>简单批准</b>： 必须审核。 未经版主审核批准，用户看不到自我介绍。 （所有需要审核的消息都是用常规处理）</li>

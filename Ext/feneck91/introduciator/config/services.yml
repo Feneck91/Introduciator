@@ -47,7 +47,6 @@ services:
             - '%core.root_path%'
             - '%core.php_ext%'
             - '@feneck91.introduciator.helper'
-            - '@user'
-            - '@template'
+            - '@language'
         tags:
             - { name: event.listener }

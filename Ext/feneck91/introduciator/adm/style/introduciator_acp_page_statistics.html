@@ -8,7 +8,7 @@
 	{# --------------------------- Posting --------------------------------------------- #}
 	{% if S_CHECK_DATABASE %}
 	<fieldset>
-		<legend><a class="acp_img_statistics" title="{{ lang('INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE') }}</legend><br/>
+		<legend><a class="acp_img_statistics" title="{{ lang('INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE') }}</legend><br />
 		<dl>
 			<dt><label>{{ lang('INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE') }}</label></dt>
 			<dd><label>{{ INTRODUCTIONS_NUMBER }}</label></dd>
@@ -64,10 +64,10 @@
 	</fieldset>
 	{% else %}
 	<fieldset>
-		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br/>
+		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br />
 		<p class="submit-buttons">
 			{S_HIDDEN_FIELDS}
-			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_ST_CHECK') }}" />&nbsp;
+			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_ST_CHECK') }}" />
 			{S_FORM_TOKEN}
 		</p>
 	</fieldset>

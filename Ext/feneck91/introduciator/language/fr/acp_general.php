@@ -39,7 +39,7 @@ if (empty($lang) || !is_array($lang))
 
 /**
  * Mode: general
- * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_GP_' pour 'INTRODUCIATOR_GENERAL_PAGES_'
+ * Info: Les clefs de langues sont préfixées avec 'INTRODUCIATOR_GP_' pour 'INTRODUCIATOR_GENERAL_PAGES_'
  */
 $lang = array_merge($lang, array(
 	// Titres

@@ -34,7 +34,7 @@ class introduciator_info
 					'cat' => array('ACP_INTRODUCIATOR_EXTENSION'),
 				),
 				'statistics'	=> array(
-					'title' => 'INTRODUCIATOR_STATISCICS',
+					'title' => 'INTRODUCIATOR_STATISTICS',
 					'auth' => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
 					'cat' => array('ACP_INTRODUCIATOR_EXTENSION'),
 				),

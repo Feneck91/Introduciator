@@ -42,11 +42,6 @@ class introduciator_module
 	public $tpl_name;
 
 	/**
-	 * @var array
-	 */
-	private $module_info;
-
-	/**
 	 * Main function call
 	 *
 	 * @param string $id
@@ -65,13 +60,11 @@ class introduciator_module
 
 		if ($this->in_array_field($mode, 'module_name', $this::$available_mode))
 		{
-			$this->module_info = $this->array_value($mode, 'module_name', $this::$available_mode);
-
 			// Load the module language file currently in use
 			$language->add_lang('acp_' . $mode, 'feneck91/introduciator');
 
 			// Get an instance of the acp controller
-			/** @type \feneck91.introduciator.controller.introduciator_acp_main_controller $acp_controller */
+			/** @type acp_main_controller $acp_controller */
 			$acp_controller = $phpbb_container->get('feneck91.introduciator.controller.acp_' . $mode);
 
 			// Load a template from adm/style for our ACP page
@@ -80,7 +73,7 @@ class introduciator_module
 			// Add a secret token to the form
 			// This functions adds a secret token to any form, a token which should be checked after
 			// submission with the check_form_key function to ensure that the received data is the same as the submitted.
-			add_form_key(introduciator_module::form_key);
+			add_form_key(self::form_key);
 
 			/** @type \phpbb\request\request $request Request object */
 			$request = $phpbb_container->get('request');
@@ -114,7 +107,6 @@ class introduciator_module
 				return true;
 			}
 		}
-		unset($item);
 
 		return false;
 	}

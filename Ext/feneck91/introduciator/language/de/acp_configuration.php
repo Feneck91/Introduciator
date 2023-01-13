@@ -52,15 +52,15 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Hier kannst du die Extension aktivieren oder deaktivieren.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Der Benutzer wird gezwungen, sich vorzustellen:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird der Benutzer gezwungen, seine eigene Vorstellung zu posten, bevor er in anderen Themen posten darf.
-																			<br/>Wenn diese Funktion nicht aktiviert ist, bleiben alle anderen Optionen aktiv.',
+																			<br />Wenn diese Funktion nicht aktiviert ist, bleiben alle anderen Optionen aktiv.',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Die Löschung des ersten Vorstellungsbeitrag im Forum für Vorstellungen wird überprüft:',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'Wenn diese Option aktiviert ist, wird verhindert, dass der erste Beitrag in einem beliebigen Thema im Forum für Vorstellungen gelöscht werden kann.
-																			<br/>Selbst Moderatoren oder Administratoren haben dazu keine Berechtigung, um sicher zu sein, dass der erste Beitrag in einem vorstellenden Thema wirklich die Vorstellung eines Forenmitglieds ist. Es ist jedoch weiterhin möglich, das Thema zu löschen, wenn die Berechtigungen dies zulassen.
-																			<br/>Du kannst diese Option deaktivieren, aber in diesem Fall kann ein Benutzer mehrere Vorstellungen haben. Die Aktivierung dieser Option ist zu empfehlen.',
+																			<br />Selbst Moderatoren oder Administratoren haben dazu keine Berechtigung, um sicher zu sein, dass der erste Beitrag in einem vorstellenden Thema wirklich die Vorstellung eines Forenmitglieds ist. Es ist jedoch weiterhin möglich, das Thema zu löschen, wenn die Berechtigungen dies zulassen.
+																			<br />Du kannst diese Option deaktivieren, aber in diesem Fall kann ein Benutzer mehrere Vorstellungen haben. Die Aktivierung dieser Option ist zu empfehlen.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'Das Forum, in dem der Benutzer sich vorstellen muss:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'Es wird nur dieses Forum überwacht, ob sich Forenbenutzer vorgestellt haben.',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Genehmigungsoptionen der Vorstellung:',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Wird verwendet, um eine Vorstellung durch einem Moderator zu genehmigen:<br/>
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Wird verwendet, um eine Vorstellung durch einem Moderator zu genehmigen:<br />
 																			<ul>
 																			<li><b>Keine Genehmigung</b>: Die Vorstellung muss nicht genehmigt werden.</li>
 																			<li><b>Einfache Genehmigung</b>: Die Vorstellung muss genehmigt werden. Der Benutzer sieht seine Vorstellung nicht, wenn sie nicht von einem Moderator validiert wird (die Standard Vorgehensweise).</li>

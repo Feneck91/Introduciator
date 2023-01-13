@@ -30,7 +30,7 @@ class introduciator_helper
 	private $root_path;
 
 	/**
-	 * phpBB Extention.
+	 * phpBB Extension.
 	 */
 	private $php_ext;
 
@@ -79,7 +79,7 @@ class introduciator_helper
 	 *
 	 * @param string					$table_prefix Table prefix.
 	 * @param string					$root_path phpBB root path.
-	 * @param string					$php_ext phpBB Extention.
+	 * @param string					$php_ext phpBB Extension.
 	 * @param \phpbb\user				$user Current connected user.
 	 * @param \phpbb\db\driver\factory	$db Database access.
 	 * @param \phpbb\config\config 		$config Current configuration (config table).
@@ -165,14 +165,14 @@ class introduciator_helper
 	/**
 	 * Is the introduciator enabled?
 	 *
-	 * Return the introduciator_allow's config field: true if the introduciator is allowed, false else.
+	 * Return the introduciator_allow's config field: true if the introduciator is allowed, false else. Read from config['introduciator_allow']:  '0' (false) or '1' or other value (true).
 	 *
 	 * @return boolean
 	 * @access public
 	 */
 	public function is_introduciator_allowed()
 	{
-		return $this->config['introduciator_allow'];
+		return $this->config['introduciator_allow'] != '0';
 	}
 
 	/**
@@ -333,7 +333,7 @@ class introduciator_helper
 						'http&#58;//dqsdfzef&#46;com'	=> '%forum_post%',
 					));
 
-				array_push($ret_value, array(
+				$ret_value[] = array(
 					'lang_local_name'		=>	$row['lang_local_name'],
 					'lang_iso'				=> 	$row['lang_iso'],
 					'explanation'			=> array(
@@ -342,11 +342,11 @@ class introduciator_helper
 						'edit_rules_title'		=> $rules_title,
 						'edit_rules_text'		=> $rules_text,
 					),
-				));
+				);
 			}
 			else
 			{
-				array_push($ret_value, array(
+				$ret_value[] = array(
 					'lang_local_name'		=>	$row['lang_local_name'],
 					'lang_iso'				=> 	$row['lang_iso'],
 					'explanation'			=> array(
@@ -367,7 +367,7 @@ class introduciator_helper
 						'rules_text_bitfield'			=> $rules_textbitfield,
 						'rules_text_bbcode_options'		=> $rules_text_bbcode_options,
 					),
-				));
+				);
 			}
 		}
 
@@ -431,7 +431,7 @@ class introduciator_helper
 			if ($is_edit === true)
 			{
 				$params = array_merge($params, array(
-					'explanations' => $this->introduciator_get_explanations($is_edit, false),
+					'explanations' => $this->introduciator_get_explanations(true, false),
 				));
 			}
 			else
@@ -451,7 +451,7 @@ class introduciator_helper
 					$explanation_rules_title = generate_text_for_display($explanation['rules_title'], $explanation['rules_title_uid'], $explanation['rules_title_bitfield'], $explanation['rules_title_bbcode_options']);
 					$explanation_rules_text = generate_text_for_display($explanation['rules_text'], $explanation['rules_text_uid'], $explanation['rules_text_bitfield'], $explanation['rules_text_bbcode_options']);
 					$explanation_message_title = str_replace('%explanation_title%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'), $explanation_message_title);
-					$explanation_message_text = str_replace('%explanation_text%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT', $forum_url, $forum_name) . (($params['is_explanation_display_rules'] && strlen($explanation_message_text) > 0 && strlen($explanation_rules_text) > 0) ? $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES') : ''), $explanation_message_text);
+					$explanation_message_text = str_replace('%explanation_text%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT', $forum_url, $forum_name) . (($params['is_explanation_display_rules'] && $explanation_message_text != '' && $explanation_rules_text != '' ? $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES') : ''), $explanation_message_text);
 					$explanation_rules_title = str_replace('%rules_title%', $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'), $explanation_rules_title);
 					$explanation_rules_text = str_replace('%rules_text%', generate_text_for_display($forum_rules['rules'], $forum_rules['rules_uid'], $forum_rules['rules_bitfield'], $forum_rules['rules_options']), $explanation_rules_text);
 					$link_goto_forum = $this->language->lang('INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM', $forum_name);
@@ -582,10 +582,10 @@ class introduciator_helper
 									$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
 									$this->load_language_if_needed();
 
-									$message = $this->language->lang(($first_poster_id == $poster_id && !$this->auth->acl_get('m_delete', $forum_id)) ? 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST' : 'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
+									$message = $first_poster_id === $poster_id && !$this->auth->acl_get('m_delete', $forum_id) ? $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST') : $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
 									$meta_info = append_sid("{$this->root_path}viewtopic.{$this->php_ext}", 'f=' . (int) $forum_id . '&amp;t=' . (int) $topic_id);
-									$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
-									$message .= '<br/><br/>' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
+									$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
+									$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
 									trigger_error($message, E_USER_NOTICE);
 								}
 							}
@@ -780,7 +780,7 @@ class introduciator_helper
 	}
 
 	/**
-	 * Replace only first occurence of string in string.
+	 * Replace only first occurrence of string in string.
 	 *
 	 * @param string	$str_find			String to find
 	 * @param string	$str_replacement	String to replace
@@ -789,7 +789,7 @@ class introduciator_helper
 	 * @return string
 	 * @access public
 	 */
-	function str_replace_once($str_find, $str_replacement, $string)
+	private function str_replace_once($str_find, $str_replacement, $string)
 	{
 		$pos = strpos($string, $str_find);
 		if ($pos !== false)
@@ -834,16 +834,13 @@ class introduciator_helper
 					$first_post_id = 0;
 					$topic_approved = false;
 
-					if ($this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
+					if ($this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved) && !$topic_approved)
 					{
 						// Post into this introduce topic
-						if (!$topic_approved)
+						$sql_approved = $this->str_replace_once('AND (t.topic_visibility', 'AND ((t.topic_visibility', $sql_approved) . ' OR ' . (empty($table_name) ? '' : $table_name . '.') . 'topic_id = ' . (int) $topic_id . ')';
+						if ($approve_fid_ary !== null)
 						{
-							$sql_approved = $this->str_replace_once('AND (t.topic_visibility', 'AND ((t.topic_visibility', $sql_approved) . ' OR ' . (empty($table_name) ? '' : $table_name . '.') . 'topic_id = ' . (int) $topic_id . ')';
-							if ($approve_fid_ary !== null)
-							{
-								$approve_fid_ary = array($topic_id);
-							}
+							$approve_fid_ary = array($topic_id);
 						}
 					}
 				}
@@ -890,21 +887,11 @@ class introduciator_helper
 					$first_post_id = 0;
 					$topic_approved = false;
 
-					if ($this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved))
+					if ($this->is_user_post_into_forum($this->introduciator_params['fk_forum_id'], $poster_id, $topic_introduce_id, $first_post_id, $topic_approved) && !$topic_approved && $topic_id == $topic_introduce_id)
 					{
 						// Post into this introduce forum, retrieve informations about topic_id and topic approved or not
-						if (!$topic_approved && $topic_id == $topic_introduce_id)
-						{
-							// This topic is unaproved and is the introduce of the current logged user
-							if ($check_moderator_permissions)
-							{
-								$ret = !$this->auth->acl_get('m_approve', $forum_id);
-							}
-							else
-							{
-								$ret = true;
-							}
-						}
+						// This topic is unapproved and is the introduce of the current logged user
+						$ret = $check_moderator_permissions ? !$this->auth->acl_get('m_approve', $forum_id) : true;
 					}
 				}
 			}
@@ -1096,32 +1083,26 @@ class introduciator_helper
 		$poster_id = (int) $this->user->data['user_id'];
 		$ret_posting_approval_level = $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
 
-		if ($poster_id != ANONYMOUS)
+		// User is logged and have user authorization
+		if ($poster_id != ANONYMOUS && $this->is_introduciator_allowed())
 		{
-			// User is logged and have user authorization
-			if ($this->is_introduciator_allowed())
+			// Extension is enabled and the user is not ignored, it can do all he wants
+			// Force forum id because it be moved while user delete the message
+			if (empty($this->introduciator_params))
 			{
-				// Extension is enabled and the user is not ignored, it can do all he wants
-				// Force forum id because it be moved while user delete the message
-				if (empty($this->introduciator_params))
-				{
-					$this->introduciator_params = $this->introduciator_getparams();
-				}
+				$this->introduciator_params = $this->introduciator_getparams();
+			}
 
-				if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
-				{
-					$topic_id = 0;
-					$first_post_id = 0;
-					$topic_approved = false;
+			if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
+			{
+				$topic_id = 0;
+				$first_post_id = 0;
+				$topic_approved = false;
 
-					if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved))
-					{
-						// No post into the introduce topic
-						if ($mode == 'post' && $forum_id == $this->introduciator_params['fk_forum_id'] && ($this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL || $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
-						{
-							$ret_posting_approval_level = $this->introduciator_params['posting_approval_level'];
-						}
-					}
+				if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved) && $mode == 'post' && $forum_id == $this->introduciator_params['fk_forum_id'] && ($this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL || $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
+				{
+					// No post into the introduce topic
+					$ret_posting_approval_level = $this->introduciator_params['posting_approval_level'];
 				}
 			}
 		}
@@ -1132,7 +1113,7 @@ class introduciator_helper
 	/**
 	 * Get the approval level for the post using introduciator configuration.
 	 *
-	 * Return true if the sql visibility mmust be overwrite, false else.
+	 * Return true if the sql visibility must be overwrite, false else.
 	 *
 	 * @param int			$forum_id						Forum identifier where the user try to post
 	 * @param string		$where_sql						Current SQL WHERE used, must be concatenate with it.

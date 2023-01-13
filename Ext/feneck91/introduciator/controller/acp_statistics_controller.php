@@ -53,7 +53,7 @@ class acp_statistics_controller extends acp_main_controller
 	 * @param \phpbb\db\driver\factory                              $db             Database interface
 	 * @param \phpbb\pagination                                     $pagination     Used to manage information split to display it into several pages
 	 * @param string                                                $root_path      phpBB root path
-	 * @param string                                                $php_ext        phpBB Extention
+	 * @param string                                                $php_ext        phpBB Extension
 	 * @param \phpbb\language\language                              $language       Language user object
 	 * @param \phpbb\request\request                                $request        Request object
 	 * @param \phpbb\template\template                              $template       Template object
@@ -83,7 +83,7 @@ class acp_statistics_controller extends acp_main_controller
 	 * Manage the page.
 	 *
 	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
-	 * is really comming from this extension by checking form key
+	 * is really coming from this extension by checking form key
 	 *
 	 * @param string $mode Current mode
 	 * @param string $action Current action to manage:
@@ -188,7 +188,7 @@ class acp_statistics_controller extends acp_main_controller
 			'GROUP_BY'	=> 'topic_poster HAVING count(1) > 1' ,
 			));
 
-		 // Record all users that have more than one posted intruction and MUST introduce (not ignored)
+		 // Record all users that have more than one posted introduction and MUST introduce (not ignored)
 		$users_ids = array();
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
@@ -205,7 +205,7 @@ class acp_statistics_controller extends acp_main_controller
 		{
 			$start = min($start, $nb_several_introduce - 1);
 
-			for ($index = $start; $index < min($nb_several_introduce, $start + acp_statistics_controller::NUMBER_ITEMS_BY_PAGE); ++$index)
+			for ($index = $start; $index < min($nb_several_introduce, $start + self::NUMBER_ITEMS_BY_PAGE); ++$index)
 			{
 				// Here, no more need to test if number of introduce > 1 because it is already done just before
 				$sql = $this->db->sql_build_query('SELECT', array(
@@ -234,10 +234,10 @@ class acp_statistics_controller extends acp_main_controller
 				$this->db->sql_freeresult($result);
 			}
 			$this->template->assign_vars(array(
-				'S_DISPLAY_INTRODUCES'		=> ($nb_several_introduce > 0) ? true : false,
-				'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start),
+				'S_DISPLAY_INTRODUCES'		=> true,
+				'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, self::NUMBER_ITEMS_BY_PAGE, $start),
 			));
-			$this->pagination->generate_template_pagination($this->u_action . "&amp;action=otherpage", 'pagination', 'start', $nb_several_introduce, acp_statistics_controller::NUMBER_ITEMS_BY_PAGE, $start);
+			$this->pagination->generate_template_pagination($this->u_action . "&amp;action=otherpage", 'pagination', 'start', $nb_several_introduce, self::NUMBER_ITEMS_BY_PAGE, $start);
 		}
 
 		$this->template->assign_vars(array(

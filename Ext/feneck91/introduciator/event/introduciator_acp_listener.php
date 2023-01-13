@@ -23,7 +23,7 @@ class introduciator_acp_listener implements EventSubscriberInterface
 	 * @access public
 	 */
 
-	static public function getSubscribedEvents()
+	public static function getSubscribedEvents()
 	{
 		return array(
 			'core.permissions'		=> 'add_permissions',

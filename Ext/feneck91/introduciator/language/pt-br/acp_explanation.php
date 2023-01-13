@@ -56,28 +56,28 @@ $lang = array_merge($lang, array(
 
 	// Settings: page text configuration
 	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE'					=> 'Configuração do texto na página de explicação',
-	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> 'Para todos os campos que se seguem, podes usar:<br/>
+	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> 'Para todos os campos que se seguem, podes usar:<br />
 																		<ul>
 																		<li><b>%forum_name%</b>: nome do fórum para apresentações</li>
 																		<li><b>%forum_url%</b>: url do fórum para apresentações</li>
 																		<li><b>%forum_post%</b>: url direto para criação de tópico no fórum para apresentações</li>
 																		</ul>
-																		É permitido o uso de BBcodes.<br/>
-																		<br/>
+																		É permitido o uso de BBcodes.<br />
+																		<br />
 																		<u>Exemplos:</u>
 																		<ul>
 																		<li>Criar um endereço para o fórum das apresentações: <i>[url=<b>%forum_url%</b>]Ir para ’<b>%forum_name%</b>’[/url]</i>
 																		<li>Criar um endereço para criar o tópico no fórum das apresentações: <i>[url=<b>%forum_post%</b>]Criar apresentação em ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
-																		<br/>',
+																		<br />',
 	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Título da página de explicação:',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Predefinido = <b>%explanation_title%</b><br/>Podes colocar o texto que desejares.',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Predefinido = <b>%explanation_title%</b><br />Podes colocar o texto que desejares.',
 	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Texto da explicação:',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Predefinido = <b>%explanation_text%</b><br/>Podes colocar o texto que desejares.',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Predefinido = <b>%explanation_text%</b><br />Podes colocar o texto que desejares.',
 	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Título das regras da explicação:',
-	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Predefinido = <b>%rules_title%</b><br/>Podes colocar o texto que desejares.',
+	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Predefinido = <b>%rules_title%</b><br />Podes colocar o texto que desejares.',
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Texto das regras do fórum das apresentações:',
-	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Predefinido = <b>%rules_text%</b><br/>Por padrão, a %rules_text% é substituída pelas regras do fórum de apresentação.<br/>Podes colocar o texto que desejares.',
+	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Predefinido = <b>%rules_text%</b><br />Por padrão, a %rules_text% é substituída pelas regras do fórum de apresentação.<br />Podes colocar o texto que desejares.',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>Introduciator: configuração da explicação atualizada com sucesso.</strong>',

@@ -1,14 +1,14 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator_explain.css' %}
 {% INCLUDE 'overall_header.html' %}
 
-<br/>
+<br />
 <div class="panel">
 {% if S_EXT_ACTIVATED %}
 	<div class="inner" >
 		<div class="content">
-			<br/>
+			<br />
 			<h2 class="introduciator_explain">{{ INTRODUCIATOR_EXT_EXPLAIN_TITLE }}</h2>
-			<br/>
+			<br />
 			<p>{{ INTRODUCIATOR_EXT_EXPLAIN_TEXT }}</p>
 		</div>
 	</div>
@@ -17,33 +17,33 @@
 		<div class="inner">
 		{% if S_RULES_TITLE_ACTIVATED %}
 			{{ INTRODUCIATOR_EXT_RULES_TITLE }}
-			<br/>
+			<br />
 		{% endif %}
-			<br/>
+			<br />
 			<p>
 				{{ INTRODUCIATOR_EXT_RULES_TEXT }}
-				<br/>
+				<br />
 			</p>
 		</div>
 	</div>
-	<br/>
+	<br />
 	{% else %}
-	<br/>
+	<br />
 	{% endif %}
-	<br/>
+	<br />
 	<div style="text-align: center">
 		<a href="{{ INTRODUCIATOR_EXT_LINK_FORUM_URL }}" class="button"><span>{{ INTRODUCIATOR_EXT_LINK_GOTO_FORUM }}</span></a>
 		<a href="{{ INTRODUCIATOR_EXT_LINK_FORUM_POST }}" class="button"><span>{{ INTRODUCIATOR_EXT_LINK_POST_FORUM }}</span></a>
 	</div>
-	<br/>
-	<br/>
+	<br />
+	<br />
 {% else %}
 	<div class="inner">
 		<div class="content">
-			<br/>
+			<br />
 			<h2 class="introduciator_disabled">{{ lang('INTRODUCIATOR_EXT_DISABLED') }}</h2>
 		</div>
-		<br/>
+		<br />
 	</div>
 {% endif %}
 </div>

@@ -17,7 +17,7 @@ use \phpbb\config\db;
 /**
  * Class used to manage general acp page.
  *
- * This is the page used to display current version, installed date version and check if new version is avalaible.
+ * This is the page used to display current version, installed date version and check if new version is available.
  */
 class acp_general_controller
 {
@@ -64,7 +64,7 @@ class acp_general_controller
 
 	/**
 	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
-	 * is really comming from this extension by checking form key.
+	 * is really coming from this extension by checking form key.
 	 *
 	 * @param string $mode Current mode
 	 * @param string $action Current action to manage

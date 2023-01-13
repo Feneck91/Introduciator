@@ -49,22 +49,22 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Please introduce youself into the topic: %s',
 	'INTRODUCIATOR_EXT_DISABLED'								=> 'The Introduciator Extension is disabled. You should enable it to make this Extension workable.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'As for every new user, you must introduce yourself to other members in the “<a href="%s">%s</a>” forum<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'As for every new user, you must introduce yourself to other members in the “<a href="%s">%s</a>” forum<br />
 																	Only a new topic in the forum for introductions is allowed.',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br />
 																	When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>The rules are repeated here:</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> 'Go to the “%s” forum',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> 'Introduce yourself',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>During presentation approval, it remains editable and moderators can reply to you.
-																	<br/>This will allow you to bring it into conformity with the requirements of the forum if necessary.',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br />During presentation approval, it remains editable and moderators can reply to you.
+																	<br />This will allow you to bring it into conformity with the requirements of the forum if necessary.',
 
 	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Member’s introduction',
-	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'No introduction avalaible for this membrer',
+	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'No introduction available for this membrer',
 	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'						=> 'See the member’s introduction',
 	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'			=> 'The introduction of this member is pending approval',
 
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Go to member’s introduction',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'The member’s introduction is pending approval',
-	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'No introduction avalaible for this member',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'No introduction available for this member',
 ));

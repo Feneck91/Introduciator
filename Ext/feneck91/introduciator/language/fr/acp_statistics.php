@@ -39,7 +39,7 @@ if (empty($lang) || !is_array($lang))
 
 /**
  * Mode: statistics
- * Info: Les clefs de langages sont préfixés avec 'INTRODUCIATOR_ST_' pour 'INTRODUCIATOR_STATISTICS_PAGES_'
+ * Info: Les clefs de langues sont préfixées avec 'INTRODUCIATOR_ST_' pour 'INTRODUCIATOR_STATISTICS_PAGES_'
  */
 $lang = array_merge($lang, array(
 	// Titres
@@ -47,7 +47,7 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Permet d’afficher les informations de la base de données :
 														<ul>
 														<li>Les statistiques sur les présentations.</li>
-														<li>La vérification de la base de données concernant les présentations (vérification que les utilisateurs n’ont pas postés plus d’une seule présentation).</li>
+														<li>La vérification de la base de données concernant les présentations (vérification que les utilisateurs n’ont pas posté plus d’une seule présentation).</li>
 														</ul>',
 
 	// Number of introduce's texts

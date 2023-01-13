@@ -56,28 +56,28 @@ $lang = array_merge($lang, array(
 
 	// Settings: page text configuration
 	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE'					=> '说明文字页面配置',
-	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> '下面所有项目，你可以使用：<br/>
+	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> '下面所有项目，你可以使用：<br />
 																		<ul>
 																		<li><b>%forum_name%</b>： 自我介绍板块的名称</li>
 																		<li><b>%forum_url%</b>： 自我介绍板块的网址</li>
 																		<li><b>%forum_post%</b>： 自我介绍板块的新帖子网址</li>
 																		</ul>
-																		你可以在消息中使用 BBcodes 。<br/>
-																		<br/>
+																		你可以在消息中使用 BBcodes 。<br />
+																		<br />
 																		<u>比如：</u>
 																		<ul>
 																		<li>创建链接到自我介绍板块： <i>[url=<b>%forum_url%</b>]点击到自我介绍板块’<b>%forum_name%</b>’[/url]</i>
 																		<li>创建链接到自我介绍板块并建立新主题： <i>[url=<b>%forum_post%</b>]点击创建新的自我介绍 ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
-																		<br/>',
+																		<br />',
 	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> '说明页面的标题：',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> '默认是 = <b>%explanation_title%</b><br/>你可以修改这个文字。',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> '默认是 = <b>%explanation_title%</b><br />你可以修改这个文字。',
 	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> '说明页面文字：',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> '默认是 = <b>%explanation_text%</b><br/>你可以修改这个文字。',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> '默认是 = <b>%explanation_text%</b><br />你可以修改这个文字。',
 	'INTRODUCIATOR_EP_RULES_TITLE'									=> '说明规则标题：',
-	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> '默认是 = <b>%rules_title%</b><br/>你可以修改这个文字。',
+	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> '默认是 = <b>%rules_title%</b><br />你可以修改这个文字。',
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> '自我介绍板块的版规：',
-	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> '默认是 = <b>%rules_text%</b><br/>默认情况下， %rules_text% 被替换为自我介绍板块的版规。<br/>你可以修改这个文字。',
+	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> '默认是 = <b>%rules_text%</b><br />默认情况下， %rules_text% 被替换为自我介绍板块的版规。<br />你可以修改这个文字。',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>自我介绍： 说明页面设置更新。</strong>',

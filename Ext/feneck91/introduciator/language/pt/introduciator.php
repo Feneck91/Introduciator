@@ -51,15 +51,15 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Por favor, apresenta-te: %s',
 	'INTRODUCIATOR_EXT_DISABLED'								=> 'A extensão está desativada. Tens de a ativar para que ela funcione.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Para poderes usar o fórum, <u>deves</u> apresentar-te</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Tal como para qualquer novo utilizador, deves apresentar-te à comunidade no fórum “<a href="%s">%s</a>”<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Tal como para qualquer novo utilizador, deves apresentar-te à comunidade no fórum “<a href="%s">%s</a>”<br />
 																	Apenas é permitido criar um  único tópico nas apresentações.',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br />
 																	Ao criar o tópico de apresentação, por favor, observa as regras que são exibidas no topo do fórum das apresentações.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>As regras repetem-se aqui:</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> 'Ir para o fórum “%s”',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> 'Apresenta-te',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>Durante a aprovação da apresentação, é possível editar e os moderadores podem responder-te.
-																	<br/>O que te irá permitir corrigir a tua apresentação caso seja necessário, conforme os requisitos do fórum.',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br />Durante a aprovação da apresentação, é possível editar e os moderadores podem responder-te.
+																	<br />O que te irá permitir corrigir a tua apresentação caso seja necessário, conforme os requisitos do fórum.',
 
 	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Apresentação do Utilizador',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'Não existe nenhuma apresentação disponível para este utilizador',

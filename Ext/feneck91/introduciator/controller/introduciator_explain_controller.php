@@ -25,7 +25,7 @@ use phpbb\user;
 class introduciator_explain_controller
 {
 	/**
-	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
+	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $introduciator_helper;
 
@@ -53,7 +53,7 @@ class introduciator_explain_controller
 	 * Constructor
 	 *
 	 * @param \feneck91\introduciator\helper\introduciator_helper   $introduciator_helper    Extension helper
-	 * @param phpbb\controller\helper                               $helper                  phpBB helper
+	 * @param \phpbb\controller\helper                              $helper                  phpBB helper
 	 * @param \phpbb\config\config                                  $config                  Current configuration (config table)
 	 * @param \phpbb\template\template                              $template                Template object
 	 * @param \phpbb\user                                           $user                    User object
@@ -71,7 +71,7 @@ class introduciator_explain_controller
 
 	public function handle($forum_id)
 	{
-		if ($this->config['introduciator_allow'])
+		if ($this->introduciator_helper->is_introduciator_allowed())
 		{	// Title message
 			$this->introduciator_helper->load_language_if_needed();
 
@@ -90,8 +90,8 @@ class introduciator_explain_controller
 				'S_EXT_ACTIVATED'					=> true,
 				'INTRODUCIATOR_EXT_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
 				'INTRODUCIATOR_EXT_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
-				'S_RULES_ACTIVATED'					=> $params['is_explanation_display_rules'] && strlen($params['explanation_rules_text']) > 0,
-				'S_RULES_TITLE_ACTIVATED'			=> (strlen($params['explanation_rules_title']) > 0),
+				'S_RULES_ACTIVATED'					=> $params['is_explanation_display_rules'] && $params['explanation_rules_text'] != '',
+				'S_RULES_TITLE_ACTIVATED'			=> $params['explanation_rules_title'] != '',
 				'INTRODUCIATOR_EXT_RULES_TITLE'		=> $params['explanation_rules_title'],
 				'INTRODUCIATOR_EXT_RULES_TEXT'		=> $params['explanation_rules_text'],
 				'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
@@ -102,6 +102,7 @@ class introduciator_explain_controller
 		}
 		else
 		{
+			$message = '';
 			$this->template->assign_vars(array(
 				'S_EXT_ACTIVATED'					=> false,
 				));

@@ -56,28 +56,28 @@ $lang = array_merge($lang, array(
 
 	// Settings: page text configuration
 	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE'					=> 'Erklärungen zur Konfiguration der Textseite',
-	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> 'Für alle nachfolgenden Felder sind folgende Funktionen verfügbar:<br/>
+	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> 'Für alle nachfolgenden Felder sind folgende Funktionen verfügbar:<br />
 																		<ul>
 																		<li><b>%forum_name%</b>: Name des Forums für Vorstellungen</li>
 																		<li><b>%forum_url%</b>: URL zum Forum für Vorstellungen.</li>
 																		<li><b>%forum_post%</b>: URL um neue Beiträge in das Forum für Vorstellungen zu posten.</li>
 																		</ul>
-																		Zur Erstellung von Nachrichten kann man BBcodes verwenden.<br/>
-																		<br/>
+																		Zur Erstellung von Nachrichten kann man BBcodes verwenden.<br />
+																		<br />
 																		<u>Beispiele:</u>
 																		<ul>
 																		<li>Link zum Forum für Vorstellungen erstellen: <i>[url=<b>%forum_url%</b>]Hier klicken, um zum Forum ’<b>%forum_name%</b> zu gelangen’[/url]</i>
 																		<li>Link erzeugen, um ein Thema in einem Forum für Vorstellungen zu erstellen: <i>[url=<b>%forum_post%</b>]Hier klicken um ein neues Thema im Forum ’<b>%forum_name%</b> zu erstellen’[/url]</i>
 																		</ul>
-																		<br/>',
+																		<br />',
 	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Erläuterung Seitentitel:',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Standard = <b>%explanation_title%</b><br/>Sie können diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Standard = <b>%explanation_title%</b><br />Sie können diesen Text mit deinem eigenen ersetzen.',
 	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Text der Erklärungsseite:',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Standard = <b>%explanation_text%</b><br/>Sie können diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Standard = <b>%explanation_text%</b><br />Sie können diesen Text mit deinem eigenen ersetzen.',
 	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Erläuterung der Regeln Titel:',
-	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Standard = <b>%rules_title%</b><br/>Sie können diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Standard = <b>%rules_title%</b><br />Sie können diesen Text mit deinem eigenen ersetzen.',
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Text der Regeln für das Forum der Vorstellungen:',
-	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Standard = <b>%rules_text%</b><br/>Standardmäßig wird %rules_text% durch die Regeln für das Forum für Vorstellungen ersetzt.<br/>Sie können diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Standard = <b>%rules_text%</b><br />Standardmäßig wird %rules_text% durch die Regeln für das Forum für Vorstellungen ersetzt.<br />Sie können diesen Text mit deinem eigenen ersetzen.',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>Introduciator: Die Einstellungen der Erklärung wurden aktualisiert.</strong>',

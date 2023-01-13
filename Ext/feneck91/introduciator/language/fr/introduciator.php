@@ -42,22 +42,22 @@ if (empty($lang) || !is_array($lang))
  */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Votre message de présentation est en cours d’approbation, veuillez patienter.',
-	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Pendant l’approbation de votre message de présentation, seule l’édition est autorisée.',
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Pendant l’approbation de votre message de présentation, seule la modification est autorisée.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'Vous n’êtes pas autorisé à vous présenter plus d’une fois !',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'Vous n’êtes pas autorisé à supprimer le premier message de votre présentation !',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'Vous n’êtes pas autorisé à supprimer le premier message d’une présentation, supprimez toute la présentation en détruisant le sujet !',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Veuillez vous présenter dans le Forum : %s',
 	'INTRODUCIATOR_EXT_DISABLED'								=> 'L’extension Présentation forcée est désactivé. Veuillez l’activer pour l’utiliser !',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le forum “<a href="%s">%s</a>”<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le forum “<a href="%s">%s</a>”<br />
 																	Seule la création d’un nouveau sujet dans le forum de présentation est autorisée.',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br />
 																	Lors de la création de votre présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>Les règles sont rappelées ici :</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> 'Aller dans le forum “%s”',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> 'Présentez-vous',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br/>Pendant l’approbation de votre présentation, celle-ci reste modifiable et les modérateurs peuvent vous répondre.
-																	<br/>Ceci pourra vous permettre de la mettre en conformité avec les exigences du forum le cas échéant.',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br />Pendant l’approbation de votre présentation, celle-ci reste modifiable et les modérateurs peuvent vous répondre.
+																	<br />Ceci pourra vous permettre de la mettre en conformité avec les exigences du forum le cas échéant.',
 
 	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Présentation du membre ',
 	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'Pas de présentation disponible pour ce membre',

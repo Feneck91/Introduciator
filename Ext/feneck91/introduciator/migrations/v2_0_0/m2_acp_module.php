@@ -14,7 +14,7 @@ namespace feneck91\introduciator\migrations\v2_0_0;
 class m2_acp_module extends \phpbb\db\migration\migration
 {
 	/**
-	 * Get the migration dependencie.
+	 * Get the migration dependencies.
 	 *
 	 * @return array Array of depending items.
 	 */
@@ -61,12 +61,12 @@ class m2_acp_module extends \phpbb\db\migration\migration
 						'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
 						'modes'				=> array(
 							//---------------------------------------------------------------------
-							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+							// Creation of ACP sub categories under Introduciator extension into Extensions tab
 							'general',
 							'configuration',
 							'explanation',
 							'statistics',
-							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+							// Creation of ACP sub categories under Introduciator extension into Extensions tab
 							//---------------------------------------------------------------------
 							),
 					),

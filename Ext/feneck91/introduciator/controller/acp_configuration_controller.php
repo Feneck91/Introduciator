@@ -48,7 +48,7 @@ class acp_configuration_controller extends acp_main_controller
 	 * @param \phpbb\db\driver\factory                              $db             Database interface
 	 * @param \phpbb\log\log                                        $log            Object used to add info into admin log
 	 * @param string                                                $root_path      phpBB root path
-	 * @param string                                                $php_ext        phpBB Extention
+	 * @param string                                                $php_ext        phpBB Extension
 	 * @param \phpbb\language\language                              $language       Language user object
 	 * @param \phpbb\request\request                                $request        Request object
 	 * @param \phpbb\template\template                              $template       Template object
@@ -78,7 +78,7 @@ class acp_configuration_controller extends acp_main_controller
 	 * Manage the page.
 	 *
 	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
-	 * is really comming from this extension by checking form key.
+	 * is really coming from this extension by checking form key.
 	 *
 	 * @param string $mode Current mode
 	 * @param string $action Current action to manage
@@ -102,16 +102,11 @@ class acp_configuration_controller extends acp_main_controller
 			{
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
-			switch ($action)
+			if ($action != 'update')
 			{
-				case 'update' :
-					$this->do_update_action();
-				break;
-
-				default:
-					trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
-				break;
+				trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
 			}
+			$this->do_update_action();
 		}
 	}
 
@@ -215,7 +210,7 @@ class acp_configuration_controller extends acp_main_controller
 	/**
 	 * Add all forum recursivly to template 'forums' var.
 	 *
-	 * Used to fill the template 'forums' var to be able to show to the user all avalaible
+	 * Used to fill the template 'forums' var to be able to show to the user all available
 	 * forums with correct hierarchy.
 	 *
 	 * @param int $fk_selected_forum_id the current selected forum id.
@@ -233,7 +228,7 @@ class acp_configuration_controller extends acp_main_controller
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'),
 				'FORUM_ID'		=> 0,
-				'SELECTED'		=> ($fk_selected_forum_id === 0),
+				'SELECTED'		=> $fk_selected_forum_id === 0,
 				'CAN_SELECT'	=> true,
 				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'),
 			));
@@ -250,8 +245,8 @@ class acp_configuration_controller extends acp_main_controller
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
-				'SELECTED'		=> ($fk_selected_forum_id == $row['forum_id']),
-				'CAN_SELECT'	=> ((int) $row['forum_type']) == FORUM_POST,
+				'SELECTED'		=> $fk_selected_forum_id == $row['forum_id'],
+				'CAN_SELECT'	=> (int) $row['forum_type'] == FORUM_POST,
 				'TOOLTIP'		=> $row['forum_desc'],
 			));
 			$this->add_all_forums($fk_selected_forum_id, $row['forum_id'], $level + 1);

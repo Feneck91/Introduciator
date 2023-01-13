@@ -52,15 +52,15 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Usado para activar ou desactivar esta extensão.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Força o utilizador a apresentar-se:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'Quando esta opção se encontra activa, a extensão força o utilizador a apresentar-se no tópico respectivo antes de poder participar noutros tópicos.
-																			<br/>Quando esta funcionalidade não se encontra activa, todas as outras opções continuam a funcionar.',
+																			<br />Quando esta funcionalidade não se encontra activa, todas as outras opções continuam a funcionar.',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Autoriza a extensão a verificar a remoção da primeira mensagem da apresentação no fórum das apresentações:',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'Quando esta opção se encontra activa, a extensão previne que a primeira mensagem de qualquer tópico que se encontra no fórum das apresentações seja removido.
-																			<br/>Mesmo moderadores ou administradores não têm permissões para garantir que a primeira mensagem de qualquer tópico de apresentação é a apresentação do utilizador. No entanto, é possível apagar o tópico caso haja permissões para isso.
-																			<br/>Podes desactivar esta opção, mas irás permitir que o utilizador possa criar múltiplas apresentações. É recomendado ter esta opção activa.',
+																			<br />Mesmo moderadores ou administradores não têm permissões para garantir que a primeira mensagem de qualquer tópico de apresentação é a apresentação do utilizador. No entanto, é possível apagar o tópico caso haja permissões para isso.
+																			<br />Podes desactivar esta opção, mas irás permitir que o utilizador possa criar múltiplas apresentações. É recomendado ter esta opção activa.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'O fórum onde o utilizador se deve apresentar:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'A extensão irá procurar apenas neste fórum por apresentações.',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Opções de aprovação das apresentações:',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'É usado para forçar que a apresentação seja aprovada por um moderador:<br/>
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'É usado para forçar que a apresentação seja aprovada por um moderador:<br />
 																			<ul>
 																			<li><b>Sem aprovação</b>: a mensagem segue normalmente sem que haja necessidade de aprovar.</li>
 																			<li><b>Aprovação simples</b>: força a apresentação de ser aprovada. O utilizador não consegue ver a sua apresentação até ser validada por um moderador (processo normal usado nas aprovações).</li>

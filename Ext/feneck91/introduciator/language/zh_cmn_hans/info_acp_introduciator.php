@@ -50,5 +50,5 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GENERAL'							=> '通用',
 	'INTRODUCIATOR_CONFIGURATION'					=> '配置',
 	'INTRODUCIATOR_EXPLANATION'						=> '说明',
-	'INTRODUCIATOR_STATISCICS'						=> '统计',
+	'INTRODUCIATOR_STATISTICS'						=> '统计',
 ));

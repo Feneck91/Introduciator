@@ -23,7 +23,7 @@ use phpbb\config\db;
  * Class used to manage explanation acp page.
  *
  * This is the page used to configure the explanation informations displayed to the user when
- * he try to post a message without beeing introduce.
+ * he try to post a message without being introduce.
  *
  */
 class acp_explanation_controller extends acp_main_controller
@@ -50,7 +50,7 @@ class acp_explanation_controller extends acp_main_controller
 	 * @param \phpbb\db\driver\factory                              $db             Database interface
 	 * @param \phpbb\log\log                                        $log            Object used to add info into admin log
 	 * @param string                                                $root_path      phpBB root path
-	 * @param string                                                $php_ext        phpBB Extention
+	 * @param string                                                $php_ext        phpBB Extension
 	 * @param \phpbb\language\language                              $language       Language user object
 	 * @param \phpbb\request\request                                $request        Request object
 	 * @param \phpbb\template\template                              $template       Template object
@@ -80,7 +80,7 @@ class acp_explanation_controller extends acp_main_controller
 	 * Manage the page.
 	 *
 	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
-	 * is really comming from this extension by checking form key.
+	 * is really coming from this extension by checking form key.
 	 *
 	 * @param string $mode Current mode
 	 * @param string $action Current action to manage
@@ -103,16 +103,11 @@ class acp_explanation_controller extends acp_main_controller
 			{
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
-			switch ($action)
+			if ($action != 'update')
 			{
-				case 'update' :
-					$this->do_update_action();
-				break;
-
-				default:
-					trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
-				break;
+				trigger_error($this->language->lang('NO_MODE') . adm_back_link($this->u_action));
 			}
+			$this->do_update_action();
 		}
 	}
 
@@ -231,7 +226,7 @@ class acp_explanation_controller extends acp_main_controller
 					$key . '_bbcode_options'	=> $bbcode_options,
 				));
 			}
-			array_push($explanation_message_array_result, $explanation_message_array_row_result);
+			$explanation_message_array_result[] = $explanation_message_array_row_result;
 		}
 		$this->db->sql_freeresult($result);
 

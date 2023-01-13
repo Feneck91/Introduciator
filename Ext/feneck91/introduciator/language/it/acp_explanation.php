@@ -56,28 +56,28 @@ $lang = array_merge($lang, array(
 
 	// Settings: page text configuration
 	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE'					=> 'Spiegazioni pagina ?????? di configurazione',
-	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> 'Per tutti i campi successivi, è possibile utilizzare:<br/>
+	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> 'Per tutti i campi successivi, è possibile utilizzare:<br />
 																		<ul>
 																		<li><b>%forum_name%</b>: NOME del forum per la presentazione</li>
 																		<li><b>%forum_url%</b>: URL del Forum per la presentazione</li>
 																		<li><b>%forum_post%</b>: URL da scrivere il uovo post nel forum per le presentazioni</li>
 																		</ul>
-																		È possibile utilizzare i BBcode per fare i messaggi.<br/>
-																		<br/>
+																		È possibile utilizzare i BBcode per fare i messaggi.<br />
+																		<br />
 																		<u>Esempi:</u>
 																		<ul>
 																		<li>Fare Link al forum per le presentazioni: <i>[url=<b>%forum_url%</b>]Clicca qui per andare al forum ’<b>%forum_name%</b>’[/url]</i>
 																		<li>Fare link per creare l’argomento e forum per le presentazioni: <i>[url=<b>%forum_post%</b>]Clicca qui per creare topic nel forum ’<b>%forum_name%</b>’[/url]</i>
 																		</ul>
-																		<br/>',
+																		<br />',
 	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Titolo per la pagina di spiegazione:',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Default = <b>%explanation_title%</b><br/>È possibile modificare questo testo con il proprio.',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Default = <b>%explanation_title%</b><br />È possibile modificare questo testo con il proprio.',
 	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Testo per la pagina di Spiegazione:',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Default = <b>%explanation_text%</b><br/>È possibile modificare questo testo con il proprio.',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Default = <b>%explanation_text%</b><br />È possibile modificare questo testo con il proprio.',
 	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Titolo spiegazione regole:',
-	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Default = <b>%rules_title%</b><br/>È possibile modificare questo testo con il proprio.',
+	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Default = <b>%rules_title%</b><br />È possibile modificare questo testo con il proprio.',
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Testo delle regole per il forum per le presentazioni:',
-	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Default = <b>%rules_text%</b><br/>Per impostazione predefinita, %rules_text% è sostituito dalle regole per il forum per le presentazioni.<br/>È possibile modificare questo testo con il proprio.',
+	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Default = <b>%rules_text%</b><br />Per impostazione predefinita, %rules_text% è sostituito dalle regole per il forum per le presentazioni.<br />È possibile modificare questo testo con il proprio.',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>?????</strong>',
