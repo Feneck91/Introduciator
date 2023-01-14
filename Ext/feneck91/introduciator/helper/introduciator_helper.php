@@ -575,7 +575,7 @@ class introduciator_helper
 								// Check if the topic contains more than one post: if contains only one post, keep default behavior
 								$sql = 'SELECT count(1)
 										FROM ' . POSTS_TABLE . '
-										WHERE topic_id = ' . $topic_id . ' AND post_visibility <> ' . ITEM_DELETED;
+										WHERE topic_id = ' . (int) $topic_id . ' AND post_visibility <> ' . ITEM_DELETED;
 
 								$result = $this->db->sql_query($sql);
 								$row = $this->db->sql_fetchrow($result);
