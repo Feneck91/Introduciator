@@ -25,7 +25,7 @@ use phpbb\user;
 class introduciator_explain_controller
 {
 	/**
-	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
+	 * @var introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $introduciator_helper;
 
@@ -52,11 +52,11 @@ class introduciator_explain_controller
 	/**
 	 * Constructor
 	 *
-	 * @param \feneck91\introduciator\helper\introduciator_helper   $introduciator_helper    Extension helper
-	 * @param \phpbb\controller\helper                              $helper                  phpBB helper
-	 * @param \phpbb\config\config                                  $config                  Current configuration (config table)
-	 * @param \phpbb\template\template                              $template                Template object
-	 * @param \phpbb\user                                           $user                    User object
+	 * @param introduciator_helper          $introduciator_helper    Extension helper
+	 * @param \phpbb\controller\helper      $helper                  phpBB helper
+	 * @param \phpbb\config\config          $config                  Current configuration (config table)
+	 * @param \phpbb\template\template      $template                Template object
+	 * @param \phpbb\user                   $user                    User object
 	 *
 	 * @access public
 	 */
@@ -69,6 +69,16 @@ class introduciator_explain_controller
 		$this->user = $user;
 	}
 
+	/**
+	 * Handle events.
+	 *
+	 * * Called when explain page is displayed to the user.
+	 *
+	 * @param type $forum_id Id's forum.
+	 *
+	 * @return Response object containing rendered page.
+	 * @access public
+	 */
 	public function handle($forum_id)
 	{
 		if ($this->introduciator_helper->is_introduciator_allowed())

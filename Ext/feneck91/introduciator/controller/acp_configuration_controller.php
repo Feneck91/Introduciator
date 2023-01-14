@@ -27,7 +27,7 @@ use phpbb\config\db;
 class acp_configuration_controller extends acp_main_controller
 {
 	/**
-	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
+	 * @var introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
 
@@ -44,16 +44,16 @@ class acp_configuration_controller extends acp_main_controller
 	/**
 	 * Constructor
 	 *
-	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
-	 * @param \phpbb\db\driver\factory                              $db             Database interface
-	 * @param \phpbb\log\log                                        $log            Object used to add info into admin log
-	 * @param string                                                $root_path      phpBB root path
-	 * @param string                                                $php_ext        phpBB Extension
-	 * @param \phpbb\language\language                              $language       Language user object
-	 * @param \phpbb\request\request                                $request        Request object
-	 * @param \phpbb\template\template                              $template       Template object
-	 * @param \phpbb\user                                           $user           User object
-	 * @param \phpbb\config\db                                      $dbconfig       Config object
+	 * @param introduciator_helper          $helper         Extension helper
+	 * @param \phpbb\db\driver\factory      $db             Database interface
+	 * @param \phpbb\log\log                $log            Object used to add info into admin log
+	 * @param string                        $root_path      phpBB root path
+	 * @param string                        $php_ext        phpBB Extension
+	 * @param \phpbb\language\language      $language       Language user object
+	 * @param \phpbb\request\request        $request        Request object
+	 * @param \phpbb\template\template      $template       Template object
+	 * @param \phpbb\user                   $user           User object
+	 * @param \phpbb\config\db              $dbconfig       Config object
 	 *
 	 * @access public
 	 */

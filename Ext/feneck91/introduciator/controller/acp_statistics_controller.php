@@ -32,7 +32,7 @@ class acp_statistics_controller extends acp_main_controller
 	const NUMBER_ITEMS_BY_PAGE = 10;
 
 	/**
-	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper
+	 * @var introduciator_helper Introduciator helper. The important code is into this helper
 	 */
 	protected $helper;
 
@@ -49,16 +49,16 @@ class acp_statistics_controller extends acp_main_controller
 	/**
 	 * Constructor
 	 *
-	 * @param \feneck91\introduciator\helper\introduciator_helper   $helper         Extension helper
-	 * @param \phpbb\db\driver\factory                              $db             Database interface
-	 * @param \phpbb\pagination                                     $pagination     Used to manage information split to display it into several pages
-	 * @param string                                                $root_path      phpBB root path
-	 * @param string                                                $php_ext        phpBB Extension
-	 * @param \phpbb\language\language                              $language       Language user object
-	 * @param \phpbb\request\request                                $request        Request object
-	 * @param \phpbb\template\template                              $template       Template object
-	 * @param \phpbb\user                                           $user           User object
-	 * @param \phpbb\config\db                                      $dbconfig       Config object
+	 * @param introduciator_helper          $helper         Extension helper
+	 * @param \phpbb\db\driver\factory      $db             Database interface
+	 * @param \phpbb\pagination             $pagination     Used to manage information split to display it into several pages
+	 * @param string                        $root_path      phpBB root path
+	 * @param string                        $php_ext        phpBB Extension
+	 * @param \phpbb\language\language      $language       Language user object
+	 * @param \phpbb\request\request        $request        Request object
+	 * @param \phpbb\template\template      $template       Template object
+	 * @param \phpbb\user                   $user           User object
+	 * @param \phpbb\config\db              $dbconfig       Config object
 	 *
 	 * @access public
 	 */
