@@ -572,21 +572,34 @@ class introduciator_helper
 
 							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
 							{
-								// The user try to delete the first post of one introduce topic : may be not allowed
-								// Even the the $first_poster_id is ignored, no way to delete the first post of any introduction of any users
-								// if the configuration option (authorize extension to verify the deletion of first post introduction) is selected
-								$ret_allowed_action = false;
-								if ($redirect)
-								{
-									// Load langage
-									$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
-									$this->load_language_if_needed();
+								// Check if the topic contains more than one post: if contains only one post, keep default behavior
+								$sql = 'SELECT count(1)
+										FROM ' . POSTS_TABLE . '
+										WHERE topic_id = ' . $topic_id . ' AND post_visibility <> ' . ITEM_DELETED;
 
-									$message = $first_poster_id === $poster_id && !$this->auth->acl_get('m_delete', $forum_id) ? $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST') : $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
-									$meta_info = append_sid("{$this->root_path}viewtopic.{$this->php_ext}", 'f=' . (int) $forum_id . '&amp;t=' . (int) $topic_id);
-									$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
-									$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
-									trigger_error($message, E_USER_NOTICE);
+								$result = $this->db->sql_query($sql);
+								$row = $this->db->sql_fetchrow($result);
+								$this->db->sql_freeresult($result);
+								$posts_count = (int) $row['count(1)'];
+
+								if ($posts_count > 1)
+								{
+									// The user try to delete the first post of one introduce topic : may be not allowed
+									// Even the the $first_poster_id is ignored, no way to delete the first post of any introduction of any users
+									// if the configuration option (authorize extension to verify the deletion of first post introduction) is selected
+									$ret_allowed_action = false;
+									if ($redirect)
+									{
+										// Load langage
+										$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+										$this->load_language_if_needed();
+
+										$message = $first_poster_id === $poster_id && !$this->auth->acl_get('m_delete', $forum_id) ? $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST') : $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
+										$meta_info = append_sid("{$this->root_path}viewtopic.{$this->php_ext}", 'f=' . (int) $forum_id . '&amp;t=' . (int) $topic_id);
+										$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
+										$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
+										trigger_error($message, E_USER_NOTICE);
+									}
 								}
 							}
 						}
