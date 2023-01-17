@@ -175,16 +175,14 @@ class introduciator_listener implements EventSubscriberInterface
 		$data = $event['data'];
 		if (isset($data['introduciator_force_unapproved']))
 		{
-			meta_refresh(20, $event['redirect_url']); // More time to read
-
-
-			$message = $this->language->lang['POST_STORED_MOD'] . ' '. $this->language->lang['POST_APPROVAL_NOTIFY'];
+			meta_refresh(30, $event['redirect_url']); // More time to read before page change
+			$message = $this->language->lang('POST_STORED_MOD') . ' '. $this->language->lang('POST_APPROVAL_NOTIFY');
 			if ($data['introduciator_force_unapproved'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 			{	// Add more explanation: the user can modify his introduce
 				$this->helper->load_language_if_needed();
-				$message .= $this->helper->get_language()->lang('INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY');
+				$message .= $this->language->lang('INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY');
 			}
-			$message .= '<br /><br />' . sprintf($this->language->lang['RETURN_FORUM'], '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $data['forum_id']) . '">', '</a>');
+			$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $data['forum_id']) . '">', '</a>');
 			trigger_error($message);
 		}
 	}
