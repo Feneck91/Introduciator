@@ -211,7 +211,7 @@ class acp_statistics_controller extends acp_main_controller
 				$sql = $this->db->sql_build_query('SELECT', array(
 					'SELECT'    => "topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type",
 					'FROM'      => array(TOPICS_TABLE => TOPICS_TABLE),
-					'WHERE'		=> "forum_id = {$params['fk_forum_id']} AND topic_poster = {$users_ids[$index]} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
+					'WHERE'		=> "forum_id = " . (int) "{$params['fk_forum_id']} AND topic_poster = {$users_ids[$index]} AND topic_visibility = " . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
 					'ORDER_BY'	=> 'topic_time',
 				));
 

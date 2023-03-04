@@ -47,23 +47,23 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Allow to configure the extension settings.',
 
 	// Settings: general
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Enable extension:',
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Used to enable or disable this extension.',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Activate extension:',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Used to activate or deactivate this extension.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself:',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
-																			<br />When this feature is not enabled, all other options remain active.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions:',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
-																			<br />Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
-																			<br />You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is selected, the extension forces the user to post a self-introduction before being allowed to post in other topics.
+																			<br />When this feature is not activated, all other options remain active.',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to regulate the deletion of first introduction post in the forum for introductions:',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'When this option is selected, the extension prevents the deletion of the first post in any topic in the forum for introductions.
+																			<br />Even moderators or administrators will not have the permission to delete the introduction, thus ensuring that the first post in any introductory topic is effectively the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
+																			<br />If not selected, a member will be able to have several introductions. Enabling this option is therefore preferable.',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'The forum where the user must introduce himself/herself:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'The extension will search only in this forum whether forum users have introduced themselves.',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Introduction approval options:',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Is used to force introduction to be approved by a moderator:<br />
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Is used to require moderator approval for an introduction:<br />
 																			<ul>
-																			<li><b>No approval</b>: don’t force introduction to be approved, let the default processing.</li>
-																			<li><b>Simple approval</b>: force introduction to be approved. The user doesn’t see his/her introduction if it is not validated by a moderator (normal processing is used for all messages that use approval).</li>
-																			<li><b>Approval with ability to edit</b>: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbidden.</li>
+																			<li><b>No approval</b>: don’t force introduction approval.</li>
+																			<li><b>Simple approval</b>: force introduction approval. The user doesn’t see his/her introduction until validated by a moderator (normal processing is used for all messages that need approval).</li>
+																			<li><b>Approval with ability to edit</b>: require introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere until his/her introduction is validated by a moderator. This allows moderators and users to cooperate to make messages compliant for validation by a moderator (unusual message processing approval). Only editing is allowed. Reply and quote are forbidden.</li>
 																			</ul>',
 	'INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL'						=> 'No approval',
 	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL'						=> 'Simple approval',
