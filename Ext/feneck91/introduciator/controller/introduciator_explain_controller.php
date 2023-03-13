@@ -72,18 +72,16 @@ class introduciator_explain_controller
 	/**
 	 * Handle events.
 	 *
-	 * * Called when explain page is displayed to the user.
+	 * Called when explain page is displayed to the user.
 	 *
-	 * @param type $forum_id Id's forum.
-	 *
-	 * @return Response object containing rendered page.
+	 * @return \Symfony\Component\HttpFoundation\Response object containing rendered page.
 	 * @access public
 	 */
-	public function handle($forum_id)
+	public function handle()
 	{
 		if ($this->introduciator_helper->is_introduciator_allowed())
 		{	// Title message
-			$this->introduciator_helper->load_language_if_needed();
+			$this->introduciator_helper->load_language();
 
 			// If user not connected, go to login page
 			if ($this->user->data['user_id'] == ANONYMOUS)

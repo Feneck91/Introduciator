@@ -57,9 +57,9 @@ function introduciator_display_permissions()
 		{# Posting  approval level #}
 		<dl>
 			<dt><label for="posting_approval_level">{{ lang('INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN') }}</span></dt>
-			<dd><label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="1"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="2"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
+			<dd><label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0"{% if APPROVAL_LEVEL_NO_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="1"{% if APPROVAL_LEVEL_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="2"{% if APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
 			</dd>
 		</dl>
 	</fieldset>
@@ -73,7 +73,7 @@ function introduciator_display_permissions()
 				<label><input id="no_is_use_permissions" name="is_use_permissions" type="radio" class="radio" value="0"  onclick="introduciator_display_permissions()"{% if not INTRODUCIATOR_USE_PERMISSIONS %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION') }}</label>
 			</dd>
 		</dl>
-		<span  id="permissions_group_options" style="display: {INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP}">
+		<div id="permissions_group_options" style="display: {INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP}">
 			<hr/>
 			{# Include / Exclude groups #}
 			<dl>
@@ -98,7 +98,7 @@ function introduciator_display_permissions()
 				<dt><label for="ignored_users">{{ lang('INTRODUCIATOR_CP_IGNORED_USERS') }}</label><br /><span>{{ lang('INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN') }}</span></dt>
 				<dd><textarea id="ignored_users" name="ignored_users" rows="10" cols="60" maxlength="255">{INTRODUCIATOR_ITEM_IGNORED_USERS}</textarea></dd>
 			</dl>
-		</span>
+		</div>
 	</fieldset>
 	{# --------------------------- Posting --------------------------------------------- #}
 	<fieldset>

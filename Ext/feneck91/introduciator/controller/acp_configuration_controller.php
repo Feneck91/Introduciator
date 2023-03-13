@@ -93,7 +93,7 @@ class acp_configuration_controller extends acp_main_controller
 		if (empty($action))
 		{
 			// no action or update current
-			$this->do_empty_action();
+			$this->display_configuration();
 		}
 		else
 		{
@@ -117,21 +117,21 @@ class acp_configuration_controller extends acp_main_controller
 	 * @return void
 	 * @access private
 	 */
-	private function do_empty_action()
+	private function display_configuration()
 	{
 		$params = $this->helper->introduciator_getparams(true);
 		$this->template->assign_vars(array(
-			'INTRODUCIATOR_EXTENSION_ACTIVATED'										=> $params['introduciator_allow'],
-			'INTRODUCIATOR_INTRODUCTION_MANDATORY'									=> $params['is_introduction_mandatory'],
-			'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'						=> $params['is_check_delete_first_post'],
-			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL,
-			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL,
-			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'	=> $params['posting_approval_level'] == introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
-			'INTRODUCIATOR_USE_PERMISSIONS'											=> $params['is_use_permissions'],
-			'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'									=> $params['is_include_groups'],
-			'INTRODUCIATOR_ITEM_IGNORED_USERS'										=> $params['ignored_users'],
-			'INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP'								=> $params['is_use_permissions'] ? "none" : "block",
-			'U_ACTION'																=> $this->u_action,
+			'INTRODUCIATOR_EXTENSION_ACTIVATED'					=> $params['introduciator_allow'],
+			'INTRODUCIATOR_INTRODUCTION_MANDATORY'				=> $params['is_introduction_mandatory'],
+			'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'	=> $params['is_check_delete_first_post'],
+			'APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL,
+			'APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_APPROVAL,
+			'APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'		=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
+			'INTRODUCIATOR_USE_PERMISSIONS'						=> $params['is_use_permissions'],
+			'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'				=> $params['is_include_groups'],
+			'INTRODUCIATOR_ITEM_IGNORED_USERS'					=> $params['ignored_users'],
+			'INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP'			=> $params['is_use_permissions'] ? "none" : "block",
+			'U_ACTION'											=> $this->u_action,
 		));
 
 		// Add all forums
@@ -145,6 +145,25 @@ class acp_configuration_controller extends acp_main_controller
 		));
 
 		$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
+	}
+
+	/**
+	 * Verify the approval level value => Incorrect value? Set to APPROVAL_LEVEL_NO_APPROVAL
+	 *
+	 * @param int $posting_approval_level
+	 *
+	 * @return int
+	 * @access private
+	 */
+	private function check_approval_value($posting_approval_level)
+	{
+		if ($posting_approval_level != introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL
+			&& $posting_approval_level != introduciator_helper::APPROVAL_LEVEL_APPROVAL
+			&& $posting_approval_level != introduciator_helper::APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+		{
+			$posting_approval_level = introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL;
+		}
+		return $posting_approval_level;
 	}
 
 	/**
@@ -162,7 +181,7 @@ class acp_configuration_controller extends acp_main_controller
 		$is_check_introduction_mandatory_activated  = $this->request->variable('check_introduction_mandatory_activated', true);
 		$is_check_delete_first_post_activated		= $this->request->variable('check_delete_first_post_activated', false);
 		$fk_forum_id								= $this->request->variable('forum_choice', 0);
-		$posting_approval_level						= $this->request->variable('posting_approval_level', introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL);
+		$posting_approval_level						= $this->request->variable('posting_approval_level', introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL);
 		$is_use_permissions							= $this->request->variable('is_use_permissions', true);
 		$is_include_groups							= $this->request->variable('include_groups', true);
 		$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
@@ -173,18 +192,13 @@ class acp_configuration_controller extends acp_main_controller
 			trigger_error($this->language->lang('INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM') . adm_back_link($this->u_action), E_USER_WARNING);
 		}
 
-		if ($posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL && $posting_approval_level != introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
-		{	// Verify the level approval values => No correct value ? Set to INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL
-			$posting_approval_level = introduciator_helper::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
-		}
-
-		$this->dbconfig->set('introduciator_allow', $is_enabled ? '1' : '0'); // Set the activation extension config
-		$this->dbconfig->set('introduciator_is_introduction_mandatory', $is_check_introduction_mandatory_activated ? '1' : '0');
-		$this->dbconfig->set('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated ? '1' : '0');
+		$this->dbconfig->set('introduciator_allow', $is_enabled); // Set the activation extension config
+		$this->dbconfig->set('introduciator_is_introduction_mandatory', $is_check_introduction_mandatory_activated);
+		$this->dbconfig->set('introduciator_is_check_delete_first_post', $is_check_delete_first_post_activated);
 		$this->dbconfig->set('introduciator_fk_forum_id', $fk_forum_id);
-		$this->dbconfig->set('introduciator_posting_approval_level', $posting_approval_level);
-		$this->dbconfig->set('introduciator_is_use_permissions', $is_use_permissions ? '1' : '0');
-		$this->dbconfig->set('introduciator_is_include_groups', $is_include_groups ? '1' : '0');
+		$this->dbconfig->set('introduciator_posting_approval_level', $this->check_approval_value($posting_approval_level));
+		$this->dbconfig->set('introduciator_is_use_permissions', $is_use_permissions);
+		$this->dbconfig->set('introduciator_is_include_groups', $is_include_groups);
 		$this->dbconfig->set('introduciator_ignored_users', $ignored_users);
 
 		// Update INTRODUCIATOR_GROUPS_TABLE
@@ -222,13 +236,13 @@ class acp_configuration_controller extends acp_main_controller
 	 */
 	private function add_all_forums($fk_selected_forum_id, $id_parent, $level)
 	{
-		if ($id_parent === 0)
+		if ((int) $id_parent === 0)
 		{
 			// Add deactivation item
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'),
 				'FORUM_ID'		=> 0,
-				'SELECTED'		=> $fk_selected_forum_id === 0,
+				'SELECTED'		=> (int) $fk_selected_forum_id === 0,
 				'CAN_SELECT'	=> true,
 				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'),
 			));
@@ -245,8 +259,8 @@ class acp_configuration_controller extends acp_main_controller
 			$this->template->assign_block_vars('forums', array(
 				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
-				'SELECTED'		=> $fk_selected_forum_id == $row['forum_id'],
-				'CAN_SELECT'	=> (int) $row['forum_type'] == FORUM_POST,
+				'SELECTED'		=> (int) $fk_selected_forum_id== (int) $row['forum_id'],
+				'CAN_SELECT'	=> (int) $row['forum_type'] === FORUM_POST,
 				'TOOLTIP'		=> $row['forum_desc'],
 			));
 			$this->add_all_forums($fk_selected_forum_id, $row['forum_id'], $level + 1);

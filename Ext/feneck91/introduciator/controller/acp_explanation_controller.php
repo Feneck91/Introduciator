@@ -94,7 +94,7 @@ class acp_explanation_controller extends acp_main_controller
 		// If no action, display configuration
 		if (empty($action))
 		{	// no action or update current
-			$this->do_empty_action();
+			$this->display_configuration();
 		}
 		else
 		{
@@ -118,7 +118,7 @@ class acp_explanation_controller extends acp_main_controller
 	 * @return void
 	 * @access private
 	 */
-	private function do_empty_action()
+	private function display_configuration()
 	{
 		// no action or update current
 		$params = $this->helper->introduciator_getparams(true);
@@ -214,17 +214,15 @@ class acp_explanation_controller extends acp_main_controller
 			{
 				$new_uid = $bitfield = $bbcode_options = '';
 				$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
-				if (sizeof($texts_errors))
+				if (count($texts_errors))
 				{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
 					trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
 				}
 				// Merge results into array
-				$explanation_message_array_row_result = array_merge($explanation_message_array_row_result, array(
-					$key						=> $value,
-					$key . '_uid'				=> $new_uid,
-					$key . '_bitfield'			=> $bitfield,
-					$key . '_bbcode_options'	=> $bbcode_options,
-				));
+				$explanation_message_array_row_result[$key] = $value;
+				$explanation_message_array_row_result[$key . '_uid'] = $new_uid;
+				$explanation_message_array_row_result[$key . '_bitfield'] = $bitfield;
+				$explanation_message_array_row_result[$key . '_bbcode_options'] = $bbcode_options;
 			}
 			$explanation_message_array_result[] = $explanation_message_array_row_result;
 		}
@@ -240,8 +238,8 @@ class acp_explanation_controller extends acp_main_controller
 		$this->db->sql_multi_insert($this->helper->get_introduciator_explanation_table(), $explanation_message_array_result);
 
 		// 3> Set enabled explanations
-		$this->dbconfig->set('introduciator_is_explanation_enabled', $is_explanation_enabled ? '1' : '0');
-		$this->dbconfig->set('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled ? '1' : '0');
+		$this->dbconfig->set('introduciator_is_explanation_enabled', $is_explanation_enabled);
+		$this->dbconfig->set('introduciator_is_explanation_display_rules', $explanation_display_rules_enabled);
 
 		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED');
 		trigger_error($this->language->lang('INTRODUCIATOR_EP_UPDATED') . adm_back_link($this->u_action));

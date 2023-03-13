@@ -9,10 +9,10 @@
 
 namespace feneck91\introduciator\controller;
 
-use \feneck91\introduciator\helper\extension_manager_helper;
-use \phpbb\template\template;
-use \phpbb\user;
-use \phpbb\config\db;
+use feneck91\introduciator\helper\extension_manager_helper;
+use phpbb\template\template;
+use phpbb\user;
+use phpbb\config\db;
 
 /**
  * Class used to manage general acp page.
@@ -21,9 +21,6 @@ use \phpbb\config\db;
  */
 class acp_general_controller
 {
-	/**
-	 * @var string The phpBB admin path.
-	 */
 	/**
 	 * @var \feneck91\introduciator\helper\extension_manager_helper Extension manager object
 	 */

@@ -15,9 +15,9 @@ namespace feneck91\introduciator\helper;
  */
 class introduciator_helper
 {
-	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL          = 0; // No approval introduce
-	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL             = 1; // Approval introduce : the user don't see his introduce and cannot edit it
-	const INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT   = 2; // Approval introduce : the user see his introduce and can edit it
+	const APPROVAL_LEVEL_NO_APPROVAL          = 0; // No approval introduce
+	const APPROVAL_LEVEL_APPROVAL             = 1; // Approval introduce : the user don't see his introduce and cannot edit it
+	const APPROVAL_LEVEL_APPROVAL_WITH_EDIT   = 2; // Approval introduce : the user see his introduce and can edit it
 
 	/**
 	 * @var string Table prefix.
@@ -108,7 +108,7 @@ class introduciator_helper
 	 * @return void
 	 * @access public
 	 */
-	public function load_language_if_needed()
+	public function load_language()
 	{
 		if (!$this->language_loaded)
 		{
@@ -437,7 +437,7 @@ class introduciator_helper
 			else
 			{
 				// Load langage
-				$this->load_language_if_needed();
+				$this->load_language();
 
 				// Only one into explanation (the user default language)
 				foreach ($this->introduciator_get_explanations($is_edit, true) as $explanation_value)
@@ -525,7 +525,7 @@ class introduciator_helper
 	 * @return boolean
 	 * @access public
 	 */
-	public function introduciator_verify_posting($mode, $forum_id, $post_id, $post_data, $redirect)
+	public function user_can_post($mode, $forum_id, $post_id, $post_data, $redirect)
 	{
 		$poster_id = (int) $this->user->data['user_id'];
 		$ret_allowed_action = true;
@@ -592,7 +592,7 @@ class introduciator_helper
 									{
 										// Load langage
 										$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
-										$this->load_language_if_needed();
+										$this->load_language();
 
 										$message = $first_poster_id === $poster_id && !$this->auth->acl_get('m_delete', $forum_id) ? $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST') : $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
 										$meta_info = append_sid("{$this->root_path}viewtopic.{$this->php_ext}", 'f=' . (int) $forum_id . '&amp;t=' . (int) $topic_id);
@@ -622,7 +622,7 @@ class introduciator_helper
 							{
 								if ($this->introduciator_params['is_explanation_enabled'])
 								{
-									redirect($this->controller_helper->route('feneck91_introduciator_explain', array('forum_id' => (int) $this->introduciator_params['fk_forum_id'])));
+									redirect($this->controller_helper->route('feneck91_introduciator_explain'));
 								}
 								else
 								{
@@ -635,7 +635,7 @@ class introduciator_helper
 					{
 						// At least one post but not approved !
 						if (($this->introduciator_params['is_introduction_mandatory'] || (!$this->introduciator_params['is_introduction_mandatory'] && $this->introduciator_params['fk_forum_id'] == $forum_id))
-							&& (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
+							&& (!in_array($mode, array('reply', 'quote')) || !$this->auth->acl_get('m_approve', $forum_id) || $this->introduciator_params['fk_forum_id'] != $forum_id || $this->introduciator_params['posting_approval_level'] != $this::APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
 						{
 							// If is_introduction_mandatory is false the user can do what he wants in other forums that introduce one, else the rules are same (as is_introduction_mandatory = true).
 							// Can quote / reply if the user is allowed to approval this introduction (moderator) -> Right of reply or quote is done by the framework,
@@ -647,7 +647,7 @@ class introduciator_helper
 						{
 							// Load langage
 							$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
-							$this->load_language_if_needed();
+							$this->load_language();
 
 							// Test : if the user try to quote / reply into his own introduction : change the message
 							if (!empty($post_data['topic_id']) && $post_data['topic_id'] == $topic_introduce_id)
@@ -672,7 +672,7 @@ class introduciator_helper
 						{
 							// Load langage
 							$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
-							$this->load_language_if_needed();
+							$this->load_language();
 
 							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
 							$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
@@ -730,7 +730,7 @@ class introduciator_helper
 				$topic_approved = false;
 
 				// Load langage
-				$this->load_language_if_needed();
+				$this->load_language();
 
 				if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], (int) $poster_id, $topic_id, $first_post_id, $topic_approved))
 				{
@@ -748,10 +748,10 @@ class introduciator_helper
 				{
 					$text = $this->language->lang('INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION');
 					$pending = true;
-					if ($this->auth->acl_get('m_approve', $this->introduciator_params['fk_forum_id']) || ($this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $poster_id == (int) $this->user->data['user_id']))
+					if ($this->auth->acl_get('m_approve', $this->introduciator_params['fk_forum_id']) || ($this->introduciator_params['posting_approval_level'] == $this::APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $poster_id == (int) $this->user->data['user_id']))
 					{
 						// Display url if user can approve the introduction of this user
-						// or if the current user is the poster (the user can see its own presentation) AND the extension configuration is INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT
+						// or if the current user is the poster (the user can see its own presentation) AND the extension configuration is APPROVAL_LEVEL_APPROVAL_WITH_EDIT
 						$url = append_sid("{$this->root_path}viewtopic.{$this->php_ext}", 'f=' . (int) $this->introduciator_params['fk_forum_id'] . '&amp;t=' . (int) $topic_id . '#p' . (int) $first_post_id);
 						$class = 'introdpu-icon';
 					}
@@ -773,7 +773,7 @@ class introduciator_helper
 	}
 
 	/**
-	 * Verify if the posting is must be approved or not.
+	 * Verify if the posting must be approved or not.
 	 *
 	 * If the user that post have right to approved it's own presentation,
 	 * the function return always false: no need to make manage approval to a user
@@ -787,9 +787,9 @@ class introduciator_helper
 	 * @return boolean
 	 * @access public
 	 */
-	public function introduciator_is_posting_must_be_approved($mode, $forum_id)
+	public function post_need_approval($mode, $forum_id)
 	{
-		return !$this->auth->acl_get('m_approve', $forum_id) && $this->introduciator_get_posting_approval_level($mode, $forum_id) != $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
+		return !$this->auth->acl_get('m_approve', $forum_id) && $this->get_post_approval_level($mode, $forum_id) != $this::APPROVAL_LEVEL_NO_APPROVAL;
 	}
 
 	/**
@@ -815,7 +815,7 @@ class introduciator_helper
 
 	/**
 	 * Generate the request to make topic visible to user when the topic owned by the user and is into
-	 * approval state (only for INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT configuration).
+	 * approval state (only for APPROVAL_LEVEL_APPROVAL_WITH_EDIT configuration).
 	 *
 	 * Return the SQL modified request to be able to see the unapproved user presentation.
 	 *
@@ -838,7 +838,7 @@ class introduciator_helper
 				$this->introduciator_params = $this->introduciator_getparams();
 			}
 
-			if (($forum_id === null || $this->introduciator_params['fk_forum_id'] == $forum_id) && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+			if (($forum_id === null || $this->introduciator_params['fk_forum_id'] == $forum_id) && $this->introduciator_params['posting_approval_level'] == $this::APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 			{
 				$poster_id = (int) $this->user->data['user_id'];
 				if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
@@ -866,7 +866,7 @@ class introduciator_helper
 	/**
 	 * Test if the topic into the forum is unapproved and contains current introduce of logged user.
 	 *
-	 * This function is used only for INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT level.
+	 * This function is used only for APPROVAL_LEVEL_APPROVAL_WITH_EDIT level.
 	 *
 	 * Return true if the topic_id is the presentation of the logged user and is not yet approved.
 	 * If should return true and check_moderator_permissions is set to true, this function also return false if the user has moderator privilege (to
@@ -891,7 +891,7 @@ class introduciator_helper
 				$this->introduciator_params = $this->introduciator_getparams();
 			}
 
-			if ($this->introduciator_params['fk_forum_id'] == $forum_id && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
+			if ($this->introduciator_params['fk_forum_id'] == $forum_id && $this->introduciator_params['posting_approval_level'] == $this::APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 			{
 				$poster_id = (int) $this->user->data['user_id'];
 				if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
@@ -1091,10 +1091,10 @@ class introduciator_helper
 	 * @return int
 	 * @access public
 	 */
-	public function introduciator_get_posting_approval_level($mode, $forum_id)
+	public function get_post_approval_level($mode, $forum_id)
 	{
 		$poster_id = (int) $this->user->data['user_id'];
-		$ret_posting_approval_level = $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL;
+		$ret_posting_approval_level = $this::APPROVAL_LEVEL_NO_APPROVAL;
 
 		// User is logged and have user authorization
 		if ($poster_id != ANONYMOUS && $this->is_introduciator_allowed())
@@ -1112,7 +1112,7 @@ class introduciator_helper
 				$first_post_id = 0;
 				$topic_approved = false;
 
-				if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved) && $mode == 'post' && $forum_id == $this->introduciator_params['fk_forum_id'] && ($this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL || $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
+				if (!$this->is_user_post_into_forum((int) $this->introduciator_params['fk_forum_id'], $poster_id, $topic_id, $first_post_id, $topic_approved) && $mode == 'post' && $forum_id == $this->introduciator_params['fk_forum_id'] && ($this->introduciator_params['posting_approval_level'] == $this::APPROVAL_LEVEL_APPROVAL || $this->introduciator_params['posting_approval_level'] == $this::APPROVAL_LEVEL_APPROVAL_WITH_EDIT))
 				{
 					// No post into the introduce topic
 					$ret_posting_approval_level = $this->introduciator_params['posting_approval_level'];
@@ -1153,7 +1153,7 @@ class introduciator_helper
 					$this->introduciator_params = $this->introduciator_getparams();
 				}
 
-				if ($forum_id == (int) $this->introduciator_params['fk_forum_id'] && $this->introduciator_params['posting_approval_level'] == $this::INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
+				if ($forum_id == (int) $this->introduciator_params['fk_forum_id'] && $this->introduciator_params['posting_approval_level'] == $this::APPROVAL_LEVEL_APPROVAL_WITH_EDIT && $this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
 				{
 					// It is the forum with approval level + edit and user should introduce himself
 					$topic_id = 0;
@@ -1189,8 +1189,8 @@ class introduciator_helper
 	 * @return boolean
 	 * @access public
 	 */
-	public function introduciator_let_user_posting_or_editing($mode, $forum_id, $post_data)
+	public function user_can_post_or_edit($mode, $forum_id, $post_data)
 	{
-		return $this->introduciator_verify_posting($mode, $forum_id, 0, $post_data, true);
+		return $this->user_can_post($mode, $forum_id, 0, $post_data, true);
 	}
 }

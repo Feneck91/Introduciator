@@ -67,6 +67,12 @@ class introduciator_module
 			/** @type acp_main_controller $acp_controller */
 			$acp_controller = $phpbb_container->get('feneck91.introduciator.controller.acp_' . $mode);
 
+			if ($acp_controller instanceof acp_main_controller)
+			{
+				// Make the $u_action url available in the admin controller
+				$acp_controller->set_page_url($this->u_action);
+			}
+
 			// Load a template from adm/style for our ACP page
 			$this->tpl_name = 'introduciator_acp_page_' . strtolower($mode);
 
@@ -109,29 +115,5 @@ class introduciator_module
 		}
 
 		return false;
-	}
-
-	/**
-	 * Return the selected array if value is in array
-	 *
-	 * @param mixed $needle
-	 * @param mixed $needle_field
-	 * @param array $haystack
-	 *
-	 * @return array
-	 * @access private
-	 */
-	private function array_value($needle, $needle_field, $haystack)
-	{
-		foreach ($haystack as $item)
-		{
-			if (isset($item[$needle_field]) && $item[$needle_field] === $needle)
-			{
-				return $item;
-			}
-		}
-		unset($item);
-
-		return array();
 	}
 }
