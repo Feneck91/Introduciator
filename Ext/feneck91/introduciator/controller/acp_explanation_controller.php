@@ -214,7 +214,8 @@ class acp_explanation_controller extends acp_main_controller
 				$new_uid = $bitfield = $bbcode_options = '';
 				$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
 				if (count($texts_errors))
-				{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
+				{
+					// Errors occured, show them to the user (split br else MPV found an error because /> is not written
 					if (count($texts_errors) == 1 && $texts_errors[0] == null)
 					{
 						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
