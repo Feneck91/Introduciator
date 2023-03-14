@@ -67,4 +67,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Voir la présentation du membre',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'La présentation est en cours d’approbation',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'Aucune présentation disponible',
+
+	// Logs
+	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Présentation forcée : paramètres de configuration mis à jour.</strong>',
+	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>Présentation forcée : configuration des explications mise à jour.</strong>',
 ));

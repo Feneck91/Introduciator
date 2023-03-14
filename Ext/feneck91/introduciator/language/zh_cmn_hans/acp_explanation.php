@@ -79,9 +79,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> '自我介绍板块的版规：',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> '默认是 = <b>%rules_text%</b><br />默认情况下， %rules_text% 被替换为自我介绍板块的版规。<br />你可以修改这个文字。',
 
-	// Logs
-	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>自我介绍： 说明页面设置更新。</strong>',
-
 	// Confirm box
 	'INTRODUCIATOR_EP_UPDATED'										=> '说明页面的设置已经完成更新',
 ));

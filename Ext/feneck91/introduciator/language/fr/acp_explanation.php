@@ -78,9 +78,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Texte des règles du forum de présentation :',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Défaut = <b>%rules_text%</b><br />Par défaut %rules_text% est remplacé par le texte des règles du forum de présentation.<br />Vous pouvez changer le texte pour mettre celui de votre choix.',
 
-	// Logs
-	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>Présentation forcée : configuration des explications mise à jour.</strong>',
-
 	// Confirm box
 	'INTRODUCIATOR_EP_UPDATED'										=> 'La configuration de la page d’explication a été mise à jour',
 ));

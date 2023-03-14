@@ -24,7 +24,6 @@ use phpbb\config\db;
  *
  * This is the page used to configure the explanation informations displayed to the user when
  * he try to post a message without being introduce.
- *
  */
 class acp_explanation_controller extends acp_main_controller
 {
@@ -216,7 +215,14 @@ class acp_explanation_controller extends acp_main_controller
 				$texts_errors = generate_text_for_storage($value, $new_uid, $bitfield, $bbcode_options, true, true, true);
 				if (count($texts_errors))
 				{	// Errors occured, show them to the user (split br else MPV found an error because /> is not written
-					trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
+					if (count($texts_errors) == 1 && $texts_errors[0] == null)
+					{
+						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+					}
+					else
+					{
+						trigger_error(implode('<b' . 'r>', $texts_errors) . adm_back_link($this->u_action), E_USER_WARNING);
+					}
 				}
 				// Merge results into array
 				$explanation_message_array_row_result[$key] = $value;

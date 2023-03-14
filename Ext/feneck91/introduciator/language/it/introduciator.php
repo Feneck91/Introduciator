@@ -68,4 +68,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Vai a introduzione utenti',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'L’introduzione dell’utente è in attesa di approvazione',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'Nessuna introduzione disponibile per questo utente',
+
+	// Logs
+	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introduzione: ???????? aggiornamento impostazioni.</strong>',
+	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>?????</strong>',
 ));

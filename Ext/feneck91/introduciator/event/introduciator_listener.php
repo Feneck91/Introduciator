@@ -178,7 +178,6 @@ class introduciator_listener implements EventSubscriberInterface
 			$message = $this->language->lang('POST_STORED_MOD') . ' '. $this->language->lang('POST_APPROVAL_NOTIFY');
 			if ($data['introduciator_force_unapproved'] == introduciator_helper::APPROVAL_LEVEL_APPROVAL_WITH_EDIT)
 			{	// Add more explanation: the user can modify his introduce
-				$this->helper->load_language();
 				$message .= $this->language->lang('INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY');
 			}
 			$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $data['forum_id']) . '">', '</a>');

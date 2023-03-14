@@ -90,9 +90,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'Nenhum fórum selecionado, apenas para quando a extensão está desativada',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'Quando a extensão se encontra ativa, deves selecionar um fórum!',
 
-	// Logs
-	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Introduciator: configuração atualizada com sucesso.</strong>',
-
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'										=> 'A configuração foi atualizada com sucesso',
 ));

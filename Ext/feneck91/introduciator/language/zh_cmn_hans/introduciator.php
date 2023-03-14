@@ -68,4 +68,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> '到用户的自我介绍',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> '用户的自我介绍等待审核',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> '此用户没有自我介绍',
+
+	// Logs
+	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>自我介绍： 配置设置更新完成。</strong>',
+	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>自我介绍： 说明页面设置更新。</strong>',
 ));

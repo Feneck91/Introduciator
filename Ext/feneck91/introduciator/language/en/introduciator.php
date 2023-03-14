@@ -42,7 +42,7 @@ if (empty($lang) || !is_array($lang))
  */
 $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Your introduction message is pending approval, please wait.',
-	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only the editing is allowed.',
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'During the approval of your introduction message, only editing is allowed.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'You are not allowed to introduce yourself more than once!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'You are not allowed to delete the first post of your introduction!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'You are not allowed to delete the first post of this introduction! You can delete this introduction by deleting the topic.',
@@ -67,4 +67,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Go to member’s introduction',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'The member’s introduction is pending approval',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'No introduction available for this member',
+
+	// Logs
+	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introduciator: configuration settings updated.</strong>',
+	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>Introduciator: explanation’s settings updated.</strong>',
 ));

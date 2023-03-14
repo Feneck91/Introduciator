@@ -172,7 +172,7 @@ class introduciator_helper
 	 */
 	public function is_introduciator_allowed()
 	{
-		return $this->config['introduciator_allow'] != '0';
+		return (bool) $this->config['introduciator_allow'];
 	}
 
 	/**
@@ -389,16 +389,16 @@ class introduciator_helper
 	public function introduciator_getparams($is_edit = null)
 	{
 		$params = array(
-			'introduciator_allow'					=> $this->is_introduciator_allowed(),
-			'fk_forum_id'							=> $this->config['introduciator_fk_forum_id'],
-			'is_introduction_mandatory'				=> $this->config['introduciator_is_introduction_mandatory'],
-			'is_check_delete_first_post'			=> $this->config['introduciator_is_check_delete_first_post'],
-			'is_explanation_enabled'				=> $this->config['introduciator_is_explanation_enabled'],
-			'is_use_permissions'					=> $this->config['introduciator_is_use_permissions'],
-			'is_include_groups'						=> $this->config['introduciator_is_include_groups'],
-			'ignored_users'							=> $this->config['introduciator_ignored_users'],
-			'is_explanation_display_rules'			=> $this->config['introduciator_is_explanation_display_rules'],
-			'posting_approval_level'				=> $this->config['introduciator_posting_approval_level'],
+			'introduciator_allow'					=>        $this->is_introduciator_allowed(),
+			'fk_forum_id'							=> (int)  $this->config['introduciator_fk_forum_id'],
+			'is_introduction_mandatory'				=> (bool) $this->config['introduciator_is_introduction_mandatory'],
+			'is_check_delete_first_post'			=> (bool) $this->config['introduciator_is_check_delete_first_post'],
+			'is_explanation_enabled'				=> (bool) $this->config['introduciator_is_explanation_enabled'],
+			'is_use_permissions'					=> (bool) $this->config['introduciator_is_use_permissions'],
+			'is_include_groups'						=> (bool) $this->config['introduciator_is_include_groups'],
+			'ignored_users'							=>        $this->config['introduciator_ignored_users'],
+			'is_explanation_display_rules'			=> (bool) $this->config['introduciator_is_explanation_display_rules'],
+			'posting_approval_level'				=>        $this->config['introduciator_posting_approval_level'],
 		);
 
 		if ($is_edit === true || $is_edit === false)

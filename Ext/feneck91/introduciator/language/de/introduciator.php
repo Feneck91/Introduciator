@@ -68,4 +68,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Zur Vorstellung des Benutzers',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'Die Vorstellung des Benutzers ist noch nicht genehmigt.',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'Für diesen Benutzer ist keine Vorstellung verfügbar.',
+
+	// Logs
+	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introducators: Konfigurationseinstellungen aktualisiert.</strong>',
+	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>Introduciator: Die Einstellungen der Erklärung wurden aktualisiert.</strong>',
 ));

@@ -89,9 +89,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is deactivated',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, you should choose a forum!',
 
-	// Logs
-	'INTRODUCIATOR_CP_LOG_UPDATED'									=> '<strong>Introduciator: configuration settings updated.</strong>',
-
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED'										=> 'The configuration has been updated',
 ));

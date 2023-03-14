@@ -79,9 +79,6 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Texto das regras do fórum das apresentações:',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Predefinido = <b>%rules_text%</b><br />Por padrão, a %rules_text% é substituída pelas regras do fórum de apresentação.<br />Podes colocar o texto que desejares.',
 
-	// Logs
-	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'						=> '<strong>Introduciator: configuração da explicação actualizada com sucesso.</strong>',
-
 	// Confirm box
 	'INTRODUCIATOR_EP_UPDATED'										=> 'A configuração da página de explicação foi actualizada com sucesso',
 ));

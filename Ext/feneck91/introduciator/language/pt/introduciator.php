@@ -69,4 +69,8 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Ir à apresentação do utilizador',
 	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'A apresentação encontra-se em aprovação',
 	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'Utilizador sem apresentação disponível',
+
+	// Logs
+	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introduciator: configuração atualizada com sucesso.</strong>',
+	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>Introduciator: configuração da explicação atualizada com sucesso.</strong>',
 ));
