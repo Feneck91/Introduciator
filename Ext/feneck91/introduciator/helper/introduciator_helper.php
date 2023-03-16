@@ -112,7 +112,7 @@ class introduciator_helper
 	{
 		if (!$this->language_loaded)
 		{
-			$this->language->add_lang('introduciator', 'feneck91/introduciator');	// Add lang
+			//$this->language->add_lang('introduciator', 'feneck91/introduciator');	// Add lang
 			$this->language_loaded = true;
 		}
 	}

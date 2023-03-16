@@ -81,8 +81,6 @@ class introduciator_explain_controller
 	{
 		if ($this->introduciator_helper->is_introduciator_allowed())
 		{	// Title message
-			$this->introduciator_helper->load_language();
-
 			// If user not connected, go to login page
 			if ($this->user->data['user_id'] == ANONYMOUS)
 			{
