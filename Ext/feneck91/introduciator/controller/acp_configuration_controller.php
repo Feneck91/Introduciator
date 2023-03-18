@@ -27,6 +27,11 @@ use phpbb\config\db;
 class acp_configuration_controller extends acp_main_controller
 {
 	/**
+	 * @var string Name of the table that contains groups for externsion's permission.
+	 */
+	private $table_groups_name;
+
+	/**
 	 * @var introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $helper;
@@ -44,21 +49,23 @@ class acp_configuration_controller extends acp_main_controller
 	/**
 	 * Constructor
 	 *
-	 * @param introduciator_helper          $helper         Extension helper
-	 * @param \phpbb\db\driver\factory      $db             Database interface
-	 * @param \phpbb\log\log                $log            Object used to add info into admin log
-	 * @param string                        $root_path      phpBB root path
-	 * @param string                        $php_ext        phpBB Extension
-	 * @param \phpbb\language\language      $language       Language user object
-	 * @param \phpbb\request\request        $request        Request object
-	 * @param \phpbb\template\template      $template       Template object
-	 * @param \phpbb\user                   $user           User object
-	 * @param \phpbb\config\db              $dbconfig       Config object
+	 * @param string                        $table_groups_name  Name of the table that contains groups for externsion's permission.
+	 * @param introduciator_helper          $helper             Extension helper
+	 * @param \phpbb\db\driver\factory      $db                 Database interface
+	 * @param \phpbb\log\log                $log                Object used to add info into admin log
+	 * @param string                        $root_path          phpBB root path
+	 * @param string                        $php_ext            phpBB Extension
+	 * @param \phpbb\language\language      $language           Language user object
+	 * @param \phpbb\request\request        $request            Request object
+	 * @param \phpbb\template\template      $template           Template object
+	 * @param \phpbb\user                   $user               User object
+	 * @param \phpbb\config\db              $dbconfig           Config object
 	 *
 	 * @access public
 	 */
-	public function __construct(introduciator_helper $helper, factory $db, log $log, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
+	public function __construct($table_groups_name, introduciator_helper $helper, factory $db, log $log, $root_path, $php_ext, language $language, request $request, template $template, user $user, db $dbconfig)
 	{
+		$this->table_groups_name = $table_groups_name;
 		$this->helper = $helper;
 		$this->db = $db;
 		$this->log = $log;
@@ -140,9 +147,9 @@ class acp_configuration_controller extends acp_main_controller
 		// Add all groups
 		$this->add_all_groups();
 
-		$s_hidden_fields = build_hidden_fields(array(
+		$s_hidden_fields = build_hidden_fields([
 			'action'				=> 'update',					// Action
-		));
+		]);
 
 		$this->template->assign_var('S_HIDDEN_FIELDS', $s_hidden_fields);
 	}
@@ -203,19 +210,19 @@ class acp_configuration_controller extends acp_main_controller
 
 		// Update INTRODUCIATOR_GROUPS_TABLE
 		// 1> Remove all entries
-		$sql = 'DELETE FROM ' . $this->helper->get_introduciator_groups_table();
+		$sql = 'DELETE FROM ' . $this->table_groups_name;
 		$this->db->sql_query($sql);
 
 		// 2> Add all entries
-		$values = array();
+		$values = [];
 		foreach ($groups as $group)
 		{
 			// Create elements to add by row
-			$values[] = array('fk_group' => (int) $group);
+			$values[] = ['fk_group' => (int) $group];
 		}
 
 		// Create and execute SQL request
-		$this->db->sql_multi_insert($this->helper->get_introduciator_groups_table(), $values);
+		$this->db->sql_multi_insert($this->table_groups_name, $values);
 
 		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'INTRODUCIATOR_CP_LOG_UPDATED');
 		trigger_error($this->language->lang('INTRODUCIATOR_CP_UPDATED') . adm_back_link($this->u_action));
@@ -239,13 +246,13 @@ class acp_configuration_controller extends acp_main_controller
 		if ((int) $id_parent === 0)
 		{
 			// Add deactivation item
-			$this->template->assign_block_vars('forums', array(
+			$this->template->assign_block_vars('forums', [
 				'FORUM_NAME'	=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'),
 				'FORUM_ID'		=> 0,
 				'SELECTED'		=> (int) $fk_selected_forum_id === 0,
 				'CAN_SELECT'	=> true,
 				'TOOLTIP'		=> $this->language->lang('INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'),
-			));
+			]);
 		}
 
 		// Add all forums
@@ -256,13 +263,13 @@ class acp_configuration_controller extends acp_main_controller
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$this->template->assign_block_vars('forums', array(
+			$this->template->assign_block_vars('forums', [
 				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
 				'SELECTED'		=> (int) $fk_selected_forum_id== (int) $row['forum_id'],
 				'CAN_SELECT'	=> (int) $row['forum_type'] === FORUM_POST,
 				'TOOLTIP'		=> $row['forum_desc'],
-			));
+			]);
 			$this->add_all_forums($fk_selected_forum_id, $row['forum_id'], $level + 1);
 		}
 		$this->db->sql_freeresult($result);
@@ -289,12 +296,12 @@ class acp_configuration_controller extends acp_main_controller
 		$result = $this->db->sql_query($sql);
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$this->template->assign_block_vars('groups', array(
+			$this->template->assign_block_vars('groups', [
 				'NAME'		=> get_group_name($row['group_id']),
 				'ID'		=> (int) $row['group_id'],
 				'SELECTED'	=> $this->helper->is_group_selected($row['group_id']),
 				'TOOLTIP'	=> $row['group_desc'],
-			));
+			]);
 		}
 		$this->db->sql_freeresult($result);
 	}

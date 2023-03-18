@@ -1,0 +1,3 @@
+parameters:
+    feneck91.introduciator.tables.introduciator_groups: '%core.table_prefix%introduciator_groups'
+    feneck91.introduciator.tables.introduciator_explanation: '%core.table_prefix%introduciator_explanation'

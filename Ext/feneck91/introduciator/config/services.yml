@@ -1,5 +1,6 @@
 imports:
     - { resource: controllers.yml }
+    - { resource: tables.yml }
 
 services:
     feneck91.introduciator.acp_listener:
@@ -22,7 +23,8 @@ services:
     feneck91.introduciator.helper:
         class: feneck91\introduciator\helper\introduciator_helper
         arguments:
-            - '%core.table_prefix%'
+            - '%feneck91.introduciator.tables.introduciator_groups%'
+            - '%feneck91.introduciator.tables.introduciator_explanation%'
             - '%core.root_path%'
             - '%core.php_ext%'
             - '@user'

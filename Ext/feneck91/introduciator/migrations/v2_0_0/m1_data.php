@@ -41,21 +41,21 @@ class m1_data extends \phpbb\db\migration\migration
 	 */
 	public function update_data()
 	{
-		return array(
+		return [
 			// Introduciator Settings
-			array('config.add', array('introduciator_posting_approval_level', 0)),
-			array('config.add', array('introduciator_allow', '0')),
-			array('config.add', array('introduciator_fk_forum_id', 0)),
-			array('config.add', array('introduciator_is_introduction_mandatory', true)),
-			array('config.add', array('introduciator_is_check_delete_first_post', true)),
-			array('config.add', array('introduciator_is_explanation_enabled', false)),
-			array('config.add', array('introduciator_is_use_permissions', true)),
-			array('config.add', array('introduciator_is_include_groups', true)),
-			array('config.add', array('introduciator_ignored_users', '')),
-			array('config.add', array('introduciator_is_explanation_display_rules', true)),
+			['config.add', ['introduciator_posting_approval_level', 0]],
+			['config.add', ['introduciator_allow', '0']],
+			['config.add', ['introduciator_fk_forum_id', 0]],
+			['config.add', ['introduciator_is_introduction_mandatory', true]],
+			['config.add', ['introduciator_is_check_delete_first_post', true]],
+			['config.add', ['introduciator_is_explanation_enabled', false]],
+			['config.add', ['introduciator_is_use_permissions', true]],
+			['config.add', ['introduciator_is_include_groups', true]],
+			['config.add', ['introduciator_ignored_users', '']],
+			['config.add', ['introduciator_is_explanation_display_rules', true]],
 
 			// Misc Settings
-			array('config.add', array('introduciator_install_date', time())),
-		);
+			['config.add', ['introduciator_install_date', time()]],
+		];
 	}
 }

@@ -80,8 +80,8 @@ class introduciator_listener implements EventSubscriberInterface
 			//=============================================
 			// From here, this is events for template html
 			//=============================================
-			'core.viewtopic_modify_post_data'									=> 'on_viewtopic_modify_post_data',				// Prepare data to be displayed in viewtopic
-			'core.memberlist_prepare_profile_data'								=> 'on_display_profile_data',					// Prepare data to be displayed in several pages
+			'core.viewtopic_modify_post_data'							=> 'on_viewtopic_modify_post_data',				// Prepare data to be displayed in viewtopic
+			'core.memberlist_prepare_profile_data'						=> 'on_display_profile_data',					// Prepare data to be displayed in several pages
 		);
 	}
 
@@ -96,10 +96,10 @@ class introduciator_listener implements EventSubscriberInterface
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
+		$lang_set_ext[] = [
 			'ext_name' => 'feneck91/introduciator',
 			'lang_set' => 'introduciator',
-		);
+		];
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
@@ -210,7 +210,7 @@ class introduciator_listener implements EventSubscriberInterface
 					$url = "{$this->root_path}viewtopic.{$this->php_ext}";
 					$event['url'] = append_sid($url, 'f=' . $event['data']['forum_id'] . $params) . $add_anchor;
 				}
-			break;
+				break;
 		}
 	}
 
@@ -306,12 +306,12 @@ class introduciator_listener implements EventSubscriberInterface
 
 			// Prepare data to display link to user's introduce
 			$data_introduciator = $event['user_poster_data']['datas_introduciator'];
-			$event['post_row'] += array(
+			$event['post_row'] += [
 				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
 				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
 				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
 				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
-			);
+			];
 		}
 	}
 
@@ -373,13 +373,13 @@ class introduciator_listener implements EventSubscriberInterface
 			$data = $event['data'];
 			$data_introduciator = $this->helper->introduciator_get_user_infos($data['user_id'], $data['username']);
 
-			$event['template_data'] += array(
+			$event['template_data'] += [
 				'S_INTRODUCIATOR_DISPLAY'	=> $data_introduciator['display'],
 				'S_INTRODUCIATOR_PENDING'	=> $data_introduciator['pending'],
 				'U_INTRODUCIATOR_URL'		=> $data_introduciator['url'],
 				'T_INTRODUCIATOR_TEXT'		=> $data_introduciator['text'],
 				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
-			);
+			];
 		}
 
 		return $event;
