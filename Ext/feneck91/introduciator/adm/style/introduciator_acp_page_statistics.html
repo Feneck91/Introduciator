@@ -1,21 +1,21 @@
 {% INCLUDECSS '@feneck91_introduciator/introduciator_acp.css' %}
 {% INCLUDE 'overall_header.html' %}
 
-<h1 class="acp_img_title" title="{{ lang('ACP_INTRODUCIATOR_EXTENSION') }}">{{ lang('INTRODUCIATOR_ST_TITLE') }}</h1>
+<h1 class="acp_img_title">{{ lang('INTRODUCIATOR_ST_TITLE') }}</h1>
 
 {{ lang('INTRODUCIATOR_ST_TITLE_EXPLAIN') }}
 <form id="acp_introduciator" method="post" action="{U_ACTION}">
 	{# --------------------------- Posting --------------------------------------------- #}
 	{% if S_CHECK_DATABASE %}
 	<fieldset>
-		<legend><a class="acp_img_statistics" title="{{ lang('INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE') }}"></a>{{ lang('INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE') }}</legend><br />
+		<legend class="legend-bg acp_img_statistics">{{ lang('INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE') }}</legend>
 		<dl>
 			<dt><label>{{ lang('INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE') }}</label></dt>
 			<dd><label>{{ INTRODUCTIONS_NUMBER }}</label></dd>
 		</dl>
 	</fieldset>
 	<fieldset>
-		<legend><a class="acp_img_too_much_introduction" title="{{ lang('INTRODUCIATOR_ST_ARRAY_TITLE') }}"></a>{{ lang('INTRODUCIATOR_ST_ARRAY_TITLE') }}</legend>
+		<legend class="legend-bg acp_img_too_much_introduction">{{ lang('INTRODUCIATOR_ST_ARRAY_TITLE') }}</legend>
 		<div class="pagination top-pagination">
 			{% if loops.pagination|length %}
 				{% INCLUDE 'pagination.html' %}
@@ -46,9 +46,7 @@
 				{% endfor %}
 			{% else %}
 				<tr class="row2">
-					<td style="text-align:center">0</td>
 					<td colspan="4" style="text-align:center; font-size:14px;"><strong><em>{{ lang('INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED') }}</em></strong></td>
-					<td style="text-align:center"></td>
 				</tr>
 			{% endif %}
 			</tbody>
@@ -64,10 +62,10 @@
 	</fieldset>
 	{% else %}
 	<fieldset>
-		<legend><a class="acp_img_submit" title="{{ lang('SUBMIT') }}"></a>{{ lang('SUBMIT') }}</legend><br />
+		<legend class="legend-bg acp_img_submit">{{ lang('SUBMIT') }}</legend>
 		<p class="submit-buttons">
 			{S_HIDDEN_FIELDS}
-			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_ST_CHECK') }}" />
+			<input class="button1" type="submit" id="check" name="update" value="{{ lang('INTRODUCIATOR_ST_CHECK') }}">
 			{S_FORM_TOKEN}
 		</p>
 	</fieldset>

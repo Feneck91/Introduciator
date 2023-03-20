@@ -1,0 +1,88 @@
+/**
+ * Style used only for introduciator_acp pages.
+ *
+ * @package phpBB Extension - Introduciator Extension
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019-2022 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
+
+/**
+ * Add image to acp page title.
+ */
+.acp_img_title {
+	padding: 12px 0 12px 50px;
+	background: url("./images/introduciator_logo_small.png") no-repeat;
+}
+
+/**
+ * Add a space below h1.
+ */
+.acp_img_title::after {
+	content: "";
+	display: block;
+	height: 0.5em;
+}
+
+/**
+ * Add background to legends.
+ */
+ .legend-bg {
+	background: var(--legend-img-url) no-repeat;
+	padding: 12px 0 12px 50px;
+}
+
+/**
+ * Declare image to acp configuration legend.
+ */
+.acp_img_configuration {
+	--legend-img-url: url("./images/settings.png");
+}
+
+/**
+ * Declare image to acp groups lengend.
+ */
+.acp_img_groups {
+	--legend-img-url: url("./images/groups.png");
+}
+
+/**
+ * Declare image to acp submit.
+ */
+.acp_img_submit {
+	--legend-img-url: url("./images/submit.png");
+}
+
+/**
+ * Declare image to acp texts legend.
+ */
+.acp_img_texts {
+	--legend-img-url: url("./images/texts.png");
+}
+
+/**
+ * Declare image to acp statistics legend.
+ */
+.acp_img_statistics {
+	--legend-img-url: url("./images/statistics.png");
+	padding-left: 55px;
+}
+
+/**
+ * Declare image to acp statistics legend: too much introduction.
+ */
+.acp_img_too_much_introduction {
+	--legend-img-path: url("./images/too_much_introduction.png");
+}
+
+/**
+ * Used for explanation divs that contain lists
+ */
+.block-explain {
+	font-size: 100%;
+	padding: 0 5px 0 0;
+}
+
+.block-explain li {
+	font-size: 100%;
+}
