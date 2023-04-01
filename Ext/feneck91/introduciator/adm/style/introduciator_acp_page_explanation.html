@@ -15,7 +15,7 @@
 			</dt>
 			<dd>
 				<label><input id="display_explanation" name="display_explanation" type="radio" class="radio" value="1"{% if INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
-				<label><input id="nodisplay_explanation" name="display_explanation" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED %} checked="checked"{% endif %}> {{ lang('NO') }}</label>
+				<label><input id="no_display_explanation" name="display_explanation" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_DISPLAY_EXPLANATION_ENABLED %} checked="checked"{% endif %}> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		{#  Activate / Desactivate rules display #}
@@ -25,7 +25,7 @@
 				<span>{{ lang('INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED_EXPLAIN') }}</span>
 			</dt>
 			<dd><label><input id="explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="1"{% if INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED %} checked="checked"{% endif %}> {{ lang('YES') }}</label>
-				<label><input  name="explanation_display_rules_enabled" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED %} checked="checked"{% endif %}> {{ lang('NO') }}</label>
+				<label><input id="no_explanation_display_rules_enabled" name="explanation_display_rules_enabled" type="radio" class="radio" value="0"{% if not INTRODUCIATOR_EXPLANATION_IS_DISPLAY_RULES_ENABLED %} checked="checked"{% endif %}> {{ lang('NO') }}</label>
 			</dd>
 		</dl>
 		<br />
