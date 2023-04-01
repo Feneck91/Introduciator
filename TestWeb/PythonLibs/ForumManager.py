@@ -88,7 +88,6 @@ class ForumManager:
 
         Try to find link from forum's panel, then ACP panel, then main url.
         """
-
         main_page = self.findXPath("//a[@id='logo']")
         if  main_page:
             main_page.click()
@@ -100,12 +99,13 @@ class ForumManager:
                 self.driver.get(self.main_url)
 
     #===================================================================================================================
-    def _wait_until_exists(self, xpath_request, raise_exception, timeout):
+    def _wait_until_exists(self, xpath_request, raise_exception, timeout, search_by = By.XPATH):
         """ Wait until some item exist in page.
 
         :param xpath_request: XPath request or array or xpath request.
         :param raise_exception If true and element is not found, raise Exception else return None
         :param timeout: Time max to wait in ms.
+        :param search_by: By default search by XPATH but can be search by ID ou CLASS.
         :return: The item found, else raise timeout exception.
         """
         objRet = None
@@ -114,7 +114,7 @@ class ForumManager:
             wait = WebDriverWait(self.driver, timeout=timeout / 1000)
             if isinstance(xpath_request, list):
                 xpath_request = ' | '.join(xpath_request)
-            objRet = wait.until(expected_conditions.presence_of_all_elements_located(((By.XPATH, xpath_request))))
+            objRet = wait.until(expected_conditions.presence_of_all_elements_located(((search_by, xpath_request))))
         except TimeoutException:
             if raise_exception:
                 print(f"wait_until_exists on XPath = {xpath_request} failed!")
@@ -266,6 +266,17 @@ class ForumManager:
         :return: The tab if found, None else.
         """
         return self._getACP_Tab_X(12, click_if_exists)
+
+    #===================================================================================================================
+    def getACP_Tab_Maintenance(self, click_if_exists = False):
+        """ Get the ACP User And Groups Tab.
+
+        The forum must be into ACP panel.
+
+        :param click_if_exists: If True and Tab exists, click it before returning.
+        :return: The tab if found, None else.
+        """
+        return self._getACP_Tab_X(25, click_if_exists)
 
     #===================================================================================================================
     def getACP_Tab_Customize(self, click_if_exists = False):
@@ -635,8 +646,23 @@ class ForumManager:
         return ret
 
     #===================================================================================================================
-    def configure_Introduciator_extension(self, extension_href_to_find, extension_page_name, is_activate, is_force_user_introduce, is_autorize_deletion_first_post, selected_forum_name, approval_level, use_phpbb_permission, include_groups, seleted_groups_names, ignore_users_list):
+    def Introduciator_extension_configure(self, is_activate, is_force_user_introduce, is_authorize_deletion_first_post, selected_forum_name, approval_level, use_phpbb_permission, include_groups, seleted_groups_names, ignore_users_list):
+        """ Configure the 'Configuration" tab of the Introduciator extension.
+
+        :param is_activate: True to activate the extension, False else.
+        :param is_force_user_introduce: True to force user to introduce himself, False else.
+        :param is_authorize_deletion_first_post: True to authorize the extension to manage first post deletion.
+        :param selected_forum_name: Forum's name where the user must to introduce himself.
+        :param approval_level: Approval level. 0 = No / 1 = Simple / 2 = Edit.
+        :param use_phpbb_permission: True to use phpBB's permissions, False to use Introduciator rights.
+        :param include_groups: For Introduciator rights, indicate if group is includes (True) or excluded (False).
+        :param seleted_groups_names: For Introduciator rights, indicate group's name that must introduce or not.
+        :param ignore_users_list: User lisy that are ignored, None if no used.
+        :return: True if configuration is valid and be set without error, False else.
+        """
         bOk = False
+        extension_href_to_find = 'acp-introduciator_module'
+        extension_page_name = 'Configuration'
         item_link_ext = self.get_extension_page(extension_href_to_find, extension_page_name)
         # Verify if no PHP problem
         self._checkPHPNotice()
@@ -650,7 +676,7 @@ class ForumManager:
             # Set Force user to introduce
             self.driver.find_element(By.ID, "check_introduction_mandatory_activated" if is_force_user_introduce else "no_check_introduction_mandatory_activated").click()
             # Set Authorize extension to regulate deletion of first post
-            self.driver.find_element(By.ID, "check_delete_first_post_activated" if is_autorize_deletion_first_post else "no_check_delete_first_post_activated").click()
+            self.driver.find_element(By.ID, "check_delete_first_post_activated" if is_authorize_deletion_first_post else "no_check_delete_first_post_activated").click()
             # Select the forum for introduce
             select = Select(self.driver.find_element(By.ID, "forum_choice"))
             for option in select.options:
@@ -681,21 +707,96 @@ class ForumManager:
 
             # Submit
             self.driver.find_element(By.ID, "submit").click()
+            boxes = self._wait_until_exists(["errorbox", "successbox"], False, 3000, By.CLASS_NAME)
 
             # Verify if no PHP problem
             self._checkPHPNotice()
 
             # Return True if submit is ok, False else
-            errorboxItem = None
-            try:
-                errorboxItem = self.driver.find_element(By.CLASS_NAME, "errorbox")
-                print(f"Initialize Introduciator Extension page {extension_page_name} error!")
-            except NoSuchElementException:
-                print(f"Initialize Introduciator Extension page {extension_page_name} done.")
-            bOk = errorboxItem is None
+            if boxes:
+                errorboxItem = None
+                try:
+                    errorboxItem = self.driver.find_element(By.CLASS_NAME, "errorbox")
+                    print(f"Initialize Introduciator Extension page {extension_page_name} error!")
+                except NoSuchElementException:
+                    print(f"Initialize Introduciator Extension page {extension_page_name} done.")
+                bOk = errorboxItem is None
+            else:
+                print("Waiting for error or success box failed!")
 
         return bOk
 
+    #===================================================================================================================
+    def Introduciator_extension_explanation(self, is_display_introduction_page, is_display_rule, dict_explanaation_page_title, dict_explanaation_page_text, dict_explanaation_rules_title, dict_explanaation_rules_text):
+        """ Configure the 'Explanation" tab of the Introduciator extension.
+
+        :param is_activate: True to activate the extension, False else.
+        :param is_force_user_introduce: True to force user to introduce himself, False else.
+        :param is_authorize_deletion_first_post: True to authorize the extension to manage first post deletion.
+        :param selected_forum_name: Forum's name where the user must to introduce himself.
+        :param approval_level: Approval level. 0 = No / 1 = Simple / 2 = Edit.
+        :param use_phpbb_permission: True to use phpBB's permissions, False to use Introduciator rights.
+        :param include_groups: For Introduciator rights, indicate if group is includes (True) or excluded (False).
+        :param seleted_groups_names: For Introduciator rights, indicate group's name that must introduce or not.
+        :param ignore_users_list: User lisy that are ignored, None if no used.
+        :return: True if configuration is valid and be set without error, False else.
+        """
+        bOk = False
+        extension_href_to_find = 'acp-introduciator_module'
+        extension_page_name = 'Explanation'
+        item_link_ext = self.get_extension_page(extension_href_to_find, extension_page_name)
+        # Verify if no PHP problem
+        self._checkPHPNotice()
+        languages_tags = []
+
+        if item_link_ext:
+            item_link_ext.click()
+            # Verify if no PHP problem
+            self._checkPHPNotice()
+            # Should display explanation?
+            self.driver.find_element(By.ID, "display_explanation" if is_display_introduction_page else "no_display_explanation").click()
+            # Display rules is enable?
+            self.driver.find_element(By.ID, "explanation_display_rules_enabled" if is_display_rule else "no_explanation_display_rules_enabled").click()
+            # Manage messages
+            # 1> Found all language
+            webdriver.Chrome()
+            languages_tags = [item.get_attribute('for')[-2:] for item in self.driver.find_elements(By.XPATH, "//label[contains(@for, 'explanation_message_title_')]")]
+            for languages_tag in languages_tags:
+                # Explanation Title
+                if not(dict_explanaation_page_title is None) and languages_tag in dict_explanaation_page_title:
+                    self.driver.find_element(By.ID, f"explanation_message_title_{languages_tag}").send_keys(dict_explanaation_page_title[languages_tag])
+                # Explanation
+                if not(dict_explanaation_page_text is None) and languages_tag in dict_explanaation_page_text:
+                    self.driver.find_element(By.ID, f"explanation_message_text_{languages_tag}").send_keys(dict_explanaation_page_text[languages_tag])
+                # Explanation rules title
+                if not(dict_explanaation_rules_title is None) and languages_tag in dict_explanaation_rules_title:
+                    self.driver.find_element(By.ID, f"explanation_rules_title_{languages_tag}").send_keys(dict_explanaation_rules_title[languages_tag])
+                # Explanation rules
+                if not(dict_explanaation_rules_text is None) and languages_tag in dict_explanaation_rules_text:
+                    self.driver.find_element(By.ID, f"explanation_rules_text_{languages_tag}").send_keys(dict_explanaation_rules_text[languages_tag])
+
+            # Submit
+            self.driver.find_element(By.ID, "submit").click()
+            boxes = self._wait_until_exists(["errorbox", "successbox"], False, 3000, By.CLASS_NAME)
+
+            # Verify if no PHP problem
+            self._checkPHPNotice()
+
+            # Return True if submit is ok, False else
+            if boxes:
+                errorboxItem = None
+                try:
+                    errorboxItem = self.driver.find_element(By.CLASS_NAME, "errorbox")
+                    print(f"Initialize Introduciator Extension page {extension_page_name} error!")
+                except NoSuchElementException:
+                    print(f"Initialize Introduciator Extension page {extension_page_name} done.")
+                bOk = errorboxItem is None
+            else:
+                print("Waiting for error or success box failed!")
+
+        return bOk
+
+    #===================================================================================================================
     def extension_can_be_managed(self, extension_href_to_find, extension_page_name):
         """ Find if an extension can be managed.
 
@@ -706,6 +807,7 @@ class ForumManager:
         item_link_ext = self.get_extension_page(extension_href_to_find, extension_page_name)
         return not(item_link_ext is None)
 
+    #===================================================================================================================
     def _set_permissions(self, permission_type, permission_tab, permission_name, permission_right):
         """ Set the permissions.
 
@@ -746,6 +848,7 @@ class ForumManager:
         # Wait alert window closed
         wait.until(expected_conditions.invisibility_of_element_located((By.XPATH, "//div[@id='phpbb_alert']")))
 
+    #===================================================================================================================
     def set_user_permissions(self, user_name, permission_type, permission_tab, permission_name, permission_right):
         """ Set the user permission.
 
@@ -779,6 +882,7 @@ class ForumManager:
             self._set_permissions(permission_type, permission_tab, permission_name, permission_right)
         return True
 
+    #===================================================================================================================
     def set_group_permissions(self, group_num, permission_type, permission_tab, permission_name, permission_right):
         """ Set the group permission.
 
@@ -803,7 +907,8 @@ class ForumManager:
         """
         if self.getACP_Tab_User_And_Group(True):
             # Click on Group Permission
-            self.driver.find_element(By.XPATH, f"//a[contains(@href, 'i=acp_permissions') and contains(@href, 'mode=setting_group_global')]").click()
+            items = self._wait_until_exists("//a[contains(@href, 'i=acp_permissions') and contains(@href, 'mode=setting_group_global')]", True, 2500)
+            items[0].click()
             select = Select(self.driver.find_element(By.ID, "group"))
             select.select_by_value(group_num)
             # Submit
@@ -811,6 +916,66 @@ class ForumManager:
             # Set Permissions
             self._set_permissions(permission_type, permission_tab, permission_name, permission_right)
         return True
+
+    #===================================================================================================================
+    def get_first_page_admin_log(self):
+        """ Get all text of the first page of admin log.
+
+        :return: None if not found or error, else an array of all admin log texts.
+        """
+        arr_texts = None
+        if self.getACP_Tab_Maintenance(True):
+            # Click on Admin Log
+            items = self._wait_until_exists("//a[contains(@href, 'i=acp_logs') and contains(@href, 'mode=admin')]", False, 2500)
+            if items:
+                items[0].click()
+                items = self._wait_until_exists("//dfn[text()='Action']//following-sibling::strong", False, 2500)
+                if items:
+                    arr_texts = [item.text for item in items]
+
+        return arr_texts
+
+    #===================================================================================================================
+    def get_nb_filter_admin_log(self, filter_text):
+        """ Get all text of the first page of admin log.
+
+        :return: -1 if not found or error, else the number of items of all admin log texts that contains filter_text.
+        """
+        nb_items = -1
+        arr_texts = self.get_first_page_admin_log()
+        if arr_texts:
+            nb_items = len([text for text in arr_texts if filter_text in text])
+
+        return nb_items
+
+    #===================================================================================================================
+    def clear_admin_logs(self):
+        """ Clear all the admin logs.
+
+        :return: True if ne error, return False or raise exception
+        """
+        ret = False
+        if self.getACP_Tab_Maintenance(True):
+            # Click on Admin Log
+            items = self._wait_until_exists("//a[contains(@href, 'i=acp_logs') and contains(@href, 'mode=admin')]", False, 2500)
+            if items:
+                items[0].click()
+                items = self._wait_until_exists("//form[@id='list' and contains(@action, 'i=acp_logs') and contains(@action, 'mode=admin')]", False, 2500)
+                if items:
+                    submit = self.findXPath("//input[@type='submit' and @name='delall']")
+                    if submit:
+                        submit.click()
+                        confirm = self._wait_until_exists("//input[@type='submit' and @name='confirm']", False, 2500)
+                        if confirm:
+                            confirm[0].click()
+                            items = self._wait_until_exists("//form[@id='list' and contains(@action, 'i=acp_logs') and contains(@action, 'mode=admin')]", False, 2500)
+                            if items:
+                                arr_texts = self.get_first_page_admin_log()
+                                if not(arr_texts is None):
+                                    ret = len(arr_texts) == 1
+
+        return ret
+
 
 if __name__ == '__main__':
     pass

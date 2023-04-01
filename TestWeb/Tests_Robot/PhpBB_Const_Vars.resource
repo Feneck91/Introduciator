@@ -36,9 +36,6 @@ ${PERMISSION_USER_TAB_PROFILE}=                         tab000
 ${PERMISSION_USER_TAB_POST}=                            tab001
 ${PERMISSION_USER_TAB_PRIVATE_MESSAGES}=                tab002
 ${PERMISSION_USER_TAB_MISC}                             tab003
-# Permissions names
-${PERMISSION_NAME_INTRODUCIATOR_MANAGE}=                a_introduciator_manage
-${PERMISSION_NAME_INTRODUCIATOR_MUST_INTRODUCE}=        u_must_introduce
 # Permissions rights
 ${PERMISSON_RIGHT_YES}=                                 _y
 ${PERMISSON_RIGHT_NO}=                                  _u

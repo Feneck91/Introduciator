@@ -20,21 +20,22 @@ if __name__ == '__main__':
         forumManager.set_login_name("admin", "123456")
         forumManager.login()
         forumManager.login_ACP()
-        forumManager.configure_forum([
-                                        { "forum"    : "Your first category",
-                                          "config"   : { "//textarea[@id='forum_rules']" : "This is the rules of 'Your first category' forum !",
-                                                       },
-                                          "subforums" :
-                                          [
-                                              {
-                                                  "forum" : "Your first forum",
-                                                  "config": { "//input[@type='radio' and @name='enable_quick_reply' and @value='1']" : "click()",
-                                                              "//textarea[@id='forum_rules']" : "This is the rules of 'Your first forum' !"
-                                                            }
-                                              }
-                                          ]
-                                        },
-                                     ])
+        forumManager.clear_admin_logs()
+        # forumManager.configure_forum([
+        #                                 { "forum"    : "Your first category",
+        #                                   "config"   : { "//textarea[@id='forum_rules']" : "This is the rules of 'Your first category' forum !",
+        #                                                },
+        #                                   "subforums" :
+        #                                   [
+        #                                       {
+        #                                           "forum" : "Your first forum",
+        #                                           "config": { "//input[@type='radio' and @name='enable_quick_reply' and @value='1']" : "click()",
+        #                                                       "//textarea[@id='forum_rules']" : "This is the rules of 'Your first forum' !"
+        #                                                     }
+        #                                       }
+        #                                   ]
+        #                                 },
+        #                              ])
 
 
         #forumManager.clear_all_topics('Your first forum')

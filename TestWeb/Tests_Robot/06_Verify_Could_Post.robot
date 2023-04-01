@@ -20,13 +20,36 @@ Login Admin + ACP
     [Tags]              Login ACP
     LoginAndLoginACP    LOGIN=${ADMIN_LOGIN}  PASSWORD=${ADMIN_PASSWORD}
 
+# Clear Admin Logs
+Clear Admin Logs
+    [Documentation]     Delete all the Admin logs
+    [Tags]              Admin Logs
+    ${result} =         FM.Clear Admin Logs
+    Should Be True      ${result}
+
 # Configure extension
 # The user introduction is not mandatory
 Configure Extension Succeeded
     [Documentation]     Configure ${EXTENSION_NAME} extension
     [Tags]              Configuration Extension succeeded
-    ${result} =         FM.Configure Introduciator Extension  ${INTRODUCIATOR_PAGE_HREF}  ${INTRODUCIATOR_PAGE_CONFIGURATION}  ${TRUE}  ${FALSE}  ${FALSE}  ${INTRODUCIATOR_FORUM_NAME}  ${INTRODUCIATOR_APPROVAL_LEVEL_NO}  ${FALSE}  ${TRUE}  ${GROUP_PERMISSIONS}  ${EMPTY}
+    ${result} =         FM.Introduciator Extension Configure  ${TRUE}  ${FALSE}  ${FALSE}  ${INTRODUCIATOR_FORUM_NAME}  ${INTRODUCIATOR_APPROVAL_LEVEL_NO}  ${FALSE}  ${TRUE}  ${GROUP_PERMISSIONS}  ${EMPTY}
     Should Be True      ${result}
+
+# Configure extension
+# The user introduction is not mandatory
+Configure Extension Succeeded
+    [Documentation]     Configure ${EXTENSION_NAME} extension
+    [Tags]              Configuration Extension succeeded
+    ${result} =         FM.Introduciator Extension Explanation  ${TRUE}  ${FALSE}  ${EMPTY}  ${EMPTY}  ${EMPTY}  ${EMPTY}
+    Should Be True      ${result}
+
+# Verify the configuration is correctly log
+Verify Admin Logs
+    [Documentation]     Verify Admin logs that contains last info about extension configuration
+    [Tags]              Verify Admin Logs
+    ${result} =         FM.Get Nb Filter Admin Log   Introduciator: configuration settings updated.
+    Should Be Equal     ${result}  ${1}
+
 
 # Clear the introduce forum
 Clear Introduce Topic

@@ -20,12 +20,12 @@ Login Admin + ACP
 Configure Extension Failed
     [Documentation]     Configure ${EXTENSION_NAME} extension - Must failed because Forum is not selected
     [Tags]              Configuration Extension failed
-    ${result} =         FM.Configure Introduciator Extension  ${INTRODUCIATOR_PAGE_HREF}  ${INTRODUCIATOR_PAGE_CONFIGURATION}  ${TRUE}  ${FALSE}  ${FALSE}  ${EMPTY}  ${INTRODUCIATOR_APPROVAL_LEVEL_NO}  ${TRUE}  ${None}  ${None}  ${EMPTY}
+    ${result} =         FM.Introduciator Extension Configure ${INTRODUCIATOR_PAGE_HREF}  ${INTRODUCIATOR_PAGE_CONFIGURATION}  ${TRUE}  ${FALSE}  ${FALSE}  ${EMPTY}  ${INTRODUCIATOR_APPROVAL_LEVEL_NO}  ${TRUE}  ${None}  ${None}  ${EMPTY}
     Should Be Equal     ${result}  ${FALSE}
 
 # Configure extension
 Configure Extension Succeeded
     [Documentation]     Configure ${EXTENSION_NAME} extension - Must succeeded
     [Tags]              Configuration Extension succeeded
-    ${result} =         FM.Configure Introduciator Extension  ${INTRODUCIATOR_PAGE_HREF}  ${INTRODUCIATOR_PAGE_CONFIGURATION}  ${TRUE}  ${FALSE}  ${FALSE}  ${INTRODUCIATOR_FORUM_NAME}  ${INTRODUCIATOR_APPROVAL_LEVEL_NO}  ${TRUE}  ${None}  ${None}  ${EMPTY}
+    ${result} =         FM.Introduciator Extension Configure  ${INTRODUCIATOR_PAGE_HREF}  ${INTRODUCIATOR_PAGE_CONFIGURATION}  ${TRUE}  ${FALSE}  ${FALSE}  ${INTRODUCIATOR_FORUM_NAME}  ${INTRODUCIATOR_APPROVAL_LEVEL_NO}  ${TRUE}  ${None}  ${None}  ${EMPTY}
     Should Be True      ${result}
