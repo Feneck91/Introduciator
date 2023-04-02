@@ -34,7 +34,7 @@ Login Admin + ACP
 Configure Forums
     [Documentation]     Set
     [Tags]              Configure forums
-    ${result} =         FM.configure_forum      ${list_config_forums}
+    ${result} =         FM.Configure Forum      ${list_config_forums}
     Should Be True      ${result}
 
 # Clear the introduce forum

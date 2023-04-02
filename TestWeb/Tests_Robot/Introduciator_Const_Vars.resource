@@ -20,7 +20,7 @@ ${PERMISSION_NAME_INTRODUCIATOR_MANAGE}=                a_introduciator_manage
 ${PERMISSION_NAME_INTRODUCIATOR_MUST_INTRODUCE}=        u_must_introduce
 
 # Forum's infos
-${FORUM_URL}=                                           http://localhost:180/my-app/quickinstall/boards/IntroduciatorTester/index.php
+${FORUM_URL}=                                           http://localhost:180/my-app/quickinstall/boards/IntroduciatorTester/
 ${ADMIN_LOGIN}=                                         admin
 ${ADMIN_PASSWORD}=                                      123456
 ${ADMIN_2_LOGIN}=                                       tester_1

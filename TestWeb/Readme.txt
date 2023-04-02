@@ -37,3 +37,13 @@ Run batch 2_RunPortableApps.bat: very important because it patch drive that can 
 Launch PyCharm through the portable app system.
 
 The source code here must be located on Tests\TestWeb
+
+Run Robot:
+----------
+In PyCharm, Terminal Tab.
+Set Current folder to TestWeb folder.
+Commands are:
+- To run all tests:
+> python ..\MainEnv\Scripts\robot.exe --pythonpath .\PythonLibs\ -d .\Tests_Robot\Results .\Tests_Robot\
+- To run only one:
+> python ..\MainEnv\Scripts\robot.exe --pythonpath .\PythonLibs\ -d .\Tests_Robot\Results .\Tests_Robot\04_Initialize_Introduciator_Extension_Fails.robot

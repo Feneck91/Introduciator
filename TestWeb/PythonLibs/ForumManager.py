@@ -67,6 +67,37 @@ class ForumManager:
 
         return not (self.driver is None)
 
+# ===================================================================================================================
+    def _navigate_to_forum(self, bToACP):
+        """ Navigate to forum or ACP forum.
+
+        :param bToACP: True to go to ACP, else navigate to main forum.
+
+        throws NoSuchElementException If there is no option with specified value in SELECT.
+        """
+        acp_tabs = self.findXPath("//div[@id='tabs']")
+        if bToACP:
+            if not acp_tabs:
+                self.driver.get(self.main_url)
+                # Here, raise exception if the user is not allowed to go to Administration panel
+                loginACPLink = self._wait_until_exists("//a[contains(@href,'/adm/index.php')]", True, 5000)
+                loginACPLink[0].click()
+                # Better to check with 25 (Maintenance) than 1 (General) else it can found 11, 10, etc.
+                # Or wait to found login page
+                self._wait_until_exists(["//li/a[contains(@href, 'i=25')]", "//input[@id = 'username']"], 5000, True)
+            else:
+                print(f"_navigate_to_forum, navigate to  ACP => already in ACP, current = {self.driver.current_url}")
+        else:
+            if acp_tabs:
+                main_page = self._wait_until_exists(["//a[@id='logo']", "//a[contains(@href, '/../index.php')]"], 5000, False)
+                if main_page:
+                    main_page[0].click()
+                else:
+                    self.driver.get(self.main_url)
+                self._wait_until_exists("logo", True, 5000, By.ID)
+            else:
+                print(f"_navigate_to_forum, navigate to non ACP => already not in ACP, current = {self.driver.current_url}")
+
     #===================================================================================================================
     def _checkPHPNotice(self):
         """ Check if PHP generate debug notice.
@@ -83,61 +114,72 @@ class ForumManager:
             raise Exception(text)
 
     #===================================================================================================================
-    def _navigate_main(self):
-        """ Navigate to furum's main page.
-
-        Try to find link from forum's panel, then ACP panel, then main url.
-        """
-        main_page = self.findXPath("//a[@id='logo']")
-        if  main_page:
-            main_page.click()
-        else:
-            main_page = self.findXPath("//a[contains(@href, '/../index.php')]")
-            if main_page:
-                main_page.click()
-            else:
-                self.driver.get(self.main_url)
-
-    #===================================================================================================================
-    def _wait_until_exists(self, xpath_request, raise_exception, timeout, search_by = By.XPATH):
+    def _wait_until_exists(self, list_request, raise_exception, timeout, search_by = By.XPATH):
         """ Wait until some item exist in page.
 
-        :param xpath_request: XPath request or array or xpath request.
+        :param list_request: XPath request or array or xpath request.
         :param raise_exception If true and element is not found, raise Exception else return None
         :param timeout: Time max to wait in ms.
         :param search_by: By default search by XPATH but can be search by ID ou CLASS.
         :return: The item found, else raise timeout exception.
+        throws TimeoutException If timeout.
         """
         objRet = None
         try:
             # wait for typed text animation completed
             wait = WebDriverWait(self.driver, timeout=timeout / 1000)
-            if isinstance(xpath_request, list):
-                xpath_request = ' | '.join(xpath_request)
-            objRet = wait.until(expected_conditions.presence_of_all_elements_located(((search_by, xpath_request))))
+            if isinstance(list_request, list):
+                if search_by == By.XPATH:
+                    list_request = ' | '.join(list_request)
+                else:
+                    if search_by == By.ID:
+                        name_of_by = "id"
+                    elif search_by == By.CLASS_NAME:
+                        name_of_by = "class"
+                    elif search_by == By.NAME:
+                        name_of_by = "name"
+                    else:
+                        raise Exception(f"_wait_until_exists, seach_by value is not supported!")
+                    list_request = ' | '.join([f"//*[@{name_of_by}='{request}']" for request in list_request])
+                    search_by = By.XPATH  # Multiple => By XPath
+            objRet = wait.until(expected_conditions.presence_of_all_elements_located(((search_by, list_request))))
         except TimeoutException:
             if raise_exception:
-                print(f"wait_until_exists on XPath = {xpath_request} failed!")
+                print(f"wait_until_exists on XPath = {list_request} failed!")
                 raise
 
         return objRet
 
     #===================================================================================================================
-    def _wait_until_visible(self, xpath_request, raise_exception, timeout):
-        """ Wait until some item exist in page.
+    def _wait_until_visible(self, list_request, raise_exception, timeout, search_by = By.XPATH):
+        """ Wait until some item exist and is visible in page.
 
-        :param xpath_request: XPath request or array or xpath request.
+        :param list_request: XPath request or array or xpath request.
         :param raise_exception If true and element is not found, raise Exception else return None
         :param timeout: Time max to wait in ms.
+        :param search_by: By default search by XPATH but can be search by ID ou CLASS.
         :return: The item found, else raise timeout exception.
+        throws TimeoutException If timeout.
         """
         objRet = None
         try:
             # wait for typed text animation completed
             wait = WebDriverWait(self.driver, timeout=timeout / 1000)
-            if isinstance(xpath_request, list):
-                xpath_request = ' | '.join(xpath_request)
-            objRet = wait.until(expected_conditions.visibility_of_all_elements_located(((By.XPATH, xpath_request))))
+            if isinstance(list_request, list):
+                if search_by == By.XPATH:
+                    list_request = ' | '.join(list_request)
+                else:
+                    if search_by == By.ID:
+                        name_of_by = "id"
+                    elif search_by == By.CLASS_NAME:
+                        name_of_by = "class"
+                    elif search_by == By.NAME:
+                        name_of_by = "name"
+                    else:
+                        raise Exception(f"_wait_until_exists, seach_by value is not supported!")
+                    list_request = ' | '.join([f"//*[@{name_of_by}='{request}']" for request in list_request])
+                    search_by = By.XPATH  # Multiple => By XPath
+            objRet = wait.until(expected_conditions.visibility_of_all_elements_located(((search_by, list_request))))
         except TimeoutException:
             if raise_exception:
                 print(f"wait_until_exists on XPath = {xpath_request} failed!")
@@ -181,7 +223,7 @@ class ForumManager:
 
         try:
             # wait for typed text animation completed
-            wait = WebDriverWait(self.driver, timeout=300000 / 1000)
+            wait = WebDriverWait(self.driver, timeout=600000 / 1000)
             wait.until(expected_conditions.invisibility_of_element_located((By.XPATH, "//div[contains(@class, 'modal-content')]")))
             print("QuickInstall correctly generated.")
         except TimeoutException:
@@ -241,6 +283,7 @@ class ForumManager:
 
         :return: The customize tab if found, None else.
         """
+        self._navigate_to_forum(True)
         itemRet = self.findXPath(f"//li/a[contains(@href, 'i={inumber}')]")
         if itemRet and click_if_exists:
             itemRet.click()
@@ -348,7 +391,7 @@ class ForumManager:
         trying_number = 10
         while bRet is None and trying_number != 0:
             if not ("mode=login" in self.driver.current_url):
-                self._navigate_main()
+                self._navigate_to_forum(False)
                 loggedName = self.getLoggedName()
                 if loggedName:
                     if self.login_name != loggedName:
@@ -366,7 +409,6 @@ class ForumManager:
             self.driver.find_element(By.ID, "username").send_keys(self.login_name)
             self.driver.find_element(By.ID, "password").clear()
             self.driver.find_element(By.ID, "password").send_keys(self.password)
-            self.driver.implicitly_wait(0.5)
             self.findXPath("//input[@name='login']").click()
             self._wait_until_exists(["//li[@id='username_logged_in']/*/*/span", "//fieldset[@class='fields1']/div[@class='error']"], False, 3000)
             if not (self.findXPath("//fieldset[@class='fields1']/div[@class='error']") is None):
@@ -390,12 +432,7 @@ class ForumManager:
         :return: True if correctly logged, False else.
         """
         # Now login with good username
-        self._wait_until_exists("//a[contains(@href,'/adm/index.php')]", True, 2500)
-        loginACPLink = self.findXPath("//a[contains(@href,'/adm/index.php')]")
-        if loginACPLink is None:
-            # strange it should exists
-            raise Exception("Cannot found ACP login link, verify loginACP function!")
-        loginACPLink.click()
+        self._navigate_to_forum(True)
         # Now fill login and submit
         if self.getACP_Tab_Customize() is None:
             # Try to log, never logged on ACP
@@ -446,7 +483,7 @@ class ForumManager:
         :return: True if all topic's forum is deleted,
                  Raise exception if some links cannot be found.
         """
-        self._navigate_main()
+        self._navigate_to_forum(False)
         linkToForum = self.findXPath(f"//a[@class='forumtitle' and text()='{forum_name}']")
         bRet = True
         if linkToForum:
@@ -465,8 +502,7 @@ class ForumManager:
                         delete_topic_link = self.findXPath("//a[contains(@href, 'action=delete_topic')]")
                         if delete_topic_link:
                             delete_topic_link.click()
-                            self.driver.implicitly_wait(1)
-                            self.driver.find_element(By.ID, "delete_permanent").click()
+                            self._wait_until_visible("delete_permanent", True, 5000, By.ID)[0].click()
                             self.driver.find_element(By.NAME, "confirm").click()
                             self.driver.get(current_url)
                             self.driver.refresh()
@@ -488,7 +524,7 @@ class ForumManager:
         :param post_content: The post content.
         :return: True if it's succeeded, False else.
         """
-        self._navigate_main()
+        self._navigate_to_forum(False)
         linkToForum = self.findXPath(f"//a[@class='forumtitle' and text()='{forum_name}']")
         bRet = False
         if linkToForum:
@@ -567,7 +603,7 @@ class ForumManager:
             if "config" in dict_forums:
                 # Configure
                 self.driver.find_element(By.XPATH, f"//a[contains(@href, 'i=acp_forums') and contains(@href, 'mode=manage') and contains(@href, 'f={forum_id}&action=edit')]").click()
-                self._wait_until_exists("//label[@for='forum_type']", True, 3000)
+                self._wait_until_exists("//label[@for='forum_type']", True, 5000)
                 # Configure the forum
                 if not isinstance(dict_forums['config'], dict):
                     raise Exception(f"configure_forum, bad configuration type for dict_forums['config'], should be dict, value = {dict_forums['config']}")
@@ -580,7 +616,7 @@ class ForumManager:
                         item.clear()
                         item.send_keys(value)
                 self.driver.find_element(By.XPATH, "//input[@type='submit']").click()  # Submit
-                self._wait_until_exists("//div[@class='successbox']", True, 3000)
+                self._wait_until_exists("//div[@class='successbox']", True, 5000)
             if "subforums" in dict_forums:
                 # Go to subforums Forum's
                 for subforum in dict_forums["subforums"]:
@@ -947,6 +983,43 @@ class ForumManager:
             nb_items = len([text for text in arr_texts if filter_text in text])
 
         return nb_items
+
+    # ===================================================================================================================
+    def set_ucp_lang(self, lang_value):
+        """ Change the user lang.
+
+        :param lang_value: 'en' / 'fr' or other to specify lang.
+        :return: True if correctly set, raise exception else.
+        throws NoSuchElementException If there is no option with specified value in SELECT.
+        throws TimeoutException If the page is too long to load.
+        """
+        self._navigate_to_forum(False)
+        # User is not good one, logout
+        logoutLink = self.getLogoutLink()
+        if not (logoutLink is None):
+            self.findXPath("//li[@id='username_logged_in']").click()  # Open menu
+            # Wait until menu item become visible
+            items = self._wait_until_exists("//a[@href='./ucp.php' and @role='menuitem']", True, 2500)
+            # CLic ling user panel
+            items[0].click()
+            items = self._wait_until_exists("//a[@href='./ucp.php?i=179']", True, 2500)
+            # CLic ling preference tab
+            items[0].click()
+            items = self._wait_until_exists("//a[contains(@href, 'i=ucp_prefs') and contains(@href, 'mode=personal')]", True, 2500)
+            if not(self.findXPath("//*[@id='lang']")):
+                items[0].click()
+                self._wait_until_exists("lang", True, 3000, By.ID)
+
+            select = Select(self.driver.find_element(By.ID, "lang"))
+            select.select_by_value(lang_value)
+
+            # Submit
+            self.driver.find_element(By.XPATH, "//input[@name='submit']").click()
+            self._wait_until_exists("message", False, 3000, By.ID)
+        else:
+            raise Exception("set_ucp_lang: the user is not logged in!")
+
+        return True
 
     #===================================================================================================================
     def clear_admin_logs(self):

@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1dd110d6-7c25-42f7-a461-8ea3c788a80a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests_Robot/06_Verify_Admin_Logs.robot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonLibs/ForumManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/PythonLibs/ForumManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests_Robot/03_Configure_Forum.robot" beforeDir="false" afterPath="$PROJECT_DIR$/Tests_Robot/03_Configure_Forum.robot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests_Robot/04_Initialize_Introduciator_Extension_Fails.robot" beforeDir="false" afterPath="$PROJECT_DIR$/Tests_Robot/04_Initialize_Introduciator_Extension_Fails.robot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests_Robot/06_Verify_Could_Post.robot" beforeDir="false" afterPath="$PROJECT_DIR$/Tests_Robot/07_Verify_Could_Post.robot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests_Robot/Introduciator_Const_Vars.resource" beforeDir="false" afterPath="$PROJECT_DIR$/Tests_Robot/Introduciator_Const_Vars.resource" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +100,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests in E:/Introduciator/Tests/TestWeb/Tests_Robots" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="TestWeb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests_Robots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Tests_Robots&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests in TestWeb" type="tests" factoryName="Autodetect" singleton="false" nameIsGenerated="true">
       <module name="TestWeb" />
       <option name="INTERPRETER_OPTIONS" value="Xfrozen_modules=off" />
@@ -106,24 +128,10 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in Tests_Robots" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="TestWeb" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tests_Robots" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/Tests_Robots&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Tests" />
-        <item itemvalue="Python tests.Python tests in Tests_Robots" />
+        <item itemvalue="Python tests.Python tests in E:/Introduciator/Tests/TestWeb/Tests_Robots" />
       </list>
     </recent_temporary>
   </component>
@@ -157,18 +165,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/PythonLibs/ForumManager.py</url>
-          <line>583</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/PythonLibs/ForumManager.py</url>
-          <line>587</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/PythonLibs/ForumManager.py</url>
-          <line>978</line>
+          <line>1051</line>
           <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/PythonLibs/ForumManager.py</url>
+          <line>999</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
