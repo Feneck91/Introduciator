@@ -20,10 +20,10 @@ if __name__ == '__main__':
         forumManager.set_login_name("admin", "123456")
         forumManager.login()
         forumManager.login_ACP()
+        forumManager.post_new_topic_into_forum("Test forum 5", "Title message from admin",  "This is the message content of admin")
         #forumManager.clear_admin_logs()
-        forumManager.set_ucp_lang("fr")
-        forumManager.set_ucp_lang("en")
-        forumManager.set_ucp_lang("fr")
+        #forumManager.set_ucp_lang("fr")
+        #forumManager.set_ucp_lang("en")
         # forumManager.configure_forum([
         #                                 { "forum"    : "Your first category",
         #                                   "config"   : { "//textarea[@id='forum_rules']" : "This is the rules of 'Your first category' forum !",
@@ -52,7 +52,7 @@ if __name__ == '__main__':
         # forumManager.login_ACP()
         # forumManager.set_user_permissions('tester_1', 'a_', 'tab005', 'a_introduciator_manage', '_u')
         # forumManager._navigate_main()
-        forumManager.Introduciator_extension_configure(True, False, False, 'Your first forum', 0, False, True, 2, '')
+        #forumManager.Introduciator_extension_configure(True, False, False, 'Your first forum', 0, False, True, 2, '')
         forumManager.wait_until_closed()
         #forumManager.clear_all_topics("Your first forum")
         # if forumManager.login():

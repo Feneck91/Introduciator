@@ -39,7 +39,7 @@ Configure Forums
 
 # Clear the introduce forum
 Clear Introduce Topic
-    [Documentation]     Clear the Topics into thie introduce forum: '${INTRODUCIATOR_FORUM_NAME}'
+    [Documentation]     Clear the Topics into the introduce forum: '${INTRODUCIATOR_FORUM_NAME}'
     [Tags]              Clear Topic
     ${result} =         FM.Clear All Topics  ${INTRODUCIATOR_FORUM_NAME}
     Should Be True      ${result}

@@ -94,9 +94,9 @@ class ForumManager:
                     main_page[0].click()
                 else:
                     self.driver.get(self.main_url)
-                self._wait_until_exists("logo", True, 5000, By.ID)
             else:
-                print(f"_navigate_to_forum, navigate to non ACP => already not in ACP, current = {self.driver.current_url}")
+                self.driver.get(self.main_url)
+            self._wait_until_exists("logo", True, 5000, By.ID)
 
     #===================================================================================================================
     def _checkPHPNotice(self):
@@ -432,19 +432,22 @@ class ForumManager:
         :return: True if correctly logged, False else.
         """
         # Now login with good username
-        self._navigate_to_forum(True)
-        # Now fill login and submit
-        if self.getACP_Tab_Customize() is None:
-            # Try to log, never logged on ACP
-            self.driver.find_element(By.ID, "username").clear()
-            self.driver.find_element(By.ID, "username").send_keys(self.login_name)
-            self.findXPath("//input[contains(@id,'password_')]").clear()
-            self.findXPath("//input[contains(@id,'password_')]").send_keys(self.password)
-            self.driver.implicitly_wait(1)
-            self.findXPath("//input[@name='login']").click()
+        iNbTry = 5
+        while self.findXPath("//div[@id='tabs']") is None and iNbTry > 0:
+            self._navigate_to_forum(True)
+            iNbTry -= 1
+            # Now fill login and submit
+            if self.findXPath("//div[@id='tabs']") is None:
+                # Try to log, never logged on ACP
+                self.driver.find_element(By.ID, "username").clear()
+                self.driver.find_element(By.ID, "username").send_keys(self.login_name)
+                self.findXPath("//input[contains(@id,'password_')]").clear()
+                self.findXPath("//input[contains(@id,'password_')]").send_keys(self.password)
+                self.driver.implicitly_wait(1)
+                self.findXPath("//input[@name='login']").click()
 
         # Verify the login successed
-        return not(self.getACP_Tab_Customize() is None)
+        return not(self.findXPath("//div[@id='tabs']") is None)
 
     #===================================================================================================================
     def enable_extension(self, extension_name):
@@ -530,10 +533,10 @@ class ForumManager:
         if linkToForum:
             # Go to forum
             linkToForum.click()
-            new_topic = self._wait_until_exists( "//a[contains(@href, 'mode=post')]", False, 3000)
+            new_topic = self._wait_until_exists( "//a[contains(@href, 'mode=post')]", False, 5000)
             if new_topic:
                 new_topic[0].click()
-                subject = self._wait_until_exists("//input[@id='subject']", False, 3000)
+                subject = self._wait_until_exists("//input[@id='subject']", False, 5000)
                 if subject:
                     subject[0].clear()
                     subject[0].send_keys(post_title)
@@ -544,6 +547,12 @@ class ForumManager:
                     title_creates = self._wait_until_exists(f"//a[contains(@href, 'viewtopic.php') and text()='{post_title}']", False, 3000)
                     if title_creates:
                         bRet = True
+                else:
+                    print(f"post_new_topic_into_forum => Subject not found!")
+            else:
+                print(f"post_new_topic_into_forum => Topic, cannot found 'New Topic' Button!")
+        else:
+            print(f"post_new_topic_into_forum => Forum '{forum_name}' not found!")
 
         return bRet
 
@@ -693,7 +702,7 @@ class ForumManager:
         :param use_phpbb_permission: True to use phpBB's permissions, False to use Introduciator rights.
         :param include_groups: For Introduciator rights, indicate if group is includes (True) or excluded (False).
         :param seleted_groups_names: For Introduciator rights, indicate group's name that must introduce or not.
-        :param ignore_users_list: User lisy that are ignored, None if no used.
+        :param ignore_users_list: User list that are ignored, None if no used.
         :return: True if configuration is valid and be set without error, False else.
         """
         bOk = False
@@ -766,16 +775,13 @@ class ForumManager:
     def Introduciator_extension_explanation(self, is_display_introduction_page, is_display_rule, dict_explanaation_page_title, dict_explanaation_page_text, dict_explanaation_rules_title, dict_explanaation_rules_text):
         """ Configure the 'Explanation" tab of the Introduciator extension.
 
-        :param is_activate: True to activate the extension, False else.
-        :param is_force_user_introduce: True to force user to introduce himself, False else.
-        :param is_authorize_deletion_first_post: True to authorize the extension to manage first post deletion.
-        :param selected_forum_name: Forum's name where the user must to introduce himself.
-        :param approval_level: Approval level. 0 = No / 1 = Simple / 2 = Edit.
-        :param use_phpbb_permission: True to use phpBB's permissions, False to use Introduciator rights.
-        :param include_groups: For Introduciator rights, indicate if group is includes (True) or excluded (False).
-        :param seleted_groups_names: For Introduciator rights, indicate group's name that must introduce or not.
-        :param ignore_users_list: User lisy that are ignored, None if no used.
-        :return: True if configuration is valid and be set without error, False else.
+        :param is_display_introduction_page: Display introduction page or not (else only redirect to introduce forum).
+        :param is_display_rule: Display rules of introduction forum or not.
+        :param dict_explanaation_page_title: Text of explanation page title.
+        :param dict_explanaation_page_text: Text of explanation page text.
+        :param dict_explanaation_rules_title: Text of rule page title.
+        :param dict_explanaation_rules_text: Text of rule page text.
+        :return: True if all is correctly configured, False else.
         """
         bOk = False
         extension_href_to_find = 'acp-introduciator_module'
@@ -795,7 +801,6 @@ class ForumManager:
             self.driver.find_element(By.ID, "explanation_display_rules_enabled" if is_display_rule else "no_explanation_display_rules_enabled").click()
             # Manage messages
             # 1> Found all language
-            webdriver.Chrome()
             languages_tags = [item.get_attribute('for')[-2:] for item in self.driver.find_elements(By.XPATH, "//label[contains(@for, 'explanation_message_title_')]")]
             for languages_tag in languages_tags:
                 # Explanation Title
@@ -1003,7 +1008,7 @@ class ForumManager:
             # CLic ling user panel
             items[0].click()
             items = self._wait_until_exists("//a[@href='./ucp.php?i=179']", True, 2500)
-            # CLic ling preference tab
+            # CLic link preference tab
             items[0].click()
             items = self._wait_until_exists("//a[contains(@href, 'i=ucp_prefs') and contains(@href, 'mode=personal')]", True, 2500)
             if not(self.findXPath("//*[@id='lang']")):
@@ -1014,6 +1019,7 @@ class ForumManager:
             select.select_by_value(lang_value)
 
             # Submit
+            self.driver.implicitly_wait(0.5) # Sometimes forum is not good
             self.driver.find_element(By.XPATH, "//input[@name='submit']").click()
             self._wait_until_exists("message", False, 3000, By.ID)
         else:
@@ -1049,6 +1055,14 @@ class ForumManager:
 
         return ret
 
+    #===================================================================================================================
+    def is_into_forum(self, forum_name):
+        """
+
+        :param forum_name: Forum's name.
+        :return: True if into the forum, False else.
+        """
+        return not(self.findXPath(f"//h2[@class='forum-title']/a[text()='{forum_name}']") is None)
 
 if __name__ == '__main__':
     pass
