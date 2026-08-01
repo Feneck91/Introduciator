@@ -1,49 +1,57 @@
-This folder contains Python code to be able to test Introduciator Extension.
+Introduciator functional tests for phpBB 3.3.x
+================================================
 
-This is based on Selenium library and Robot Framework to make tests.
+This directory contains the Robot Framework and Selenium end-to-end suite.
+The tests intentionally target an installed phpBB version >= 3.3.0 and < 3.4.0
+and Introduciator 3.0.0. The version assertions are in
+Tests_Robot/02_Extension_Activation.robot.
 
-PythonLibs:
------------
-Contains the python code (ForumManager.py) called by Robot Framework to manage phpBB forum.
+Prerequisites
+-------------
 
-Tests_Robot:
-------------
-Contains the the tests done to be able verify Introduciator extension is working well.
+1. Configure phpBB QuickInstall with a profile based on the phpBB 3.3.x branch.
+2. Make feneck91/introduciator available to that board.
+3. Install Python 3, Chrome, and the Python dependencies:
 
-.idea:
-------
-Used by pyCharm, it is the current project.
+   python -m venv .venv
+   .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
-Notes:
-------
-This project can be used to check other things on phpBB's forums.
-Specific constants used by Introduciator extension are put on separate files.
-The robot used QuickInstall to create a new phpBB's forum to be checked.
+Configuration
+-------------
 
-Here it contains ONLY tests source code, not all the framework.
-The framework can be put on USB key or on hard drive, in the root of a disk.
-It used only Portable Apps, no need to do installation!
+The defaults retain the original local QuickInstall setup. Override them with:
 
-It can be download here:
-------------------------
-Link: https://dsm.darksphinx.myds.me/sharing/WTY5IWTuh
-password: dfdsf554$*sdfsdqSDFF5
+* PHPBB_QUICKINSTALL_URL - QuickInstall URL used by suite 01.
+* PHPBB_TEST_URL - generated phpBB board URL used by suites 02-08.
+* PHPBB_TEST_HEADLESS=true - run Chrome in headless mode.
+* SELENIUM_REMOTE_URL - optional Selenium Grid endpoint.
 
-To launch it:
---------------
-Install the Python environment (to be done only once) - DownloadAndInstallAllPythonLibs.bat
-Run batch 1_RunUwAmp.bat.
-Run batch 2_RunPortableApps.bat: very important because it patch drive that can change on each USB key.
-Launch PyCharm through the portable app system.
+Execution
+---------
 
-The source code here must be located on Tests\TestWeb
+Run the complete ordered suite from TestWeb:
 
-Run Robot:
-----------
-In PyCharm, Terminal Tab.
-Set Current folder to TestWeb folder.
-Commands are:
-- To run all tests:
-> python ..\MainEnv\Scripts\robot.exe --pythonpath .\PythonLibs\ -d .\Tests_Robot\Results .\Tests_Robot\
-- To run only one:
-> python ..\MainEnv\Scripts\robot.exe --pythonpath .\PythonLibs\ -d .\Tests_Robot\Results .\Tests_Robot\04_Initialize_Introduciator_Extension_Fails.robot
+   .\.venv\Scripts\robot.exe --pythonpath .\PythonLibs -d .\Tests_Robot\Results .\Tests_Robot
+
+Parse the suite without opening a browser:
+
+   .\.venv\Scripts\robot.exe --dryrun --pythonpath .\PythonLibs -d .\Tests_Robot\Results .\Tests_Robot
+
+Suite 01 creates a clean populated board. The remaining suites deliberately run
+in numeric order because they validate activation, configuration, permissions,
+logs, and posting behaviour on that board. Every suite closes its WebDriver
+session in teardown, including after a failure.
+
+phpBB-native validation
+-----------------------
+
+The extension also contains PHPUnit tests in Ext/feneck91/introduciator/tests.
+Install the extension at phpBB/ext/feneck91/introduciator in a phpBB 3.3.x Git
+clone, install phpBB's development dependencies, and run from the clone root:
+
+   php phpBB/vendor/bin/phpunit -c phpBB/ext/feneck91/introduciator/phpunit.xml.dist
+
+Run the official Extension Pre-Validator against the packaged directory layout
+(the directory supplied to EPV must contain feneck91/introduciator):
+
+   php EPV.php run --dir=Ext

@@ -1,3 +1,6 @@
 PythonLibs/__pycache__
 Tests_Robot/Results
 .idea/vcs.xml
+.venv/
+Tests_Robot/Results/
+PythonLibs/__pycache__/

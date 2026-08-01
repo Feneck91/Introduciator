@@ -6,7 +6,7 @@
 
 *** Variables ***
 # QuickInstall
-${QUICKINSTALL_URL}=                                    http://localhost:180/my-app/quickinstall/
+${QUICKINSTALL_URL}=                                    %{PHPBB_QUICKINSTALL_URL=http://localhost:180/my-app/quickinstall/}
 ${QUICKINSTALL_PROFILE_NAME}=                           IntroduciatorTester
 ${QUICKINSTALL_BOARD_NAME}=                             Introduciator Extension Board
 ${QUICKINSTALL_BOARD_DESCRIPTION}=                      Board used to check Introduciator Extension with Robot Framework
@@ -20,7 +20,7 @@ ${PERMISSION_NAME_INTRODUCIATOR_MANAGE}=                a_introduciator_manage
 ${PERMISSION_NAME_INTRODUCIATOR_MUST_INTRODUCE}=        u_must_introduce
 
 # Forum's infos
-${FORUM_URL}=                                           http://localhost:180/my-app/quickinstall/boards/IntroduciatorTester/
+${FORUM_URL}=                                           %{PHPBB_TEST_URL=http://localhost:180/my-app/quickinstall/boards/IntroduciatorTester/}
 ${ADMIN_LOGIN}=                                         admin
 ${ADMIN_PASSWORD}=                                      123456
 ${ADMIN_2_LOGIN}=                                       tester_1
@@ -34,6 +34,9 @@ ${SIMPLE_USER_2_PASSWORD}=                              123456
 ${SIMPLE_USER_3_LOGIN}=                                 tester_22
 ${SIMPLE_USER_3_PASSWORD}=                              123456
 ${EXTENSION_NAME}=                                      feneck91/introduciator
+${EXTENSION_VERSION}=                                   3.0.0
+${PHPBB_MIN_VERSION}=                                   3.3.0
+${PHPBB_MAX_VERSION}=                                   3.4.0
 ${INTRODUCIATOR_FORUM_NAME}=                            Your first forum
 ${INTRODUCIATOR_NORMAL_FORUM_NAME1}=                    Test forum 5
 ${INTRODUCIATOR_APPROVAL_LEVEL_NO}=                     ${0}

@@ -2,6 +2,7 @@
 Library     BuiltIn
 Resource    PhpBB_Const_Vars.resource
 Resource    LoginAndLoginACP.resource
+Suite Teardown    FM.Close Browser
 
 *** Variables ***
 @{GROUP_PERMISSIONS}=   ${GROUP_REGISTERED_USERS}   ${GROUP_GLOBAL_MODERATORS}
@@ -60,7 +61,7 @@ Post New Topic '${ADMIN_LOGIN}': Redirect to '${INTRODUCIATOR_FORUM_NAME}' forum
     ${result} =         FM.is_into_forum  ${INTRODUCIATOR_FORUM_NAME}
     Should Be True      ${result}
 
-# Post in Topic User 1
+# Post in Topic User 2
 Post New Topic '${SIMPLE_USER_1_LOGIN}': Redirect to '${INTRODUCIATOR_FORUM_NAME}' forum
     [Documentation]     Post New Topic for ${SIMPLE_USER_1_LOGIN}
     [Tags]              Post Topic

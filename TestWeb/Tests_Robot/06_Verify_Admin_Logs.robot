@@ -2,6 +2,7 @@
 Library     BuiltIn
 Resource    PhpBB_Const_Vars.resource
 Resource    LoginAndLoginACP.resource
+Suite Teardown    FM.Close Browser
 
 *** Variables ***
 @{GROUP_PERMISSIONS}=   ${GROUP_REGISTERED_USERS}   ${GROUP_GLOBAL_MODERATORS}
@@ -30,6 +31,7 @@ Set UCP Lang FR
     [Documentation]     Set the user language to French
     [Tags]              Set Lang EN
     ${result} =         FM.Set Ucp Lang  fr
+    Should Be True      ${result}
 
 # Clear Admin Logs
 Clear Admin Logs FR Start
@@ -86,6 +88,7 @@ Set UCP Lang EN
     [Documentation]     Set the user language to English
     [Tags]              Set Lang EN
     ${result} =         FM.Set Ucp Lang  en
+    Should Be True      ${result}
 
 # Clear Admin Logs
 Clear Admin Logs EN Start

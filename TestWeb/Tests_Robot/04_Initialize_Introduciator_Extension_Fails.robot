@@ -1,6 +1,7 @@
 *** Settings ***
 Library     BuiltIn
 Resource    LoginAndLoginACP.resource
+Suite Teardown    FM.Close Browser
 
 *** Test Cases ***
 # Init the Web Browser

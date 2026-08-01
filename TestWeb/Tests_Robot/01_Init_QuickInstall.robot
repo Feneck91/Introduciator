@@ -2,6 +2,7 @@
 Library     BuiltIn
 Resource    Introduciator_Const_Vars.resource
 Library     ForumManager.ForumManager   WITH NAME       FM      # Python Lib to check the forum
+Suite Teardown    FM.Close Browser
 
 *** Test Cases ***
 # Init the Web Browser

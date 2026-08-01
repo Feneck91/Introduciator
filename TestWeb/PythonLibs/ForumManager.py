@@ -9,6 +9,8 @@ import re
 import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.common.exceptions import NoSuchWindowException, NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions
@@ -40,32 +42,52 @@ class ForumManager:
         self.login_name = ""
         self.password = ForumManager.PASSWORD
         self.driver = None
+        self.last_extension_enable_notice = ""
 
     #===================================================================================================================
-    def init(self, main_url):
+    def init(self, main_url, headless=None):
         """ Open the browser.
 
         :param main_url: Main URL of the forum to test.
         :return: True if the browser is correctly created, False else.
         """
-        # Create session with web browser, select the browser you want
-        # self.driver = webdriver.Edge()
-        # self.driver = webdriver.Firefox()
-        self.main_url = main_url
+        self.close_browser()
+        self.main_url = main_url.rstrip("/") + "/"
         print(f"Open Forum on url = '{self.main_url}'...")
-        try:
-            self.driver = webdriver.Chrome()
-        except Exception:
-            pass
-        if not (self.driver):
-            self.driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'drivers', 'chromedriver.exe'))
-        self.driver.maximize_window()
-        # CLear all cookies else sometimes there are problems with previous cookies
+        options = ChromeOptions()
+        if headless is None:
+            headless = os.environ.get("PHPBB_TEST_HEADLESS", "false").lower() in ("1", "true", "yes")
+        if isinstance(headless, str):
+            headless = headless.lower() in ("1", "true", "yes")
+        if headless:
+            options.add_argument("--headless=new")
+            options.add_argument("--window-size=1920,1080")
+        remote_url = os.environ.get("SELENIUM_REMOTE_URL")
+        local_driver = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "drivers", "chromedriver.exe")
+        if remote_url:
+            self.driver = webdriver.Remote(command_executor=remote_url, options=options)
+        elif os.path.isfile(local_driver):
+            self.driver = webdriver.Chrome(service=ChromeService(local_driver), options=options)
+        else:
+            # Selenium Manager resolves a compatible ChromeDriver with Selenium 4.
+            self.driver = webdriver.Chrome(options=options)
+        if not headless:
+            self.driver.maximize_window()
+        self.driver.set_page_load_timeout(30)
+        # Clear all cookies, otherwise previous sessions can make a test non-deterministic.
         self.driver.delete_all_cookies()
-        # Open web site
         self.driver.get(self.main_url)
 
         return not (self.driver is None)
+
+    def close_browser(self):
+        if self.driver is not None:
+            try:
+                self.driver.quit()
+            except (NoSuchWindowException, selenium.common.exceptions.WebDriverException):
+                pass
+            finally:
+                self.driver = None
 
 # ===================================================================================================================
     def _navigate_to_forum(self, bToACP):
@@ -84,12 +106,12 @@ class ForumManager:
                 loginACPLink[0].click()
                 # Better to check with 25 (Maintenance) than 1 (General) else it can found 11, 10, etc.
                 # Or wait to found login page
-                self._wait_until_exists(["//li/a[contains(@href, 'i=25')]", "//input[@id = 'username']"], 5000, True)
+                self._wait_until_exists(["//div[@id='tabs']", "//input[@id='username']"], True, 5000)
             else:
                 print(f"_navigate_to_forum, navigate to  ACP => already in ACP, current = {self.driver.current_url}")
         else:
             if acp_tabs:
-                main_page = self._wait_until_exists(["//a[@id='logo']", "//a[contains(@href, '/../index.php')]"], 5000, False)
+                main_page = self._wait_until_exists(["//a[@id='logo']", "//a[contains(@href, '/../index.php')]"], False, 5000)
                 if main_page:
                     main_page[0].click()
                 else:
@@ -104,14 +126,11 @@ class ForumManager:
 
         Throw exception if phpBB notice found!
         """
-        noticeItem = self.findXPath("//b[contains(text(), '[phpBB')]")
-        if not (noticeItem is None):
-            noticeText = self.findXPath("//b[contains(text(), '[phpBB')]/following-sibling::b")
-            noticeLine = self.findXPath("//b[contains(text(), '[phpBB')]/following-sibling::b/following-sibling::b")
-            noticeLine = "" if noticeLine is None else f" in line {noticeLine.text}"
-            text = f"PHPbb server error found = '{noticeText.text} {noticeLine}'!" if noticeText else f"PHPbb server error found!"
-            print(text)
-            raise Exception(text)
+        page_source = self.driver.page_source
+        error_markers = ("[phpBB Debug]", "Fatal error:", "Parse error:")
+        marker = next((item for item in error_markers if item.lower() in page_source.lower()), None)
+        if marker:
+            raise Exception(f"phpBB server error found: {marker}")
 
     #===================================================================================================================
     def _wait_until_exists(self, list_request, raise_exception, timeout, search_by = By.XPATH):
@@ -142,7 +161,7 @@ class ForumManager:
                         raise Exception(f"_wait_until_exists, seach_by value is not supported!")
                     list_request = ' | '.join([f"//*[@{name_of_by}='{request}']" for request in list_request])
                     search_by = By.XPATH  # Multiple => By XPath
-            objRet = wait.until(expected_conditions.presence_of_all_elements_located(((search_by, list_request))))
+            objRet = wait.until(expected_conditions.presence_of_all_elements_located((search_by, list_request)))
         except TimeoutException:
             if raise_exception:
                 print(f"wait_until_exists on XPath = {list_request} failed!")
@@ -179,10 +198,10 @@ class ForumManager:
                         raise Exception(f"_wait_until_exists, seach_by value is not supported!")
                     list_request = ' | '.join([f"//*[@{name_of_by}='{request}']" for request in list_request])
                     search_by = By.XPATH  # Multiple => By XPath
-            objRet = wait.until(expected_conditions.visibility_of_all_elements_located(((search_by, list_request))))
+            objRet = wait.until(expected_conditions.visibility_of_all_elements_located((search_by, list_request)))
         except TimeoutException:
             if raise_exception:
-                print(f"wait_until_exists on XPath = {xpath_request} failed!")
+                print(f"wait_until_visible on locator = {list_request} failed!")
                 raise
 
         return objRet
@@ -257,7 +276,7 @@ class ForumManager:
         """
         self.login_name = login_name
         self.password = password
-        print(f"Set login = {self.login_name} / password = {self.password}.")
+        print(f"Set login name = {self.login_name}.")
 
     #===================================================================================================================
     def findXPath(self, xpath):
@@ -443,8 +462,8 @@ class ForumManager:
                 self.driver.find_element(By.ID, "username").send_keys(self.login_name)
                 self.findXPath("//input[contains(@id,'password_')]").clear()
                 self.findXPath("//input[contains(@id,'password_')]").send_keys(self.password)
-                self.driver.implicitly_wait(1)
                 self.findXPath("//input[@name='login']").click()
+                self._wait_until_exists("//div[@id='tabs']", False, 5000)
 
         # Verify the login successed
         return not(self.findXPath("//div[@id='tabs']") is None)
@@ -458,25 +477,79 @@ class ForumManager:
         :param extension_name: The extension name like "feneck91/introduciator".
         :return: True if extension is enabled, False else.
         """
+        escaped_extension_name = urllib.parse.quote(extension_name, safe='')
+        self.last_extension_enable_notice = ""
         # Go to Customize Tab
         if self.getACP_Tab_Customize(True):
-            escaped_extension_name = urllib.parse.quote(extension_name, safe='')
             enableExtensionLink = self.findXPath(f"//tr/td/a[contains(@href, 'action=enable_pre') and contains(@href, 'ext_name={escaped_extension_name}')]")
             if enableExtensionLink:
-                # Clic on Enable extension
                 enableExtensionLink.click()
-                # Clic on Enable button
                 enableExtensionButton = self.findXPath("//input[@name='enable']")
                 if enableExtensionButton:
                     enableExtensionButton.click()
-                    successItem = self.findXPath("//div[@class='successbox']")
+                    successItems = self._wait_until_exists("//div[contains(@class, 'successbox')]", False, 5000)
+                    successItem = successItems[0] if successItems else None
                     if successItem:
-                        # Go back on extension list
+                        notice = self.findXPath("//div[contains(@class, 'successbox')]//div[contains(@class, 'phpinfo')]")
+                        self.last_extension_enable_notice = notice.text if notice else ""
                         self.getACP_Tab_Customize(True)
 
         self._checkPHPNotice()
-        # Return OK if extension can be disabled
-        return self.findXPath(f"//tr/td/a[contains(@href, 'action=disable_pre') and contains(@href, 'ext_name={escaped_extension_name}')]")
+        return self.findXPath(f"//tr/td/a[contains(@href, 'action=disable_pre') and contains(@href, 'ext_name={escaped_extension_name}')]") is not None
+
+    #===================================================================================================================
+    def extension_enable_notice_is_present(self):
+        """Return True when the version 3.0.0 first-enable guidance was shown."""
+        return bool(self.last_extension_enable_notice.strip())
+
+    #===================================================================================================================
+    @staticmethod
+    def _version_tuple(version):
+        match = re.match(r"^(\d+)\.(\d+)\.(\d+)", str(version).strip())
+        if not match:
+            raise ValueError(f"Invalid semantic version: {version}")
+        return tuple(int(part) for part in match.groups())
+
+    #===================================================================================================================
+    def get_phpbb_version(self):
+        """Read the installed board version from phpBB 3.3's ACP general page."""
+        if not self.getACP_Tab_General(True):
+            raise Exception("The phpBB ACP General tab is not available.")
+
+        candidates = self.driver.find_elements(By.XPATH, "//div[@id='main']//dd | //div[@id='main']//strong")
+        for candidate in candidates:
+            match = re.search(r"\b3\.\d+\.\d+(?:[-+.][0-9A-Za-z.-]+)?\b", candidate.text)
+            if match:
+                return match.group(0)
+        raise Exception("Could not determine the installed phpBB version from the ACP.")
+
+    #===================================================================================================================
+    def validate_phpbb_version(self, minimum_version="3.3.0", maximum_version="3.4.0"):
+        """Validate that the board belongs to the supported phpBB 3.3.x line."""
+        version = self._version_tuple(self.get_phpbb_version())
+        return self._version_tuple(minimum_version) <= version < self._version_tuple(maximum_version)
+
+    #===================================================================================================================
+    def get_extension_version(self, extension_name):
+        """Read an extension version from phpBB 3.3's extension manager table."""
+        if not self.getACP_Tab_Customize(True):
+            raise Exception("The phpBB ACP Customise tab is not available.")
+
+        escaped_name = urllib.parse.quote(extension_name, safe="")
+        rows = self._wait_until_exists(
+            f"//a[contains(@href, 'ext_name={escaped_name}')]/ancestor::tr[1]",
+            True,
+            5000,
+        )
+        for row in rows:
+            match = re.search(r"\b\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?\b", row.text)
+            if match:
+                return match.group(0)
+        raise Exception(f"Could not determine the version of extension {extension_name}.")
+
+    #===================================================================================================================
+    def validate_extension_version(self, extension_name, expected_version):
+        return self.get_extension_version(extension_name) == expected_version
 
     #===================================================================================================================
     def clear_all_topics(self, forum_name):
@@ -509,7 +582,6 @@ class ForumManager:
                             self.driver.find_element(By.NAME, "confirm").click()
                             self.driver.get(current_url)
                             self.driver.refresh()
-                            self.driver.implicitly_wait(1)
                         else:
                             raise Exception("Delete topic link not found!")
                     else:
@@ -801,7 +873,10 @@ class ForumManager:
             self.driver.find_element(By.ID, "explanation_display_rules_enabled" if is_display_rule else "no_explanation_display_rules_enabled").click()
             # Manage messages
             # 1> Found all language
-            languages_tags = [item.get_attribute('for')[-2:] for item in self.driver.find_elements(By.XPATH, "//label[contains(@for, 'explanation_message_title_')]")]
+            languages_tags = [
+                item.get_attribute("for").replace("explanation_message_title_", "", 1)
+                for item in self.driver.find_elements(By.XPATH, "//label[contains(@for, 'explanation_message_title_')]")
+            ]
             for languages_tag in languages_tags:
                 # Explanation Title
                 if not(dict_explanaation_page_title is None) and languages_tag in dict_explanaation_page_title:
@@ -1019,7 +1094,6 @@ class ForumManager:
             select.select_by_value(lang_value)
 
             # Submit
-            self.driver.implicitly_wait(0.5) # Sometimes forum is not good
             self.driver.find_element(By.XPATH, "//input[@name='submit']").click()
             self._wait_until_exists("message", False, 3000, By.ID)
         else:
