@@ -51,4 +51,6 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CONFIGURATION' => 'Konfiguration',
 	'INTRODUCIATOR_EXPLANATION'   => 'Erklärungen',
 	'INTRODUCIATOR_STATISTICS'    => 'Statistiken',
+
+	'INTRODUCIATOR_NOTICE'        => '<div class="phpinfo"><p>Die Einstellungen für diese Erweiterung befinden sich unter <strong>%1$s &#187; %2$s &#187; %3$s</strong>. Sie bleibt <strong>deaktiviert</strong>, bis Sie dort das Forum auswählen, in dem sich Benutzer vorstellen müssen, und sie aktivieren &#8212; bis dahin muss sich niemand vorstellen.</p></div>',
 ]);

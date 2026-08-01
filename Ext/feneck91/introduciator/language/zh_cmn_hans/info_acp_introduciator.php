@@ -51,4 +51,6 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CONFIGURATION' => '配置',
 	'INTRODUCIATOR_EXPLANATION'   => '说明',
 	'INTRODUCIATOR_STATISTICS'    => '统计',
+
+	'INTRODUCIATOR_NOTICE'        => '<div class="phpinfo"><p>此扩展的设置位于 <strong>%1$s &#187; %2$s &#187; %3$s</strong>。在选择用户必须自我介绍的版面并启用扩展前，它会保持<strong>禁用</strong>状态 &#8212; 在此之前任何用户都无需自我介绍。</p></div>',
 ]);

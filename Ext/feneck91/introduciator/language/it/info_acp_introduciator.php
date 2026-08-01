@@ -51,4 +51,6 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CONFIGURATION' => 'Configurazione',
 	'INTRODUCIATOR_EXPLANATION'   => 'Spiegazione',
 	'INTRODUCIATOR_STATISTICS'    => 'Statistica',
+
+	'INTRODUCIATOR_NOTICE'        => '<div class="phpinfo"><p>Le impostazioni di questa estensione si trovano in <strong>%1$s &#187; %2$s &#187; %3$s</strong>. Rimane <strong>disabilitata</strong> finché non scegli il forum in cui gli utenti devono presentarsi e non la abiliti &#8212; fino ad allora nessuno è obbligato a presentarsi.</p></div>',
 ]);

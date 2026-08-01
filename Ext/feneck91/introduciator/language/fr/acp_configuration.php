@@ -47,6 +47,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN' => 'Permet de configurer le fonctionnement de l’extension.',
 
 	// Settings: général
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'         => 'Activer l’extension :',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN' => 'Est utilisé pour activer ou désactiver cette extension.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'         => 'Forcer l’utilisateur à se présenter :',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN' => 'Quand cet option est activée, l’extension force l’utilisateur à poster sa propre présentation avant d’être autorisé à poster dans les autres sujets.
 																			<br/>Lorsque cette fonctionalité n’est pas activée, toutes les autres options restent actives.',

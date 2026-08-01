@@ -47,6 +47,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN' => 'Allow to configure the extension settings.',
 
 	// Settings: general
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'         => 'Activate extension:',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN' => 'Used to activate or deactivate this extension.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'         => 'Force the user to introduce himself:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN' => 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
 																			<br/>When this feature is not enabled, all other options remain active.',

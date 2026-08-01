@@ -45,6 +45,8 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_TITLE'                       => 'Configurações do Introduciator',
 	'INTRODUCIATOR_CP_TITLE_EXPLAIN'               => 'Permite configurar as definições da extensão.',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'         => 'Ativar extensão:',
+	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN' => 'Usado para ativar ou desativar esta extensão.',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'         => 'Forçar o usuário a apresentar-se:',
 	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN' => 'Quando esta opção está habilitada, a extensão força o usuário a publicar a sua própria apresentação antes de poder publicar noutros tópicos.
 																			<br/>Quando esta funcionalidade não está habilitada, todas as outras opções permanecem ativas.',

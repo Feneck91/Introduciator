@@ -50,4 +50,6 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CONFIGURATION' => 'Configuration',
 	'INTRODUCIATOR_EXPLANATION'   => 'Explication',
 	'INTRODUCIATOR_STATISTICS'    => 'Statistiques',
+
+	'INTRODUCIATOR_NOTICE'        => '<div class="phpinfo"><p>Les paramètres de cette extension se trouvent dans <strong>%1$s &#187; %2$s &#187; %3$s</strong>. Elle reste <strong>désactivée</strong> jusqu’à ce que vous choisissiez le forum dans lequel les utilisateurs doivent se présenter et que vous l’activiez &#8212; jusque-là, personne n’est obligé de se présenter.</p></div>',
 ]);

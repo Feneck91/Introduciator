@@ -47,4 +47,6 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CONFIGURATION' => 'Configuração',
 	'INTRODUCIATOR_EXPLANATION'   => 'Explicação',
 	'INTRODUCIATOR_STATISTICS'    => 'Estatísticas',
+
+	'INTRODUCIATOR_NOTICE'        => '<div class="phpinfo"><p>As definições desta extensão estão em <strong>%1$s &#187; %2$s &#187; %3$s</strong>. Ela fica <strong>desativada</strong> até você escolher o fórum onde os usuários devem se apresentar e ativá-la &#8212; ninguém é obrigado a se apresentar enquanto você não fizer isso.</p></div>',
 ]);
