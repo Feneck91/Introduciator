@@ -34,6 +34,9 @@
 	<div style="text-align: center">
 		<a href="{{ INTRODUCIATOR_EXT_LINK_FORUM_URL }}" class="button"><span>{{ INTRODUCIATOR_EXT_LINK_GOTO_FORUM }}</span></a>
 		<a href="{{ INTRODUCIATOR_EXT_LINK_FORUM_POST }}" class="button"><span>{{ INTRODUCIATOR_EXT_LINK_POST_FORUM }}</span></a>
+		{% if S_HAS_ORIGIN_FORUM %}
+		<a href="{{ INTRODUCIATOR_EXT_LINK_ORIGIN_FORUM_URL }}" class="button"><span>{{ lang('INTRODUCIATOR_EXT_LINK_RETURN_FORUM') }}</span></a>
+		{% endif %}
 	</div>
 	<br/>
 	<br/>

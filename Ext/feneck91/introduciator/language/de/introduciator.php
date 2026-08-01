@@ -49,13 +49,14 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => 'Es ist nicht erlaubt, den ersten Beitrag dieser Vorstellung zu löschen! Du kannst diese Vorstellung löschen, indem du das Thema löschst.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => 'Bitte stelle dich in diesem Thema vor: %s',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>Um posten zu können, <u>musst</u> du dich selbst vorstellen</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => 'Wie bei jedem neuen Benutzer musst du dich den anderen Mitgliedern im “<a href="%forum_url%">%forum_name%</a>” Forum vorstellen<br/>
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => 'Wie bei jedem neuen Benutzer musst du dich den anderen Mitgliedern im “<a href="%s">%s</a>” Forum vorstellen<br/>
 																	Es ist nur <strong>ein</strong> neues Thema im Forum für Vorstellungen erlaubt.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	Bitte beachte die folgenden Regeln bei der Erstellung des Vorstellungsthemas, die auch oben im Forum für Vorstellungen angezeigt werden.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>Die Regeln werden hier nochmals wiederholt:</u></strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => '<a href="%forum_url%">Klicke auf diesen Link um zum Forum “%forum_name%” zu gelangen</a>',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => '<a href="%forum_post%">Stelle dich jetzt vor, indem du auf diesen Link klickst</a>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => 'Gehen sie zum Forum “%s”',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => 'Stelle dich vor',
+	'INTRODUCIATOR_EXT_LINK_RETURN_FORUM'       => 'Abbrechen und zum vorherigen Forum zurückkehren',
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>Während der Genehmigung der Vorstellung bleibt sie editierbar und die Moderatoren können dir antworten..
 																	<br/>Dies ermöglicht es dir, sie gegebenenfalls mit den Anforderungen des Forums in Einklang zu bringen.',
 

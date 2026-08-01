@@ -50,6 +50,16 @@ class introduciator_explain_controller
 	protected $user;
 
 	/**
+	 * @var string phpBB root path.
+	 */
+	protected $root_path;
+
+	/**
+	 * @var string PHP file extension.
+	 */
+	protected $php_ext;
+
+	/**
 	 * Constructor
 	 *
 	 * @param introduciator_helper          $introduciator_helper    Extension helper
@@ -57,16 +67,20 @@ class introduciator_explain_controller
 	 * @param \phpbb\config\config          $config                  Current configuration (config table)
 	 * @param \phpbb\template\template      $template                Template object
 	 * @param \phpbb\user                   $user                    User object
+	 * @param string                        $root_path               phpBB root path
+	 * @param string                        $php_ext                 PHP file extension
 	 *
 	 * @access public
 	 */
-	public function __construct(introduciator_helper $introduciator_helper, helper $helper, config $config, template $template, user $user)
+	public function __construct(introduciator_helper $introduciator_helper, helper $helper, config $config, template $template, user $user, $root_path, $php_ext)
 	{
 		$this->introduciator_helper = $introduciator_helper;
 		$this->helper = $helper;
 		$this->config = $config;
 		$this->template = $template;
 		$this->user = $user;
+		$this->root_path = $root_path;
+		$this->php_ext = $php_ext;
 	}
 
 	/**
@@ -77,7 +91,7 @@ class introduciator_explain_controller
 	 * @return \Symfony\Component\HttpFoundation\Response object containing rendered page.
 	 * @access public
 	 */
-	public function handle()
+	public function handle($forum_id = 0)
 	{
 		if ($this->introduciator_helper->is_introduciator_allowed())
 		{	// Title message
@@ -92,6 +106,11 @@ class introduciator_explain_controller
 			$params = $this->introduciator_helper->introduciator_getparams(false);
 			$message = $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 
+			// forum_id is the forum the user was trying to post in before being redirected here;
+			// only offer a way back to it when it differs from the introduction forum itself
+			$origin_forum_id = (int) $forum_id;
+			$has_origin_forum = $origin_forum_id > 0 && $origin_forum_id != (int) $this->config['introduciator_fk_forum_id'];
+
 			$this->template->assign_vars([
 				'S_EXT_ACTIVATED'					=> true,
 				'INTRODUCIATOR_EXT_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
@@ -104,6 +123,8 @@ class introduciator_explain_controller
 				'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
 				'INTRODUCIATOR_EXT_LINK_FORUM_URL'	=> $params['forum_url'],
 				'INTRODUCIATOR_EXT_LINK_FORUM_POST'	=> $params['forum_post'],
+				'S_HAS_ORIGIN_FORUM'					=> $has_origin_forum,
+				'INTRODUCIATOR_EXT_LINK_ORIGIN_FORUM_URL'	=> $has_origin_forum ? append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . $origin_forum_id) : '',
 			]);
 		}
 		else

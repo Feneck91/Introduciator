@@ -42,6 +42,8 @@ services:
             - '@config'
             - '@template'
             - '@user'
+            - '%core.root_path%'
+            - '%core.php_ext%'
 
     feneck91.introduciator.listener:
         class: feneck91\introduciator\event\introduciator_listener

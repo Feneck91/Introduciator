@@ -596,7 +596,7 @@ class introduciator_helper
 							{
 								if ($this->introduciator_params['is_explanation_enabled'])
 								{
-									redirect($this->controller_helper->route('feneck91_introduciator_explain'));
+									redirect($this->controller_helper->route('feneck91_introduciator_explain', ['forum_id' => (int) $forum_id]));
 								}
 								else
 								{
