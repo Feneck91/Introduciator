@@ -4,7 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,16 +38,18 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * mode: main : the name of the extension
- */
-$lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Introduciator',
+* mode: main : the name of the extension
+*/
+$lang = array_merge($lang, [
+	'ACP_INTRODUCIATOR_EXTENSION' => 'Introduciator',
 
 /**
- * Titles present on the left side of Extensions ACP's tab under Introduciator item
- */
-	'INTRODUCIATOR_GENERAL'							=> 'General',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Explanation',
-	'INTRODUCIATOR_STATISTICS'						=> 'Statistics',
-));
+* Titles present on the left side of Extensions ACP's tab under Introduciator item
+*/
+	'INTRODUCIATOR_GENERAL'       => 'General',
+	'INTRODUCIATOR_CONFIGURATION' => 'Configuration',
+	'INTRODUCIATOR_EXPLANATION'   => 'Explanation',
+	'INTRODUCIATOR_STATISTICS'    => 'Statistics',
+
+	'INTRODUCIATOR_NOTICE'        => '<div class="phpinfo"><p>The settings for this extension are in <strong>%1$s &#187; %2$s &#187; %3$s</strong>. It stays <strong>disabled</strong> until you pick the forum users must introduce themselves in and turn it on there &#8212; no one is required to introduce themselves until you do.</p></div>',
+]);

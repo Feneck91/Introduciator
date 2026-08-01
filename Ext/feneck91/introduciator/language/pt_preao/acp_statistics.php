@@ -6,7 +6,7 @@
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @translation Leinad4Mind [Brazilian Portuguese [pt_br]] (2026)
+ * @translation Leinad4Mind [Portuguese [pt_preao]] (2026)
  */
 
 /**
@@ -43,17 +43,17 @@ if (empty($lang) || !is_array($lang))
 * Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
 */
 $lang = array_merge($lang, [
-	'INTRODUCIATOR_ST_TITLE'         => 'Estatísticas e verificações sobre a apresentação de usuários',
-	'INTRODUCIATOR_ST_TITLE_EXPLAIN' => 'Usado para mostrar informações do banco de dados:
+	'INTRODUCIATOR_ST_TITLE'         => 'Estatísticas e verificações sobre a apresentação de utilizadores',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN' => 'Usado para mostrar informações da base de dados:
 														<ul>
 														<li>As estatísticas sobre apresentações.</li>
-														<li>A verificação de coerência do banco de dados sobre a apresentação do usuário (verificar se os usuários publicaram mais de uma apresentação).</li>
+														<li>A verificação de coerência da base de dados sobre a apresentação do utilizador (verificar se os utilizadores publicaram mais de uma apresentação).</li>
 														</ul>',
 	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'      => 'Estatísticas gerais',
 	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'      => 'Número de apresentações no fórum:',
 	'INTRODUCIATOR_ST_ARRAY_TITLE'                => 'Esta matriz indica todas as apresentações que foram publicadas mais do que uma vez',
 	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED' => 'Nenhuma apresentação múltipla detetada',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'          => 'Usuário',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'          => 'Utilizador',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => 'Data',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => 'Apresentações',
 	'INTRODUCIATOR_ST_CHECK'                      => 'Verificar',

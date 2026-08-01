@@ -1,14 +1,13 @@
 <?php
-/**
- * permissions_introduciator.php [Portuguese-Brazil]
- *
- * @package phpBB Extension - Introduciator Extension
- * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
- * @copyright (c) 2022 Leinad4Mind
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
 
+/**
+ * @package phpBB Extension - Introduciator Extension for phpBB.
+ * permissions_introduciator.php [English]
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @translation Leinad4Mind [Brazilian Portuguese [pt_br]] (2026)
+ */
 /**
  * DO NOT CHANGE
  */
@@ -19,7 +18,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,10 +38,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 // Adding the permissions
-$lang = array_merge($lang, array(
-	// User Permissions
-	'ACL_U_MUST_INTRODUCE'			=> 'Obrigado a se apresentar',
-
-	// Admin Permissions
-	'ACL_A_INTRODUCIATOR_MANAGE'	=> 'Pode gerir a extensão Introduciator',
-));
+$lang = array_merge($lang, [
+	'ACL_U_MUST_INTRODUCE'       => 'Deve primeiro publicar uma apresentação',
+	'ACL_A_INTRODUCIATOR_MANAGE' => 'Pode gerenciar a extensão Introduciator',
+]);

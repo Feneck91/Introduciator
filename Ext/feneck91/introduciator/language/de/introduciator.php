@@ -5,7 +5,7 @@
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @German Language (c) Dr.Death  <http://www.lpi-clan.de>
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,38 +38,33 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-/**
- * General messages
- */
-$lang = array_merge($lang, array(
-	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> 'Die Freigabe deiner Vorstellung steht noch aus, bitte warte.',
-	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> 'Während der Genehmigung deiner Vorstellung ist nur die Bearbeitung erlaubt.',
-	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> 'Du darfst dich nicht mehr als einmal vorstellen!',
-	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> 'Es ist nicht erlaubt, den ersten Beitrag deiner Vorstellung zu löschen!',
-	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> 'Es ist nicht erlaubt, den ersten Beitrag dieser Vorstellung zu löschen! Du kannst diese Vorstellung löschen, indem du das Thema löschst.',
-	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> 'Bitte stelle dich in diesem Thema vor: %s',
-	'INTRODUCIATOR_EXT_DISABLED'								=> 'Die Introduciator Extension ist deaktiviert. Du solltest sie aktivieren, um diese Extension benutzbar zu machen.',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>Um posten zu können, <u>musst</u> du dich selbst vorstellen</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> 'Wie bei jedem neuen Benutzer musst du dich den anderen Mitgliedern im “<a href="%s">%s</a>” Forum vorstellen<br />
+/*
+* General messages
+*/
+$lang = array_merge($lang, [
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'           => 'Die Freigabe deiner Vorstellung steht noch aus, bitte warte.',
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT' => 'Während der Genehmigung deiner Vorstellung ist nur die Bearbeitung erlaubt.',
+	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'Du darfst dich nicht mehr als einmal vorstellen!',
+	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'          => 'Es ist nicht erlaubt, den ersten Beitrag deiner Vorstellung zu löschen!',
+	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => 'Es ist nicht erlaubt, den ersten Beitrag dieser Vorstellung zu löschen! Du kannst diese Vorstellung löschen, indem du das Thema löschst.',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => 'Bitte stelle dich in diesem Thema vor: %s',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>Um posten zu können, <u>musst</u> du dich selbst vorstellen</strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => 'Wie bei jedem neuen Benutzer musst du dich den anderen Mitgliedern im “<a href="%forum_url%">%forum_name%</a>” Forum vorstellen<br/>
 																	Es ist nur <strong>ein</strong> neues Thema im Forum für Vorstellungen erlaubt.',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br />
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	Bitte beachte die folgenden Regeln bei der Erstellung des Vorstellungsthemas, die auch oben im Forum für Vorstellungen angezeigt werden.',
-	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>Die Regeln werden hier nochmals wiederholt:</u></strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> 'Gehen sie zum Forum “%s”',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> 'Stelle dich vor',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br />Während der Genehmigung der Vorstellung bleibt sie editierbar und die Moderatoren können dir antworten..
-																	<br />Dies ermöglicht es dir, sie gegebenenfalls mit den Anforderungen des Forums in Einklang zu bringen.',
+	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>Die Regeln werden hier nochmals wiederholt:</u></strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => '<a href="%forum_url%">Klicke auf diesen Link um zum Forum “%forum_name%” zu gelangen</a>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => '<a href="%forum_post%">Stelle dich jetzt vor, indem du auf diesen Link klickst</a>',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>Während der Genehmigung der Vorstellung bleibt sie editierbar und die Moderatoren können dir antworten..
+																	<br/>Dies ermöglicht es dir, sie gegebenenfalls mit den Anforderungen des Forums in Einklang zu bringen.',
 
-	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> 'Vorstellung des Benutzers',
-	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> 'Für diesen Benutzer ist keine Vorstellung verfügbar.',
-	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'						=> 'Siehe die Vorstellung des Benutzers',
-	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'			=> 'Die Vorstellung dieses Benutzers ist noch nicht genehmigt.',
+	'INTRODUCIATOR_MEMBER_INTRODUCTION'                 => 'Vorstellung des Benutzers',
+	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'          => 'Für diesen Benutzer ist keine Vorstellung verfügbar.',
+	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'             => 'Siehe die Vorstellung des Benutzers',
+	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION' => 'Die Vorstellung dieses Benutzers ist noch nicht genehmigt.',
 
-	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> 'Zur Vorstellung des Benutzers',
-	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> 'Die Vorstellung des Benutzers ist noch nicht genehmigt.',
-	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> 'Für diesen Benutzer ist keine Vorstellung verfügbar.',
-
-	// Logs
-	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>Introducators: Konfigurationseinstellungen aktualisiert.</strong>',
-	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>Introduciator: Die Einstellungen der Erklärung wurden aktualisiert.</strong>',
-));
+	'INTRODUCIATOR_VIEW_MEMBER_GOTO'    => 'Zur Vorstellung des Benutzers',
+	'INTRODUCIATOR_VIEW_MEMBER_PENDING' => 'Die Vorstellung des Benutzers ist noch nicht genehmigt.',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO' => 'Für diesen Benutzer ist keine Vorstellung verfügbar.',
+]);

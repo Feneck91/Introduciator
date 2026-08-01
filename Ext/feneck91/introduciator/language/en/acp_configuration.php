@@ -4,7 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,57 +38,58 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * Mode: configuration
- * Info: language keys are prefixed with 'INTRODUCIATOR_CP_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_'
- */
-$lang = array_merge($lang, array(
+* mode: configuration
+* Info: language keys are prefixed with 'INTRODUCIATOR_CP_' for 'INTRODUCIATOR_CONFIGURATION_PAGES_'
+*/
+$lang = array_merge($lang, [
 	// Titles
-	'INTRODUCIATOR_CP_TITLE'										=> 'Introduciator configuration settings',
-	'INTRODUCIATOR_CP_TITLE_EXPLAIN'								=> 'Allow to configure the extension settings.',
+	'INTRODUCIATOR_CP_TITLE'         => 'Introduciator configuration settings',
+	'INTRODUCIATOR_CP_TITLE_EXPLAIN' => 'Allow to configure the extension settings.',
 
 	// Settings: general
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'							=> 'Activate extension:',
-	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN'					=> 'Used to activate or deactivate this extension.',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'							=> 'Force the user to introduce himself:',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN'					=> 'When this option is selected, the extension forces the user to post a self-introduction before being allowed to post in other topics.
-																			<br />When this feature is not activated, all other options remain active.',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'							=> 'Authorize the extension to regulate the deletion of first introduction post in the forum for introductions:',
-	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN'					=> 'When this option is selected, the extension prevents the deletion of the first post in any topic in the forum for introductions.
-																			<br />Even moderators or administrators will not have the permission to delete the introduction, thus ensuring that the first post in any introductory topic is effectively the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
-																			<br />If not selected, a member will be able to have several introductions. Enabling this option is therefore preferable.',
-	'INTRODUCIATOR_CP_FORUM_CHOICE'									=> 'The forum where the user must introduce himself/herself:',
-	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'							=> 'The extension will search only in this forum whether forum users have introduced themselves.',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'						=> 'Introduction approval options:',
-	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN'				=> 'Is used to require moderator approval for an introduction:<br />
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'         => 'Force the user to introduce himself:',
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN' => 'When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
+																			<br/>When this feature is not enabled, all other options remain active.',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'         => 'Authorize the extension to verify the deletion of first introduction post in the forum for introductions:',
+	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN' => 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
+																			<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
+																			<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
+	'INTRODUCIATOR_CP_FORUM_CHOICE'                   => 'The forum where the user must introduce himself/herself:',
+	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'           => 'The extension will search only in this forum whether forum users have introduced themselves.',
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'         => 'Introduction approval options:',
+	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN' => 'Is used to force introduction to be approved by a moderator:<br/>
 																			<ul>
-																			<li><b>No approval</b>: don’t force introduction approval.</li>
-																			<li><b>Simple approval</b>: force introduction approval. The user doesn’t see his/her introduction until validated by a moderator (normal processing is used for all messages that need approval).</li>
-																			<li><b>Approval with ability to edit</b>: require introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere until his/her introduction is validated by a moderator. This allows moderators and users to cooperate to make messages compliant for validation by a moderator (unusual message processing approval). Only editing is allowed. Reply and quote are forbidden.</li>
+																			<li><b>No approval</b>: don’t force introduction to be approved, let the default processing.</li>
+																			<li><b>Simple approval</b>: force introduction to be approved. The user doesn’t see his/her introduction if it is not validated by a moderator (normal processing is used for all messages that use approval).</li>
+																			<li><b>Approval with ability to edit</b>: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbiden.</li>
 																			</ul>',
-	'INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL'						=> 'No approval',
-	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL'						=> 'Simple approval',
-	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT'				=> 'Approval with ability to edit',
+	'INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL'        => 'No approval',
+	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL'           => 'Simple approval',
+	'INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT' => 'Approval with ability to edit',
 
 	// Settings: groups and users
-	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS'		=> 'Groups and users configuration',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS'								=> 'Use phpBB permissions:',
-	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'						=> 'You can use either the phpBB permissions or this extension configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.',
-	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'						=> 'Use forum’s permissions',
-	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'					=> 'Use extension configuration',
-	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'						=> 'Include or exclude groups:',
-	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'				=> 'When « include groups » is selected, only users of selected groups need to introduce themselves.<br />When « exclude groups » is selected, only users that are not into selected groups need to introduce themselves.',
-	'INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION'						=> 'Include groups',
-	'INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION'						=> 'Exclude groups',
-	'INTRODUCIATOR_CP_SELECTED_GROUPS'								=> 'Groups selections:',
-	'INTRODUCIATOR_CP_SELECTED_GROUPS_EXPLAIN'						=> 'Select groups that should be included or excluded.',
-	'INTRODUCIATOR_CP_IGNORED_USERS'								=> 'Ignored users:',
-	'INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN'						=> 'Users who are not required to introduce themselves.<br />Enter one username on each line.<br />The option is used, for example, for the administrators or test accounts.',
+	'INTRODUCIATOR_CP_GENERAL_OPTIONS_MANAGE_GROUPS_AND_USERS' => 'Groups and users configuration',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS'                         => 'Use phpBB permissions:',
+	'INTRODUCIATOR_CP_USE_PERMISSIONS_EXPLAIN'                 => 'You can use either the phpBB permissions or this extension configuration (simplest way but less efficient) to indicate that the user must introduce himself/herself.<br /><br />When the « Use forum’s permissions » option is used, the next configuration is ignored.',
+	'INTRODUCIATOR_CP_USE_PERMISSION_OPTION'                   => 'Use forum’s permissions',
+	'INTRODUCIATOR_CP_NOT_USE_PERMISSION_OPTION'               => 'Use extension configuration',
+	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS'                  => 'Include or exclude groups:',
+	'INTRODUCIATOR_CP_INCLUDE_EXCLUDE_GROUPS_EXPLAIN'          => 'When « include groups » is selected, only users of selected groups need to introduce themselves.<br />When « exclude groups » is selected, only users that are not into selected groups need to introduce themselves.',
+	'INTRODUCIATOR_CP_INCLUDE_GROUPS_OPTION'                   => 'Include groups',
+	'INTRODUCIATOR_CP_EXCLUDE_GROUPS_OPTION'                   => 'Exclude groups',
+	'INTRODUCIATOR_CP_SELECTED_GROUPS'                         => 'Groups selections:',
+	'INTRODUCIATOR_CP_SELECTED_GROUPS_EXPLAIN'                 => 'Select groups that should be included or excluded.',
+	'INTRODUCIATOR_CP_IGNORED_USERS'                           => 'Ignored users:',
+	'INTRODUCIATOR_CP_IGNORED_USERS_EXPLAIN'                   => 'Users who are not required to introduce themselves.<br />Enter one username on each line.<br />The option is used, for example, for the administrators or test accounts.',
 
 	// Messages
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'							=> '',
-	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'					=> 'No forum selection, use it only when the extension is deactivated',
-	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'					=> 'When this extension is enabled, you should choose a forum!',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'         => '',
+	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP' => 'No forum selection',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM' => 'Your must choose a forum!',
+
+	// Logs
+	'INTRODUCIATOR_CP_LOG_UPDATED' => '<strong>Introduciator: configuration settings updated.</strong>',
 
 	// Confirm box
-	'INTRODUCIATOR_CP_UPDATED'										=> 'The configuration has been updated',
-));
+	'INTRODUCIATOR_CP_UPDATED' => 'The configuration has been updated',
+]);

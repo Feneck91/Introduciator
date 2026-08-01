@@ -4,7 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @copyright (c) Traduzione MOD by Galandas (Rey) 2016 www.phpbb3world.altervista.org/
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,10 +39,10 @@ if (empty($lang) || !is_array($lang))
 //
 
 // Adding the permissions
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	// User Permissions
-	'ACL_U_MUST_INTRODUCE'			=> 'Deve prima postare un introduzione',
+	'ACL_U_MUST_INTRODUCE' => 'Deve prima postare un introduzione',
 
 	// Admin Permissions
-	'ACL_A_INTRODUCIATOR_MANAGE'	=> 'Può gestire Introduzione MOD',
-));
+	'ACL_A_INTRODUCIATOR_MANAGE' => 'Può gestire Introduzione MOD',
+]);

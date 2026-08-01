@@ -6,7 +6,7 @@
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @translation Leinad4Mind [Brazilian Portuguese [pt_br]] (2026)
+ * @translation Leinad4Mind [Portuguese [pt_preao]] (2026)
  */
 
 /**
@@ -39,12 +39,17 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
-* mode: main : the name of the extension
+* mode: general
+* Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
 */
 $lang = array_merge($lang, [
-	'ACP_INTRODUCIATOR_EXTENSION' => 'Introduciator',
-	'INTRODUCIATOR_GENERAL'       => 'Geral',
-	'INTRODUCIATOR_CONFIGURATION' => 'Configuração',
-	'INTRODUCIATOR_EXPLANATION'   => 'Explicação',
-	'INTRODUCIATOR_STATISTICS'    => 'Estatísticas',
+	'INTRODUCIATOR_GP_TITLE'                           => 'Informações gerais',
+	'INTRODUCIATOR_GP_TITLE_EXPLAIN'                   => 'Obter a versão desta extensão.',
+	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS' => 'Informações',
+	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES'       => 'Valores',
+	'INTRODUCIATOR_GP_INFOS'                           => 'Informações do Introduciator',
+	'INTRODUCIATOR_GP_INSTALL_DATE'                    => 'Data de instalação da extensão <strong>Introduciator</strong>:',
+	'INTRODUCIATOR_GP_VERSION'                         => 'Versão da extensão <strong>Introduciator</strong>:',
+	'INTRODUCIATOR_GP_DETAILS'                         => 'Detalhes',
+	'INTRODUCIATOR_GP_URL_DETAILS'                     => 'https://www.phpbb.com/customise/db/extension/introduciator/',
 ]);

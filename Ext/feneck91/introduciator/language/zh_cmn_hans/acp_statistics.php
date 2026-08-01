@@ -5,7 +5,7 @@
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @Simplified Chinese Language (c) David Yin <https://www.phpbbchinese.com>
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,32 +39,29 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * Mode: statistics
- * Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
- */
-$lang = array_merge($lang, array(
+* mode: statistics
+* Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
+*/
+$lang = array_merge($lang, [
 	// Titles
-	'INTRODUCIATOR_ST_TITLE'						=> '用户自我介绍的统计信息和检查',
-	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> '用于显示数据库信息：
+	'INTRODUCIATOR_ST_TITLE'         => '用户自我介绍的统计信息和检查',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN' => '用于显示数据库信息：
 														<ul>
 														<li>自我介绍的统计信息。</li>
 														<li>用户自我介绍的数据库一致性检查（检查用户是否发布了多个自我介绍）。</li>
 														</ul>',
 
 	// Number of introduce's texts
-	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> '通用统计',
-	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> '有多少个自我介绍：',
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE' => '通用统计',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE' => '有多少个自我介绍：',
 
 	// Array's texts
-	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> '这个列表显示有多少个用户发布了超过一次自我介绍的帖子',
-	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> '未检测到多个介绍',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> '用户',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> '日期',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> '自我介绍',
-
-	// Errors
-	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS'	=> '启用并配置好自我介绍的扩展后，才能查看相关统计信息！',
+	'INTRODUCIATOR_ST_ARRAY_TITLE'                => '这个列表显示有多少个用户发布了超过一次自我介绍的帖子',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED' => '未检测到多个介绍',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'          => '用户',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => '日期',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => '自我介绍',
 
 	// Buttons
-	'INTRODUCIATOR_ST_CHECK'						=> '检查',
-));
+	'INTRODUCIATOR_ST_CHECK' => '检查',
+]);

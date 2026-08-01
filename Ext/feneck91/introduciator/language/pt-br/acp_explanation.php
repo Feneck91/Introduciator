@@ -1,12 +1,12 @@
 <?php
+
 /**
- * info_acp_introduciator.php [Portuguese-Brazil]
- *
- * @package phpBB Extension - Introduciator Extension
+ * @package phpBB Extension - Introduciator Extension for phpBB.
+ * info_acp_introduciator.php [English]
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
- * @copyright (c) 2022 Leinad4Mind
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @translation Leinad4Mind [Brazilian Portuguese [pt_br]] (2026)
  */
 
 /**
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,46 +39,40 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * Mode: explanation
- * Info: language keys are prefixed with 'INTRODUCIATOR_EP_' for 'INTRODUCIATOR_EXPLANATION_PAGES_'
- */
-$lang = array_merge($lang, array(
-	// Titles
-	'INTRODUCIATOR_EP_TITLE'										=> 'Configuração da Página de Explicação',
-	'INTRODUCIATOR_EP_TITLE_EXPLAIN'								=> 'Permite configurar a página de explicação das apresentações.',
-
-	// Settings: page configuration
-	'INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE'						=> 'Configuração da Explicação',
-	'INTRODUCIATOR_EP_DISPLAY_PAGE'									=> 'Exibir página de explicação:',
-	'INTRODUCIATOR_EP_DISPLAY_PAGE_EXPLAIN'							=> 'Esta opção é usada para exibir a página de explicação quando um usuário tenta criar uma mensagem ou um tópico num fórum que não o das apresentações.',
-	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED'						=> 'Exibir regras do fórum na página de explicação:',
-	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED_EXPLAIN'				=> 'Serve para exibir as regras do fórum usado para as apresentações na página de explicações.',
-
-	// Settings: page text configuration
-	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE'					=> 'Configuração do texto na página de explicação',
-	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN'			=> 'Para todos os campos que se seguem, podes usar:<br />
+* Mode: explanation
+* Info: language keys are prefixed with 'INTRODUCIATOR_EP_' for 'INTRODUCIATOR_EXPLANATION_PAGES_'
+*/
+$lang = array_merge($lang, [
+	'INTRODUCIATOR_EP_TITLE'                               => 'Configurações da página de explicações do Introduciator',
+	'INTRODUCIATOR_EP_TITLE_EXPLAIN'                       => 'Permite configurar as definições da página de explicações do Introduciator.',
+	'INTRODUCIATOR_EP_GENERAL_SETTINGS_TITLE'              => 'Configuração da página de explicações',
+	'INTRODUCIATOR_EP_DISPLAY_PAGE'                        => 'Mostrar página de explicação:',
+	'INTRODUCIATOR_EP_DISPLAY_PAGE_EXPLAIN'                => 'Esta opção é usada para mostrar uma página de explicação se o usuário tentar publicar noutro fórum que não o fórum de apresentações.',
+	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED'               => 'Mostrar regras do fórum de apresentações:',
+	'INTRODUCIATOR_EP_DISPLAY_RULES_ENABLED_EXPLAIN'       => 'Usado para mostrar as regras do fórum de apresentações na página de explicação.',
+	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE'         => 'Configuração do texto da página de explicações',
+	'INTRODUCIATOR_EP_GENERAL_OPTIONS_TEXTS_TITLE_EXPLAIN' => 'Para todos os campos seguintes, pode usar:<br/>
 																		<ul>
-																		<li><b>%forum_name%</b>: nome do fórum para apresentações</li>
-																		<li><b>%forum_url%</b>: url do fórum para apresentações</li>
-																		<li><b>%forum_post%</b>: url direto para criação de tópico no fórum para apresentações</li>
+																		<li><b>%forum_name%</b>: nome do fórum de apresentações</li>
+																		<li><b>%forum_url%</b>: url para o fórum de apresentações</li>
+																		<li><b>%forum_post%</b>: url para escrever uma nova mensagem no fórum de apresentações</li>
 																		</ul>
-																		É permitido o uso de BBcodes.<br />
-																		<br />
+																		Pode usar BBcodes para fazer mensagens.<br/>
+																		<br/>
 																		<u>Exemplos:</u>
 																		<ul>
-																		<li>Criar um endereço para o fórum das apresentações: <i>[url=<b>%forum_url%</b>]Ir para ’<b>%forum_name%</b>’[/url]</i>
-																		<li>Criar um endereço para criar o tópico no fórum das apresentações: <i>[url=<b>%forum_post%</b>]Criar apresentação em ’<b>%forum_name%</b>’[/url]</i>
+																		<li>Criar link para o fórum de apresentações: <i>[url=<b>%forum_url%</b>]Clique aqui para ir para o fórum "<b>%forum_name%</b>"[/url]</i>
+																		<li>Criar link para criar tópico no fórum de apresentações: <i>[url=<b>%forum_post%</b>]Clique aqui para criar tópico no fórum "<b>%forum_name%</b>"[/url]</i>
 																		</ul>
-																		<br />',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE'								=> 'Título da página de explicação:',
-	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'						=> 'Predefinido = <b>%explanation_title%</b><br />Podes colocar o texto que desejares.',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT'									=> 'Texto da explicação:',
-	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'							=> 'Predefinido = <b>%explanation_text%</b><br />Podes colocar o texto que desejares.',
-	'INTRODUCIATOR_EP_RULES_TITLE'									=> 'Título das regras da explicação:',
-	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'							=> 'Predefinido = <b>%rules_title%</b><br />Podes colocar o texto que desejares.',
-	'INTRODUCIATOR_EP_RULES_TEXT'									=> 'Texto das regras do fórum das apresentações:',
-	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'							=> 'Predefinido = <b>%rules_text%</b><br />Por padrão, a %rules_text% é substituída pelas regras do fórum de apresentação.<br />Podes colocar o texto que desejares.',
-
-	// Confirm box
-	'INTRODUCIATOR_EP_UPDATED'										=> 'A configuração da página de explicação foi atualizada com sucesso',
-));
+																		<br/>',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE'           => 'Título da página de explicação:',
+	'INTRODUCIATOR_EP_MESSAGE_TITLE_EXPLAIN'   => 'Padrão = <b>%explanation_title%</b><br/>Pode alterar este texto para o seu próprio.',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT'            => 'Texto da página de explicação:',
+	'INTRODUCIATOR_EP_MESSAGE_TEXT_EXPLAIN'    => 'Padrão = <b>%explanation_text%</b><br/>Pode alterar este texto para o seu próprio.',
+	'INTRODUCIATOR_EP_RULES_TITLE'             => 'Título das regras de explicação:',
+	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'     => 'Padrão = <b>%rules_title%</b><br/>Pode alterar este texto para o seu próprio.',
+	'INTRODUCIATOR_EP_RULES_TEXT'              => 'Texto das regras do fórum de apresentações:',
+	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'      => 'Padrão = <b>%rules_text%</b><br/>Por padrão, %rules_text% é substituído pelas regras do fórum de apresentações.<br/>Pode alterar este texto para o seu próprio.',
+	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED' => '<strong>Introduciator: definições de explicações atualizadas.</strong>',
+	'INTRODUCIATOR_EP_UPDATED'                 => 'As definições da página de explicações foram atualizadas',
+]);

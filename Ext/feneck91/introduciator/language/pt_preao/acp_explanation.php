@@ -6,7 +6,7 @@
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @translation Leinad4Mind [Portuguese [pt]] (2026)
+ * @translation Leinad4Mind [Portuguese [pt_preao]] (2026)
  */
 
 /**

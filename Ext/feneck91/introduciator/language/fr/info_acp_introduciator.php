@@ -4,7 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension (Présentation forcée)
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -18,7 +18,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,16 +38,16 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * Mode: main : le nom de l'extension
- */
-$lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Présentation forcée',
+* mode: main : le nom de l'extension
+*/
+$lang = array_merge($lang, [
+	'ACP_INTRODUCIATOR_EXTENSION' => 'Présentation forcée',
 
-	/**
-	 * Titres présents dans la partie gauche de l'onglet extensions de l'ACP sous l'item INTRODUCIATOR
-	 */
-	'INTRODUCIATOR_GENERAL'							=> 'Général',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuration',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Explication',
-	'INTRODUCIATOR_STATISTICS'						=> 'Statistiques',
-));
+/**
+* Titres présents dans la partie gauche de l'onglet extensions de l'ACP sous l'item INTRODUCIATOR
+*/
+	'INTRODUCIATOR_GENERAL'       => 'Général',
+	'INTRODUCIATOR_CONFIGURATION' => 'Configuration',
+	'INTRODUCIATOR_EXPLANATION'   => 'Explication',
+	'INTRODUCIATOR_STATISTICS'    => 'Statistiques',
+]);

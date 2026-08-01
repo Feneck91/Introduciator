@@ -1,14 +1,13 @@
 <?php
-/**
- * info_acp_introduciator.php [Portuguese-PreAO]
- *
- * @package phpBB Extension - Introduciator Extension
- * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
- * @copyright (c) 2022 Leinad4Mind
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
 
+/**
+ * @package phpBB Extension - Introduciator Extension for phpBB.
+ * permissions_introduciator.php [English]
+ * @author Feneck91 (Stéphane Château) feneck91@free.fr
+ * @copyright (c) 2019 Feneck91
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @translation Leinad4Mind [Portuguese [pt_preao]] (2026)
+ */
 /**
  * DO NOT CHANGE
  */
@@ -19,7 +18,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,17 +37,8 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-/**
- * Mode: main : the name of the extension
- */
-$lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Introduciator',
-
-	/**
-	 * Titles present on the left side of Extensions ACP's tab under Introduciator item
-	 */
-	'INTRODUCIATOR_GENERAL'							=> 'Geral',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuração',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Explicação',
-	'INTRODUCIATOR_STATISTICS'						=> 'Estatísticas',
-));
+// Adding the permissions
+$lang = array_merge($lang, [
+	'ACL_U_MUST_INTRODUCE'       => 'Deve primeiro publicar uma apresentação',
+	'ACL_A_INTRODUCIATOR_MANAGE' => 'Pode gerir a extensão Introduciator',
+]);

@@ -4,7 +4,7 @@
  *
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @copyright (c) Traduzione MOD by Galandas (Rey) 2016 www.phpbb3world.altervista.org/
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,16 +39,16 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * mode: main : the name of the extension
- */
-$lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Introduzione',
+* mode: main : the name of the extension
+*/
+$lang = array_merge($lang, [
+	'ACP_INTRODUCIATOR_EXTENSION' => 'Introduzione',
 
 /**
- * Titles present on the left side of Extensions ACP's tab under Introduciator item
- */
-	'INTRODUCIATOR_GENERAL'							=> 'Generale',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configurazione',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Spiegazione',
-	'INTRODUCIATOR_STATISTICS'						=> 'Statistica',
-));
+* Titles present on the left side of Extensions ACP's tab under Introduciator item
+*/
+	'INTRODUCIATOR_GENERAL'       => 'Generale',
+	'INTRODUCIATOR_CONFIGURATION' => 'Configurazione',
+	'INTRODUCIATOR_EXPLANATION'   => 'Spiegazione',
+	'INTRODUCIATOR_STATISTICS'    => 'Statistica',
+]);

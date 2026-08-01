@@ -80,9 +80,9 @@ function introduciator_reset_display_permissions()
 				<div class="block-explain">{{ lang('INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN') }}</div>
 			</dt>
 			<dd>
-				<label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0"{% if APPROVAL_LEVEL_NO_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="1"{% if APPROVAL_LEVEL_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL') }}</label>
-				<label><input name="posting_approval_level" type="radio" class="radio" value="2"{% if APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
+				<label><input id="posting_approval_level" name="posting_approval_level" type="radio" class="radio" value="0"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_NO_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="1"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL') }}</label>
+				<label><input name="posting_approval_level" type="radio" class="radio" value="2"{% if INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED %} checked="checked"{% endif %}/> {{ lang('INTRODUCIATOR_CP_TEXT_POSTING_APPROVAL_WITH_EDIT') }}</label>
 			</dd>
 		</dl>
 	</fieldset>
