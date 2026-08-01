@@ -11,7 +11,7 @@ namespace feneck91\introduciator\acp;
 
 class introduciator_info
 {
-	function module()
+	public function module()
 	{
 		return [
 			'filename' => '\feneck91\introduciator\acp\introduciator_module',

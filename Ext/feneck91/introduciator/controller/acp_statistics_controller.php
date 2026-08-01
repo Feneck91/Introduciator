@@ -72,7 +72,7 @@ class acp_statistics_controller extends acp_main_controller
 			$user,
 			$dbconfig
 		);
- 	}
+	}
 
 	/**
 	 * Manage the page.
@@ -106,7 +106,7 @@ class acp_statistics_controller extends acp_main_controller
 			switch ($action)
 			{
 				case 'check' :
-					if (!check_form_key(introduciator_module::form_key))
+					if (!check_form_key(introduciator_module::FORM_KEY))
 					{
 						trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 					}
@@ -227,7 +227,7 @@ class acp_statistics_controller extends acp_main_controller
 				'S_DISPLAY_INTRODUCES'		=> true,
 				'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, (int) $this->dbconfig['topics_per_page'], $start),
 			]);
-			$this->pagination->generate_template_pagination($this->u_action . "&amp;action=otherpage", 'pagination', 'start', $nb_several_introduce, (int) $this->dbconfig['topics_per_page'], $start);
+			$this->pagination->generate_template_pagination($this->u_action . '&amp;action=otherpage', 'pagination', 'start', $nb_several_introduce, (int) $this->dbconfig['topics_per_page'], $start);
 		}
 
 		$this->template->assign_vars([

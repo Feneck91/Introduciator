@@ -94,7 +94,8 @@ class introduciator_explain_controller
 	public function handle($forum_id = 0)
 	{
 		if ($this->introduciator_helper->is_introduciator_allowed())
-		{	// Title message
+		{
+			// Title message
 			// If user not connected, go to login page
 			if ($this->user->data['user_id'] == ANONYMOUS)
 			{

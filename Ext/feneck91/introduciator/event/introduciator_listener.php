@@ -260,7 +260,7 @@ class introduciator_listener implements EventSubscriberInterface
 	*/
 	public function is_topic_visible($event)
 	{
-		if ($event['mode'] === "topic" && $this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
+		if ($event['mode'] === 'topic' && $this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
 		{
 			$event['is_visible'] = true;
 		}

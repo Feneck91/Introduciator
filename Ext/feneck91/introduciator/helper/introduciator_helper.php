@@ -364,7 +364,7 @@ class introduciator_helper
 	{
 		$params = [
 			'introduciator_allow'					=>        $this->is_introduciator_allowed(),
-			'fk_forum_id'							=> (int)  $this->config['introduciator_fk_forum_id'],
+			'fk_forum_id'							=> (int) $this->config['introduciator_fk_forum_id'],
 			'is_introduction_mandatory'				=> (bool) $this->config['introduciator_is_introduction_mandatory'],
 			'is_check_delete_first_post'			=> (bool) $this->config['introduciator_is_check_delete_first_post'],
 			'is_explanation_enabled'				=> (bool) $this->config['introduciator_is_explanation_enabled'],
@@ -565,7 +565,7 @@ class introduciator_helper
 									if ($redirect)
 									{
 										// Load langage
-										$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+										$this->user->setup('posting'); // Mandatory here else all forum is not in same language as user's one
 										$this->load_language();
 
 										$message = $first_poster_id === $poster_id && !$this->auth->acl_get('m_delete', $forum_id) ? $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST') : $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
@@ -620,7 +620,7 @@ class introduciator_helper
 						if (!$ret_allowed_action && $redirect)
 						{
 							// Load langage
-							$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+							$this->user->setup('posting'); // Mandatory here else all forum is not in same language as user's one
 							$this->load_language();
 
 							// Test : if the user try to quote / reply into his own introduction : change the message
@@ -645,7 +645,7 @@ class introduciator_helper
 						if ($redirect)
 						{
 							// Load langage
-							$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+							$this->user->setup('posting'); // Mandatory here else all forum is not in same language as user's one
 							$this->load_language();
 
 							$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
@@ -1036,7 +1036,7 @@ class introduciator_helper
 
 				if (!$userdata)
 				{
-					$this->user->setup("posting"); // Mandatory here else all forum is not in same language as user's one
+					$this->user->setup('posting'); // Mandatory here else all forum is not in same language as user's one
 					trigger_error('NO_USERS', E_USER_ERROR);
 				}
 
@@ -1121,7 +1121,8 @@ class introduciator_helper
 			// User is logged and have user authorization
 			// If the user has m_approve right, nothing to do, he will see the topic
 			if ($this->is_introduciator_allowed())
-			{	// Extension is enabled
+			{
+				// Extension is enabled
 				if (empty($this->introduciator_params))
 				{
 					$this->introduciator_params = $this->introduciator_getparams();
