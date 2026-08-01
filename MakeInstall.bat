@@ -20,10 +20,8 @@ ECHO.
 ECHO ------------------------------------
 ECHO Exporting "Introduciator_v%INTRODUCIATOR_VERSION%"
 ECHO ------------------------------------
-pushd %CD%
-CD /D "%BATCH_PATH%Ext"
-git archive --format zip --output "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%.zip" "master"
-popd
+REM Package only the phpBB extension and omit development tests.
+git -C "%BATCH_PATH%." archive --format zip --prefix="feneck91/introduciator/" --output "%BATCH_PATH%Introduciator_v%INTRODUCIATOR_VERSION%.zip" "master:Ext/feneck91/introduciator" . ":(exclude)tests"
 IF %errorlevel% EQU 0 GOTO Done
 
 REM Error while exporting Introduciator
