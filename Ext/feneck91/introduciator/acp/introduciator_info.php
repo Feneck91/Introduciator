@@ -20,22 +20,22 @@ class introduciator_info
 			'modes'    => [
 				'general' => [
 					'title' => 'INTRODUCIATOR_GENERAL',
-					'auth'  => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
+					'auth'  => 'ext_feneck91/introduciator && acl_a_introduciator_manage',
 					'cat'   => ['ACP_INTRODUCIATOR_EXTENSION'],
 				],
 				'configuration' => [
 					'title' => 'INTRODUCIATOR_CONFIGURATION',
-					'auth'  => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
+					'auth'  => 'ext_feneck91/introduciator && acl_a_introduciator_manage',
 					'cat'   => ['ACP_INTRODUCIATOR_EXTENSION'],
 				],
 				'explanation' => [
 					'title' => 'INTRODUCIATOR_EXPLANATION',
-					'auth'  => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
+					'auth'  => 'ext_feneck91/introduciator && acl_a_introduciator_manage',
 					'cat'   => ['ACP_INTRODUCIATOR_EXTENSION'],
 				],
 				'statistics' => [
 					'title' => 'INTRODUCIATOR_STATISTICS',
-					'auth'  => 'ext_feneck91/introduciator && acl_a_board && acl_a_introduciator_manage',
+					'auth'  => 'ext_feneck91/introduciator && acl_a_introduciator_manage',
 					'cat'   => ['ACP_INTRODUCIATOR_EXTENSION'],
 				],
 			],

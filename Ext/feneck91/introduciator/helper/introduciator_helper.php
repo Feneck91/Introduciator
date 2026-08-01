@@ -80,6 +80,11 @@ class introduciator_helper
 	private $introduciator_params;
 
 	/**
+	 * @var array|null Cached group IDs from the introduciator groups table, memoized per request.
+	 */
+	private $groups_selected_cache;
+
+	/**
 	 * Constructor
 	 *
 	 * @param string                    $table_groups_name Name of the table that contains groups for externsion's permission.
@@ -344,6 +349,7 @@ class introduciator_helper
 				];
 			}
 		}
+		$this->db->sql_freeresult($result);
 
 		return $ret_value;
 	}
@@ -942,18 +948,24 @@ class introduciator_helper
 	 */
 	protected function is_user_in_groups_selected($user_id)
 	{
-		$sql = 'SELECT *
-				FROM ' . $this->table_groups_name;
-
-		$result = $this->db->sql_query($sql);
-
-		// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
-		$arr_groups_id = [];
-		while ($row = $this->db->sql_fetchrow($result))
+		if ($this->groups_selected_cache === null)
 		{
-			$arr_groups_id[] = $row['fk_group'];
+			$sql = 'SELECT *
+					FROM ' . $this->table_groups_name;
+
+			$result = $this->db->sql_query($sql);
+
+			// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
+			$arr_groups_id = [];
+			while ($row = $this->db->sql_fetchrow($result))
+			{
+				$arr_groups_id[] = $row['fk_group'];
+			}
+			$this->db->sql_freeresult($result);
+
+			// This table's content doesn't depend on $user_id, so it's the same for every call in this request
+			$this->groups_selected_cache = $arr_groups_id;
 		}
-		$this->db->sql_freeresult($result);
 
 		// Testing
 		if (!function_exists('group_memberships'))
@@ -961,7 +973,7 @@ class introduciator_helper
 			include($this->root_path . 'includes/functions_user.' . $this->php_ext);
 		}
 
-		return group_memberships($arr_groups_id, (int) $user_id, true);
+		return group_memberships($this->groups_selected_cache, (int) $user_id, true);
 	}
 
 	/**
@@ -1052,6 +1064,74 @@ class introduciator_helper
 		}
 
 		return $ret;
+	}
+
+	/**
+	 * Batch version of is_user_must_introduce_himself(), for pages that need to check many
+	 * users at once (like the statistics page) without running one query per user.
+	 *
+	 * @param array	$users	List of rows, each containing at least 'topic_poster' (user id)
+	 *						and 'topic_first_poster_name' (username).
+	 *
+	 * @return array List of topic_poster ids (int) among $users that must introduce themselves.
+	 * @access public
+	 */
+	public function filter_users_that_must_introduce(array $users)
+	{
+		if (empty($this->introduciator_params))
+		{
+			$this->introduciator_params = $this->introduciator_getparams();
+		}
+
+		$filtered_ids = [];
+
+		if ($this->introduciator_params['is_use_permissions'])
+		{
+			$poster_ids = array_unique(array_map(function ($user) {
+				return (int) $user['topic_poster'];
+			}, $users));
+
+			$authorisations_by_id = [];
+			if (!empty($poster_ids))
+			{
+				$sql = 'SELECT user_id, username, user_permissions, user_type
+						FROM ' . USERS_TABLE . '
+						WHERE ' . $this->db->sql_in_set('user_id', $poster_ids);
+				$result = $this->db->sql_query($sql);
+				while ($userdata = $this->db->sql_fetchrow($result))
+				{
+					$authorisations = new \phpbb\auth\auth();
+					$authorisations->acl($userdata);
+					$authorisations_by_id[(int) $userdata['user_id']] = $authorisations;
+				}
+				$this->db->sql_freeresult($result);
+			}
+
+			foreach ($users as $user)
+			{
+				$poster_id = (int) $user['topic_poster'];
+
+				// A poster_id with no matching row (eg. deleted user) is skipped rather than
+				// treated as an error: this is a report, not a single-user posting check.
+				if (isset($authorisations_by_id[$poster_id]) && $authorisations_by_id[$poster_id]->acl_get('u_must_introduce'))
+				{
+					$filtered_ids[] = $poster_id;
+				}
+			}
+		}
+		else
+		{
+			foreach ($users as $user)
+			{
+				$poster_id = (int) $user['topic_poster'];
+				if (!$this->is_user_ignored($poster_id, $user['topic_first_poster_name']))
+				{
+					$filtered_ids[] = $poster_id;
+				}
+			}
+		}
+
+		return $filtered_ids;
 	}
 
 	/**

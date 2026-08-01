@@ -364,7 +364,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Prepare data to be displayed in several pages  like memberlist.
 	 *
 	 * @param \phpbb\event\data	$event The event data
-	 * @return \phpbb\event\data Event datas that contains informations to display into the profile.
+	 * @return void
 	 */
 	public function on_display_profile_data($event)
 	{
@@ -381,7 +381,5 @@ class introduciator_listener implements EventSubscriberInterface
 				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
 			];
 		}
-
-		return $event;
 	}
 }

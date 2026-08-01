@@ -159,7 +159,9 @@ class acp_statistics_controller extends acp_main_controller
 			'FROM'		=> [TOPICS_TABLE => TOPICS_TABLE],
 			'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . '.forum_id = ' . (int) $params['fk_forum_id'] . ' AND ' . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
 		]);
-		$row = $this->db->sql_fetchrow($this->db->sql_query($sql));
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
 		$nb_introductions = (int) $row['numrows'];
 		$this->template->assign_var('INTRODUCTIONS_NUMBER', $nb_introductions);
 
@@ -179,16 +181,16 @@ class acp_statistics_controller extends acp_main_controller
 		]);
 
 		 // Record all users that have more than one posted introduction and MUST introduce (not ignored)
-		$users_ids = [];
 		$result = $this->db->sql_query($sql);
+		$rows = [];
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			if ($this->helper->is_user_must_introduce_himself((int) $row['topic_poster'], null, $row['topic_first_poster_name']))
-			{
-				// Record this users (not ignored)
-				$users_ids[] = (int) $row['topic_poster'];
-			}
+			$rows[] = $row;
 		}
+		$this->db->sql_freeresult($result);
+
+		// Checked in one batch instead of one query per row to avoid N+1 queries
+		$users_ids = $this->helper->filter_users_that_must_introduce($rows);
 
 		$nb_several_introduce = count($users_ids);
 		if ($nb_several_introduce > 0)
