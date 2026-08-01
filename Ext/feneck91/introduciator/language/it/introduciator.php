@@ -42,6 +42,7 @@ if (empty($lang) || !is_array($lang))
 * General messages
 */
 $lang = array_merge($lang, [
+	'INTRODUCIATOR_EXT_DISABLED'                                => 'L’estensione Introduciator è disabilitata. Abilitala per utilizzare questa funzionalità.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'           => 'Il tuo messaggio di introduzione è in attesa di approvazione, si prega di attendere.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT' => 'Durante l’approvazione del messaggio di introduzione, e solo permesso la modifica del mesaggio.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'Non è consentito introdurre te stesso più di una volta!',

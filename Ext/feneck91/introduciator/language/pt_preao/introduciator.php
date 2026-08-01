@@ -42,6 +42,7 @@ if (empty($lang) || !is_array($lang))
 * General messages
 */
 $lang = array_merge($lang, [
+	'INTRODUCIATOR_EXT_DISABLED'                                => 'A extensão está desactivada. Tens de a activar para que ela funcione.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'           => 'A tua mensagem de apresentação aguarda aprovação, por favor aguarda.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT' => 'Durante a aprovação da tua mensagem de apresentação, apenas a edição é permitida.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'Não tens permissão para te apresentares mais do que uma vez!',

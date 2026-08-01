@@ -41,6 +41,7 @@ if (empty($lang) || !is_array($lang))
 * Messages généraux
 */
 $lang = array_merge($lang, [
+	'INTRODUCIATOR_EXT_DISABLED'                                => 'L’extension Présentation forcée est désactivée. Veuillez l’activer pour l’utiliser !',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'           => 'Votre message de présentation est en cours d’approbation, veuillez patienter.',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT' => 'Pendant l’approbation de votre message de présentation, seule l’édition est autorisée.',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'Vous n’êtes pas autorisé à vous présenter plus d’une fois !',

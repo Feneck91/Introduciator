@@ -42,6 +42,7 @@ if (empty($lang) || !is_array($lang))
 * General messages
 */
 $lang = array_merge($lang, [
+	'INTRODUCIATOR_EXT_DISABLED'                                => '自我介绍扩展已禁用，请启用它，来使自我介绍扩展工作。',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'           => '你的自我介绍消息还未审核，请稍后。',
 	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT' => '在等待审核阶段，只允许编辑自我介绍。',
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => '你不可以自我介绍一次以上！',
