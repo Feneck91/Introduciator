@@ -1,0 +1,7 @@
+build:
+    environment:
+        php:
+            version: '8.1'
+    dependencies:
+        before:
+            - composer self-update --2
