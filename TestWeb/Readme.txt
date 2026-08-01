@@ -49,7 +49,7 @@ The extension also contains PHPUnit tests in Ext/feneck91/introduciator/tests.
 Install the extension at phpBB/ext/feneck91/introduciator in a phpBB 3.3.x Git
 clone, install phpBB's development dependencies, and run from the clone root:
 
-   php phpBB/vendor/bin/phpunit -c phpBB/ext/feneck91/introduciator/phpunit.xml.dist
+   php phpBB/vendor/bin/phpunit -c phpBB/ext/feneck91/introduciator/phpunit.xml
 
 Run the official Extension Pre-Validator against the packaged directory layout
 (the directory supplied to EPV must contain feneck91/introduciator):
