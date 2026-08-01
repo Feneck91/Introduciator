@@ -51,7 +51,7 @@ $lang = array_merge($lang, array(
 														</ul>',
 
 	// Number of introduce's texts
-	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> 'Generales statistics',
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> 'Overall statistics',
 	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> 'Number of introduction into the forum:',
 
 	// Array's texts

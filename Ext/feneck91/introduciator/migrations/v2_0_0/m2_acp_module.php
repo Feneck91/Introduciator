@@ -14,7 +14,7 @@ namespace feneck91\introduciator\migrations\v2_0_0;
 class m2_acp_module extends \phpbb\db\migration\migration
 {
 	/**
-	 * Get the migration dependencie.
+	 * Get the migration dependencies.
 	 *
 	 * @return array Array of depending items.
 	 */
@@ -49,29 +49,29 @@ class m2_acp_module extends \phpbb\db\migration\migration
 	 */
 	public function update_data()
 	{
-		return array(
+		return [
 			// Add the module in ACP under the customise tab
-			array('module.add', array('acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_EXTENSION')),
+			['module.add', ['acp', 'ACP_CAT_DOT_MODS', 'ACP_INTRODUCIATOR_EXTENSION']],
 
 			// Add a new category named ACP_INTRODUCIATOR_EXTENSION to ACP_CAT_DOT_MODS (under tab 'extensions' in ACP)
-			array('module.add', array(
+			['module.add', [
 					'acp',
 					'ACP_INTRODUCIATOR_EXTENSION',
-					array(
+					[
 						'module_basename'	=> '\feneck91\introduciator\acp\introduciator_module',
-						'modes'				=> array(
+						'modes' => [
 							//---------------------------------------------------------------------
-							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+							// Creation of ACP sub categories under Introduciator extension into Extensions tab
 							'general',
 							'configuration',
 							'explanation',
 							'statistics',
-							// Creation of ACP sub caterories under Introduciator extension into Extensions tab
+							// Creation of ACP sub categories under Introduciator extension into Extensions tab
 							//---------------------------------------------------------------------
-							),
-					),
-				)
-			),
-		);
+							],
+					],
+				]
+			],
+		];
 	}
 }

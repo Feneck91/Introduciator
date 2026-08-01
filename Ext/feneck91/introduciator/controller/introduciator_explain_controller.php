@@ -25,7 +25,7 @@ use phpbb\user;
 class introduciator_explain_controller
 {
 	/**
-	 * @var feneck91\introduciator\helper\introduciator_helper Introduciator helper. The important code is into this helper.
+	 * @var introduciator_helper Introduciator helper. The important code is into this helper.
 	 */
 	protected $introduciator_helper;
 
@@ -52,11 +52,11 @@ class introduciator_explain_controller
 	/**
 	 * Constructor
 	 *
-	 * @param \feneck91\introduciator\helper\introduciator_helper   $introduciator_helper    Extension helper
-	 * @param phpbb\controller\helper                               $helper                  phpBB helper
-	 * @param \phpbb\config\config                                  $config                  Current configuration (config table)
-	 * @param \phpbb\template\template                              $template                Template object
-	 * @param \phpbb\user                                           $user                    User object
+	 * @param introduciator_helper          $introduciator_helper    Extension helper
+	 * @param \phpbb\controller\helper      $helper                  phpBB helper
+	 * @param \phpbb\config\config          $config                  Current configuration (config table)
+	 * @param \phpbb\template\template      $template                Template object
+	 * @param \phpbb\user                   $user                    User object
 	 *
 	 * @access public
 	 */
@@ -69,12 +69,18 @@ class introduciator_explain_controller
 		$this->user = $user;
 	}
 
-	public function handle($forum_id)
+	/**
+	 * Handle events.
+	 *
+	 * Called when explain page is displayed to the user.
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response object containing rendered page.
+	 * @access public
+	 */
+	public function handle()
 	{
-		if ($this->config['introduciator_allow'])
+		if ($this->introduciator_helper->is_introduciator_allowed())
 		{	// Title message
-			$this->introduciator_helper->load_language_if_needed();
-
 			// If user not connected, go to login page
 			if ($this->user->data['user_id'] == ANONYMOUS)
 			{
@@ -86,25 +92,26 @@ class introduciator_explain_controller
 			$params = $this->introduciator_helper->introduciator_getparams(false);
 			$message = $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
 
-			$this->template->assign_vars(array(
+			$this->template->assign_vars([
 				'S_EXT_ACTIVATED'					=> true,
 				'INTRODUCIATOR_EXT_EXPLAIN_TITLE'	=> $params['explanation_message_title'],
 				'INTRODUCIATOR_EXT_EXPLAIN_TEXT'	=> $params['explanation_message_text'],
-				'S_RULES_ACTIVATED'					=> $params['is_explanation_display_rules'] && strlen($params['explanation_rules_text']) > 0,
-				'S_RULES_TITLE_ACTIVATED'			=> (strlen($params['explanation_rules_title']) > 0),
+				'S_RULES_ACTIVATED'					=> $params['is_explanation_display_rules'] && $params['explanation_rules_text'] != '',
+				'S_RULES_TITLE_ACTIVATED'			=> $params['explanation_rules_title'] != '',
 				'INTRODUCIATOR_EXT_RULES_TITLE'		=> $params['explanation_rules_title'],
 				'INTRODUCIATOR_EXT_RULES_TEXT'		=> $params['explanation_rules_text'],
 				'INTRODUCIATOR_EXT_LINK_GOTO_FORUM'	=> $params['explanation_message_goto_forum'],
 				'INTRODUCIATOR_EXT_LINK_POST_FORUM'	=> $params['explanation_message_post_forum'],
 				'INTRODUCIATOR_EXT_LINK_FORUM_URL'	=> $params['forum_url'],
 				'INTRODUCIATOR_EXT_LINK_FORUM_POST'	=> $params['forum_post'],
-				));
+			]);
 		}
 		else
 		{
-			$this->template->assign_vars(array(
+			$message = '';
+			$this->template->assign_vars([
 				'S_EXT_ACTIVATED'					=> false,
-				));
+			]);
 		}
 
 		return $this->helper->render('introduciator_explain.html', $message);

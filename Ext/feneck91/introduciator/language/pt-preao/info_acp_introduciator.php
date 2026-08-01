@@ -50,5 +50,5 @@ $lang = array_merge($lang, array(
 	'INTRODUCIATOR_GENERAL'							=> 'Geral',
 	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuração',
 	'INTRODUCIATOR_EXPLANATION'						=> 'Explicação',
-	'INTRODUCIATOR_STATISCICS'						=> 'Estatísticas',
+	'INTRODUCIATOR_STATISTICS'						=> 'Estatísticas',
 ));

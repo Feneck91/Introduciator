@@ -4,7 +4,7 @@
 
 **Developer Helper:** Leinad4Mind
 
-**Extension Description:** This extension force member to introduce himself into a specific forum before beeing able to post everywhere into the forum.
+**Extension Description:** This extension force member to introduce himself into a specific forum before being able to post everywhere into the forum.
 
 **Extension Version:** 2.0.0
 
@@ -19,7 +19,7 @@ It's a port from [MOD Introduciator](https://www.phpbb.com/customise/db/mod/intr
 - Add introduce approval options is used to force introduction to be approved by a moderator or not:
   - No approval: don’t force introduction to be approved, let the default processing.
   - Simple approval: force introduction to be approved. The user doesn’t see his/her introduction if it is not validated by a moderator (normal processing is used for all messages that use approval).
-  - Approval with ability to edit: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbiden.
+  - Approval with ability to edit: force introduction to be approved. The user can see his/her introduction immediately and can modify it. He/She cannot post elsewhere while his/her introduction is not validated by a moderator. This allows moderators and users to exchange to make messages into compliance before validation by a moderator (unusual message processing approval). Only edition is allowed. Reply and quote are forbidden.
 - Select redirection page if the user try to post somewhere else.
 - Configure redirection page. Now the text displayed into the introduce redirection page is multi-langual **(New)**.
 - Add permission to disable this feature for some accounts (administators and / or moderator for example).
@@ -67,7 +67,7 @@ Cette extension est un portage du [MOD Introduciator](http://www.phpbb-fr.com/cu
 - Ajout d'options d’approbation de la présentation pour forcer la présentation a être approuvée par un modérateur ou pas :
   - Pas d’approbation : ne force pas l’approbation de la présentation, il laisse le traitement par défaut.
   - Approbation simple : force l’approbation de la présentation. L’utilisateur ne voit pas sa présentation jusqu’à ce qu’elle soit validée par un modérateur (traitement normal de tous les messages nécessitants une approbation).
-  - Approbation avec édition : force l’approbation de la présentation. L’utilisateur voit sa présentation immédiatement et peut la modifier. Il ne peut pas poster ailleurs tant qu’elle n’est pas validée par un modérateur. Ceci permet aux modérateurs et à l’utilisateur d’échanger afin que ce dernier puisse mettre son message en conformité avant validation par le modérateur (traitement différent des messages nécessitant une approbation). Seule l’édition est autorisée. Répondre et citer sont interdit.
+  - Approbation avec édition : force l’approbation de la présentation. L’utilisateur voit sa présentation immédiatement et peut la modifier. Il ne peut pas poster ailleurs tant qu’elle n’est pas validée par un modérateur. Ceci permet aux modérateurs et à l’utilisateur d’échanger afin que ce dernier puisse mettre son message en conformité avant validation par le modérateur (traitement différent des messages nécessitant une approbation). Seule la modification est autorisée, répondre ou citer ne l'est pas.
 - Sélection de la page de redirection si l'utilisateur tente de poster ailleurs.
 - Configuration de la page de redirection. Maintenant, le texte affiché sur la page de redirection peut être configuré dans toutes les langues installées dans phpBB **(Nouveau)**.
 - Ajout d'une permission pour permettant de désactiver cette fonctionnalité pour certains comptes (administrateurs et / ou modérateur par exemple).
