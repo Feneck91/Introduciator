@@ -51,5 +51,4 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_GP_INSTALL_DATE'                    => 'Data de instalação da extensão <strong>Introduciator</strong>:',
 	'INTRODUCIATOR_GP_VERSION'                         => 'Versão da extensão <strong>Introduciator</strong>:',
 	'INTRODUCIATOR_GP_DETAILS'                         => 'Detalhes',
-	'INTRODUCIATOR_GP_URL_DETAILS'                     => 'https://www.phpbb.com/customise/db/extension/introduciator/',
 ]);

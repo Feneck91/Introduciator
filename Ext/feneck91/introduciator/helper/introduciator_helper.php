@@ -20,6 +20,17 @@ class introduciator_helper
 	const APPROVAL_LEVEL_APPROVAL_WITH_EDIT   = 2; // Approval introduce : the user see his introduce and can edit it
 
 	/**
+	 * Seconds after which a posting claim is considered abandoned by a request
+	 * that died before releasing it. A submission never legitimately takes this long.
+	 */
+	const CLAIM_TIMEOUT = 60;
+
+	/**
+	 * Directory, relative to the phpBB root, holding the posting claim files.
+	 */
+	const CLAIM_DIR = 'store/feneck91_introduciator';
+
+	/**
 	 * @var string Name of the table that contains groups for externsion's permission.
 	 */
 	private $table_groups_name;
@@ -83,6 +94,11 @@ class introduciator_helper
 	 * @var array|null Cached group IDs from the introduciator groups table, memoized per request.
 	 */
 	private $groups_selected_cache;
+
+	/**
+	 * @var string Path of the posting claim file held by this request, empty if none.
+	 */
+	private $posting_claim_file = '';
 
 	/**
 	 * Constructor
@@ -501,11 +517,13 @@ class introduciator_helper
 	 * @param int				$post_id	Post's id: it cannot be deleted if it is the first one and action is delete (used only for delete), pass 0 else.
 	 * @param array				$post_data	Informations about posting (used only for delete) pass null else.
 	 * @param boolean			$redirect	true if the function should redirect in case of the user is not allowed to make the action, else only return status.
+	 * @param boolean			$claim_slot	true only when called from the actual submission path (not from a display-only
+	 *										check): claims an atomic slot to guard against a concurrent duplicate introduction.
 	 *
 	 * @return boolean
 	 * @access public
 	 */
-	public function user_can_post($mode, $forum_id, $post_id, $post_data, $redirect)
+	public function user_can_post($mode, $forum_id, $post_id, $post_data, $redirect, $claim_slot = false)
 	{
 		$poster_id = (int) $this->user->data['user_id'];
 		$ret_allowed_action = true;
@@ -607,6 +625,27 @@ class introduciator_helper
 								else
 								{
 									redirect(append_sid("{$this->root_path}viewforum.{$this->php_ext}",'f=' . (int) $this->introduciator_params['fk_forum_id']));
+								}
+							}
+						}
+						else if ($claim_slot && $mode == 'post' && $forum_id == $this->introduciator_params['fk_forum_id'])
+						{
+							// About to allow creating a brand new introduction topic: claim an atomic
+							// slot first so that a concurrent duplicate submission (double click, slow
+							// network resubmit, two tabs, back button + resubmit) cannot also fall
+							// through and create a second one.
+							if (!$this->claim_introduction_slot($poster_id))
+							{
+								$ret_allowed_action = false;
+								if ($redirect)
+								{
+									// Load langage
+									$this->user->setup('posting'); // Mandatory here else all forum is not in same language as user's one
+									$this->load_language();
+
+									$message = $this->language->lang('INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE');
+									$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
+									trigger_error($message, E_USER_NOTICE);
 								}
 							}
 						}
@@ -931,6 +970,104 @@ class introduciator_helper
 		}
 
 		return $topic_row !== false; // Return true or false
+	}
+
+	/**
+	 * Get the directory used to store posting claim files.
+	 *
+	 * Creates it if missing.
+	 *
+	 * @return string Absolute path, without trailing slash.
+	 * @access public
+	 */
+	public function get_claim_dir()
+	{
+		$dir = rtrim($this->root_path, '/') . '/' . self::CLAIM_DIR;
+
+		if (!is_dir($dir))
+		{
+			@mkdir($dir, 0777, true);
+		}
+
+		return $dir;
+	}
+
+	/**
+	 * Check whether the posting claim directory can actually be written to.
+	 *
+	 * Used to warn the admin in the ACP if the protection against duplicate
+	 * introductions is silently disabled because of filesystem permissions.
+	 *
+	 * @return boolean
+	 * @access public
+	 */
+	public function is_claim_storage_writable()
+	{
+		$dir = $this->get_claim_dir();
+
+		return is_dir($dir) && is_writable($dir);
+	}
+
+	/**
+	 * Try to atomically claim the "posting a new introduction" slot for a user.
+	 *
+	 * Uses fopen(..., 'x') to create the claim file only if it does not already
+	 * exist: this is an atomic create-or-fail at the filesystem level, so two
+	 * concurrent requests for the same user cannot both succeed. This is what
+	 * closes the race that let a user create more than one introduction topic
+	 * (double click, slow network resubmit, two tabs, back button + resubmit).
+	 *
+	 * If the claim directory is not writable, the claim is considered acquired
+	 * (fail open): the protection is silently unavailable, but the admin is
+	 * warned about it in the ACP via is_claim_storage_writable(), and it is
+	 * preferable to a board where nobody can introduce themselves at all.
+	 *
+	 * @param int $user_id User identifier into database
+	 *
+	 * @return boolean True if the slot was claimed (or storage is unusable), false if
+	 *                  another request already holds a claim for this user.
+	 * @access protected
+	 */
+	protected function claim_introduction_slot($user_id)
+	{
+		$file = $this->get_claim_dir() . '/claim_' . (int) $user_id;
+
+		// Release claims abandoned by a request that died before releasing them.
+		if (file_exists($file) && filemtime($file) < time() - self::CLAIM_TIMEOUT)
+		{
+			@unlink($file);
+		}
+
+		$fp = @fopen($file, 'x');
+
+		if ($fp === false)
+		{
+			// If the file still exists, another request genuinely holds the claim: deny.
+			// If it does not exist, we simply could not write (permissions): fail open.
+			return !file_exists($file);
+		}
+
+		fclose($fp);
+		$this->posting_claim_file = $file;
+
+		return true;
+	}
+
+	/**
+	 * Release the posting claim held by this request, if any.
+	 *
+	 * Safe to call even when no claim is held.
+	 *
+	 * @return void
+	 * @access public
+	 */
+	public function release_introduction_slot()
+	{
+		if ($this->posting_claim_file !== '')
+		{
+			@unlink($this->posting_claim_file);
+			$this->posting_claim_file = '';
+		}
 	}
 
 	/**

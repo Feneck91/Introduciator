@@ -53,5 +53,4 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_GP_INSTALL_DATE'                    => 'Date d’installation de l’extension <strong>Présentation forcée</strong> :',
 	'INTRODUCIATOR_GP_VERSION'                         => 'Version de l’extension <strong>Présentation forcée</strong> :',
 	'INTRODUCIATOR_GP_DETAILS'                         => 'Détails',
-	'INTRODUCIATOR_GP_URL_DETAILS'                     => 'http://www.phpbb-fr.com/customise/db/extension/introduciator_2',
 ]);

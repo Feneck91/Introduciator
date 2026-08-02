@@ -146,7 +146,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_submit_post_before($event)
 	{
-		if ($this->helper->user_can_post($event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true))
+		if ($this->helper->user_can_post($event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true, true))
 		{	// Posting is allowed
 			$introduciator_posting_must_be_approved = $this->helper->post_need_approval($event['mode'], $event['data']['forum_id']);
 			if ($introduciator_posting_must_be_approved)
@@ -171,6 +171,8 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_submit_post_after($event)
 	{
+		$this->helper->release_introduction_slot();
+
 		$data = $event['data'];
 		if (isset($data['introduciator_force_unapproved']))
 		{

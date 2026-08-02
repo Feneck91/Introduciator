@@ -54,5 +54,4 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_GP_INSTALL_DATE'                    => '<strong>自我介绍</strong> 扩展的安装日期：',
 	'INTRODUCIATOR_GP_VERSION'                         => '<strong>自我介绍</strong> 扩展版本号：',
 	'INTRODUCIATOR_GP_DETAILS'                         => '细节',
-	'INTRODUCIATOR_GP_URL_DETAILS'                     => 'https://www.phpbb.com/customise/db/extension/introduciator/',
 ]);
