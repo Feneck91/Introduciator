@@ -146,7 +146,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_submit_post_before($event)
 	{
-		if ($this->helper->user_can_post($event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true))
+		if ($this->helper->user_can_post($event['mode'], $event['forum_id'], $event['post_id'], $event['post_data'], true, true))
 		{	// Posting is allowed
 			$introduciator_posting_must_be_approved = $this->helper->post_need_approval($event['mode'], $event['data']['forum_id']);
 			if ($introduciator_posting_must_be_approved)
@@ -171,6 +171,8 @@ class introduciator_listener implements EventSubscriberInterface
 	 */
 	public function on_submit_post_after($event)
 	{
+		$this->helper->release_introduction_slot();
+
 		$data = $event['data'];
 		if (isset($data['introduciator_force_unapproved']))
 		{
@@ -260,7 +262,7 @@ class introduciator_listener implements EventSubscriberInterface
 	*/
 	public function is_topic_visible($event)
 	{
-		if ($event['mode'] === "topic" && $this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
+		if ($event['mode'] === 'topic' && $this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
 		{
 			$event['is_visible'] = true;
 		}
@@ -364,7 +366,7 @@ class introduciator_listener implements EventSubscriberInterface
 	 * Prepare data to be displayed in several pages  like memberlist.
 	 *
 	 * @param \phpbb\event\data	$event The event data
-	 * @return \phpbb\event\data Event datas that contains informations to display into the profile.
+	 * @return void
 	 */
 	public function on_display_profile_data($event)
 	{
@@ -381,7 +383,5 @@ class introduciator_listener implements EventSubscriberInterface
 				'T_INTRODUCIATOR_CLASS'		=> $data_introduciator['class'],
 			];
 		}
-
-		return $event;
 	}
 }

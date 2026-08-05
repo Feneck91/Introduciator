@@ -10,6 +10,7 @@
 namespace feneck91\introduciator\controller;
 
 use feneck91\introduciator\helper\extension_manager_helper;
+use feneck91\introduciator\helper\introduciator_helper;
 use phpbb\template\template;
 use phpbb\user;
 use phpbb\config\db;
@@ -42,22 +43,29 @@ class acp_general_controller
 	protected $dbconfig;
 
 	/**
+	 * @var \feneck91\introduciator\helper\introduciator_helper Introduciator helper
+	 */
+	protected $helper;
+
+	/**
 	 * Constructor
 	 *
 	 * @param \feneck91\introduciator\helper\extension_manager_helper       $ext_manager_helper         Extension manager object
 	 * @param \phpbb\template\template                                      $template                   Template object
 	 * @param \phpbb\user                                                   $user                       User object
 	 * @param \phpbb\config\db                                              $dbconfig                   Config object
+	 * @param \feneck91\introduciator\helper\introduciator_helper           $helper                     Introduciator helper
 	 *
 	 * @access public
 	 */
-	public function __construct(extension_manager_helper $ext_manager_helper, template $template, user $user, db $dbconfig)
+	public function __construct(extension_manager_helper $ext_manager_helper, template $template, user $user, db $dbconfig, introduciator_helper $helper)
 	{
 		$this->ext_manager_helper = $ext_manager_helper;
 		$this->template = $template;
 		$this->user = $user;
 		$this->dbconfig = $dbconfig;
- 	}
+		$this->helper = $helper;
+	}
 
 	/**
 	 * When action is empty, the page is filled with current extension configuration, else it check if the current action
@@ -75,13 +83,23 @@ class acp_general_controller
 		//Load metadata for this extension
 		$ext_meta = $this->ext_manager_helper->get_ext_meta();
 
+		// Holds INTRODUCIATOR_STORE_NOT_WRITABLE, used below if the claim directory is unusable
+		$this->user->add_lang_ext('feneck91/introduciator', 'ext_enable_error');
+
+		$details_url = 'https://www.phpbb.com/customise/db/extension/introduciator/';
+
 		$this->template->assign_vars([
 			// Display general page content into ACP Extensions tab
-			'S_INTRODUCIATOR_GENERAL_PAGES'			=> true,
+			'S_INTRODUCIATOR_GENERAL_PAGES' => true,
 			// Current version of this extension
-			'INTRODUCIATOR_VERSION'					=> $ext_meta['version'],
+			'INTRODUCIATOR_VERSION' => $ext_meta['version'],
 			// Install date of this extension
-			'INTRODUCIATOR_INSTALL_DATE'			=> $this->user->format_date($this->dbconfig['introduciator_install_date']),
+			'INTRODUCIATOR_INSTALL_DATE' => $this->user->format_date($this->dbconfig['introduciator_install_date']),
+			// URL to the extension's listing page
+			'U_INTRODUCIATOR_GP_DETAILS' => $details_url,
+			// Warn the admin if the duplicate-introduction protection cannot write its claim files
+			'S_INTRODUCIATOR_STORE_NOT_WRITABLE' => !$this->helper->is_claim_storage_writable(),
+			'INTRODUCIATOR_STORE_DIR' => $this->helper->get_claim_dir(),
 		]);
 	}
 }

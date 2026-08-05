@@ -11,9 +11,64 @@ namespace feneck91\introduciator;
 
 class ext extends \phpbb\extension\base
 {
+	/**
+	 * Directory, relative to the phpBB root, holding the posting claim files used to
+	 * guard against duplicate introductions. Kept in sync with
+	 * introduciator_helper::CLAIM_DIR (that class is not loaded yet at this point,
+	 * since the extension's own services are not registered until it is enabled).
+	 */
+	const CLAIM_DIR = 'store/feneck91_introduciator';
+
 	public function is_enableable()
 	{
+		$language = $this->container->get('language');
+		$language->add_lang('ext_enable_error', 'feneck91/introduciator');
+
+		$errors = [];
+
 		$config = $this->container->get('config');
-		return phpbb_version_compare($config['version'], '3.2.8', '>=');
+		if (!phpbb_version_compare($config['version'], '3.2.8', '>='))
+		{
+			$errors[] = $language->lang('INTRODUCIATOR_ENABLE_ERROR_PHPBB_VERSION');
+		}
+
+		// The protection against duplicate introductions needs to write here.
+		$dir = rtrim($this->container->getParameter('core.root_path'), '/') . '/' . self::CLAIM_DIR;
+		if (!is_dir($dir))
+		{
+			@mkdir($dir, 0777, true);
+		}
+		if (!is_dir($dir) || !is_writable($dir))
+		{
+			$errors[] = $language->lang('INTRODUCIATOR_ENABLE_ERROR_STORE', $dir);
+		}
+
+		return empty($errors) ? true : $errors;
+	}
+
+	/**
+	 * Point the admin at the configuration page on the very first enable
+	 * step, so the "extension enabled successfully" screen doubles as the
+	 * next-steps notice instead of leaving them to find it on their own.
+	 *
+	 * @param mixed $old_state State returned by the previous call of this method.
+	 * @return mixed Same as the parent implementation.
+	 */
+	public function enable_step($old_state)
+	{
+		if (empty($old_state))
+		{
+			$user = $this->container->get('user');
+			$user->add_lang_ext('feneck91/introduciator', 'info_acp_introduciator');
+
+			$this->container->get('template')->assign_var('L_EXTENSION_ENABLE_SUCCESS', $user->lang['EXTENSION_ENABLE_SUCCESS'] .
+				(isset($user->lang['INTRODUCIATOR_NOTICE']) ?
+					sprintf($user->lang['INTRODUCIATOR_NOTICE'],
+									$user->lang['ACP_CAT_DOT_MODS'],
+									$user->lang['ACP_INTRODUCIATOR_EXTENSION'],
+									$user->lang['INTRODUCIATOR_CONFIGURATION']) : ''));
+		}
+
+		return parent::enable_step($old_state);
 	}
 }

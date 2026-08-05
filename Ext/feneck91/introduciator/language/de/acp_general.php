@@ -5,7 +5,7 @@
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @German Language (c) Dr.Death  <http://www.lpi-clan.de>
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,20 +39,19 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * Mode: general
- * Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
- */
-$lang = array_merge($lang, array(
+* mode: general
+* Info: language keys are prefixed with 'INTRODUCIATOR_GP_' for 'INTRODUCIATOR_GENERAL_PAGES_'
+*/
+$lang = array_merge($lang, [
 	// Titles
-	'INTRODUCIATOR_GP_TITLE'							=> 'Allgemeine Informationen',
-	'INTRODUCIATOR_GP_TITLE_EXPLAIN'					=> 'Version dieser Extension anzeigen lassen.',
+	'INTRODUCIATOR_GP_TITLE'         => 'Allgemeine Informationen',
+	'INTRODUCIATOR_GP_TITLE_EXPLAIN' => 'Version dieser Extension anzeigen lassen.',
 
 	// Extension's informations
-	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS'	=> 'Informationen',
-	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES'		=> 'Werte',
-	'INTRODUCIATOR_GP_INFOS'							=> 'Introduciator Infos',
-	'INTRODUCIATOR_GP_INSTALL_DATE'						=> 'Installationsdatum der <strong>Introduciator</strong> Extension:',
-	'INTRODUCIATOR_GP_VERSION'							=> '<strong>Introduciator</strong> Extension Version:',
-	'INTRODUCIATOR_GP_DETAILS'							=> 'Einzelheiten',
-	'INTRODUCIATOR_GP_URL_DETAILS'						=> 'https://www.phpbb.com/customise/db/extension/introduciator/',
-));
+	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_INFORMATIONS' => 'Informationen',
+	'INTRODUCIATOR_GP_INFOS_ARRAY_HEADER_VALUES'       => 'Werte',
+	'INTRODUCIATOR_GP_INFOS'                           => 'Introduciator Infos',
+	'INTRODUCIATOR_GP_INSTALL_DATE'                    => 'Installationsdatum der <strong>Introduciator</strong> Extension:',
+	'INTRODUCIATOR_GP_VERSION'                         => '<strong>Introduciator</strong> Extension Version:',
+	'INTRODUCIATOR_GP_DETAILS'                         => 'Einzelheiten',
+]);

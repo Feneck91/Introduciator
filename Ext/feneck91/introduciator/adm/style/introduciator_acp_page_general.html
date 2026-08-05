@@ -4,6 +4,13 @@
 <h1 class="acp_img_title">{{ lang('INTRODUCIATOR_GP_TITLE') }}</h1>
 {{ lang('INTRODUCIATOR_GP_TITLE_EXPLAIN') }}
 
+{% if S_INTRODUCIATOR_STORE_NOT_WRITABLE %}
+<div class="errorbox">
+	<h3>{{ lang('WARNING') }}</h3>
+	<p>{{ lang('INTRODUCIATOR_STORE_NOT_WRITABLE', INTRODUCIATOR_STORE_DIR) }}</p>
+</div>
+{% endif %}
+
 <table>
 	<caption>{{ lang('INTRODUCIATOR_GP_INFOS') }}</caption>
 	<colgroup>
@@ -17,12 +24,12 @@
 	<tbody>
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_INSTALL_DATE') }}</td>
-			<td><strong>{INTRODUCIATOR_INSTALL_DATE}</strong></td>
+			<td><strong>{{ INTRODUCIATOR_INSTALL_DATE }}</strong></td>
 		</tr>
 		<tr>
 			<td>{{ lang('INTRODUCIATOR_GP_VERSION') }}</td>
 			<td>
-				<strong>{INTRODUCIATOR_VERSION} <a href="{{ lang('INTRODUCIATOR_GP_URL_DETAILS') }}" title="{{ lang('INTRODUCIATOR_GP_URL_DETAILS') }}" target="_blank">[{{ lang('INTRODUCIATOR_GP_DETAILS') }}]</a></strong>
+				<strong>{{ INTRODUCIATOR_VERSION }} <a href="{{ U_INTRODUCIATOR_GP_DETAILS }}" title="{{ U_INTRODUCIATOR_GP_DETAILS }}" target="_blank">[{{ lang('INTRODUCIATOR_GP_DETAILS') }}]</a></strong>
 			</td>
 		</tr>
 	</tbody>

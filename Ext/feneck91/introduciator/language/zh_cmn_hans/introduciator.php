@@ -5,7 +5,7 @@
  * @package phpBB Extension - Introduciator Extension
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
  * @Simplified Chinese Language (c) David Yin <https://www.phpbbchinese.com>
- * @copyright (c) 2019-2022 Feneck91
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,38 +38,35 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-/**
- * General messages
- */
-$lang = array_merge($lang, array(
-	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'			=> '你的自我介绍消息还未审核，请稍后。',
-	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT'	=> '在等待审核阶段，只允许编辑自我介绍。',
-	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'				=> '你不可以自我介绍一次以上！',
-	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'			=> '你不可以删除你的自我介绍的首个帖子！',
-	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'				=> '你不可以删除你的自我介绍的首个帖子！但你可以删除整个自我介绍主题。',
-	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'				=> '请在主题P %s 中介绍你自己',
-	'INTRODUCIATOR_EXT_DISABLED'								=> '自我介绍扩展已禁用，请启用它，来使自我介绍扩展工作。',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'					=> '<strong>要发表帖子， <u>你必须</u> 先自我介绍</strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'					=> '作为一个新用户，你必须先对其他用户作自我介绍，到板块 “<a href="%s">%s</a>” 发表自我介绍<br />
+/*
+* General messages
+*/
+$lang = array_merge($lang, [
+	'INTRODUCIATOR_EXT_DISABLED'                                => '自我介绍扩展已禁用，请启用它，来使自我介绍扩展工作。',
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION'           => '你的自我介绍消息还未审核，请稍后。',
+	'INTRODUCIATOR_EXT_INTRODUCE_WAITING_APPROBATION_ONLY_EDIT' => '在等待审核阶段，只允许编辑自我介绍。',
+	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => '你不可以自我介绍一次以上！',
+	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'          => '你不可以删除你的自我介绍的首个帖子！',
+	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => '你不可以删除你的自我介绍的首个帖子！但你可以删除整个自我介绍主题。',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => '请在主题P %s 中介绍你自己',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>要发表帖子， <u>你必须</u> 先自我介绍</strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => '作为一个新用户，你必须先对其他用户作自我介绍，到板块 “<a href="%s">%s</a>” 发表自我介绍<br/>
 																	在自我介绍板块只有新主题才被允许。',
-	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES'				=> '<br />
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	当创建自我介绍主题，请先看一下显示在论坛版块顶部的规则。',
-	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'						=> '<strong><u>版规也重复显示在：“</u></strong>',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM'					=> '点击前往 “%s” 板块',
-	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM'					=> '自我介绍',
-	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'					=> '<br />在等待审核期间，你可以编辑它，版主也可以回复你。
-																	<br />这可以让你的自我介绍更加的合乎版规的要求。',
+	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>版规也重复显示在：“</u></strong>',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => '点击前往 “%s” 板块',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => '自我介绍',
+	'INTRODUCIATOR_EXT_LINK_RETURN_FORUM'       => '取消并返回上一个板块',
+	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>在等待审核期间，你可以编辑它，版主也可以回复你。
+																	<br/>这可以让你的自我介绍更加的合乎版规的要求。',
 
-	'INTRODUCIATOR_MEMBER_INTRODUCTION'							=> '用户的自我介绍',
-	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'					=> '此用户没有自我介绍',
-	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'						=> '查看用户的自我介绍',
-	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION'			=> '此用户的自我介绍正等待审核',
+	'INTRODUCIATOR_MEMBER_INTRODUCTION'                 => '用户的自我介绍',
+	'INTRODUCIATOR_TOPIC_VIEW_NO_PRESENTATION'          => '此用户没有自我介绍',
+	'INTRODUCIATOR_TOPIC_VIEW_PRESENTATION'             => '查看用户的自我介绍',
+	'INTRODUCIATOR_TOPIC_VIEW_APPROBATION_PRESENTATION' => '此用户的自我介绍正等待审核',
 
-	'INTRODUCIATOR_VIEW_MEMBER_GOTO'							=> '到用户的自我介绍',
-	'INTRODUCIATOR_VIEW_MEMBER_PENDING'							=> '用户的自我介绍等待审核',
-	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO'							=> '此用户没有自我介绍',
-
-	// Logs
-	'INTRODUCIATOR_CP_LOG_UPDATED'								=> '<strong>自我介绍： 配置设置更新完成。</strong>',
-	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED'					=> '<strong>自我介绍： 说明页面设置更新。</strong>',
-));
+	'INTRODUCIATOR_VIEW_MEMBER_GOTO'    => '到用户的自我介绍',
+	'INTRODUCIATOR_VIEW_MEMBER_PENDING' => '用户的自我介绍等待审核',
+	'INTRODUCIATOR_VIEW_MEMBER_NO_GOTO' => '此用户没有自我介绍',
+]);

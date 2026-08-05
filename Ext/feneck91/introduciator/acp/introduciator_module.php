@@ -19,7 +19,7 @@ class introduciator_module
 	/**
 	 * Constant form key used to verify that the form comes from ACP post.
 	 */
-	const form_key = 'feneck91/acp_introduciator';
+	const FORM_KEY = 'feneck91/acp_introduciator';
 
 	/**
 	 * @var array
@@ -79,7 +79,7 @@ class introduciator_module
 			// Add a secret token to the form
 			// This functions adds a secret token to any form, a token which should be checked after
 			// submission with the check_form_key function to ensure that the received data is the same as the submitted.
-			add_form_key(self::form_key);
+			add_form_key(self::FORM_KEY);
 
 			/** @type \phpbb\request\request $request Request object */
 			$request = $phpbb_container->get('request');

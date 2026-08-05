@@ -2,6 +2,7 @@
 Library     BuiltIn
 Resource    PhpBB_Const_Vars.resource
 Resource    LoginAndLoginACP.resource
+Suite Teardown    FM.Close Browser
 
 *** Variables ***
 @{GROUP_PERMISSIONS}=   ${GROUP_REGISTERED_USERS}   ${GROUP_GLOBAL_MODERATORS}
@@ -60,7 +61,7 @@ Post New Topic ${ADMIN_LOGIN}: allowed.
     Should Be True      ${result}
 
 # Post in Topic User 1
-Post New Topic '${SIMPLE_USER_2_LOGIN}': allowed.
+Post New Topic '${SIMPLE_USER_1_LOGIN}': allowed.
     [Documentation]     Post New Topic for '${SIMPLE_USER_1_LOGIN}' is allowed.
     [Tags]              Post Topic
     Log                 Login as '${SIMPLE_USER_1_LOGIN}' into the forum.

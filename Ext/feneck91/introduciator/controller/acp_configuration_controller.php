@@ -79,7 +79,7 @@ class acp_configuration_controller extends acp_main_controller
 			$user,
 			$dbconfig
 		);
- 	}
+	}
 
 	/**
 	 * Manage the page.
@@ -105,7 +105,7 @@ class acp_configuration_controller extends acp_main_controller
 		else
 		{
 			// Action !
-			if (!check_form_key(introduciator_module::form_key))
+			if (!check_form_key(introduciator_module::FORM_KEY))
 			{
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
@@ -131,13 +131,13 @@ class acp_configuration_controller extends acp_main_controller
 			'INTRODUCIATOR_EXTENSION_ACTIVATED'					=> $params['introduciator_allow'],
 			'INTRODUCIATOR_INTRODUCTION_MANDATORY'				=> $params['is_introduction_mandatory'],
 			'INTRODUCIATOR_CHECK_DELETE_FIRST_POST_ACTIVATED'	=> $params['is_check_delete_first_post'],
-			'APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL,
-			'APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_APPROVAL,
-			'APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'		=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
+			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_ENABLED'				=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL,
+			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_APPROVAL_ENABLED'					=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_APPROVAL,
+			'INTRODUCIATOR_POSTING_APPROVAL_LEVEL_NO_APPROVAL_WITH_EDIT_ENABLED'		=> $params['posting_approval_level'] == introduciator_helper::APPROVAL_LEVEL_APPROVAL_WITH_EDIT,
 			'INTRODUCIATOR_USE_PERMISSIONS'						=> $params['is_use_permissions'],
 			'INTRODUCIATOR_INCLUDE_GROUPS_SELECTED'				=> $params['is_include_groups'],
 			'INTRODUCIATOR_ITEM_IGNORED_USERS'					=> $params['ignored_users'],
-			'INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP'			=> $params['is_use_permissions'] ? "none" : "block",
+			'INTRODUCIATOR_DISPLAY_PERMISSIONS_GROUP'			=> $params['is_use_permissions'] ? 'none' : 'block',
 			'U_ACTION'											=> $this->u_action,
 		));
 
@@ -264,7 +264,7 @@ class acp_configuration_controller extends acp_main_controller
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$this->template->assign_block_vars('forums', [
-				'FORUM_NAME'	=> str_repeat("&nbsp;", 4 * $level) . $row['forum_name'],
+				'FORUM_NAME'	=> str_repeat('&nbsp;', 4 * $level) . $row['forum_name'],
 				'FORUM_ID'		=> (int) $row['forum_id'],
 				'SELECTED'		=> (int) $fk_selected_forum_id== (int) $row['forum_id'],
 				'CAN_SELECT'	=> (int) $row['forum_type'] === FORUM_POST,

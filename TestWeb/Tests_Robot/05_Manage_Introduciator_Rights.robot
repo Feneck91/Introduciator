@@ -2,6 +2,7 @@
 Library     BuiltIn
 Resource    PhpBB_Const_Vars.resource
 Resource    CheckPermissionsACP.resource
+Suite Teardown    FM.Close Browser
 
 *** Test Cases ***
 # Init the Web Browser

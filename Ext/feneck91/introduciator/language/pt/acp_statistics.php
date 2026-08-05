@@ -1,12 +1,12 @@
 <?php
+
 /**
- * info_acp_introduciator.php [Portuguese]
- *
- * @package phpBB Extension - Introduciator Extension
+ * @package phpBB Extension - Introduciator Extension for phpBB.
+ * info_acp_introduciator.php [English]
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
- * @copyright (c) 2022 Leinad4Mind
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @translation Leinad4Mind [Portuguese [pt]] (2026)
  */
 
 /**
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,32 +39,23 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * Mode: statistics
- * Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
- */
-$lang = array_merge($lang, array(
-	// Titles
-	'INTRODUCIATOR_ST_TITLE'						=> 'Estatísticas e verificações sobre as apresentações do utilizador',
-	'INTRODUCIATOR_ST_TITLE_EXPLAIN'				=> 'Serve para exibir informações da base de dados:
+* mode: statistics
+* Info: language keys are prefixed with 'INTRODUCIATOR_ST_' for 'INTRODUCIATOR_STATISTICS_PAGES_'
+*/
+$lang = array_merge($lang, [
+	'INTRODUCIATOR_ST_TITLE'         => 'Estatísticas e verificações sobre a apresentação de utilizadores',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN' => 'Usado para mostrar informações da base de dados:
 														<ul>
-														<li>Estatísticas sobre as apresentações.</li>
-														<li>A base de dados verifica de forma coerente sobre as apresentações dos utilizadores (verifica que existem múltiplas apresentações pelo mesmo utilizador).</li>
+														<li>As estatísticas sobre apresentações.</li>
+														<li>A verificação de coerência da base de dados sobre a apresentação do utilizador (verificar se os utilizadores publicaram mais de uma apresentação).</li>
 														</ul>',
-
-	// Number of introduce's texts
-	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'		=> 'Estatísticas Globais',
-	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'		=> 'Número de apresentações no fórum:',
-
-	// Array's texts
-	'INTRODUCIATOR_ST_ARRAY_TITLE'					=> 'Este array indica todas as apresentações que foram colocadas em excesso',
-	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED'	=> 'Nenhuma apresentação repetida detetada',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'			=> 'Utilizador',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'			=> 'Data',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'		=> 'Apresentações',
-
-	// Errors
-	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS'	=> 'Para ter estatísticas deves ativar e configurar a extensão Introduciator!',
-
-	// Buttons
-	'INTRODUCIATOR_ST_CHECK'						=> 'Verificar',
-));
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE'      => 'Estatísticas gerais',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE'      => 'Número de apresentações no fórum:',
+	'INTRODUCIATOR_ST_ARRAY_TITLE'                => 'Esta matriz indica todas as apresentações que foram publicadas mais do que uma vez',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED' => 'Nenhuma apresentação múltipla detetada',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'          => 'Utilizador',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => 'Data',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => 'Apresentações',
+	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS' => 'Para ter estatísticas deves ativar e configurar a extensão Introduciator!',
+	'INTRODUCIATOR_ST_CHECK'                      => 'Verificar',
+]);

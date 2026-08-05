@@ -1,12 +1,12 @@
 <?php
+
 /**
- * info_acp_introduciator.php [Portuguese-Brazil]
- *
- * @package phpBB Extension - Introduciator Extension
+ * @package phpBB Extension - Introduciator Extension for phpBB.
+ * info_acp_introduciator.php [English]
  * @author Feneck91 (Stéphane Château) feneck91@free.fr
- * @copyright (c) 2019-2022 Feneck91
- * @copyright (c) 2022 Leinad4Mind
+ * @copyright (c) 2019 Feneck91
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * @translation Leinad4Mind [Brazilian Portuguese [pt_br]] (2026)
  */
 
 /**
@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -39,16 +39,14 @@ if (empty($lang) || !is_array($lang))
 //
 
 /**
- * Mode: main : the name of the extension
- */
-$lang = array_merge($lang, array(
-	'ACP_INTRODUCIATOR_EXTENSION'					=> 'Introduciator',
+* mode: main : the name of the extension
+*/
+$lang = array_merge($lang, [
+	'ACP_INTRODUCIATOR_EXTENSION' => 'Introduciator',
+	'INTRODUCIATOR_GENERAL'       => 'Geral',
+	'INTRODUCIATOR_CONFIGURATION' => 'Configuração',
+	'INTRODUCIATOR_EXPLANATION'   => 'Explicação',
+	'INTRODUCIATOR_STATISTICS'    => 'Estatísticas',
 
-	/**
-	 * Titles present on the left side of Extensions ACP's tab under Introduciator item
-	 */
-	'INTRODUCIATOR_GENERAL'							=> 'Geral',
-	'INTRODUCIATOR_CONFIGURATION'					=> 'Configuração',
-	'INTRODUCIATOR_EXPLANATION'						=> 'Explicação',
-	'INTRODUCIATOR_STATISTICS'						=> 'Estatísticas',
-));
+	'INTRODUCIATOR_NOTICE'        => '<div class="phpinfo"><p>As definições desta extensão estão em <strong>%1$s &#187; %2$s &#187; %3$s</strong>. Ela fica <strong>desativada</strong> até você escolher o fórum onde os usuários devem se apresentar e ativá-la &#8212; ninguém é obrigado a se apresentar enquanto você não fizer isso.</p></div>',
+]);

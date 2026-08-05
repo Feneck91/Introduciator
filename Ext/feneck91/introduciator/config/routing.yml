@@ -1,3 +1,4 @@
 feneck91_introduciator_explain:
-    path: /introduciator_explain
-    defaults: { _controller: feneck91.introduciator.explain:handle }
+    path: /introduciator_explain/{forum_id}
+    defaults: { _controller: feneck91.introduciator.explain:handle, forum_id: 0 }
+    requirements: { forum_id: \d+ }

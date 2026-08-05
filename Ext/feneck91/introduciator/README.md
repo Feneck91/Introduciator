@@ -6,7 +6,7 @@
 
 **Extension Description:** This extension force member to introduce himself into a specific forum before being able to post everywhere into the forum.
 
-**Extension Version:** 2.0.0
+**Extension Version:** 3.0.0
 
 It's a port from [MOD Introduciator](https://www.phpbb.com/customise/db/mod/introduciator/), with new features.
 
@@ -54,7 +54,7 @@ This extension need at least **phpBB's version 3.2.8**.
 **Description de l'extension :** Est utilisé pour forcer les utilisateurs à poster un message de présentation dans un forum spécifique avant d'être autorisé de poster dans les autres forums.
 Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de poster un message dans un autre forum afin de lui expliquer ce qu'il doit faire..
 
-**Version de l'extension :** 2.0.0
+**Version de l'extension :** 3.0.0
 
 Cette extension est un portage du [MOD Introduciator](http://www.phpbb-fr.com/customise/db/mod/introduciator/), avec des nouvelles fonctionnalités.
 

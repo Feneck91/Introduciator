@@ -1,0 +1,17 @@
+build:
+    nodes:
+        analysis:
+            environment:
+                php:
+                    version: '8.1'
+            dependencies:
+                override:
+                    - composer self-update --2
+                    - composer install --no-interaction --prefer-dist --no-progress
+            tests:
+                override:
+                    -
+                        command: vendor/bin/phpcs --standard=phpcs.xml.dist --report=checkstyle --report-file=phpcs-checkstyle.xml
+                        analysis:
+                            file: phpcs-checkstyle.xml
+                            format: general-checkstyle

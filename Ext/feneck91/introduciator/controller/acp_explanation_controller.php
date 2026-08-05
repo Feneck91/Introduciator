@@ -80,7 +80,7 @@ class acp_explanation_controller extends acp_main_controller
 			$user,
 			$dbconfig
 		);
- 	}
+	}
 
 	/**
 	 * Manage the page.
@@ -105,7 +105,7 @@ class acp_explanation_controller extends acp_main_controller
 		else
 		{
 			// Action !
-			if (!check_form_key(introduciator_module::form_key))
+			if (!check_form_key(introduciator_module::FORM_KEY))
 			{
 				trigger_error($this->language->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
 			}
