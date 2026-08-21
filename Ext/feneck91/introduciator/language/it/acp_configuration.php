@@ -50,15 +50,24 @@ $lang = array_merge($lang, [
 	// Settings: general
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED'         => 'Abilita MOD:',
 	'INTRODUCIATOR_CP_EXTENSION_ACTIVATED_EXPLAIN' => 'Utilizzato per abilitare o disabilitare questa MOD.',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'         => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Force the user to introduce himself:',
-	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx When this option is enabled, the extension force the user to post his own introduce before being allowed to post in other topics.
-																			xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx <br/>Il this feature is not enabled, all other options remain active.',
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE'         => 'Forza l’utente a introdurre se stesso/se stessa:',
+	'INTRODUCIATOR_CP_MANDATORY_INTRODUCE_EXPLAIN' => 'Quando questa opzione è abilitata, l’estensione forza l’utente a pubblicare la propria introduzione prima di poter scrivere in altri argomenti.
+																			<br/>Se questa funzionalità non è abilitata, tutte le altre opzioni rimangono attive.',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST'         => 'Autorizzo il MOD per verificare l’eliminazione del primo post introduzione nel forum per le presentazioni:',
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN' => 'Quando questa opzione è abilitata, il MOD impedisce il primo post in qualsiasi argomento nel forum per le presentazioni dall’eliminazione.
 																			<br/>Anche i moderatori o gli amministratori non hanno questo permesso per essere sicuri che il primo messaggio in qualsiasi argomento introduttivo è davvero l’introduzione di un membro del forum. Tuttavia, rimane possibile cancellare l’argomento se i permessi lo consentono.
 																			<br/>È possibile disattivare questa opzione, ma in questo caso un utente sarà in grado di avere diverse presentazioni. L’attivazione di questa opzione è preferibile.',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE'         => 'Autorizza l’estensione a bloccare lo spostamento di un argomento nel forum per le presentazioni se il suo autore ha già una presentazione lì:',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE_EXPLAIN' => 'Quando questa opzione è abilitata, lo spostamento di un argomento (dal MCP, da QuickMod, o durante l’eliminazione di un utente con riassegnazione dei suoi argomenti) nel forum per le presentazioni viene bloccato se l’autore dell’argomento ha già lì un altro argomento di presentazione, per evitare di ritrovarsi con due presentazioni. Al moderatore viene chiesto di unire o eliminare l’argomento in eccesso.',
+	'INTRODUCIATOR_CP_MODE'                            => 'Modalità di presentazione:',
+	'INTRODUCIATOR_CP_MODE_EXPLAIN'                    => 'Scegli come i membri si presentano: creando un proprio argomento in un forum dedicato, oppure pubblicando in un unico argomento condiviso.',
+	'INTRODUCIATOR_CP_MODE_FORUM'                      => 'Per forum: ogni membro crea il proprio argomento di presentazione',
+	'INTRODUCIATOR_CP_MODE_TOPIC'                      => 'Per argomento: ogni membro pubblica in un unico argomento di presentazione condiviso',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'                   => 'Il forum in cui l’utente deve introdurre se stesso/se stessa:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'           => 'Il MOD cercherà solo in questo forum se gli utenti del forum hanno introdotto loro stessi.',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE'                    => 'L’argomento in cui l’utente deve presentarsi:',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE_EXPLAIN'            => 'Inserisci l’ID dell’unico argomento in cui tutti i membri devono pubblicare la propria presentazione.',
+	'INTRODUCIATOR_CP_CURRENT_TOPIC'                   => 'Argomento attualmente configurato:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'         => 'Opzioni di approvazione Introduzione:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN' => 'Viene utilizzato per forzare l’introduzione e per essere approvato da un moderatore:<br/>
 																			<ul>
@@ -89,9 +98,12 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'         => '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP' => 'Nessun Forum selezionato, utilizzare solo quando la MOD è disabilitata',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM' => 'Quando questa MOD è abilitata, si dovrebbe scegliere un forum!',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_TOPIC' => 'Devi scegliere un argomento!',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_NOT_FOUND'   => 'L’argomento scelto non esiste o è stato eliminato.',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_IS_GLOBAL'   => 'L’argomento scelto è un annuncio globale e non può essere usato per le presentazioni.',
 
 	// Logs
-	'INTRODUCIATOR_CP_LOG_UPDATED' => '<strong>Introduzione: ???????? aggiornamento impostazioni.</strong>',
+	'INTRODUCIATOR_CP_LOG_UPDATED' => '<strong>Introduciator: impostazioni di configurazione aggiornate.</strong>',
 
 	// Confirm box
 	'INTRODUCIATOR_CP_UPDATED' => 'La configurazione è stata aggiornata con successo',

@@ -62,6 +62,7 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => 'Datum',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => 'Vorstellungen',
 	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS' => 'Um Statistiken zu erhalten, sollten Sie die Introduciator-Erweiterung aktivieren und konfigurieren!',
+	'INTRODUCIATOR_ST_MULTIPLE_NOT_APPLICABLE_TOPIC_MODE' => 'Nicht zutreffend: Im Themen-Modus ist eine Vorstellung der erste Beitrag eines Mitglieds im gemeinsamen Thema, daher ist es nicht möglich, mehr als eine Vorstellung zu posten.',
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK' => 'Überprüfen',

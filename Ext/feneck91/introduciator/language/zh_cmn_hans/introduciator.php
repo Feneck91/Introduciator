@@ -48,14 +48,20 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => '你不可以自我介绍一次以上！',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'          => '你不可以删除你的自我介绍的首个帖子！',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => '你不可以删除你的自我介绍的首个帖子！但你可以删除整个自我介绍主题。',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_HEADER'                   => '此移动操作已被阻止，因为至少有一个主题的作者在目标板块中已经有自我介绍：',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_ITEM'                     => '%1$s 在此板块中已经有%2$s一个自我介绍%3$s。请将此主题合并到该介绍中，或将其删除，而不是移动它。',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => '请在主题P %s 中介绍你自己',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_TOPIC'               => '请在主题 %s 中介绍你自己',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>要发表帖子， <u>你必须</u> 先自我介绍</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => '作为一个新用户，你必须先对其他用户作自我介绍，到板块 “<a href="%s">%s</a>” 发表自我介绍<br/>
 																	在自我介绍板块只有新主题才被允许。',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_TOPIC'              => '作为一个新用户，你必须先对其他用户作自我介绍，到主题 “<a href="%s">%s</a>” 中发表自我介绍<br/>
+																	只需在此主题中回复即可完成自我介绍。',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	当创建自我介绍主题，请先看一下显示在论坛版块顶部的规则。',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>版规也重复显示在：“</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => '点击前往 “%s” 板块',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_TOPIC' => '点击前往 “%s” 主题',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => '自我介绍',
 	'INTRODUCIATOR_EXT_LINK_RETURN_FORUM'       => '取消并返回上一个板块',
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>在等待审核期间，你可以编辑它，版主也可以回复你。

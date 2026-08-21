@@ -62,6 +62,7 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => '日期',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => '自我介绍',
 	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS' => '启用并配置好自我介绍的扩展后，才能查看相关统计信息！',
+	'INTRODUCIATOR_ST_MULTIPLE_NOT_APPLICABLE_TOPIC_MODE' => '不适用：在主题模式下，自我介绍是用户在共享主题中的第一个帖子，因此不可能发布多个自我介绍。',
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK' => '检查',

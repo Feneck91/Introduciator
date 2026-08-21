@@ -6,7 +6,7 @@
 
 **Extension Description:** This extension force member to introduce himself into a specific forum before being able to post everywhere into the forum.
 
-**Extension Version:** 3.0.0
+**Extension Version:** 3.1.0
 
 It's a port from [MOD Introduciator](https://www.phpbb.com/customise/db/mod/introduciator/), with new features.
 
@@ -14,7 +14,8 @@ It's a port from [MOD Introduciator](https://www.phpbb.com/customise/db/mod/intr
 - Permission to let administrator manage the Introduciator extension or not.
 - Possibility to configure user permission from forum's permission or with the extension configuration (must choose one or other).
 - Activate / Deactivate this extension with only one option.
-- Select forum where the users must introduce himself.
+- Choose between two introduction modes **(New)**: Forum mode (each member creates their own introduction topic in a dedicated forum) or Topic mode (every member introduces themselves by posting in a single shared topic).
+- Select forum where the users must introduce himself (Forum mode) or select the shared topic (Topic mode) **(New)**.
 - Force user to introduce himself or not (in this case, other option are always active, like approval, first post deletion survey, or direct link under avatar. **(New)**
 - Add introduce approval options is used to force introduction to be approved by a moderator or not:
   - No approval: don’t force introduction to be approved, let the default processing.
@@ -54,7 +55,7 @@ This extension need at least **phpBB's version 3.2.8**.
 **Description de l'extension :** Est utilisé pour forcer les utilisateurs à poster un message de présentation dans un forum spécifique avant d'être autorisé de poster dans les autres forums.
 Une page d'explication peut être affichée à l'utilisateur lorsqu'il tente de poster un message dans un autre forum afin de lui expliquer ce qu'il doit faire..
 
-**Version de l'extension :** 3.0.0
+**Version de l'extension :** 3.1.0
 
 Cette extension est un portage du [MOD Introduciator](http://www.phpbb-fr.com/customise/db/mod/introduciator/), avec des nouvelles fonctionnalités.
 
@@ -62,7 +63,8 @@ Cette extension est un portage du [MOD Introduciator](http://www.phpbb-fr.com/cu
 - Permission permettant d'autoriser ou pas l'administration de l'extension.
 - Possibilité de configurer les permissions des utilisateurs à partir des permissions du forum ou à partir de la configuration de l'extension (à choisir entre l'un et l'autre).
 - Activation / Désactivation de cette extension par une option
-- Sélection du forum où les utilisateurs doivent se présenter.
+- Choix entre deux modes de présentation **(Nouveau)** : par forum (chaque membre crée son propre sujet de présentation dans un forum dédié) ou par sujet (chaque membre se présente en publiant dans un unique sujet partagé).
+- Sélection du forum où les utilisateurs doivent se présenter (mode Forum) ou sélection du sujet partagé (mode Sujet) **(Nouveau)**.
 - Force l'utilisateur à se présenter ou pas (dans ce cas, toutes les autres options sont toujours actives, comme l'approbation de la présentation, la surveillance de la suppression du premier message d'une présentation, ajout du lien direct sous l'avatar. **(Nouveau)**
 - Ajout d'options d’approbation de la présentation pour forcer la présentation a être approuvée par un modérateur ou pas :
   - Pas d’approbation : ne force pas l’approbation de la présentation, il laisse le traitement par défaut.

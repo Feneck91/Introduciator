@@ -151,6 +151,13 @@ class acp_statistics_controller extends acp_main_controller
 	{
 		$params = $this->helper->introduciator_getparams();
 
+		if ((int) $params['mode'] === introduciator_helper::MODE_TOPIC)
+		{
+			$this->do_check_action_topic_mode($params);
+
+			return;
+		}
+
 		//
 		// Compute number of introductions
 		//
@@ -235,6 +242,35 @@ class acp_statistics_controller extends acp_main_controller
 		$this->template->assign_vars([
 			'U_ACTION'					=> $this->u_action,
 			'S_CHECK_DATABASE'			=> true,
+		]);
+	}
+
+	/**
+	 * Manage the page in topic mode: an introduction is the first approved post of a user in the
+	 * shared topic, so "more than one introduction" cannot happen by construction — there is
+	 * nothing to list, only a count to show.
+	 *
+	 * @param array $params Extension parameters, as returned by introduciator_getparams().
+	 *
+	 * @throws \Exception
+	 * @return void
+	 * @access private
+	 */
+	private function do_check_action_topic_mode($params)
+	{
+		$sql = 'SELECT COUNT(DISTINCT poster_id) as numrows
+				FROM ' . POSTS_TABLE . '
+				WHERE topic_id = ' . (int) $params['fk_topic_id'] . '
+				 AND post_visibility = ' . ITEM_APPROVED;
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+		$this->template->assign_var('INTRODUCTIONS_NUMBER', (int) $row['numrows']);
+
+		$this->template->assign_vars([
+			'U_ACTION'					=> $this->u_action,
+			'S_CHECK_DATABASE'			=> true,
+			'S_INTRODUCIATOR_TOPIC_MODE'	=> true,
 		]);
 	}
 }

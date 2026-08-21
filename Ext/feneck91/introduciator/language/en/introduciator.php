@@ -47,14 +47,20 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'You are not allowed to introduce yourself more than once!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'          => 'You are not allowed to delete the first post of your introduction!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => 'You are not allowed to delete the first post of this introduction! You can delete this introduction by deleting the topic.',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_HEADER'                   => 'This move has been blocked because at least one topic’s author already has a presentation in the destination forum:',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_ITEM'                     => '%1$s already has %2$san existing presentation in this forum%3$s. Merge this topic into it, or delete it, instead of moving it.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => 'Please introduce youself into the topic: %s',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_TOPIC'               => 'Please introduce yourself in the topic: %s',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>To be able to post, <u>you must</u> introduce yourself</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => 'As for every new user, you must introduce yourself to other members in the “<a href="%s">%s</a>” forum<br/>
 																	Only a new topic in the forum for introductions is allowed.',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_TOPIC'              => 'As for every new user, you must introduce yourself to other members in the “<a href="%s">%s</a>” topic<br/>
+																	Just post a reply in this topic to introduce yourself.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	When creating the introduction topic, please observe the following rules that are also displayed at the top of the forum for introductions.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>The rules are repeated here:</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => 'Go to the “%s” forum',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_TOPIC' => 'Go to the “%s” topic',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => 'Introduce yourself',
 	'INTRODUCIATOR_EXT_LINK_RETURN_FORUM'       => 'Cancel and return to previous forum',
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>During presentation approval, it remains editable and moderators can reply to you.

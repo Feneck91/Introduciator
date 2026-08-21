@@ -56,8 +56,17 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN' => 'When this option is on, the extension prevents the first post in any topic in the forum for introductions from deletion.
 																			<br/>Even moderators or administrators don’t have this permission to be sure that the first post in any introductive topic is the really the introduction of a forum member. However, it remains possible to delete the topic if the permissions allow it.
 																			<br/>You can deactivate this option but in this case a member will be able to have several introductions. Enabling this option is preferable.',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE'         => 'Authorize the extension to block moving a topic into the forum for introductions if its author already has a presentation there:',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE_EXPLAIN' => 'When this option is on, moving a topic (from the MCP, QuickMod, or when deleting a user and reassigning their topics) into the forum for introductions is blocked if the topic’s author already has a different presentation topic there, to avoid ending up with two. The moderator is asked to merge or delete the extra topic instead.',
+	'INTRODUCIATOR_CP_MODE'                            => 'Introduction mode:',
+	'INTRODUCIATOR_CP_MODE_EXPLAIN'                    => 'Choose how members introduce themselves: by creating their own topic in a dedicated forum, or by posting in a single shared topic.',
+	'INTRODUCIATOR_CP_MODE_FORUM'                      => 'By forum: each member creates their own introduction topic',
+	'INTRODUCIATOR_CP_MODE_TOPIC'                      => 'By topic: each member posts in a single shared introduction topic',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'                   => 'The forum where the user must introduce himself/herself:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'           => 'The extension will search only in this forum whether forum users have introduced themselves.',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE'                    => 'The topic where the user must introduce himself/herself:',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE_EXPLAIN'            => 'Enter the ID of the single topic where all members must post their introduction.',
+	'INTRODUCIATOR_CP_CURRENT_TOPIC'                   => 'Currently configured topic:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'         => 'Introduction approval options:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN' => 'Is used to force introduction to be approved by a moderator:<br/>
 																			<ul>
@@ -88,6 +97,9 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'         => '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP' => 'No forum selection',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM' => 'Your must choose a forum!',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_TOPIC' => 'You must choose a topic!',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_NOT_FOUND'   => 'The chosen topic doesn’t exist or has been deleted.',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_IS_GLOBAL'   => 'The chosen topic is a global announcement and cannot be used for introductions.',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED' => '<strong>Introduciator: configuration settings updated.</strong>',

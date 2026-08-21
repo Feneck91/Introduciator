@@ -44,24 +44,25 @@ if (empty($lang) || !is_array($lang))
 */
 $lang = array_merge($lang, [
 	// Titles
-	'INTRODUCIATOR_ST_TITLE'         => '??Statistics and checks about user’s introduction',
-	'INTRODUCIATOR_ST_TITLE_EXPLAIN' => '??Used to display database informations:
+	'INTRODUCIATOR_ST_TITLE'         => 'Statistiche e controlli sulle introduzioni degli utenti',
+	'INTRODUCIATOR_ST_TITLE_EXPLAIN' => 'Utilizzato per visualizzare le informazioni del database:
 														<ul>
-														<li>The statistics about introductions.</li>
-														<li>The database coherence check about user’s introduction (check if users have post more than one introduction).</li>
+														<li>Le statistiche sulle introduzioni.</li>
+														<li>Il controllo di coerenza del database sulle introduzioni degli utenti (verifica se gli utenti hanno pubblicato più di un’introduzione).</li>
 														</ul>',
 
 	// Number of introduce's texts
-	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE' => '??Generales statistics',
-	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE' => '??Number of introduction into the forum:',
+	'INTRODUCIATOR_ST_MAIN_STATISTICS_TITLE' => 'Statistiche generali',
+	'INTRODUCIATOR_ST_NB_INTRODUCTION_TITLE' => 'Numero di introduzioni nel forum:',
 
 	// Array's texts
-	'INTRODUCIATOR_ST_ARRAY_TITLE'                => '???This array indicate all the introduction that have been posted more than once',
-	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED' => '??No multiple introduction detected',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'          => '??User',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => '??Date',
-	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => '??Introductions',
+	'INTRODUCIATOR_ST_ARRAY_TITLE'                => 'Questa tabella indica tutte le introduzioni che sono state pubblicate più di una volta',
+	'INTRODUCIATOR_ST_ARRAY_NO_MULTIPLE_DETECTED' => 'Nessuna introduzione multipla rilevata',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_USER'          => 'Utente',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => 'Data',
+	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => 'Introduzioni',
 	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS' => 'Per visualizzare le statistiche, devi abilitare e configurare l’estensione Introduciator.',
+	'INTRODUCIATOR_ST_MULTIPLE_NOT_APPLICABLE_TOPIC_MODE' => 'Non applicabile: in modalità argomento, un’introduzione è il primo messaggio di un utente nell’argomento condiviso, quindi non è possibile pubblicare più di un’introduzione.',
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK' => '??Check',

@@ -146,6 +146,7 @@ class acp_explanation_controller extends acp_main_controller
 				'INTRODUCIATOR_EXPLANATION_MESSAGE_TEXT'	=> $explanation['edit_message_text'],
 				'INTRODUCIATOR_EXPLANATION_RULES_TITLE'		=> $explanation['edit_rules_title'],
 				'INTRODUCIATOR_EXPLANATION_RULES_TEXT'		=> $explanation['edit_rules_text'],
+				'INTRODUCIATOR_EXPLANATION_TOPIC_TITLE_TEMPLATE'	=> $explanation['edit_topic_title_template'],
 			]);
 			$i++;
 		}
@@ -189,6 +190,7 @@ class acp_explanation_controller extends acp_main_controller
 			$explanation_message_text	= $this->request->variable("explanation_message_text_$iso", '', true);
 			$explanation_rules_title	= $this->request->variable("explanation_rules_title_$iso", '', true);
 			$explanation_rules_text		= $this->request->variable("explanation_rules_text_$iso", '', true);
+			$topic_title_template		= truncate_string($this->request->variable("topic_title_template_$iso", '', true), 100);
 
 			// Replace all url by real fake urls
 			$this->helper->replace_all_by(
@@ -238,6 +240,10 @@ class acp_explanation_controller extends acp_main_controller
 				$explanation_message_array_row_result[$key . '_bitfield'] = $bitfield;
 				$explanation_message_array_row_result[$key . '_bbcode_options'] = $bbcode_options;
 			}
+
+			// Plain text, unlike the fields above: no BBCode, so it skips generate_text_for_storage()
+			$explanation_message_array_row_result['topic_title_template'] = $topic_title_template;
+
 			$explanation_message_array_result[] = $explanation_message_array_row_result;
 		}
 		$this->db->sql_freeresult($result);

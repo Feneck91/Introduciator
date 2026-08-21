@@ -77,6 +77,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'   => 'Défaut = <b>%rules_title%</b><br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
 	'INTRODUCIATOR_EP_RULES_TEXT'            => 'Texte des règles du forum de présentation :',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'    => 'Défaut = <b>%rules_text%</b><br/>Par défaut %rules_text% est remplacé par le texte des règles du forum de présentation.<br/>Vous pouvez changer le texte pour mettre celui de votre choix.',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE'         => 'Titre du sujet de présentation :',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE_EXPLAIN' => 'Pré-remplit le champ Sujet lorsqu’un membre crée son sujet de présentation ; il peut encore le modifier avant de publier. Laissez vide pour ne rien pré-remplir.<br/>Vous pouvez utiliser <b>%username%</b>.<br/>Texte brut uniquement, sans BBcode (les titres de sujet ne le prennent pas en charge).',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED' => '<strong>Présentation forcée : configuration des explications mise à jour.</strong>',

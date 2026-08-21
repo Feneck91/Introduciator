@@ -77,6 +77,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'   => 'Default = <b>%rules_title%</b><br/>You can change this text to your own.',
 	'INTRODUCIATOR_EP_RULES_TEXT'            => 'Text of the rules for the forum for introductions:',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'    => 'Default = <b>%rules_text%</b><br/>By default, %rules_text% is replaced by rules for the forum for introductions.<br/>You can change this text to your own.',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE'         => 'Introduction topic title:',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE_EXPLAIN' => 'Pre-fills the Subject field when a member starts their introduction topic; they can still change it before posting. Leave empty to not pre-fill anything.<br/>You can use <b>%username%</b>.<br/>Plain text only, no BBCode (topic titles don’t support it).',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED' => '<strong>Introduciator: explanation’s settings updated.</strong>',

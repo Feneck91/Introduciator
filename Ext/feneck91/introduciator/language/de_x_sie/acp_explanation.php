@@ -78,6 +78,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'   => 'Standard = <b>%rules_title%</b><br/>Sie können diesen Text mit deinem eigenen ersetzen.',
 	'INTRODUCIATOR_EP_RULES_TEXT'            => 'Text der Regeln für das Forum der Vorstellungen:',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'    => 'Standard = <b>%rules_text%</b><br/>Standardmäßig wird %rules_text% durch die Regeln für das Forum für Vorstellungen ersetzt.<br/>Sie können diesen Text mit deinem eigenen ersetzen.',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE'         => 'Titel des Vorstellungsthemas:',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE_EXPLAIN' => 'Füllt das Betreff-Feld vorab aus, wenn ein Mitglied sein Vorstellungsthema beginnt; er kann es vor dem Posten noch ändern. Leer lassen, um nichts vorab auszufüllen.<br/>Sie können <b>%username%</b> verwenden.<br/>Nur reiner Text, kein BBCode (Themen-Titel unterstützen das nicht).',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED' => '<strong>Introduciator: Die Einstellungen der Erklärung wurden aktualisiert.</strong>',

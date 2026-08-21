@@ -78,6 +78,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'   => '默认是 = <b>%rules_title%</b><br/>你可以修改这个文字。',
 	'INTRODUCIATOR_EP_RULES_TEXT'            => '自我介绍板块的版规：',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'    => '默认是 = <b>%rules_text%</b><br/>默认情况下， %rules_text% 被替换为自我介绍板块的版规。<br/>你可以修改这个文字。',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE'         => '自我介绍主题标题：',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE_EXPLAIN' => '当成员开始创建自我介绍主题时，会预先填写标题栏；他们在发布之前仍然可以修改。留空则不会预填任何内容。<br/>你可以使用 <b>%username%</b>。<br/>仅支持纯文本，不支持 BBCode（主题标题不支持 BBCode）。',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED' => '<strong>自我介绍： 说明页面设置更新。</strong>',

@@ -73,6 +73,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'     => 'Padrão = <b>%rules_title%</b><br/>Pode alterar este texto para o seu próprio.',
 	'INTRODUCIATOR_EP_RULES_TEXT'              => 'Texto das regras do fórum de apresentações:',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'      => 'Padrão = <b>%rules_text%</b><br/>Por padrão, %rules_text% é substituído pelas regras do fórum de apresentações.<br/>Pode alterar este texto para o seu próprio.',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE'         => 'Título do tópico de apresentação:',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE_EXPLAIN' => 'Preenche antecipadamente o campo Assunto quando um membro inicia o seu tópico de apresentação; ele pode continuar a alterá-lo antes de publicar. Deixe vazio para não preencher nada.<br/>Pode usar <b>%username%</b>.<br/>Apenas texto simples, sem BBCode (os títulos de tópicos não suportam).',
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED' => '<strong>Introduciator: definições de explicações atualizadas.</strong>',
 	'INTRODUCIATOR_EP_UPDATED'                 => 'As definições da página de explicações foram atualizadas',
 ]);

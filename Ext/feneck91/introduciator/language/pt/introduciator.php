@@ -48,14 +48,20 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'Não tens permissão para te apresentares mais do que uma vez!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'          => 'Não tens permissão para eliminar a primeira mensagem da tua apresentação!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => 'Não tens permissão para eliminar a primeira mensagem desta apresentação! Podes eliminar esta apresentação eliminando o tópico.',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_HEADER'                   => 'Esta ação de mover foi bloqueada porque pelo menos um dos autores dos tópicos já tem uma apresentação no fórum de destino:',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_ITEM'                     => '%1$s já tem %2$suma apresentação existente neste fórum%3$s. Em vez de mover este tópico, junta-o a essa apresentação (merge) ou apaga-o.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => 'Por favor apresenta-te no tópico: %s',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_TOPIC'               => 'Por favor apresenta-te no tópico: %s',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>Para poderes publicar, <u>deves</u> apresentar-te</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => 'Como todos os novos utilizadores, deves apresentar-te aos outros membros no fórum "<a href="%s">%s</a>"<br/>
 																	Apenas é permitido um novo tópico no fórum de apresentações.',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_TOPIC'              => 'Como todos os novos utilizadores, deves apresentar-te aos outros membros no tópico "<a href="%s">%s</a>"<br/>
+																	Basta responderes a este tópico para te apresentares.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	Ao criares o tópico de apresentação, por favor observa as seguintes regras que também são apresentadas no topo do fórum de apresentações.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>As regras são repetidas aqui:</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => 'Vai para o fórum "%s"',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_TOPIC' => 'Vai para o tópico "%s"',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => 'Apresenta-te',
 	'INTRODUCIATOR_EXT_LINK_RETURN_FORUM'       => 'Cancelar e voltar ao fórum anterior',
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>Durante a aprovação da apresentação, a mesma permanece editável e os moderadores podem responder-te.
