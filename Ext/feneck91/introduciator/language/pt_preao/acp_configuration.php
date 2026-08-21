@@ -54,8 +54,17 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN' => 'Quando esta opção está activada, a extensão impede a eliminação da primeira mensagem de qualquer tópico no fórum de apresentações.
 																			<br/>Nem os moderadores ou administradores têm esta permissão para garantir que a primeira mensagem em qualquer tópico de apresentação é realmente a apresentação de um membro do fórum. No entanto, continua a ser possível eliminar o tópico se as permissões o permitirem.
 																			<br/>Podes desactivar esta opção mas, neste caso, um membro poderá ter várias apresentações. Activar esta opção é preferível.',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE'         => 'Autorizar a extensão a bloquear mover um tópico para o fórum de apresentações se o seu autor já tiver lá uma apresentação:',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE_EXPLAIN' => 'Quando esta opção está activada, mover um tópico (a partir do MCP, do QuickMod, ou ao eliminar um utilizador e reatribuir os seus tópicos) para o fórum de apresentações é bloqueado se o autor do tópico já tiver lá um tópico de apresentação diferente, para evitar ficar com dois. É pedido ao moderador que junte (merge) ou elimine o tópico a mais.',
+	'INTRODUCIATOR_CP_MODE'                            => 'Modo de apresentação:',
+	'INTRODUCIATOR_CP_MODE_EXPLAIN'                    => 'Escolhe como os membros se apresentam: criando o seu próprio tópico num fórum dedicado, ou publicando num único tópico partilhado.',
+	'INTRODUCIATOR_CP_MODE_FORUM'                      => 'Por fórum: cada membro cria o seu próprio tópico de apresentação',
+	'INTRODUCIATOR_CP_MODE_TOPIC'                      => 'Por tópico: cada membro publica num único tópico de apresentação partilhado',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'                   => 'O fórum onde o utilizador se deve apresentar:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'           => 'A extensão irá procurar apenas neste fórum se os utilizadores do fórum se apresentaram.',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE'                    => 'O tópico onde o utilizador se deve apresentar:',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE_EXPLAIN'            => 'Introduz o ID do único tópico onde todos os membros devem publicar a sua apresentação.',
+	'INTRODUCIATOR_CP_CURRENT_TOPIC'                   => 'Tópico actualmente configurado:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'         => 'Opções de aprovação de apresentação:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN' => 'É usado para forçar a apresentação a ser aprovada por um moderador:<br/>
 																			<ul>
@@ -82,6 +91,9 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'                     => '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP'             => 'Nenhum fórum seleccionado',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM'             => 'Deves escolher um fórum!',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_TOPIC'             => 'Deves escolher um tópico!',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_NOT_FOUND'               => 'O tópico escolhido não existe ou foi eliminado.',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_IS_GLOBAL'               => 'O tópico escolhido é um anúncio global e não pode ser usado para apresentações.',
 	'INTRODUCIATOR_CP_LOG_UPDATED'                             => '<strong>Introduciator: definições de configuração atualizadas.</strong>',
 	'INTRODUCIATOR_CP_UPDATED'                                 => 'A configuração foi atualizada',
 ]);

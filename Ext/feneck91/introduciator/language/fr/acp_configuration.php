@@ -56,8 +56,17 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN' => 'Lorsque cette option est activée, l’extension empèche la suppression du premier message qui a créé le sujet dans le forum de présentation.
 																			<br/>Même les modérateurs et les administrateurs n’ont pas cette permission pour être certain que le premier message du sujet est la présentation du membre. Il reste toutefois possible de supprimer le sujet si les permissions le permettent.
 																			<br/>Vous pouvez désactiver cette option mais dans ce cas un membre peut avoir plusieurs présentations. Il est recommandé d’activer cette option.',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE'         => 'Autorise l’extension à bloquer le déplacement d’un sujet vers le forum de présentation si son auteur y a déjà une présentation :',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE_EXPLAIN' => 'Lorsque cette option est activée, le déplacement d’un sujet (depuis le MCP, QuickMod, ou lors de la suppression d’un utilisateur avec réattribution de ses sujets) vers le forum de présentation est bloqué si l’auteur du sujet y a déjà un autre sujet de présentation, pour éviter de se retrouver avec deux présentations. Il est demandé au modérateur de fusionner ou de supprimer le sujet en trop.',
+	'INTRODUCIATOR_CP_MODE'                            => 'Mode de présentation :',
+	'INTRODUCIATOR_CP_MODE_EXPLAIN'                    => 'Choisissez comment les membres se présentent : en créant leur propre sujet dans un forum dédié, ou en postant dans un unique sujet partagé.',
+	'INTRODUCIATOR_CP_MODE_FORUM'                      => 'Par forum : chaque membre crée son propre sujet de présentation',
+	'INTRODUCIATOR_CP_MODE_TOPIC'                      => 'Par sujet : chaque membre poste dans un unique sujet de présentation partagé',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'                   => 'Choix du forum où l’utilisateur doit se présenter :',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'           => 'Est utilisé pour connaître quel forum doit être testé pour savoir si un utilisateur s’est déjà présenté ou pas.',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE'                    => 'Choix du sujet où l’utilisateur doit se présenter :',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE_EXPLAIN'            => 'Entrez l’identifiant de l’unique sujet où tous les membres doivent poster leur présentation.',
+	'INTRODUCIATOR_CP_CURRENT_TOPIC'                   => 'Sujet actuellement configuré :',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'         => 'Options d’approbation de la présentation :',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN' => 'Est utilisé pour forcer l’approbation de la présentation par un modérateur :<br/>
 																			<ul>
@@ -88,6 +97,9 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'         => '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP' => 'Aucun forum sélectionné',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM' => 'Merci de sélectionner un forum !',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_TOPIC' => 'Merci de sélectionner un sujet !',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_NOT_FOUND'   => 'Le sujet choisi n’existe pas ou a été supprimé.',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_IS_GLOBAL'   => 'Le sujet choisi est une annonce globale et ne peut pas être utilisé pour les présentations.',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED' => '<strong>Présentation forcée : paramètres de configuration mis à jour.</strong>',

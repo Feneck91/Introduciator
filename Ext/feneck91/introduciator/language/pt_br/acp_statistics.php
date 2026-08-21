@@ -57,5 +57,6 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => 'Data',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => 'Apresentações',
 	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS' => 'Para visualizar as estatísticas, você deve ativar e configurar a extensão Introduciator!',
+	'INTRODUCIATOR_ST_MULTIPLE_NOT_APPLICABLE_TOPIC_MODE' => 'Não aplicável: no modo tópico, uma apresentação é a primeira mensagem de um membro no tópico compartilhado, portanto não é possível publicar mais de uma apresentação.',
 	'INTRODUCIATOR_ST_CHECK'                      => 'Verificar',
 ]);

@@ -57,8 +57,17 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_CHECK_DEL_1ST_POST_EXPLAIN' => 'Wenn diese Option aktiviert ist, wird verhindert, dass der erste Beitrag in einem beliebigen Thema im Forum für Vorstellungen gelöscht werden kann.
 																			<br/>Selbst Moderatoren oder Administratoren haben dazu keine Berechtigung, um sicher zu sein, dass der erste Beitrag in einem vorstellenden Thema wirklich die Vorstellung eines Forenmitglieds ist. Es ist jedoch weiterhin möglich, das Thema zu löschen, wenn die Berechtigungen dies zulassen.
 																			<br/>Du kannst diese Option deaktivieren, aber in diesem Fall kann ein Benutzer mehrere Vorstellungen haben. Die Aktivierung dieser Option ist zu empfehlen.',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE'         => 'Die Erweiterung blockiert das Verschieben eines Themas in das Forum für Vorstellungen, wenn dessen Ersteller dort bereits eine Vorstellung hat:',
+		'INTRODUCIATOR_CP_CHECK_MOVE_DUPLICATE_EXPLAIN' => 'Wenn diese Option aktiviert ist, wird das Verschieben eines Themas (aus dem MCP, QuickMod oder beim Löschen eines Benutzers mit Neuzuordnung seiner Themen) in das Forum für Vorstellungen blockiert, wenn der Ersteller des Themas dort bereits ein anderes Vorstellungsthema hat, um zwei Vorstellungen zu vermeiden. Der Moderator wird gebeten, das zusätzliche Thema stattdessen zusammenzuführen oder zu löschen.',
+	'INTRODUCIATOR_CP_MODE'                            => 'Vorstellungsmodus:',
+	'INTRODUCIATOR_CP_MODE_EXPLAIN'                    => 'Wähle, wie sich Mitglieder vorstellen: durch Erstellen eines eigenen Themas in einem dafür vorgesehenen Forum, oder durch Posten in einem einzigen gemeinsamen Thema.',
+	'INTRODUCIATOR_CP_MODE_FORUM'                      => 'Nach Forum: jedes Mitglied erstellt sein eigenes Vorstellungsthema',
+	'INTRODUCIATOR_CP_MODE_TOPIC'                      => 'Nach Thema: jedes Mitglied postet in einem einzigen gemeinsamen Vorstellungsthema',
 	'INTRODUCIATOR_CP_FORUM_CHOICE'                   => 'Das Forum, in dem der Benutzer sich vorstellen muss:',
 	'INTRODUCIATOR_CP_FORUM_CHOICE_EXPLAIN'           => 'Es wird nur dieses Forum überwacht, ob sich Forenbenutzer vorgestellt haben.',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE'                    => 'Das Thema, in dem der Benutzer sich vorstellen muss:',
+	'INTRODUCIATOR_CP_TOPIC_CHOICE_EXPLAIN'            => 'Gib die ID des einzigen Themas ein, in dem sich alle Mitglieder vorstellen müssen.',
+	'INTRODUCIATOR_CP_CURRENT_TOPIC'                   => 'Aktuell konfiguriertes Thema:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL'         => 'Genehmigungsoptionen der Vorstellung:',
 	'INTRODUCIATOR_CP_POSTING_APPROVAL_LEVEL_EXPLAIN' => 'Wird verwendet, um eine Vorstellung durch einem Moderator zu genehmigen:<br/>
 																			<ul>
@@ -89,6 +98,9 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE'         => '',
 	'INTRODUCIATOR_CP_MSG_NO_FORUM_CHOICE_TOOLTIP' => 'Keine Forenauswahl',
 	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_FORUM' => 'Sie müssen ein Forum auswählen!',
+	'INTRODUCIATOR_CP_MSG_ERROR_MUST_SELECT_TOPIC' => 'Du musst ein Thema auswählen!',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_NOT_FOUND'   => 'Das ausgewählte Thema existiert nicht oder wurde gelöscht.',
+	'INTRODUCIATOR_CP_MSG_ERROR_TOPIC_IS_GLOBAL'   => 'Das ausgewählte Thema ist eine globale Ankündigung und kann nicht für Vorstellungen verwendet werden.',
 
 	// Logs
 	'INTRODUCIATOR_CP_LOG_UPDATED' => '<strong>Introducators: Konfigurationseinstellungen aktualisiert.</strong>',

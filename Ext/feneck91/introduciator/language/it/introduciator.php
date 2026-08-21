@@ -48,14 +48,20 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'Non è consentito introdurre te stesso più di una volta!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'          => 'Non è consentito di eliminare il primo messaggio della vostra introduzione!',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => 'Non è consentito di eliminare il primo post di questa introduzione! È possibile eliminare questa introduzione eliminando il topic.',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_HEADER'                   => 'Questo spostamento è stato bloccato perché l’autore di almeno uno degli argomenti ha già una presentazione nel forum di destinazione:',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_ITEM'                     => '%1$s ha già %2$suna presentazione esistente in questo forum%3$s. Unisci questo argomento a quella presentazione, oppure eliminalo, invece di spostarlo.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => 'Si prega di introdurre te stesso in un topic: %s',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_TOPIC'               => 'Si prega di introdurre te stesso in questo argomento: %s',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>Per essere in grado di pubblicare, <u>devi</u> introdurre/presentare te stesso</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => 'Come per ogni nuovo utente, è necessario presentarsi agli altri membri del “<a href="%s">%s</a>” forum<br/>
 																	è solo permesso un nuovo argomento nel forum per le presentazioni.',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_TOPIC'              => 'Come per ogni nuovo utente, è necessario presentarsi agli altri membri nell’argomento “<a href="%s">%s</a>”<br/>
+																	È sufficiente rispondere in questo argomento per presentarsi.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	Quando si crea l’argomento introduzione, osservare le seguenti regole che vengono anche visualizzate nella parte superiore del forum per le presentazioni.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>Le regole sono ripetute qui:</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => 'Vai al “%s” forum',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_TOPIC' => 'Vai all’argomento “%s”',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => 'Introduci te stesso',
 	'INTRODUCIATOR_EXT_LINK_RETURN_FORUM'       => 'Annulla e torna al forum precedente',
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>Durante l’approvazione della presentazione, il topic rimane modificabile e i moderatori possono rispondere a voi.

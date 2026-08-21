@@ -16,6 +16,9 @@
 	</fieldset>
 	<fieldset>
 		<legend class="legend-bg acp_img_too_much_introduction">{{ lang('INTRODUCIATOR_ST_ARRAY_TITLE') }}</legend>
+		{% if S_INTRODUCIATOR_TOPIC_MODE %}
+		<p>{{ lang('INTRODUCIATOR_ST_MULTIPLE_NOT_APPLICABLE_TOPIC_MODE') }}</p>
+		{% else %}
 		<div class="pagination top-pagination">
 			{% if loops.pagination|length %}
 				{% INCLUDE 'pagination.html' %}
@@ -59,6 +62,7 @@
 			&bull; {{ PAGE_NUMBER }}
 			{% endif %}
 		</div>
+		{% endif %}
 	</fieldset>
 	{% else %}
 	<fieldset>

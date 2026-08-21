@@ -105,12 +105,13 @@ class introduciator_explain_controller
 
 			// Load extension configuration + language
 			$params = $this->introduciator_helper->introduciator_getparams(false);
-			$message = $this->introduciator_helper->get_language()->lang('INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM', $params['forum_name']);
+			$must_introduce_lang_key = ((int) $params['mode'] === introduciator_helper::MODE_TOPIC) ? 'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_TOPIC' : 'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM';
+			$message = $this->introduciator_helper->get_language()->lang($must_introduce_lang_key, $params['forum_name']);
 
 			// forum_id is the forum the user was trying to post in before being redirected here;
-			// only offer a way back to it when it differs from the introduction forum itself
+			// only offer a way back to it when it differs from the introduction scope itself
 			$origin_forum_id = (int) $forum_id;
-			$has_origin_forum = $origin_forum_id > 0 && $origin_forum_id != (int) $this->config['introduciator_fk_forum_id'];
+			$has_origin_forum = $origin_forum_id > 0 && $origin_forum_id != (int) $params['fk_forum_id'];
 
 			$this->template->assign_vars([
 				'S_EXT_ACTIVATED'					=> true,

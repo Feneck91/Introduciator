@@ -61,6 +61,7 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => 'Date',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => 'Présentations',
 	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS' => 'Pour voir les statistiques vous devez activer et configurer l’extension Présentation forcée !',
+	'INTRODUCIATOR_ST_MULTIPLE_NOT_APPLICABLE_TOPIC_MODE' => 'Non applicable : en mode sujet, une présentation est le premier message d’un membre dans le sujet partagé, il n’est donc pas possible de poster plus d’une présentation.',
 
 	// Boutons
 	'INTRODUCIATOR_ST_CHECK' => 'Vérifier',

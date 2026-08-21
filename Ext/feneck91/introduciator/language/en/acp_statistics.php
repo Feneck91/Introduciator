@@ -61,6 +61,7 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_ST_ARRAY_HEADER_DATE'          => 'Date',
 	'INTRODUCIATOR_ST_ARRAY_HEADER_INTRODUCE'     => 'Introductions',
 	'INTRODUCIATOR_ST_NOT_ENABLED_FOR_STATISTICS' => 'To view statistics, you must enable and configure the Introduciator extension.',
+	'INTRODUCIATOR_ST_MULTIPLE_NOT_APPLICABLE_TOPIC_MODE' => 'Not applicable: in topic mode, an introduction is a member’s first post in the shared topic, so posting more than one introduction is not possible.',
 
 	// Buttons
 	'INTRODUCIATOR_ST_CHECK' => 'Check',

@@ -78,6 +78,8 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EP_RULES_TITLE_EXPLAIN'   => 'Default = <b>%rules_title%</b><br/>È possibile modificare questo testo con il proprio.',
 	'INTRODUCIATOR_EP_RULES_TEXT'            => 'Testo delle regole per il forum per le presentazioni:',
 	'INTRODUCIATOR_EP_RULES_TEXT_EXPLAIN'    => 'Default = <b>%rules_text%</b><br/>Per impostazione predefinita, %rules_text% è sostituito dalle regole per il forum per le presentazioni.<br/>È possibile modificare questo testo con il proprio.',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE'         => 'Titolo dell’argomento di presentazione:',
+	'INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE_EXPLAIN' => 'Precompila il campo Oggetto quando un membro crea il proprio argomento di presentazione; può comunque modificarlo prima di pubblicare. Lascia vuoto per non precompilare nulla.<br/>È possibile utilizzare <b>%username%</b>.<br/>Solo testo semplice, senza BBcode (i titoli degli argomenti non lo supportano).',
 
 	// Logs
 	'INTRODUCIATOR_EP_LOG_EXPLANATION_UPDATED' => '<strong>?????</strong>',

@@ -47,14 +47,20 @@ $lang = array_merge($lang, [
 	'INTRODUCIATOR_EXT_INTRODUCE_MORE_THAN_ONCE'                => 'Vous n’êtes pas autorisé à vous présenter plus d’une fois !',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST'          => 'Vous n’êtes pas autorisé à supprimer le premier message de votre présentation !',
 	'INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST'             => 'Vous n’êtes pas autorisé à supprimer le premier message d’une présentation, supprimez toute la présentation en détruisant le sujet !',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_HEADER'                   => 'Ce déplacement a été bloqué car l’auteur d’au moins un des sujets a déjà une présentation dans le forum de destination :',
+	'INTRODUCIATOR_EXT_MOVE_DUPLICATE_ITEM'                     => '%1$s a déjà %2$sune présentation existante dans ce forum%3$s. Fusionnez ce sujet avec elle, ou supprimez-le, plutôt que de le déplacer.',
 	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_FORUM'               => 'Veuillez vous présenter dans le Forum : %s',
+	'INTRODUCIATOR_EXT_MUST_INTRODUCE_INTO_TOPIC'               => 'Veuillez vous présenter dans le sujet : %s',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TITLE'                   => '<strong>Pour pouvoir poster vous devez <u>obligatoirement</u> vous présenter</strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT'                    => 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le forum “<a href="%s">%s</a>”<br/>
 																	Seule la création d’un nouveau sujet dans le forum de présentation est autorisée.',
+	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_TOPIC'              => 'Comme pour chaque nouvel utilisateur, vous devez vous présenter aux autres membres dans le sujet “<a href="%s">%s</a>”<br/>
+																	Il vous suffit de répondre dans ce sujet pour vous présenter.',
 	'INTRODUCIATOR_EXT_DEFAULT_MESSAGE_TEXT_RULES' => '<br/>
 																	Lors de la création de votre présentation, veuillez suivre les règles qui sont affichées en haut du forum de présentation.',
 	'INTRODUCIATOR_EXT_DEFAULT_RULES_TITLE'     => '<strong><u>Les règles sont rappelées ici :</u></strong>',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_FORUM' => 'Aller dans le forum “%s”',
+	'INTRODUCIATOR_EXT_DEFAULT_LINK_GOTO_TOPIC' => 'Aller dans le sujet “%s”',
 	'INTRODUCIATOR_EXT_DEFAULT_LINK_POST_FORUM' => 'Présentez-vous',
 	'INTRODUCIATOR_EXT_LINK_RETURN_FORUM'       => 'Annuler et retourner au forum précédent',
 	'INTRODUCIATOR_EXT_POST_APPROVAL_NOTIFY'    => '<br/>Pendant l’approbation de votre présentation, celle-ci reste modifiable et les modérateurs peuvent vous répondre.

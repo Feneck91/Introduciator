@@ -78,6 +78,16 @@
 				</dt>
 				<dd><textarea id="explanation_rules_text_{{ explanation.LANG_ISO }}" name="explanation_rules_text_{{ explanation.LANG_ISO }}" rows="10" cols="60">{{ explanation.INTRODUCIATOR_EXPLANATION_RULES_TEXT }}</textarea></dd>
 			</dl>
+			{# Topic title template (pre-fill only, not enforced) #}
+			<dl>
+				<dt>
+					<label for="topic_title_template_{{ explanation.LANG_ISO }}">{{ lang('INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE') }}</label><br>
+					<span>{{ lang('INTRODUCIATOR_EP_TOPIC_TITLE_TEMPLATE_EXPLAIN') }}</span>
+				</dt>
+				<dd>
+					<input type="text" class="text medium" id="topic_title_template_{{ explanation.LANG_ISO }}" name="topic_title_template_{{ explanation.LANG_ISO }}" maxlength="100" value="{{ explanation.INTRODUCIATOR_EXPLANATION_TOPIC_TITLE_TEMPLATE }}">
+				</dd>
+			</dl>
 		{% endfor %}
 	</fieldset>
 	{# --------------------------- Posting --------------------------------------------- #}

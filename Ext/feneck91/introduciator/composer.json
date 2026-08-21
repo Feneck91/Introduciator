@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "Used to force users to create post to introduce himself into a specific forum before being allowed to post into other forums. An explanation page can be displayed to the user when trying to post a message in another forum to explain to him what he should do.",
     "homepage": "https://github.com/Feneck91/Introduciator",
-    "version": "3.0.0",
-    "time": "2026-08-01",
+    "version": "3.1.0",
+    "time": "2026-08-02",
     "keywords": [
         "phpbb",
         "extension",
