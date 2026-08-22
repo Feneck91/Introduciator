@@ -92,7 +92,7 @@ class acp_general_controller
 			// Display general page content into ACP Extensions tab
 			'S_INTRODUCIATOR_GENERAL_PAGES' => true,
 			// Current version of this extension
-			'INTRODUCIATOR_VERSION' => $ext_meta['version'],
+			'INTRODUCIATOR_VERSION' => $ext_meta['version'] ?? '',
 			// Install date of this extension
 			'INTRODUCIATOR_INSTALL_DATE' => $this->user->format_date($this->dbconfig['introduciator_install_date']),
 			// URL to the extension's listing page
