@@ -226,7 +226,7 @@ class acp_configuration_controller extends acp_main_controller
 		$is_check_introduction_mandatory_activated  = $this->request->variable('check_introduction_mandatory_activated', true);
 		$is_check_delete_first_post_activated		= $this->request->variable('check_delete_first_post_activated', false);
 		$is_check_move_duplicate_activated			= $this->request->variable('check_move_duplicate_activated', false);
-		$mode										= $this->request->variable('mode', introduciator_helper::MODE_FORUM);
+		$mode										= $this->request->variable('introduciator_mode', introduciator_helper::MODE_FORUM);
 		$fk_forum_id								= $this->request->variable('forum_choice', 0);
 		$fk_topic_id								= $this->request->variable('topic_choice', 0);
 		$posting_approval_level						= $this->request->variable('posting_approval_level', introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL);
