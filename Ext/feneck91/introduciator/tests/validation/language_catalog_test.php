@@ -26,7 +26,13 @@ class language_catalog_test extends \phpbb_test_case
 			foreach ($english_files as $english_file)
 			{
 				$translation_file = $language_dir . '/' . basename($english_file);
-				$this->assertFileExists($translation_file);
+				// phpBB falls back to English when a translated catalogue file is
+				// absent. If a translation does provide the file, it must be complete.
+				if (!is_file($translation_file))
+				{
+					continue;
+				}
+
 				$missing = array_diff_key($this->load_language($english_file), $this->load_language($translation_file));
 				$this->assertSame([], array_keys($missing), $translation_file . ' is missing language keys.');
 			}

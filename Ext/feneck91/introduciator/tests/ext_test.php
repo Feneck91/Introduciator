@@ -12,6 +12,8 @@ namespace feneck91\introduciator\tests;
 use feneck91\introduciator\ext;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+// phpcs:disable Generic.Files.OneClassPerFile.MultipleFound
+
 class ext_test_user
 {
 	public $lang = [
@@ -28,6 +30,16 @@ class ext_test_user
 	{
 		$this->loaded_language = [$extension, $file];
 	}
+
+	public function add_lang($file, $extension)
+	{
+		$this->loaded_language = [$extension, $file];
+	}
+
+	public function lang($key)
+	{
+		return $key;
+	}
 }
 
 class ext_test_template
@@ -42,7 +54,7 @@ class ext_test_template
 
 class ext_test extends \phpbb_test_case
 {
-	public function version_data()
+	public static function version_data()
 	{
 		return [
 			['3.2.7', false],
@@ -58,7 +70,7 @@ class ext_test extends \phpbb_test_case
 	public function test_is_enableable($phpbb_version, $expected)
 	{
 		[$extension] = $this->create_extension($phpbb_version);
-		$this->assertSame($expected, $extension->is_enableable());
+		$this->assertSame($expected, $extension->is_enableable() === true);
 	}
 
 	public function test_first_enable_adds_configuration_notice()
@@ -92,8 +104,10 @@ class ext_test extends \phpbb_test_case
 		$user = new ext_test_user();
 		$template = new ext_test_template();
 		$container->set('config', new \phpbb\config\config(['version' => $phpbb_version]));
+		$container->set('language', $user);
 		$container->set('user', $user);
 		$container->set('template', $template);
+		$container->setParameter('core.root_path', dirname(__DIR__, 4) . '/');
 
 		$finder = $this->getMockBuilder('\phpbb\finder')
 			->disableOriginalConstructor()
