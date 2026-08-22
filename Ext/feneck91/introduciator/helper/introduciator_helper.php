@@ -202,6 +202,38 @@ class introduciator_helper
 	}
 
 	/**
+	 * Get the ids of the groups selected in the ACP.
+	 *
+	 * The table's content doesn't depend on any argument, so it's read once per request and
+	 * memoized: callers that check many groups or many users in a row (the ACP group list, the
+	 * statistics page) would otherwise run one query each.
+	 *
+	 * @return array List of group ids (int)
+	 * @access public
+	 */
+	public function get_selected_group_ids()
+	{
+		if ($this->groups_selected_cache === null)
+		{
+			$sql = 'SELECT fk_group
+					FROM ' . $this->table_groups_name;
+
+			$result = $this->db->sql_query($sql);
+
+			$arr_groups_id = [];
+			while ($row = $this->db->sql_fetchrow($result))
+			{
+				$arr_groups_id[] = (int) $row['fk_group'];
+			}
+			$this->db->sql_freeresult($result);
+
+			$this->groups_selected_cache = $arr_groups_id;
+		}
+
+		return $this->groups_selected_cache;
+	}
+
+	/**
 	 * Check if a group is selected.
 	 *
 	 * Return true if the group is selected, false else.
@@ -213,16 +245,7 @@ class introduciator_helper
 	 */
 	public function is_group_selected($group_id)
 	{
-		$sql = 'SELECT COUNT(*) AS cnt
-			FROM ' . $this->table_groups_name . '
-			WHERE fk_group = ' . (int) $group_id . '
-			LIMIT 1';
-
-		$result = $this->db->sql_query($sql);
-		$ret = (int) $this->db->sql_fetchfield('cnt') > 0;
-		$this->db->sql_freeresult($result);
-
-		return $ret;
+		return in_array((int) $group_id, $this->get_selected_group_ids(), true);
 	}
 
 	/**
@@ -1085,15 +1108,19 @@ class introduciator_helper
 	protected function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_id, &$topic_approved)
 	{
 		// Visibility state : ITEM_UNAPPROVED / ITEM_APPROVED / ITEM_DELETED / ITEM_REAPPROVE
+		// A user can end up with more than one topic here (they existed before the extension was
+		// enabled, or a moderator moved one in), so order explicitly and take the oldest rather
+		// than letting the database pick.
 		$sql = 'SELECT topic_id, topic_first_post_id, topic_visibility
 				FROM ' . TOPICS_TABLE . '
 				WHERE topic_poster = ' . (int) $user_id . '
 				 AND topic_type = ' . POST_NORMAL . '
 				 AND forum_id = ' . (int) $forum_id . '
 				 AND topic_visibility <> ' . ITEM_DELETED . '
-				 AND topic_first_post_id <> 0'; // PATCH : Sometimes, the topic_first_post_id is 0
+				 AND topic_first_post_id <> 0
+				ORDER BY topic_id'; // PATCH : Sometimes, the topic_first_post_id is 0
 
-		$result = $this->db->sql_query($sql);
+		$result = $this->db->sql_query_limit($sql, 1);
 		$topic_row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 		if ($topic_row !== false)
@@ -1215,28 +1242,70 @@ class introduciator_helper
 				WHERE ' . $this->db->sql_in_set('t.topic_id', array_map('intval', $topic_ids));
 		$result = $this->db->sql_query($sql);
 
+		$moved = [];
+		$poster_ids = [];
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$poster_id = (int) $row['topic_poster'];
-			$existing_topic_id = 0;
-			$existing_post_id = 0;
-			$existing_approved = false;
+			$moved[] = $row;
+			$poster_ids[] = (int) $row['topic_poster'];
+		}
+		$this->db->sql_freeresult($result);
 
-			if ($this->is_user_post_into_forum($to_forum_id, $poster_id, $existing_topic_id, $existing_post_id, $existing_approved)
-				&& $existing_topic_id != $row['topic_id'])
+		if (empty($moved))
+		{
+			return $conflicts;
+		}
+
+		// Every presentation those posters already have in the destination forum, in one query
+		// rather than one per moved topic. Keyed by poster, holding every topic rather than just
+		// the first, so a poster whose only match is the topic being moved is still compared
+		// against their other presentations.
+		$existing_by_poster = [];
+		$sql = 'SELECT topic_id, topic_first_post_id, topic_poster
+				FROM ' . TOPICS_TABLE . '
+				WHERE ' . $this->db->sql_in_set('topic_poster', array_unique($poster_ids)) . '
+				 AND topic_type = ' . POST_NORMAL . '
+				 AND forum_id = ' . (int) $to_forum_id . '
+				 AND topic_visibility <> ' . ITEM_DELETED . '
+				 AND topic_first_post_id <> 0
+				ORDER BY topic_id';
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$existing_by_poster[(int) $row['topic_poster']][] = $row;
+		}
+		$this->db->sql_freeresult($result);
+
+		foreach ($moved as $row)
+		{
+			$poster_id = (int) $row['topic_poster'];
+
+			if (!isset($existing_by_poster[$poster_id]))
 			{
+				continue;
+			}
+
+			foreach ($existing_by_poster[$poster_id] as $existing)
+			{
+				if ((int) $existing['topic_id'] === (int) $row['topic_id'])
+				{
+					// The topic being moved is already there: not a duplicate of itself.
+					continue;
+				}
+
 				$conflicts[] = [
 					'moved_topic_id'			=> (int) $row['topic_id'],
 					'moved_topic_title'			=> $row['topic_title'],
 					'poster_id'					=> $poster_id,
 					'poster_name'				=> $row['username'],
 					'poster_colour'				=> $row['user_colour'],
-					'existing_topic_id'			=> (int) $existing_topic_id,
-					'existing_first_post_id'	=> (int) $existing_post_id,
+					'existing_topic_id'			=> (int) $existing['topic_id'],
+					'existing_first_post_id'	=> (int) $existing['topic_first_post_id'],
 				];
+
+				break;
 			}
 		}
-		$this->db->sql_freeresult($result);
 
 		return $conflicts;
 	}
@@ -1467,32 +1536,46 @@ class introduciator_helper
 	 */
 	protected function is_user_in_groups_selected($user_id)
 	{
-		if ($this->groups_selected_cache === null)
-		{
-			$sql = 'SELECT *
-					FROM ' . $this->table_groups_name;
-
-			$result = $this->db->sql_query($sql);
-
-			// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
-			$arr_groups_id = [];
-			while ($row = $this->db->sql_fetchrow($result))
-			{
-				$arr_groups_id[] = $row['fk_group'];
-			}
-			$this->db->sql_freeresult($result);
-
-			// This table's content doesn't depend on $user_id, so it's the same for every call in this request
-			$this->groups_selected_cache = $arr_groups_id;
-		}
-
-		// Testing
 		if (!function_exists('group_memberships'))
 		{
 			include($this->root_path . 'includes/functions_user.' . $this->php_ext);
 		}
 
-		return group_memberships($this->groups_selected_cache, (int) $user_id, true);
+		return group_memberships($this->get_selected_group_ids(), (int) $user_id, true);
+	}
+
+	/**
+	 * Batch version of is_user_in_groups_selected(), for pages checking many users at once.
+	 *
+	 * Semantics are deliberately identical to the per-user call, including the phpBB quirk that
+	 * an empty group selection matches any user who belongs to any group at all.
+	 *
+	 * @param array $user_ids List of user ids to test
+	 *
+	 * @return array Map of user id => true, holding only the users in a selected group
+	 * @access protected
+	 */
+	protected function get_users_in_selected_groups(array $user_ids)
+	{
+		if (empty($user_ids))
+		{
+			return [];
+		}
+
+		if (!function_exists('group_memberships'))
+		{
+			include($this->root_path . 'includes/functions_user.' . $this->php_ext);
+		}
+
+		$memberships = group_memberships($this->get_selected_group_ids(), $user_ids, false);
+
+		$in_group = [];
+		foreach ($memberships ?: [] as $membership)
+		{
+			$in_group[(int) $membership['user_id']] = true;
+		}
+
+		return $in_group;
 	}
 
 	/**
@@ -1676,12 +1759,27 @@ class introduciator_helper
 		}
 		else
 		{
+			$poster_ids = array_unique(array_map(function ($user) {
+				return (int) $user['topic_poster'];
+			}, $users));
+
+			// One membership query for every user on the page instead of one per user. The set
+			// of ids that come back is exactly the set for which the per-user check would have
+			// answered "in a selected group", empty selection included.
+			$in_selected_group = $this->get_users_in_selected_groups($poster_ids);
+			$ignored_users = $this->get_ignored_users_list();
+
 			foreach ($users as $user)
 			{
 				$poster_id = (int) $user['topic_poster'];
-				if (!$this->is_user_ignored($poster_id, $user['topic_first_poster_name']))
+				$is_in_group_selected = isset($in_selected_group[$poster_id]);
+
+				if (($this->introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$this->introduciator_params['is_include_groups'] && !$is_in_group_selected))
 				{
-					$filtered_ids[] = $poster_id;
+					if (!in_array(utf8_strtolower($user['topic_first_poster_name']), $ignored_users, true))
+					{
+						$filtered_ids[] = $poster_id;
+					}
 				}
 			}
 		}
