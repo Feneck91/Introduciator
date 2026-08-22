@@ -1622,11 +1622,11 @@ class introduciator_helper
 	 * dropped so that a trailing newline does not ignore the anonymous user.
 	 *
 	 * @return array List of lowercased usernames to ignore
-	 * @access protected
+	 * @access public
 	 */
-	protected function get_ignored_users_list()
+	public function get_ignored_users_list()
 	{
-		$list = utf8_strtolower($this->introduciator_params['ignored_users']);
+		$list = utf8_strtolower((string) $this->config['introduciator_ignored_users']);
 
 		// A list saved by an older release can hold a byte-truncated character, which makes a
 		// UTF-8 mode split fail outright, so fall back to a plain newline split.
