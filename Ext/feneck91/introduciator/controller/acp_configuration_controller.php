@@ -232,8 +232,10 @@ class acp_configuration_controller extends acp_main_controller
 		$posting_approval_level						= $this->request->variable('posting_approval_level', introduciator_helper::APPROVAL_LEVEL_NO_APPROVAL);
 		$is_use_permissions							= $this->request->variable('is_use_permissions', true);
 		$is_include_groups							= $this->request->variable('include_groups', true);
-		$groups										= $this->request->variable('groups_choices', array('' => 0)); // Array of IDs of selected groups
-		$ignored_users								= substr($this->request->variable('ignored_users', ''), 0, 255);
+		$groups										= $this->request->variable('groups_choices', [0]); // Array of IDs of selected groups
+		// truncate_string() rather than substr(): usernames are UTF-8 and a byte-wise cut can
+		// split a character in half.
+		$ignored_users								= truncate_string($this->request->variable('ignored_users', '', true), 255);
 
 		if ($mode != introduciator_helper::MODE_TOPIC)
 		{
@@ -290,9 +292,16 @@ class acp_configuration_controller extends acp_main_controller
 		$this->db->sql_query($sql);
 
 		// 2> Add all entries
+		// An empty multi-select posts nothing, in which case $request->variable() hands back the
+		// default array verbatim; skipping non-positive ids keeps that placeholder out of the table.
 		$values = [];
 		foreach ($groups as $group)
 		{
+			if ((int) $group <= 0)
+			{
+				continue;
+			}
+
 			// Create elements to add by row
 			$values[] = ['fk_group' => (int) $group];
 		}

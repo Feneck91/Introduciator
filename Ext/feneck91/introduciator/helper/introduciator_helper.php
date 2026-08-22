@@ -23,6 +23,15 @@ class introduciator_helper
 	const MODE_TOPIC = 1; // Introduce by posting into a single shared topic (one post per user)
 
 	/**
+	 * Dummy URLs the %forum_url% / %forum_post% placeholders are swapped for before the
+	 * explanation texts go through phpBB's BBCode parser, which rejects a [url] tag whose
+	 * content is not a syntactically valid URL. They are swapped back both on display and
+	 * when the texts are loaded for editing again.
+	 */
+	const PLACEHOLDER_URL_FORUM = 'http://aghxkfps.tld';
+	const PLACEHOLDER_URL_POST  = 'http://dqsdfzef.tld';
+
+	/**
 	 * Seconds after which a posting claim is considered abandoned by a request
 	 * that died before releasing it. A submission never legitimately takes this long.
 	 */
@@ -249,6 +258,31 @@ class introduciator_helper
 	}
 
 	/**
+	 * Build the map that turns the dummy URLs back into the %forum_url% / %forum_post%
+	 * placeholders the admin typed.
+	 *
+	 * Boards still on the legacy BBCode storage keep the URL entity-escaped inside [url]
+	 * tags (see bbcode_specialchars() in includes/message_parser.php), while the s9e
+	 * TextFormatter storage used since phpBB 3.2 gives the plain form back. Both are
+	 * restored, so the placeholders survive a save / re-edit round trip either way.
+	 *
+	 * @return array Map of text to search for => placeholder to restore
+	 * @access public
+	 * @static
+	 */
+	public static function get_placeholder_restore_map()
+	{
+		$escaped = str_replace([':', '.'], ['&#58;', '&#46;'], [self::PLACEHOLDER_URL_FORUM, self::PLACEHOLDER_URL_POST]);
+
+		return [
+			$escaped[0]						=> '%forum_url%',
+			$escaped[1]						=> '%forum_post%',
+			self::PLACEHOLDER_URL_FORUM		=> '%forum_url%',
+			self::PLACEHOLDER_URL_POST		=> '%forum_post%',
+		];
+	}
+
+	/**
 	 * Get the explanations informations.
 	 *
 	 * Return an array of explanation text used to edit or display.
@@ -329,10 +363,7 @@ class introduciator_helper
 						&$rules_title,
 						&$rules_text,
 					],
-					[
-						'http&#58;//aghxkfps&#46;com'	=> '%forum_url%',
-						'http&#58;//dqsdfzef&#46;com'	=> '%forum_post%',
-					]);
+					self::get_placeholder_restore_map());
 
 				$ret_value[] = [
 					'lang_local_name'		=>	$row['lang_local_name'],
@@ -442,7 +473,15 @@ class introduciator_helper
 		if ($is_edit === true || $is_edit === false)
 		{
 			$forum_name = '';
-			$forum_rules = [];
+			// Filled in from the configured forum below. Kept complete even when that forum no
+			// longer exists (deleted after being configured), so the display path can read every
+			// key unconditionally.
+			$forum_rules = [
+				'rules'				=> '',
+				'rules_uid'			=> '',
+				'rules_bitfield'	=> '',
+				'rules_options'		=> 0,
+			];
 
 			if ($params['introduciator_allow'])
 			{
@@ -545,8 +584,8 @@ class introduciator_helper
 						],
 						[
 							'%forum_name%'			=> $forum_name,
-							'http://aghxkfps.tld'	=> $forum_url,	// Restore correct link
-							'http://dqsdfzef.tld'	=> $forum_post,	// Restore correct link
+							self::PLACEHOLDER_URL_FORUM	=> $forum_url,	// Restore correct link
+							self::PLACEHOLDER_URL_POST	=> $forum_post,	// Restore correct link
 						]
 					);
 
@@ -648,8 +687,10 @@ class introduciator_helper
 						$result = $this->db->sql_query($sql);
 						$row = $this->db->sql_fetchrow($result);
 						$this->db->sql_freeresult($result);
-						$topic_id_of_post = (int) $row['topic_id'];
-						$first_poster_id = (int) $row['poster_id'];	// <-- $poster_id could be <> from current user id
+						// A moderator can be looking at a post that no longer exists by the time
+						// this runs, so never assume the row came back.
+						$topic_id_of_post = $row ? (int) $row['topic_id'] : 0;
+						$first_poster_id = $row ? (int) $row['poster_id'] : 0;	// <-- $poster_id could be <> from current user id
 																	// It's this case when moderator try to delete post of another user
 
 						if (!empty($topic_id_of_post) && !empty($first_poster_id))
@@ -660,14 +701,14 @@ class introduciator_helper
 							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
 							{
 								// Check if the topic contains more than one post: if contains only one post, keep default behavior
-								$sql = 'SELECT count(1)
+								$sql = 'SELECT COUNT(*) AS posts_count
 										FROM ' . POSTS_TABLE . '
 										WHERE topic_id = ' . (int) $topic_id_of_post . ' AND post_visibility <> ' . ITEM_DELETED;
 
 								$result = $this->db->sql_query($sql);
 								$row = $this->db->sql_fetchrow($result);
 								$this->db->sql_freeresult($result);
-								$posts_count = (int) $row['count(1)'];
+								$posts_count = (int) $row['posts_count'];
 
 								if ($posts_count > 1)
 								{
@@ -1484,10 +1525,46 @@ class introduciator_helper
 		// User is in selected group or out of selected group ?
 		if (($this->introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$this->introduciator_params['is_include_groups'] && !$is_in_group_selected))
 		{
-			$user_ignored = in_array(utf8_strtolower($poster_name), explode("\n", utf8_strtolower($this->introduciator_params['ignored_users'])));
+			$user_ignored = in_array(utf8_strtolower($poster_name), $this->get_ignored_users_list(), true);
 		}
 
 		return $user_ignored;
+	}
+
+	/**
+	 * Split the configured ignored-users list into lowercased usernames.
+	 *
+	 * The list comes from a textarea, so entries can be separated by LF or CRLF and can carry
+	 * stray spaces; both would otherwise make an entry silently never match. Empty lines are
+	 * dropped so that a trailing newline does not ignore the anonymous user.
+	 *
+	 * @return array List of lowercased usernames to ignore
+	 * @access protected
+	 */
+	protected function get_ignored_users_list()
+	{
+		$list = utf8_strtolower($this->introduciator_params['ignored_users']);
+
+		// A list saved by an older release can hold a byte-truncated character, which makes a
+		// UTF-8 mode split fail outright, so fall back to a plain newline split.
+		$entries = preg_split('/\R/u', $list);
+
+		if ($entries === false)
+		{
+			$entries = explode("\n", str_replace("\r\n", "\n", $list));
+		}
+
+		$ignored = [];
+		foreach ($entries as $entry)
+		{
+			$entry = trim($entry);
+			if ($entry !== '')
+			{
+				$ignored[] = $entry;
+			}
+		}
+
+		return $ignored;
 	}
 
 	/**

@@ -24,6 +24,22 @@ class m3_topic_title_template extends \phpbb\db\migration\migration
 	}
 
 	/**
+	 * Run migration only if the column is not already there.
+	 *
+	 * The table itself may legitimately be missing on a legacy install (see update_schema()),
+	 * which is not "installed" either.
+	 *
+	 * @return bool Is effectively installed?
+	 */
+	public function effectively_installed()
+	{
+		$table = $this->table_prefix . 'introduciator_explanation';
+
+		return $this->db_tools->sql_table_exists($table)
+			&& $this->db_tools->sql_column_exists($table, 'topic_title_template');
+	}
+
+	/**
 	 * Add the table schema to the database
 	 *
 	 * @return array

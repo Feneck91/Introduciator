@@ -201,8 +201,8 @@ class acp_explanation_controller extends acp_main_controller
 					&$explanation_rules_text,
 				],
 				[
-					'%forum_url%'	=> 'http://aghxkfps.tld', // Make link work if placed into [url]
-					'%forum_post%'	=> 'http://dqsdfzef.tld', // Make link work if placed into [url]
+					'%forum_url%'	=> introduciator_helper::PLACEHOLDER_URL_FORUM, // Make link work if placed into [url]
+					'%forum_post%'	=> introduciator_helper::PLACEHOLDER_URL_POST, // Make link work if placed into [url]
 				]
 			);
 
