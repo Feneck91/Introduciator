@@ -20,7 +20,7 @@ class m1_topic_mode extends \phpbb\db\migration\migration
 	 */
 	public static function depends_on()
 	{
-		return array('\feneck91\introduciator\migrations\v2_0_0\m1_data');
+		return array('\feneck91\introduciator\migrations\v2_0_0\m4_permissions');
 	}
 
 	/**

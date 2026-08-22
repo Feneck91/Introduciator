@@ -11,7 +11,7 @@ namespace feneck91\introduciator\tests\validation;
 
 class metadata_test extends \phpbb_test_case
 {
-	private const EXPECTED_VERSION = '3.0.0';
+	private const EXPECTED_VERSION = '3.1.0';
 
 	public function test_release_metadata_is_valid_and_synchronised()
 	{

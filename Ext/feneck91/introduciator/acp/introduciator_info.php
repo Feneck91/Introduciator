@@ -16,7 +16,7 @@ class introduciator_info
 		return [
 			'filename' => '\feneck91\introduciator\acp\introduciator_module',
 			'title'    => 'ACP_INTRODUCIATOR_EXTENSION',
-			'version'  => '3.0.0',
+			'version'  => '3.1.0',
 			'modes'    => [
 				'general' => [
 					'title' => 'INTRODUCIATOR_GENERAL',

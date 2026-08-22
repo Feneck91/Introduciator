@@ -31,9 +31,23 @@ class m3_topic_title_template extends \phpbb\db\migration\migration
 	 */
 	public function update_schema()
 	{
+		$table = $this->table_prefix . 'introduciator_explanation';
+
+		// Some legacy installations have the groups table (so the original
+		// schema migration was considered installed) but not the explanation
+		// table. Create the complete table before trying to add a column to it.
+		if (!$this->db_tools->sql_table_exists($table))
+		{
+			return [
+				'add_tables' => [
+					$table => \feneck91\introduciator\migrations\v2_0_0\m3_schema::explanation_table_schema(),
+				],
+			];
+		}
+
 		return [
 			'add_columns' => [
-				$this->table_prefix . 'introduciator_explanation' => [
+				$table => [
 					// Per-language template used to pre-fill (not enforce) the Subject field
 					// when a member starts a new introduction topic. Empty = don't pre-fill.
 					'topic_title_template' => ['VCHAR:100', ''],

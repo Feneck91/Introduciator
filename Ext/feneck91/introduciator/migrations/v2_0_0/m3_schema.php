@@ -30,7 +30,45 @@ class m3_schema extends \phpbb\db\migration\migration
 	 */
 	public function effectively_installed()
 	{
-		return $this->db_tools->sql_table_exists($this->table_prefix . 'introduciator_groups');
+		return $this->db_tools->sql_table_exists($this->table_prefix . 'introduciator_groups') &&
+			$this->db_tools->sql_table_exists($this->table_prefix . 'introduciator_explanation');
+	}
+
+	/**
+	 * Return the complete explanation table schema used by current installs.
+	 *
+	 * Keeping this definition here also lets later migrations recover an
+	 * incomplete legacy install where the groups table exists but the
+	 * explanation table does not.
+	 *
+	 * @return array
+	 */
+	public static function explanation_table_schema()
+	{
+		return [
+			'COLUMNS'		=> [
+				'id'							=> ['UINT', null, 'auto_increment'],
+				'lang'							=> ['VCHAR:30', ''],
+				'message_title'					=> ['MTEXT_UNI', ''],
+				'message_title_uid'				=> ['VCHAR:8', ''],
+				'message_title_bitfield'		=> ['VCHAR:255', ''],
+				'message_title_bbcode_options'	=> ['VCHAR:255', ''],
+				'message_text'					=> ['MTEXT_UNI', ''],
+				'message_text_uid'				=> ['VCHAR:8', ''],
+				'message_text_bitfield'			=> ['VCHAR:255', ''],
+				'message_text_bbcode_options'	=> ['VCHAR:255', ''],
+				'rules_title'					=> ['MTEXT_UNI', ''],
+				'rules_title_uid'				=> ['VCHAR:8', ''],
+				'rules_title_bitfield'			=> ['VCHAR:255', ''],
+				'rules_title_bbcode_options'	=> ['VCHAR:255', ''],
+				'rules_text'					=> ['MTEXT_UNI', ''],
+				'rules_text_uid'				=> ['VCHAR:8', ''],
+				'rules_text_bitfield'			=> ['VCHAR:255', ''],
+				'rules_text_bbcode_options'		=> ['VCHAR:255', ''],
+				'topic_title_template'			=> ['VCHAR:100', ''],
+			],
+			'PRIMARY_KEY'	=> 'id',
+		];
 	}
 
 	/**
@@ -53,29 +91,7 @@ class m3_schema extends \phpbb\db\migration\migration
 						'fk_group'	=> ['UINT', null],
 					],
 				],
-				$this->table_prefix . 'introduciator_explanation' => [
-					'COLUMNS'		=> [
-						'id'							=> ['UINT', null, 'auto_increment'],
-						'lang'							=> ['VCHAR:30', ''],
-						'message_title'					=> ['MTEXT_UNI', ''],
-						'message_title_uid'				=> ['VCHAR:8', ''],
-						'message_title_bitfield'		=> ['VCHAR:255', ''],
-						'message_title_bbcode_options'	=> ['VCHAR:255', ''],
-						'message_text'					=> ['MTEXT_UNI', ''],
-						'message_text_uid'				=> ['VCHAR:8', ''],
-						'message_text_bitfield'			=> ['VCHAR:255', ''],
-						'message_text_bbcode_options'	=> ['VCHAR:255', ''],
-						'rules_title'					=> ['MTEXT_UNI', ''],
-						'rules_title_uid'				=> ['VCHAR:8', ''],
-						'rules_title_bitfield'			=> ['VCHAR:255', ''],
-						'rules_title_bbcode_options'	=> ['VCHAR:255', ''],
-						'rules_text'					=> ['MTEXT_UNI', ''],
-						'rules_text_uid'				=> ['VCHAR:8', ''],
-						'rules_text_bitfield'			=> ['VCHAR:255', ''],
-						'rules_text_bbcode_options'		=> ['VCHAR:255', ''],
-					],
-					'PRIMARY_KEY'	=> 'id',
-				],
+				$this->table_prefix . 'introduciator_explanation' => self::explanation_table_schema(),
 			],
 		];
 	}
