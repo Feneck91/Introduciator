@@ -70,8 +70,8 @@ function introduciator_reset_display_mode()
 				<span>{{ lang('INTRODUCIATOR_CP_MODE_EXPLAIN') }}</span>
 			</dt>
 			<dd>
-				<label><input id="mode_forum" name="mode" type="radio" class="radio" value="0" onclick="introduciator_display_mode()"{% if INTRODUCIATOR_MODE_FORUM_ENABLED %} checked="checked"{% endif %}> {{ lang('INTRODUCIATOR_CP_MODE_FORUM') }}</label>
-				<label><input id="mode_topic" name="mode" type="radio" class="radio" value="1" onclick="introduciator_display_mode()"{% if INTRODUCIATOR_MODE_TOPIC_ENABLED %} checked="checked"{% endif %}> {{ lang('INTRODUCIATOR_CP_MODE_TOPIC') }}</label>
+				<label><input id="mode_forum" name="introduciator_mode" type="radio" class="radio" value="0" onclick="introduciator_display_mode()"{% if INTRODUCIATOR_MODE_FORUM_ENABLED %} checked="checked"{% endif %}> {{ lang('INTRODUCIATOR_CP_MODE_FORUM') }}</label>
+				<label><input id="mode_topic" name="introduciator_mode" type="radio" class="radio" value="1" onclick="introduciator_display_mode()"{% if INTRODUCIATOR_MODE_TOPIC_ENABLED %} checked="checked"{% endif %}> {{ lang('INTRODUCIATOR_CP_MODE_TOPIC') }}</label>
 			</dd>
 		</dl>
 		{# Activate / Desactivate Check delete first post : only meaningful in forum mode #}

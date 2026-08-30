@@ -11,14 +11,7 @@ services:
     feneck91.introduciator.extension_manager_helper:
         class: feneck91\introduciator\helper\extension_manager_helper
         arguments:
-            - '@service_container'
-            - '@dbal.conn'
-            - '@config'
-            - '@filesystem'
-            - '%tables.ext%'
-            - '%core.root_path%'
-            - '%core.php_ext%'
-            - '@cache'
+            - '@ext.manager'
 
     feneck91.introduciator.helper:
         class: feneck91\introduciator\helper\introduciator_helper

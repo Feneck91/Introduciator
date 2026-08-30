@@ -9,7 +9,16 @@
 
 namespace feneck91\introduciator\helper;
 
-class extension_manager_helper extends \phpbb\extension\manager
+use phpbb\extension\manager;
+
+/**
+ * Reads this extension's own composer.json metadata, for the ACP General page.
+ *
+ * Wraps phpBB's extension manager rather than extending it: subclassing would mean repeating
+ * the core constructor's argument list in our service definition, and any change to it upstream
+ * would break the extension at container compile time.
+ */
+class extension_manager_helper
 {
 	/**
 	 *  Extension name
@@ -17,10 +26,27 @@ class extension_manager_helper extends \phpbb\extension\manager
 	const EXT_NAME = 'feneck91/introduciator';
 
 	/**
+	 * @var \phpbb\extension\manager phpBB extension manager
+	 */
+	protected $ext_manager;
+
+	/**
 	 *
 	 * @var array Metadata for this extension
 	 */
 	protected $ext_meta;
+
+	/**
+	 * Constructor
+	 *
+	 * @param \phpbb\extension\manager $ext_manager phpBB extension manager
+	 *
+	 * @access public
+	 */
+	public function __construct(manager $ext_manager)
+	{
+		$this->ext_manager = $ext_manager;
+	}
 
 	/**
 	 * Get extension metadata
@@ -41,7 +67,9 @@ class extension_manager_helper extends \phpbb\extension\manager
 	 */
 	private function load_metadata()
 	{
-		$md_manager = $this->create_extension_metadata_manager($this::EXT_NAME);
+		$md_manager = $this->ext_manager->create_extension_metadata_manager(self::EXT_NAME);
+
+		$this->ext_meta = [];
 
 		try
 		{
@@ -49,7 +77,9 @@ class extension_manager_helper extends \phpbb\extension\manager
 		}
 		catch (\phpbb\extension\exception $e)
 		{
-			trigger_error($e, E_USER_WARNING);
+			// Only the message: casting the exception itself would print its stack trace,
+			// and with it absolute server paths, into the ACP.
+			trigger_error($e->getMessage(), E_USER_WARNING);
 		}
 
 		return $this->ext_meta;

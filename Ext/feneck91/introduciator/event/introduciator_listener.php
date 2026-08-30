@@ -275,11 +275,17 @@ class introduciator_listener implements EventSubscriberInterface
 	 *
 	 * Else phpBB say that the topic doesn't exists.
 	 *
+	 * The 'data' row is not guaranteed to carry a topic_id: phpbb_download_handle_forum_auth()
+	 * calls is_visible() with a row that only selects the visibility columns. Without the
+	 * topic identifier the introduce cannot be recognized, so leave the visibility unchanged.
+	 *
 	 * @param \phpbb\event\data $event Event.
 	*/
 	public function is_topic_visible($event)
 	{
-		if ($event['mode'] === 'topic' && $this->helper->introduction_is_unapproved_topic($event['forum_id'], $event['data']['topic_id'], false))
+		$data = $event['data'];
+
+		if ($event['mode'] === 'topic' && isset($data['topic_id']) && $this->helper->introduction_is_unapproved_topic($event['forum_id'], $data['topic_id'], false))
 		{
 			$event['is_visible'] = true;
 		}

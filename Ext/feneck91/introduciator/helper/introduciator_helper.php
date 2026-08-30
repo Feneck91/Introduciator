@@ -23,6 +23,15 @@ class introduciator_helper
 	const MODE_TOPIC = 1; // Introduce by posting into a single shared topic (one post per user)
 
 	/**
+	 * Dummy URLs the %forum_url% / %forum_post% placeholders are swapped for before the
+	 * explanation texts go through phpBB's BBCode parser, which rejects a [url] tag whose
+	 * content is not a syntactically valid URL. They are swapped back both on display and
+	 * when the texts are loaded for editing again.
+	 */
+	const PLACEHOLDER_URL_FORUM = 'http://aghxkfps.tld';
+	const PLACEHOLDER_URL_POST  = 'http://dqsdfzef.tld';
+
+	/**
 	 * Seconds after which a posting claim is considered abandoned by a request
 	 * that died before releasing it. A submission never legitimately takes this long.
 	 */
@@ -193,6 +202,38 @@ class introduciator_helper
 	}
 
 	/**
+	 * Get the ids of the groups selected in the ACP.
+	 *
+	 * The table's content doesn't depend on any argument, so it's read once per request and
+	 * memoized: callers that check many groups or many users in a row (the ACP group list, the
+	 * statistics page) would otherwise run one query each.
+	 *
+	 * @return array List of group ids (int)
+	 * @access public
+	 */
+	public function get_selected_group_ids()
+	{
+		if ($this->groups_selected_cache === null)
+		{
+			$sql = 'SELECT fk_group
+					FROM ' . $this->table_groups_name;
+
+			$result = $this->db->sql_query($sql);
+
+			$arr_groups_id = [];
+			while ($row = $this->db->sql_fetchrow($result))
+			{
+				$arr_groups_id[] = (int) $row['fk_group'];
+			}
+			$this->db->sql_freeresult($result);
+
+			$this->groups_selected_cache = $arr_groups_id;
+		}
+
+		return $this->groups_selected_cache;
+	}
+
+	/**
 	 * Check if a group is selected.
 	 *
 	 * Return true if the group is selected, false else.
@@ -204,16 +245,7 @@ class introduciator_helper
 	 */
 	public function is_group_selected($group_id)
 	{
-		$sql = 'SELECT COUNT(*) AS cnt
-			FROM ' . $this->table_groups_name . '
-			WHERE fk_group = ' . (int) $group_id . '
-			LIMIT 1';
-
-		$result = $this->db->sql_query($sql);
-		$ret = (int) $this->db->sql_fetchfield('cnt') > 0;
-		$this->db->sql_freeresult($result);
-
-		return $ret;
+		return in_array((int) $group_id, $this->get_selected_group_ids(), true);
 	}
 
 	/**
@@ -246,6 +278,31 @@ class introduciator_helper
 				$field = str_replace($arr_replace_by_key, $arr_replace_by_value, $field);
 			}
 		}
+	}
+
+	/**
+	 * Build the map that turns the dummy URLs back into the %forum_url% / %forum_post%
+	 * placeholders the admin typed.
+	 *
+	 * Boards still on the legacy BBCode storage keep the URL entity-escaped inside [url]
+	 * tags (see bbcode_specialchars() in includes/message_parser.php), while the s9e
+	 * TextFormatter storage used since phpBB 3.2 gives the plain form back. Both are
+	 * restored, so the placeholders survive a save / re-edit round trip either way.
+	 *
+	 * @return array Map of text to search for => placeholder to restore
+	 * @access public
+	 * @static
+	 */
+	public static function get_placeholder_restore_map()
+	{
+		$escaped = str_replace([':', '.'], ['&#58;', '&#46;'], [self::PLACEHOLDER_URL_FORUM, self::PLACEHOLDER_URL_POST]);
+
+		return [
+			$escaped[0]						=> '%forum_url%',
+			$escaped[1]						=> '%forum_post%',
+			self::PLACEHOLDER_URL_FORUM		=> '%forum_url%',
+			self::PLACEHOLDER_URL_POST		=> '%forum_post%',
+		];
 	}
 
 	/**
@@ -329,10 +386,7 @@ class introduciator_helper
 						&$rules_title,
 						&$rules_text,
 					],
-					[
-						'http&#58;//aghxkfps&#46;com'	=> '%forum_url%',
-						'http&#58;//dqsdfzef&#46;com'	=> '%forum_post%',
-					]);
+					self::get_placeholder_restore_map());
 
 				$ret_value[] = [
 					'lang_local_name'		=>	$row['lang_local_name'],
@@ -442,7 +496,15 @@ class introduciator_helper
 		if ($is_edit === true || $is_edit === false)
 		{
 			$forum_name = '';
-			$forum_rules = [];
+			// Filled in from the configured forum below. Kept complete even when that forum no
+			// longer exists (deleted after being configured), so the display path can read every
+			// key unconditionally.
+			$forum_rules = [
+				'rules'				=> '',
+				'rules_uid'			=> '',
+				'rules_bitfield'	=> '',
+				'rules_options'		=> 0,
+			];
 
 			if ($params['introduciator_allow'])
 			{
@@ -545,8 +607,8 @@ class introduciator_helper
 						],
 						[
 							'%forum_name%'			=> $forum_name,
-							'http://aghxkfps.tld'	=> $forum_url,	// Restore correct link
-							'http://dqsdfzef.tld'	=> $forum_post,	// Restore correct link
+							self::PLACEHOLDER_URL_FORUM	=> $forum_url,	// Restore correct link
+							self::PLACEHOLDER_URL_POST	=> $forum_post,	// Restore correct link
 						]
 					);
 
@@ -631,66 +693,68 @@ class introduciator_helper
 					// one's own post there just puts the user back into "must introduce" state.
 					if ($this->introduciator_params['mode'] == self::MODE_FORUM)
 					{
-					// Check if the user don't try to remove the first message of it's OWN introduce
-					// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
-					// else he needs to delete all the topic
-					$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
-					$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
+						// Check if the user don't try to remove the first message of it's OWN introduce
+						// Don't care about is_user_ignored / is_user_must_introduce_himself => Administrator / Moderator cannot delete first posts of presentation
+						// else he needs to delete all the topic
+						$forum_id = (!empty($post_data['forum_id'])) ? (int) $post_data['forum_id'] : (int) $forum_id;
+						$post_id  = (!empty($post_data['post_id'])) ? (int) $post_data['post_id'] : (int) $post_id;
 
-					if (!empty($post_id) && !empty($post_data['topic_id']) && ((int) $this->introduciator_params['fk_forum_id']) == $forum_id && $this->introduciator_params['is_check_delete_first_post'] && $this->user->data['is_registered'] && $this->auth->acl_gets('f_delete', 'm_delete', (int) $forum_id))
-					{
-						// This post is into the introduce forum
-						// Find the topic identifier
-						$sql = 'SELECT topic_id, poster_id
-								FROM ' . POSTS_TABLE . '
-								WHERE post_id = ' . (int) $post_id;
-
-						$result = $this->db->sql_query($sql);
-						$row = $this->db->sql_fetchrow($result);
-						$this->db->sql_freeresult($result);
-						$topic_id_of_post = (int) $row['topic_id'];
-						$first_poster_id = (int) $row['poster_id'];	// <-- $poster_id could be <> from current user id
-																	// It's this case when moderator try to delete post of another user
-
-						if (!empty($topic_id_of_post) && !empty($first_poster_id))
+						if (!empty($post_id) && !empty($post_data['topic_id']) && ((int) $this->introduciator_params['fk_forum_id']) == $forum_id && $this->introduciator_params['is_check_delete_first_post'] && $this->user->data['is_registered'] && $this->auth->acl_gets('f_delete', 'm_delete', (int) $forum_id))
 						{
-							// Check if this post is the first one, ie this is the post that created the Topic
-							$topic_first_post_id = (int) $post_data['topic_first_post_id'];
+							// This post is into the introduce forum
+							// Find the topic identifier
+							$sql = 'SELECT topic_id, poster_id
+									FROM ' . POSTS_TABLE . '
+									WHERE post_id = ' . (int) $post_id;
 
-							if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
+							$result = $this->db->sql_query($sql);
+							$row = $this->db->sql_fetchrow($result);
+							$this->db->sql_freeresult($result);
+							// A moderator can be looking at a post that no longer exists by the time
+							// this runs, so never assume the row came back.
+							$topic_id_of_post = $row ? (int) $row['topic_id'] : 0;
+							$first_poster_id = $row ? (int) $row['poster_id'] : 0;	// <-- $poster_id could be <> from current user id
+																		// It's this case when moderator try to delete post of another user
+
+							if (!empty($topic_id_of_post) && !empty($first_poster_id))
 							{
-								// Check if the topic contains more than one post: if contains only one post, keep default behavior
-								$sql = 'SELECT count(1)
-										FROM ' . POSTS_TABLE . '
-										WHERE topic_id = ' . (int) $topic_id_of_post . ' AND post_visibility <> ' . ITEM_DELETED;
+								// Check if this post is the first one, ie this is the post that created the Topic
+								$topic_first_post_id = (int) $post_data['topic_first_post_id'];
 
-								$result = $this->db->sql_query($sql);
-								$row = $this->db->sql_fetchrow($result);
-								$this->db->sql_freeresult($result);
-								$posts_count = (int) $row['count(1)'];
-
-								if ($posts_count > 1)
+								if (!empty($topic_first_post_id) && $topic_first_post_id == $post_id)
 								{
-									// The user try to delete the first post of one introduce topic : may be not allowed
-									// Even the the $first_poster_id is ignored, no way to delete the first post of any introduction of any users
-									// if the configuration option (authorize extension to verify the deletion of first post introduction) is selected
-									$ret_allowed_action = false;
-									if ($redirect)
-									{
-										// Load langage
-										$this->user->setup('posting'); // Mandatory here else all forum is not in same language as user's one
-										$this->load_language();
+									// Check if the topic contains more than one post: if contains only one post, keep default behavior
+									$sql = 'SELECT COUNT(*) AS posts_count
+											FROM ' . POSTS_TABLE . '
+											WHERE topic_id = ' . (int) $topic_id_of_post . ' AND post_visibility <> ' . ITEM_DELETED;
 
-										$message = $first_poster_id === $poster_id && !$this->auth->acl_get('m_delete', $forum_id) ? $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST') : $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
-										$meta_info = append_sid("{$this->root_path}viewtopic.{$this->php_ext}", 'f=' . (int) $forum_id . '&amp;t=' . (int) $topic_id_of_post);
-										$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
-										$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
-										trigger_error($message, E_USER_NOTICE);
+									$result = $this->db->sql_query($sql);
+									$row = $this->db->sql_fetchrow($result);
+									$this->db->sql_freeresult($result);
+									$posts_count = (int) $row['posts_count'];
+
+									if ($posts_count > 1)
+									{
+										// The user try to delete the first post of one introduce topic : may be not allowed
+										// Even the the $first_poster_id is ignored, no way to delete the first post of any introduction of any users
+										// if the configuration option (authorize extension to verify the deletion of first post introduction) is selected
+										$ret_allowed_action = false;
+										if ($redirect)
+										{
+											// Load langage
+											$this->user->setup('posting'); // Mandatory here else all forum is not in same language as user's one
+											$this->load_language();
+
+											$message = $first_poster_id === $poster_id && !$this->auth->acl_get('m_delete', $forum_id) ? $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_MY_FIRST_POST') : $this->language->lang('INTRODUCIATOR_EXT_DELETE_INTRODUCE_FIRST_POST');
+											$meta_info = append_sid("{$this->root_path}viewtopic.{$this->php_ext}", 'f=' . (int) $forum_id . '&amp;t=' . (int) $topic_id_of_post);
+											$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_TOPIC'), '<a href="' . $meta_info . '">', '</a>');
+											$message .= '<br /><br />' . sprintf($this->language->lang('RETURN_FORUM'), '<a href="' . append_sid("{$this->root_path}viewforum.{$this->php_ext}", 'f=' . (int) $forum_id) . '">', '</a>');
+											trigger_error($message, E_USER_NOTICE);
+										}
 									}
 								}
 							}
 						}
-					}
 					}
 				}
 				else if ($this->is_user_must_introduce_himself($poster_id, $this->auth, $this->user->data['username']))
@@ -1044,15 +1108,19 @@ class introduciator_helper
 	protected function is_user_post_into_forum($forum_id, $user_id, &$topic_id, &$first_post_id, &$topic_approved)
 	{
 		// Visibility state : ITEM_UNAPPROVED / ITEM_APPROVED / ITEM_DELETED / ITEM_REAPPROVE
+		// A user can end up with more than one topic here (they existed before the extension was
+		// enabled, or a moderator moved one in), so order explicitly and take the oldest rather
+		// than letting the database pick.
 		$sql = 'SELECT topic_id, topic_first_post_id, topic_visibility
 				FROM ' . TOPICS_TABLE . '
 				WHERE topic_poster = ' . (int) $user_id . '
 				 AND topic_type = ' . POST_NORMAL . '
 				 AND forum_id = ' . (int) $forum_id . '
 				 AND topic_visibility <> ' . ITEM_DELETED . '
-				 AND topic_first_post_id <> 0'; // PATCH : Sometimes, the topic_first_post_id is 0
+				 AND topic_first_post_id <> 0
+				ORDER BY topic_id'; // PATCH : Sometimes, the topic_first_post_id is 0
 
-		$result = $this->db->sql_query($sql);
+		$result = $this->db->sql_query_limit($sql, 1);
 		$topic_row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
 		if ($topic_row !== false)
@@ -1174,28 +1242,70 @@ class introduciator_helper
 				WHERE ' . $this->db->sql_in_set('t.topic_id', array_map('intval', $topic_ids));
 		$result = $this->db->sql_query($sql);
 
+		$moved = [];
+		$poster_ids = [];
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$poster_id = (int) $row['topic_poster'];
-			$existing_topic_id = 0;
-			$existing_post_id = 0;
-			$existing_approved = false;
+			$moved[] = $row;
+			$poster_ids[] = (int) $row['topic_poster'];
+		}
+		$this->db->sql_freeresult($result);
 
-			if ($this->is_user_post_into_forum($to_forum_id, $poster_id, $existing_topic_id, $existing_post_id, $existing_approved)
-				&& $existing_topic_id != $row['topic_id'])
+		if (empty($moved))
+		{
+			return $conflicts;
+		}
+
+		// Every presentation those posters already have in the destination forum, in one query
+		// rather than one per moved topic. Keyed by poster, holding every topic rather than just
+		// the first, so a poster whose only match is the topic being moved is still compared
+		// against their other presentations.
+		$existing_by_poster = [];
+		$sql = 'SELECT topic_id, topic_first_post_id, topic_poster
+				FROM ' . TOPICS_TABLE . '
+				WHERE ' . $this->db->sql_in_set('topic_poster', array_unique($poster_ids)) . '
+				 AND topic_type = ' . POST_NORMAL . '
+				 AND forum_id = ' . (int) $to_forum_id . '
+				 AND topic_visibility <> ' . ITEM_DELETED . '
+				 AND topic_first_post_id <> 0
+				ORDER BY topic_id';
+		$result = $this->db->sql_query($sql);
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$existing_by_poster[(int) $row['topic_poster']][] = $row;
+		}
+		$this->db->sql_freeresult($result);
+
+		foreach ($moved as $row)
+		{
+			$poster_id = (int) $row['topic_poster'];
+
+			if (!isset($existing_by_poster[$poster_id]))
 			{
+				continue;
+			}
+
+			foreach ($existing_by_poster[$poster_id] as $existing)
+			{
+				if ((int) $existing['topic_id'] === (int) $row['topic_id'])
+				{
+					// The topic being moved is already there: not a duplicate of itself.
+					continue;
+				}
+
 				$conflicts[] = [
 					'moved_topic_id'			=> (int) $row['topic_id'],
 					'moved_topic_title'			=> $row['topic_title'],
 					'poster_id'					=> $poster_id,
 					'poster_name'				=> $row['username'],
 					'poster_colour'				=> $row['user_colour'],
-					'existing_topic_id'			=> (int) $existing_topic_id,
-					'existing_first_post_id'	=> (int) $existing_post_id,
+					'existing_topic_id'			=> (int) $existing['topic_id'],
+					'existing_first_post_id'	=> (int) $existing['topic_first_post_id'],
 				];
+
+				break;
 			}
 		}
-		$this->db->sql_freeresult($result);
 
 		return $conflicts;
 	}
@@ -1426,32 +1536,46 @@ class introduciator_helper
 	 */
 	protected function is_user_in_groups_selected($user_id)
 	{
-		if ($this->groups_selected_cache === null)
-		{
-			$sql = 'SELECT *
-					FROM ' . $this->table_groups_name;
-
-			$result = $this->db->sql_query($sql);
-
-			// Construct an array of group ID present into INTRODUCIATOR_GROUPS_TABLE table
-			$arr_groups_id = [];
-			while ($row = $this->db->sql_fetchrow($result))
-			{
-				$arr_groups_id[] = $row['fk_group'];
-			}
-			$this->db->sql_freeresult($result);
-
-			// This table's content doesn't depend on $user_id, so it's the same for every call in this request
-			$this->groups_selected_cache = $arr_groups_id;
-		}
-
-		// Testing
 		if (!function_exists('group_memberships'))
 		{
 			include($this->root_path . 'includes/functions_user.' . $this->php_ext);
 		}
 
-		return group_memberships($this->groups_selected_cache, (int) $user_id, true);
+		return group_memberships($this->get_selected_group_ids(), (int) $user_id, true);
+	}
+
+	/**
+	 * Batch version of is_user_in_groups_selected(), for pages checking many users at once.
+	 *
+	 * Semantics are deliberately identical to the per-user call, including the phpBB quirk that
+	 * an empty group selection matches any user who belongs to any group at all.
+	 *
+	 * @param array $user_ids List of user ids to test
+	 *
+	 * @return array Map of user id => true, holding only the users in a selected group
+	 * @access protected
+	 */
+	protected function get_users_in_selected_groups(array $user_ids)
+	{
+		if (empty($user_ids))
+		{
+			return [];
+		}
+
+		if (!function_exists('group_memberships'))
+		{
+			include($this->root_path . 'includes/functions_user.' . $this->php_ext);
+		}
+
+		$memberships = group_memberships($this->get_selected_group_ids(), $user_ids, false);
+
+		$in_group = [];
+		foreach ($memberships ?: [] as $membership)
+		{
+			$in_group[(int) $membership['user_id']] = true;
+		}
+
+		return $in_group;
 	}
 
 	/**
@@ -1484,10 +1608,46 @@ class introduciator_helper
 		// User is in selected group or out of selected group ?
 		if (($this->introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$this->introduciator_params['is_include_groups'] && !$is_in_group_selected))
 		{
-			$user_ignored = in_array(utf8_strtolower($poster_name), explode("\n", utf8_strtolower($this->introduciator_params['ignored_users'])));
+			$user_ignored = in_array(utf8_strtolower($poster_name), $this->get_ignored_users_list(), true);
 		}
 
 		return $user_ignored;
+	}
+
+	/**
+	 * Split the configured ignored-users list into lowercased usernames.
+	 *
+	 * The list comes from a textarea, so entries can be separated by LF or CRLF and can carry
+	 * stray spaces; both would otherwise make an entry silently never match. Empty lines are
+	 * dropped so that a trailing newline does not ignore the anonymous user.
+	 *
+	 * @return array List of lowercased usernames to ignore
+	 * @access public
+	 */
+	public function get_ignored_users_list()
+	{
+		$list = utf8_strtolower((string) $this->config['introduciator_ignored_users']);
+
+		// A list saved by an older release can hold a byte-truncated character, which makes a
+		// UTF-8 mode split fail outright, so fall back to a plain newline split.
+		$entries = preg_split('/\R/u', $list);
+
+		if ($entries === false)
+		{
+			$entries = explode("\n", str_replace("\r\n", "\n", $list));
+		}
+
+		$ignored = [];
+		foreach ($entries as $entry)
+		{
+			$entry = trim($entry);
+			if ($entry !== '')
+			{
+				$ignored[] = $entry;
+			}
+		}
+
+		return $ignored;
 	}
 
 	/**
@@ -1599,12 +1759,27 @@ class introduciator_helper
 		}
 		else
 		{
+			$poster_ids = array_unique(array_map(function ($user) {
+				return (int) $user['topic_poster'];
+			}, $users));
+
+			// One membership query for every user on the page instead of one per user. The set
+			// of ids that come back is exactly the set for which the per-user check would have
+			// answered "in a selected group", empty selection included.
+			$in_selected_group = $this->get_users_in_selected_groups($poster_ids);
+			$ignored_users = $this->get_ignored_users_list();
+
 			foreach ($users as $user)
 			{
 				$poster_id = (int) $user['topic_poster'];
-				if (!$this->is_user_ignored($poster_id, $user['topic_first_poster_name']))
+				$is_in_group_selected = isset($in_selected_group[$poster_id]);
+
+				if (($this->introduciator_params['is_include_groups'] && $is_in_group_selected) || (!$this->introduciator_params['is_include_groups'] && !$is_in_group_selected))
 				{
-					$filtered_ids[] = $poster_id;
+					if (!in_array(utf8_strtolower($user['topic_first_poster_name']), $ignored_users, true))
+					{
+						$filtered_ids[] = $poster_id;
+					}
 				}
 			}
 		}

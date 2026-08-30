@@ -180,14 +180,14 @@ class acp_statistics_controller extends acp_main_controller
 		//
 		// Here, we must check database to see if some user have more than one introduction
 		// 1> Get the ids of users that post more than one introduce
-		 $sql = $this->db->sql_build_query('SELECT', [
-			'SELECT'	=> 'topic_poster, topic_first_poster_name',
+		$sql = $this->db->sql_build_query('SELECT', [
+			'SELECT'	=> 'topic_poster, topic_first_poster_name, COUNT(*) AS introduces_count',
 			'FROM'		=> [TOPICS_TABLE => TOPICS_TABLE],
 			'WHERE'		=> TOPICS_TABLE . '.topic_type = ' . POST_NORMAL . ' AND ' . TOPICS_TABLE . '.forum_id = ' . (int) $params['fk_forum_id'] . ' AND ' . TOPICS_TABLE . '.topic_visibility = ' . ITEM_APPROVED,
-			'GROUP_BY'	=> 'topic_poster, topic_first_poster_name HAVING count(1) > 1' ,
+			'GROUP_BY'	=> 'topic_poster, topic_first_poster_name HAVING COUNT(*) > 1',
 		]);
 
-		 // Record all users that have more than one posted introduction and MUST introduce (not ignored)
+		// Record all users that have more than one posted introduction and MUST introduce (not ignored)
 		$result = $this->db->sql_query($sql);
 		$rows = [];
 		while ($row = $this->db->sql_fetchrow($result))
@@ -202,41 +202,60 @@ class acp_statistics_controller extends acp_main_controller
 		$nb_several_introduce = count($users_ids);
 		if ($nb_several_introduce > 0)
 		{
-			$start = min($start, $nb_several_introduce - 1);
+			$per_page = (int) $this->dbconfig['topics_per_page'];
+			$start = $this->pagination->validate_start($nb_several_introduce, $per_page, $start);
+			$page_users_ids = array_slice($users_ids, $start, $per_page);
 
-			for ($index = $start; $index < min($nb_several_introduce, $start + (int) $this->dbconfig['topics_per_page']); ++$index)
+			// Every introduction of every user on this page in a single query, instead of one
+			// query per user. Ordered by poster so the rows of one user stay grouped together.
+			$sql = $this->db->sql_build_query('SELECT', [
+				'SELECT'    => 'topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type',
+				'FROM'      => [TOPICS_TABLE => TOPICS_TABLE],
+				'WHERE'		=> 'forum_id = ' . (int) $params['fk_forum_id'] . ' AND ' . $this->db->sql_in_set('topic_poster', $page_users_ids) . ' AND topic_visibility = ' . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
+				'ORDER_BY'	=> 'topic_poster, topic_time',
+			]);
+
+			$result = $this->db->sql_query($sql);
+			$introduces_by_poster = [];
+			while ($row = $this->db->sql_fetchrow($result))
 			{
-				// Here, no more need to test if number of introduce > 1 because it is already done just before
-				$sql = $this->db->sql_build_query('SELECT', [
-					'SELECT'    => 'topic_id, topic_first_post_id, topic_title, topic_visibility, topic_time, topic_poster, topic_first_poster_name, topic_first_poster_colour, topic_type',
-					'FROM'      => [TOPICS_TABLE => TOPICS_TABLE],
-					'WHERE'		=> 'forum_id = ' . (int) $params['fk_forum_id'] . ' AND topic_poster = ' . (int) $users_ids[$index] . ' AND topic_visibility = ' . ITEM_APPROVED . ' AND topic_type = ' . POST_NORMAL,
-					'ORDER_BY'	=> 'topic_time',
-				]);
+				$introduces_by_poster[(int) $row['topic_poster']][] = $row;
+			}
+			$this->db->sql_freeresult($result);
 
-				$result = $this->db->sql_query($sql);
+			// Emitted in the order of $page_users_ids rather than of the result set, so the
+			// numbering stays stable whatever order the database returns the rows in.
+			foreach ($page_users_ids as $row_number => $poster_id)
+			{
+				if (!isset($introduces_by_poster[(int) $poster_id]))
+				{
+					continue;
+				}
+
+				$poster_introduces = $introduces_by_poster[(int) $poster_id];
 				$first_row = true;
-				while ($row = $this->db->sql_fetchrow($result))
+
+				foreach ($poster_introduces as $row)
 				{
 					$link_to_introduce = $this->helper->get_post_url($params['fk_forum_id'], $row['topic_id'], $row['topic_first_post_id']);
 
 					$this->template->assign_block_vars('introduces', [
 						'FIRST_ROW_SPAN'	=> $first_row,
-						'ROW_SPAN'			=> $result->num_rows,
+						'ROW_SPAN'			=> count($poster_introduces),
 						'POSTER'			=> get_username_string('full', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
 						'DATE'				=> $this->user->format_date($row['topic_time']),
 						'INTRODUCE'			=> '<a href="' . $link_to_introduce . '">' . $row['topic_title'] . '</a>',
-						'ROW_NUMBER'		=> $index - $start + 1,
+						'ROW_NUMBER'		=> $row_number + 1,
 					]);
 					$first_row = false;
 				}
-				$this->db->sql_freeresult($result);
 			}
+
 			$this->template->assign_vars([
 				'S_DISPLAY_INTRODUCES'		=> true,
-				'PAGE_NUMBER' 				=> $this->pagination->validate_start($nb_several_introduce, (int) $this->dbconfig['topics_per_page'], $start),
+				'PAGE_NUMBER' 				=> $start,
 			]);
-			$this->pagination->generate_template_pagination($this->u_action . '&amp;action=otherpage', 'pagination', 'start', $nb_several_introduce, (int) $this->dbconfig['topics_per_page'], $start);
+			$this->pagination->generate_template_pagination($this->u_action . '&amp;action=otherpage', 'pagination', 'start', $nb_several_introduce, $per_page, $start);
 		}
 
 		$this->template->assign_vars([

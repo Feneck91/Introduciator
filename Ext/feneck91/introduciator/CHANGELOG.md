@@ -17,6 +17,25 @@ This file lists the changes between versions of the Introduciator extension.
   * The ACP validates the chosen topic: it must exist, not be deleted, and not be a global
     announcement (which has no real containing forum).
 
+### Bug fixes
+* [BUG] The `%forum_url%` and `%forum_post%` placeholders were lost whenever the explanation texts
+  were reopened in the ACP: they are swapped for dummy URLs before going through the BBCode parser,
+  but the two halves of that swap disagreed about which dummy URLs to use, so the admin saw the raw
+  dummy URL and re-saved it. Both are now defined once and the restore map is derived from them.
+* [BUG] The ignored-users list was only split on `\n`, so every entry of a list saved with Windows
+  line endings carried a trailing carriage return and silently never matched the username it named.
+* [BUG] The ignored-users list was truncated with `substr()`, which can cut a UTF-8 character in
+  half.
+* [BUG] Two queries relied on MySQL-only behaviour (a `count(1)` column read back by that literal
+  name, and `num_rows` on the result object) and would not work on PostgreSQL.
+* [BUG] The explanation page emitted PHP 8 warnings when the configured forum had been deleted
+  after being configured.
+* [BUG] Saving the configuration with no group selected inserted a placeholder group row.
+* [BUG] Removed four one-query-per-row patterns: the ACP group list, the statistics listing, the
+  duplicate-move check and the batch "must introduce" filter each ran a query per row. The
+  duplicate-move check also stopped at a poster's first existing topic, which could hide a real
+  duplicate when that first topic was the one being moved.
+
 # Version 3.0.0
 ## Changes since 2.0.0
 ### Bug fixes
